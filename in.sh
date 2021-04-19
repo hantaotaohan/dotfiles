@@ -70,7 +70,6 @@ Dotfiles_copy=( \
         .vim \
         .w3m \
         .pip \
-        .snclirc \
         extras/z.lua
         )
 
@@ -267,28 +266,6 @@ echo -e "                                                                       
 # Make Floder
 if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace"; fi
 if [ ! -d "$HOME/desktop" ]; then mkdir -p "$HOME/desktop"; fi
-
-# Set Xrdb
-#if [ ! "$XDG_VTNR" = "" ]; then
-#    xrdb $HOME/.Xresources 
-#fi
-#echo -e "              ${green}[+]Set Xterm of Xrdb Successful${reset}\n"
-
-# Set Locales Language
-# sudo dpkg-reconfigure locales
-sudo locale-gen "zh_CN.UTF-8" > /dev/null 2>&1
-sudo dpkg-reconfigure --frontend=noninteractive locales > /dev/null 2>&1
-echo -e "              ${green}[+]Set Locales Language is Successful${reset}\n"
-
-# Set TimeZone
-sudo timedatectl set-timezone "Asia/Shanghai"
-echo -e "              ${green}[+]Set TimeZone is Successful${reset}\n"
-
-# Set Add Hosts Speed Sudo 
-if [ -f "/etc/hosts" ]; then
-    sudo bash -c "echo -e '127.0.0.1\t$HOSTNAME' >> /etc/hosts"
-fi
-echo -e "              ${green}[+]Set Add Hosts is Successful${reset}\n"
 }
 
 
@@ -313,9 +290,9 @@ echo -e "              ${blue}Repace Sources and System Update ${reset}         
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-#sudo ln -sf "$Dotfiles_repo/sources.list" "/etc/apt/sources.list"
-#sudo cp "$Dotfiles_repo/sources.list" "/etc/apt/sources.list"
-#echo -e "              ${green}[+]Repace sources.list Done !${reset}\n"
+sudo ln -sf "$Dotfiles_repo/sources.list" "/etc/apt/sources.list"
+sudo cp "$Dotfiles_repo/sources.list" "/etc/apt/sources.list"
+echo -e "              ${green}[+]Repace sources.list Done !${reset}\n"
 sudo apt update -y -qq > /dev/null 2>&1
 echo -e "              ${green}[+]Update Successful !${reset}\n"
 sudo apt upgrade -y -qq > /dev/null 2>&1
@@ -351,8 +328,8 @@ echo -e "                                                                       
 	i3blocks \
         i3lock-fancy \
 	deepin-screenshot \
-	solaar \
-	imwheel \
+	#solaar \
+	#imwheel \
 	zathura \
 	nautilus --no-install-recommends --no-install-suggests \
 	#------System--------
@@ -466,15 +443,15 @@ echo -e "                                                                       
         #notebook \
         #prompt-toolkit \
         pyvirtualdisplay \
-        tabview \
-        you-get \
-        sncli \
+        #tabview \
+        #you-get \
+        #sncli \
         i3ipc \
         keyring \
         mdv \
-        litecli \
+        #litecli \
         raiseorlaunch \
-        xlsx2csv
+        #xlsx2csv
         )
         for app in "${pipApps[@]}"
         do
@@ -510,10 +487,10 @@ echo -e "                                                                       
         for app in "${gemApps[@]}"
         do
             echo -e "              [*] Installing: $app";
-            gem sources --remove https://rubygems.org/ > /dev/null 2>&1
-            gem sources -a https://gems.ruby-china.com/ > /dev/null 2>&1
-            sudo gem install $app > /dev/null 2>&1
-            #sudo gem install --local $Dotfiles_repo/bin/$app > /dev/null 2>&1
+            #gem sources --remove https://rubygems.org/ > /dev/null 2>&1
+            #gem sources -a https://gems.ruby-china.com/ > /dev/null 2>&1
+            #sudo gem install $app > /dev/null 2>&1
+            sudo gem install --local $Dotfiles_repo/bin/$app > /dev/null 2>&1
             installSuccess $? $app
         done
 }
@@ -575,15 +552,6 @@ echo -e "                                                                       
 
         im-config -n fcitx > /dev/null 2>&1
         im-config -s fcitx > /dev/null 2>&1
-        # if [ -f "/usr/share/fcitx/imicon/pinyin.png" ]; then
-        #     sudo mv /usr/share/fcitx/imicon/pinyin.png /usr/share/fcitx/imicon/pinyin.png1
-    	# fi
-    	# if [ -f "/usr/share/fcitx/skin/dark/cn.png" ]; then
-        #     sudo cp $Dotfiles_repo/setup/fcitx/cn.png /usr/share/fcitx/skin/dark/active.png
-    	# fi
-    	# if [ -f "/usr/share/fcitx/skin/dark/vk_inactive.png" ]; then
-        #     sudo cp $Dotfiles_repo/setup/fcitx/en.png /usr/share/fcitx/skin/dark/inactive.png
-    	# fi
         echo -e "              ${green}[√] Fcitx Successful${reset}\n"
 
 	
@@ -615,46 +583,6 @@ echo -e "                                                                       
         sudo apt install -y -qq microsoft-edge-dev > /dev/null 2>&1
 
         echo -e "              ${green}[√] Edge Successful${reset}\n"
-        
-#----------------------------------------------------------------------------------------#
-# Chrome 
-#----------------------------------------------------------------------------------------#
-
-        # # Install Chrome
-        # sudo wget -q -t 0 -P $HOME https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb > /dev/null 2>&1
-        # sudo dpkg -i $HOME/google-chrome-stable_current_amd64.deb > /dev/null 2>&1
-        # sudo apt --fix-broken install -y -qq > /dev/null 2>&1
-        # sudo dpkg -i $Dotfiles_repo/chrome/google-chrome-stable_current_amd64.deb > /dev/null 2>&1
-        # sudo rm -rf $HOME/google*
-        # echo -e "              ${green}[√] Chrome Successful${reset}\n"
-        
-        # # Install ChromeDriver
-        # if [ -f "/usr/local/share/chromedriver" ]; then
-        #     sudo rm -rf /usr/local/share/chromedriver
-        #     sudo cp -f $Dotfiles_repo/chrome/chromedriver /usr/local/share/chromedriver
-        #     sudo chmod +x /usr/local/share/chromedriver
-        #     sudo ln -sf /usr/local/share/chromedriver /usr/local/bin/chromedriver
-        #     sudo ln -sf /usr/local/share/chromedriver /usr/bin/chromedriver
-        # else
-        #     sudo cp -f $Dotfiles_repo/chrome/chromedriver /usr/local/share/chromedriver
-        #     sudo chmod +x /usr/local/share/chromedriver
-        #     sudo ln -sf /usr/local/share/chromedriver /usr/local/bin/chromedriver
-        #     sudo ln -sf /usr/local/share/chromedriver /usr/bin/chromedriver
-        # fi
-        # echo -e "              ${green}[√] ChromeDriver Successful${reset}\n"
-
-        # # Unzip Chrome Plugin
-        # if [ ! -d "$HOME/chrome-extend" ]; then
-        #     env mkdir $HOME/chrome-extend
-        # else
-        #     rm -rf $HOME/chrome-extend
-        #     env mkdir $HOME/chrome-extend
-        # fi
-        # unzip -q $Dotfiles_repo/chrome/darkreader.zip -d $HOME/chrome-extend
-        # unzip -q $Dotfiles_repo/chrome/proxyswitch.zip -d $HOME/chrome-extend
-        # unzip -q $Dotfiles_repo/chrome/tampermonkey.zip -d $HOME/chrome-extend
-        # unzip -q $Dotfiles_repo/chrome/Surfingkeys.zip -d $HOME/chrome-extend
-        # echo -e "              ${green}[√] Unzip ChromeExtend-Pack Successful${reset}\n"
 
 #----------------------------------------------------------------------------------------#
 # Tmux
@@ -699,14 +627,7 @@ echo -e "                                                                       
             sudo chmod 777 /usr/local/bin/trans
         fi
         echo -e "              ${green}[√] Trans Successful${reset}\n"
-
-#----------------------------------------------------------------------------------------#
-# Install FZF
-#----------------------------------------------------------------------------------------#
-
-#        $HOME/.fzf/install --all
-#        echo -e "              ${green}[√] FZF Successful${reset}\n"
-
+	
 #----------------------------------------------------------------------------------------#
 # Install Vim Plug
 #----------------------------------------------------------------------------------------#
@@ -714,29 +635,6 @@ echo -e "                                                                       
         vim
         echo -e "              ${green}[√] Vim Successful${reset}\n"
 
-#----------------------------------------------------------------------------------------#
-# Install Tabview
-#----------------------------------------------------------------------------------------#
-
-#        if [ -f "$HOME/.local/bin/tabview" ]; then
-#            sudo cp $HOME/.local/bin/tabview /bin/
-#            sudo chmod +x /bin/tabview
-#        fi
-#        echo -e "              ${green}[√] Tabview Successful${reset}\n"
-
-#----------------------------------------------------------------------------------------#
-# Install Rsync
-#----------------------------------------------------------------------------------------#
-
-#        if [ -f "/usr/bin/rslsync" ]; then
-#	    sudo usermod -aG $USER rslsync &&\
-#	    sudo usermod -aG rslsync $USER &&\
-#	    sudo chmod g+rw $HOME &&\
-#	    systemctl --user enable resilio-sync &&\
-#	    systemctl --user start resilio-sync &&\
-#	    sudo service resilio-sync start    
-#        fi
-#        echo -e "              ${green}[√] Rsync Successful${reset}\n"
 }
 
 #----------------------------------------------------------------------------------------#
