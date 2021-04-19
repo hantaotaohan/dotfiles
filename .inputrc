@@ -1,0 +1,77 @@
+# Make Tab autocomplete regardless of filename case
+# 使Tab自动完成而不考虑文件名大小写
+set completion-ignore-case on
+
+# List all matches in case multiple possible completions are possible
+# 列出所有匹配项，以防有多个可能的完成
+set show-all-if-ambiguous on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+# 当自动完成指向目录的符号链接时，立即在结尾添加斜杠
+set mark-symlinked-directories on
+
+# Use the text that has already been typed as the prefix for searching through
+# commands (i.e. more intelligent Up/Down behavior)
+# 使用已键入的文本作为搜索前缀              
+# 命令(即更智能的上/下行为)
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
+# 除非模式以点显式开头，否则不要自动完成隐藏文件
+set match-hidden-files off
+
+# Show all autocomplete results at once
+# 一次显示所有自动完成结果
+set page-completions off
+
+# If there are more than 200 possible completions for a word, ask to show them all
+# 如果一个单词有超过200个可能的补全词，要求把它们全部显示出来
+set completion-query-items 200
+
+# Show extra file information when completing, like `ls -F` does
+# 完成时显示额外的文件信息，就像“ls-F”一样
+set visible-stats on
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+# 允许UTF-8输入和输出
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# Use Alt/Meta + Delete to delete the preceding word
+# 使用Alt/Meta+Delete删除前面的单词
+"\e[3;3~": kill-word
+
+# 自定义按键绑定
+
+# F5 进入HOME
+"\e[15~":"cd $HOME\C-m"
+
+# ;+q 退出bash
+"\;q":"exit\C-m"
+
+# \+g 进入navi
+"\\g":"navi\C-m"
+
+# CTRL+ALT+J,K 上下历史命令
+# "\e\C-J": history-search-forward
+# "\e\C-K": history-search-backward
+
+# CTRL+ALT+M,N 删除单词
+# "\e\C-M": kill-word
+# "\e\C-N": backward-kill-word
+
+# CTRL+Backspace > delete
+# "\e\C-M": delete-char
+# "\e\C-N": backward-delete-char
+
+# "\e\C-H": backward-char
+# "\e\C-L": forward-char

@@ -1,0 +1,70 @@
+# Feed options
+auto-reload yes
+reload-time 180
+reload-threads 4
+download-retries 2
+download-timeout 10
+download-full-page yes
+html-renderer "w3m -dump -T text/html"
+
+# external-url-viewer "urlscan -dc -r 'google-chrome {}'"
+
+bind-key j down
+bind-key k up
+bind-key j next articlelist
+bind-key k prev articlelist
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key u pageup
+bind-key l open
+bind-key h quit
+bind-key a toggle-article-read
+bind-key n next-unread
+bind-key N prev-unread
+bind-key D pb-download
+bind-key U show-urls
+bind-key x pb-delete
+
+color listnormal color7 default
+color listfocus color5 color0 bold
+color listnormal_unread color2 default
+color listfocus_unread color5 color0 bold
+color info color5 black bold
+color article color250 default bold
+
+text-width 80
+
+browser rdrview -B w3m
+bind-key ; macro-prefix
+unbind-key ,
+macro b set browser "google-chrome %u" ; open-in-browser ; set browser rdrview -B w3m
+macro r open-in-browser 
+macro q quit
+
+highlight all "  Reeder.*" color1
+highlight all "  Other.*" color1
+# highlight all ".*-.*" color1
+# highlight all "(0/0)" color0
+highlight feedlist "^(.+?)((0/0)))" color8
+highlight feedlist ".((0/0)))" color0
+
+highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
+highlight article "(^Link:.*|^Date:.*)" default default
+highlight article "https?://[^ ]+" green default
+highlight article "^(Title):.*$" blue default
+highlight article "\\[[0-9][0-9]*\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article ":.*\\(link\\)$" cyan default
+highlight article ":.*\\(image\\)$" blue default
+highlight article ":.*\\(embedded flash\\)$" magenta default
+
+
+# Related to the title formats of the dialog boxes
+datetime-format "%Y-%m-%d %H:%M"
+# feedlist-format " %t %> %n %4i  %11u %"
+feedlist-format "%t  %> %n  %11u %"
+# vim: ft=apachestyle cms=#\ %s :

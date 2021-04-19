@@ -1,0 +1,15 @@
+#!/bin/bash
+
+STATUS="$(fcitx-remote)"
+
+if [ "$STATUS" = 0 ]
+then
+    OUT="Off"
+elif [ "$STATUS" = 1 ]
+then
+    OUT="US"
+else
+    OUT="CN"
+fi
+
+echo "$OUT"

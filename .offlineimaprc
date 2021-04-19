@@ -1,0 +1,69 @@
+[general]
+accounts = bteb,live
+maxsyncaccounts = 3
+# pythonfile = ~/.config/neomutt/offlineimap.py
+
+# --------------------------------------------------------------
+
+[Account bteb]
+localrepository = bteb-local
+remoterepository = bteb-remote
+autorefresh = 0.2
+quick = 10
+utf8foldernames = yes
+maxage = 10
+postsynchook = ~/.config/neomutt/notify.sh
+
+[Repository bteb-local]
+type = Maildir
+localfolders = ~/mail/bteb
+sync_deletes = no
+
+[Repository bteb-remote]
+type = IMAP
+remoteport = 143
+remotehost = imap.mxhichina.com
+remoteuser = hantao@bteb.cn
+remotepassfile = ~/.config/neomutt/alimail.pass
+#remotepasseval = keyring.get_password("bteb", "hantao@bteb.cn")
+maxconnections = 2
+ssl = no
+starttls = yes
+#ssl_version = tls1_3
+keepalive = 60
+holdconnectionopen = no
+readonly = False
+expunge = yes
+
+# --------------------------------------------------------------
+
+[Account live]
+localrepository = live-local
+remoterepository = live-remote
+autorefresh = 0.2
+quick = 10
+utf8foldernames = yes
+maxage = 10
+# postsynchook = ~/.config/offlineimap/notify.sh
+
+[Repository live-local]
+type = Maildir
+localfolders = ~/mail/live
+sync_deletes = no
+
+[Repository live-remote]
+type = IMAP
+#remoteport = 993
+remotehost = outlook.office365.com
+remoteuser = hantaotaohan@hotmail.com
+remotepassfile = ~/.config/neomutt/hotmail.pass
+#remotepasseval = keyring.get_password("hotmail", "hantaotaohan@hotmail.com")
+maxconnections = 2
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes
+starttls = yes
+#ssl_version = tls1_3
+keepalive = 60
+holdconnectionopen = no
+readonly = False
+expunge = yes

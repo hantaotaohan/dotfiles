@@ -1,0 +1,44 @@
+# Search hidden files and directories.
+# 搜索隐藏文件
+--hidden
+
+# Follow symbolic links.
+# 跟踪软连接
+--follow
+
+# Don't respect ignore files (.gitignore, .ignore, etc.).
+# 不忽略任何文件
+--no-ignore
+
+# Exclude directories.
+# 排除目录
+--glob=!{.git,.svn,.tldr,node_modules,Trash,vendor}
+
+# Exclude file types.
+# 排除文件类型
+--glob=!*.{lock}
+
+# Exclude files.
+# 排除文件
+--glob=!{package-lock.json}
+
+# Don't print lines longer than this limit.
+# 不要显示超过10000的行
+--max-columns=10000
+
+# Searches case insensitively.
+# 开启智能搜索
+--smart-case
+
+# Sort by file path.
+# 按照文件路径排序
+--sort=path
+
+# Configure color settings and styles.
+# 配置颜色设定
+--colors=path:bg:0x3b,0x3b,0x3b
+--colors=path:fg:magenta
+--colors=line:fg:0xf2,0xc2,0x60
+--colors=match:bg:0x2b,0x83,0xa6
+--colors=match:fg:0xff,0xff,0xff
+--colors=match:style:nobold

@@ -1,0 +1,89 @@
+/**
+ * User: deadguy
+ * Copyright: deadguy
+ */
+
+configuration {
+	display-drun:    "Activate";
+	display-run:     "Execute";
+	display-window:  "Window";
+	show-icons:      false;
+	sidebar-mode:    true;
+    lines:22;
+}
+
+* {
+    background-color: #282C33;
+    border-color: #2e343f;
+    text-color: #8ca0aa;
+    spacing: 0;
+	selbg:                       #215d9c;
+	actbg:                       #262626;
+	urgbg:                       #e53935;
+	winbg:			             #26c6da;
+    background-color: transparent;
+    font: "Saber 10";
+
+	line-margin:                 2;
+	line-padding:                2;
+	separator-style:             "none";
+	hide-scrollbar:              "true";
+	margin:                      0;
+	padding:                     0;
+}
+
+window {
+    transparency: "real";
+	location:	 west;
+	anchor:		 west;
+	height:		 100%;
+	width:		 22%;
+	orientation: horizontal;
+	children:	 [mainbox];
+    background-color: #282c34dd;
+}
+
+mainbox {
+	spacing:  0.8em;
+	children: [ entry,listview,mode-switcher ];
+}
+
+
+inputbar {
+	padding: 5px;
+	spacing: 5px;
+}
+
+listview {
+	spacing: 0.5em;
+	dynamic: false;
+	cycle:   true;
+}
+
+element {
+  border: 0 0 1px 0;
+  padding: 16px;
+}
+
+entry {
+	expand:         false;
+	text-color:     @normal-foreground;
+	vertical-align: 1;
+	padding:        5px;
+}
+
+element {
+  border: 0 0 1px 0;
+  padding: 16px;
+}
+
+element selected {
+  background-color: #2e343f;
+}
+
+textbox {
+  background-color: #2e343f;
+  border: 0 0 1px 0;
+  border-color: #282C33;
+  padding: 8px 16px;
+}

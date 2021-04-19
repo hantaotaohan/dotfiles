@@ -1,0 +1,415 @@
+# About Me
+set from                =       "hantao@bteb.cn"
+set realname            =       "Han Tao"
+
+# Msmtp
+set sendmail="/usr/bin/msmtp"
+set use_from             =       yes       # 让 msmtp 知道用哪个帐号
+set use_envelope_from    =       yes       # 让 mutt 使用 msmtp 的 -f 选项
+
+## My credentials
+#set smtp_url            =       "smtp://hantao\@bteb.cn@smtp.bteb.cn:25"
+#set smtp_pass           =       ""
+#set from                =       "hantao@bteb.cn"
+#set realname            =       "Han Tao"
+#set smtp_authenticators =       "gssapi:login"
+
+## My Account Pop3
+##set pop_user           =       "hantao@bteb.cn"
+##set pop_host           =       "pop3.mxhichina.com/INBOX"
+##set pop_pass           =       ""
+
+## My Account Imap
+#set imap_user           =       "hantao@bteb.cn"
+#set imap_pass           =       ""
+#set imap_authenticators =       "login"
+#set folder              =       "imaps://imap.mxhichina.com:993/"
+#set spoolfile           =       "imaps://imap.mxhichina.com:993/INBOX"
+#set imap_check_subscribed
+
+set folder = ~/mail
+set spoolfile=+bteb/INBOX
+set postponed=~/mail/Postponed
+mailboxes +"----------   BTEB ------------"\
+          +bteb/INBOX \
+          +bteb/草稿 \
+          +bteb/垃圾邮件 \
+          +bteb/已发送 \
+          +bteb/已归档 \
+          +bteb/已删除邮件 \
+          +"---------   HOTMAIL ----------"\
+          +live/Inbox \
+          +live/Archive \
+          +live/Deleted \
+          +live/Drafts \
+          +live/Sent \
+          +"---------   SYSTEM ----------"\
+          +"Postponed"
+
+## Where to put the stuff
+set header_cache        =       ~/mail/cache/headers
+set message_cachedir    =       ~/mail/cache/bodies
+set certificate_file    =       ~/mail/certificates
+
+# Etc
+set alias_file          =       "$HOME/.config/neomutt/neomutt.alias"
+set mail_check          =       2 
+set check_new           =       yes                         # 查是否有新邮件
+set imap_keepalive      =       10
+set nomark_old                                              # 未读新邮件别标注为旧邮件
+set markers             =       yes
+set move                =       no                          # 移动已读邮件
+#set keep_flagged        
+set timeout 		    =       1
+set quit
+auto_view                       text/html                                         # 自动显示HTML
+alternative_order               text/enriched text/plain text/html
+set fast_reply          =       yes
+set sleep_time          =       0
+set edit_headers        =       yes
+#unset help
+unset wait_key
+
+# UI
+set sort                =       threads
+set sort_aux            =       reverse-last-date-received
+set index_format        =       "%[%b %d %H:%M]   %-15.15L   %?M?<%03M> &      ?%s"
+set include             =       yes
+set pager_index_lines   =       10
+set ts_status_format    =       'mutt %m messages%?n?, %n new?'
+set folder_format       =       '%4C %t %f'
+set smart_wrap
+set tilde
+set menu_scroll
+set quote_regexp        =       "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set uncollapse_jump # don't collapse on an unread message
+set sort_re # thread based on regex
+set reply_regexp        =       "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set date_format         =       "%m/%d"
+set pager_format        =       '=%b %C/%m: %-20.20F   %s%* (%P)'
+set forward_format      =       "Fwd: %s"
+set editor              =       "vim +':set textwidth=70' +':set wrap' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
+set collapse_all
+
+# status
+set status_format="$from/%f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?F? Flag:%F?%?t? Tag:%t?%?d? Del:%d?]%>-(%P)---"
+# 发件箱显示to subject date 邮件
+ignore *
+unignore from date subject to cc
+unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
+unignore posted-to:
+alternative_order text/plain
+
+# Certificates
+set certificate_file    =       "~/.mutt/certificates"
+set ssl_starttls        =       yes
+set ssl_force_tls       =       yes
+
+# Disable GPGME
+set crypt_use_gpgme     =       no
+
+# Charset
+set charset             =       "utf-8"
+set assumed_charset     =       "utf-8"
+set send_charset        =       "utf-8:iso-8859-15:us-ascii"
+
+# Sidebar
+set mail_check_stats
+set sidebar_visible     =       no
+set sidebar_width       =       30
+set sidebar_divider_char=       '  │'
+#set sidebar_format      =     '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
+
+#set sidebar_component_depth=3
+#set sidebar_delim_chars='.'
+set sidebar_short_path 
+#set sidebar_folder_indent
+set sidebar_format  ="%B%?F? [%F]?%* %?N?%N/?%S"
+
+
+# Load atomic theme
+# source ~/Desktop/colors
+
+# -----------------------------------------------------
+# Keybindings
+# -----------------------------------------------------
+
+###################################
+#          KEYBINDINGS            #
+###################################
+
+# Reload settings
+macro index \Cr '<enter-command>source $HOME/.config/neomutt/neomuttrc<enter>'
+
+# Get emails
+# bind index \Cl imap-fetch-mail
+
+# Search
+bind browser,pager,index,attach /       search
+bind browser,pager,index,attach ?       search-reverse
+bind browser,pager,index,attach n       search-next
+bind browser,pager,index,attach N       search-opposite
+
+# Moving around
+bind attach,browser,index       g       noop
+bind attach,browser,index       gg      first-entry
+bind attach,browser,index       G       last-entry
+#bind        browser,index,pager N       search-opposite
+bind pager                      g       noop
+bind pager                      gg      top
+bind pager                      G       bottom
+bind pager                      K       previous-line
+bind pager                      J       next-line
+bind browser                    k       next-page
+bind browser                    j       previous-page 
+
+# Scrolling
+bind browser,pager,index,attach \;q     exit
+bind browser,pager,index,attach \CF     next-page
+bind browser,pager,index,attach \CB     previous-page # webview for URL
+bind browser,pager,index,attach \Cu     half-up
+bind browser,pager,index,attach \Cd     half-down
+bind browser,pager              \Ce     next-line
+bind browser,pager              \Cy     previous-line
+bind               index        \Ce     next-line
+bind               index        \Cy     previous-line
+
+# Misc
+bind index,pager                d       noop
+bind index,pager                u       noop
+bind index,pager                dd      delete-message
+bind index,pager                uu      undelete-message
+bind index,pager                <F8>    sidebar-toggle-visible
+bind index,pager                <Up>    sidebar-prev
+bind index,pager                \Cp     sidebar-prev
+bind index,pager                \Ck     sidebar-prev
+bind index,pager                <Down>  sidebar-next
+bind index,pager                \Cn     sidebar-next
+bind index,pager                \Cj     sidebar-next
+bind index                      <Right> sidebar-open
+bind index                      \Cl     sidebar-open
+bind index                      \Co     sidebar-open
+bind index,pager                R       group-reply
+
+# Threads
+bind index,pager                dT      delete-thread
+bind index,pager                dt      delete-subthread
+bind index,pager                uT      undelete-thread
+bind index,pager                ut      undelete-subthread
+bind index,pager                gt      next-thread
+bind index,pager                gT      previous-thread
+bind index                      <Space> collapse-thread
+bind index                      zA      collapse-all # Missing :folddisable/foldenabl
+
+# '?' is used for search-opposite
+bind browser,pager,index,attach \Ch help
+
+# Sync-Maibox
+bind browser,index,pager <Esc><Esc> sync-mailbox
+
+bind index                      \;n     toggle-new
+bind index,pager                \;<Tab> next-unread-mailbox
+
+# vim: filetype=muttrc
+#----------------------------------------------------------------
+#   __  __       _   _
+#  |  \/  |_   _| |_| |_
+#  | |\/| | | | | __| __|
+#  | |  | | |_| | |_| |_
+#  |_|  |_|\__,_|\__|\__|
+#
+#----------------------------------------------------------------
+#  Theme   : Atomic
+#  Version : 1.0.0
+#  License : MIT
+#  Author  : Gerard Bajona
+#  URL     : https://github.com/gerardbm/atomic
+#----------------------------------------------------------------
+
+# UI ------------------------------------------------------------
+color status        color5    brightblack
+color indicator     color0    color5
+color tree          color1    default
+
+# general -------------------------------------------------------
+color normal        default    default
+color message       default    default
+color markers       color1     default
+color error         color1     default
+color tilde         color0     default
+color attachment    color3     default
+color signature     color102   default
+color search        color196   default
+
+# message body --------------------------------------------------
+#color quoted        color4    default
+color bold          color16   default
+color underline     color16   default
+color body          color9    default         "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+
+# quoted -------------------------------------------------------
+color quoted        cyan        default
+color quoted1       yellow      black
+color quoted2       red         black
+color quoted3       green       black
+color quoted4       cyan        black
+color quoted5       yellow      black
+color quoted6       red         black
+color quoted7       green       black
+color quoted8       brightblack black
+color quoted9       brightred   black
+
+# index ---------------------------------------------------------
+color index         default    default         "~A"        # 全部邮件
+color index         color13    default         "~E"        # 过期消息
+color index         color3     default         "~F"        # 带标签的消息
+color index         color0     color1          "~D"        # 删除的消息
+color index         color2     color8          "~N"        # 新邮件
+color index         color2     default         "~O"        # 旧消息
+color index         color2     color8          "~U"        # 未读邮件
+color index         color2     color8          "~v~(~N)"   # Collapsed thread with some unread
+color index         color0     color1          "~N~(~D~N)" # Collapsed thread with some unread & flagged
+#color index         color1     color1          "~v~(~F~N)" # Collapsed thread with some unread & flagged
+#color index         color2     color8          "~U~$"      # 未读邮件+未引用的消息（需要线程视图）
+#color index         color2     color8          "~(~N)"     # Messages in threads with some unread 包含与PATTERN匹配的消息的线程中的消息
+
+# cancel theme colors
+color index         color3     color8          "~T"        # 标记的消息
+#color index         color13    color8          "~Q"        # 已回复的邮件
+#color index         color13    color8          "~P"        # 来自我发的消息
+#color index         default     default        "~R"        # 已读消息
+
+# new message
+color index_subject color2        color8          "~N !~T !~D"
+color index_author  color2        color8          "~N !~T !~D"
+#color index         cyan        color8          "~N"
+
+# message headers -----------------------------------------------
+color hdrdefault    color4    default
+color header        color4    default         "^(From)"
+color header        color4    default         "^(Subject)"
+
+
+#color index         color2     color8          "~>(~U)"   # Collapsed thread with some unread
+
+# URL -----------------------------------------------------------
+color body brightgreen black "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+color body brightgreen black "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+mono body bold "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+mono body bold "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+
+## Email address ------------------------------------------------
+color body brightgreen black "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+
+## header -------------------------------------------------------
+color hdrdefault        color30         black
+color header            magenta         black       '^date:'
+color header            color153        black       '^(to|cc|bcc):'
+color header            cyan            black       '^from:'
+color header            brightyellow    black       '^subject:'
+color header            color31         black       '^user-agent:'
+color header            color29         black       '^reply-to:'
+
+# Sidebar -------------------------------------------------------
+color sidebar_indicator     color0      color4
+color sidebar_divider       color0      color0
+color sidebar_ordinary      color4      color0
+color sidebar_new           color2      color0
+color sidebar_flagged       color4      color0
+color sidebar_highlight     color0      color4
+
+
+# Credits to https://github.com/sheoak/neomutt-powerline-nerdfonts/
+#set index_format=" %T %{!%Y-%m-%d } %2M %-28.28L  %?X?&·? %s"
+set index_format=" %Gx %zs %zc %zt | %{!%Y-%m-%d · %H:%M } | %?M?+& ? %02M  | %-28.28L  %?X?&·? %s"
+set pager_format=" %n  %t %s%*   %{!%Y-%m-%d · %H:%M} %?X?  %X ? %P  "
+set status_format = " %f%?r? %r?   %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %> %?p?   %p ?"
+set vfolder_format = " %N %?n?%3n&   ?  %8m  · %f"
+set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
+
+
+# no addressed to me, to me, group, cc, sent by me, mailing list
+#set to_chars=""
+# unchanged mailbox, changed, read only, attach mode
+set status_chars = " "
+# mail is tagged, important, deletion, attachments marked for deletion, \
+# been replied to, old, new, thread old, thread new, %S expando, %Z expando
+set flag_chars = "Oo "
+set hidden_tags = "unread,draft,flagged,passed,replied,attachment,signed,encrypted"
+tag-transforms "replied" "↻ "  \
+    "encrytpted" " " \
+    "signed" " " \
+    "attachment" " " \
+
+# The formats must start with 'G' and the entire sequence is case sensitive.
+tag-formats "replied" "GR" \
+    "encrypted" "GE" \
+    "signed" "GS" \
+    "attachment" "GA" \
+
+# powerline status bar hack
+color status white          black
+color status green          black   ' '
+color status yellow         black   ' '
+color status red            black   ' '
+color status color0         blue    '(.*)' 1 # bottom left
+color status blue           black   '.*()' 1
+color status brightwhite    blue    '\s* [0-9]+\s*' # bottom right
+color status blue           black   '().*$' 1
+color status yellow         black   '()\s* \s*[0-9]+\s*' 1
+color status black          yellow  '\s* \s*[0-9]+\s*'
+color status blue           yellow  '() ([0-9]+%|all|end)  \s*' 1
+color status black          blue    '.([0-9]+%|all|end)  \s*'
+color status yellow         black   '()\s*' 1
+color status default        black   ''
+
+# other ---------------------------------------------------------
+#mono index     bold '~h "^content-type: *(multipart/(mixed|signed|encrypted)|application/)"'
+#color index    red black '~h "^content-type: *multipart/(signed|encrypted)"'
+
+#macro index,pager A "<save-message>=已归档<enter>" "Archive Message"
+#macro index,pager I "<save-message>=INBOX<enter>" "Archive Message"
+
+#--------------------------------------------------
+#
+
+# add some nice custom coloring to the message list
+# thanks to new neomutt features
+# http://www.mutt.org/doc/manual/#patterns
+# https://neomutt.org/feature/index-color
+#color index_subject color109 color8 "~P !~T !~D"
+#color index_author color109 color8 "~P !~T !~D"
+#color index_subject color243 color8 "~Q !~T !~D"
+#color index_author color243 color8 "~Q !~T !~D"
+
+
+#color index_subject color142 color8 "~O !~T !~D"
+#color index_author color142 color8 "~O !~T !~D"
+#color index_subject color214 color8 "~F !~T !~D"
+#color index_author color214 color8 "~F !~T !~D"
+#color index_subject brightcolor214 color8 "~F ~N !~T !~D"
+#color index_author  brightcolor214 color8 "~F ~N !~T !~D"
+#color index_subject color167 color8 "~= !~T !~D"
+#color index_author color167 color8 "~= !~T !~D"
+#color index_subject brightcolor109 color8 "~P ~N !~T !~D"
+#color index_author brightcolor109 color8 "~P ~N !~T !~D"
+#color index color8 color223 "~T"
+#color index color229 color124 "~D"
+
+
+#set new_mail_command="dunstify -r 8888  normal  'New mail! %n new, %u unread.'"
+
+#切换发件人
+macro generic "<F1>" ":set from=hantao@bteb.cn"
+macro generic "<F2>" ":set from=hantaotaohan@hotmail.com"
+
+#切换信箱
+macro index,pager gi "<change-folder>=bteb/INBOX<enter>"
+macro index,pager go "<change-folder>=live/Inbox<enter>"
+
+# 自动同步邮箱设置
+timeout-hook 'exec sync-mailbox'
+startup-hook 'exec sync-mailbox'
+shutdown-hook 'exec sync-mailbox'
+
+

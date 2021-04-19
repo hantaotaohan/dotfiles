@@ -1,0 +1,9 @@
+{
+ "suggest.autoTrigger": "none",
+ "cursors.cancelKey": "<esc>",
+ "cursors.nextKey": "<C-n>",
+ "cursors.previousKey": "<C-p>",
+ "diagnostic.errorSign": "•",
+ "diagnostic.warningSign": "•",
+ "diagnostic.infoSign": "•"
+}

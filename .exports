@@ -1,0 +1,116 @@
+# ------------------------------------------------------------------------------------------------------------
+# Locale.
+# ------------------------------------------------------------------------------------------------------------
+# 本地语言环境设定
+if [ -f "/usr/bin/i3" ]; then
+    export LANG="zh_CN.UTF-8"
+    export LANGUAGE="zh_CN.UTF-8"
+else
+    export LANG="en_US.UTF-8"
+    export LANGUAGE="en_US.UTF-8"
+fi
+
+# Term.
+# Term颜色设定
+export TERM="xterm-256color"
+
+# Default Editor.
+# 默认编辑器设定
+export EDITOR="vim"
+
+# Default Pager.
+# 默认文字预览设定
+export PAGER="less"
+
+# 多用户历史记录保存及读取
+export PROMPT_COMMAND="history -a; history -r;  $PROMPT_COMMAND"    
+
+# ------------------------------------------------------------------------------------------------------------
+# FZF.
+# ------------------------------------------------------------------------------------------------------------
+# FZF默认功能设定及颜色设定
+    
+export FZF_DEFAULT_COMMAND="fd --hidden --follow --type f \
+  --exclude .git \
+  --exclude boot \
+  --exclude lib \
+  --exclude lib64 \
+  --exclude lost+found \
+  --exclude opt \
+  --exclude proc \
+  --exclude root \
+  --exclude run \
+  --exclude sbin \
+  --exclude srv \
+  --exclude sys \
+  --exclude tmp \
+  --exclude var"
+
+export FZF_DEFAULT_OPTS='
+  --color=fg:#abb2bf,bg:#282c34,hl:#e06c75,gutter:#282c34,fg+:#e06c75,bg+:#3d4148,hl+:#98c379
+  --color=info:#f7c662,prompt:#e06c75,pointer:#e06c75,marker:#98c379,spinner:#f7c662,header:#6699cc
+  --layout=reverse 
+  --border
+  --inline-info
+  --exact
+  --bind '?:toggle-preview,Ctrl-j:down,Ctrl-k:up,J:preview-down,K:preview-up'
+  '
+  # --prompt="❱❱❱ "  
+  # --pointer="●"
+  # --marker="❱ "
+
+# CTRL+T 搜索目录
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+
+# CTRL+R 搜索历史命令
+export FZF_CTRL_R_OPTS="--sort --exact --preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview,Ctrl-j:down,Ctrl-k:up,J:preview-down,K:preview-up'" 
+
+# ALT+C 搜索文件夹并cd进入
+export FZF_ALT_C_COMMAND='fd --hidden --type directory --exclude ".git"'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+
+# ctrl+t 采用预览框 ?打开关闭预览框
+# export FZF_CTRL_T_OPTS="--preview 'bat --color=always {}' --preview-window right:wrap --bind '?:toggle-preview'"
+# export FZF_DEFAULT_OPTS="--preview 'bat --color=always {}' --preview-window right:wrap --bind '?:toggle-preview'"
+
+# ------------------------------------------------------------------------------------------------------------
+# Navi.
+# ------------------------------------------------------------------------------------------------------------
+# # Navi fzf预览设置
+export NAVI_FZF_OVERRIDES='--height 30 --margin 1,1 --inline-info --border --preview-window=top:3:wrap'
+export NAVI_FZF_OVERRIDES_VAR='--height 3'
+export NAVI_TAG_COLOR=1
+export NAVI_COMMENT_COLOR=5
+export NAVI_SNIPPET_COLOR=2
+export NAVI_TAG=50
+export NAVI_COMMENT_WIDTH=50
+export NAVI_FZF_OVERRIDES='--height 30 --margin 1,1 --border --no-sort --layout=reverse'
+export NAVI_FZF_OVERRIDES_VAR='--height 30 --margin 1,1 --border'
+
+# ------------------------------------------------------------------------------------------------------------
+# Ripgrep.
+# ------------------------------------------------------------------------------------------------------------
+# Rg模糊搜索设定
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+# ------------------------------------------------------------------------------------------------------------
+# Less.
+# ------------------------------------------------------------------------------------------------------------
+# 文档预览Less设定
+export LESS="--RAW-CONTROL-CHARS"
+export LESS_TERMCAP_mb=$'\e[1;31m' # Start blinking
+export LESS_TERMCAP_md=$'\e[1;34m' # Start bold mode
+export LESS_TERMCAP_me=$'\e[0m' # End all mode
+export LESS_TERMCAP_so=$'\e[38;5;215m' # Start standout mode
+export LESS_TERMCAP_se=$'\e[0m' # End standout mode
+export LESS_TERMCAP_us=$'\e[4;35m' # Start underline
+export LESS_TERMCAP_ue=$'\e[0m' # End underline
+
+# ------------------------------------------------------------------------------------------------------------
+# Tldr.
+# ------------------------------------------------------------------------------------------------------------
+export TLDR_HEADER='magenta bold underline'
+export TLDR_QUOTE='yellow bold italic'
+export TLDR_DESCRIPTION='bold green'
+export TLDR_CODE='red'
+export TLDR_PARAM='blue'

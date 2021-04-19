@@ -1,0 +1,8 @@
+style "no-resize-handle"
+{
+    GtkWindow::resize-grip-height = 0
+    GtkWindow::resize-grip-width = 0
+    bg[NORMAL] = "#282C34"
+}
+
+class "GtkWidget" style "no-resize-handle"

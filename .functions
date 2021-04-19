@@ -1,0 +1,266 @@
+# ----------------------------------------------------------------------------------------------------------------
+# Tree View
+# ----------------------------------------------------------------------------------------------------------------
+function tre() {
+	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Create a new directory and enter it
+# ----------------------------------------------------------------------------------------------------------------
+function mkd() {
+	mkdir -p "$@" && cd "$_";
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Git Add submit and upload
+# ----------------------------------------------------------------------------------------------------------------
+function lazygit() {
+    git add .
+    git commit -a -m "$1"
+    git push
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Git commit browser
+# ----------------------------------------------------------------------------------------------------------------
+fshow() {
+    local commit_hash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+    local view_commit="$commit_hash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+    git log --color=always \
+        --format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" "$@" | \
+    fzf --no-sort --tiebreak=index --no-multi --reverse --ansi \
+        --header="enter to view, alt-y to copy hash" --preview="$view_commit" \
+        --bind="enter:execute:$view_commit | less -R" \
+        --bind="alt-y:execute:$commit_hash | xclip -selection clipboard"
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Remove all commit in Git
+# ----------------------------------------------------------------------------------------------------------------
+git-remove-all-commit() {
+    local branch
+    branch=$(git symbolic-ref --short HEAD)
+    echo -e "\nDo you want to remove all your commit in \033[1m$branch\033[0m branch? [Y/n] "
+    read -r response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            git checkout --orphan latest_branch
+            git add -A
+            git commit -am "Initial commit"
+            git branch -D "$branch"
+            git branch -m "$branch"
+            echo -e "\nTo force update your repository, run this command:\n\n    git push -fu origin $branch"
+            ;;
+        *)
+            echo "Cancelled."
+            ;;
+    esac
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Colors List - style1
+# ----------------------------------------------------------------------------------------------------------------
+function colors() {
+    for i in {0..255}; do
+        printf "\x1b[38;5;${i}mcolor%-5i\x1b[0m" $i
+        if ! (( ($i + 1 ) % 8 )); then
+            echo ""
+        fi
+    done
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Colors List - style2
+# ----------------------------------------------------------------------------------------------------------------
+function colorss() {
+    for x in {0..8}; do
+        for i in {30..37}; do
+            for a in {40..47}; do
+                echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "
+            done
+            echo
+        done
+    done
+    echo ""
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Check Web-Files size
+# ----------------------------------------------------------------------------------------------------------------
+sizeof() {
+    URL="$1"
+    humanize_size() {
+        local SIZE=$1
+        local KiB=1024
+        local MiB=$((1024 ** 2))
+        local GiB=$((1024 ** 3))
+
+        if ((SIZE > GiB)); then
+            echo "scale=2; $SIZE/$GiB" | bc | xargs -I{} printf "%.1fG" "{}"
+        elif ((SIZE > MiB)); then
+            echo "scale=2; $SIZE/$MiB" | bc | xargs -I{} printf "%.1fM" "{}"
+        elif ((SIZE > KiB)); then
+            echo "scale=2; $SIZE/$KiB" | bc | xargs -I{} printf "%.1fK" "{}"
+        else
+            echo "${SIZE}B"
+        fi
+    }
+
+    # Get Content-Length
+    local curl_size
+    curl_size=$(curl -sLI "$URL" | grep "[Cc]ontent-[Ll]ength" | awk 'NR==1{print $2}' | tr -d '\r')
+
+    if [ -z "$curl_size" ]; then
+        echo "File size not available"
+        exit 1
+    elif [[ "$curl_size" =~ ^[0-9]+$ ]]; then
+        humanize_size "$curl_size"
+    else
+        echo "Please provide a valid URL of a file"
+        exit 1
+    fi
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# FZF-Ripgrep
+# ----------------------------------------------------------------------------------------------------------------
+frg() {
+    [[ -n $1 ]] && cd $1 # go to provided folder or noop
+    RG_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
+
+    selected=$(
+    FZF_DEFAULT_COMMAND="rg --files" fzf \
+      -m \
+      -e \
+      --ansi \
+      --phony \
+      --reverse \
+      --bind "ctrl-a:select-all" \
+      --bind "f12:execute-silent:(vim {})" \
+      --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
+      --preview "rg -i --pretty --context 2 {q} {}" | cut -d":" -f1,2
+    )
+    [[ -n $selected ]] && vim $selected # open multiple files in editor
+}
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# FZF-Kill-Processes 
+# ----------------------------------------------------------------------------------------------------------------
+fkill() {
+    local pid
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# CD_Func
+# ----------------------------------------------------------------------------------------------------------------
+my_cd_func() {
+    \cd "${1}" 
+    ls -alhovqF --color=always --group-directories-first
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# CD到所选文件的目录中
+# ----------------------------------------------------------------------------------------------------------------
+cdf() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# 通过fzf搜索文件并用vim打开
+# ----------------------------------------------------------------------------------------------------------------
+fe() {
+    local file
+    file="$(fd --type f ${1:-.} ${2:-.} \
+    --hidden \
+    --follow \
+    --exclude .git \
+    --exclude boot \
+    --exclude lib \
+    --exclude lib64 \
+    --exclude lost+found \
+    --exclude opt \
+    --exclude proc \
+    --exclude root \
+    --exclude run \
+    --exclude sbin \
+    --exclude srv \
+    --exclude sys \
+    --exclude tmp \
+    --exclude var / | fzf --multi --exit-0 --select-1)"
+    if [[ -n $file ]]; then
+        VIMRUNTIME= vim -p $file
+    fi
+    if [ -z "${file}" ]; then
+        return 1
+    fi
+    history -w
+    : > /tmp/fzf_tmp
+    for files in ${file[@]}; do
+        echo $files >> /tmp/fzf_tmp
+    done
+    # sed -i 's/\n//g; s/ /\\ /g; s/(/\\(/; s/)/\\)/' /tmp/fzf_tmp
+    # # If the program is on the GUI list add a '&' to the command history
+    # if [[ $1 =~ ^(vim|zathura|vlc|eog|kolourpaint)$ ]]; then
+    #     sed -i '${s/$/ \&/}' /tmp/fzf_tmp
+    # fi
+    arguments=$(cat /tmp/fzf_tmp)
+    echo vim ${arguments} >> ~/.bash_history
+    history -r
+    rm -rf /tmp/fzf_tmp
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Normalize `open` across Linux, macOS, and Windows.
+# This is needed to make the `o` function (see below) cross-platform.
+# ----------------------------------------------------------------------------------------------------------------
+if [ ! $(uname -s) = 'Darwin' ]; then
+	if grep -q Microsoft /proc/version; then
+		# Ubuntu on Windows using the Linux subsystem
+		alias open='explorer.exe';
+	else
+		alias open='xdg-open';
+	fi
+fi
+
+# `o` with no arguments opens the current directory, otherwise opens the given
+# location
+function o() {
+	if [ $# -eq 0 ]; then
+		open .;
+	else
+		open "$@";
+	fi;
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# ls Dir
+# ----------------------------------------------------------------------------------------------------------------
+function l() {
+ll -ht | awk '{printf "%-10s%-8s%-15s%-12s%-20s\n",$3,$4,$5,$6,$7}'
+}
+
+# ----------------------------------------------------------------------------------------------------------------
+# Watch Dir
+# ----------------------------------------------------------------------------------------------------------------
+function wls(){
+path=$1
+inotifywait --quiet --monitor --event attrib,modify,move,delete,create --timefmt '%Y-%m-%dT%H:%M:%S' --format '%T %w %f %e' $path |
+while read -r file; do
+    clear
+    ls -alhtovqF --color=always --group-directories-first --time-style +"%F %T" $path | awk '{printf "%-10s%-8s%-15s%-12s%-20s\n",$3,$4,$5,$6,$7}'
+done
+}

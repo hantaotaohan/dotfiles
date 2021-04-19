@@ -1,0 +1,7 @@
+#!/bin/bash
+time=`date '+%H:%M:%S'`
+date=`date '+%Y-%m-%d'`
+case $BLOCK_BUTTON in
+    1) echo " $date" ;;
+    *) echo " $time" ;;
+esac

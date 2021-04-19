@@ -1,0 +1,12 @@
+# Use "gitignore" highlighting for ".ignore" files
+--map-syntax .ignore:.gitignore
+
+# theme
+#--theme=OneHalfDark
+--theme=TwoDark
+
+# style
+--style=full
+
+# pager
+--pager="less -RFX~"

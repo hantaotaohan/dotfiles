@@ -1,0 +1,104 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/share/i3blocks/$BLOCK_NAME
+#separator_block_width=30
+markup=none
+align=center
+separator=true
+
+[separator]
+full_text= 
+
+#[vim]
+#full_text=  Vim
+#min_width=200
+#command=i3-msg exec "alacritty -d 80 20 -t vim -e vim $HOME/.scratchpad" > /dev/null
+
+[separator]
+full_text=Bookmarks 
+color=#4F5767
+min_width=100
+
+[vim]
+min_width=100
+markup=pango
+command=$HOME/.config/i3blocks/vim
+interval=1
+
+[neomutt]
+min_width=100
+markup=pango
+command=$HOME/.config/i3blocks/neomutt
+interval=1
+
+[notion]
+min_width=100
+markup=pango
+command=$HOME/.config/i3blocks/notion
+interval=1
+
+[github]
+full_text=  Github
+min_width=100
+command=i3-msg exec "google-chrome --force-dark-mode https://www.github.com" > /dev/null
+
+[book]
+full_text=  Book
+min_width=100
+command=i3-msg exec "google-chrome --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --app=https://weread.qq.com/" > /dev/null
+
+[separator]
+full_text=System 
+color=#4F5767
+min_width=100
+
+[memory]
+command=$HOME/.config/i3blocks/memory
+label=
+interval=1
+instance=mem
+min_width=100
+
+[bandwidth]
+label= 
+full_text=Network I/O
+command=$HOME/.config/i3blocks/bandwidth
+interval=1
+min_width=100
+
+[cpu_usage]
+full_text=CPU
+label= 
+interval=1
+min_width=100
+
+[iface]
+command=$HOME/.config/i3blocks/iface
+label= 
+color=#abb2bf
+interval=10
+min_width=200

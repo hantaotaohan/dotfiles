@@ -1,0 +1,28 @@
+#!/bin/bash
+
+show_count() {
+  count="$(i3-msg -t get_tree | jq '.' | grep -c '"scratchpad_state": "fresh"')"
+
+  echo "${count}"
+  echo "${count}"
+
+  if   [[ "${count}" -gt 5 ]]; then
+    echo "#e06c75"
+  elif [[ "${count}" -gt 4 ]]; then
+    echo "#c678dd"
+  elif [[ "${count}" -gt 3 ]]; then
+    echo "#e5c07b"
+  elif [[ "${count}" -gt 2 ]]; then
+    echo "#61afef"
+  else
+    echo "#abb2bf"
+  fi
+}
+
+case $BLOCK_BUTTON in
+  1) i3-msg "scratchpad show" 2>&1 >/dev/null;;
+  3) i3-msg "scratchpad show; floating toggle" 2>&1 >/dev/null
+esac
+
+show_count
+

@@ -1,0 +1,17 @@
+/* @binding-set rebind */
+/* { */
+/*         bind "<Capslock>a" { "select-all" (1)   }; */
+/*         bind "<Capslock>x" { "cut-clipboard" ()   }; */
+/*         bind "<Capslock>c" { "copy-clipboard" ()  }; */
+/*         bind "<Capslock>v" { "paste-clipboard" () }; */
+/*         bind "<super>z"    { "undo" () }; */
+/* } */
+
+/* * { */
+/*         -gtk-key-bindings: rebind */
+/* } */
+
+
+#vim-main-window {
+    background-color: #282C34;
+}

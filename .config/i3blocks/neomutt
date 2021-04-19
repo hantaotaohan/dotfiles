@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#if [ `wmctrl -l | grep -c "scratchpad"` = 0 ]
+#then
+#    alacritty -d 100 30 -t scratchpad -e vim $HOME/.scratchpad
+#fi
+
+case $BLOCK_BUTTON in
+    1) # Left Click
+        i3-msg --quiet "exec --no-startup-id raiseorlaunch -r -t neomutt -e '--no-startup-id alacritty -d 100 30 -t neomutt -e neomutt'"
+        ;;
+    2) # Middle Click
+        i3-msg "kill"
+        ;;
+    3) # Right Click
+        i3-msg "kill"
+        ;;
+esac
+
+dbm=$(wmctrl -l | grep -c "neomutt")
+COLOR_on="#e06c75"
+COLOR_off="#abb2bf"
+
+if [[ $dbm -eq 0 ]]
+then
+   # i3-msg exec "alacritty -d 100 30 -t scratchpad -e vim $HOME/.scratchpad" > /dev/nul
+    echo "<span color='$COLOR_off'>  Neomutt</span>"
+else
+    echo "<span color='$COLOR_on'>  Neomutt</span>"
+fi
+

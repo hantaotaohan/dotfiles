@@ -1,0 +1,11 @@
+/* Rofi config file */
+configuration {
+    lines: 22;
+    /* font: "Inziu_Iosevka_SC_Bold 10"; */
+    font: "Saber 10";
+    show-icons: true;
+    theme: "onedark";
+    display-window: "Window";
+    display-drun: "Search";
+    sidebar-mode: false;
+}
