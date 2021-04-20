@@ -38,7 +38,13 @@ reset='\e[0;37m'
 
 Backup_dir="$HOME/.dotfiles.orig"
 Dotfiles_repo=$(pwd)
-#Dotfiles_repo=$(dirname $PWD)
+Github="github.com"
+Gitraw="download.fastgit.org"
+Gitfast="hub.fastgit.org"
+Bin_dir="$HOME/.bin"
+
+if [ ! -d .bin ]; then mkdir .bin; fi
+
 
 Dotfiles_symlinks=( \
         .aliases \
@@ -341,13 +347,13 @@ echo -e "                                                                       
 	fcitx \
         fcitx-pinyin \
 	#------Language------
-	language-pack-zh-hans \
+	#language-pack-zh-hans \
 	#language-pack-gnome-zh-hans \
 	#------VmWare--------
 	open-vm-tools \
         open-vm-tools-desktop \
 	#------Tools---------
-        git \
+	fzf \
         wget \
         curl \
         ranger \
@@ -361,7 +367,7 @@ echo -e "                                                                       
 	xdotool \
 	xclip \
 	wmctrl \
-	#ncdu \
+	ncdu \
 	inotify-tools \
 	#------Edit----------
         vim \
@@ -447,7 +453,7 @@ echo -e "                                                                       
         #sncli \
         i3ipc \
         keyring \
-        mdv \
+        #mdv \
         #litecli \
         raiseorlaunch \
         #xlsx2csv
@@ -480,6 +486,7 @@ echo -e "              ${blue}GEM - Install${reset}                             
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/vimwiki_markdown.gem
 	gemApps=(\
         vimwiki_markdown
         )
@@ -489,7 +496,7 @@ echo -e "                                                                       
             #gem sources --remove https://rubygems.org/ > /dev/null 2>&1
             #gem sources -a https://gems.ruby-china.com/ > /dev/null 2>&1
             #sudo gem install $app > /dev/null 2>&1
-            sudo gem install --local $Dotfiles_repo/bin/$app > /dev/null 2>&1
+            sudo gem install --local $Dotfiles_repo/bin/$app.gme > /dev/null 2>&1
             installSuccess $? $app
         done
 }
@@ -514,17 +521,19 @@ echo -e "              ${blue}Local - Install ${reset}                          
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/fd.deb
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/bat.deb
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/Alacritty.deb
+	
 	dpkgApps=( \
-        #ripgrep.deb \
         fd.deb \
         bat.deb \
-        #resilio-sync.deb \
         Alacritty.deb
         )
         for app in "${dpkgApps[@]}"
         do
             echo -e "              [*] Installing: $app";
-            sudo dpkg -i $Dotfiles_repo/bin/$app > /dev/null 2>&1
+            sudo dpkg -i $Bin_dir/$app > /dev/null 2>&1
             installSuccess $? $app
         done
 }
@@ -558,15 +567,17 @@ echo -e "                                                                       
 # TLDR 
 #----------------------------------------------------------------------------------------#
 
-#         if [ ! -f "/bin/tldr" ];then
-#             sudo cp $Dotfiles_repo/bin/tldr /bin
-#             sudo chmod +x /bin/tldr
-#         else
-#             sudo rm -rf /bin/tldr
-#             sudo cp $Dotfiles_repo/bin/tldr /bin
-#             sudo chmod +x /bin/tldr
-#         fi
-#         echo -e "              ${green}[√] TLDR Successful${reset}\n"
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/tldr
+	
+	if [ ! -f "/bin/tldr" ];then
+		sudo cp $Bin_dir/tldr /bin
+		sudo chmod +x /bin/tldr
+	else
+		sudo rm -rf /bin/tldr
+		sudo cp $Bin_dir/tldr /bin
+		sudo chmod +x /bin/tldr
+	fi
+	echo -e "              ${green}[√] TLDR Successful${reset}\n"
 
 #----------------------------------------------------------------------------------------#
 # Edge
@@ -580,7 +591,6 @@ echo -e "                                                                       
         # Install
         sudo apt update -y -qq > /dev/null 2>&1
         sudo apt install -y -qq microsoft-edge-dev > /dev/null 2>&1
-
         echo -e "              ${green}[√] Edge Successful${reset}\n"
 
 #----------------------------------------------------------------------------------------#
@@ -603,12 +613,14 @@ echo -e "                                                                       
 # diff-so-fancy
 #----------------------------------------------------------------------------------------#
 
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/diff-so-fancy
+	
         if [ ! -f "/usr/local/bin/diff-so-fancy" ]; then
-            sudo cp -f $Dotfiles_repo/bin/diff-so-fancy /usr/local/bin
+            sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
             sudo chmod 777 /usr/local/bin/diff-so-fancy
         else
             sudo rm -rf /usr/local/bin/diff-so-fancy
-            sudo cp -f $Dotfiles_repo/bin/diff-so-fancy /usr/local/bin
+            sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
             sudo chmod 777 /usr/local/bin/diff-so-fancy
         fi
         echo -e "              ${green}[√] Diff-So-Fancy Successful${reset}\n"
@@ -617,12 +629,14 @@ echo -e "                                                                       
 # Install trans
 #----------------------------------------------------------------------------------------#
 
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/trans
+
         if [ ! -f "/usr/local/bin/trans" ]; then
-            sudo cp -f $Dotfiles_repo/bin/trans /usr/local/bin
+            sudo cp -f $Bin_dir/trans /usr/local/bin
             sudo chmod 777 /usr/local/bin/trans
         else
             sudo rm -rf /usr/local/bin/trans
-            sudo cp -f $Dotfiles_repo/bin/trans /usr/local/bin
+            sudo cp -f $Bin_dir/trans /usr/local/bin
             sudo chmod 777 /usr/local/bin/trans
         fi
         echo -e "              ${green}[√] Trans Successful${reset}\n"
