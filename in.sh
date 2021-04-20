@@ -496,7 +496,7 @@ echo -e "                                                                       
             #gem sources --remove https://rubygems.org/ > /dev/null 2>&1
             #gem sources -a https://gems.ruby-china.com/ > /dev/null 2>&1
             #sudo gem install $app > /dev/null 2>&1
-            sudo gem install --local $Dotfiles_repo/bin/$app.gem > /dev/null 2>&1
+            sudo gem install --local $Bin_dir/$app.gem > /dev/null 2>&1
             installSuccess $? $app
         done
 }
