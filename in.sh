@@ -486,7 +486,7 @@ echo -e "              ${blue}GEM - Install${reset}                             
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/vimwiki_markdown.gem
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/vimwiki_markdown.gem > /dev/null 2>&1
 	gemApps=(\
         vimwiki_markdown
         )
@@ -521,9 +521,9 @@ echo -e "              ${blue}Local - Install ${reset}                          
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/fd.deb
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/bat.deb
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/Alacritty.deb
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/fd.deb > /dev/null 2>&1
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/bat.deb > /dev/null 2>&1
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/Alacritty.deb > /dev/null 2>&1
 	
 	dpkgApps=( \
         fd.deb \
@@ -567,7 +567,7 @@ echo -e "                                                                       
 # TLDR 
 #----------------------------------------------------------------------------------------#
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/tldr
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/tldr > /dev/null 2>&1
 	
 	if [ ! -f "/bin/tldr" ];then
 		sudo cp $Bin_dir/tldr /bin
@@ -613,7 +613,7 @@ echo -e "                                                                       
 # diff-so-fancy
 #----------------------------------------------------------------------------------------#
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/diff-so-fancy
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/diff-so-fancy > /dev/null 2>&1
 	
         if [ ! -f "/usr/local/bin/diff-so-fancy" ]; then
             sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
@@ -629,7 +629,7 @@ echo -e "                                                                       
 # Install trans
 #----------------------------------------------------------------------------------------#
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/trans
+	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/trans > /dev/null 2>&1
 
         if [ ! -f "/usr/local/bin/trans" ]; then
             sudo cp -f $Bin_dir/trans /usr/local/bin
