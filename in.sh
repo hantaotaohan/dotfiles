@@ -725,40 +725,7 @@ main() {
 
     Sync_Dotfiles
 
-    echo "                                                                            "
-    echo "-------------------------------------------------------------------------------"
-    echo "                                                                               "
-    echo " -h        Print this message                                                  "
-    echo "                                                                               "
-    echo " -A        Install All                                                         "
-    echo " -D        Install Dotfiles & Enviroment                                       "
-    echo " -S        Update System & Setup Alls Tools & Enviroment                       "
-    echo "                                                                               "
-    echo "-------------------------------------------------------------------------------"
-    echo "                                                                               "
-    echo " -1        Install Dotfiles                                                    "
-    echo " -2        Uninstall Dotfiles                                                  "
-    echo " -3        Install Environment                                                 "
-    echo " -4        Install APT Tools                                                   "
-    echo " -5        Install PIP3 Tools                                                  "
-    echo " -6        Install GEM Tools                                                   "
-    echo " -7        Install Local Bin Folder Tools                                      "
-    echo " -8        Install Fonts                                                       "
-    echo "                                                                               "
-    echo "-------------------------------------------------------------------------------"
-    echo "                                                                               "
-    echo " -9        Install Server Edition                                              "
-    echo "                                                                               "
-    echo " -t        Install Tools                                                       "
-    echo "                                                                               "
-    echo " -q        Exit                                                                "
-    echo "                                                                               "
-    echo "-------------------------------------------------------------------------------"
-    echo "                                                                               "
-
-    read -r -p "Please select the mode you want to install ?  " input
-
-    case "$input" in
+    case "$1" in
         ''|-h|--help)
             usage
             exit 0
