@@ -136,18 +136,18 @@ EOF
 
 install_dotfiles() {
  
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "               ____        _    __ _ _                                         "; | center
-echo -e "              |  _ \  ___ | |_ / _(_) | ___  ___                               "; | center
-echo -e "              | | | |/ _ \| __| |_| | |/ _ \/ __|                              "; | center
-echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                              "; | center
-echo -e "              |____/ \___/ \__|_| |_|_|\___||___/                              "; | center
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "              ${blue}Start Backup and Install Dotfiles${reset}                 "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "               ____        _    __ _ _                                         " | center
+echo -e "              |  _ \  ___ | |_ / _(_) | ___  ___                               " | center
+echo -e "              | | | |/ _ \| __| |_| | |/ _ \/ __|                              " | center
+echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                              " | center
+echo -e "              |____/ \___/ \__|_| |_|_|\___||___/                              " | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "              ${blue}Start Backup and Install Dotfiles${reset}                 " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
 
     # Backup config.
     if ! [ -f "$Backup_dir/check-backup.txt" ]; then
@@ -210,18 +210,18 @@ echo -e "                                                                       
 
 uninstall_dotfiles() {
 
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "               ____        _    __ _ _                                         "; | center
-echo -e "              |  _ \  ___ | |_ / _(_) | ___  ___                               "; | center
-echo -e "              | | | |/ _ \| __| |_| | |/ _ \/ __|                              "; | center
-echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                              "; | center
-echo -e "              |____/ \___/ \__|_| |_|_|\___||___/    - Restore                 "; | center
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "              ${blue}Restore Dotfile Initial State${reset}                     "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "               ____        _    __ _ _                                         " | center
+echo -e "              |  _ \  ___ | |_ / _(_) | ___  ___                               " | center
+echo -e "              | | | |/ _ \| __| |_| | |/ _ \/ __|                              " | center
+echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                              " | center
+echo -e "              |____/ \___/ \__|_| |_|_|\___||___/    - Restore                 " | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "              ${blue}Restore Dotfile Initial State${reset}                     " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
 
     if [ -f "$Backup_dir/check-backup.txt" ]; then
         for dots_symlinks in "${Dotfiles_symlinks[@]}"
@@ -265,19 +265,19 @@ echo -e "                                                                       
 
 workspace_settings() {
 
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
-echo -e "               _____   _   _  __     __                                        "; | center
-echo -e "              | ____| | \ | | \ \   / /                                        "; | center
-echo -e "              |  _|   |  \| |  \ \ / /                                         "; | center
-echo -e "              | |___  | |\  |   \ V /                                          "; | center
-echo -e "              |_____| |_| \_|    \_/                                           "; | center
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "              ${blue}System Environment Configuration${reset}                  "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
+echo -e "               _____   _   _  __     __                                        " | center
+echo -e "              | ____| | \ | | \ \   / /                                        " | center
+echo -e "              |  _|   |  \| |  \ \ / /                                         " | center
+echo -e "              | |___  | |\  |   \ V /                                          " | center
+echo -e "              |_____| |_| \_|    \_/                                           " | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "              ${blue}System Environment Configuration${reset}                  " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
 
 # Make Floder
 if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace"; fi
@@ -291,20 +291,20 @@ if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
 
 sysUpdate(){
 
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
-echo -e "               ____            _                                               "; | center
-echo -e "              / ___| _   _ ___| |_ ___ _ __ ___                                "; | center
-echo -e "              \___ \| | | / __| __/ _ \ '_    _ \                              "; | center
-echo -e "               ___) | |_| \__ \ ||  __/ | | | | |                              "; | center
-echo -e "              |____/ \__, |___/\__\___|_| |_| |_|                              "; | center
-echo -e "                     |___/                                                     "; | center
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "              ${blue}Repace Sources and System Update ${reset}                 "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
+echo -e "               ____            _                                               " | center
+echo -e "              / ___| _   _ ___| |_ ___ _ __ ___                                " | center
+echo -e "              \___ \| | | / __| __/ _ \ '_    _ \                              " | center
+echo -e "               ___) | |_| \__ \ ||  __/ | | | | |                              " | center
+echo -e "              |____/ \__, |___/\__\___|_| |_| |_|                              " | center
+echo -e "                     |___/                                                     " | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "              ${blue}Repace Sources and System Update ${reset}                 " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
 
 sudo ln -sf "$Dotfiles_repo/sources.list" "/etc/apt/sources.list"
 echo -e "${green}[+]Repace sources.list Done !${reset}\n"				   | center
@@ -320,19 +320,19 @@ echo -e "${green}[+]Upgrade Successful !${reset}\n"					   | center
 
 aptInstall() {
 
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
-echo -e "                  _      ____    _____                                         "; | center
-echo -e "                 / \    |  _ \  |_   _|                                        "; | center
-echo -e "                / _ \   | |_) |   | |                                          "; | center
-echo -e "               / ___ \  |  __/    | |                                          "; | center
-echo -e "              /_/   \_\ |_|       |_|                                          "; | center
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "              ${blue}Apt - Install${reset}                                     "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
+echo -e "                  _      ____    _____                                         " | center
+echo -e "                 / \    |  _ \  |_   _|                                        " | center
+echo -e "                / _ \   | |_) |   | |                                          " | center
+echo -e "               / ___ \  |  __/    | |                                          " | center
+echo -e "              /_/   \_\ |_|       |_|                                          " | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "              ${blue}Apt - Install${reset}                                     " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
 
 	aptApps=( \
 	#--------------------------------------------------------------------------I3WM--
@@ -435,19 +435,19 @@ echo -e "                                                                       
 
 pipInstall() {
 
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
-echo -e "               ____    ___   ____    _____                                     "; | center
-echo -e "              |  _ \  |_ _| |  _ \  |___ /                                     "; | center
-echo -e "              | |_) |  | |  | |_) |   |_ \                                     "; | center
-echo -e "              |  __/   | |  |  __/   ___) |                                    "; | center
-echo -e "              |_|     |___| |_|     |____/                                     "; | center
-echo -e "                                                                               "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "              ${blue}PIP3 - Install${reset}                                    "; | center
-echo -e "-------------------------------------------------------------------------------"; | center
-echo -e "                                                                               "; | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
+echo -e "               ____    ___   ____    _____                                     " | center
+echo -e "              |  _ \  |_ _| |  _ \  |___ /                                     " | center
+echo -e "              | |_) |  | |  | |_) |   |_ \                                     " | center
+echo -e "              |  __/   | |  |  __/   ___) |                                    " | center
+echo -e "              |_|     |___| |_|     |____/                                     " | center
+echo -e "                                                                               " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "              ${blue}PIP3 - Install${reset}                                    " | center
+echo -e "-------------------------------------------------------------------------------" | center
+echo -e "                                                                               " | center
 
 	pipApps=( \
         i3ipc \
