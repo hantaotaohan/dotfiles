@@ -31,20 +31,16 @@ green='\e[0;32m'
 white='\e[0;37m'
 reset='\e[0;37m'
 
-
 #----------------------------------------------------------------------------------------#
 # Setting Bash Variable
 #----------------------------------------------------------------------------------------#
 
 Backup_dir="$HOME/.dotfiles.orig"
+Bin_dir="$HOME/.bin"
 Dotfiles_repo=$(pwd)
 Github="github.com"
-Gitraw="download.fastgit.org"
 Gitfast="hub.fastgit.org"
-Bin_dir="$HOME/.bin"
-
-
-
+Gitraw="https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0"
 
 Dotfiles_symlinks=( \
         .aliases \
@@ -119,7 +115,6 @@ Options:
 EOF
 }
 
-
 #----------------------------------------------------------------------------------------#
 # Start Install Dotfiles 
 #----------------------------------------------------------------------------------------#
@@ -138,6 +133,7 @@ echo -e "-----------------------------------------------------------------------
 echo -e "              ${blue}Start Backup and Install Dotfiles${reset}                 ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
+
     # Backup config.
     if ! [ -f "$Backup_dir/check-backup.txt" ]; then
         env mkdir -p "$Backup_dir/.config"
@@ -192,7 +188,6 @@ echo -e "                                                                       
     echo -e "If you want to restore your old config, " >&2
     echo -e "you can use ${red}./install.sh -r${white} command.\n" >&2
 }
-
 
 #----------------------------------------------------------------------------------------#
 # Uninstall Dotfiles
@@ -275,7 +270,6 @@ if [ ! -d "$HOME/desktop" ]; then mkdir -p "$HOME/desktop"; fi
 if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
 }
 
-
 #----------------------------------------------------------------------------------------#
 # Repace Sources and System Update & Upgrade Packages
 #----------------------------------------------------------------------------------------#
@@ -326,90 +320,91 @@ echo -e "-----------------------------------------------------------------------
 echo -e "                                                                               ";
 
 	aptApps=( \
-	#------I3wm----------
+	#--------------------------------------------------------------------------I3WM--
 	i3 \
         feh \
 	mpv \
         rofi \
+	zathura \
 	i3blocks \
         i3lock-fancy \
 	deepin-screenshot \
-	#solaar \
-	#imwheel \
-	zathura \
 	nautilus --no-install-recommends --no-install-suggests \
-	#------System--------
+	#-------------------------------------------------------------------------SYSTEM--
 	xinit \
 	lua5.2 \
         ruby-full \
         openssh-server \
         openssh-client \
-	#------Fcitx---------
+	#--------------------------------------------------------------------------FCITX--
 	fcitx \
         fcitx-pinyin \
-	#------Language------
+	#-----------------------------------------------------------------------LANGUAGE--
 	#language-pack-zh-hans \
 	#language-pack-gnome-zh-hans \
-	#------VmWare--------
+	#-------------------------------------------------------------------------VMWARE--
 	open-vm-tools \
         open-vm-tools-desktop \
-	#------Tools---------
+	#--------------------------------------------------------------------------TOOLS--
+        jq \
 	fzf \
+	w3m \
+	zip \
+	htop \
         wget \
         curl \
-        ranger \
-        ripgrep \
-        python3-pip \
-	zip \
+	ncdu \
+        tldr \	
         unzip \
-        jq \
-        tldr \
-        silversearcher-ag \
-	xdotool \
 	xclip \
 	wmctrl \
-	ncdu \
+	ranger \
+	xdotool \
+        ripgrep \
+	newsboat \
+        python3-pip \
 	inotify-tools \
-	#------Edit----------
+        silversearcher-ag \
+	#--------------------------------------------------------------------------EDIT--
         vim \
-        vim-gtk \
 	tmux \
-        w3m \
-	#------Mail----------
+        vim-gtk \
+	#--------------------------------------------------------------------------MAIL--
+        msmtp \
 	neomutt \
         offlineimap \
-        msmtp \
-	newsboat \
-	#------Other---------
+	#-------------------------------------------------------------------------OTHER--
         yank
-	#------ignore--------
+	#------------------------------------------------------------------------IGNORE--
+        #pv \
+        #rar \
+        #vlc \
+	#bat \
+	#xvfb \
+	#tree \
+        #axel \
+        #unrar \
+        #xinit \
+        #aria2 \
+        #ffmpeg \
+	#xinput \
         #ctags \
+	#solaar \
+	#imwheel \
         #compton \
         #i3status \
         #calibre \
-        #xautolock \
+	#dbus-x11 \
+	#alacritty \
+	#xautolock \
+	#zlib1g-dev \ 
+        #p7zip-full \
+	#python-pip \
         #gnome-keyring \
         #libsecret-tools \
-	#python-pip \
-	#alacritty \
-	#bat \
-	#zlib1g-dev \
-	#tree \
-	#xvfb \
-	#dbus-x11 \
-	#fonts-wqy-microhei \
-	#xinput \
-        #axel \
-        #pv \
-        #aria2 \
-        #rar \
-        #unrar \
-        #ffmpeg \
-        #vlc \
-        #p7zip-full \
-        #fcitx-module-cloudpinyin \
 	#x11-xserver-utils \
-        #xinit \
+	#fonts-wqy-microhei \
+        #fcitx-module-cloudpinyin \
         )
         for app in "${aptApps[@]}"
         do
@@ -440,24 +435,24 @@ echo -e "-----------------------------------------------------------------------
 echo -e "                                                                               ";
 
 	pipApps=( \
-        #powerline-shell \
-        #pandas \
-        #django \
-        #selenium \
-        #ipython \
-        #beautifulsoup4 \
-        #notebook \
-        #prompt-toolkit \
-        pyvirtualdisplay \
-        #tabview \
-        #you-get \
-        #sncli \
         i3ipc \
         keyring \
-        #mdv \
-        #litecli \
         raiseorlaunch \
-        #xlsx2csv
+        pyvirtualdisplay 
+        #mdv \
+        #sncli \
+	#pandas \
+        #django \
+        #litecli \
+        #tabview \
+        #you-get \
+	#ipython \
+        #xlsx2csv \
+        #notebook \
+        #selenium \
+        #beautifulsoup4 \
+        #prompt-toolkit \
+        #powerline-shell \
         )
         for app in "${pipApps[@]}"
         do
@@ -487,7 +482,7 @@ echo -e "              ${blue}GEM - Install${reset}                             
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/vimwiki_markdown.gem > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/vimwiki_markdown.gem > /dev/null 2>&1
 	gemApps=(\
         vimwiki_markdown
         )
@@ -496,8 +491,8 @@ echo -e "                                                                       
             echo -e "              [*] Installing: $app";
             gem sources --remove https://rubygems.org/ > /dev/null 2>&1
             gem sources -a https://gems.ruby-china.com/ > /dev/null 2>&1
-            #sudo gem install $app > /dev/null 2>&1
             sudo gem install --local $Bin_dir/$app.gem > /dev/null 2>&1
+            #sudo gem install $app > /dev/null 2>&1
             installSuccess $? $app
         done
 }
@@ -522,9 +517,9 @@ echo -e "              ${blue}Local - Install ${reset}                          
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/fd.deb > /dev/null 2>&1
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/bat.deb > /dev/null 2>&1
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/Alacritty.deb > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/fd.deb > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/bat.deb > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/Alacritty.deb > /dev/null 2>&1
 	
 	dpkgApps=( \
         fd.deb \
@@ -568,7 +563,7 @@ echo -e "                                                                       
 # TLDR 
 #----------------------------------------------------------------------------------------#
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/tldr > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/tldr > /dev/null 2>&1
 	
 	if [ ! -f "/bin/tldr" ];then
 		sudo cp $Bin_dir/tldr /bin
@@ -614,7 +609,7 @@ echo -e "                                                                       
 # diff-so-fancy
 #----------------------------------------------------------------------------------------#
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/diff-so-fancy > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/diff-so-fancy > /dev/null 2>&1
 	
         if [ ! -f "/usr/local/bin/diff-so-fancy" ]; then
             sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
@@ -630,7 +625,7 @@ echo -e "                                                                       
 # Install trans
 #----------------------------------------------------------------------------------------#
 
-	wget -P $Bin_dir https://$Gitraw/hantaotaohan/debian/releases/download/1.0.0/trans > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/trans > /dev/null 2>&1
 
         if [ ! -f "/usr/local/bin/trans" ]; then
             sudo cp -f $Bin_dir/trans /usr/local/bin
@@ -671,12 +666,12 @@ echo -e "              ${blue}Fonts Install ${reset}                            
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-        if [ ! -d "$HOME/fonts" ]; then
+        if [ ! -d "$HOME/.fonts" ]; then
             git clone -q\
                 https://hub.fastgit.org/hantaotaohan/fonts_minimize.git\
-                $HOME/fonts && cd $HOME/fonts && ./install.sh
+                $HOME/.fonts && cd $HOME/.fonts && ./install.sh
         else
-            cd $HOME/fonts &&\
+            cd $HOME/.fonts &&\
             git reset -q --hard && git pull -q && ./install.sh
         fi
 }
@@ -741,13 +736,13 @@ main() {
             LocalDpkg
             LoaclConfig
             installFonts
-            Make_apps
+            #Make_apps
             sudo apt-get -y -qq --purge remove byobu gnome-terminal yelp > /dev/null 2>&1
             sudo apt autoremove -y -qq > /dev/null 2>&1
             sudo apt-get clean > /dev/null 2>&1
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
             cd $HOME
-            bash $HOME/dotfiles/setup/setup_tools.sh
+            bash $HOME/debian/.extras/install/setup_tools.sh
             cd $HOME
             bash
             ;;
