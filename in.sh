@@ -7,12 +7,15 @@ clear
 #----------------------------------------------------------------------------------------#
 
 center() {
-	w=$(( $COLUMNS / 2 - 50 ))
-	while IFS= read -r line
-	do
-		printf "%${w}s %s\n" ' ' "$line"
-	done
+    readarray message < <(expand)
+    width="${1:-$(tput cols)}"
+    margin=$(awk -v "width=$width" '
+        { max_len = length > width ? width : length > max_len ? length : max_len }
+        END { printf "%" int((width - max_len + 1) / 2) "s", "" }
+    ' <<< "${message[@]}")
+    printf "%s" "${message[@]/#/$margin}"
 }
+
 
 #----------------------------------------------------------------------------------------#
 # Start
@@ -96,17 +99,17 @@ usage() {
     program_name=${0##*/}
     cat <<EOF
 
-Usage: $program_name [-option]
+Usage: $program_name [-option]  | center
 
-Options:
+Options:  | center
                                                                             
-------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------  | center
                                                                             
- -h        Print this message                                               
+ -h        Print this message   | center                                             
                                                                             
- -A        Install All                                                      
- -D        Install Dotfiles & Enviroment                                    
- -S        Update System & Setup Alls Tools & Enviroment                    
+ -A        Install All                             | center                          
+ -D        Install Dotfiles & Enviroment             | center                        
+ -S        Update System & Setup Alls Tools & Enviroment       | center              
                                                                             
 ------------------------------------------------------------------------------------------
                                                                             
