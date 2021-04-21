@@ -32,6 +32,21 @@ white='\e[0;37m'
 reset='\e[0;37m'
 
 #----------------------------------------------------------------------------------------#
+# Setting Bash Function
+#----------------------------------------------------------------------------------------#
+function center ()
+{
+ _STR=$1
+ _ROW=$2
+ LEN=`echo $_STR | wc -c`
+ COLS=`tput cols`
+ HOLD_COL=`expr $COLS - $LEN`
+ NEW_COL=`expr $HOLD_COL / 2`
+ tput cup $_ROW $NEW_COL
+ echo -n $_STR
+}
+
+#----------------------------------------------------------------------------------------#
 # Setting Bash Variable
 #----------------------------------------------------------------------------------------#
 
@@ -747,7 +762,7 @@ main() {
             sudo apt-get clean > /dev/null 2>&1
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
             cd $HOME
-            bash $HOME/debian/.extras/install/setup_tools.sh
+            bash $HOME/debian/.extras/install/install_tools.sh
             cd $HOME
             bash
             ;;
