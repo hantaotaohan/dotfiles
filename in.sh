@@ -97,7 +97,7 @@ Dotfiles_copy=( \
 usage() {
     local program_name
     program_name=${0##*/}
-    cat <<EOF | center
+    cat <<EOF										   | center
 
 Usage: $program_name [-option]
 
@@ -136,18 +136,18 @@ EOF
 
 install_dotfiles() {
  
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "               ____        _    __ _ _                                         ";
-echo -e "              |  _ \  ___ | |_ / _(_) | ___  ___                               ";
-echo -e "              | | | |/ _ \| __| |_| | |/ _ \/ __|                              ";
-echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                              ";
-echo -e "              |____/ \___/ \__|_| |_|_|\___||___/                              ";
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Start Backup and Install Dotfiles${reset}                 ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "               ____        _    __ _ _                                         "; | center
+echo -e "              |  _ \  ___ | |_ / _(_) | ___  ___                               "; | center
+echo -e "              | | | |/ _ \| __| |_| | |/ _ \/ __|                              "; | center
+echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                              "; | center
+echo -e "              |____/ \___/ \__|_| |_|_|\___||___/                              "; | center
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "              ${blue}Start Backup and Install Dotfiles${reset}                 "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
 
     # Backup config.
     if ! [ -f "$Backup_dir/check-backup.txt" ]; then
@@ -176,9 +176,9 @@ echo -e "                                                                       
         fi
 
         # Output.
-        echo -e "${blue}Your config is backed up in ${Backup_dir}\n" >&2
-        echo -e "${red}Please do not delete check-backup.txt in .dotfiles.orig folder.${white}" >&2
-        echo -e "It's used to backup and restore your old config.\n" >&2
+        echo -e "${blue}Your config is backed up in ${Backup_dir}\n" >&2 		   | center
+        echo -e "${red}Please do not delete check-backup.txt.${white}" >&2 		   | center
+        echo -e "It's used to backup and restore your old config.\n" >&2 	           | center
     fi
 
     # Install config.
@@ -195,13 +195,13 @@ echo -e "                                                                       
         cp -rf "$Dotfiles_repo/${dots_copy}" "$HOME/"
     done
 
-    echo -e "${blue}New dotfiles is installed!\n${white}" >&2
-    echo "There may be some errors when Terminal is restarted." >&2
-    echo "Please read carefully the error messages and make sure." >&2
-    echo "all packages are installed. See more info in README.md." >&2
-    echo "Note that the author of this dotfiles uses dev branch in some packages." >&2
-    echo -e "If you want to restore your old config, " >&2
-    echo -e "you can use ${red}./install.sh -r${white} command.\n" >&2
+    echo -e "${blue}New dotfiles is installed!\n${white}" >&2				   | center
+    echo "There may be some errors when Terminal is restarted." >&2			   | center
+    echo "Please read carefully the error messages and make sure." >&2			   | center
+    echo "all packages are installed. See more info in README.md." >&2			   | center
+    echo "Note that the author of this dotfiles uses dev branch in some packages." >&2	   | center
+    echo -e "If you want to restore your old config, " >&2 				   | center
+    echo -e "you can use ${red}./install.sh -r${white} command.\n" >&2 			   | center
 }
 
 #----------------------------------------------------------------------------------------#
@@ -210,18 +210,18 @@ echo -e "                                                                       
 
 uninstall_dotfiles() {
 
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "               ____        _    __ _ _                                         ";
-echo -e "              |  _ \  ___ | |_ / _(_) | ___  ___                               ";
-echo -e "              | | | |/ _ \| __| |_| | |/ _ \/ __|                              ";
-echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                              ";
-echo -e "              |____/ \___/ \__|_| |_|_|\___||___/    - Restore                 ";
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Restore Dotfile Initial State${reset}                     ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "               ____        _    __ _ _                                         "; | center
+echo -e "              |  _ \  ___ | |_ / _(_) | ___  ___                               "; | center
+echo -e "              | | | |/ _ \| __| |_| | |/ _ \/ __|                              "; | center
+echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                              "; | center
+echo -e "              |____/ \___/ \__|_| |_|_|\___||___/    - Restore                 "; | center
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "              ${blue}Restore Dotfile Initial State${reset}                     "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
 
     if [ -f "$Backup_dir/check-backup.txt" ]; then
         for dots_symlinks in "${Dotfiles_symlinks[@]}"
@@ -248,12 +248,12 @@ echo -e "                                                                       
     fi
 
     if ! [ -f "$Backup_dir/check-backup.txt" ]; then
-        echo -e "${red}You have not installed this dotfiles yet.${white}" >&2
+        echo -e "${red}You have not installed this dotfiles yet.${white}" >&2 		   | center
         exit 1
     else
-        echo -e "${blue}Your old config has been restored!\n${white}" >&2
-        echo "Thanks for using my dotfiles." >&2
-        echo "Enjoy your next journey!" >&2
+        echo -e "${blue}Your old config has been restored!\n${white}" >&2 		   | center
+        echo "Thanks for using my dotfiles." >&2 					   | center
+        echo "Enjoy your next journey!" >&2 						   | center
     fi
 
     env rm -rf "$Backup_dir/check-backup.txt"
@@ -265,19 +265,19 @@ echo -e "                                                                       
 
 workspace_settings() {
 
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
-echo -e "               _____   _   _  __     __                                        ";
-echo -e "              | ____| | \ | | \ \   / /                                        ";
-echo -e "              |  _|   |  \| |  \ \ / /                                         ";
-echo -e "              | |___  | |\  |   \ V /                                          ";
-echo -e "              |_____| |_| \_|    \_/                                           ";
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}System Environment Configuration${reset}                  ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
+echo -e "               _____   _   _  __     __                                        "; | center
+echo -e "              | ____| | \ | | \ \   / /                                        "; | center
+echo -e "              |  _|   |  \| |  \ \ / /                                         "; | center
+echo -e "              | |___  | |\  |   \ V /                                          "; | center
+echo -e "              |_____| |_| \_|    \_/                                           "; | center
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "              ${blue}System Environment Configuration${reset}                  "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
 
 # Make Floder
 if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace"; fi
@@ -291,27 +291,27 @@ if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
 
 sysUpdate(){
 
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";         
-echo -e "               ____            _                                               ";
-echo -e "              / ___| _   _ ___| |_ ___ _ __ ___                                ";
-echo -e "              \___ \| | | / __| __/ _ \ '_    _ \                              ";
-echo -e "               ___) | |_| \__ \ ||  __/ | | | | |                              ";
-echo -e "              |____/ \__, |___/\__\___|_| |_| |_|                              ";
-echo -e "                     |___/                                                     ";
-echo -e "                                                                               ";           
-echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Repace Sources and System Update ${reset}                 ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
+echo -e "               ____            _                                               "; | center
+echo -e "              / ___| _   _ ___| |_ ___ _ __ ___                                "; | center
+echo -e "              \___ \| | | / __| __/ _ \ '_    _ \                              "; | center
+echo -e "               ___) | |_| \__ \ ||  __/ | | | | |                              "; | center
+echo -e "              |____/ \__, |___/\__\___|_| |_| |_|                              "; | center
+echo -e "                     |___/                                                     "; | center
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "              ${blue}Repace Sources and System Update ${reset}                 "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
 
 sudo ln -sf "$Dotfiles_repo/sources.list" "/etc/apt/sources.list"
-echo -e "              ${green}[+]Repace sources.list Done !${reset}\n"
+echo -e "${green}[+]Repace sources.list Done !${reset}\n"				   | center
 sudo apt update -y -qq > /dev/null 2>&1
-echo -e "              ${green}[+]Update Successful !${reset}\n"
+echo -e "${green}[+]Update Successful !${reset}\n"					   | center
 sudo apt upgrade -y -qq > /dev/null 2>&1
-echo -e "              ${green}[+]Upgrade Successful !${reset}\n"
+echo -e "${green}[+]Upgrade Successful !${reset}\n"					   | center
 }
 
 #----------------------------------------------------------------------------------------#
@@ -320,19 +320,19 @@ echo -e "              ${green}[+]Upgrade Successful !${reset}\n"
 
 aptInstall() {
 
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";           
-echo -e "                  _      ____    _____                                         ";
-echo -e "                 / \    |  _ \  |_   _|                                        ";
-echo -e "                / _ \   | |_) |   | |                                          ";
-echo -e "               / ___ \  |  __/    | |                                          ";
-echo -e "              /_/   \_\ |_|       |_|                                          ";
-echo -e "                                                                               ";           
-echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Apt - Install${reset}                                     ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
+echo -e "                  _      ____    _____                                         "; | center
+echo -e "                 / \    |  _ \  |_   _|                                        "; | center
+echo -e "                / _ \   | |_) |   | |                                          "; | center
+echo -e "               / ___ \  |  __/    | |                                          "; | center
+echo -e "              /_/   \_\ |_|       |_|                                          "; | center
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "              ${blue}Apt - Install${reset}                                     "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
 
 	aptApps=( \
 	#--------------------------------------------------------------------------I3WM--
@@ -423,9 +423,9 @@ echo -e "                                                                       
         )
         for app in "${aptApps[@]}"
         do
-            echo -e "              [*] Installing: $app";
+            echo -e "[*] Installing: $app"; 						   | center
             sudo apt install -y -qq $app > /dev/null 2>&1
-            installSuccess $? $app
+            installSuccess $? $app 							   | center
         done
 }
 
@@ -435,19 +435,19 @@ echo -e "                                                                       
 
 pipInstall() {
 
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";           
-echo -e "               ____    ___   ____    _____                                     ";
-echo -e "              |  _ \  |_ _| |  _ \  |___ /                                     ";
-echo -e "              | |_) |  | |  | |_) |   |_ \                                     ";
-echo -e "              |  __/   | |  |  __/   ___) |                                    ";
-echo -e "              |_|     |___| |_|     |____/                                     ";
-echo -e "                                                                               ";           
-echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}PIP3 - Install${reset}                                    ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
+echo -e "               ____    ___   ____    _____                                     "; | center
+echo -e "              |  _ \  |_ _| |  _ \  |___ /                                     "; | center
+echo -e "              | |_) |  | |  | |_) |   |_ \                                     "; | center
+echo -e "              |  __/   | |  |  __/   ___) |                                    "; | center
+echo -e "              |_|     |___| |_|     |____/                                     "; | center
+echo -e "                                                                               "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "              ${blue}PIP3 - Install${reset}                                    "; | center
+echo -e "-------------------------------------------------------------------------------"; | center
+echo -e "                                                                               "; | center
 
 	pipApps=( \
         i3ipc \
@@ -471,10 +471,10 @@ echo -e "                                                                       
         )
         for app in "${pipApps[@]}"
         do
-            echo -e "              [*] Installing: $app";
+            echo -e "[*] Installing: $app"; 						   | center
             sudo pip3 install -q --timeout 1000 --retries 20  $app -i \
 	    https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
-            installSuccess $? $app
+            installSuccess $? $app							   | center
         done
 }
 
@@ -726,7 +726,7 @@ installSuccess() {
 
 Sync_Dotfiles() {
     git reset -q --hard && git pull -q
-    echo -e "${green} ● Dotfiles Update Sync Complete ${reset}"
+    echo -e "${green} ● Dotfiles Update Sync Complete ${reset}" | center
 }
 
 #----------------------------------------------------------------------------------------#
