@@ -43,7 +43,7 @@ Gitraw="download.fastgit.org"
 Gitfast="hub.fastgit.org"
 Bin_dir="$HOME/.bin"
 
-if [ ! -d .bin ]; then mkdir .bin; fi
+
 
 
 Dotfiles_symlinks=( \
@@ -76,7 +76,7 @@ Dotfiles_copy=( \
         .vim \
         .w3m \
         .pip \
-        extras/z.lua/z.lua
+        .extras/z.lua/z.lua
         )
 
 #----------------------------------------------------------------------------------------#
@@ -272,6 +272,7 @@ echo -e "                                                                       
 # Make Floder
 if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace"; fi
 if [ ! -d "$HOME/desktop" ]; then mkdir -p "$HOME/desktop"; fi
+if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
 }
 
 
