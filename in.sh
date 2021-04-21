@@ -97,7 +97,7 @@ Dotfiles_copy=( \
 usage() {
     local program_name
     program_name=${0##*/}
-    cat <<EOF
+    cat <<EOF | center
 
 Usage: $program_name [-option]
 
@@ -105,11 +105,11 @@ Options:
                                                                             
 ------------------------------------------------------------------------------------------
                                                                             
- -h        Print this message   | center                                             
+ -h        Print this message
                                                                             
- -A        Install All                             | center                          
- -D        Install Dotfiles & Enviroment             | center                        
- -S        Update System & Setup Alls Tools & Enviroment       | center              
+ -A        Install All
+ -D        Install Dotfiles & Enviroment
+ -S        Update System & Setup Alls Tools & Enviroment
                                                                             
 ------------------------------------------------------------------------------------------
                                                                             
@@ -128,7 +128,7 @@ Options:
 ------------------------------------------------------------------------------------------
                                                                             
 EOF
-} | center
+}
 
 #----------------------------------------------------------------------------------------#
 # Start Install Dotfiles 
