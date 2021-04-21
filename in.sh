@@ -423,7 +423,7 @@ echo -e "                                                                       
         )
         for app in "${aptApps[@]}"
         do
-            echo -e "[*] Installing: $app"; 						   | center
+            echo -e "[*] Installing: $app" 						   | center
             sudo apt install -y -qq $app > /dev/null 2>&1
             installSuccess $? $app 							   | center
         done
@@ -471,7 +471,7 @@ echo -e "                                                                       
         )
         for app in "${pipApps[@]}"
         do
-            echo -e "[*] Installing: $app"; 						   | center
+            echo -e "[*] Installing: $app" 						   | center
             sudo pip3 install -q --timeout 1000 --retries 20  $app -i \
 	    https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
             installSuccess $? $app							   | center
