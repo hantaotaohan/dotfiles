@@ -228,7 +228,7 @@ echo -e "                                                                       
             cd "$Backup_dir" || exit
             git add -u &> /dev/null
             git add . &> /dev/null
-            git commit -m "Restore original config on $(date '+%Y-%m-%d %H:%M')" &> /dev/null
+            git commit -m "Restore original on $(date '+%Y-%m-%d %H:%M')" &> /dev/null
         fi
     fi
 
@@ -457,7 +457,8 @@ echo -e "                                                                       
         for app in "${pipApps[@]}"
         do
             echo -e "              [*] Installing: $app";
-            sudo pip3 install -q --timeout 1000 --retries 20  $app -i https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
+            sudo pip3 install -q --timeout 1000 --retries 20  $app -i \
+	    https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
             installSuccess $? $app
         done
 }
@@ -580,10 +581,14 @@ echo -e "                                                                       
 #----------------------------------------------------------------------------------------#
 
         # Setup
-        curl -s https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+        curl -s https://packages.microsoft.com/keys/microsoft.asc \
+	| gpg --dearmor > microsoft.gpg
         sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
-        sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
+        sudo sh -c \
+	'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" \
+	> /etc/apt/sources.list.d/microsoft-edge-dev.list' > /dev/null 2>&1
         sudo rm microsoft.gpg
+	
         # Install
         sudo apt update -y -qq > /dev/null 2>&1
         sudo apt install -y -qq microsoft-edge-dev > /dev/null 2>&1
