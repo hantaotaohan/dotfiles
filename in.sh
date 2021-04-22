@@ -268,6 +268,16 @@ echo -e "                                                                       
 if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace"; fi
 if [ ! -d "$HOME/desktop" ]; then mkdir -p "$HOME/desktop"; fi
 if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
+
+# Set Locales Language
+## sudo dpkg-reconfigure locales
+sudo locale-gen "zh_CN.UTF-8" > /dev/null 2>&1
+sudo dpkg-reconfigure --frontend=noninteractive locales > /dev/null 2>&1
+echo -e "              ${green}[+]Set Locales Language is Successful${reset}\n"
+
+# Set TimeZone
+sudo timedatectl set-timezone "Asia/Shanghai"
+echo -e "              ${green}[+]Set TimeZone is Successful${reset}\n"
 }
 
 #----------------------------------------------------------------------------------------#
