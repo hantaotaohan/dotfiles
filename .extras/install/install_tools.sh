@@ -2,7 +2,9 @@
 
 Dotfiles_repo=$(pwd)
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 # Print usage message.
+#---------------------------------------------------------------------------------------------------------------------------------------
 usage() {
     local program_name
     program_name=${0##*/}
@@ -10,53 +12,72 @@ usage() {
 Usage: $program_name [-option]
 Options:
     
-    --help    Print this message
+    -------------------------------------------------------------------------------
+                                                                                   
+     -h        Print this message                                                  
+                                                                                   
+     -a        Setup All                                                           
+     -s        Setup Server All                                                    
+                                                                                   
+    -------------------------------------------------------------------------------
+                                                                                   
+     -1        Setup Alttab                                                        
+     -2        Setup Arc-themes                                                    
+     -3        Setup Arc-icons                                                     
+     -4        Setup Copytranslator                                                
+     -5        Setup Crossover & Kindle                                            
+     -6        Setup I3gaps                                                        
+     -7        Setup Imagemagick                                                   
+     -8        Setup Jupyter Themes                                                
+     -9        Setup Navi                                                          
+     -10       Setup Peek                                                          
+     -11       Setup Picom                                                         
+     -12       Setup SSR Tools                                                     
+     -13       Update Dunst                                                        
+     -14       Update VIM with PPA                                                 
+     -15       Auto Start Run Offlineimap                                          
+     -16       Config Fcitx                                                        
+     -17       Config GTK with Ctrl+xcv                                            
+     -18       Config Github SSH                                                   
+     -19       Config Github_Hosts > Hosts                                         
+     -20       Config I3wm - Defaul - I3_Sensible_Terminal - Fix                   
+     -21       Fix VMware Share Floader                                            
+     -22       Setup Calibre                                                       
+     -23       Setup Foliate                                                       
+     -24       Setup Rdrview                                                       
+     -25       Setup I3wm                                                          
+     -26       Setup SSH_banner                                                    
+     -27       Setup Ly                                                            
+     -28       Setup Ctags                                                         
+     -29       Setup Nodejs & Yarn                                                 
+     -30       Setup Crow_Translate                                                
+     -31       Setup Hugo                                                          
+     -32       Setup Java                                                          
+     -33       Fix FZF-history                                                     
+     -34       Git Clone Mywiki and hugowiki                                       
+     -35       Fix Icons                                                           
+     -36       Setup Alacritty                                                     
+                                                                                   
+    -------------------------------------------------------------------------------
+                                                                                   
+     -q        Exit                                                                
+                                                                                   
+    -------------------------------------------------------------------------------
     
-    -all      Install All tools
-    -s        Install Server All tools
-    
-    -1        Install Alttab
-    -2        Install Arcthemes
-    -3        Install Arcicons
-    -4        Install Copytranslator
-    -5        Install Crossover
-    -6        Install I3gaps
-    -7        Install Imagemagick
-    -8        Install Jupyter Themes
-    -9        Install Navi
-    -10       Install Peek
-    -11       Install Picom
-    -12       Install SSR
-    -13       Install Dunst
-    -14       Install VIM
-    -15       Auto run Offlineimap
-    -16       Config Dark Fcitx
-    -17       Config GTK Suppor Ctrlc.v
-    -18       Config Github SSHkey
-    -19       Config Hosts Suppor Github_Hosts
-    -20       Config I3_Sensible_Terminal Default
-    -21       Fix VMware Share Floader
-    -22       Install Calibre
-    -23       Install Foliate
-    -24       Install rdrview
-    -25       Install I3wm
-    -26       Install SSH_banner
-    -27       Install Ly
-    -28       Install Ctags
-    -29       Install Nodejs & Yarn
-    -30       Install Crow_Translate
-    -31       Install Hugo
-    -32       Install Java
-    -33       Install Fix FZF-history
-    -34       Git Clone My vimwiki and hugowiki
-    -35       Fix Icons
-    -36       Install Alacritty
 EOF
 }
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+# Public Functions . 
+#---------------------------------------------------------------------------------------------------------------------------------------
 
 row() {
     seq -s '─' 0 "$(tput cols)" | tr -d '[:digit:]'
 }
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+# Install Tools
+#---------------------------------------------------------------------------------------------------------------------------------------
 
 Alttab() {
     sudo apt install -y libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev libxpm4 libxpm-dev
@@ -70,6 +91,7 @@ Alttab() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Arcthemes() {
     sudo apt install -y arc-theme
     if [ -f /etc/gtk-3.0/settings.ini ]; then
@@ -90,6 +112,13 @@ Arcicons() {
     row
 }
 
+Gtkdarkthme() {
+    if [ -f /etc/gtk-3.0/settings.ini ]; then
+        sudo cp $Dotfiles_repo/gtk3setting/settings.ini /etc/gtk-3.0/settings.ini
+    fi
+    row
+}
+#---------------------------------------------------------------------------------------------------------------------------------------
 Copytranslator() {
     wget -P $HOME/desktop https://download.fastgit.org/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
     cd $HOME/desktop
@@ -100,6 +129,7 @@ Copytranslator() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Crossover() {
     wget -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/crossover-20.deb
     wget -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/winewrapper.exe.so
@@ -146,6 +176,7 @@ Crossover() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 I3gaps() {
     sudo add-apt-repository -y ppa:kgilmer/speed-ricer
     sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
@@ -161,6 +192,7 @@ I3gaps() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Imagemagick() {
     sudo apt install -y imagemagick
     if [ -f /etc/ImageMagick-6/policy.xml ]; then
@@ -169,6 +201,7 @@ Imagemagick() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Jupyter() {
     sudo pip3 install -q --timeout 1000 --retries 20 ipython notebook prompt-toolkit -i https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
     if [ ! -d "$HOME/.jupyter/custom/" ]
@@ -185,6 +218,7 @@ Jupyter() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Navi() {
     sudo bash -c "$(wget -O- https://raw.fastgit.org/denisidoro/navi/master/scripts/install)"
     if [ -d "$HOME/.local/share/navi/cheats/denisidoro__cheats/" ]; then
@@ -196,6 +230,7 @@ Navi() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Peek() {
     sudo add-apt-repository -y ppa:peek-developers/stable
     sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
@@ -206,6 +241,7 @@ Peek() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Picom() {
     sudo apt install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev  libpcre2-dev  libevdev-dev uthash-dev libev-dev libx11-xcb-dev
     sudo apt install -y meson
@@ -222,6 +258,7 @@ Picom() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 SSR() {
     wget -P $HOME/desktop https://download.fastgit.org/shadowsocksrr/electron-ssr/releases/download/0.3.0-alpha.6/electron-ssr-0.3.0-alpha.6.deb
     sudo dpkg -i $HOME/desktop/electron-ssr-0.3.0-alpha.6.deb
@@ -232,6 +269,7 @@ SSR() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Dunst() {
     sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev
     git clone https://hub.fastgit.org/dunst-project/dunst.git $HOME/desktop/dunst
@@ -243,6 +281,7 @@ Dunst() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 VIM() {
     sudo apt-get remove --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox
     sudo add-apt-repository -y ppa:jonathonf/vim
@@ -256,27 +295,7 @@ VIM() {
     row
 }
 
-# Offlineimap() {
-#     echo " config offline user and password "
-#     keyring set bteb hantao@bteb.cn
-#     keyring set hotmail hantaotaohan@hotmail.com
-#     echo " config msmtp user and password - bteb "
-#     secret-tool store --label msmtp \
-#     host smtp.bteb.cn \
-#     service smtp \
-#     user hantao@bteb.cn
-#     echo " config msmtp user and password - hotmail "
-#     secret-tool store --label msmtp \
-#     host smtp.office365.com \
-#     service smtp \
-#     user hantaotaohan@hotmail.com
-#     sudo cp /usr/share/doc/offlineimap/examples/systemd/offlineimap.service /etc/systemd/user
-#     systemctl --user enable offlineimap
-#     systemctl --user start offlineimap
-#     sudo chmod 0600 $HOME/.msmtprc
-#     row
-# }
-
+#---------------------------------------------------------------------------------------------------------------------------------------
 Offlineimap() {
     echo " Config and Unzip passwords "
     unzip -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
@@ -289,6 +308,7 @@ Offlineimap() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Fcitx() {
     if [ -f $HOME/.config/fcitx/conf/fcitx-classic-ui.config ]; then
         sudo rm -rf $HOME/.config/fcitx/conf/fcitx-classic-ui.config
@@ -331,14 +351,8 @@ Fcitx() {
     row
 }
 
-GTK() {
-    if [ -f /etc/gtk-3.0/settings.ini ]; then
-        sudo cp $Dotfiles_repo/gtk3setting/settings.ini /etc/gtk-3.0/settings.ini
-    fi
-    row
-}
-
-Github() {
+#---------------------------------------------------------------------------------------------------------------------------------------
+Github_SSH() {
     if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
         echo 'Email for ssh key'
         read -e ssh_email
@@ -350,6 +364,7 @@ Github() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Github_Hosts() {
     sudo sed -i '/# GitHub/,$d' /etc/hosts
     sudo sed -i '$a\# ------------------------------------------------------------------' /etc/hosts
@@ -357,6 +372,7 @@ Github_Hosts() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 I3_Sensible_Terminal() {
     if [ -f /usr/bin/i3-sensible-terminal ]; then
         sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/rofi-sensible-terminal
@@ -367,22 +383,25 @@ I3_Sensible_Terminal() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Vmware_Share_Fix() {
     if type vmhgfs-fuse >/dev/null 2>&1; then
         sudo vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other,nonempty ;
     fi
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Calibre() {
     sudo apt install calibre
-    sudo snap install foliate
     git clone https://github.com/hantaotaohan/books $HOME/books
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Foliate() {
     sudo snap install foliate
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Rdrview() {
     sudo apt install libxml2-dev libseccomp-dev libcurl4-gnutls-dev
     git clone https://hub.fastgit.org/eafer/rdrview.git $HOME/desktop/rdrview
@@ -394,7 +413,7 @@ Rdrview() {
     row
 }
 
-
+#---------------------------------------------------------------------------------------------------------------------------------------
 I3wm() {
     sudo add-apt-repository -y ppa:kgilmer/speed-ricer
     sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
@@ -408,6 +427,7 @@ I3wm() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 SSH_banner() {
     sudo sed -i '$a\Banner \/etc\/ssh\/my_ssh_banner' /etc/ssh/sshd_config
     sudo cp $Dotfiles_repo/banner/my_ssh_banner /etc/ssh/
@@ -415,6 +435,7 @@ SSH_banner() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Ly() {
     sudo apt install -y build-essential libpam0g-dev libxcb-xkb-dev
     git clone https://github.com/nullgemm/ly.git $HOME/desktop/ly
@@ -428,6 +449,7 @@ Ly() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Ctags() {
     sudo apt purge --remove ctags
     sudo apt-get install -y libjansson-dev autotools-dev autoconf
@@ -444,6 +466,7 @@ Ctags() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Nodejs() {
     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     sudo apt install -y nodejs
@@ -460,6 +483,7 @@ Nodejs() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Crow_Translate() {
     wget --tries=40 -P $HOME/desktop https://download.fastgit.org/crow-translate/crow-translate/releases/download/2.6.1/crow-translate_2.6.1_amd64.deb
     cd $HOME/desktop
@@ -471,6 +495,7 @@ Crow_Translate() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Hugo() {
     wget https://download.fastgit.org/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $HOME/desktop/hugo.deb
     cd $HOME/desktop
@@ -482,6 +507,7 @@ Hugo() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Java() {
     sudo apt install -y default-jre
     sudo apt install -y default-jdk
@@ -492,6 +518,7 @@ Java() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Fix_FZF_history() {
     echo "bind -m emacs-standard '\"\\C-r\": \"\\C-e \\C-u\\C-y\\ey\\C-u\"\$(__fzf_history__)\"\\e\\C-e\\er\\C-m\"'" >> $HOME/.fzf/shell/key-bindings.bash
     row
@@ -499,6 +526,7 @@ Fix_FZF_history() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Clone() {
     git clone git@github.com:hantaotaohan/vimwiki.git $HOME/vimwiki
     git clone git@github.com:hantaotaohan/hantaotaohan.github.io.git $HOME/blog
@@ -508,13 +536,15 @@ Clone() {
     row
 }
 
-Fixicons() {
+#---------------------------------------------------------------------------------------------------------------------------------------
+Fixrofiicons() {
     sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/pdf.png' /usr/share/applications/zathura.desktop
     sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/mail.png' /usr/share/applications/neomutt.desktop 
     sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/translate.png' /usr/share/applications/copytranslator.desktop
     sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/browser.png' /usr/share/applications/ranger.desktop
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Alacritty() {
     sudo add-apt-repository -y ppa:aslatter/ppa
     sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
@@ -527,63 +557,9 @@ Alacritty() {
 
 main() {
 
-    echo "                                                                               "
-    echo "-------------------------------------------------------------------------------"
-    echo "                                                                               "
-    echo " -h        Print this message                                                  "
-    echo "                                                                               "
-    echo " -a        Setup All                                                           "
-    echo " -s        Setup Server All                                                    "
-    echo "                                                                               "
-    echo "-------------------------------------------------------------------------------"
-    echo "                                                                               "
-    echo " -1        Setup Alttab                                                        "
-    echo " -2        Setup Arc-themes                                                    "
-    echo " -3        Setup Arc-icons                                                     "
-    echo " -4        Setup Copytranslator                                                "
-    echo " -5        Setup Crossover & Kindle                                            "
-    echo " -6        Setup I3gaps                                                        "
-    echo " -7        Setup Imagemagick                                                   "
-    echo " -8        Setup Jupyter Themes                                                "
-    echo " -9        Setup Navi                                                          "
-    echo " -10       Setup Peek                                                          "
-    echo " -11       Setup Picom                                                         "
-    echo " -12       Setup SSR Tools                                                     "
-    echo " -13       Update Dunst                                                        "
-    echo " -14       Update VIM with PPA                                                 "
-    echo " -15       Auto Start Run Offlineimap                                          "
-    echo " -16       Config Fcitx                                                        "
-    echo " -17       Config GTK with Ctrl+xcv                                            "
-    echo " -18       Config Github SSH                                                   "
-    echo " -19       Config Github_Hosts > Hosts                                         "
-    echo " -20       Config I3wm - Defaul - I3_Sensible_Terminal - Fix                   "
-    echo " -21       Fix VMware Share Floader                                            "
-    echo " -22       Setup Calibre                                                       "
-    echo " -23       Setup Foliate                                                       "
-    echo " -24       Setup Rdrview                                                       "
-    echo " -25       Setup I3wm                                                          "
-    echo " -26       Setup SSH_banner                                                    "
-    echo " -27       Setup Ly                                                            "
-    echo " -28       Setup Ctags                                                         "
-    echo " -29       Setup Nodejs & Yarn                                                 "
-    echo " -30       Setup Crow_Translate                                                "
-    echo " -31       Setup Hugo                                                          "
-    echo " -32       Setup Java                                                          "
-    echo " -33       Fix FZF-history                                                     "
-    echo " -34       Git Clone Mywiki and hugowiki                                       "
-    echo " -35       Fix Icons                                                           "
-    echo " -36       Setup Alacritty                                                     "
-    echo "                                                                               "
-    echo "-------------------------------------------------------------------------------"
-    echo "                                                                               "
-    echo " -q        Exit                                                                "
-    echo "                                                                               "
-    echo "-------------------------------------------------------------------------------"
-    echo "                                                                               "
 
-    read -r -p "Please select the mode you want to install ?  " input
 
-    case "$input" in
+    case "$1" in
         ''|-h|--help)
             usage
             exit 0
@@ -761,4 +737,3 @@ main() {
 while true ; do
 main "$@"
 done
-
