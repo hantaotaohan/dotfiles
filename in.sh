@@ -364,7 +364,6 @@ echo -e "                                                                       
         wget \
         curl \
 	ncdu \
-        tldr \	
         unzip \
 	xclip \
 	wmctrl \
