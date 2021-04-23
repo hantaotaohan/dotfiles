@@ -335,6 +335,7 @@ echo -e "                                                                       
         feh \
 	mpv \
         rofi \
+	alttab \
 	zathura \
 	i3blocks \
         i3lock-fancy \
