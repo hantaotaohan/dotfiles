@@ -82,13 +82,13 @@ row() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Alttab() {
-    sudo apt install -y -qq libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev > /dev/null 2>&1 
+    sudo apt install -y -qq libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev ibxpm-dev libxpm4 > /dev/null 2>&1 
     git clone -q https://hub.fastgit.org/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab
     ./configure 
     make > /dev/null 2>&1 
     sudo make install 
     sudo rm -rf $Bin_dir/alttab
-    alttabversion=`alttab -v 2>&1`
+    alttabversion=$(alttab -v 2>&1)
     row
     echo $alttabversion | grep -o -E '^alttab [1-9]\d*.\d*.\d*.\d*.\d*'
     row
