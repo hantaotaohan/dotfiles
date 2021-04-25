@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 Dotfiles_repo=$(pwd)
+Extras_dir=$(dirname "$PWD") 
+Bin_dir="$HOME/.bin"
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 # Print usage message.
@@ -80,14 +82,12 @@ row() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Alttab() {
-    sudo apt install -y libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev libxpm4 libxpm-dev
-    wget -P $HOME/desktop https://download.fastgit.org/sagb/alttab/archive/v1.5.0.zip
-    cd $HOME/desktop && unzip v1.5.0.zip && cd alttab-1.5.0
+    sudo apt install libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev
+    git clone https://hub.fastgit.org/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab
     ./configure 
     make 
     sudo make install 
-    sudo rm -rf $HOME/desktop/alttab-1.5.0
-    sudo rm -rf $HOME/desktop/v1.5.0.zip
+    sudo rm -rf $Bin_dir/alttab
     row
 }
 
@@ -101,20 +101,20 @@ Arcthemes() {
 }
 
 Arcicons() {
-    git clone https://hub.fastgit.org/horst3180/arc-icon-theme --depth 1 $HOME/desktop/arc-icon-theme && cd $HOME/desktop/arc-icon-theme
+    git clone https://hub.fastgit.org/horst3180/arc-icon-theme --depth 1 $Bin_dir/arc-icon-theme && cd $Bin_dir/arc-icon-theme
     sudo cp -r Arc /usr/share/icons/
     sudo chmod +x /usr/share/icons/Arc
     if [ -f /etc/gtk-3.0/settings.ini ]; then
         sudo sed -i 's/gtk-icon-theme-name = ubuntu-mono-dark/gtk-icon-theme-name = Arc/g' /etc/gtk-3.0/settings.ini
     fi
     cd $HOME
-    sudo rm -rf $HOME/desktop/arc-icon-theme
+    sudo rm -rf $Bin_dir/arc-icon-theme
     row
 }
 
 Gtkdarkthme() {
     if [ -f /etc/gtk-3.0/settings.ini ]; then
-        sudo cp $Dotfiles_repo/gtk3setting/settings.ini /etc/gtk-3.0/settings.ini
+        sudo cp $Extras_dir/gtk3setting/settings.ini /etc/gtk-3.0/settings.ini
     fi
     row
 }
