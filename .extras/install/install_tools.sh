@@ -11,7 +11,9 @@ usage() {
     local program_name
     program_name=${0##*/}
     cat <<EOF
+
 Usage: $program_name [-option]
+
 Options:
     
     -------------------------------------------------------------------------------
@@ -87,11 +89,11 @@ Alttab() {
     make -s
     sudo make install 
     alttab -v > $Bin_dir/alttabversion 2>&1
+    sudo rm -rf $Bin_dir/alttab
     row
     grep -o -E '^alttab [1-9]\d*.\d*.\d*.\d*.\d*' $Bin_dir/alttabversion
     row
     rm -rf $Bin_dir/alttabversion
-    sudo rm -rf $Bin_dir/alttab
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -560,8 +562,6 @@ Alacritty() {
 
 main() {
 
-
-
     case "$1" in
         ''|-h|--help)
             usage
@@ -737,6 +737,4 @@ main() {
     esac
 }
 
-while true ; do
 main "$@"
-done
