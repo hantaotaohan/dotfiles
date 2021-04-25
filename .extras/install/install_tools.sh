@@ -85,9 +85,9 @@ row() {
 
 Alttab() {
     sudo apt install -y -qq libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev ibxpm-dev libxpm4 > /dev/null 2>&1 
-    git clone -q https://hub.fastgit.org/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab && ./configure
-    make -s
-    sudo make install 
+    git clone -q https://hub.fastgit.org/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab && ./configure > /dev/null 2>&1
+    make -s > /dev/null 2>&1
+    sudo make install > /dev/null 2>&1
     alttab -v > $Bin_dir/alttabversion 2>&1
     sudo rm -rf $Bin_dir/alttab
     row
@@ -98,7 +98,7 @@ Alttab() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Arcthemes() {
-    sudo apt install -y arc-theme
+    sudo apt install -y -qq arc-theme
     if [ -f /etc/gtk-3.0/settings.ini ]; then
         sudo sed -i 's/gtk-theme-name = Ambiance/gtk-theme-name = Arc-Dark/g' /etc/gtk-3.0/settings.ini
     fi
@@ -106,7 +106,7 @@ Arcthemes() {
 }
 
 Arcicons() {
-    git clone https://hub.fastgit.org/horst3180/arc-icon-theme --depth 1 $Bin_dir/arc-icon-theme && cd $Bin_dir/arc-icon-theme
+    git clone -q https://hub.fastgit.org/horst3180/arc-icon-theme --depth 1 $Bin_dir/arc-icon-theme && cd $Bin_dir/arc-icon-theme
     sudo cp -r Arc /usr/share/icons/
     sudo chmod +x /usr/share/icons/Arc
     if [ -f /etc/gtk-3.0/settings.ini ]; then
