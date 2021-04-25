@@ -82,8 +82,8 @@ row() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Alttab() {
-    sudo apt install -y -qq libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev
-    git clone https://hub.fastgit.org/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab
+    sudo apt install -y -qq libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev > /dev/null 2>&1 
+    git clone -q https://hub.fastgit.org/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab
     ./configure 
     make -s
     sudo make install 
