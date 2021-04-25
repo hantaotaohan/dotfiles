@@ -92,7 +92,7 @@ Alttab() {
     row
     grep -o -E '^alttab [1-9]\d*.\d*.\d*.\d*.\d*' $Bin_dir/alttabversion
     row
-    rf -rf cat $Bin_dir/alttabversion
+    rm -rf $Bin_dir/alttabversion
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
