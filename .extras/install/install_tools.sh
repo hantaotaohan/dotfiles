@@ -92,7 +92,7 @@ Alttab() {
     row
     echo $alttabversion | grep -o -E '^alttab [1-9]\d*.\d*.\d*.\d*.\d*'
     row
-    unset $alttabversion
+    unset alttabversion
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
