@@ -88,11 +88,11 @@ Alttab() {
     make -s
     sudo make install 
     sudo rm -rf $Bin_dir/alttab
-    alttabversion=$(alttab -v 2>&1)
+    alttab -v > $Bin_dir/alttabversion 2>&1
     row
-    echo $alttabversion | grep -o -E '^alttab [1-9]\d*.\d*.\d*.\d*.\d*'
+    grep -o -E '^alttab [1-9]\d*.\d*.\d*.\d*.\d*' $Bin_dir/alttabversion
     row
-    unset alttabversion
+    rf -rf cat $Bin_dir/alttabversion
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
