@@ -290,10 +290,12 @@ Dunst() {
     sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev
     git clone https://hub.fastgit.org/dunst-project/dunst.git $HOME/desktop/dunst
     cd $HOME/desktop/dunst
-    make
+    sudo make
     sudo make install
     cd $HOME
     rm -rf $HOME/desktop/dunst
+    row
+    dunst -v
     row
 }
 
@@ -375,7 +377,7 @@ Github_SSH() {
         ssh-keygen -t rsa -P "" -C "$ssh_email"  -f ~/.ssh/id_rsa
         echo 'Key copied to keyboard'
         xclip -sel clip < $HOME/.ssh/id_rsa.pub
-        google-chrome --new-window 'https://github.com/settings/keys'
+        microsoft-edge --new-window 'https://github.com/settings/keys'
     fi
     row
 }
