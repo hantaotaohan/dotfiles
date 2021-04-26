@@ -199,8 +199,8 @@ I3gaps() {
     git clone -q https://hub.fastgit.org/Airblader/i3 $Bin_dir/i3-gaps
     cd $Bin_dir/i3-gaps
     mkdir -p build && cd build
-    meson ..
-    ninja
+    sudo meson ..
+    sudo ninja
     sudo apt-get -y -qq --purge remove rxvt-unicode > /dev/null 2>&1 
     sed -i 's|# smart_gaps on|smart_gaps on|g' $HOME/.config/i3/config
     sed -i 's|# gaps inner 8|gaps inner 8|g' $HOME/.config/i3/config
