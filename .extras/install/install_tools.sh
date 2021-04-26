@@ -103,6 +103,9 @@ Arcthemes() {
         sudo sed -i 's/gtk-theme-name = Ambiance/gtk-theme-name = Arc-Dark/g' /etc/gtk-3.0/settings.ini
     fi
     row
+    The Arc Themes installation is complete
+    Files: /etc/gtk-3.0/settings.ini . The update has been completed
+    row
 }
 
 Arcicons() {
@@ -115,6 +118,9 @@ Arcicons() {
     cd $HOME
     sudo rm -rf $Bin_dir/arc-icon-theme
     row
+    The Arc Icons installation is complete
+    Files: /etc/gtk-3.0/settings.ini . The update has been completed
+    row
 }
 
 Gtkdarkthme() {
@@ -122,15 +128,19 @@ Gtkdarkthme() {
         sudo cp $Extras_dir/gtk3setting/settings.ini /etc/gtk-3.0/settings.ini
     fi
     row
+    Has been setting GTK Dark Mode
+    row
 }
 #---------------------------------------------------------------------------------------------------------------------------------------
 Copytranslator() {
-    wget -P $HOME/desktop https://download.fastgit.org/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
-    cd $HOME/desktop
+    wget -P $Bin_dir https://download.fastgit.org/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
+    cd $Bin_dir
     sudo dpkg -i copytranslator_10.0.0-beta.2_amd64.deb
     sudo chown -R $USER:$USER /dev/input/mice
     cd $HOME
-    sudo rm -rf $HOME/desktop/copytranslator_10.0.0-beta.2_amd64.deb
+    sudo rm -rf $Bin_dir/copytranslator_10.0.0-beta.2_amd64.deb
+    row
+    Copytranslator Install Completed
     row
 }
 
