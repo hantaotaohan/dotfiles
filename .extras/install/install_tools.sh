@@ -133,10 +133,10 @@ Gtkdarkthme() {
 }
 #---------------------------------------------------------------------------------------------------------------------------------------
 Copytranslator() {
-    wget -P $Bin_dir https://download.fastgit.org/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
+    wget -q -P $Bin_dir https://download.fastgit.org/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
     cd $Bin_dir
     sudo dpkg -i copytranslator_10.0.0-beta.2_amd64.deb
-    sudo chown -R $USER:$USER /dev/input/mice
+    sudo usermod -a -G input $USER
     cd $HOME
     sudo rm -rf $Bin_dir/copytranslator_10.0.0-beta.2_amd64.deb
     row
@@ -146,19 +146,19 @@ Copytranslator() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Crossover() {
-    wget -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/crossover-20.deb
-    wget -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/winewrapper.exe.so
-    wget -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/kindle.zip
+    wget -q -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/crossover-20.deb
+    wget -q -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/winewrapper.exe.so
+    wget -q -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/kindle.zip
     sudo dpkg -i $HOME/desktop/crossover-20.deb
-    sudo apt install -f -y
+    sudo apt install -f -y -qq
     sudo dpkg -i $HOME/desktop/crossover-20.deb
     sudo mv /opt/cxoffice/lib/wine/winewrapper.exe.so /opt/cxoffice/lib/wine/winewrapper.exe.so.bak
     sudo cp $HOME/desktop/winewrapper.exe.so /opt/cxoffice/lib/wine/
     cd $HOME
     sudo rm -rf $HOME/desktop/winewrapper.exe.so crossover-20.deb
     sudo dpkg --add-architecture i386 && \
-    sudo apt-get update && \
-    sudo apt-get install -y gstreamer1.0-plugins-base:i386 \
+    sudo apt-get update -y -qq && \
+    sudo apt-get install -y -qq gstreamer1.0-plugins-base:i386 \
     gstreamer1.0-plugins-good:i386 \
     gstreamer1.0-plugins-ugly:i386 \
     libc6-i386 \
