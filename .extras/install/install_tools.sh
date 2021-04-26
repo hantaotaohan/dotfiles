@@ -260,18 +260,22 @@ Peek() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Picom() {
-    sudo apt install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev  libpcre2-dev  libevdev-dev uthash-dev libev-dev libx11-xcb-dev
-    sudo apt install -y meson
-    git clone https://hub.fastgit.org/yshui/picom.git $HOME/desktop/picom && \
-    cd $HOME/desktop/picom && \
+    sudo apt install -y -qq libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev \
+    libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
+    libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev \
+    meson  > /dev/null 2>&1
+    git clone https://hub.fastgit.org/yshui/picom.git  $Bin_dir/picom && \
+    cd $Bin_dir/picom && \
     git submodule update --init --recursive && \
     meson --buildtype=release . build && \
     sudo ninja -C build && \
     sudo ninja -C build install && \
     cd $HOME
-    sudo rm -rf $HOME/desktop/picom
+    sudo rm -rf $Bin_dir/ipicom
     sed -i "s|# exec --no-startup-id picom --config ~/.config/picom/picom.conf|exec --no-startup-id picom --config ~/.config/picom/picom.conf|g" $HOME/.config/i3/config
     sed -i "s|exec --no-startup-id compton --config ~/.config/compton/compton.conf|# exec --no-startup-id compton --config ~/.config/compton/compton.conf|g" $HOME/.config/i3/config
+    row
+    picom --version
     row
 }
 
