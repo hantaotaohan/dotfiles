@@ -218,6 +218,8 @@ Imagemagick() {
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
     fi
     row
+    Imagemagick Fix Completed
+    row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -235,6 +237,8 @@ Jupyter() {
         cp $Dotfiles_repo/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
     fi
     row
+    Jupyter Settings Completed
+    row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -246,17 +250,6 @@ Navi() {
         mkdir -p $HOME/.local/share/navi/cheats/denisidoro__cheats
         ln -fs $Dotfiles_repo/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
     fi
-    row
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-Peek() {
-    sudo add-apt-repository -y ppa:peek-developers/stable
-    sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
-    sudo apt update
-    sudo apt install -y peek
-    sudo sed -i "s/https:\/\/launchpad.proxy.ustclug.org/http:\/\/ppa.launchpad.net/g" /etc/apt/sources.list.d/*.list
-    sudo add-apt-repository -y --remove peek-developers/stable
     row
 }
 
