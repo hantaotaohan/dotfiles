@@ -193,13 +193,15 @@ Crossover() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 I3gaps() {
-    sudo add-apt-repository -y ppa:kgilmer/speed-ricer
-    sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
-    sudo apt-get update
-    sudo apt install -y i3-gaps-wm
+    sudo apt install -y -qq dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev \
+    libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev \
+    libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
+    git clone -q https://hub.fastgit.org/Airblader/i3 $Bin_dir/i3-gaps
+    cd $Bin_dir/i3-gaps
+    mkdir -p build && cd build
+    meson ..
+    ninja
     sudo apt-get -y -qq --purge remove rxvt-unicode > /dev/null 2>&1 
-    sudo sed -i "s/https:\/\/launchpad.proxy.ustclug.org/http:\/\/ppa.launchpad.net/g" /etc/apt/sources.list.d/*.list
-    sudo add-apt-repository -y --remove ppa:kgilmer/speed-ricer
     sed -i 's|# smart_gaps on|smart_gaps on|g' $HOME/.config/i3/config
     sed -i 's|# gaps inner 8|gaps inner 8|g' $HOME/.config/i3/config
     sed -i 's|# gaps outer 2|gaps outer 2|g' $HOME/.config/i3/config
