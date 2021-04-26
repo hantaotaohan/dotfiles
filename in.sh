@@ -830,3 +830,4 @@ main() {
             exit 1
     esac
 }
+main "$@"
