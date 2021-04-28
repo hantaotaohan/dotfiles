@@ -235,7 +235,7 @@ Jupyter() {
         cp $Dotfiles_repo/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
     fi
     row
-    Jupyter Settings Completed
+    jupyter --version
     row
 }
 
