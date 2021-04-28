@@ -651,20 +651,24 @@ main() {
             Vmware_Share_Fix
             ;;
         -m|--minimize)
-            VIM
-            Imagemagick
-            Jupyter
-            Navi
-            Offlineimap
-            Rdrview
-            SSH_banner
-            Ctags
-            Nodejs
-            Github
+            Github_SSH
             Github_Hosts
-            Hugo
-            Java
+            SSH_banner
+            Alttab
+            Arcthemes
+            Arcicons
+            Gtkdarkmode
+            I3gaps
+            Picom
+            Dunst
+            Offlineimap
+            Navi
+            Ctags
+            Rdrview
+            Fcitx
+            Fixrofiicons
             Fix_FZF_history
+            Imagemagick
             ;;
         -s|--server)
             Github_SSH
