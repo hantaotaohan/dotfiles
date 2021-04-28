@@ -242,7 +242,7 @@ Jupyter() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Navi() {
     wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/navi
-    sudo mv navi /bin/
+    sudo mv $Bin_dir/navi /bin/
     if [ -d "$HOME/.local/share/navi/cheats/denisidoro__cheats/" ]; then
         ln -fs $Dotfiles_repo/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
     else
