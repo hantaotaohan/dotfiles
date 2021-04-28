@@ -278,24 +278,24 @@ Picom() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 SSR() {
-    wget -P $HOME/desktop https://download.fastgit.org/shadowsocksrr/electron-ssr/releases/download/0.3.0-alpha.6/electron-ssr-0.3.0-alpha.6.deb
-    sudo dpkg -i $HOME/desktop/electron-ssr-0.3.0-alpha.6.deb
+    wget -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/electron-ssr.deb
+    sudo dpkg -i $Bin_dir/electron-ssr-0.3.0-alpha.6.deb
     sudo apt install -f -y
-    sudo dpkg -i $HOME/desktop/electron-ssr-0.3.0-alpha.6.deb
+    sudo dpkg -i $Bin_dir/desktop/electron-ssr-0.3.0-alpha.6.deb
     cd $HOME
-    sudo rm -rf $HOME/desktop/electron-ssr-0.3.0-alpha.6.deb
+    sudo rm -rf $Bin_dir/electron-ssr-0.3.0-alpha.6.deb
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Dunst() {
     sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev
-    git clone https://hub.fastgit.org/dunst-project/dunst.git $HOME/desktop/dunst
-    cd $HOME/desktop/dunst
+    git clone https://hub.fastgit.org/dunst-project/dunst.git $Bin_dir/dunst
+    cd $Bin_dir/dunst
     sudo make
     sudo make install
     cd $HOME
-    rm -rf $HOME/desktop/dunst
+    rm -rf $Bin_dir/dunst
     row
     dunst -v
     row
