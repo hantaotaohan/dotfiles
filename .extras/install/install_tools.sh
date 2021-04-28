@@ -123,7 +123,7 @@ Arcicons() {
     row
 }
 
-Gtkdarkthme() {
+Gtkdarkmode() {
     if [ -f /etc/gtk-3.0/settings.ini ]; then
         sudo cp $Extras_dir/gtk3setting/settings.ini /etc/gtk-3.0/settings.ini
     fi
@@ -541,149 +541,126 @@ main() {
         alttab)
             Alttab
             ;;
-        -2)
+        arcthemes)
             Arcthemes
             ;;
-        -3)
+        arcicons)
             Arcicons
             ;;
-        -4)
+        gtkdarkmode)
+            Gtkdarkmode
+            ;;
+        copytranslator)
             Copytranslator
             ;;
-        -5)
+        crossover)
             Crossover
             ;;
-        -6)
+        i3gaps)
             I3gaps
             ;;
-        -7)
+        imagemagick)
             Imagemagick
             ;;
-        -8)
+        jupyter)
             Jupyter
             ;;
-        -9)
+        navi)
             Navi
             ;;
-        -10)
-            Peek
-            ;;
-        -11)
+        picom)
             Picom
             ;;
-        -12)
+        ssr)
             SSR
             ;;
-        -13)
+        dunst)
             Dunst
             ;;
-        -14)
-            VIM
-            ;;
-        -15)
+        offlineimap)
             Offlineimap
             ;;
-        -16)
+        fcitx)
             Fcitx
             ;;
-        -17)
-            GTK
+        githubssh)
+            Github_SSH
             ;;
-        -18)
-            Github
-            ;;
-        -19)
+        githubhosts)
             Github_Hosts
             ;;
-        -20)
-            I3_Sensible_Terminal
-            ;;
-        -21)
+        fixvmwareshare)
             Vmware_Share_Fix
             ;;
-        -22)
+        calibre)
             Calibre
             ;;
-        -23)
+        foliate)
             Foliate
             ;;
-        -24)
+        rdrview)
             Rdrview
             ;;
-        -25)
-            I3wm
-            ;;
-        -26)
+        sshbanner)
             SSH_banner
             ;;
-        -27)
+        ly)
             Ly
             ;;
-        -28)
+        ctags)
             Ctags
             ;;
-        -29)
+        nodejs)
             Nodejs
             ;;
-        -30)
-            Crow_Translate
-            ;;
-        -31)
+        hugo)
             Hugo
             ;; 
-        -32)
+        java)
             Java
             ;;
-        -33)
+        fixfzf)
             Fix_FZF_history
             ;;
-        -34)
+        clone)
             Clone
             ;;  
-        -35)
-            Fixicons
+        fixrofiicons)
+            Fixrofiicons
             ;;  
-        -36)
-            Alacritty
-            ;;  
-        -[aA])
+        -a|--all)
+            Github_SSH
             Github_Hosts
+            SSH_banner
             Alttab
             Arcthemes
             Arcicons
-            Copytranslator
-            #Crossover
+            Gtkdarkmode
+            I3gaps
+            Picom
+            Dunst
+            Offlineimap
+            Navi
+            Ctags
+            Rdrview
+            Fcitx
+            Fixrofiicons
+            Fix_FZF_history
             Imagemagick
             Jupyter
-            Navi
-            #Peek
-            #SSR
-            Dunst
-            VIM
-            Offlineimap
-            Fcitx
-            GTK
-            #Github
-            #Vmware_Share_Fix
-            #Calibre
-            #Foliate
-            Rdrview
-            I3wm
-            I3gaps
-            I3_Sensible_Terminal
-            Picom
-            SSH_banner
-            #Ly
-            Ctags
             Nodejs
-            #Crow_Translate
+            SSR
+            Calibre
+            Foliate
+            Crossover
+            Copytranslator
             Hugo
             Java
-            Fix_FZF_history
-            Fixicons
-            sudo rm -rf /etc/apt/sources.list.d/*
+            Clone
+            #Ly
+            Vmware_Share_Fix
             ;;
-        -[sS])
+        -m|--minimize)
             VIM
             Imagemagick
             Jupyter
@@ -698,13 +675,25 @@ main() {
             Hugo
             Java
             Fix_FZF_history
-            ;; 
-        -[qQ]) 
-            exit; break 
             ;;
+        -s|--server)
+            Github_SSH
+            Github_Hosts
+            SSH_banner
+            Offlineimap
+            Navi
+            Ctags
+            Rdrview
+            Fix_FZF_history
+            Imagemagick
+            Jupyter
+            Nodejs
+            Hugo
+            Java
+            Clone
+            ;;             
         *)
             echo "Command not found" >&2
-            # exit 1
     esac
 }
 
