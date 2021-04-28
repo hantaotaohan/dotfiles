@@ -18,54 +18,44 @@ Options:
     
     -------------------------------------------------------------------------------
                                                                                    
-     -h        Print this message                                                  
-                                                                                   
-     -a        Setup All                                                           
-     -s        Setup Server All                                                    
-                                                                                   
-    -------------------------------------------------------------------------------
-                                                                                   
-     -1        Setup Alttab                                                        
-     -2        Setup Arc-themes                                                    
-     -3        Setup Arc-icons                                                     
-     -4        Setup Copytranslator                                                
-     -5        Setup Crossover & Kindle                                            
-     -6        Setup I3gaps                                                        
-     -7        Setup Imagemagick                                                   
-     -8        Setup Jupyter Themes                                                
-     -9        Setup Navi                                                          
-     -10       Setup Peek                                                          
-     -11       Setup Picom                                                         
-     -12       Setup SSR Tools                                                     
-     -13       Update Dunst                                                        
-     -14       Update VIM with PPA                                                 
-     -15       Auto Start Run Offlineimap                                          
-     -16       Config Fcitx                                                        
-     -17       Config GTK with Ctrl+xcv                                            
-     -18       Config Github SSH                                                   
-     -19       Config Github_Hosts > Hosts                                         
-     -20       Config I3wm - Defaul - I3_Sensible_Terminal - Fix                   
-     -21       Fix VMware Share Floader                                            
-     -22       Setup Calibre                                                       
-     -23       Setup Foliate                                                       
-     -24       Setup Rdrview                                                       
-     -25       Setup I3wm                                                          
-     -26       Setup SSH_banner                                                    
-     -27       Setup Ly                                                            
-     -28       Setup Ctags                                                         
-     -29       Setup Nodejs & Yarn                                                 
-     -30       Setup Crow_Translate                                                
-     -31       Setup Hugo                                                          
-     -32       Setup Java                                                          
-     -33       Fix FZF-history                                                     
-     -34       Git Clone Mywiki and hugowiki                                       
-     -35       Fix Icons                                                           
-     -36       Setup Alacritty                                                     
+         -h --help          Print this message                                                  
+
+         -a --all           Setup All                                                           
+         -m --minimize      Setup All   
+         -s --server        Setup Server All                                                    
                                                                                    
     -------------------------------------------------------------------------------
-                                                                                   
-     -q        Exit                                                                
-                                                                                   
+
+        githubhosts         Config /etc/hosts/ View Github.com
+        sshbanner           Config SSH Login Banner
+        alttab              Same Windows Alt Tab
+        arcthemes           Gtk themes
+        arcicons            Gtk themes Icons
+        gtkdarkmode         Settings Gtk DarkMode
+        i3gaps              Setup I3-Gaps
+        picom               Setup Picom
+        dunst               Setup Dunst
+        offlineimap         Auto Setting Neomutt
+        navi                Setup Navi
+        ctags               Setup Ctags
+        rdrview             Setup Rdrview
+        fcitx               Settings Fcitx Themes
+        fixrofiicons        Settings Rofi Icons
+        fixfzf              Fix FZF Ctrl + r
+        imagemagick         Fix Imagemagick 
+        jupyter             Setup Jupyter Notebook Settings Themes
+        nodejs              Setup Node.js
+        ssr                 Setup SSR
+        calibre             Setup Calibre Settings Config
+        foliate             Setup Foliate
+        crossover           Setup Crossover Config Kindle
+        copytranslator      Setup Copytranslator
+        hugo                Setup Hugo
+        java                Setup Java
+        clone               Git clone My github Respones
+        ly                  Commandline Longin 
+        fixvmwareshare      Fix Vmware Share Folads
+                                    
     -------------------------------------------------------------------------------
     
 EOF
