@@ -146,16 +146,16 @@ Copytranslator() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Crossover() {
-    wget -q -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/crossover-20.deb
-    wget -q -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/winewrapper.exe.so
-    wget -q -P $HOME/desktop/ https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.3/kindle.zip
-    sudo dpkg -i $HOME/desktop/crossover-20.deb
+    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/crossover-20.deb
+    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/winewrapper.exe.so
+    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/kindle.zip
+    sudo dpkg -i $Bin_dir/crossover-20.deb
     sudo apt install -f -y -qq
-    sudo dpkg -i $HOME/desktop/crossover-20.deb
+    sudo dpkg -i $Bin_dir/crossover-20.deb
     sudo mv /opt/cxoffice/lib/wine/winewrapper.exe.so /opt/cxoffice/lib/wine/winewrapper.exe.so.bak
-    sudo cp $HOME/desktop/winewrapper.exe.so /opt/cxoffice/lib/wine/
+    sudo cp $Bin_dir/winewrapper.exe.so /opt/cxoffice/lib/wine/
     cd $HOME
-    sudo rm -rf $HOME/desktop/winewrapper.exe.so crossover-20.deb
+    sudo rm -rf $Bin_dir/winewrapper.exe.so crossover-20.deb
     sudo dpkg --add-architecture i386 && \
     sudo apt-get update -y -qq && \
     sudo apt-get install -y -qq gstreamer1.0-plugins-base:i386 \
