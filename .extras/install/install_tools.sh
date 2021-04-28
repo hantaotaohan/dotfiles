@@ -135,10 +135,10 @@ Gtkdarkthme() {
 Copytranslator() {
     wget -q -P $Bin_dir https://download.fastgit.org/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
     cd $Bin_dir
-    sudo dpkg -i copytranslator_10.0.0-beta.2_amd64.deb
+    sudo dpkg -i copytranslator_10.0.0-beta.2_amd64.deb  > /dev/null 2>&1
     sudo usermod -a -G input $USER
     cd $HOME
-    sudo rm -rf $Bin_dir/copytranslator_10.0.0-beta.2_amd64.deb
+    sudo rm -rf $Bin_dir/copytranslator_10.0.0-beta.2_amd64.deb  > /dev/null 2>&1
     row
     Copytranslator Install Completed
     row
@@ -261,7 +261,7 @@ Picom() {
     libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
     libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev \
     meson  > /dev/null 2>&1
-    git clone https://hub.fastgit.org/yshui/picom.git  $Bin_dir/picom && \
+    git clone -q https://hub.fastgit.org/yshui/picom.git  $Bin_dir/picom && \
     cd $Bin_dir/picom && \
     git submodule update --init --recursive && \
     meson --buildtype=release . build && \
@@ -278,10 +278,10 @@ Picom() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 SSR() {
-    wget -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/electron-ssr.deb
-    sudo dpkg -i $Bin_dir/electron-ssr.deb
-    sudo apt install -f -y
-    sudo dpkg -i $Bin_dir/electron-ssr.deb
+    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/electron-ssr.deb
+    sudo dpkg -i $Bin_dir/electron-ssr.deb  > /dev/null 2>&1
+    sudo apt install -f -y > /dev/null 2>&1
+    sudo dpkg -i $Bin_dir/electron-ssr.deb  > /dev/null 2>&1
     cd $HOME
     sudo rm -rf $Bin_dir/electron-ssr.deb
     row
@@ -289,11 +289,11 @@ SSR() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Dunst() {
-    sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev
-    git clone https://hub.fastgit.org/dunst-project/dunst.git $Bin_dir/dunst
+    sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev > /dev/null 2>&1
+    git clone -q https://hub.fastgit.org/dunst-project/dunst.git $Bin_dir/dunst
     cd $Bin_dir/dunst
-    sudo make
-    sudo make install
+    sudo make  > /dev/null 2>&1
+    sudo make install  > /dev/null 2>&1
     cd $HOME
     rm -rf $Bin_dir/dunst
     row
@@ -302,22 +302,9 @@ Dunst() {
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
-VIM() {
-    sudo apt-get remove --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox
-    sudo add-apt-repository -y ppa:jonathonf/vim
-    sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
-    sudo apt update
-    sudo apt install -y vim vim-gtk
-    sudo sed -i "s/https:\/\/launchpad.proxy.ustclug.org/http:\/\/ppa.launchpad.net/g" /etc/apt/sources.list.d/*.list
-    sudo add-apt-repository -y --remove ppa:jonathonf/vim
-    row
-    vim --version | grep "VIM - Vi IMproved "
-    row
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
 Offlineimap() {
-    echo " Config and Unzip passwords "
+    echo " It Is Now Being Configured Offlineimap ...... "
+    echo " Please Enter The Zip Package Password "
     unzip -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
     sudo cp /usr/share/doc/offlineimap/examples/systemd/offlineimap.service /etc/systemd/user
     systemctl --user enable offlineimap
@@ -325,6 +312,7 @@ Offlineimap() {
     sudo chmod 600 $HOME/.msmtprc
     row
     echo " Neomutt Config Doen! "
+    neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*..."
     row
 }
 
@@ -332,49 +320,51 @@ Offlineimap() {
 Fcitx() {
     if [ -f $HOME/.config/fcitx/conf/fcitx-classic-ui.config ]; then
         sudo rm -rf $HOME/.config/fcitx/conf/fcitx-classic-ui.config
-        sudo cp $Dotfiles_repo/fcitx/fcitx-classic-ui.config $HOME/.config/fcitx/conf/fcitx-classic-ui.config
+        sudo cp $Extras_dir/fcitx/fcitx-classic-ui.config $HOME/.config/fcitx/conf/fcitx-classic-ui.config
     else
         mkdir -p $HOME/.config/fcitx/conf
-        sudo cp $Dotfiles_repo/fcitx/fcitx-classic-ui.config $HOME/.config/fcitx/conf/fcitx-classic-ui.config
+        sudo cp $Extras_dir/fcitx/fcitx-classic-ui.config $HOME/.config/fcitx/conf/fcitx-classic-ui.config
     fi
 
     if [ -f $HOME/.config/fcitx/conf/fcitx-keyboard.config ]; then
         sudo rm -rf $HOME/.config/fcitx/conf/fcitx-keyboard.config
-        sudo cp $Dotfiles_repo/fcitx/fcitx-keyboard.config $HOME/.config/fcitx/conf/fcitx-keyboard.config
+        sudo cp $Extras_dir/fcitx/fcitx-keyboard.config $HOME/.config/fcitx/conf/fcitx-keyboard.config
     else
         mkdir -p $HOME/.config/fcitx/conf
-        sudo cp $Dotfiles_repo/fcitx/fcitx-keyboard.config $HOME/.config/fcitx/conf/fcitx-keyboard.config
+        sudo cp $Extras_dir/fcitx/fcitx-keyboard.config $HOME/.config/fcitx/conf/fcitx-keyboard.config
     fi
     
     if [ -f $HOME/.config/fcitx/config ]; then
         sudo rm -rf $HOME/.config/fcitx/config
-        sudo cp $Dotfiles_repo/fcitx/config $HOME/.config/fcitx/config
+        sudo cp $Extras_dir/fcitx/config $HOME/.config/fcitx/config
     else
-        sudo cp $Dotfiles_repo/fcitx/config $HOME/.config/fcitx/config
+        sudo cp $Extras_dir/fcitx/config $HOME/.config/fcitx/config
     fi
 
     if [ -f $HOME/.config/fcitx/skin/dark/fcitx_skin.conf  ]; then
         sudo rm -rf $HOME/.config/fcitx/skin/dark/fcitx_skin.conf
-        sudo cp $Dotfiles_repo/fcitx/fcitx_skin.conf $HOME/.config/fcitx/skin/dark/fcitx_skin.conf
+        sudo cp $Extras_dir/fcitx/fcitx_skin.conf $HOME/.config/fcitx/skin/dark/fcitx_skin.conf
     else
         mkdir -p $HOME/.config/fcitx/skin/dark
-        sudo cp $Dotfiles_repo/fcitx/fcitx_skin.conf $HOME/.config/fcitx/skin/dark/fcitx_skin.conf
+        sudo cp $Extras_dir/fcitx/fcitx_skin.conf $HOME/.config/fcitx/skin/dark/fcitx_skin.conf
     fi
     
     if [ -f $HOME/.config/fcitx/skin/dark/bar.png  ]; then
         sudo rm -rf $HOME/.config/fcitx/skin/dark/bar.png
-        sudo cp $Dotfiles_repo/fcitx/bar.png $HOME/.config/fcitx/skin/dark/bar.png
+        sudo cp $Extras_dir/fcitx/bar.png $HOME/.config/fcitx/skin/dark/bar.png
     else
         mkdir -p $HOME/.config/fcitx/skin/dark
-        sudo cp $Dotfiles_repo/fcitx/bar.png $HOME/.config/fcitx/skin/dark/bar.png
+        sudo cp $Extras_dir/fcitx/bar.png $HOME/.config/fcitx/skin/dark/bar.png
     fi
+    row
+    fcitx -v
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Github_SSH() {
     if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
-        echo 'Email for ssh key'
+        echo 'Please Input Email Addrsses For SSH Key'
         read -e ssh_email
         ssh-keygen -t rsa -P "" -C "$ssh_email"  -f ~/.ssh/id_rsa
         echo 'Key copied to keyboard'
@@ -382,24 +372,17 @@ Github_SSH() {
         microsoft-edge --new-window 'https://github.com/settings/keys'
     fi
     row
+    echo "Add Github For SSH Key Done!"
+    row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Github_Hosts() {
     sudo sed -i '/# GitHub/,$d' /etc/hosts
     sudo sed -i '$a\# ------------------------------------------------------------------' /etc/hosts
-    sudo python3 $Dotfiles_repo/github_hosts.py
+    sudo python3 $Extras_dir/autohosts/github_hosts.py
     row
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-I3_Sensible_Terminal() {
-    if [ -f /usr/bin/i3-sensible-terminal ]; then
-        sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/rofi-sensible-terminal
-    fi
-    if [ -f /usr/bin/rofi-sensible-terminal ]; then
-        sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/i3-sensible-terminal
-    fi
+    cat /etc/hosts
     row
 }
 
@@ -413,7 +396,12 @@ Vmware_Share_Fix() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Calibre() {
     sudo apt install calibre
+    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/calibre.zip
+    unzip -d $HOME/.config/ $Bin_dir/calibre.zip
     git clone https://github.com/hantaotaohan/books $HOME/books
+    row
+    echo "Install Calibre Done & Calibre Config Done & Git Clone Book Done"
+    row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -423,35 +411,23 @@ Foliate() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Rdrview() {
-    sudo apt install libxml2-dev libseccomp-dev libcurl4-gnutls-dev
-    git clone https://hub.fastgit.org/eafer/rdrview.git $HOME/desktop/rdrview
-    cd $HOME/desktop/rdrview
+    sudo apt install -y -qq libxml2-dev libseccomp-dev libcurl4-gnutls-dev > /dev/null 2>&1
+    git clone -q https://hub.fastgit.org/eafer/rdrview.git $Bin_dir/rdrview
+    cd $Bin_dir/rdrview
     make
     sudo make install
     cd $HOME
-    rm -rf $HOME/desktop/rdrview
-    row
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-I3wm() {
-    sudo add-apt-repository -y ppa:kgilmer/speed-ricer
-    sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
-    sudo apt-get update
-    sudo apt install -y i3 i3-wm
-    sudo apt-get -y -qq --purge remove rxvt-unicode > /dev/null 2>&1 
-    sudo sed -i "s/https:\/\/launchpad.proxy.ustclug.org/http:\/\/ppa.launchpad.net/g" /etc/apt/sources.list.d/*.list
-    sudo add-apt-repository -y --remove ppa:kgilmer/speed-ricer
-    row
-    i3 --version
+    rm -rf $Bin_dir/rdrview
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 SSH_banner() {
     sudo sed -i '$a\Banner \/etc\/ssh\/my_ssh_banner' /etc/ssh/sshd_config
-    sudo cp $Dotfiles_repo/banner/my_ssh_banner /etc/ssh/
+    sudo cp $Extras_dir/banner/my_ssh_banner /etc/ssh/
     systemctl restart sshd
+    row
+    echo "SSH Banner Replacement Is Complete"
     row
 }
 
@@ -472,15 +448,15 @@ Ly() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Ctags() {
     sudo apt purge --remove ctags
-    sudo apt-get install -y libjansson-dev autotools-dev autoconf
-    git clone https://hub.fastgit.org/universal-ctags/ctags.git --depth=1 $HOME/desktop/ctags
-    cd $HOME/desktop/ctags
+    sudo apt install -y -qq libjansson-dev autotools-dev autoconf > /dev/null 2>&1
+    git clone https://hub.fastgit.org/universal-ctags/ctags.git --depth=1 $Bin_dir/ctags
+    cd $Bin_dir/ctags
     ./autogen.sh
     ./configure
     make
     sudo make install
     cd $HOME
-    rm -rf $HOME/desktop/ctags
+    rm -rf $Bin_dir/ctags
     row
     ctags --version | grep "Universal Ctags"
     row
@@ -489,14 +465,14 @@ Ctags() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Nodejs() {
     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-    sudo apt install -y nodejs
+    sudo apt install -y -qq nodejs > /dev/null 2>&1
     row
     node --version
     row
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt update
-    sudo apt install -y yarn
+    sudo apt install -y -qq yarn > /dev/null 2>&1
     sudo rm -rf /etc/apt/sources.list.d/yarn.list
     row
     yarn --version
@@ -504,24 +480,12 @@ Nodejs() {
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
-Crow_Translate() {
-    wget --tries=40 -P $HOME/desktop https://download.fastgit.org/crow-translate/crow-translate/releases/download/2.6.1/crow-translate_2.6.1_amd64.deb
-    cd $HOME/desktop
-    sudo dpkg -i crow-translate_2.6.1_amd64.deb
-    sudo apt install -f
-    sudo dpkg -i crow-translate_2.6.1_amd64.deb   
-    rm -rf $HOME/desktop/crow-translate_2.6.1_amd64.deb
-    cd $HOME
-    row
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
 Hugo() {
-    wget https://download.fastgit.org/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $HOME/desktop/hugo.deb
-    cd $HOME/desktop
+    wget -q https://download.fastgit.org/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $Bin_dir/hugo.deb
+    cd $Bin_dir
     sudo dpkg -i hugo.deb
     cd $HOME
-    rm -rf $HOME/desktop/hugo.deb
+    rm -rf $Bin_dir/hugo.deb
     row
     hugo version
     row
@@ -529,8 +493,8 @@ Hugo() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Java() {
-    sudo apt install -y default-jre
-    sudo apt install -y default-jdk
+    sudo apt install -y -qq default-jre
+    sudo apt install -y -qq default-jdk
     row
     java -version
     row
@@ -562,16 +526,8 @@ Fixrofiicons() {
     sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/mail.png' /usr/share/applications/neomutt.desktop 
     sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/translate.png' /usr/share/applications/copytranslator.desktop
     sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/browser.png' /usr/share/applications/ranger.desktop
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-Alacritty() {
-    sudo add-apt-repository -y ppa:aslatter/ppa
-    sudo sed -i "s/http:\/\/ppa.launchpad.net/https:\/\/launchpad.proxy.ustclug.org/g" /etc/apt/sources.list.d/*.list
-    sudo apt update
-    sudo apt install -y alacritty
-    sudo sed -i "s/https:\/\/launchpad.proxy.ustclug.org/http:\/\/ppa.launchpad.net/g" /etc/apt/sources.list.d/*.list
-    sudo add-apt-repository -y --remove peek-developers/stable
+    row
+    echo "Fix Rofi Icons Done!"
     row
 }
 
