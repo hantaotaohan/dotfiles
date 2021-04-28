@@ -226,13 +226,13 @@ Jupyter() {
     if [ ! -d "$HOME/.jupyter/custom/" ]
     then
         mkdir -p $HOME/.jupyter/custom/
-        cp $Dotfiles_repo/jupyter/custom.css $HOME/.jupyter/custom/custom.css
+        cp $Extras_dir/jupyter/custom.css $HOME/.jupyter/custom/custom.css
     fi
 
     if [ ! -d "$HOME/.ipython/profile_default/startup/" ]
     then
         mkdir -p $HOME/.ipython/profile_default/startup/
-        cp $Dotfiles_repo/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
+        cp $Extras_dir/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
     fi
     row
     jupyter --version
@@ -279,11 +279,11 @@ Picom() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 SSR() {
     wget -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/electron-ssr.deb
-    sudo dpkg -i $Bin_dir/electron-ssr-0.3.0-alpha.6.deb
+    sudo dpkg -i $Bin_dir/electron-ssr.deb
     sudo apt install -f -y
-    sudo dpkg -i $Bin_dir/desktop/electron-ssr-0.3.0-alpha.6.deb
+    sudo dpkg -i $Bin_dir/electron-ssr.deb
     cd $HOME
-    sudo rm -rf $Bin_dir/electron-ssr-0.3.0-alpha.6.deb
+    sudo rm -rf $Bin_dir/electron-ssr.deb
     row
 }
 
