@@ -193,14 +193,12 @@ Crossover() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 I3gaps() {
-    sudo apt install -y -qq dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev \
-    libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev \
-    libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev > /dev/null 2>&1
-    git clone -q https://hub.fastgit.org/Airblader/i3 $Bin_dir/i3-gaps
-    cd $Bin_dir/i3-gaps
-    mkdir -p build && cd build
-    sudo meson ..
-    sudo ninja
+    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/i3gaps.zip
+    cd $BIN_dir
+    unzip i3gaps.zip
+    sudo dpkg -i i3gpas1.deb > /dev/null 2>&1
+    sudo dpkg -i i3gpas2.deb > /dev/null 2>&1
+    sudo dpkg -i i3gpas3.deb > /dev/null 2>&1
     sudo apt-get -y -qq --purge remove rxvt-unicode > /dev/null 2>&1 
     sed -i 's|# smart_gaps on|smart_gaps on|g' $HOME/.config/i3/config
     sed -i 's|# gaps inner 8|gaps inner 8|g' $HOME/.config/i3/config
