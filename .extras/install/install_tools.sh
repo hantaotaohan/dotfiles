@@ -538,7 +538,7 @@ main() {
             usage
             exit 0
             ;;
-        -1)
+        alttab)
             Alttab
             ;;
         -2)
