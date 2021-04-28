@@ -272,7 +272,9 @@ if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
 
 # Set Locales Language
 ## sudo dpkg-reconfigure locales
-sudo locale-gen "zh_CN.UTF-8" > /dev/null 2>&1
+## sudo locale-gen "zh_CN.UTF-8" > /dev/null 2>&1
+sudo sed -i -e 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen
+sudo locale-gen
 sudo dpkg-reconfigure --frontend=noninteractive locales > /dev/null 2>&1
 echo -e "              ${green}[+]Set Locales Language is Successful${reset}\n"
 
