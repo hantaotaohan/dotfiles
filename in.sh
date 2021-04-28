@@ -281,6 +281,10 @@ echo -e "              ${green}[+]Set Locales Language is Successful${reset}\n"
 # Set TimeZone
 sudo timedatectl set-timezone "Asia/Shanghai"
 echo -e "              ${green}[+]Set TimeZone is Successful${reset}\n"
+
+# Fix Sanbox
+echo 'kernel.unprivileged_userns_clone=1' | sudo tee /etc/sysctl.d/userns.conf
+echo -e "              ${green}[+]Fix Error:chrome-sandbox is Successful${reset}\n"
 }
 
 #----------------------------------------------------------------------------------------#
