@@ -93,8 +93,8 @@ Arcthemes() {
         sudo sed -i 's/gtk-theme-name = Ambiance/gtk-theme-name = Arc-Dark/g' /etc/gtk-3.0/settings.ini
     fi
     row
-    The Arc Themes installation is complete
-    Files: /etc/gtk-3.0/settings.ini . The update has been completed
+    echo "The Arc Themes installation is complete"
+    echo "Files: /etc/gtk-3.0/settings.ini . The update has been completed"
     row
 }
 
@@ -108,8 +108,8 @@ Arcicons() {
     cd $HOME
     sudo rm -rf $Bin_dir/arc-icon-theme
     row
-    The Arc Icons installation is complete
-    Files: /etc/gtk-3.0/settings.ini . The update has been completed
+    echo "The Arc Icons installation is complete"
+    echo "Files: /etc/gtk-3.0/settings.ini . The update has been completed"
     row
 }
 
@@ -118,7 +118,7 @@ Gtkdarkmode() {
         sudo cp $Extras_dir/gtk3setting/settings.ini /etc/gtk-3.0/settings.ini
     fi
     row
-    Has been setting GTK Dark Mode
+    echo "Has been setting GTK Dark Mode"
     row
 }
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -201,7 +201,7 @@ I3gaps() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Imagemagick() {
-    sudo apt install -y imagemagick
+    sudo apt install -y -qq imagemagick
     if [ -f /etc/ImageMagick-6/policy.xml ]; then
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
     fi
@@ -232,8 +232,8 @@ Jupyter() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Navi() {
     wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/navi
-    sudo mv $Bin_dir/navi /bin/
-    sudo chmod +x /bin/navi
+    sudo mv $Bin_dir/navi /usr/local/bin
+    sudo chmod +x /usr/local/bin/navi
     if [ -d "$HOME/.local/share/navi/cheats/denisidoro__cheats/" ]; then
         ln -fs $Extras_dir/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
     else
@@ -251,12 +251,12 @@ Picom() {
     libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
     libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev \
     meson  > /dev/null 2>&1
-    git clone -q https://hub.fastgit.org/yshui/picom.git  $Bin_dir/picom && \
-    cd $Bin_dir/picom && \
-    git submodule update --init --recursive && \
-    meson --buildtype=release . build && \
-    sudo ninja -C build && \
-    sudo ninja -C build install && \
+    git clone -q https://hub.fastgit.org/yshui/picom.git  $Bin_dir/picom
+    cd $Bin_dir/picom
+    git submodule update --init --recursive > /dev/null 2>&1
+    meson --buildtype=release . build > /dev/null 2>&1
+    sudo ninja -C build > /dev/null 2>&1
+    sudo ninja -C build install > /dev/null 2>&1
     cd $HOME
     sudo rm -rf $Bin_dir/ipicom
     sed -i "s|# exec --no-startup-id picom --config ~/.config/picom/picom.conf|exec --no-startup-id picom --config ~/.config/picom/picom.conf|g" $HOME/.config/i3/config
@@ -295,10 +295,10 @@ Dunst() {
 Offlineimap() {
     echo " It Is Now Being Configured Offlineimap ...... "
     echo " Please Enter The Zip Package Password "
-    unzip -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
+    unzip -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass > /dev/null 2>&1
     sudo cp /usr/share/doc/offlineimap/examples/systemd/offlineimap.service /etc/systemd/user
-    systemctl --user enable offlineimap
-    systemctl --user start offlineimap
+    systemctl --user enable offlineimap > /dev/null 2>&1
+    systemctl --user start offlineimap > /dev/null 2>&1
     sudo chmod 600 $HOME/.msmtprc
     row
     echo " Neomutt Config Doen! "
@@ -368,7 +368,7 @@ Github_SSH() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Github_Hosts() {
-    sudo sed -i '/# GitHub/,$d' /etc/hosts
+    #sudo sed -i '/# GitHub/,$d' /etc/hosts
     sudo sed -i '$a\# ------------------------------------------------------------------' /etc/hosts
     sudo python3 $Extras_dir/autohosts/github_hosts.py
     row
@@ -404,8 +404,8 @@ Rdrview() {
     sudo apt install -y -qq libxml2-dev libseccomp-dev libcurl4-gnutls-dev > /dev/null 2>&1
     git clone -q https://hub.fastgit.org/eafer/rdrview.git $Bin_dir/rdrview
     cd $Bin_dir/rdrview
-    make
-    sudo make install
+    make > /dev/null 2>&1
+    sudo make install > /dev/null 2>&1
     cd $HOME
     rm -rf $Bin_dir/rdrview
     row
@@ -439,12 +439,12 @@ Ly() {
 Ctags() {
     sudo apt purge --remove ctags
     sudo apt install -y -qq libjansson-dev autotools-dev autoconf > /dev/null 2>&1
-    git clone https://hub.fastgit.org/universal-ctags/ctags.git --depth=1 $Bin_dir/ctags
+    git clone -q https://hub.fastgit.org/universal-ctags/ctags.git --depth=1 $Bin_dir/ctags
     cd $Bin_dir/ctags
-    ./autogen.sh
-    ./configure
-    make
-    sudo make install
+    ./autogen.sh > /dev/null 2>&1
+    ./configure > /dev/null 2>&1
+    make > /dev/null 2>&1
+    sudo make install > /dev/null 2>&1
     cd $HOME
     rm -rf $Bin_dir/ctags
     row
@@ -512,10 +512,10 @@ Clone() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Fixrofiicons() {
-    sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/pdf.png' /usr/share/applications/zathura.desktop
-    sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/mail.png' /usr/share/applications/neomutt.desktop 
-    sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/translate.png' /usr/share/applications/copytranslator.desktop
-    sudo sed -i '$a\Icon=/home/taotao/dotfiles/setup/icons/browser.png' /usr/share/applications/ranger.desktop
+    sudo sed -i '$a\Icon="${HOME}"/debian/.extras/icons/pdf.png' /usr/share/applications/zathura.desktop
+    sudo sed -i '$a\Icon="${HOME}"/debian/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
+    sudo sed -i '$a\Icon="${HOME}"/debian/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
+    sudo sed -i '$a\Icon="${HOME}"/debian/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
     row
     echo "Fix Rofi Icons Done!"
     row
