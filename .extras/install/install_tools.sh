@@ -2,7 +2,7 @@
 
 Dotfiles_repo=$(pwd)
 Extras_dir=$(dirname "$PWD") 
-Bin_dir="$/home/taotao/.bin"
+Bin_dir="/home/taotao/.bin"
 
 Git_clone="https://hub.fastgit.org"
 Git_download="https://download.fastgit.org"
