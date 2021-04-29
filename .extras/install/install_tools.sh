@@ -2,7 +2,7 @@
 
 Dotfiles_repo=$(pwd)
 Extras_dir=$(dirname "$PWD") 
-Bin_dir="$HOME/.bin"
+Bin_dir="$/home/taotao/.bin"
 
 Git_clone="https://hub.fastgit.org"
 Git_download="https://download.fastgit.org"
@@ -303,7 +303,7 @@ Dunst() {
 Offlineimap() {
     echo " It Is Now Being Configured Offlineimap ...... "
     echo " Please Enter The Zip Package Password "
-    unzip -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass > /dev/null 2>&1
+    unzip -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
     sudo cp /usr/share/doc/offlineimap/examples/systemd/offlineimap.service /etc/systemd/user
     systemctl --user enable offlineimap
     systemctl --user start offlineimap
