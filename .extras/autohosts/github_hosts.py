@@ -1,6 +1,6 @@
 import requests
 
-hosts_url = "https://gitee.com/xueweihan/codes/6g793pm2k1hacwfbyesl464/raw?blob_name=GitHub520.yml"
+hosts_url = "https://cdn.jsdelivr.net/gh/521xueweihan/GitHub520@main/hosts"
 start_flag = "# GitHub520 Host Start"
 end_flag = "# GitHub520 Host End"
 
