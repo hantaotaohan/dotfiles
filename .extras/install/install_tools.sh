@@ -297,8 +297,8 @@ Offlineimap() {
     echo " Please Enter The Zip Package Password "
     unzip -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass > /dev/null 2>&1
     sudo cp /usr/share/doc/offlineimap/examples/systemd/offlineimap.service /etc/systemd/user
-    systemctl --user enable offlineimap > /dev/null 2>&1
-    systemctl --user start offlineimap > /dev/null 2>&1
+    systemctl --user enable offlineimap
+    systemctl --user start offlineimap
     sudo chmod 600 $HOME/.msmtprc
     row
     echo " Neomutt Config Doen! "
