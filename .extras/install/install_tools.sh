@@ -9,7 +9,7 @@ Gitclone=$(ping -c 1 -w 1 github.com)
 Fastclone=$(ping -c 1 -w 1 hub.fastgit.org)
 Fastdownload=$(ping -c 1 -w 1 download.fastgit.org)
 
-if $Fastclone && $Gitclone && [ $Gitpingspeed -gt 200 ]; then
+if [ $Fastclone -eq 0 && $Gitclone -eq 0 && $Gitpingspeed -gt 200 ]; then
     Git_clone="https://hub.fastgit.org"
     Git_download="https://download.fastgit.org"
 else
