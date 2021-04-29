@@ -4,11 +4,11 @@ Dotfiles_repo=$(pwd)
 Extras_dir=$(dirname "$PWD") 
 Bin_dir="$HOME/.bin"
 
-#Git_clone="https://hub.fastgit.org"
-#Git_download="https://download.fastgit.org"
+Git_clone="https://hub.fastgit.org"
+Git_download="https://download.fastgit.org"
 
-Git_clone="https://github.com"
-Git_download="https://github.com"
+#Git_clone="https://github.com"
+#Git_download="https://github.com"
 
 
 
