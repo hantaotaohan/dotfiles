@@ -3,6 +3,8 @@
 Dotfiles_repo=$(pwd)
 Extras_dir=$(dirname "$PWD") 
 Bin_dir="$HOME/.bin"
+Git_clone="https://github.com"
+Git_download="https://github.com"
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 # Print usage message.
@@ -75,7 +77,7 @@ row() {
 
 Alttab() {
     sudo apt install -y -qq libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev ibxpm-dev libxpm4 > /dev/null 2>&1 
-    git clone -q https://hub.fastgit.org/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab && ./configure > /dev/null 2>&1
+    git clone -q $Git_clone/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab && ./configure > /dev/null 2>&1
     make -s > /dev/null 2>&1
     sudo make install > /dev/null 2>&1
     alttab -v > $Bin_dir/alttabversion 2>&1
@@ -99,7 +101,7 @@ Arcthemes() {
 }
 
 Arcicons() {
-    git clone -q https://hub.fastgit.org/horst3180/arc-icon-theme --depth 1 $Bin_dir/arcicontheme
+    git clone -q $Git_clone/horst3180/arc-icon-theme --depth 1 $Bin_dir/arcicontheme
     cd $Bin_dir/arcicontheme
     sudo cp -r Arc /usr/share/icons/
     sudo chmod +x /usr/share/icons/Arc
@@ -124,7 +126,7 @@ Gtkdarkmode() {
 }
 #---------------------------------------------------------------------------------------------------------------------------------------
 Copytranslator() {
-    wget -q -P $Bin_dir https://download.fastgit.org/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
+    wget -q -P $Bin_dir $Git_download/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
     cd $Bin_dir
     sudo dpkg -i copytranslator_10.0.0-beta.2_amd64.deb  > /dev/null 2>&1
     sudo usermod -a -G input $USER
@@ -137,9 +139,9 @@ Copytranslator() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Crossover() {
-    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/crossover-20.deb
-    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/winewrapper.exe.so
-    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/kindle.zip
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/crossover-20.deb
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/winewrapper.exe.so
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/kindle.zip
     sudo dpkg -i $Bin_dir/crossover-20.deb
     sudo apt install -f -y -qq
     sudo dpkg -i $Bin_dir/crossover-20.deb
@@ -184,7 +186,7 @@ Crossover() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 I3gaps() {
-    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/i3gaps.zip
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/i3gaps.zip
     cd $BIN_dir
     unzip i3gaps.zip
     sudo dpkg -i i3gpas1.deb > /dev/null 2>&1
@@ -232,7 +234,7 @@ Jupyter() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Navi() {
-    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/navi
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/navi
     sudo mv $Bin_dir/navi /usr/local/bin
     sudo chmod +x /usr/local/bin/navi
     if [ -d "$HOME/.local/share/navi/cheats/denisidoro__cheats/" ]; then
@@ -252,7 +254,7 @@ Picom() {
     libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
     libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev \
     meson  > /dev/null 2>&1
-    git clone -q https://hub.fastgit.org/yshui/picom.git  $Bin_dir/picom
+    git clone -q $Git_clone/yshui/picom.git  $Bin_dir/picom
     cd $Bin_dir/picom
     git submodule update --init --recursive > /dev/null 2>&1
     meson --buildtype=release . build > /dev/null 2>&1
@@ -269,7 +271,7 @@ Picom() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 SSR() {
-    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/electron-ssr.deb
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/electron-ssr.deb
     sudo dpkg -i $Bin_dir/electron-ssr.deb  > /dev/null 2>&1
     sudo apt install -f -y > /dev/null 2>&1
     sudo dpkg -i $Bin_dir/electron-ssr.deb  > /dev/null 2>&1
@@ -281,7 +283,7 @@ SSR() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Dunst() {
     sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev > /dev/null 2>&1
-    git clone -q https://hub.fastgit.org/dunst-project/dunst.git $Bin_dir/dunst
+    git clone -q $Git_clone/dunst-project/dunst.git $Bin_dir/dunst
     cd $Bin_dir/dunst
     sudo make  > /dev/null 2>&1
     sudo make install  > /dev/null 2>&1
@@ -386,10 +388,10 @@ Vmware_Share_Fix() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Calibre() {
-    sudo apt install calibre
-    wget -q -P $Bin_dir https://download.fastgit.org/hantaotaohan/debian/releases/download/1.0.0/calibre.zip
+    sudo apt install calibre -y -qq >/dev/null 2>&1
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/calibre.zip
     unzip -d $HOME/.config/ $Bin_dir/calibre.zip
-    git clone https://github.com/hantaotaohan/books $HOME/books
+    git clone $Git_clone/hantaotaohan/books $HOME/books
     row
     echo "Install Calibre Done & Calibre Config Done & Git Clone Book Done"
     row
@@ -403,7 +405,7 @@ Foliate() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Rdrview() {
     sudo apt install -y -qq libxml2-dev libseccomp-dev libcurl4-gnutls-dev > /dev/null 2>&1
-    git clone -q https://hub.fastgit.org/eafer/rdrview.git $Bin_dir/rdrview
+    git clone -q $Git_clone/eafer/rdrview.git $Bin_dir/rdrview
     cd $Bin_dir/rdrview
     make > /dev/null 2>&1
     sudo make install > /dev/null 2>&1
@@ -425,7 +427,7 @@ SSH_banner() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Ly() {
     sudo apt install -y build-essential libpam0g-dev libxcb-xkb-dev
-    git clone https://github.com/nullgemm/ly.git $HOME/desktop/ly
+    git clone $Git_clone/nullgemm/ly.git $HOME/desktop/ly
     cd $HOME/desktop/ly
     make github
     make
@@ -440,7 +442,7 @@ Ly() {
 Ctags() {
     sudo apt purge --remove ctags
     sudo apt install -y -qq libjansson-dev autotools-dev autoconf > /dev/null 2>&1
-    git clone -q https://hub.fastgit.org/universal-ctags/ctags.git --depth=1 $Bin_dir/ctags
+    git clone -q $Git_clone/universal-ctags/ctags.git --depth=1 $Bin_dir/ctags
     cd $Bin_dir/ctags
     ./autogen.sh > /dev/null 2>&1
     ./configure > /dev/null 2>&1
@@ -472,7 +474,7 @@ Nodejs() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Hugo() {
-    wget -q https://download.fastgit.org/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $Bin_dir/hugo.deb
+    wget -q $Git_download/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $Bin_dir/hugo.deb
     cd $Bin_dir
     sudo dpkg -i hugo.deb
     cd $HOME
