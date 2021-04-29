@@ -627,9 +627,7 @@ main() {
             Fixrofiicons
             ;;  
         -a|--all)
-            Github_SSH
             Github_Hosts
-            SSH_banner
             Alttab
             Arcthemes
             Arcicons
@@ -657,11 +655,11 @@ main() {
             Clone
             #Ly
             Vmware_Share_Fix
+            Github_SSH
+            SSH_banner
             ;;
         -m|--minimize)
-            Github_SSH
             Github_Hosts
-            SSH_banner
             Alttab
             Arcthemes
             Arcicons
@@ -677,11 +675,11 @@ main() {
             Fixrofiicons
             Fix_FZF_history
             Imagemagick
+            Github_SSH
+            SSH_banner
             ;;
         -s|--server)
-            Github_SSH
             Github_Hosts
-            SSH_banner
             Offlineimap
             Navi
             Ctags
@@ -693,6 +691,8 @@ main() {
             Hugo
             Java
             Clone
+            Github_SSH
+            SSH_banner
             ;;             
         *)
             echo "Command not found" >&2
