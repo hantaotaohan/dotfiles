@@ -107,14 +107,14 @@ Arcthemes() {
 }
 
 Arcicons() {
-    git clone -q $Git_clone/horst3180/arc-icon-theme $Bin_dir/arcicontheme
-    sudo cp -r $Bin_dir/arcicontheme/Arc /usr/share/icons/
+    git clone https://github.com/horst3180/arc-icon-theme --depth 1 $Bin_dir/arc-icon-theme && cd arc-icon-theme
+    sudo cp -r $Bin_dir/arc-icon-theme/Arc /usr/share/icons/
     sudo chmod +x /usr/share/icons/Arc
     if [ -f /etc/gtk-3.0/settings.ini ]; then
         sudo sed -i 's/gtk-icon-theme-name = ubuntu-mono-dark/gtk-icon-theme-name = Arc/g' /etc/gtk-3.0/settings.ini
     fi
     cd $HOME
-    sudo rm -rf $Bin_dir/arcicontheme
+    sudo rm -rf $Bin_dir/arc-icon-theme
     row
     echo "The Arc Icons installation is complete"
     echo "Files: /etc/gtk-3.0/settings.ini . The update has been completed"
