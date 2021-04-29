@@ -107,7 +107,7 @@ Arcthemes() {
 }
 
 Arcicons() {
-    git clone -q $Git_clone/horst3180/arc-icon-theme --depth 1 $Bin_dir/arcicontheme
+    git clone -q $Git_clone/horst3180/arc-icon-theme $Bin_dir/arcicontheme
     cd $Bin_dir/arcicontheme
     sudo cp -r Arc /usr/share/icons/
     sudo chmod +x /usr/share/icons/Arc
