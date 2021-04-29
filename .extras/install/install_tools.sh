@@ -2,7 +2,7 @@
 
 Dotfiles_repo=$(pwd)
 Extras_dir=$(dirname "$PWD") 
-Bin_dir=$("$HOME"/.bin)
+Bin_dir="$HOME/.bin"
 
 #Git_clone="https://hub.fastgit.org"
 #Git_download="https://download.fastgit.org"
@@ -20,21 +20,17 @@ usage() {
     local program_name
     program_name=${0##*/}
     cat <<EOF
-
 Usage: $program_name [-option]
-
 Options:
     
     -------------------------------------------------------------------------------
                                                                                    
          -h --help          Print this message                                                  
-
          -a --all           Setup All                                                           
          -m --minimize      Setup All   
          -s --server        Setup Server All                                                    
                                                                                    
     -------------------------------------------------------------------------------
-
         githubhosts         Config /etc/hosts/ View Github.com
         sshbanner           Config SSH Login Banner
         alttab              Same Windows Alt Tab
@@ -97,7 +93,7 @@ Alttab() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Arcthemes() {
-    sudo apt install -y -qq arc-theme
+    sudo apt install -y -qq arc-theme > /dev/null 2>&1
     if [ -f /etc/gtk-3.0/settings.ini ]; then
         sudo sed -i 's/gtk-theme-name = Ambiance/gtk-theme-name = Arc-Dark/g' /etc/gtk-3.0/settings.ini
     fi
@@ -108,8 +104,9 @@ Arcthemes() {
 }
 
 Arcicons() {
-    git clone https://github.com/horst3180/arc-icon-theme --depth 1 $Bin_dir/arc-icon-theme && cd arc-icon-theme
-    sudo cp -r $Bin_dir/arc-icon-theme/Arc /usr/share/icons/
+    cd "$Bin_dir" || return 
+    git clone -q $Git_clone/horst3180/arc-icon-theme --depth 1 arc-icon-theme && cd arc-icon-theme > /dev/null 2>&1
+    sudo cp -r Arc /usr/share/icons/
     sudo chmod +x /usr/share/icons/Arc
     if [ -f /etc/gtk-3.0/settings.ini ]; then
         sudo sed -i 's/gtk-icon-theme-name = ubuntu-mono-dark/gtk-icon-theme-name = Arc/g' /etc/gtk-3.0/settings.ini
@@ -192,8 +189,8 @@ Crossover() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 I3gaps() {
+    cd "$Bin_dir" || return 
     wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/i3gaps.zip
-    cd $BIN_dir
     unzip i3gaps.zip
     sudo dpkg -i i3gpas1.deb > /dev/null 2>&1
     sudo dpkg -i i3gpas2.deb > /dev/null 2>&1
@@ -204,8 +201,9 @@ I3gaps() {
     sed -i 's|# gaps outer 2|gaps outer 2|g' $HOME/.config/i3/config
     sed -i 's|# smart_gaps inverse_outer|smart_gaps inverse_outer|g' $HOME/.config/i3/config
     row
-    I3 - Gaps Install Completed
+    echo "I3 - Gaps Install Completed"
     row
+    rm -rf i3gaps*
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -267,7 +265,7 @@ Picom() {
     sudo ninja -C build > /dev/null 2>&1
     sudo ninja -C build install > /dev/null 2>&1
     cd $HOME
-    sudo rm -rf $Bin_dir/ipicom
+    sudo rm -rf $Bin_dir/picom
     sed -i "s|# exec --no-startup-id picom --config ~/.config/picom/picom.conf|exec --no-startup-id picom --config ~/.config/picom/picom.conf|g" $HOME/.config/i3/config
     sed -i "s|exec --no-startup-id compton --config ~/.config/compton/compton.conf|# exec --no-startup-id compton --config ~/.config/compton/compton.conf|g" $HOME/.config/i3/config
     row
@@ -310,7 +308,7 @@ Offlineimap() {
     systemctl --user start offlineimap
     sudo chmod 600 $HOME/.msmtprc
     row
-    echo " Neomutt Config Doen! "
+    echo "Neomutt Config Doen! "
     neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*..."
     row
 }
@@ -381,7 +379,8 @@ Github_Hosts() {
     sudo sed -i '$a\# ------------------------------------------------------------------' /etc/hosts
     sudo python3 $Extras_dir/autohosts/github_hosts.py
     row
-    cat /etc/hosts
+    tail -n -3 /etc/hosts 
+    echo ""
     row
 }
 
@@ -446,7 +445,7 @@ Ly() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Ctags() {
-    sudo apt purge --remove ctags
+    sudo apt purge --remove ctags > /dev/null 2>&1
     sudo apt install -y -qq libjansson-dev autotools-dev autoconf > /dev/null 2>&1
     git clone -q $Git_clone/universal-ctags/ctags.git --depth=1 $Bin_dir/ctags
     cd $Bin_dir/ctags
@@ -643,7 +642,7 @@ main() {
             Fcitx
             Fixrofiicons
             Fix_FZF_history
-            Imagemagick
+            #Imagemagick
             Jupyter
             Nodejs
             SSR
@@ -675,7 +674,7 @@ main() {
             Fcitx
             Fixrofiicons
             Fix_FZF_history
-            Imagemagick
+            #Imagemagick
             Github_SSH
             SSH_banner
             ;;
@@ -686,7 +685,7 @@ main() {
             Ctags
             Rdrview
             Fix_FZF_history
-            Imagemagick
+            #Imagemagick
             Jupyter
             Nodejs
             Hugo
