@@ -3,8 +3,20 @@
 Dotfiles_repo=$(pwd)
 Extras_dir=$(dirname "$PWD") 
 Bin_dir="$HOME/.bin"
-Git_clone="https://github.com"
-Git_download="https://github.com"
+
+Gitpingspeed=$(ping -c 4 github.com | tail -1| awk '{print $4}' | cut -d '/' -f 2)
+Gitclone=$(ping -c 1 -w 1 github.com)
+Fastclone=$(ping -c 1 -w 1 hub.fastgit.org)
+Fastdownload=$(ping -c 1 -w 1 download.fastgit.org)
+
+if [ $Fastclone -eq 0 ] && [ $Gitclone -eq 0 ] && [ $Gitpingspeed -gt 200 ]; then
+    Git_clone="https://hub.fastgit.org"
+    Git_download="https://download.fastgit.org"
+else
+    Git_clone="https://github.com"
+    Git_download="https://github.com"
+fi
+
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 # Print usage message.
