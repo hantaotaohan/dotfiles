@@ -44,7 +44,6 @@ Options:
         navi                Setup Navi
         ctags               Setup Ctags
         rdrview             Setup Rdrview
-        fcitx               Settings Fcitx Themes
         fixrofiicons        Settings Rofi Icons
         fixfzf              Fix FZF Ctrl + r
         imagemagick         Fix Imagemagick 
@@ -94,39 +93,24 @@ Alttab() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Arcthemes() {
     sudo apt install -y -qq arc-theme > /dev/null 2>&1
-    if [ -f /etc/gtk-3.0/settings.ini ]; then
-        sudo sed -i 's/gtk-theme-name = Ambiance/gtk-theme-name = Arc-Dark/g' /etc/gtk-3.0/settings.ini
-    fi
     row
     echo "The Arc Themes installation is complete"
-    echo "Files: /etc/gtk-3.0/settings.ini . The update has been completed"
     row
 }
 
 Arcicons() {
     cd "$Bin_dir" || return 
     git clone -q $Git_clone/horst3180/arc-icon-theme --depth 1 arc-icon-theme && cd arc-icon-theme > /dev/null 2>&1
-    sudo cp -r Arc /usr/share/icons/
+    mkdir -p $HOME/.local/share/icons/
+    cp -r Arc $HOME/.local/share/icons/
     sudo chmod +x /usr/share/icons/Arc
-    if [ -f /etc/gtk-3.0/settings.ini ]; then
-        sudo sed -i 's/gtk-icon-theme-name = ubuntu-mono-dark/gtk-icon-theme-name = Arc/g' /etc/gtk-3.0/settings.ini
-    fi
     cd $HOME
     sudo rm -rf $Bin_dir/arc-icon-theme
     row
     echo "The Arc Icons installation is complete"
-    echo "Files: /etc/gtk-3.0/settings.ini . The update has been completed"
     row
 }
 
-Gtkdarkmode() {
-    if [ -f /etc/gtk-3.0/settings.ini ]; then
-        sudo cp $Extras_dir/gtk3setting/settings.ini /etc/gtk-3.0/settings.ini
-    fi
-    row
-    echo "Has been setting GTK Dark Mode"
-    row
-}
 #---------------------------------------------------------------------------------------------------------------------------------------
 Copytranslator() {
     wget -q -P $Bin_dir $Git_download/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
@@ -309,51 +293,6 @@ Offlineimap() {
     row
     echo "Neomutt Config Doen! "
     neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*..."
-    row
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-Fcitx() {
-    if [ -f $HOME/.config/fcitx/conf/fcitx-classic-ui.config ]; then
-        sudo rm -rf $HOME/.config/fcitx/conf/fcitx-classic-ui.config
-        sudo cp $Extras_dir/fcitx/fcitx-classic-ui.config $HOME/.config/fcitx/conf/fcitx-classic-ui.config
-    else
-        mkdir -p $HOME/.config/fcitx/conf
-        sudo cp $Extras_dir/fcitx/fcitx-classic-ui.config $HOME/.config/fcitx/conf/fcitx-classic-ui.config
-    fi
-
-    if [ -f $HOME/.config/fcitx/conf/fcitx-keyboard.config ]; then
-        sudo rm -rf $HOME/.config/fcitx/conf/fcitx-keyboard.config
-        sudo cp $Extras_dir/fcitx/fcitx-keyboard.config $HOME/.config/fcitx/conf/fcitx-keyboard.config
-    else
-        mkdir -p $HOME/.config/fcitx/conf
-        sudo cp $Extras_dir/fcitx/fcitx-keyboard.config $HOME/.config/fcitx/conf/fcitx-keyboard.config
-    fi
-    
-    if [ -f $HOME/.config/fcitx/config ]; then
-        sudo rm -rf $HOME/.config/fcitx/config
-        sudo cp $Extras_dir/fcitx/config $HOME/.config/fcitx/config
-    else
-        sudo cp $Extras_dir/fcitx/config $HOME/.config/fcitx/config
-    fi
-
-    if [ -f $HOME/.config/fcitx/skin/dark/fcitx_skin.conf  ]; then
-        sudo rm -rf $HOME/.config/fcitx/skin/dark/fcitx_skin.conf
-        sudo cp $Extras_dir/fcitx/fcitx_skin.conf $HOME/.config/fcitx/skin/dark/fcitx_skin.conf
-    else
-        mkdir -p $HOME/.config/fcitx/skin/dark
-        sudo cp $Extras_dir/fcitx/fcitx_skin.conf $HOME/.config/fcitx/skin/dark/fcitx_skin.conf
-    fi
-    
-    if [ -f $HOME/.config/fcitx/skin/dark/bar.png  ]; then
-        sudo rm -rf $HOME/.config/fcitx/skin/dark/bar.png
-        sudo cp $Extras_dir/fcitx/bar.png $HOME/.config/fcitx/skin/dark/bar.png
-    else
-        mkdir -p $HOME/.config/fcitx/skin/dark
-        sudo cp $Extras_dir/fcitx/bar.png $HOME/.config/fcitx/skin/dark/bar.png
-    fi
-    row
-    fcitx -v
     row
 }
 
@@ -577,9 +516,6 @@ main() {
         offlineimap)
             Offlineimap
             ;;
-        fcitx)
-            Fcitx
-            ;;
         githubssh)
             Github_SSH
             ;;
@@ -638,7 +574,6 @@ main() {
             Navi
             Ctags
             Rdrview
-            Fcitx
             Fixrofiicons
             Fix_FZF_history
             #Imagemagick
@@ -670,7 +605,6 @@ main() {
             Navi
             Ctags
             Rdrview
-            Fcitx
             Fixrofiicons
             Fix_FZF_history
             #Imagemagick
