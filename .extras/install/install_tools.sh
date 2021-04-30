@@ -285,7 +285,7 @@ Dunst() {
 Offlineimap() {
     echo " It Is Now Being Configured Offlineimap ...... "
     echo " Please Enter The Zip Package Password "
-    unzip -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
+    unzip -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
     sudo cp /usr/share/doc/offlineimap/examples/systemd/offlineimap.service /etc/systemd/user
     systemctl --user enable offlineimap
     systemctl --user start offlineimap
