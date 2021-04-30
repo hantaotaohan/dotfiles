@@ -305,6 +305,10 @@ Github_SSH() {
         echo 'Key copied to keyboard'
         xclip -sel clip < $HOME/.ssh/id_rsa.pub
         microsoft-edge --new-window 'https://github.com/settings/keys'
+    else
+        echo 'Key copied to keyboard'
+        xclip -sel clip < $HOME/.ssh/id_rsa.pub
+        microsoft-edge --new-window 'https://github.com/settings/keys'
     fi
     row
     echo "Add Github For SSH Key Done!"
