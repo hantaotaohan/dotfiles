@@ -463,7 +463,7 @@ Clone() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Fixrofiicons() {
-    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/pdf.png' /usr/share/applications/zathura.desktop
+    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/pdf.png' /usr/share/applications/org.pwmt.zathura.desktop
     sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
     sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
     sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
