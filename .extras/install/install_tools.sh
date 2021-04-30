@@ -59,6 +59,7 @@ Options:
         clone               Git clone My github Respones
         ly                  Commandline Longin 
         fixvmwareshare      Fix Vmware Share Folads
+        fixi3terminal       Fix I3wm Terminal Alacritty suppose
                                     
     -------------------------------------------------------------------------------
     
@@ -472,6 +473,19 @@ Fixrofiicons() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
+Fixi3terminal() {
+    if [ -f /usr/bin/i3-sensible-terminal ]; then
+        sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/rofi-sensible-terminal
+    fi
+    if [ -f /usr/bin/rofi-sensible-terminal ]; then
+        sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/i3-sensible-terminal
+    fi
+    row
+    echo "I3wm Terminal for Alacritty Doen!"
+    row
+}
+
 main() {
 
     case "$1" in
@@ -565,7 +579,10 @@ main() {
             ;;  
         fixrofiicons)
             Fixrofiicons
-            ;;  
+            ;;
+        fixi3terminal)
+            Fixi3terminal
+            ;;              
         -a|--all)
             Github_Hosts
             Alttab
@@ -581,6 +598,7 @@ main() {
             Rdrview
             Fixrofiicons
             Fix_FZF_history
+            Fixi3terminal
             #Imagemagick
             Jupyter
             Nodejs
@@ -612,6 +630,7 @@ main() {
             Rdrview
             Fixrofiicons
             Fix_FZF_history
+            Fixi3terminal
             #Imagemagick
             Github_SSH
             SSH_banner
