@@ -340,14 +340,15 @@ echo -e "                                                                       
 	#--------------------------------------------------------------------------I3WM--
 	i3 \
         feh \
-	mpv \
+	#mpv \
         rofi \
 	alttab \
 	zathura \
 	i3blocks \
         i3lock-fancy \
 	deepin-screenshot \
-	nautilus --no-install-recommends --no-install-suggests \
+	nautilus \
+	#nautilus --no-install-recommends --no-install-suggests \
 	#-------------------------------------------------------------------------SYSTEM--
 	xinit \
 	lua5.2 \
