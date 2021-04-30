@@ -463,10 +463,10 @@ Clone() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Fixrofiicons() {
-    sudo sed -i '$a\Icon="${HOME}"/debian/.extras/icons/pdf.png' /usr/share/applications/zathura.desktop
-    sudo sed -i '$a\Icon="${HOME}"/debian/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
-    sudo sed -i '$a\Icon="${HOME}"/debian/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
-    sudo sed -i '$a\Icon="${HOME}"/debian/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
+    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/pdf.png' /usr/share/applications/zathura.desktop
+    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
+    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
+    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
     row
     echo "Fix Rofi Icons Done!"
     row
