@@ -175,7 +175,7 @@ Crossover() {
 I3gaps() {
     cd "$Bin_dir" || return 
     wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/i3gaps.zip
-    unzip i3gaps.zip
+    unzip -q i3gaps.zip
     sudo dpkg -i i3gpas1.deb > /dev/null 2>&1
     sudo dpkg -i i3gpas2.deb > /dev/null 2>&1
     sudo dpkg -i i3gpas3.deb > /dev/null 2>&1
