@@ -240,7 +240,6 @@ Jupyter() {
 Navi() {
     wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/navi
     sudo mv $Bin_dir/navi /usr/local/bin
-    sudo chmod +x /usr/local/bin/navi
     if [ -d "$HOME/.local/share/navi/cheats/denisidoro__cheats/" ]; then
         ln -fs $Extras_dir/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
     else
