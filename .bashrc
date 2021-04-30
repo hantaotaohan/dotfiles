@@ -209,6 +209,6 @@ if [ ! "$XDG_CURRENT_DESKTOP" = "" ]; then
 fi
 
 # 为navi配置启动快捷键 CTRL+G
-if command -v navi >/dev/null 2>&1; then
-    source <(echo "$(navi widget bash)")
-fi
+# if command -v navi >/dev/null 2>&1; then
+#     source <(echo "$(navi widget bash)")
+# fi
