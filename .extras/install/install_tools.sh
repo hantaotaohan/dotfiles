@@ -230,6 +230,7 @@ Navi() {
         mkdir -p $HOME/.local/share/navi/cheats/denisidoro__cheats
         ln -fs $Extras_dir/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
     fi
+    sudo chmod +x /usr/local/bin/navi
     row
     navi -V
     row
