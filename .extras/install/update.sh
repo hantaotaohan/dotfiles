@@ -60,13 +60,6 @@ use_latest_release() {
 }
 
 # Installer.
-update_oh-my-zsh() {
-    echo -e "$magenta\n Updating oh-my-zsh... \n$white"
-    sh "$HOME/.oh-my-zsh/tools/upgrade.sh"
-    echo -e "$magenta\n Updating zsh plugins... \n$white"
-    cd "$HOME/.zsh/plugins" || return
-    find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;
-}
 
 update_i3-gaps() {
     echo -e "$magenta\n Updating & compiling i3-gaps... \n$white"
@@ -211,7 +204,7 @@ update_picom() {
 }
 
 update_one_by_one() {
-    declare -a arr=("update_oh-my-zsh" "update_i3-gaps" "update_i3blocks"
+    declare -a arr=("update_i3-gaps" "update_i3blocks"
                     "update_i3lock" "update_rofi" "update_dunst" "update_picom")
 
     for update_command in "${arr[@]}"; do
@@ -238,7 +231,6 @@ main() {
             update_one_by_one
             ;;
         -a)
-            update_oh-my-zsh
             update_i3-gaps
             update_i3blocks
             update_i3lock
