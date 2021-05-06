@@ -26,7 +26,7 @@
   spacing: 0;
   background-color: transparent;
 
-  font: "Saber 18";
+  font: "Saber 16";
   text-color: @text;
 }
 
