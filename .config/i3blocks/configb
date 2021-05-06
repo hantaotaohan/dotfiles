@@ -78,13 +78,13 @@ min_width=100
 
 [memory]
 command=$HOME/.config/i3blocks/memory
-label=
+label= 
 interval=1
 instance=mem
 min_width=100
 
 [bandwidth]
-label= 
+label=  
 full_text=Network I/O
 command=$HOME/.config/i3blocks/bandwidth
 interval=1
@@ -92,13 +92,13 @@ min_width=100
 
 [cpu_usage]
 full_text=CPU
-label= 
+label=  
 interval=1
 min_width=100
 
 [iface]
 command=$HOME/.config/i3blocks/iface
-label= 
+label=  
 color=#abb2bf
 interval=10
 min_width=200
