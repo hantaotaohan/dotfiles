@@ -1240,7 +1240,6 @@ let g:tagbar_map_showproto = "d"
 "=================================================================================================================================
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
-    " \ 'ctagsbin' : '$HOME/.vim/plugged/markdown2ctags/markdown2ctags.py', 
     \ 'ctagsbin' : '$HOME/.vim/markdown2ctags.py', 
     \ 'ctagsargs' : '-f - --sort=yes --sro=»',
     \ 'kinds' : [
