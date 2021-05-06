@@ -7,7 +7,7 @@
 
 case $BLOCK_BUTTON in
     1) # Left Click
-        i3-msg --quiet "exec --no-startup-id raiseorlaunch -r -c 'notion.so' -c 'Google-chrome' -e '--no-startup-id google-chrome -force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://notion.so'" > /dev/null
+        i3-msg --quiet "exec --no-startup-id raiseorlaunch -r -c 'notion.so' -c 'Microsoft-edge' -e '--no-startup-id microsoft-edge -force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://notion.so'" > /dev/null
         ;;
     2) # Middle Click
         i3-msg "kill"
