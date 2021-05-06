@@ -64,12 +64,12 @@ interval=1
 [github]
 full_text=  Github
 min_width=100
-command=i3-msg exec "google-chrome --force-dark-mode https://www.github.com" > /dev/null
+command=i3-msg exec "microsoft-edge --force-dark-mode https://www.github.com" > /dev/null
 
 [book]
 full_text=  Book
 min_width=100
-command=i3-msg exec "google-chrome --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --app=https://weread.qq.com/" > /dev/null
+command=i3-msg exec "microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --app=https://weread.qq.com/" > /dev/null
 
 [separator]
 full_text=System 
