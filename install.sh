@@ -620,10 +620,10 @@ echo -e "                                                                       
 #----------------------------------------------------------------------------------------#
 
     if [ ! -d "$HOME/.tmux" ]; then
-        git clone -q https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+        git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     else
         sudo rm -rf $HOME/.tmux
-        git clone -q https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+        git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
     tmux start-server
     tmux new-session -d
