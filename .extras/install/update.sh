@@ -6,6 +6,13 @@ red='\e[0;31m'
 white='\e[0;37m'
 source_dir="$HOME/.local/src"
 
+git clone https://github.com/Airblader/i3 $source_dir/i3
+git clone https://github.com/vivien/i3blocks $source_dir/i3blocks
+git clone https://github.com/i3/i3lock $source_dir/i3lock
+git clone https://github.com/davatorium/rofi $source_dir/rofi
+git clone https://github.com/dunst-project/dunst $source_dir/dunst
+git clone https://github.com/yshui/picom $source_dir/picom
+
 # Since some programs are installed in non-root directories,
 # don't run this script as root to avoid permission conflict.
 if [[ $EUID -eq 0 ]]; then
