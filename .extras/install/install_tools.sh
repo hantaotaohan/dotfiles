@@ -237,6 +237,26 @@ Navi() {
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
+#Picom() {
+#    sudo apt install -y -qq libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev \
+#    libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
+#    libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev \
+#    meson  > /dev/null 2>&1
+#    git clone -q $Git_clone/yshui/picom.git  $Bin_dir/picom
+#    cd $Bin_dir/picom
+#    git submodule update --init --recursive > /dev/null 2>&1
+#    meson --buildtype=release . build > /dev/null 2>&1
+#    sudo ninja -C build > /dev/null 2>&1
+#    sudo ninja -C build install > /dev/null 2>&1
+#    cd $HOME
+#    sudo rm -rf $Bin_dir/picom
+#    sed -i "s|# exec --no-startup-id picom --config ~/.config/picom/picom.conf|exec --no-startup-id picom --config ~/.config/picom/picom.conf|g" $HOME/.config/i3/config
+#    sed -i "s|exec --no-startup-id compton --config ~/.config/compton/compton.conf|# exec --no-startup-id compton --config ~/.config/compton/compton.conf|g" $HOME/.config/i3/config
+#    row
+#    echo "Picom Version: "picom --version
+#    row
+#}
+
 Picom() {
     sudo apt install -y -qq libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev \
     libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
@@ -244,14 +264,11 @@ Picom() {
     meson  > /dev/null 2>&1
     git clone -q $Git_clone/yshui/picom.git  $Bin_dir/picom
     cd $Bin_dir/picom
-    git submodule update --init --recursive > /dev/null 2>&1
-    meson --buildtype=release . build > /dev/null 2>&1
-    sudo ninja -C build > /dev/null 2>&1
-    sudo ninja -C build install > /dev/null 2>&1
-    cd $HOME
-    sudo rm -rf $Bin_dir/picom
-    sed -i "s|# exec --no-startup-id picom --config ~/.config/picom/picom.conf|exec --no-startup-id picom --config ~/.config/picom/picom.conf|g" $HOME/.config/i3/config
-    sed -i "s|exec --no-startup-id compton --config ~/.config/compton/compton.conf|# exec --no-startup-id compton --config ~/.config/compton/compton.conf|g" $HOME/.config/i3/config
+    rm -rf build
+    git submodule update --init  > /dev/null 2>&1
+    meson --buildtype=release . build -Dwith_docs=false  > /dev/null 2>&1
+    ninja -C build  > /dev/null 2>&1
+    sudo install -Dm755 --verbose build/src/picom /usr/local/bin/picom
     row
     echo "Picom Version: "picom --version
     row
