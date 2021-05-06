@@ -40,27 +40,27 @@ separator=true
 [separator]
 full_text= 
 
-[scratchpad]
-label= 
-command=$HOME/.config/i3blocks/scratchpad
-min_width=60
-interval=1
+# [scratchpad]
+# label= 
+# command=$HOME/.config/i3blocks/scratchpad
+# min_width=60
+# interval=1
 
 [memory]
-label=
+label= 
 interval=30
-min_width=60
+min_width=80
 
 [memory]
-label=
+label= 
 instance=swap
 interval=30
-min_width=60
+min_width=80
 
 [disk]
-label=
+label= 
 interval=30
-min_width=60
+min_width=80
 #instance=/mnt/data
 
 #[sync]
@@ -70,9 +70,9 @@ min_width=60
 
 [fcitx]
 command=$HOME/.config/i3blocks/fcitx
-label= 
+label=  
 interval=1
-min_width=50
+min_width=80
 
 #[email]
 # label= 
@@ -85,13 +85,13 @@ min_width=50
 
 [volume]
 label=VOL
-label=
+label= 
 instance=Master
 #instance=PCM
 interval=once
 signal=10
 interval=30
-min_width=50
+min_width=80
 
 [time]
 instance=swap
