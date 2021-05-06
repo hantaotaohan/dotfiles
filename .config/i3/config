@@ -70,7 +70,7 @@ bindsym $mod+Shift+Return exec --no-startup-id alacritty -e ranger
 
 # 开启Google Chrome快捷键 
 # bindsym $mod+g exec --no-startup-id raiseorlaunch -c google-chrome-stable --force-dark-mode
-bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Google-chrome" -e "google-chrome --force-dark-mode"
+bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode"
 
 # 移动当前窗口到便签区
 # bindsym $mod+shift+n move scratchpad ,resize set 1200 800 , move position center
@@ -179,7 +179,7 @@ set $workspace6 "6: 6 "
 set $workspace7 "7: 7 "
 set $workspace8 "8: 8 "
 set $workspace9 "9: 9 "
-set $workspace10 "10:   Chrome "
+set $workspace10 "10:   Edge "
 
 
 # 切换工作区
@@ -213,9 +213,7 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # --------------------------------------------------------------------------------------------------
 # 打开指定程序到指定的工作区-可用 xprop | grep WM_CLASS 命令获取wm_class
 # --------------------------------------------------------------------------------------------------
-# assign [class="Gnome-terminal"]	              $workspace1
-# assign [class="Google-chrome"]                        $workspace2
-assign [class="Google-chrome"]                        $workspace10
+assign [class="Microsoft-edge"]                        $workspace10
 
 # --------------------------------------------------------------------------------------------------
 # 设定那些程序为浮动窗口
@@ -393,6 +391,7 @@ client.background $base07
 # --------------------------------------------------------------------------------------------------
 bar {
     # font pango:Inziu Iosevka SC Bold 10
+    id			            bar-0
     font pango:Saber 10
     status_command 	        i3blocks -c ~/.config/i3blocks/config
     bindsym button4         nop
@@ -420,7 +419,7 @@ bar {
 
 bar {
     # font pango:Inziu Iosevka SC Bold 10
-    id			    bar-1
+    id			            bar-1
     font pango:Saber 10
     status_command 	        i3blocks -c ~/.config/i3blocks/configb
     bindsym button1         nop
@@ -460,8 +459,8 @@ bindsym Control+1 exec --no-startup-id raiseorlaunch -r -t "scratchpad" -e "--no
 for_window [class="Alacritty" title="neomutt"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
 bindsym Control+2 exec --no-startup-id raiseorlaunch -r -t "neomutt" -e "--no-startup-id alacritty -d 100 30 -t neomutt -e neomutt"
 
-for_window [class="Google-chrome" title="notion.so"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
-bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "notion.so" -c "Google-chrome" -e "google-chrome --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://notion.so"
+for_window [class="Microsoft-edge" title="notion.so"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
+bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "notion.so" -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://notion.so"
 
 for_window [class="copytranslator"] move to scratchpad , sticky enable , resize set 650 250 , move absolute position center
 bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "copytranslator" -t "Copytranslator" -e "copytranslator --no-sandbox"
@@ -480,10 +479,10 @@ bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "copytranslator" -t "
 # i3-gaps
 # --------------------------------------------------------------------------------------------------
 
-# smart_gaps on
-# gaps inner 8
-# gaps outer 2
-# smart_gaps inverse_outer
+smart_gaps on
+gaps inner 8
+gaps outer 2
+smart_gaps inverse_outer
 
 # --------------------------------------------------------------------------------------------------
 # 随机启动设置
@@ -496,11 +495,11 @@ exec --no-startup-id fcitx &
 exec --no-startup-id feh --bg-scale ~/.config/i3/background/1.jpg
 
 # 透明窗口 Compton
-exec --no-startup-id compton --config ~/.config/compton/compton.conf
+# # exec --no-startup-id compton --config ~/.config/compton/compton.conf
 #exec_always --no-startup-id picom
 
 # 透明窗口 Picom
-# exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # xmodmap
 exec --no-startup-id xmodmap ~/.Xmodmap
