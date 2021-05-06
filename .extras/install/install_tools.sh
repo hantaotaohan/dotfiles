@@ -103,7 +103,7 @@ Arcicons() {
     cd "$Bin_dir" || return 
     git clone -q $Git_clone/horst3180/arc-icon-theme --depth 1 arc-icon-theme && cd arc-icon-theme > /dev/null 2>&1
     mkdir -p $HOME/.local/share/icons/
-    cp -r Arc $HOME/.local/share/icons/
+    cp -r Arc/ $HOME/.local/share/icons/
     sudo chmod +x /usr/share/icons/Arc
     cd $HOME
     sudo rm -rf $Bin_dir/arc-icon-theme
@@ -502,9 +502,6 @@ main() {
         arcicons)
             Arcicons
             ;;
-        gtkdarkmode)
-            Gtkdarkmode
-            ;;
         copytranslator)
             Copytranslator
             ;;
@@ -588,7 +585,6 @@ main() {
             Alttab
             Arcthemes
             Arcicons
-            Gtkdarkmode
             I3gaps
             Picom
             Dunst
@@ -620,7 +616,6 @@ main() {
             Alttab
             Arcthemes
             Arcicons
-            Gtkdarkmode
             I3gaps
             Picom
             Dunst
