@@ -671,10 +671,10 @@ augroup END
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 加速语法渲染
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-augroup AutoSyntax
-    autocmd!
-    autocmd Syntax * syn sync clear | syntax sync minlines=10 | syntax sync maxlines=10
-augroup END
+" augroup AutoSyntax
+"     autocmd!
+"     autocmd Syntax * syn sync clear | syntax sync minlines=10 | syntax sync maxlines=10
+" augroup END
 
 
 "=================================================================================================================================
@@ -1176,7 +1176,7 @@ let g:mkdp_echo_preview_url = 1
 let g:mkdp_browserfunc = ''
 
 " 设置markdowncss和highdark paht
-let g:mdpath='/home/taotao/dotfiles/setup/vim_preview_markdown/onedark/'
+let g:mdpath='/home/taotao/.vim/vim_preview_markdown/onedark/'
 
 " use a custom markdown style must be absolute path
 let g:mkdp_markdown_css = g:mdpath . 'onedark.css'
@@ -1240,7 +1240,8 @@ let g:tagbar_map_showproto = "d"
 "=================================================================================================================================
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
-    \ 'ctagsbin' : '$HOME/.vim/plugged/markdown2ctags/markdown2ctags.py', 
+    " \ 'ctagsbin' : '$HOME/.vim/plugged/markdown2ctags/markdown2ctags.py', 
+    \ 'ctagsbin' : '$HOME/.vim/markdown2ctags.py', 
     \ 'ctagsargs' : '-f - --sort=yes --sro=»',
     \ 'kinds' : [
         \ 's:sections',
@@ -1405,7 +1406,7 @@ let g:startify_custom_footer = [
 " let g:zettel_format = "%Y%m%d%H%M"
 let g:zettel_format = "%title"
 let g:zettel_link_format="[%title](%link)"
-let g:zettel_options = [{"template":"$HOME/dotfiles/extras/zettelnew.tpl", "disable_front_matter": 1}]
+let g:zettel_options = [{"template":"$HOME/.vim/zettelnew.tpl", "disable_front_matter": 1}]
 
 "=================================================================================================================================
 " Vimwiki settings
@@ -1434,7 +1435,7 @@ let wiki_1.path_html= '$HOME/blog/public'
 let wiki_1.syntax= 'markdown'
 let wiki_1.ext= '.md'
 let wiki_1.index = 'inbox'
-let wiki_1.custom_wiki2html= '$HOME/dotfiles/extras/wiki2html.sh'
+let wiki_1.custom_wiki2html= '$HOME/.vim/wiki2html.sh'
 let wiki_1.nested_syntaxes= {'python': 'python','bash': 'sh'}
 let wiki_1.html_filename_parameterization= 1
 let wiki_1.vimwiki_auto_chdir= 1
