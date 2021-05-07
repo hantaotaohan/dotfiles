@@ -340,14 +340,15 @@ echo -e "                                                                       
         #--------------------------------------------------------------------------I3WM--
         i3 \
         feh \
-        #mpv \
+        mpv \
+	sxiv \
         rofi \
         alttab \
         zathura \
+        nautilus \
         i3blocks \
         i3lock-fancy \
         deepin-screenshot \
-        nautilus \
         #nautilus --no-install-recommends --no-install-suggests \
         #-------------------------------------------------------------------------SYSTEM--
         xinit \
@@ -391,8 +392,9 @@ echo -e "                                                                       
         neomutt \
         offlineimap \
         #-------------------------------------------------------------------------OTHER--
-        imwheel \
-        yank
+	peek \
+        yank \
+        imwheel
         #------------------------------------------------------------------------IGNORE--
         #pv \
         #rar \
