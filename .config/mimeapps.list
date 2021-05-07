@@ -1,0 +1,30 @@
+[Default Applications]
+text/html=microsoft-edge.desktop
+x-scheme-handler/http=microsoft-edge.desktop
+x-scheme-handler/https=microsoft-edge.desktop
+x-scheme-handler/about=microsoft-edge.desktop
+x-scheme-handler/unknown=microsoft-edge.desktop
+
+[Added Associations]
+image/jpeg=feh.desktop;
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+text/x-python=vim.desktop;
+text/plain=vim.desktop;
+text/x-matlab=vim.desktop;
+image/png=feh.desktop;
+text/csv=vim.desktop;
+text/vnd.graphviz=vim.desktop;
+image/tiff=org.gnome.eog.desktop;feh.desktop;
+application/x-shellscript=vim.desktop;
+application/xml=vim.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
+text/x-c++src=vim.desktop;
+text/x-makefile=vim.desktop;
+text/x-install=vim.desktop;
+text/markdown=vim.desktop;
+text/x-tex=vim.desktop;
+image/gif=sxiv.desktop;
+audio/mpeg=mpv.desktop;
+text/x-authors=vim.desktop;
+inode/directory=ranger.desktop;
+video/x-matroska=mpv.desktop;
