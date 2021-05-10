@@ -268,7 +268,7 @@ Picom() {
     git submodule update --init  > /dev/null 2>&1
     meson --buildtype=release . build -Dwith_docs=false  > /dev/null 2>&1
     ninja -C build  > /dev/null 2>&1
-    sudo install -Dm755 --verbose build/src/picom /usr/local/bin/picom
+    sudo install -Dm755 --verbose build/src/picom /usr/local/bin/picom > /dev/null 2>&1
     row
     echo "Picom Version: "picom --version
     row
