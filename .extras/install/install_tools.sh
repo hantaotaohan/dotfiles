@@ -39,6 +39,7 @@ Options:
         gtkdarkmode         Settings Gtk DarkMode
         i3gaps              Setup I3-Gaps
         picom               Setup Picom
+        dragon              Setup Ranger Plug Dragon
         dunst               Setup Dunst
         offlineimap         Auto Setting Neomutt
         navi                Setup Navi
@@ -502,6 +503,18 @@ Fixi3terminal() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
+Dragon() {
+    git clone -q $Git_clone/mwh/dragon $Bin_dir/dragon && cd $Bin_dir/dragon > /dev/null 2>&1
+    sudo make  > /dev/null 2>&1
+    sudo make install  > /dev/null 2>&1
+    cd $HOME
+    rm -rf $Bin_dir/dragon
+    row
+    dragon --version
+    row
+}
+
 main() {
 
     case "$1" in
@@ -595,7 +608,10 @@ main() {
             ;;
         fixi3terminal)
             Fixi3terminal
-            ;;              
+            ;;
+        dragon)
+            Dragon
+            ;;   
         -a|--all)
             Github_Hosts
             Alttab
@@ -622,6 +638,7 @@ main() {
             Hugo
             Java
             Clone
+            Dragon
             #Ly
             Vmware_Share_Fix
             Github_SSH
@@ -643,6 +660,7 @@ main() {
             Fix_FZF_history
             Fixi3terminal
             #Imagemagick
+            Dragon
             Github_SSH
             SSH_banner
             ;;
