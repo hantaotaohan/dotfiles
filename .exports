@@ -47,15 +47,18 @@ export FZF_DEFAULT_COMMAND="fd --hidden --follow --type f \
   --exclude tmp \
   --exclude var"
 
-export FZF_DEFAULT_OPTS='
+export FZF_DEFAULT_OPTS="
   --color=fg:#abb2bf,bg:#282c34,hl:#e06c75,gutter:#282c34,fg+:#e06c75,bg+:#3d4148,hl+:#98c379
   --color=info:#f7c662,prompt:#e06c75,pointer:#e06c75,marker:#73d0ff,spinner:#73d0ff,header:#6699cc
   --layout=reverse 
   --border
   --inline-info
   --exact
-  --bind '?:toggle-preview,Ctrl-j:down,Ctrl-k:up,J:preview-down,K:preview-up'
-  '
+  --multi
+  --preview-window=hidden
+  --preview 'bat --style=numbers --color=always --line-range :500 {}'
+  --bind '?:toggle-preview'
+  "
   # --prompt="❱❱❱ "  
   # --pointer="●"
   # --marker="❱ "
