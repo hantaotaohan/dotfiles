@@ -49,7 +49,7 @@ export FZF_DEFAULT_COMMAND="fd --hidden --follow --type f \
 
 export FZF_DEFAULT_OPTS='
   --color=fg:#abb2bf,bg:#282c34,hl:#e06c75,gutter:#282c34,fg+:#e06c75,bg+:#3d4148,hl+:#98c379
-  --color=info:#f7c662,prompt:#e06c75,pointer:#e06c75,marker:#98c379,spinner:#f7c662,header:#6699cc
+  --color=info:#f7c662,prompt:#e06c75,pointer:#e06c75,marker:#73d0ff,spinner:#73d0ff,header:#6699cc
   --layout=reverse 
   --border
   --inline-info
