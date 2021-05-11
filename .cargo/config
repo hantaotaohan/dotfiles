@@ -19,4 +19,4 @@ registry = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index"
 
 # rustcc社区
 [source.rustcc]
-registry = "git://crates.rustcc.cn/crates.io-index
+registry = "git://crates.rustcc.cn/crates.io-index"
