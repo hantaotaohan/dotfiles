@@ -55,6 +55,9 @@ export FZF_DEFAULT_OPTS="
   --inline-info
   --exact
   --multi
+  --prompt='Search: '
+  --marker='●'
+  --pointer='➤ '
   --preview-window=hidden
   --preview 'bat --style=numbers --color=always --line-range :500 {}'
   --bind '?:toggle-preview'
