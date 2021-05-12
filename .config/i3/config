@@ -375,6 +375,9 @@ set $base0C #56b6c2
 set $base0D #61afef
 set $base0E #c678dd
 set $base0F #be5046
+set $base0G #50545f
+set $base0H #d2dfea
+set $base0I #7fa1bf
 
 # Basic color configuration using the Base16 variables for windows and borders.
 
@@ -407,11 +410,11 @@ bar {
         separator  $base04
         statusline $base06
         # State             Border  BG      Text
-        focused_workspace   $base00 $base00 $base0D
+        focused_workspace   $base00 $base0G $base0H
         active_workspace    $base00 $base00 $base06
         inactive_workspace  $base00 $base00 $base06
-        urgent_workspace    $base00 $base08 $base00
-        binding_mode        $base00 $base00 $base08
+        urgent_workspace    $base00 $base0I $base00
+        binding_mode        $base00 $base00 $base0I
     }
 }
 
