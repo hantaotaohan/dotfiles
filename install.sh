@@ -506,7 +506,7 @@ echo -e "              ${blue}GEM - Install${reset}                             
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-	wget -P $Bin_dir $Gitraw/vimwiki_markdown.gem > /dev/null 2>&1
+#	wget -P $Bin_dir $Gitraw/vimwiki_markdown.gem > /dev/null 2>&1
 	gemApps=(\
         vimwiki_markdown
         )
@@ -514,10 +514,10 @@ echo -e "                                                                       
         for app in "${gemApps[@]}"
         do
             echo -e "              [*] Installing: $app";
-            gem sources --remove https://rubygems.org/ > /dev/null 2>&1
-            gem sources -a https://gems.ruby-china.com/ > /dev/null 2>&1
-            sudo gem install --local $Bin_dir/$app.gem > /dev/null 2>&1
-            #sudo gem install $app > /dev/null 2>&1
+#            gem sources --remove https://rubygems.org/ > /dev/null 2>&1
+#            gem sources -a https://gems.ruby-china.com/ > /dev/null 2>&1
+#            sudo gem install --local $Bin_dir/$app.gem > /dev/null 2>&1
+            sudo gem install $app > /dev/null 2>&1
             installSuccess $? $app
         done
 }
