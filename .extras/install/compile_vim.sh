@@ -1,8 +1,8 @@
 sudo apt-get remove vim vim-tiny vim-common vim-runtime gvim
 
-git clone https://hub.fastgit.org/vim/vim.git $HOME/desktop/vim
+git clone https://hub.fastgit.org/vim/vim.git $HOME/.bin/vim
 
-cd $HOME/desktop/vim
+cd $HOME/.bin/vim
 
 sudo apt-get remove --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox
 
@@ -28,7 +28,7 @@ sudo make
 sudo make install
 
 cd $HOME
-sudo rm -rf $HOME/desktop/vim
+sudo rm -rf $HOME/.bin/vim
 
 # --with-features=huge：支持最大特性
 # --enable-rubyinterp：打开对 ruby 编写的插件的支持
