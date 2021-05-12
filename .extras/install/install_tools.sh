@@ -506,8 +506,8 @@ Fixi3terminal() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 Dragon() {
     git clone -q $Git_clone/mwh/dragon $Bin_dir/dragon && cd $Bin_dir/dragon > /dev/null 2>&1
-    sudo make  > /dev/null 2>&1
-    sudo make install  > /dev/null 2>&1
+    make  > /dev/null 2>&1
+    make install  > /dev/null 2>&1
     cd $HOME
     rm -rf $Bin_dir/dragon
     row
