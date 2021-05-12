@@ -73,6 +73,7 @@ Dotfiles_copy=( \
         .w3m \
         .pip \
 	.cargo \
+	.config/.gtk-bookmarks \
         .extras/z.lua/z.lua
         )
 
