@@ -1,0 +1,7 @@
+---
+:backtrace: false
+:sources:
+- https://mirrors.tuna.tsinghua.edu.cn/rubygems/
+:update_sources: true
+:verbose: true
+gem: --user-install --no-document
