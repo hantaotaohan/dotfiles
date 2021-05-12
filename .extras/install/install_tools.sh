@@ -57,6 +57,7 @@ Options:
         copytranslator      Setup Copytranslator
         hugo                Setup Hugo
         java                Setup Java
+        fsearch             Setup Fsearch
         clone               Git clone My github Respones
         ly                  Commandline Longin 
         fixvmwareshare      Fix Vmware Share Folads
@@ -512,6 +513,20 @@ Dragon() {
     rm -rf $Bin_dir/dragon
     row
     dragon --version
+    row
+}
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+Fearch() {
+    sudo apt install git build-essential automake autopoint autoconf libtool pkg-config intltool autoconf-archive libpcre3-dev libglib2.0-dev libgtk-3-dev libxml2-utils
+    git clone -q $Git_clone/cboxdoerfer/fsearch.git $Bin_dir/fsearch && cd $Bin_dir/fsearch > /dev/null 2>&1
+    ./autogen.sh
+    ./configure
+    make && sudo make install
+    cd $HOME
+    rm -rf $Bin_dir/fsearch
+    row
+    fsearch --version
     row
 }
 
