@@ -36,7 +36,7 @@ Options:
         alttab              Same Windows Alt Tab
         arcthemes           Gtk themes
         arcicons            Gtk themes Icons
-        gtkdarkmode         Settings Gtk DarkMode
+        githubssh           Settings Github.com SSH Key
         i3gaps              Setup I3-Gaps
         picom               Setup Picom
         dragon              Setup Ranger Plug Dragon
