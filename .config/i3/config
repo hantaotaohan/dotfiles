@@ -457,10 +457,10 @@ bindsym Mod4+Return bar hidden_state toggle
 # --------------------------------------------------------------------------------------------------
 
 for_window [class="Alacritty" title="scratchpad"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
-bindsym Control+1 exec --no-startup-id raiseorlaunch -r -t "scratchpad" -e "--no-startup-id alacritty -d 100 30 -t scratchpad -e vim $HOME/.scratchpad"
+bindsym Control+1 exec --no-startup-id raiseorlaunch -r -t "scratchpad" -e "--no-startup-id alacritty -t scratchpad -e vim $HOME/.scratchpad"
 
 for_window [class="Alacritty" title="neomutt"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
-bindsym Control+2 exec --no-startup-id raiseorlaunch -r -t "neomutt" -e "--no-startup-id alacritty -d 100 30 -t neomutt -e neomutt"
+bindsym Control+2 exec --no-startup-id raiseorlaunch -r -t "neomutt" -e "--no-startup-id alacritty -t neomutt -e neomutt"
 
 for_window [class="Microsoft-edge" title="notion.so"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
 bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "notion.so" -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://notion.so"
