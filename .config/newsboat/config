@@ -27,6 +27,7 @@ bind-key N prev-unread
 bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
+unbind-key q
 
 color listnormal color7 default
 color listfocus color5 color0 bold
