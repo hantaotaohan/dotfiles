@@ -11,17 +11,17 @@ sudo apt-get install libncurses5-dev python-dev python3-dev libwxgtk3.0-dev liba
 sudo ./configure --with-features=huge \
 	--enable-multibyte \
 	--enable-fontset \
-	#--enable-rubyinterp \
-	#--enable-pythoninterp \
-	#--enable-python3interp \
-	#--enable-luainterp \
-	#--enable-cscope \
-	#--enable-gui=auto \
-	# --enable-perlinterp \
-	#--with-python-config-dir=$(python2-config --configdir) \
-	#--with-python3-config-dir=$(python3-config --configdir) \
+	--enable-rubyinterp \
+	--enable-pythoninterp \
+	--enable-python3interp \
+	--enable-luainterp \
+	--enable-cscope \
+	--enable-gui=auto \
+	--enable-perlinterp \
+	--with-python-config-dir=$(python2-config --configdir) \
+	--with-python3-config-dir=$(python3-config --configdir) \
 	--with-compiledby="TaoTao" \
-	# --enable-largefile \
+	--enable-largefile \
 	--prefix=/usr/local/vim
 
 sudo make
