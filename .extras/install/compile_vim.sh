@@ -1,3 +1,5 @@
+#!/bin/bash
+
 git clone https://hub.fastgit.org/vim/vim.git $HOME/.bin/vim
 
 cd $HOME/.bin/vim
