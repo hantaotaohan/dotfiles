@@ -18,7 +18,7 @@ sudo ./configure --with-features=huge \
 	--enable-cscope \
 	--enable-gui=auto \
 	# --enable-perlinterp \
-	--with-python-config-dir=$(python2-config --configdir) \
+	#--with-python-config-dir=$(python2-config --configdir) \
 	--with-python3-config-dir=$(python3-config --configdir) \
 	--with-compiledby="TaoTao" \
 	# --enable-largefile \
