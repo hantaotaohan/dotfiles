@@ -12,7 +12,7 @@ sudo ./configure --with-features=huge \
 	--enable-multibyte \
 	--enable-fontset \
 	--enable-rubyinterp \
-	--enable-pythoninterp \
+	#--enable-pythoninterp \
 	--enable-python3interp \
 	--enable-luainterp \
 	--enable-cscope \
