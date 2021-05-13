@@ -3,7 +3,7 @@
 git clone https://hub.fastgit.org/vim/vim.git $HOME/.bin/vim
 cd $HOME/.bin/vim
 sudo apt-get remove --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox
-sudo apt-get install libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+sudo apt-get install libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
 sudo ./configure --with-features=huge \
 	--enable-multibyte \
 	--enable-fontset \
@@ -12,7 +12,7 @@ sudo ./configure --with-features=huge \
 	--enable-python3interp \
 	--enable-luainterp \
 	--enable-cscope \
-	--enable-gui=gtk2 \
+	--enable-gui=auto \
 	--enable-perlinterp \
 	--enable-fontset \
 	--with-python-config-dir=$(python2-config --configdir) \
