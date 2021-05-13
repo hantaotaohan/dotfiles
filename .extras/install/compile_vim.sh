@@ -1,13 +1,9 @@
 #!/bin/bash
 
 git clone https://hub.fastgit.org/vim/vim.git $HOME/.bin/vim
-
 cd $HOME/.bin/vim
-
 sudo apt-get remove --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox
-
-sudo apt-get install libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev ncurses* 
-
+sudo apt-get install libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
 sudo ./configure --with-features=huge \
 	--enable-multibyte \
 	--enable-fontset \
@@ -22,11 +18,9 @@ sudo ./configure --with-features=huge \
 	--with-python3-config-dir=$(python3-config --configdir) \
 	--with-compiledby="TaoTao" \
 	--enable-largefile \
-	--prefix=/usr/local/vim
-
+	--prefix=/usr/local
 sudo make
 sudo make install
-
 cd $HOME
 sudo rm -rf $HOME/.bin/vim
 
