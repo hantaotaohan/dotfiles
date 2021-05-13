@@ -165,6 +165,7 @@ bind browser                    j       previous-page
 
 # Scrolling
 bind browser,pager,index,attach \;q     exit
+bind browser,pager,index,attach q       noop
 bind browser,pager,index,attach \CF     next-page
 bind browser,pager,index,attach \CB     previous-page # webview for URL
 bind browser,pager,index,attach \Cu     half-up
