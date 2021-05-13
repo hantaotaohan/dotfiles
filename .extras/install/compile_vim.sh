@@ -12,12 +12,16 @@ sudo ./configure --with-features=huge \
 	--enable-python3interp \
 	--enable-luainterp \
 	--enable-cscope \
-	--enable-gui=auto \
+	--enable-gui=gtk2 \
 	--enable-perlinterp \
+	--enable-fontset \
 	--with-python-config-dir=$(python2-config --configdir) \
 	--with-python3-config-dir=$(python3-config --configdir) \
 	--with-compiledby="TaoTao" \
 	--enable-largefile \
+	--with-x \
+	--enable-xim \
+	--enable-fontset \
 	--prefix=/usr/local
 sudo make
 sudo make install
