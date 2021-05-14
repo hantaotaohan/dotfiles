@@ -62,6 +62,7 @@ Options:
         ly                  Commandline Longin 
         fixvmwareshare      Fix Vmware Share Folads
         fixi3terminal       Fix I3wm Terminal Alacritty suppose
+        fixnautilus         Fix Nautilus Views
                                     
     -------------------------------------------------------------------------------
     
@@ -530,6 +531,31 @@ Fearch() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
+Fixnautilus() {
+    # 隐藏边栏
+    # gsettings set org.gnome.nautilus.window-state start-with-sidebar false
+    # 显示边栏
+    # gsettings set org.gnome.nautilus.window-state start-with-sidebar true
+    
+    # 输入栏
+    # gsettings set org.gnome.nautilus.preferences always-use-location-entry true
+    # 路径栏
+    # gsettings set org.gnome.nautilus.preferences always-use-location-entry false
+    
+    # 删除文件和清空回收站有确认框
+    # gsettings set org.gnome.nautilus.preferences confirm-trash true
+    # 删除文件和清空回收站没有有确认框
+    # gsettings set org.gnome.nautilus.preferences confirm-trash false
+    
+    # 可供选择的值有“list-view”(列表视图)和“icon-view”(图标视图)
+    gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+    
+    row
+    echo "fix Nautilus Done!"
+    row
+}
+
 main() {
 
     case "$1" in
@@ -627,6 +653,9 @@ main() {
         dragon)
             Dragon
             ;;   
+        fixnautilus)
+            Fixnautilus
+            ;;   
         -a|--all)
             Github_Hosts
             Alttab
@@ -658,6 +687,7 @@ main() {
             Vmware_Share_Fix
             Github_SSH
             SSH_banner
+            Fixnautilus
             ;;
         -m|--minimize)
             Github_Hosts
@@ -678,6 +708,7 @@ main() {
             Dragon
             Github_SSH
             SSH_banner
+            Fixnautilus
             ;;
         -s|--server)
             Github_Hosts
