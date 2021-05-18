@@ -63,6 +63,7 @@ Options:
         fixvmwareshare      Fix Vmware Share Folads
         fixi3terminal       Fix I3wm Terminal Alacritty suppose
         fixnautilus         Fix Nautilus Views
+        fzfopen             Setup FZF-Open of the New Alacritty
                                     
     -------------------------------------------------------------------------------
     
@@ -556,6 +557,17 @@ Fixnautilus() {
     row
 }
 
+Fzfopen() {
+    git clone -q $Git_clone/hantaotaohan/fzf-open.git $Bin_dir/fzf-open > /dev/null 2>&1
+    cd fzf-open
+    sudo ./install.sh
+    cd ..
+    rm -rf fzf-open
+    row
+    echo "FZF-OPEN Install Done!"
+    row
+}
+
 main() {
 
     case "$1" in
@@ -655,7 +667,10 @@ main() {
             ;;   
         fixnautilus)
             Fixnautilus
-            ;;   
+            ;;
+        fzfopen)
+            Fzfopen
+            ;;
         -a|--all)
             Github_Hosts
             Alttab
@@ -688,6 +703,7 @@ main() {
             Github_SSH
             SSH_banner
             Fixnautilus
+            Fzfopen
             ;;
         -m|--minimize)
             Github_Hosts
@@ -709,6 +725,7 @@ main() {
             Github_SSH
             SSH_banner
             Fixnautilus
+            Fzfopen
             ;;
         -s|--server)
             Github_Hosts
