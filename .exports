@@ -84,8 +84,8 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 # Navi.
 # ------------------------------------------------------------------------------------------------------------
 # # Navi fzf预览设置
-export NAVI_FZF_OVERRIDES='--height 30 --margin 1,1 --inline-info --border --preview-window=top:3:wrap'
-export NAVI_FZF_OVERRIDES_VAR='--height 3'
+export NAVI_FZF_OVERRIDES='--color=fg:#d0d0d0,bg:#282c34,hl:#5f87af --color=fg+:#d0d0d0,bg+:#3d4148,hl+:#5fd7ff --color=info:#e5c07b,prompt:#5f87af,pointer:#e06c75 --color=marker:#5fd7ff,spinner:#e06c75,header:#87afaf --height 30 --margin 1,1 --inline-info --border --preview-window=top:3:wrap'
+export NAVI_FZF_OVERRIDES_VAR='--color=fg:#d0d0d0,bg:#282c34,hl:#5f87af --color=fg+:#d0d0d0,bg+:#3d4148,hl+:#5fd7ff --color=info:#e5c07b,prompt:#5f87af,pointer:#e06c75 --color=marker:#5fd7ff,spinner:#e06c75,header:#87afaf --height 20 --margin 1,1 --inline-info --border --preview-window=top'
 export NAVI_TAG_COLOR=1
 export NAVI_COMMENT_COLOR=5
 export NAVI_SNIPPET_COLOR=2
