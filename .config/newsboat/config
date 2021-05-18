@@ -5,7 +5,8 @@ reload-threads 4
 download-retries 2
 download-timeout 10
 download-full-page yes
-html-renderer "w3m -dump -T text/html"
+html-renderer "rdrview -B w3m"
+# html-renderer "w3m -dump -T text/html"
 
 # external-url-viewer "urlscan -dc -r 'google-chrome {}'"
 
