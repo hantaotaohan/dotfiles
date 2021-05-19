@@ -52,7 +52,7 @@ set message_cachedir    =       ~/mail/cache/bodies
 set certificate_file    =       ~/mail/certificates
 
 # Etc
-set mailcap_path 	    =       "$HOME/.config/neomutt/mailcap"
+set mailcap_path        =       "$HOME/.config/neomutt/mailcap"
 set alias_file          =       "$HOME/.config/neomutt/neomutt.alias"
 set mail_check          =       2 
 set check_new           =       yes                         # 查是否有新邮件
