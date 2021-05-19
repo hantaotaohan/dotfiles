@@ -2,7 +2,7 @@
 # 更改键盘灵敏度
 # xset r rate 200 60
 
-xset r rate 180 60
+xset r rate 190 60
 
 # disable key repeat for keys that are not (or not heavily) used for navigation
 
@@ -85,7 +85,7 @@ xset -r 62	# Shift Right
 xset -r 37	# Ctrl Left
 xset -r 115	# Logo Left (-> Option)
 xset -r 64	# Alt Left (-> Command)
-xset -r 65	# Space
+# xset -r 65	# Space
 xset -r 113	# Alt Right (-> Command)
 xset -r 116	# Logo Right (-> Option)
 xset -r 117	# Menu (-> International)
