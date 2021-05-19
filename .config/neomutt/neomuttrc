@@ -52,6 +52,7 @@ set message_cachedir    =       ~/mail/cache/bodies
 set certificate_file    =       ~/mail/certificates
 
 # Etc
+set mailcap_path 	    =       "$HOME/.config/neomutt/mailcap"
 set alias_file          =       "$HOME/.config/neomutt/neomutt.alias"
 set mail_check          =       2 
 set check_new           =       yes                         # 查是否有新邮件
@@ -409,8 +410,8 @@ macro index,pager gi "<change-folder>=bteb/INBOX<enter>"
 macro index,pager go "<change-folder>=live/Inbox<enter>"
 
 # 自动同步邮箱设置
-timeout-hook 'exec sync-mailbox'
-startup-hook 'exec sync-mailbox'
-shutdown-hook 'exec sync-mailbox'
+#timeout-hook 'exec sync-mailbox'
+#startup-hook 'exec sync-mailbox'
+#shutdown-hook 'exec sync-mailbox'
 
 
