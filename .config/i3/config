@@ -459,8 +459,8 @@ bindsym Mod4+Return bar hidden_state toggle
 for_window [class="Alacritty" title="scratchpad"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
 bindsym Control+1 exec --no-startup-id raiseorlaunch -r -t "scratchpad" -e "--no-startup-id alacritty -t scratchpad -e vim $HOME/.scratchpad"
 
-for_window [class="Alacritty" title="neomutt"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
-bindsym Control+2 exec --no-startup-id raiseorlaunch -r -t "neomutt" -e "--no-startup-id alacritty -t neomutt -e neomutt"
+for_window [class="Alacritty" title="neomuttt"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
+bindsym Control+2 exec --no-startup-id raiseorlaunch -r -t "neomuttt" -e "--no-startup-id alacritty -t neomuttt -e neomutt"
 
 for_window [class="Microsoft-edge" title="notion.so"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
 bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "notion.so" -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://notion.so"
@@ -473,6 +473,9 @@ bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "copytranslator" -t "
 
 #for_window [class="Crow Translate"] move to scratchpad , sticky enable , resize set 748 380 , move absolute position center
 #bindsym Mod4+4 exec --no-startup-id raiseorlaunch -r -t "Crow Translate" -e "crow"
+
+for_window [class="fzfopen" title="fzfopen"] move to scratchpad , sticky enable ,  resize set 650 250 , move absolute position center
+bindsym $mod+o exec --no-startup-id raiseorlaunch -r -t "fzfopen" -e "--no-startup-id alacritty  -t fzfopen -e fzf-open" 
 
 # Scratchpad config
 #for_window [class="Zathura"] move to scratchpad, scratchpad
