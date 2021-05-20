@@ -460,6 +460,7 @@ echo -e "                                                                       
         i3ipc \
         keyring \
         raiseorlaunch \
+	popupdict \
         pyvirtualdisplay 
         #mdv \
         #sncli \
