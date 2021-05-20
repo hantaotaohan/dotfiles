@@ -2,6 +2,13 @@
 # 使Tab自动完成而不考虑文件名大小写
 set completion-ignore-case on
 
+# Keep terminal quiet and clean.
+set bell-style none
+set echo-control-characters off
+
+# Don't automatically match files beginning with dot.
+set match-hidden-files on
+
 # List all matches in case multiple possible completions are possible
 # 列出所有匹配项，以防有多个可能的完成
 set show-all-if-ambiguous on
@@ -45,6 +52,12 @@ set skip-completed-text on
 set input-meta on
 set output-meta on
 set convert-meta off
+
+# TAB cycles forward through completion choices. Press an arrow key to choose a
+# selection.
+# Shift-TAB cycles backward through completion choices. Press an arrow key to
+# choose a selection
+TAB: menu-complete
 
 # Use Alt/Meta + Delete to delete the preceding word
 # 使用Alt/Meta+Delete删除前面的单词
