@@ -42,7 +42,7 @@ alias rm='rm -i'
 alias rmf='rm -rf'
 
 # Tmux
-alias tm='test -z "$TMUX" && (tmux attach || tmux new-session -s "TaoTao")'
+# alias tm='test -z "$TMUX" && (tmux attach || tmux new-session -s "TaoTao")'
 
 # Shortcuts
 alias cl='clear'
