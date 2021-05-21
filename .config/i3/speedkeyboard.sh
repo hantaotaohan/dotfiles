@@ -1,8 +1,9 @@
+# auto repeat delay:  660    repeat rate:  25
 # Keystrokes rate and frequency to 300ms and 30Hz
 # 更改键盘灵敏度
 # xset r rate 200 60
 
-xset r rate 190 60
+xset r rate 200 60
 
 # disable key repeat for keys that are not (or not heavily) used for navigation
 
@@ -60,8 +61,8 @@ xset -r 66	# Caps Lock
 # xset -r 44	# J
 # xset -r 45	# K
 # xset -r 46	# L
-xset -r 47	# ;
-xset -r 48	# '
+# xset -r 47	# ;
+# xset -r 48	# '
 xset -r 36	# Return
 
 xset -r 50	# Shift Left
