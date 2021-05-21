@@ -1,109 +1,109 @@
 [alias]
 
-                                    a                    = add
-                                    aa                   = add -A
-                                    b                    = branch
-                                    ba                   = branch -a
-                                    c                    = commit -m
-                                    ca                   = commit -am
-                                    co                   = checkout
-                                    lg                   = log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
-                                    lga                  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date = relative
-                                    s                    = status -sb
-                                    sclone               = clone --depth 1
-                                    undo                 = reset HEAD~1
-                                    d                    = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-                                    di                   = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
-                                    dv                   = difftool --tool=vimdiff -y
-                                    dvs                  = difftool --staged --tool=vimdiff -y
-                                    dvc                  = difftool --cached --tool=vimdiff -y
-                                    ds                   = diff --stat
-                                    w                    = whatchanged
+a                    = add
+aa                   = add -A
+b                    = branch
+ba                   = branch -a
+c                    = commit -m
+ca                   = commit -am
+co                   = checkout
+lg                   = log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+lga                  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date = relative
+s                    = status -sb
+sclone               = clone --depth 1
+undo                 = reset HEAD~1
+d                    = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+di                   = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+dv                   = difftool --tool=vimdiff -y
+dvs                  = difftool --staged --tool=vimdiff -y
+dvc                  = difftool --cached --tool=vimdiff -y
+ds                   = diff --stat
+w                    = whatchanged
 
 [user]
 
-                                    email                = hantaotaohan@gmail.com 
-                                    name                 = hantaotaohan
+email                = hantaotaohan@gmail.com 
+name                 = hantaotaohan
 
 [core]
 
-                                    editor               = vim
-                                    autocrlf             = false
-                                    pager                = diff-so-fancy | less --tabs=4 -RFX
+editor               = vim
+autocrlf             = false
+pager                = diff-so-fancy | less --tabs=4 -RFX
 
 [merge]
 
-                                    tool                 = vimdiff
+tool                 = vimdiff
 
 [http]
 
-                                    sslVerify            = false
+sslVerify            = false
 
 [color]
 
-                                    ui                   = always
-                                    diff                 = always
+ui                   = always
+diff                 = always
 
 [color "diff"]
 
-                                    meta                 = 11 bold
-                                    commit               = cyan bold
-                                    frag                 = magenta bold
-                                    old                  = red bold
-                                    new                  = green bold
-                                    whitespace           = red reverse
+meta                 = 11 bold
+commit               = cyan bold
+frag                 = magenta bold
+old                  = red bold
+new                  = green bold
+whitespace           = red reverse
 
 [color "diff-highlight"]
 
-                                    oldNormal            = red bold
-                                    oldHighlight         = 0 bold 1
-                                    newNormal            = green bold
-                                    newHighlight         = 0 bold 2
+oldNormal            = red bold
+oldHighlight         = 0 bold 1
+newNormal            = green bold
+newHighlight         = 0 bold 2
 
 [color "branch"]
 
-                                    current              = yellow reverse
-                                    local                = yellow
-                                    remote               = green
+current              = yellow reverse
+local                = yellow
+remote               = green
 
 [color "status"]
 
-                                    added                = green
-                                    changed              = yellow
-                                    untracked            = red
+added                = green
+changed              = yellow
+untracked            = red
 
 [pager]
 
-                                    diff                 = diff-so-fancy | less --tabs=4 -RFX
-                                    show                 = diff-so-fancy | less --tabs=4 -RFX
+diff                 = diff-so-fancy | less --tabs=4 -RFX
+show                 = diff-so-fancy | less --tabs=4 -RFX
 
 [diff-so-fancy]
 
-                                    stripLeadingSymbols  = false
-                                    changeHunkIndicators = true
-                                    markEmptyLines       = true
-                                    useUnicodeRuler      = true
+stripLeadingSymbols  = false
+changeHunkIndicators = true
+markEmptyLines       = true
+useUnicodeRuler      = true
 
 [url "git@github.com:"]
 
-                                    insteadOf            = "gh:"
-                                    pushInsteadOf        = "github:"
-                                    pushInsteadOf        = "git://github.com/"
+insteadOf            = "gh:"
+pushInsteadOf        = "github:"
+pushInsteadOf        = "git://github.com/"
 
 [url "git://github.com/"]
 
-                                    insteadOf            = "github:"
+insteadOf            = "github:"
 
 [url "git@gist.github.com:"]
 
-                                    insteadOf            = "gst:"
-                                    pushInsteadOf        = "gist:"
-                                    pushInsteadOf        = "git://gist.github.com/"
+insteadOf            = "gst:"
+pushInsteadOf        = "gist:"
+pushInsteadOf        = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
 
-                                    insteadOf            = "gist:"
+insteadOf            = "gist:"
 
 [init]
 
-                                    defaultBranch        = main
+defaultBranch        = main
