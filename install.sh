@@ -461,6 +461,7 @@ echo -e "                                                                       
         keyring \
         raiseorlaunch \
 	popupdict \
+	you-get \
         pyvirtualdisplay 
         #mdv \
         #sncli \
