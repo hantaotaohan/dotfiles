@@ -561,6 +561,7 @@ Fzfopen() {
     git clone -q $Git_clone/hantaotaohan/fzf-open.git $Bin_dir/fzf-open > /dev/null 2>&1
     cd fzf-open
     sudo ./install.sh
+    sed '/^Terminal=/d;s/^Exec=/Exec=alacritty -e /' /usr/share/applications/ranger.desktop > ~/.local/share/applications/ranger.desktop
     cd ..
     rm -rf fzf-open
     row
