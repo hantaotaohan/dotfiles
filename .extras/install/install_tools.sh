@@ -64,6 +64,7 @@ Options:
         fixi3terminal       Fix I3wm Terminal Alacritty suppose
         fixnautilus         Fix Nautilus Views
         fzfopen             Setup FZF-Open of the New Alacritty
+        i3blocks            Setup I3blocks
                                     
     -------------------------------------------------------------------------------
     
@@ -559,13 +560,27 @@ Fixnautilus() {
 
 Fzfopen() {
     git clone -q $Git_clone/hantaotaohan/fzf-open.git $Bin_dir/fzf-open > /dev/null 2>&1
-    cd fzf-open
+    cd $Bin_dir/fzf-open
     sudo ./install.sh
     sed '/^Terminal=/d;s/^Exec=/Exec=alacritty -e /' /usr/share/applications/ranger.desktop > ~/.local/share/applications/ranger.desktop
     cd ..
     rm -rf fzf-open
     row
     echo "FZF-OPEN Install Done!"
+    row
+}
+
+I3blocks() {
+    git clone -q $Git_clone/vivien/i3blocks $Bin_dir/i3blocks > /dev/null 2>&1
+    cd $Bin_dir/i3blocks
+    ./autogen.sh
+    ./configure
+    make
+    sudo make install
+    cd ..
+    rm -rf i3blocks
+    row
+    i3blocks -V
     row
 }
 
@@ -672,6 +687,9 @@ main() {
         fzfopen)
             Fzfopen
             ;;
+        i3blocks)
+            I3blocks
+            ;;
         -a|--all)
             Github_Hosts
             Alttab
@@ -705,6 +723,7 @@ main() {
             SSH_banner
             Fixnautilus
             Fzfopen
+            I3blocks
             ;;
         -m|--minimize)
             Github_Hosts
@@ -727,6 +746,7 @@ main() {
             SSH_banner
             Fixnautilus
             Fzfopen
+            I3blocks
             ;;
         -s|--server)
             Github_Hosts
