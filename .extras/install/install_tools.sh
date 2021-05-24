@@ -573,10 +573,10 @@ Fzfopen() {
 I3blocks() {
     git clone -q $Git_clone/vivien/i3blocks $Bin_dir/i3blocks > /dev/null 2>&1
     cd $Bin_dir/i3blocks
-    ./autogen.sh
-    ./configure
-    make
-    sudo make install
+    ./autogen.sh > /dev/null 2>&1
+    ./configure > /dev/null 2>&1
+    make > /dev/null 2>&1
+    sudo make install > /dev/null 2>&1
     cd ..
     rm -rf i3blocks
     row
