@@ -51,6 +51,7 @@ bindsym --whole-window $mod+button2 kill
 
 # 关闭窗口快捷键 
 bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # 开启Terminal快捷键 
 bindsym $mod+Return exec --no-startup-id alacritty
