@@ -65,6 +65,7 @@ Options:
         fixnautilus         Fix Nautilus Views
         fzfopen             Setup FZF-Open of the New Alacritty
         i3blocks            Setup I3blocks
+        yarn                Setup Yarn
                                     
     -------------------------------------------------------------------------------
     
@@ -584,6 +585,15 @@ I3blocks() {
     row
 }
 
+Yarn() {
+    sudo apt remove yarn
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    sudo apt update -y -qq && sudo apt install -y -qq yarn
+    row
+    yarn -v
+    row
+}
 main() {
 
     case "$1" in
@@ -690,6 +700,9 @@ main() {
         i3blocks)
             I3blocks
             ;;
+        yarn)
+            Yarn
+            ;;
         -a|--all)
             Github_Hosts
             Alttab
@@ -724,6 +737,7 @@ main() {
             Fixnautilus
             Fzfopen
             I3blocks
+            Yarn
             ;;
         -m|--minimize)
             Github_Hosts
