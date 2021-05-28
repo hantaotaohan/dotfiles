@@ -109,6 +109,10 @@ bindsym $mod+Shift+e exec --no-startup-id i3-nagbar -t warning -f "pango:Saber 1
 
 # bar toggle settings
 bindsym $mod+w bar mode toggle bar-1
+
+# auto windows size for in workspaces "10"
+bindsym $mod+Shift+a exec --no-startup-id $HOME/autowindowssize.py
+
 # --------------------------------------------------------------------------------------------------
 # 窗口设置
 # --------------------------------------------------------------------------------------------------
@@ -538,4 +542,4 @@ exec --no-startup-id imwheel
 # Alttab
 # exec --no-startup-id "alttab -mk Control_L -s 1 -t 500x200 -d 1 -font xft:Saber:style=Bold:size=10 -i 30x30"
 # exec --no-startup-id "alttab -s 1 -t 500x200 -d 1 -font xft:Saber:style=Bold:size=10 -i 30x30"
-exec --no-startup-id "alttab -s 1 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 20x20"
+exec --no-startup-id "alttab -s 1 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 1x1"
