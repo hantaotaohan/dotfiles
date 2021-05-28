@@ -480,7 +480,7 @@ bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "copytranslator" -t "
 #bindsym Mod4+4 exec --no-startup-id raiseorlaunch -r -t "Crow Translate" -e "crow"
 
 for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
-bindsym $mod+o exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e fzf-open
+bindsym $mod+o exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
 
 # Scratchpad config
 #for_window [class="Zathura"] move to scratchpad, scratchpad
