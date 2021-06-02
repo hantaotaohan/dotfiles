@@ -111,7 +111,7 @@ bindsym $mod+Shift+e exec --no-startup-id i3-nagbar -t warning -f "pango:Saber 1
 bindsym $mod+w bar mode toggle bar-1
 
 # auto windows size for in workspaces "10"
-bindsym $mod+Shift+a exec --no-startup-id $HOME/autowindowssize.py
+bindsym $mod+Shift+a exec --no-startup-id $HOME/.config/i3/autowindowssize.py
 
 # --------------------------------------------------------------------------------------------------
 # 窗口设置
