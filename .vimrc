@@ -1115,6 +1115,13 @@ function! s:nerdtreeToggle()
     endif
 endfunction
 
+if (has("win32") || has("win64") || has("win95") || has("win16"))
+    " let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'horizontal'  }  }
+    let g:fzf_layout = { 'down': '40%'  }
+    let g:fzf_preview_window = []
+    exec 'cd ' . fnameescape('$HOME\Desktop')
+endif
+
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 let g:NERDTreeShowBookmarks=1                                             " 显示书签
 let g:NERDTreeChDirMode=0                                                 " 是否改变PWD目录路径
