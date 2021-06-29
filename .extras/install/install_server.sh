@@ -767,15 +767,15 @@ main() {
             gemInstall
             LocalDpkg
             LoaclConfig
-            installFonts
+            #installFonts
             #Make_apps
             sudo apt-get -y -qq --purge remove byobu gnome-terminal yelp > /dev/null 2>&1
             sudo apt autoremove -y -qq > /dev/null 2>&1
             sudo apt-get clean > /dev/null 2>&1
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
             cd $HOME
-            bash $HOME/debian/.extras/install/install_tools.sh
-            cd $HOME
+            #bash $HOME/debian/.extras/install/install_tools.sh
+            #cd $HOME
             bash
             ;;
         -[dD])
