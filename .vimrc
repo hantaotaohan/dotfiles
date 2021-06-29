@@ -1104,26 +1104,26 @@ endif
 "=================================================================================================================================
 " NERDTree 插件配置
 "=================================================================================================================================
-nnoremap <silent><localleader>e :call <SID>nerdtreeToggle()<CR>                   " ;e开启关闭NERDTree
-inoremap <silent><localleader>e <Esc> :call <SID>nerdtreeToggle()<CR>             " ;e开启关闭NERDTree
+nnoremap <silent><localleader>e :call <SID>NERDTreetoggle()<CR> 
+inoremap <silent><localleader>e <Esc> :call <SID>nerdtreeToggle()<CR> 
 
-function! s:nerdtreeToggle()
-    if &filetype == 'nerdtree'
-        NERDTreeToggle
-    else
-        NERDTreeFind
-    endif
-endfunction
+function! s:NERDTreetoggle()                                    
+    if &filetype == 'nerdtree'                                  
+        NERDTreeToggle %p:h                                     
+    else                                                        
+        NERDTreeFind                                            
+    endif                                                       
+endfunction                                                     
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 let g:NERDTreeShowBookmarks=1                                             " 显示书签
-let g:NERDTreeChDirMode=0                                                 " 是否改变PWD目录路径
+let g:NERDTreeChDirMode=2                                                 " 是否改变PWD目录路径
 let g:NERDTreeQuitOnOpen=0                                                " 打开后是否关闭NT窗口
 let g:NERDTreeMinimalUI=1                                                 " 不显示帮助面板
 let g:NERDTreeWinSize=35                                                  " 窗口宽度
 let g:NERDTreeShowHidden=1                                                " 是否显示隐藏文件
 let g:NERDTreeIgnore=['\.pyc','\~$','\.swp','_gsdata_']                   " 过滤所有指定的文件和文件夹
-let g:NERDTreeShowLineNumbers=1                                           " 是否显示行号
+let g:NERDTreeShowLineNumbers=0                                           " 是否显示行号
 let g:NERDTreeDirArrowExpandable = '▸'                                    " 设置树的显示图标
 let g:NERDTreeDirArrowCollapsible = '▾'                                   " 设置树的显示图标
 let g:NERDTreeUseTCD=1                                                    " 打开Tcd模式
