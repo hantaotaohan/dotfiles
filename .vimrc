@@ -1216,7 +1216,7 @@ nnoremap <localleader>t :TagbarToggle<CR>                                 " ;t�
 inoremap <localleader>t <Esc>:TagbarToggle<CR>                            " ;t打开关闭Tagbar
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 let g:tagbar_autofocus = 1                                                " 焦点自动聚焦到Tagbar
-let g:tagbar_autoclose = 0
+let g:tagbar_autoclose = 1
 let g:tagbar_autopreview = 0
 let g:tagbar_no_autocmds = 1
 let g:tagbar_jump_lazy_scroll = 1
