@@ -2194,8 +2194,8 @@ endif
 let g:floaterm_keymap_toggle = '<Localleader>c'
 let g:floaterm_wintype = 'split'
 let g:floaterm_height = 0.3
-let g:floaterm_autoclose = 1
-let g:floaterm_autohide = v:false
+let g:floaterm_autoclose = 2
+let g:floaterm_autohide = 0
 
 "=================================================================================================================================
 " Coc.nvim settings
