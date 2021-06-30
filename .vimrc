@@ -1118,7 +1118,7 @@ endfunction
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 let g:NERDTreeShowBookmarks=1                                             " 显示书签
 let g:NERDTreeChDirMode=2                                                 " 是否改变PWD目录路径
-let g:NERDTreeQuitOnOpen=0                                                " 打开后是否关闭NT窗口
+let g:NERDTreeQuitOnOpen=1                                                " 打开后是否关闭NT窗口
 let g:NERDTreeMinimalUI=1                                                 " 不显示帮助面板
 let g:NERDTreeWinSize=35                                                  " 窗口宽度
 let g:NERDTreeShowHidden=1                                                " 是否显示隐藏文件
@@ -2194,7 +2194,7 @@ endif
 let g:floaterm_keymap_toggle = '<Localleader>c'
 let g:floaterm_wintype = 'split'
 let g:floaterm_height = 0.3
-let g:floaterm_autoclose = 2
+let g:floaterm_autoclose = 1
 let g:floaterm_autohide = v:false
 
 "=================================================================================================================================
