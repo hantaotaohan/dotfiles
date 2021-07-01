@@ -461,6 +461,7 @@ echo -e "                                                                       
         #keyring \
         #raiseorlaunch \
 	popupdict \
+	flake8 \
 	#you-get \
         pyvirtualdisplay 
         #mdv \
