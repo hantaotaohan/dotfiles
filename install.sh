@@ -458,6 +458,7 @@ echo -e "                                                                       
 
 	pipApps=( \
         i3ipc \
+	flake8 \
         keyring \
         raiseorlaunch \
 	popupdict \
