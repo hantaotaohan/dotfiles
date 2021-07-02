@@ -1117,6 +1117,11 @@ function! s:NERDTreetoggle()
     endif                                                       
 endfunction                                                     
 
+augroup filetype_nerdtree
+    autocmd!
+    autocmd BufEnter,FileType nerdtree  nnoremap <LocalLeader>s <nop>
+augroup END
+
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 let g:NERDTreeShowBookmarks=1                                             " 显示书签
 let g:NERDTreeChDirMode=2                                                 " 是否改变PWD目录路径
