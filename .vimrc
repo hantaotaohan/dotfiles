@@ -1410,18 +1410,27 @@ let g:startify_custom_footer = [
 " Vimwiki Zettel settings
 "=================================================================================================================================
 " let g:zettel_format = "%Y%m%d%H%M"
-let g:zettel_format = "%title"
-let g:zettel_link_format="[%title](%link)"
-let g:zettel_options = [{"template":"$HOME/.vim/zettelnew.tpl", "disable_front_matter": 1}]
+" let g:zettel_format = "%Y-%m-%d"
+let g:zettel_format = "%title""
+let g:zettel_link_format="[[%title]]"
+" let g:zettel_link_format="[%title](%link)"
+" let g:zettel_options = [{"template":"$HOME/.vim/zettelnew.tpl", "disable_front_matter": 1}]
+" let g:zettel_options = [{"disable_front_matter": 1}]
+let g:zettel_fzf_command = "rg --column --ignore-case --no-heading --color=always"
+" let g:zettel_fzf_options = ['--exact', '--tiebreak=end']
 
 "=================================================================================================================================
 " Vimwiki settings
 "=================================================================================================================================
 nmap <Leader>ww <Plug>VimwikiIndex
-autocmd FileType vimwiki nnoremap <leader>wv :VimwikiUISelect<CR>
-autocmd FileType vimwiki nnoremap <leader>ws :call VWS()<CR>
-autocmd FileType vimwiki nnoremap <leader>wf :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
-autocmd FileType vimwiki nnoremap <silent><localleader>p :call GitPush()<cr>
+autocmd FileType vimwiki nnoremap <silent><localleader>f :call VWS()<CR>
+autocmd FileType vimwiki nnoremap <silent><localleader>b :VimwikiBacklinks<cr>
+autocmd FileType vimwiki nnoremap <silent><localleader>j :lnext<cr>
+autocmd FileType vimwiki nnoremap <silent><localleader>k :lprevious<cr>
+autocmd FileType vimwiki nnoremap <silent><localleader>ss :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
+" autocmd FileType vimwiki nnoremap <leader>wv :VimwikiUISelect<CR>
+" autocmd FileType vimwiki nnoremap <silent><localleader>p :call GitPush()<cr>
+" autocmd FileType vimwiki nnoremap <silent><localleader>bl :ZettelBackLinks<cr>
 
 function! VWS()
     execute ":VimwikiSearch " . input("VimwikiSearch:")
@@ -1429,71 +1438,78 @@ function! VWS()
 endfunction
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-let wiki_1 = {}
-let wiki_1.name= '<Hugo   >'
-let wiki_1.auto_export= 1
-let wiki_1.auto_tags= 1
-let wiki_1.auto_generate_tags= 1
-let wiki_1.auto_generate_links= 1
-let wiki_1.automatic_nested_syntaxes= 1
-let wiki_1.path= '$HOME/blog/content/posts/'
-let wiki_1.path_html= '$HOME/blog/public'
-let wiki_1.syntax= 'markdown'
-let wiki_1.ext= '.md'
-let wiki_1.index = 'inbox'
-let wiki_1.custom_wiki2html= '$HOME/.vim/wiki2html.sh'
-let wiki_1.nested_syntaxes= {'python': 'python','bash': 'sh'}
-let wiki_1.html_filename_parameterization= 1
-let wiki_1.vimwiki_auto_chdir= 1
+" let wiki_1 = {}
+" let wiki_1.name= '<Hugo   >'
+" let wiki_1.auto_export= 1
+" let wiki_1.auto_tags= 1
+" let wiki_1.auto_generate_tags= 1
+" let wiki_1.auto_generate_links= 1
+" let wiki_1.automatic_nested_syntaxes= 1
+" let wiki_1.path= '$HOME/blog/content/posts/'
+" let wiki_1.path_html= '$HOME/blog/public'
+" let wiki_1.syntax= 'markdown'
+" let wiki_1.ext= '.md'
+" let wiki_1.index = 'inbox'
+" let wiki_1.custom_wiki2html= '$HOME/.vim/wiki2html.sh'
+" let wiki_1.nested_syntaxes= {'python': 'python','bash': 'sh'}
+" let wiki_1.html_filename_parameterization= 1
+" let wiki_1.vimwiki_auto_chdir= 1
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-let wiki_2 = {}
-let wiki_2.name= '<Vimwiki>'
-let wiki_2.auto_export= 1
-let wiki_2.auto_tags= 1
-let wiki_2.auto_generate_tags= 0
-let wiki_2.auto_generate_links= 0
-let wiki_2.automatic_nested_syntaxes= 1
-let wiki_2.path= '$HOME/vimwiki/src'
-let wiki_2.path_html= '$HOME/vimwiki/docs/'
-let wiki_2.template_path= '$HOME/vimwiki/templates/'
-let wiki_2.template_default= 'default'
-let wiki_2.template_ext= '.tpl'
-let wiki_2.css_file= '$HOME/vimwiki/templates/style.css'
-let wiki_2.syntax= 'markdown'
-let wiki_2.ext= '.md'
-let wiki_2.custom_wiki2html= 'vimwiki_markdown'
-let wiki_2.nested_syntaxes= {'python': 'python','bash': 'sh'}
-let wiki_2.html_filename_parameterization= 1
-let wiki_1.vimwiki_auto_chdir= 1
+" let wiki_2 = {}
+" let wiki_2.name= '<Vimwiki>'
+" let wiki_2.auto_export= 1
+" let wiki_2.auto_tags= 1
+" let wiki_2.auto_generate_tags= 0
+" let wiki_2.auto_generate_links= 0
+" let wiki_2.automatic_nested_syntaxes= 1
+" let wiki_2.path= '$HOME/vimwiki/src'
+" let wiki_2.path_html= '$HOME/vimwiki/docs/'
+" let wiki_2.template_path= '$HOME/vimwiki/templates/'
+" let wiki_2.template_default= 'default'
+" let wiki_2.template_ext= '.tpl'
+" let wiki_2.css_file= '$HOME/vimwiki/templates/style.css'
+" let wiki_2.syntax= 'markdown'
+" let wiki_2.ext= '.md'
+" let wiki_2.custom_wiki2html= 'vimwiki_markdown'
+" let wiki_2.nested_syntaxes= {'python': 'python','bash': 'sh'}
+" let wiki_2.html_filename_parameterization= 1
+" let wiki_2.vimwiki_auto_chdir= 1
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+let wiki_3 = {}
+let wiki_3.name= '<Logseq>'
+let wiki_3.path= '$HOME/logseq/pages/'
+let wiki_3.index = 'contents'
+let wiki_3.ext= '.md'
+let wiki_3.vimwiki_auto_chdir= 2
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-let g:vimwiki_list = [wiki_1, wiki_2]
+let g:vimwiki_list = [wiki_3]
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-"
+
 let g:vimwiki_CJK_length = 1
 let g:vimwiki_hl_cb_checked = 2
 let g:vimwiki_global_ext = 1 " make sure vimwiki doesn't own all .md files
 let g:vimwiki_use_mouse = 1
 let g:vimwiki_conceallevel=1
-let g:vimwiki_markdown_link_ext = 0
+let g:vimwiki_markdown_link_ext = 1
 let g:list_margin=0
-let g:vimwiki_user_htmls = '404.html,search.html,books.html,todo,html,contact.html,tags.html,inbox.html'
-let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1,nav,body,aside'
-let g:vimwiki_tag_format = {'pre': 'tags:.*', 'pre_mark': '\[', 'post_mark': '\]', 'sep': ','}
+" let g:vimwiki_user_htmls = '404.html,search.html,books.html,todo,html,contact.html,tags.html,inbox.html'
+" let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1,nav,body,aside'
+" let g:vimwiki_tag_format = {'pre': 'tags:.*', 'pre_mark': '\[', 'post_mark': '\]', 'sep': ','}
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 自动插入YAML 并自动改写filename
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-autocmd BufEnter    ~/blog/content/posts/*.md :2d
-autocmd BufEnter    ~/blog/content/posts/*.md :1r! echo title: %:t:r
-autocmd BufNewFile ~/blog/content/posts/*.md :0r !echo ---
-autocmd BufNewFile ~/blog/content/posts/*.md :r! echo title: %:t:r
-autocmd BufNewFile ~/blog/content/posts/*.md :r! echo "date: `date +'\%Y-\%m-\%dT\%H:\%M:\%S+08:00'`"
-autocmd BufNewFile ~/blog/content/posts/*.md :r! echo draft: false
-autocmd BufNewFile ~/blog/content/posts/*.md :r! echo categories: []
-autocmd BufNewFile ~/blog/content/posts/*.md :r! echo tags: []
-autocmd BufNewFile ~/blog/content/posts/*.md :r! echo ---
-autocmd BufNewFile ~/blog/content/posts/*.md :$r !echo   
+" autocmd BufEnter    ~/blog/content/posts/*.md :2d
+" autocmd BufEnter    ~/blog/content/posts/*.md :1r! echo title: %:t:r
+" autocmd BufNewFile ~/blog/content/posts/*.md :0r !echo ---
+" autocmd BufNewFile ~/blog/content/posts/*.md :r! echo title: %:t:r
+" autocmd BufNewFile ~/blog/content/posts/*.md :r! echo "date: `date +'\%Y-\%m-\%dT\%H:\%M:\%S+08:00'`"
+" autocmd BufNewFile ~/blog/content/posts/*.md :r! echo draft: false
+" autocmd BufNewFile ~/blog/content/posts/*.md :r! echo categories: []
+" autocmd BufNewFile ~/blog/content/posts/*.md :r! echo tags: []
+" autocmd BufNewFile ~/blog/content/posts/*.md :r! echo ---
+" autocmd BufNewFile ~/blog/content/posts/*.md :$r !echo   
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 改变Shift+Enter映射
@@ -1522,14 +1538,14 @@ hi VimwikiBold term=reverse cterm=underline ctermfg=204 gui=underline guifg=#E06
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 自动添加Backlinks
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-autocmd BufWritePost ~/blog/content/posts/*.md if bufname() !='inbox.md' | call s:backlinks()
-function! s:backlinks()
-    let fw = search('Backlinks')
-    let bf = bufname()
-    if bf != "inbox.md" && fw == 0
-        exec ":ZettelBackLinks"
-    endif
-endfunction
+" autocmd BufWritePost ~/blog/content/posts/*.md if bufname() !='inbox.md' | call s:backlinks()
+" function! s:backlinks()
+"     let fw = search('Backlinks')
+"     let bf = bufname()
+"     if bf != "inbox.md" && fw == 0
+"         exec ":ZettelBackLinks"
+"     endif
+" endfunction
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 方案三(异步) - 最终方案
@@ -1547,8 +1563,9 @@ function! GitPull()
 endfunc
 
 function! GitCommit()
-	call s:backlinks()
+	" call s:backlinks()
 	exec "w"
+    exec ":cd %:h"
 	exec ":AsyncRun git add --all"
 	exec ":AsyncRun git add -m\"Update `whoami` at `hostname` in `date +%Y-%m-%d` `date +%H:%M:%S`\""
     let g:asyncrun_exit = "echom 'Git Add and Commit Done'"
@@ -1556,6 +1573,8 @@ endfunc
 
 function! GitPush()
     " 上传到云端
+	exec "w"
+    exec ":cd %:h"
     call system("git add --all")
 	call system("git commit -m \"Update `whoami` at `hostname` in `date +%Y-%m-%d` `date +%H:%M:%S`\"")
 	exec ":AsyncRun -mode=hide git push origin master"
@@ -1563,18 +1582,25 @@ function! GitPush()
     let g:asyncrun_exit = "echom 'Done'"
 endfunc
 
+" augroup Github_Hogo
+" 	autocmd!
+" 	autocmd BufReadPost $HOME/blog/content/posts/inbox.md call GitPull()
+" 	autocmd BufWritePost $HOME/blog/content/posts/*.md call GitCommit()
+" 	autocmd VimLeavePre $HOME/blog/content/posts/inbox.md call GitPush() 
+" augroup END
+
+" augroup Github_Vimwiki
+" 	autocmd!
+" 	autocmd BufReadPost $HOME/vimwiki/src/index.md call GitPull()
+" 	autocmd BufWritePost $HOME/vimwiki/src/*.md call GitCommit()
+" 	autocmd VimLeavePre $HOME/vimwiki/src/index.md call GitPush() 
+" augroup END
+
 augroup Github_Hogo
 	autocmd!
-	autocmd BufReadPost $HOME/blog/content/posts/inbox.md call GitPull()
-	autocmd BufWritePost $HOME/blog/content/posts/*.md call GitCommit()
-	autocmd VimLeavePre $HOME/blog/content/posts/inbox.md call GitPush() 
-augroup END
-
-augroup Github_Vimwiki
-	autocmd!
-	autocmd BufReadPost $HOME/vimwiki/src/index.md call GitPull()
-	autocmd BufWritePost $HOME/vimwiki/src/*.md call GitCommit()
-	autocmd VimLeavePre $HOME/vimwiki/src/index.md call GitPush() 
+	autocmd BufReadPost $HOME/logseq/pages/contents.md call GitPull()
+	autocmd BufWritePost $HOME/logseq/pages/.md call GitCommit()
+	autocmd VimLeavePre $HOME/logseq/pages/contents.md call GitPush() 
 augroup END
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
@@ -1616,27 +1642,27 @@ endtry
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 使用wd删除markdown时自动删除相对应不使用的HTML文件
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-function! VimwikiDeleteClean()
-    let htmlfile = expand('%:r') . '.html'
-    lcd ${HOME}/vimwiki/docs/
-    call delete(htmlfile)
-    lcd %:p:h
-    call vimwiki#base#delete_link()
-endfunction
-autocmd filetype vimwiki nnoremap <buffer> <leader>wd :call VimwikiDeleteClean()<CR>
+" function! VimwikiDeleteClean()
+"     let htmlfile = expand('%:r') . '.html'
+"     lcd ${HOME}/vimwiki/docs/
+"     call delete(htmlfile)
+"     lcd %:p:h
+"     call vimwiki#base#delete_link()
+" endfunction
+" autocmd filetype vimwiki nnoremap <buffer> <leader>wd :call VimwikiDeleteClean()<CR>
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 预览Hugo
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-function! PreviewHugo()
-    let filename = expand('%:t:r')
-    exec ":AsyncStop"
-    exec ":cd $HOME/blog"
-    exec ":AsyncRun -mode=hide hugo server"
-    exec ":AsyncRun -mode=hide google-chrome http://localhost:1313/" . filename
-    echom 'Hugo Server Done! You Can Preview Hugo ...'
-endfunc
-autocmd FileType vimwiki nnoremap <F12> :call PreviewHugo()<cr>
+" function! PreviewHugo()
+"     let filename = expand('%:t:r')
+"     exec ":AsyncStop"
+"     exec ":cd $HOME/blog"
+"     exec ":AsyncRun -mode=hide hugo server"
+"     exec ":AsyncRun -mode=hide google-chrome http://localhost:1313/" . filename
+"     echom 'Hugo Server Done! You Can Preview Hugo ...'
+" endfunc
+" autocmd FileType vimwiki nnoremap <F12> :call PreviewHugo()<cr>
 
 
 "=================================================================================================================================
