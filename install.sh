@@ -345,6 +345,7 @@ echo -e "                                                                       
         mpv \
 	sxiv \
         rofi \
+	picom \
         alttab \
         zathura \
         nautilus \
