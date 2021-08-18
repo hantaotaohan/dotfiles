@@ -387,6 +387,7 @@ echo -e "                                                                       
         newsboat \
         python3-pip \
         inotify-tools \
+	universal-ctags \
         silversearcher-ag \
         #--------------------------------------------------------------------------EDIT--
         vim \
