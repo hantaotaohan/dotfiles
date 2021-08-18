@@ -356,8 +356,10 @@ echo -e "                                                                       
         xinit \
         lua5.2 \
         ruby-full \
+	xserver-xorg \
         openssh-server \
         openssh-client \
+	xserver-xorg-core \
         #--------------------------------------------------------------------------FCITX--
         fcitx \
         fcitx-pinyin \
@@ -406,7 +408,6 @@ echo -e "                                                                       
         #tree \
         #axel \
         #unrar \
-        #xinit \
         #aria2 \
         #ffmpeg \
         #xinput \
