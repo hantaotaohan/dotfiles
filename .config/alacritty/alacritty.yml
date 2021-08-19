@@ -29,6 +29,8 @@ window:
     # Window decorations
     # One of 'full' or 'none'
     decorations: full
+    
+    startup_mode: Windowed
 
 scrolling:
     # Size of scrollback buffer (lines)
@@ -37,14 +39,9 @@ scrolling:
     # Number of lines that are scrolled at once
     # Faux multiplier is the same, but for commands like man and less
     multiplier: 1
-    #faux_multiplier: 3
 
     # Scroll to bottom when new text is printed
     # auto_scroll: false
-
-# Size of a single tab character
-# Has to be the same as defined in the terminfo 'it' value
-tabspace: 4
 
 # Font configuration
 font:
@@ -86,12 +83,6 @@ mouse:
 
     # Make mouse invisible while typing
     hide_when_typing: true
-
-    # Makes links clickable while holding Shift
-    url:
-        launcher: xdg-open
-        modifiers: Shift
-
 
 selection:
     semantic_escape_chars: ",│`|:\"' ()[]{}<>"
