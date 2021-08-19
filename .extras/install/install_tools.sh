@@ -705,29 +705,29 @@ main() {
             ;;
         -a|--all)
             Github_Hosts
-            Alttab
+            #Alttab
             Arcthemes
             Arcicons
-            I3gaps
-            Picom
-            Dunst
+            #I3gaps
+            #Picom
+            #Dunst
             Offlineimap
             Navi
-            Ctags
+            #Ctags
             Rdrview
             Fixrofiicons
-            Fix_FZF_history
-            Fixi3terminal
+            #Fix_FZF_history
+            #Fixi3terminal
             #Imagemagick
-            Jupyter
-            Nodejs
-            SSR
-            Calibre
-            Foliate
-            Crossover
+            #Jupyter
+            #Nodejs
+            #SSR
+            #Calibre
+            #Foliate
+            #Crossover
             Copytranslator
-            Hugo
-            Java
+            #Hugo
+            #Java
             Clone
             Dragon
             #Ly
@@ -736,8 +736,8 @@ main() {
             SSH_banner
             Fixnautilus
             Fzfopen
-            I3blocks
-            Yarn
+            #I3blocks
+            #Yarn
             ;;
         -m|--minimize)
             Github_Hosts
