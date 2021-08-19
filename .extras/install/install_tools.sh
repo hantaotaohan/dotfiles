@@ -476,9 +476,10 @@ Fix_FZF_history() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Clone() {
-    git clone git@github.com:hantaotaohan/vimwiki.git $HOME/vimwiki
-    git clone git@github.com:hantaotaohan/hantaotaohan.github.io.git $HOME/blog
-    git clone git@github.com:hantaotaohan/books.git $HOME/books
+    #git clone git@github.com:hantaotaohan/vimwiki.git $HOME/vimwiki
+    #git clone git@github.com:hantaotaohan/hantaotaohan.github.io.git $HOME/blog
+    #git clone git@github.com:hantaotaohan/books.git $HOME/books
+    git clone git@github.com:hantaotaohan/logseq.git $HOME/logseq
     row
     echo "Git Clone Done!"
     row
