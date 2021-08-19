@@ -548,12 +548,12 @@ echo -e "                                                                       
 
 	wget -P $Bin_dir $Gitraw/fd.deb > /dev/null 2>&1
 	wget -P $Bin_dir $Gitraw/bat.deb > /dev/null 2>&1
-	wget -P $Bin_dir $Gitraw/Alacritty.deb > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/Alacritty_0.10.0-debian.deb > /dev/null 2>&1
 	
 	dpkgApps=( \
         fd.deb \
         bat.deb \
-        Alacritty.deb
+        Alacritty_0.10.0-debian.deb
         )
 
     for app in "${dpkgApps[@]}"
