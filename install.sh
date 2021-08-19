@@ -357,10 +357,8 @@ echo -e "                                                                       
         xinit \
         lua5.2 \
         ruby-full \
-	xserver-xorg \
         openssh-server \
         openssh-client \
-	xserver-xorg-core \
         #--------------------------------------------------------------------------FCITX--
         fcitx \
         fcitx-pinyin \
