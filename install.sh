@@ -346,6 +346,7 @@ echo -e "                                                                       
 	sxiv \
         rofi \
 	picom \
+	dunst \
         alttab \
         zathura \
         nautilus \
