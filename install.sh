@@ -342,12 +342,12 @@ echo -e "                                                                       
         #--------------------------------------------------------------------------I3WM--
         i3 \
         feh \
-        mpv \
+	mpv \
 	sxiv \
-        rofi \
+	rofi \
 	picom \
 	dunst \
-        alttab \
+	alttab \
         zathura \
         nautilus \
         i3blocks \
