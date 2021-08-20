@@ -285,8 +285,8 @@ sudo timedatectl set-timezone "Asia/Shanghai"
 echo -e "              ${green}[+]Set TimeZone is Successful${reset}\n"
 
 # Fix Sanbox
-echo 'kernel.unprivileged_userns_clone=1' | sudo tee /etc/sysctl.d/userns.conf > /dev/null 2>&1
-echo -e "              ${green}[+]Fix Error:chrome-sandbox is Successful${reset}\n"
+# echo 'kernel.unprivileged_userns_clone=1' | sudo tee /etc/sysctl.d/userns.conf > /dev/null 2>&1
+# echo -e "              ${green}[+]Fix Error:chrome-sandbox is Successful${reset}\n"
 }
 
 #----------------------------------------------------------------------------------------#
@@ -367,7 +367,7 @@ echo -e "                                                                       
         #language-pack-zh-hans \
         #language-pack-gnome-zh-hans \
         #-------------------------------------------------------------------------VMWARE--
-        open-vm-tools \
+        #open-vm-tools \
         open-vm-tools-desktop \
         #--------------------------------------------------------------------------TOOLS--
         jq \
@@ -549,12 +549,12 @@ echo -e "                                                                       
 
 	wget -P $Bin_dir $Gitraw/fd.deb > /dev/null 2>&1
 	wget -P $Bin_dir $Gitraw/bat.deb > /dev/null 2>&1
-	wget -P $Bin_dir $Gitraw/Alacritty_0.10.0-debian.deb > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/Alacritty.deb > /dev/null 2>&1
 	
 	dpkgApps=( \
         fd.deb \
         bat.deb \
-        Alacritty_0.10.0-debian.deb
+        Alacritty.deb
         )
 
     for app in "${dpkgApps[@]}"
