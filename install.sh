@@ -349,20 +349,22 @@ echo -e "                                                                       
 	dunst \
 	alttab \
         zathura \
-        nautilus \
+        #nautilus \
         i3blocks \
         i3lock-fancy \
         deepin-screenshot \
-        #nautilus --no-install-recommends --no-install-suggests \
+        --no-install-recommends --no-install-suggests nautilus \
         #-------------------------------------------------------------------------SYSTEM--
-        xinit \
+        #xinit \
+	--no-install-recommends --no-install-suggests xinit \
         lua5.2 \
         ruby-full \
         openssh-server \
         openssh-client \
         #--------------------------------------------------------------------------FCITX--
-        fcitx \
-        fcitx-pinyin \
+        #fcitx \
+        #fcitx-pinyin \
+	fcitx5 fcitx5-pinyin fcitx5-module-cloudpinyin 、
         #-----------------------------------------------------------------------LANGUAGE--
         #language-pack-zh-hans \
         #language-pack-gnome-zh-hans \
