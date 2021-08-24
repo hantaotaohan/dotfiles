@@ -364,7 +364,7 @@ echo -e "                                                                       
         #--------------------------------------------------------------------------FCITX--
         #fcitx \
         #fcitx-pinyin \
-	fcitx5 fcitx5-pinyin fcitx5-module-cloudpinyin 、
+	fcitx5 fcitx5-pinyin fcitx5-module-cloudpinyin \
         #-----------------------------------------------------------------------LANGUAGE--
         #language-pack-zh-hans \
         #language-pack-gnome-zh-hans \
