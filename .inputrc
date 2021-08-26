@@ -57,7 +57,7 @@ set convert-meta off
 # selection.
 # Shift-TAB cycles backward through completion choices. Press an arrow key to
 # choose a selection
-TAB: menu-complete
+# TAB: menu-complete
 
 # Use Alt/Meta + Delete to delete the preceding word
 # 使用Alt/Meta+Delete删除前面的单词
