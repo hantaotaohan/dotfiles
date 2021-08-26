@@ -41,7 +41,7 @@ full_text=
 [separator]
 full_text=Bookmarks 
 color=#abb2bf
-background=#50545f
+#background=#50545f
 min_width=100
 
 [vim]
@@ -75,7 +75,7 @@ command=i3-msg exec "microsoft-edge --force-dark-mode --enable-features=OverlayS
 [separator]
 full_text=System 
 color=#abb2bf
-background=#50545f
+#background=#50545f
 min_width=100
 
 [memory]
