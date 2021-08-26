@@ -493,10 +493,10 @@ bindsym $mod+o exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen"
 # i3-gaps
 # --------------------------------------------------------------------------------------------------
 
-smart_gaps on
-gaps inner 8
-gaps outer 2
-smart_gaps inverse_outer
+# smart_gaps on
+# gaps inner 8
+# gaps outer 2
+# smart_gaps inverse_outer
 
 # --------------------------------------------------------------------------------------------------
 # 随机启动设置
@@ -519,7 +519,7 @@ exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id xmodmap ~/.Xmodmap
 
 # 网络图标
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 
 # 加载键盘加速脚本
 exec --no-startup-id bash ~/.config/i3/speedkeyboard.sh
