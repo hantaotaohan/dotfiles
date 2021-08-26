@@ -711,7 +711,7 @@ main() {
             Arcicons
             #I3gaps
             #Picom
-            #Dunst
+            Dunst
             Offlineimap
             Navi
             #Ctags
