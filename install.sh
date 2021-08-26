@@ -349,7 +349,6 @@ echo -e "                                                                       
 	dunst \
 	alttab \
         zathura \
-        #nautilus \
         i3blocks \
         i3lock-fancy \
         deepin-screenshot \
@@ -362,9 +361,8 @@ echo -e "                                                                       
         openssh-server \
         openssh-client \
         #--------------------------------------------------------------------------FCITX--
-        #fcitx \
-        #fcitx-pinyin \
-	fcitx5 fcitx5-pinyin fcitx5-module-cloudpinyin \
+        fcitx \
+        fcitx-pinyin \
         #-----------------------------------------------------------------------LANGUAGE--
         #language-pack-zh-hans \
         #language-pack-gnome-zh-hans \
@@ -551,12 +549,12 @@ echo -e "                                                                       
 
 	wget -P $Bin_dir $Gitraw/fd.deb > /dev/null 2>&1
 	wget -P $Bin_dir $Gitraw/bat.deb > /dev/null 2>&1
-	wget -P $Bin_dir $Gitraw/Alacritty.deb > /dev/null 2>&1
+	wget -P $Bin_dir $Gitraw/Alacritty_0.9.0.deb > /dev/null 2>&1
 	
 	dpkgApps=( \
         fd.deb \
         bat.deb \
-        Alacritty.deb
+        Alacritty_0.9.0.deb
         )
 
     for app in "${dpkgApps[@]}"
