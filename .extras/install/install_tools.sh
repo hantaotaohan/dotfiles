@@ -729,11 +729,11 @@ main() {
             Copytranslator
             #Hugo
             #Java
+            Github_SSH
             Clone
             Dragon
             #Ly
             Vmware_Share_Fix
-            Github_SSH
             SSH_banner
             Fixnautilus
             Fzfopen
