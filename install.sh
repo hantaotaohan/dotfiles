@@ -345,9 +345,9 @@ echo -e "                                                                       
 	mpv \
 	sxiv \
 	rofi \
-	picom \
-	dunst \
-	alttab \
+	#picom \
+	#dunst \
+	#alttab \
         zathura \
         i3blocks \
         i3lock-fancy \
@@ -357,7 +357,7 @@ echo -e "                                                                       
         #xinit \
 	--no-install-recommends --no-install-suggests xinit \
         lua5.2 \
-        ruby-full \
+        #ruby-full \
         openssh-server \
         openssh-client \
         #--------------------------------------------------------------------------FCITX--
@@ -397,7 +397,7 @@ echo -e "                                                                       
         neomutt \
         offlineimap \
         #-------------------------------------------------------------------------OTHER--
-	peek \
+	#peek \
         yank \
         imwheel
         #------------------------------------------------------------------------IGNORE--
@@ -647,7 +647,7 @@ echo -e "                                                                       
 	wget -P $Bin_dir $Gitraw/diff-so-fancy > /dev/null 2>&1
 	
     if [ ! -f "/usr/local/bin/diff-so-fancy" ]; then
-        sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
+		sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
         sudo chmod 777 /usr/local/bin/diff-so-fancy
     else
         sudo rm -rf /usr/local/bin/diff-so-fancy
@@ -767,12 +767,12 @@ main() {
             sysUpdate
             aptInstall
             pipInstall
-            gemInstall
+            #gemInstall
             LocalDpkg
             LoaclConfig
             installFonts
             #Make_apps
-            sudo apt-get -y -qq --purge remove byobu gnome-terminal yelp > /dev/null 2>&1
+            sudo apt-get -y -qq --purge remove byobu gnome-terminal yelp rxvt-unicode > /dev/null 2>&1
             sudo apt autoremove -y -qq > /dev/null 2>&1
             sudo apt-get clean > /dev/null 2>&1
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
