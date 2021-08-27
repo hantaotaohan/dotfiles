@@ -226,7 +226,7 @@ assign [class="Microsoft-edge"]                        $workspace10
 # --------------------------------------------------------------------------------------------------
 # 设定那些程序为浮动窗口
 # --------------------------------------------------------------------------------------------------
-for_window [class="Nautilus"]                       floating enable , resize set 1200 800 , move position center , sticky enable , border normal 0 , title_format "<b>%title</b>"
+for_window [class="Nautilus"]                       floating enable , resize set 1200 800 , move position center , sticky enable
 for_window [window_role="app"]                      floating enable , resize set 1200 800 , move position center , sticky enable , border normal 0 , title_format "<b>%title</b>"
 for_window [class="Vmware"]                         floating enable , resize set 1200 800 , move position center , sticky enable
 for_window [class="feh"]                            floating enable
@@ -483,7 +483,7 @@ bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "copytranslator" -t "
 #bindsym Mod4+4 exec --no-startup-id raiseorlaunch -r -t "Crow Translate" -e "crow"
 
 for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
-bindsym $mod+o exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
+bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
 
 # Scratchpad config
 #for_window [class="Zathura"] move to scratchpad, scratchpad
