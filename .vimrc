@@ -1104,117 +1104,123 @@ if exists('g:plugs["vim-airline"]')
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 endif
 
-
 "=================================================================================================================================
 " NERDTree 插件配置
 "=================================================================================================================================
-nnoremap <silent><localleader>e :call <SID>NERDTreetoggle()<CR> 
-inoremap <silent><localleader>e <Esc> :call <SID>nerdtreeToggle()<CR> 
+if exists('g:plugs["nerdtree"]')
+    nnoremap <silent><localleader>e :call <SID>NERDTreetoggle()<CR> 
+    inoremap <silent><localleader>e <Esc> :call <SID>nerdtreeToggle()<CR> 
 
-function! s:NERDTreetoggle()                                    
-    if &filetype == 'nerdtree'                                  
-        NERDTreeToggle %p:h                                     
-    else                                                        
-        NERDTreeFind                                            
-    endif                                                       
-endfunction                                                     
+    function! s:NERDTreetoggle()                                    
+        if &filetype == 'nerdtree'                                  
+            NERDTreeToggle %p:h                                     
+        else                                                        
+            NERDTreeFind                                            
+        endif                                                       
+    endfunction                                                     
 
-augroup filetype_nerdtree
-    autocmd!
-    autocmd BufEnter,FileType nerdtree  nnoremap <LocalLeader>s <nop>
-augroup END
+    augroup filetype_nerdtree
+        autocmd!
+        autocmd BufEnter,FileType nerdtree  nnoremap <LocalLeader>s <nop>
+    augroup END
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-let g:NERDTreeShowBookmarks=1                                             " 显示书签
-let g:NERDTreeChDirMode=2                                                 " 是否改变PWD目录路径
-let g:NERDTreeQuitOnOpen=1                                                " 打开后是否关闭NT窗口
-let g:NERDTreeMinimalUI=1                                                 " 不显示帮助面板
-let g:NERDTreeWinSize=35                                                  " 窗口宽度
-let g:NERDTreeShowHidden=1                                                " 是否显示隐藏文件
-let g:NERDTreeIgnore=['\.pyc','\~$','\.swp','_gsdata_']                   " 过滤所有指定的文件和文件夹
-let g:NERDTreeShowLineNumbers=0                                           " 是否显示行号
-let g:NERDTreeDirArrowExpandable = '▸'                                    " 设置树的显示图标
-let g:NERDTreeDirArrowCollapsible = '▾'                                   " 设置树的显示图标
-let g:NERDTreeUseTCD=1                                                    " 打开Tcd模式
-" let NERDTreeSortOrder=[1]                                                " 排序设置0 or 1
+    let g:NERDTreeShowBookmarks=1                                             " 显示书签
+    let g:NERDTreeChDirMode=2                                                 " 是否改变PWD目录路径
+    let g:NERDTreeQuitOnOpen=1                                                " 打开后是否关闭NT窗口
+    let g:NERDTreeMinimalUI=1                                                 " 不显示帮助面板
+    let g:NERDTreeWinSize=35                                                  " 窗口宽度
+    let g:NERDTreeShowHidden=1                                                " 是否显示隐藏文件
+    let g:NERDTreeIgnore=['\.pyc','\~$','\.swp','_gsdata_']                   " 过滤所有指定的文件和文件夹
+    let g:NERDTreeShowLineNumbers=0                                           " 是否显示行号
+    let g:NERDTreeDirArrowExpandable = '▸'                                    " 设置树的显示图标
+    let g:NERDTreeDirArrowCollapsible = '▾'                                   " 设置树的显示图标
+    let g:NERDTreeUseTCD=1                                                    " 打开Tcd模式
+    " let NERDTreeSortOrder=[1]                                                " 排序设置0 or 1
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 "当NERDTree为剩下的唯一窗口时自动关闭
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+endif
 
 "=================================================================================================================================
 " MarkdownPreview插件配置
 "=================================================================================================================================
-" MarkdownPreviewToggle
-nmap <Leader>e <Plug>MarkdownPreviewToggle
+if exists('g:plugs["markdown-preview.nvim"]')
 
-" 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开  markdown 文件的时候打开一次
-" default: 0
-let g:mkdp_auto_start = 0
+    " MarkdownPreviewToggle
+    nmap <Leader>e <Plug>MarkdownPreviewToggle
 
-" 在切换 buffer 的时候自动关闭预览窗口，设置为 0 则在切换 buffer 的时候不  自动关闭预览窗口
-" default: 1
-let g:mkdp_auto_close = 1
+    " 设置为 1 可以在打开 markdown 文件的时候自动打开浏览器预览，只在打开  markdown 文件的时候打开一次
+    " default: 0
+    let g:mkdp_auto_start = 0
 
-" 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时  更新预览
-" default: 0
-let g:mkdp_refresh_slow = 0
+    " 在切换 buffer 的时候自动关闭预览窗口，设置为 0 则在切换 buffer 的时候不  自动关闭预览窗口
+    " default: 1
+    let g:mkdp_auto_close = 1
 
-" 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown  文件可以使用改命令
-" default: 0
-let g:mkdp_command_for_global = 1
+    " 设置为 1 则只有在保存文件，或退出插入模式的时候更新预览，默认为 0，实时  更新预览
+    " default: 0
+    let g:mkdp_refresh_slow = 0
 
-" 设置为 1, 在使用的网络中的其他计算机也能访问预览页面  默认只监听本地（127.0.0.1），其他计算机不能访问
-" default: 0
-let g:mkdp_open_to_the_world = 1
+    " 设置为 1 则所有文件都可以使用 MarkdownPreview 进行预览，默认只有 markdown  文件可以使用改命令
+    " default: 0
+    let g:mkdp_command_for_global = 1
 
-" 使用自定义IP打开预览页面在远程vim中工作并在本地浏览器上预览时很有用
-" default empty
-let g:mkdp_open_ip = ''
+    " 设置为 1, 在使用的网络中的其他计算机也能访问预览页面  默认只监听本地（127.0.0.1），其他计算机不能访问
+    " default: 0
+    let g:mkdp_open_to_the_world = 1
 
-" 指定浏览器以打开预览页面
-" default: ''
-let g:mkdp_browser = ''
+    " 使用自定义IP打开预览页面在远程vim中工作并在本地浏览器上预览时很有用
+    " default empty
+    let g:mkdp_open_ip = ''
 
-" 设置为1时，打开预览页时在命令行中回显预览页网址
-" default is 0
-let g:mkdp_echo_preview_url = 1
+    " 指定浏览器以打开预览页面
+    " default: ''
+    let g:mkdp_browser = ''
 
-" 自定义vim函数名称以打开预览页面 此函数将接收url作为参数
-" default is empty
-let g:mkdp_browserfunc = ''
+    " 设置为1时，打开预览页时在命令行中回显预览页网址
+    " default is 0
+    let g:mkdp_echo_preview_url = 1
 
-" 设置markdowncss和highdark paht
-let g:mdpath='/home/taotao/.vim/vim_preview_markdown/onedark/'
+    " 自定义vim函数名称以打开预览页面 此函数将接收url作为参数
+    " default is empty
+    let g:mkdp_browserfunc = ''
 
-" use a custom markdown style must be absolute path
-let g:mkdp_markdown_css = g:mdpath . 'onedark.css'
+    " 设置markdowncss和highdark paht
+    let g:mdpath='/home/taotao/.vim/vim_preview_markdown/onedark/'
 
-" use a custom highlight style must absolute path
-let g:mkdp_highlight_css = g:mdpath . 'highdark.css'
+    " use a custom markdown style must be absolute path
+    let g:mkdp_markdown_css = g:mdpath . 'onedark.css'
 
-" 使用自定义端口启动服务器，或使用随机端口将其清空
-let g:mkdp_port = '8888'
+    " use a custom highlight style must absolute path
+    let g:mkdp_highlight_css = g:mdpath . 'highdark.css'
 
-" “预览页面标题 ${name} 将被替换为文件名
-let g:mkdp_page_title = '「${name}」'
+    " 使用自定义端口启动服务器，或使用随机端口将其清空
+    let g:mkdp_port = '8888'
 
-" 渲染的选项
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {}
-    \ }
+    " “预览页面标题 ${name} 将被替换为文件名
+    let g:mkdp_page_title = '「${name}」'
+
+    " 渲染的选项
+    let g:mkdp_preview_options = {
+        \ 'mkit': {},
+        \ 'katex': {},
+        \ 'uml': {},
+        \ 'maid': {},
+        \ 'disable_sync_scroll': 0,
+        \ 'sync_scroll_type': 'middle',
+        \ 'hide_yaml_meta': 1,
+        \ 'sequence_diagrams': {}
+        \ }
+endif
 
 "=================================================================================================================================
 " Vim-table-mode 插件配置
 "=================================================================================================================================
-let g:table_mode_corner = '|'
+if exists('g:plugs["vim-table-mode"]')
+    let g:table_mode_corner = '|'
+endif
 
 "=================================================================================================================================
 " Tagbar   
@@ -1670,33 +1676,35 @@ endtry
 "=================================================================================================================================
 " EasyAlign  settings
 "=================================================================================================================================
-xnoremap ga <Plug>(EasyAlign)
-nnoremap ga <Plug>(EasyAlign)
+if exists('g:plugs["vim-easy-align"]')
+    xnoremap ga <Plug>(EasyAlign)
+    nnoremap ga <Plug>(EasyAlign)
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-let g:easy_align_delimiters = {
-    \ '>': { 'pattern': '>>\|=>\|>'  },
-    \ '/': {
-    \     'pattern':         '//\+\|/\*\|\*/',
-    \     'delimiter_align': 'l',
-    \     'ignore_groups':   ['!Comment'] },
-    \ ']': {
-    \     'pattern':       '[[\]]',
-    \     'left_margin':   0,
-    \     'right_margin':  0,
-    \     'stick_to_left': 0
-    \   },
-    \ ')': {
-    \     'pattern':       '[()]',
-    \     'left_margin':   0,
-    \     'right_margin':  0,
-    \     'stick_to_left': 0
-    \   },
-    \ 'd': {
-    \     'pattern':      ' \(\S\+\s*[;=]\)\@=',
-    \     'left_margin':  0,
-    \     'right_margin': 0
-    \   }
-    \ }
+    let g:easy_align_delimiters = {
+        \ '>': { 'pattern': '>>\|=>\|>'  },
+        \ '/': {
+        \     'pattern':         '//\+\|/\*\|\*/',
+        \     'delimiter_align': 'l',
+        \     'ignore_groups':   ['!Comment'] },
+        \ ']': {
+        \     'pattern':       '[[\]]',
+        \     'left_margin':   0,
+        \     'right_margin':  0,
+        \     'stick_to_left': 0
+        \   },
+        \ ')': {
+        \     'pattern':       '[()]',
+        \     'left_margin':   0,
+        \     'right_margin':  0,
+        \     'stick_to_left': 0
+        \   },
+        \ 'd': {
+        \     'pattern':      ' \(\S\+\s*[;=]\)\@=',
+        \     'left_margin':  0,
+        \     'right_margin': 0
+        \   }
+        \ }
+endif
 
 "=================================================================================================================================
 " Vim-visual-multi  settings
@@ -1708,52 +1716,56 @@ let g:easy_align_delimiters = {
 "=================================================================================================================================
 " Goyo  settings
 "=================================================================================================================================
-function! s:goyo_enter()
-    if has('gui_running')
-        set background=light
-        set linespace=7
-    elseif exists('$TMUX')
-        silent !tmux set status off
-    endif
-    set noshowmode
-    set noshowcmd
-    Limelight
-endfunction
+if exists('g:plugs["goyo.vim"]')
+    function! s:goyo_enter()
+        if has('gui_running')
+            set background=light
+            set linespace=7
+        elseif exists('$TMUX')
+            silent !tmux set status off
+        endif
+        set noshowmode
+        set noshowcmd
+        Limelight
+    endfunction
 
-function! s:goyo_leave()
-    if has('gui_running')
-        set background=dark
-        set linespace=0
-    elseif exists('$TMUX')
-        silent !tmux set status on
-    endif
-    set showmode
-    set showcmd
-    Limelight!
-endfunction
+    function! s:goyo_leave()
+        if has('gui_running')
+            set background=dark
+            set linespace=0
+        elseif exists('$TMUX')
+            silent !tmux set status on
+        endif
+        set showmode
+        set showcmd
+        Limelight!
+    endfunction
 
-augroup user_plugin_goyo
-    autocmd!
-    autocmd! User GoyoEnter
-    autocmd! User GoyoLeave
-    autocmd  User GoyoEnter nested call <SID>goyo_enter()
-    autocmd  User GoyoLeave nested call <SID>goyo_leave()
-augroup END
+    augroup user_plugin_goyo
+        autocmd!
+        autocmd! User GoyoEnter
+        autocmd! User GoyoLeave
+        autocmd  User GoyoEnter nested call <SID>goyo_enter()
+        autocmd  User GoyoLeave nested call <SID>goyo_leave()
+    augroup END
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-function! Switch_goyo()
-    if  winnr('$') == 1
-        Goyo 200x200
-    elseif exists('#goyo')
-        Goyo!
-    endif
-endfunction
-nnoremap <silent><Leader>go :call Switch_goyo()<cr>
+    function! Switch_goyo()
+        if  winnr('$') == 1
+            Goyo 200x200
+        elseif exists('#goyo')
+            Goyo!
+        endif
+    endfunction
+    nnoremap <silent><Leader>go :call Switch_goyo()<cr>
+endif
 
 "=================================================================================================================================
 " Limelight  settings
 "=================================================================================================================================
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+if exists('g:plugs["limelight"]')
+    autocmd! User GoyoEnter Limelight
+    autocmd! User GoyoLeave Limelight!
+endif
 
 "=================================================================================================================================
 " AutoPairs  settings
@@ -1771,259 +1783,264 @@ endif
 "=================================================================================================================================
 " Which Key Map  settings
 "=================================================================================================================================
-if !exists('which_key#register')
-    silent! call which_key#register('\', "g:which_key_map")
+if exists('g:plugs["vim-which-key"]')
+
+    if !exists('which_key#register')
+        silent! call which_key#register('\', "g:which_key_map")
+    endif
+
+    nnoremap <silent><leader> :WhichKey '\'<CR>
+    vnoremap <silent><leader> :WhichKeyVisual '\'<CR>
+
+    autocmd! FileType which_key
+    autocmd  FileType which_key set laststatus=0 noshowmode noruler
+        \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+    " let g:which_key_sep = '→'
+    let g:which_key_sep = ' ◆ '
+    let g:which_key_use_floating_win = 0
+    let g:which_key_use_floating_relative = 0
+    let g:which_key_align_by_seperator = 1
+    let g:which_key_flatten = 1
+    let g:which_key_run_map_on_popup = 0
+    let g:which_key_fallback_to_native_key=1
+    let g:which_key_disable_default_offset = 1
+    let g:which_key_exit = ["\<Esc>","\q"]
+    let g:which_key_hspace = 3
+    let g:which_key_vertical = 0
+    let g:which_key_max_size = 0
+    let g:which_key_sort_horizontal = 0
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+    highlight default link WhichKey          Function
+    highlight default link WhichKeySeperator DiffAdded
+    highlight default link WhichKeyGroup     Keyword
+    highlight default link WhichKeyDesc      Identifier
+    highlight default link WhichKeyFloating  Pmenu
+    "highlight Pmenu ctermbg=red guibg=#282c34
+    "highlight Keyword ctermbg=red guibg=#282c34
+    "highlight Function ctermbg=red guibg=#282c34
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+    let g:which_key_map =  {}
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+    let g:which_key_map = {
+        \
+        \ 'e'    : [ ''                                            , 'MarkdownPreview'             ] ,
+        \ 'p'    : [ ''                                            , 'ClipboardImage to Vim'       ] ,
+        \ 'l'    : [ ''                                            , 'Toggle IndentLines'          ] ,
+        \
+        \ '<F2>' : [ ''                                            , 'Toggle Number'               ] ,
+        \ '<F3>' : [ ''                                            , 'Toggle Syntax'               ] ,
+        \ '<F4>' : [ ''                                            , 'Toggle Paste'                ] ,
+        \ '<F5>' : [ ''                                            , 'Toggle Runner'               ] ,
+        \ '<F6>' : [ ''                                            , 'Toggle Terminal'             ] ,
+        \ '<F7>' : [ ''                                            , 'Toggle QuickFix'             ] ,
+        \ '<F8>' : [ ''                                            , 'Toggle NERDTree'             ] ,
+        \ '<F9>' : [ ''                                            , 'Toggle TagBar'               ] ,
+        \
+        \ 'm'    : {
+        \ 'name' : '+SignatureMap',
+        \
+        \ "a"    : [''                                             , 'List All Marks'              ] ,
+        \ "m"    : [''                                             , 'MarkLine'                    ] ,
+        \ "d"    : [''                                             , 'Delete Marks'                ] ,
+        \ "x"    : [''                                             , 'Delete All Marks'            ] ,
+        \ "n"    : [''                                             , 'Next Marks Line'             ] ,
+        \ "p"    : [''                                             , 'Prev Marks Line'             ] ,
+        \ "f"    : [''                                             , 'Next Marks Spot'             ] ,
+        \ "b"    : [''                                             , 'Prev Marks Spot'             ] ,
+        \
+        \ },
+        \
+        \ }
+
+    let g:which_key_map[';'] = {
+        \ 'name' : '+LocalLeader' ,
+        \
+        \ 'q'    : [ ''                                            , 'Exit'                        ] ,
+        \ 'w'    : [ ''                                            , 'Save'                        ] ,
+        \ 't'    : [ ''                                            , 'Toggle TagBar'               ] ,
+        \ 'b'    : [ ''                                            , 'Toggle LeaderF BufferTag'    ] ,
+        \ 'u'    : [ ''                                            , 'Toggle LeaderF Functions'    ] ,
+        \ 'f'    : [ ''                                            , 'Toggle LeaderF Files'        ] ,
+        \ 'e'    : [ ''                                            , 'Toggle NERDTree'             ] ,
+        \ 'm'    : [ ''                                            , 'Toggle Signature'            ] ,
+        \ 'z'    : [ ''                                            , 'Toggle Zoom mode'            ] ,
+        \ 'y'    : [ ''                                            , 'Copy  System Clipboard'      ] ,
+        \ 'p'    : [ ''                                            , 'Paste System Clipboard'      ] ,
+        \ 's'    : [ ''                                            , 'Toggle Startify'             ] ,
+        \ 'r'    : [ ''                                            , 'Toggle Runner Code'          ] ,
+        \ 'c'    : [ ''                                            , 'Toggle Terminal'             ] ,
+        \
+        \ "1"    : [''                                             , 'Toggle Buffers 1 '           ] ,
+        \ "2"    : [''                                             , 'Toggle Buffers 2 '           ] ,
+        \ "3"    : [''                                             , 'Toggle Buffers 3 '           ] ,
+        \ "4"    : [''                                             , 'Toggle Buffers 4 '           ] ,
+        \ "5"    : [''                                             , 'Toggle Buffers 5 '           ] ,
+        \ "6"    : [''                                             , 'Toggle Buffers 6 '           ] ,
+        \ "7"    : [''                                             , 'Toggle Buffers 7 '           ] ,
+        \ "8"    : [''                                             , 'Toggle Buffers 8 '           ] ,
+        \ "9"    : [''                                             , 'Toggle Buffers 9 '           ] ,
+        \ "0"    : [''                                             , 'Toggle Buffers 10'           ] ,
+        \ "a"    : [''                                             , 'Buffer Add'                  ] ,
+        \ "Tab"  : [''                                             , 'Buffer Next'                 ] ,
+        \ "STab" : [''                                             , 'Buffer Previous'             ] ,
+        \
+        \ "<Tab>": [''                                             , 'Edit Mode UltiSnip'          ] ,
+        \
+        \ }
+
+    let g:which_key_map.d = {
+        \ 'name' : '+Display',
+        \
+        \ "w"    : ['<C-W>w'                                       , 'other-window'                ] ,
+        \ "d"    : ['<C-W>c'                                       , 'delete-window'               ] ,
+        \ "b"    : ['<C-W>s'                                       , 'split-window-below'          ] ,
+        \ "r"    : ['<C-W>v'                                       , 'split-window-right'          ] ,
+        \ "2"    : ['<C-W>v'                                       , 'layout-double-columns'       ] ,
+        \ "h"    : ['<C-W>5<'                                      , 'expand-window-left'          ] ,
+        \ "l"    : ['<C-W>5>'                                      , 'expand-window-right'         ] ,
+        \ "a"    : ['<C-W>='                                       , 'balance-window'              ] ,
+        \ "s"    : ['<C-W>s'                                       , 'split-window-below'          ] ,
+        \ "v"    : ['<C-W>v'                                       , 'split-window-below'          ] ,
+        \ "k"    : [':resize -5'                                   , 'expand-window-up'            ] ,
+        \ "j"    : [':resize +5'                                   , 'expand-window-below'         ] ,
+        \
+        \ }
+
+    let g:which_key_map.f = {
+        \ "name" : "+FZF",
+        \
+        \ "f"    : ['Files'                                        , 'Search Files'                ] ,
+        \ "l"    : ['BLines'                                       , 'Search Lines Buffers'        ] ,
+        \ "o"    : ['Colors'                                       , 'Search Color Themes'         ] ,
+        \ "t"    : ['BTags'                                        , 'Search Tags'                 ] ,
+        \ "b"    : ['Buffers'                                      , 'Search Open Buffers'         ] ,
+        \ "i"    : ['GFiles'                                       , 'Search Git-Files'            ] ,
+        \ "g"    : ['GFiles?'                                      , 'Search Modified-Git-Files'   ] ,
+        \ "a"    : ['Ag'                                           , 'Search Ag'                   ] ,
+        \ "r"    : ['Rg'                                           , 'Search Rg'                   ] ,
+        \ "m"    : ['Marks'                                        , 'Search Marks'                ] ,
+        \ "w"    : ['Windows'                                      , 'Search Windows'              ] ,
+        \ "c"    : ['Commands'                                     , 'Search Commands'             ] ,
+        \
+        \ }
+
+
+    let g:which_key_map.t = {
+        \ 'name' : '+Table Mode',
+        \
+        \ "m"    : ['TableModeToggle'                              , 'TableModeToggle'             ] ,
+        \
+        \ }
+
+    let g:which_key_map.v = {
+        \ 'name' : '+VCS',
+        \
+        \ "e"    : ['Gbrowse'                                     , 'Browse'                       ] ,
+        \ "i"    : ['Gdiff'                                       , 'Diff'                         ] ,
+        \ "g"    : ['Gmerge'                                      , 'Merge'                        ] ,
+        \ "s"    : ['Gpush'                                       , 'Push'                         ] ,
+        \ "a"    : ['Grebase'                                     , 'Rebase'                       ] ,
+        \ "b"    : ['Gblame'                                      , 'Blame'                        ] ,
+        \ "c"    : ['Gcommit'                                     , 'Commit'                       ] ,
+        \ "d"    : ['Gdelete'                                     , 'Delete'                       ] ,
+        \ "f"    : ['Gfetch'                                      , 'Fetch'                        ] ,
+        \ "o"    : ['Glog'                                        , 'Log'                          ] ,
+        \ "m"    : ['Gmove'                                       , 'Move'                         ] ,
+        \ "l"    : ['Gpull'                                       , 'Pull'                         ] ,
+        \ "r"    : ['Grename'                                     , 'Rename'                       ] ,
+        \ "t"    : ['Gstatus'                                     , 'Status'                       ] ,
+        \
+        \ }
+
+    let g:which_key_map.w = {
+        \ 'name' : '+VimWiki',
+        \
+        \ "w"    : [''                                            , 'Go To Index'                  ] ,
+        \ "n"    : [''                                            , 'Create new wiki page'         ] ,
+        \ "d"    : [''                                            , 'Delete wiki page'             ] ,
+        \ "r"    : [''                                            , 'Rename wiki page'             ] ,
+        \ "v"    : [''                                            , 'Toggle wiki List'             ] ,
+        \ "s"    : [''                                            , 'Search-for-wiki-pattam'       ] ,
+        \ "f"    : [''                                            , 'Search-for-wiki-curword'      ] ,
+        \
+        \ 'c'    : {
+        \ 'name' : '+CheckBox',
+        \
+        \ "t"    : ['VimwikiToggleListItem'                       , 'Toggle checkbox On/Off'       ] ,
+        \ "n"    : ['VimwikiIncrementListItem'                    , 'Toggle checkbox Next/Previous'] ,
+        \
+        \ },
+        \
+        \ 't'    : {
+        \ 'name' : '+Tables',
+        \
+        \ "t"    : ['VimwikiTable'                                , 'Create Table'                             ] ,
+        \ "h"    : ['<Plug>VimwikiTableMoveColumnLeft'            , 'Move current column to the left'          ] ,
+        \ "l"    : ['<Plug>VimwikiTableMoveColumnRight'           , 'Move current column to the Right'         ] ,
+        \
+        \ },
+        \
+        \ 'z'    : {
+        \ 'name' : '+Zettel',
+        \
+        \ "b"    : ['ZettelBackLinks'                             , 'add-backlineks'                           ] ,
+        \ "n"    : ['ZettelNew'                                   , 'add-new'                                  ] ,
+        \ "o"    : ['ZettelOpen'                                  , 'Search fulltext use FZF'                  ] ,
+        \ "i"    : ['ZettelInsertNote'                            , 'Using FZF and insert in the current'      ] ,
+        \ "s"    : ['ZettelSearch'                                , 'Search the content of your zettelkasten'  ] ,
+        \ "y"    : ['ZettelYankName'                              , 'Copy the current zettel file name'        ] ,
+        \
+        \ },
+        \
+        \ }
+
+    let g:which_key_map.g = {
+        \ 'name' : '+Goyo',
+        \
+        \ "o"    : [':call Switch_goyo()'                         , 'Enter Goyo Mode'                          ] ,
+        \
+        \ }
 endif
-
-nnoremap <silent><leader> :WhichKey '\'<CR>
-vnoremap <silent><leader> :WhichKeyVisual '\'<CR>
-
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-    \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-"-----------------------------------------------------------------o--------------------------------------------------------------o
-" let g:which_key_sep = '→'
-let g:which_key_sep = ' ◆ '
-let g:which_key_use_floating_win = 0
-let g:which_key_use_floating_relative = 0
-let g:which_key_align_by_seperator = 1
-let g:which_key_flatten = 1
-let g:which_key_run_map_on_popup = 0
-let g:which_key_fallback_to_native_key=1
-let g:which_key_disable_default_offset = 1
-let g:which_key_exit = ["\<Esc>","\q"]
-let g:which_key_hspace = 3
-let g:which_key_vertical = 0
-let g:which_key_max_size = 0
-let g:which_key_sort_horizontal = 0
-"-----------------------------------------------------------------o--------------------------------------------------------------o
-highlight default link WhichKey          Function
-highlight default link WhichKeySeperator DiffAdded
-highlight default link WhichKeyGroup     Keyword
-highlight default link WhichKeyDesc      Identifier
-highlight default link WhichKeyFloating  Pmenu
-"highlight Pmenu ctermbg=red guibg=#282c34
-"highlight Keyword ctermbg=red guibg=#282c34
-"highlight Function ctermbg=red guibg=#282c34
-"-----------------------------------------------------------------o--------------------------------------------------------------o
-let g:which_key_map =  {}
-"-----------------------------------------------------------------o--------------------------------------------------------------o
-let g:which_key_map = {
-    \
-    \ 'e'    : [ ''                                            , 'MarkdownPreview'             ] ,
-    \ 'p'    : [ ''                                            , 'ClipboardImage to Vim'       ] ,
-    \ 'l'    : [ ''                                            , 'Toggle IndentLines'          ] ,
-    \
-    \ '<F2>' : [ ''                                            , 'Toggle Number'               ] ,
-    \ '<F3>' : [ ''                                            , 'Toggle Syntax'               ] ,
-    \ '<F4>' : [ ''                                            , 'Toggle Paste'                ] ,
-    \ '<F5>' : [ ''                                            , 'Toggle Runner'               ] ,
-    \ '<F6>' : [ ''                                            , 'Toggle Terminal'             ] ,
-    \ '<F7>' : [ ''                                            , 'Toggle QuickFix'             ] ,
-    \ '<F8>' : [ ''                                            , 'Toggle NERDTree'             ] ,
-    \ '<F9>' : [ ''                                            , 'Toggle TagBar'               ] ,
-    \
-    \ 'm'    : {
-    \ 'name' : '+SignatureMap',
-    \
-    \ "a"    : [''                                             , 'List All Marks'              ] ,
-    \ "m"    : [''                                             , 'MarkLine'                    ] ,
-    \ "d"    : [''                                             , 'Delete Marks'                ] ,
-    \ "x"    : [''                                             , 'Delete All Marks'            ] ,
-    \ "n"    : [''                                             , 'Next Marks Line'             ] ,
-    \ "p"    : [''                                             , 'Prev Marks Line'             ] ,
-    \ "f"    : [''                                             , 'Next Marks Spot'             ] ,
-    \ "b"    : [''                                             , 'Prev Marks Spot'             ] ,
-    \
-    \ },
-    \
-    \ }
-
-let g:which_key_map[';'] = {
-    \ 'name' : '+LocalLeader' ,
-    \
-    \ 'q'    : [ ''                                            , 'Exit'                        ] ,
-    \ 'w'    : [ ''                                            , 'Save'                        ] ,
-    \ 't'    : [ ''                                            , 'Toggle TagBar'               ] ,
-    \ 'b'    : [ ''                                            , 'Toggle LeaderF BufferTag'    ] ,
-    \ 'u'    : [ ''                                            , 'Toggle LeaderF Functions'    ] ,
-    \ 'f'    : [ ''                                            , 'Toggle LeaderF Files'        ] ,
-    \ 'e'    : [ ''                                            , 'Toggle NERDTree'             ] ,
-    \ 'm'    : [ ''                                            , 'Toggle Signature'            ] ,
-    \ 'z'    : [ ''                                            , 'Toggle Zoom mode'            ] ,
-    \ 'y'    : [ ''                                            , 'Copy  System Clipboard'      ] ,
-    \ 'p'    : [ ''                                            , 'Paste System Clipboard'      ] ,
-    \ 's'    : [ ''                                            , 'Toggle Startify'             ] ,
-    \ 'r'    : [ ''                                            , 'Toggle Runner Code'          ] ,
-    \ 'c'    : [ ''                                            , 'Toggle Terminal'             ] ,
-    \
-    \ "1"    : [''                                             , 'Toggle Buffers 1 '           ] ,
-    \ "2"    : [''                                             , 'Toggle Buffers 2 '           ] ,
-    \ "3"    : [''                                             , 'Toggle Buffers 3 '           ] ,
-    \ "4"    : [''                                             , 'Toggle Buffers 4 '           ] ,
-    \ "5"    : [''                                             , 'Toggle Buffers 5 '           ] ,
-    \ "6"    : [''                                             , 'Toggle Buffers 6 '           ] ,
-    \ "7"    : [''                                             , 'Toggle Buffers 7 '           ] ,
-    \ "8"    : [''                                             , 'Toggle Buffers 8 '           ] ,
-    \ "9"    : [''                                             , 'Toggle Buffers 9 '           ] ,
-    \ "0"    : [''                                             , 'Toggle Buffers 10'           ] ,
-    \ "a"    : [''                                             , 'Buffer Add'                  ] ,
-    \ "Tab"  : [''                                             , 'Buffer Next'                 ] ,
-    \ "STab" : [''                                             , 'Buffer Previous'             ] ,
-    \
-    \ "<Tab>": [''                                             , 'Edit Mode UltiSnip'          ] ,
-    \
-    \ }
-
-let g:which_key_map.d = {
-    \ 'name' : '+Display',
-    \
-    \ "w"    : ['<C-W>w'                                       , 'other-window'                ] ,
-    \ "d"    : ['<C-W>c'                                       , 'delete-window'               ] ,
-    \ "b"    : ['<C-W>s'                                       , 'split-window-below'          ] ,
-    \ "r"    : ['<C-W>v'                                       , 'split-window-right'          ] ,
-    \ "2"    : ['<C-W>v'                                       , 'layout-double-columns'       ] ,
-    \ "h"    : ['<C-W>5<'                                      , 'expand-window-left'          ] ,
-    \ "l"    : ['<C-W>5>'                                      , 'expand-window-right'         ] ,
-    \ "a"    : ['<C-W>='                                       , 'balance-window'              ] ,
-    \ "s"    : ['<C-W>s'                                       , 'split-window-below'          ] ,
-    \ "v"    : ['<C-W>v'                                       , 'split-window-below'          ] ,
-    \ "k"    : [':resize -5'                                   , 'expand-window-up'            ] ,
-    \ "j"    : [':resize +5'                                   , 'expand-window-below'         ] ,
-    \
-    \ }
-
-let g:which_key_map.f = {
-    \ "name" : "+FZF",
-    \
-    \ "f"    : ['Files'                                        , 'Search Files'                ] ,
-    \ "l"    : ['BLines'                                       , 'Search Lines Buffers'        ] ,
-    \ "o"    : ['Colors'                                       , 'Search Color Themes'         ] ,
-    \ "t"    : ['BTags'                                        , 'Search Tags'                 ] ,
-    \ "b"    : ['Buffers'                                      , 'Search Open Buffers'         ] ,
-    \ "i"    : ['GFiles'                                       , 'Search Git-Files'            ] ,
-    \ "g"    : ['GFiles?'                                      , 'Search Modified-Git-Files'   ] ,
-    \ "a"    : ['Ag'                                           , 'Search Ag'                   ] ,
-    \ "r"    : ['Rg'                                           , 'Search Rg'                   ] ,
-    \ "m"    : ['Marks'                                        , 'Search Marks'                ] ,
-    \ "w"    : ['Windows'                                      , 'Search Windows'              ] ,
-    \ "c"    : ['Commands'                                     , 'Search Commands'             ] ,
-    \
-    \ }
-
-
-let g:which_key_map.t = {
-    \ 'name' : '+Table Mode',
-    \
-    \ "m"    : ['TableModeToggle'                              , 'TableModeToggle'             ] ,
-    \
-    \ }
-
-let g:which_key_map.v = {
-    \ 'name' : '+VCS',
-    \
-    \ "e"    : ['Gbrowse'                                     , 'Browse'                       ] ,
-    \ "i"    : ['Gdiff'                                       , 'Diff'                         ] ,
-    \ "g"    : ['Gmerge'                                      , 'Merge'                        ] ,
-    \ "s"    : ['Gpush'                                       , 'Push'                         ] ,
-    \ "a"    : ['Grebase'                                     , 'Rebase'                       ] ,
-    \ "b"    : ['Gblame'                                      , 'Blame'                        ] ,
-    \ "c"    : ['Gcommit'                                     , 'Commit'                       ] ,
-    \ "d"    : ['Gdelete'                                     , 'Delete'                       ] ,
-    \ "f"    : ['Gfetch'                                      , 'Fetch'                        ] ,
-    \ "o"    : ['Glog'                                        , 'Log'                          ] ,
-    \ "m"    : ['Gmove'                                       , 'Move'                         ] ,
-    \ "l"    : ['Gpull'                                       , 'Pull'                         ] ,
-    \ "r"    : ['Grename'                                     , 'Rename'                       ] ,
-    \ "t"    : ['Gstatus'                                     , 'Status'                       ] ,
-    \
-    \ }
-
-let g:which_key_map.w = {
-    \ 'name' : '+VimWiki',
-    \
-    \ "w"    : [''                                            , 'Go To Index'                  ] ,
-    \ "n"    : [''                                            , 'Create new wiki page'         ] ,
-    \ "d"    : [''                                            , 'Delete wiki page'             ] ,
-    \ "r"    : [''                                            , 'Rename wiki page'             ] ,
-    \ "v"    : [''                                            , 'Toggle wiki List'             ] ,
-    \ "s"    : [''                                            , 'Search-for-wiki-pattam'       ] ,
-    \ "f"    : [''                                            , 'Search-for-wiki-curword'      ] ,
-    \
-    \ 'c'    : {
-    \ 'name' : '+CheckBox',
-    \
-    \ "t"    : ['VimwikiToggleListItem'                       , 'Toggle checkbox On/Off'       ] ,
-    \ "n"    : ['VimwikiIncrementListItem'                    , 'Toggle checkbox Next/Previous'] ,
-    \
-    \ },
-    \
-    \ 't'    : {
-    \ 'name' : '+Tables',
-    \
-    \ "t"    : ['VimwikiTable'                                , 'Create Table'                             ] ,
-    \ "h"    : ['<Plug>VimwikiTableMoveColumnLeft'            , 'Move current column to the left'          ] ,
-    \ "l"    : ['<Plug>VimwikiTableMoveColumnRight'           , 'Move current column to the Right'         ] ,
-    \
-    \ },
-    \
-    \ 'z'    : {
-    \ 'name' : '+Zettel',
-    \
-    \ "b"    : ['ZettelBackLinks'                             , 'add-backlineks'                           ] ,
-    \ "n"    : ['ZettelNew'                                   , 'add-new'                                  ] ,
-    \ "o"    : ['ZettelOpen'                                  , 'Search fulltext use FZF'                  ] ,
-    \ "i"    : ['ZettelInsertNote'                            , 'Using FZF and insert in the current'      ] ,
-    \ "s"    : ['ZettelSearch'                                , 'Search the content of your zettelkasten'  ] ,
-    \ "y"    : ['ZettelYankName'                              , 'Copy the current zettel file name'        ] ,
-    \
-    \ },
-    \
-    \ }
-
-let g:which_key_map.g = {
-    \ 'name' : '+Goyo',
-    \
-    \ "o"    : [':call Switch_goyo()'                         , 'Enter Goyo Mode'                          ] ,
-    \
-    \ }
 
 "=================================================================================================================================
 " Signature  settings
 "=================================================================================================================================
-nnoremap <silent><localleader>m :SignatureToggleSigns<CR> 
+if exists('g:plugs["vim-signature"]')
+    nnoremap <silent><localleader>m :SignatureToggleSigns<CR> 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-let g:SignatureEnabledAtStartup = 1
-let g:SignatureForceMarkPlacement = 1
-let g:SignatureForceMarkerPlacement = 1
-let g:SignatureWrapJumps = 0
-let g:SignatureMarkOrder="\m"
-let g:SignatureMap = {
-    \ 'Leader'             :  "m",
-    \ 'PlaceNextMark'      :  "m.",
-    \ 'ToggleMarkAtLine'   :  "mm",
-    \ 'PurgeMarksAtLine'   :  "m-",
-    \ 'DeleteMark'         :  "md",
-    \ 'PurgeMarks'         :  "mx",
-    \ 'PurgeMarkers'       :  "m<SPACE>",
-    \ 'GotoNextLineAlpha'  :  "']",
-    \ 'GotoPrevLineAlpha'  :  "'[",
-    \ 'GotoNextSpotAlpha'  :  "`]",
-    \ 'GotoPrevSpotAlpha'  :  "`[",
-    \ 'GotoNextLineByPos'  :  "mn",
-    \ 'GotoPrevLineByPos'  :  "mp",
-    \ 'GotoNextSpotByPos'  :  "mf",
-    \ 'GotoPrevSpotByPos'  :  "mb",
-    \ 'GotoNextMarker'     :  "]-",
-    \ 'GotoPrevMarker'     :  "[-",
-    \ 'GotoNextMarkerAny'  :  "]=",
-    \ 'GotoPrevMarkerAny'  :  "[=",
-    \ 'ListBufferMarks'    :  "ma",
-    \ 'ListBufferMarkers'  :  "m?"
-    \ }
+    let g:SignatureEnabledAtStartup = 1
+    let g:SignatureForceMarkPlacement = 1
+    let g:SignatureForceMarkerPlacement = 1
+    let g:SignatureWrapJumps = 0
+    let g:SignatureMarkOrder="\m"
+    let g:SignatureMap = {
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m.",
+        \ 'ToggleMarkAtLine'   :  "mm",
+        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'DeleteMark'         :  "md",
+        \ 'PurgeMarks'         :  "mx",
+        \ 'PurgeMarkers'       :  "m<SPACE>",
+        \ 'GotoNextLineAlpha'  :  "']",
+        \ 'GotoPrevLineAlpha'  :  "'[",
+        \ 'GotoNextSpotAlpha'  :  "`]",
+        \ 'GotoPrevSpotAlpha'  :  "`[",
+        \ 'GotoNextLineByPos'  :  "mn",
+        \ 'GotoPrevLineByPos'  :  "mp",
+        \ 'GotoNextSpotByPos'  :  "mf",
+        \ 'GotoPrevSpotByPos'  :  "mb",
+        \ 'GotoNextMarker'     :  "]-",
+        \ 'GotoPrevMarker'     :  "[-",
+        \ 'GotoNextMarkerAny'  :  "]=",
+        \ 'GotoPrevMarkerAny'  :  "[=",
+        \ 'ListBufferMarks'    :  "ma",
+        \ 'ListBufferMarkers'  :  "m?"
+        \ }
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-hi SignatureMarkText   term=standout ctermbg=2   ctermbg=2   guifg=#E06C75 guibg=#282C34   " 书签标记颜色
-hi SignatureMarkerText term=standout ctermbg=2   ctermbg=2   guifg=#E06C75 guibg=#282C34   " 折叠提示颜色
+    hi SignatureMarkText   term=standout ctermbg=2   ctermbg=2   guifg=#E06C75 guibg=#282C34   " 书签标记颜色
+    hi SignatureMarkerText term=standout ctermbg=2   ctermbg=2   guifg=#E06C75 guibg=#282C34   " 折叠提示颜色
+endif
 
 "=================================================================================================================================
 " Vim-bookmarks  settings
@@ -2226,11 +2243,13 @@ endif
 "=================================================================================================================================
 " Floaterm settings
 "=================================================================================================================================
-let g:floaterm_keymap_toggle = '<Localleader>c'
-let g:floaterm_wintype = 'split'
-let g:floaterm_height = 0.3
-let g:floaterm_autoclose = 2
-let g:floaterm_autohide = 0
+if exists('g:plugs["vim-floaterm"]')
+    let g:floaterm_keymap_toggle = '<Localleader>c'
+    let g:floaterm_wintype = 'split'
+    let g:floaterm_height = 0.3
+    let g:floaterm_autoclose = 2
+    let g:floaterm_autohide = 0
+endif
 
 "=================================================================================================================================
 " Coc.nvim settings
