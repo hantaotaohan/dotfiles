@@ -895,7 +895,7 @@ Plug 'tpope/vim-repeat'                                                  " 重�
 Plug 'tpope/vim-unimpaired'                                              " 括号映射
 Plug 'neomake/neomake'                                                   " 语法检查
 Plug 'junegunn/fzf.vim'                                                  " 为vim安装fzf插件
-Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }       " 为系统安装fzf工具
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                      " 为系统安装fzf工具
 Plug 'junegunn/goyo.vim'                                                 " 专注模式
 Plug 'junegunn/limelight.vim'                                            " 专注模式辅助
 Plug 'scrooloose/nerdtree' , { 'on': ['NERDTreeToggle','NERDTreeFind'] } " 文件树插件
