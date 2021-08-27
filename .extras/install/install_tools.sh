@@ -706,11 +706,11 @@ main() {
             ;;
         -a|--all)
             Github_Hosts
-            #Alttab
+            Alttab
             Arcthemes
             Arcicons
             #I3gaps
-            #Picom
+            Picom
             Dunst
             Offlineimap
             Navi
@@ -726,7 +726,7 @@ main() {
             #Calibre
             #Foliate
             #Crossover
-            Copytranslator
+            #Copytranslator
             #Hugo
             #Java
             Github_SSH

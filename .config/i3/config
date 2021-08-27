@@ -37,7 +37,7 @@ floating_minimum_size -1 x -1
 floating_maximum_size -1 x -1
 
 # 窗口标题居中
-# title_align center
+title_align center
 
 # 焦点跟随鼠标
 focus_follows_mouse no
@@ -57,7 +57,7 @@ bindsym $mod+q kill
 bindsym $mod+Return exec --no-startup-id alacritty
 
 # rofi 设置及配置 apt install rofi
-bindsym $mod+Shift+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # 切换窗口
 bindsym $mod+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'Alt+p' -kb-accept-entry '!Alt-p'
@@ -68,6 +68,9 @@ bindsym $mod+slash exec --no-startup-id cat $HOME/.config/rofi/rofi-shortcuts.co
 
 # 打开Ranger快捷键
 bindsym $mod+Shift+Return exec --no-startup-id alacritty -e ranger
+
+# 打开 Nautilus 快捷键
+bindsym Mod4+e exec --no-startup-id nautilus
 
 # 开启Google Chrome快捷键 
 # bindsym $mod+g exec --no-startup-id raiseorlaunch -c google-chrome-stable --force-dark-mode

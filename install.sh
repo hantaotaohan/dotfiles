@@ -64,7 +64,7 @@ Dotfiles_symlinks=( \
         .Xmodmap \
         .imwheelrc \
         .gtkrc-2.0 \
-	.gemrc \
+        .gemrc \
         .Xresources
         )
 
@@ -73,8 +73,8 @@ Dotfiles_copy=( \
         .vim \
         .w3m \
         .pip \
-	.cargo \
-	.config/.gtk-bookmarks \
+        .cargo \
+        .config/.gtk-bookmarks \
         .extras/z.lua/z.lua
         )
 
@@ -342,12 +342,12 @@ echo -e "                                                                       
         #--------------------------------------------------------------------------I3WM--
         i3 \
         feh \
-	mpv \
-	sxiv \
-	rofi \
-	#picom \
-	#dunst \
-	#alttab \
+        mpv \
+        sxiv \
+        rofi \
+        #picom \
+        #dunst \
+        #alttab \
         zathura \
         i3blocks \
         i3lock-fancy \
@@ -355,7 +355,7 @@ echo -e "                                                                       
         --no-install-recommends --no-install-suggests nautilus \
         #-------------------------------------------------------------------------SYSTEM--
         #xinit \
-	--no-install-recommends --no-install-suggests xinit \
+        --no-install-recommends --no-install-suggests xinit \
         lua5.2 \
         #ruby-full \
         openssh-server \
@@ -386,7 +386,7 @@ echo -e "                                                                       
         newsboat \
         python3-pip \
         inotify-tools \
-	universal-ctags \
+        universal-ctags \
         silversearcher-ag \
         #--------------------------------------------------------------------------EDIT--
         vim \
@@ -460,11 +460,11 @@ echo -e "                                                                       
 
 	pipApps=( \
         i3ipc \
-	flake8 \
+        flake8 \
         keyring \
         raiseorlaunch \
-	popupdict \
-	you-get \
+        popupdict \
+        you-get \
         pyvirtualdisplay 
         #mdv \
         #sncli \
@@ -644,7 +644,7 @@ echo -e "                                                                       
 # diff-so-fancy
 #----------------------------------------------------------------------------------------#
 
-	wget -P $Bin_dir $Gitraw/diff-so-fancy > /dev/null 2>&1
+    wget -P $Bin_dir $Gitraw/diff-so-fancy > /dev/null 2>&1
 	
     if [ ! -f "/usr/local/bin/diff-so-fancy" ]; then
 		sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
@@ -660,7 +660,7 @@ echo -e "                                                                       
 # Install trans
 #----------------------------------------------------------------------------------------#
 
-	wget -P $Bin_dir $Gitraw/trans > /dev/null 2>&1
+    wget -P $Bin_dir $Gitraw/trans > /dev/null 2>&1
 
     if [ ! -f "/usr/local/bin/trans" ]; then
         sudo cp -f $Bin_dir/trans /usr/local/bin
