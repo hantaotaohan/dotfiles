@@ -906,7 +906,6 @@ Plug 'skywind3000/asyncrun.vim'                                          " 配�
 Plug 'christoomey/vim-tmux-navigator'                                    " 同步vim与tmux快捷键
 Plug 'Yggdroot/indentLine' , { 'on': 'IndentLinesToggle' }               " 缩进线显示插件
 Plug 'mhinz/vim-startify'                                                " 定制vim开始页面
-Plug 'iamcco/markdown-preview.nvim' , { 'do': 'cd app && yarn install' } " MarkdownPreview插件
 Plug 'jszakmeister/markdown2ctags'                                       " Tags的Toc插件
 Plug 'ferrine/md-img-paste.vim'                                          " Markdown截图自动粘贴
 Plug 'vimwiki/vimwiki' , { 'on': '<Plug>VimwikiIndex' ,'branch': 'dev' } " Vimwiki插件
@@ -917,10 +916,13 @@ Plug 'yianwillis/vimcdoc'                                                " 中�
 Plug 'voldikss/vim-floaterm'                                             " 终端插件
 Plug 'jiangmiao/auto-pairs'                                              " 成对添加括号等
 Plug 'ludovicchabant/vim-gutentags'                                      " Tags管理
+Plug 'smkent/vim-pipe-preview'                                           " 终端预览Markdown插件
+Plug 'vim-scripts/AnsiEsc.vim'                                           " 终端预览Markdown插件
 if has("python3")
     Plug 'SirVer/ultisnips'                                              " 代码片段管理器
     Plug 'hantaotaohan/vim-snippets'                                     " 代码片段仓库
 endif
+" Plug 'iamcco/markdown-preview.nvim' , { 'do': 'cd app && yarn install' } " MarkdownPreview插件
 " Plug 'chriskempson/base16-vim'                                           " Themes
 " Plug 'arcticicestudio/nord-vim'                                          " Themes
 " Plug 'tpope/vim-eunuch'                                                  " 使用Linux内置命令
@@ -2314,3 +2316,9 @@ endif
 if exists('g:plugs["neomake"]')
     call neomake#configure#automake('nrwi', 500)
 endif
+
+"=================================================================================================================================
+" Mdv - pipe preview command  settings
+"=================================================================================================================================
+let g:pipe_preview_command = 'mdv -t "767.4327" -'
+nnoremap <silent><localleader>v :<C-U>PipePreview<CR>
