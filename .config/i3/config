@@ -29,7 +29,7 @@ new_float none
 floating_modifier $mod
 
 # 开启工作区自动返回
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 
 # 默认浮动窗口大小
 # floating_minimum_size 1200 x 800
@@ -51,7 +51,7 @@ bindsym --whole-window $mod+button2 kill
 
 # 关闭窗口快捷键 
 bindsym $mod+Shift+q kill
-bindsym $mod+q kill
+# bindsym $mod+q kill
 
 # 开启Terminal快捷键 
 bindsym $mod+Return exec --no-startup-id alacritty
@@ -484,6 +484,10 @@ bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "copytranslator" -t "
 
 for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
 bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
+
+# Open Alacritty
+for_window [class="Alacritty" title="alacritty"] floating enable , sticky enable , resize set 850 350 , move absolute position center
+bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "alacritty"
 
 # Scratchpad config
 #for_window [class="Zathura"] move to scratchpad, scratchpad
