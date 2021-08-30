@@ -464,30 +464,35 @@ bindsym Mod4+Return bar hidden_state toggle
 # 便签区域设定
 # --------------------------------------------------------------------------------------------------
 
+# Open vim-scratchpad
 for_window [class="Alacritty" title="scratchpad"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
 bindsym Control+1 exec --no-startup-id raiseorlaunch -r -t "scratchpad" -e "--no-startup-id alacritty -t scratchpad -e vim $HOME/.scratchpad"
 
+# Open noemutt
 for_window [class="Alacritty" title="neomuttt"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
 bindsym Control+2 exec --no-startup-id raiseorlaunch -r -t "neomuttt" -e "--no-startup-id alacritty -t neomuttt -e neomutt"
 
+# Open notion
 for_window [class="Microsoft-edge" title="notion.so"] move to scratchpad , sticky enable , border normal 0 , title_format "<b>%title</b>" , resize set 1200 800 , move absolute position center
 bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "notion.so" -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://notion.so"
 
+# Open copytranslator
 for_window [class="copytranslator"] move to scratchpad , sticky enable , resize set 650 250 , move absolute position center
 bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "copytranslator" -t "Copytranslator" -e "copytranslator --no-sandbox"
+
+# Open Alacritty
+for_window [class="Alacritty" title="open-alacritty"] floating enable , sticky enable , resize set 850 350 , move absolute position center
+bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
+
+# Open fzf-open
+for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
+bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
 
 #for_window [class="Fsearch" title="fsearch"] move to scratchpad , sticky enable , resize set 650 250 , move absolute position center
 #bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Fsearch" -t "fsearch" -e "fsearch"
 
 #for_window [class="Crow Translate"] move to scratchpad , sticky enable , resize set 748 380 , move absolute position center
 #bindsym Mod4+4 exec --no-startup-id raiseorlaunch -r -t "Crow Translate" -e "crow"
-
-for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
-bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
-
-# Open Alacritty
-for_window [class="Alacritty" title="alacritty"] floating enable , sticky enable , resize set 850 350 , move absolute position center
-bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "alacritty"
 
 # Scratchpad config
 #for_window [class="Zathura"] move to scratchpad, scratchpad
