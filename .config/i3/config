@@ -529,6 +529,7 @@ exec --no-startup-id feh --bg-scale ~/.config/i3/background/1.jpg
 
 # 透明窗口 Picom
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
+# exec --no-startup-id picom --config ~/.config/picom/picom.conf --experimental-backends
 
 # xmodmap
 exec --no-startup-id xmodmap ~/.Xmodmap
