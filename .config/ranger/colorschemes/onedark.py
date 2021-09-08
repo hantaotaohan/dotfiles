@@ -32,7 +32,7 @@ class OneDark(ColorScheme):
                 fg = 0
                 bg = 1
             if context.border:
-                fg = default
+                fg = 8
             if context.media:
                 if context.image:
                     fg = 3
