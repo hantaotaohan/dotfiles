@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 Dotfiles_repo=$(pwd)
-#Extras_dir=$(dirname "$PWD") 
-Extras_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd )
+Extras_dir=$(dirname "$PWD") 
+#Extras_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd )
 Bin_dir="$HOME/.bin"
 
 #Git_clone="https://hub.fastgit.org"
