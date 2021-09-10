@@ -2342,5 +2342,6 @@ endif
 "=================================================================================================================================
 " Mdv - pipe preview command  settings
 "=================================================================================================================================
-let g:pipe_preview_command = 'mdv -t "767.4327" -'
+" let g:pipe_preview_command = 'mdv -t "767.4327" -'
+let g:pipe_preview_command = 'mdv -t "960.847" -'
 nnoremap <silent><localleader>v :<C-U>PipePreview<CR>
