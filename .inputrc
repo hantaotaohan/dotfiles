@@ -74,6 +74,9 @@ set convert-meta off
 # \+g 进入navi
 "\\g":"navi\C-m"
 
+# ;+v Paste
+"\;v":"paste-from-clipboard"
+
 # CTRL+ALT+J,K 上下历史命令
 # "\e\C-J": history-search-forward
 # "\e\C-K": history-search-backward
