@@ -404,9 +404,8 @@ client.background $base07
 # i3bar设定
 # --------------------------------------------------------------------------------------------------
 bar {
-    # font pango:Inziu Iosevka SC Bold 10
+    font pango:Inziu Iosevka SC Bold 10
     id			            bar-0
-    font pango:Saber 10
     status_command 	        i3blocks -c ~/.config/i3blocks/config
     bindsym button4         nop
     bindsym button5         nop
@@ -432,9 +431,8 @@ bar {
 # --------------------------------------------------------------------------------------------------
 
 bar {
-    # font pango:Inziu Iosevka SC Bold 10
+    font pango:Inziu Iosevka SC Bold 10
     id			            bar-1
-    font pango:Saber 10
     status_command 	        i3blocks -c ~/.config/i3blocks/configb
     bindsym button1         nop
     separator_symbol        "|"
