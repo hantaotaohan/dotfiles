@@ -53,6 +53,10 @@ set input-meta on
 set output-meta on
 set convert-meta off
 
+# Completed Colors
+set colored-stats On
+set visible-stats On
+
 # TAB cycles forward through completion choices. Press an arrow key to choose a
 # selection.
 # Shift-TAB cycles backward through completion choices. Press an arrow key to
