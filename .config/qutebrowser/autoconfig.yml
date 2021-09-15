@@ -86,7 +86,7 @@ settings:
   colors.messages.info.border:
     global: '#282c34'
   colors.messages.info.fg:
-    global: '#282c34'
+    global: '#abb2bf'
   colors.messages.warning.bg:
     global: '#e5c07b'
   colors.messages.warning.fg:
