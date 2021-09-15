@@ -181,7 +181,7 @@ settings:
     global: always
   content.host_blocking.lists:
     global:
-    - https://raw.hellogithub.com/hosts
+    - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
   fonts.completion.category:
     global: bold 10pt Saber
   fonts.completion.entry:
