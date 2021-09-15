@@ -11,10 +11,10 @@ settings:
       wq: quit --save
       wqa: quit --save
   bindings.commands:
-    global: 
+    global:
       normal:
-        d: nop
         ;q: tab-close
+        d: nop
   bindings.key_mappings:
     global:
       <Ctrl+6>: <Ctrl+^>
@@ -164,13 +164,13 @@ settings:
   colors.tabs.odd.fg:
     global: '#abb2bf'
   colors.tabs.selected.even.bg:
-    global: '#abb2bf'
+    global: '#343538'
   colors.tabs.selected.even.fg:
-    global: '#282c34'
-  colors.tabs.selected.odd.bg:
     global: '#abb2bf'
+  colors.tabs.selected.odd.bg:
+    global: '#343538'
   colors.tabs.selected.odd.fg:
-    global: '#282c34'
+    global: '#abb2bf'
   colors.webpage.bg:
     global: '#abb2bf'
   completion.height:
