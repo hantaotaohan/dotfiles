@@ -387,6 +387,7 @@ echo -e "                                                                       
         xdotool \
         ripgrep \
         newsboat \
+	qutebrowser \
         python3-pip \
         inotify-tools \
         universal-ctags \
