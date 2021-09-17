@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Start</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <form id="form" role="search">
+      <input
+        type="search"
+        id="query"
+        name="q"
+        placeholder="Search Bing..."
+      />
+    </form>
+    <script>
+      const f = document.getElementById("form");
+      const q = document.getElementById("query");
+      const search = "https://bing.com/?q=";
+
+      function submitted(event) {
+        event.preventDefault();
+        const url = search + q.value + "&ia=web";
+        window.open(url, "_self");
+      }
+
+      f.addEventListener("submit", submitted);
+    </script>
+        <div id="links">
+      <nav>
+        <ul>
+          <h2>Links</h2>
+          <li><a href="https://github.com/">Github</a></li>
+          <br>
+          <li><a href="https://bing.com/">Bing</a></li>
+          <br>
+          <li><a href="https://weread.qq.com">Weread</a></li>
+        </ul>
+      </nav>
+    </div>
+  </body>
+</html>
