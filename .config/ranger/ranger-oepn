@@ -1,0 +1,3 @@
+#! /bin/bash
+
+wmctrl -a Ranger; sleep 1 && xdotool key Control_L+n && xdotool key Shift+\: && xdotool type cd ${1} && xdotool key Return
