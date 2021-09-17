@@ -15,6 +15,8 @@ settings:
       normal:
         ;q: tab-close
         d: nop
+        t: nop
+        T: nop
   bindings.key_mappings:
     global:
       <Ctrl+6>: <Ctrl+^>
@@ -56,15 +58,19 @@ settings:
   colors.downloads.error.bg:
     global: '#e06c75'
   colors.downloads.error.fg:
-    global: '#abb2bf'
+    global: '#282c34'
   colors.downloads.start.bg:
     global: '#61afef'
   colors.downloads.start.fg:
-    global: '#abb2bf'
+    global: '#282c34'
   colors.downloads.stop.bg:
     global: '#98c379'
   colors.downloads.stop.fg:
-    global: '#abb2bf'
+    global: '#282c34'
+  colors.downloads.system.bg:
+    global: none
+  colors.downloads.system.fg:
+    global: none
   colors.hints.bg:
     global: '#282c34'
   colors.hints.fg:
@@ -98,7 +104,7 @@ settings:
   colors.prompts.fg:
     global: '#abb2bf'
   colors.prompts.selected.bg:
-    global: '#282c34'
+    global: '#abb2bf'
   colors.statusbar.caret.bg:
     global: '#e06c75'
   colors.statusbar.caret.fg:
@@ -181,7 +187,11 @@ settings:
     global: always
   content.host_blocking.lists:
     global:
-    - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+    - https://raw.hellogithub.com/hosts
+  content.plugins:
+    global: true
+  downloads.position:
+    global: bottom
   fonts.completion.category:
     global: bold 10pt Saber
   fonts.completion.entry:
@@ -269,3 +279,5 @@ settings:
   url.searchengines:
     global:
       DEFAULT: https://bing.com/?q={}
+  url.start_pages:
+    global: www.bing.com
