@@ -280,4 +280,4 @@ settings:
     global:
       DEFAULT: https://bing.com/?q={}
   url.start_pages:
-    global: www.bing.com
+    global: /home/taotao/.config/qutebrowser/index.html
