@@ -557,7 +557,12 @@ Fixnautilus() {
     
     # 可供选择的值有“list-view”(列表视图)和“icon-view”(图标视图)
     gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
-    
+    gsettings set org.gnome.nautilus.preferences show-image-thumbnails "'never'"
+    gsettings set org.gnome.nautilus.preferences show-directory-item-counts "'never'"
+    gsettings set org.gnome.nautilus.preferences recursive-search 'never'
+    gsettings set org.gtk.Settings.FileChooser sort-directories-first 'true'
+    gsettings set org.gtk.Settings.FileChooser show-hidden false 'true'
+    gsettings set org.gnome.desktop.wm.preferences audible-bell 'false'
     row
     echo "fix Nautilus Done!"
     row
