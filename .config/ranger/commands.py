@@ -1851,10 +1851,41 @@ class fzf_select(Command):
         import os.path
         if self.quantifier:
             # match only directories
-            command='fd --type d --hidden --follow -E ".git" -E "node_modules" . / /home/taotao | fzf +m'
+            command='fd --type d --hidden --follow --exclude ".git" -exclude "node_modules" --exclude .git  \
+            --exclude boot       \
+            --exclude lib        \
+            --exclude lib64      \
+            --exclude lost+found \
+            --exclude opt        \
+            --exclude proc       \
+            --exclude root       \
+            --exclude run        \
+            --exclude sys        \
+            --exclude srv        \
+            --exclude sbin       \
+            --exclude tmp        \
+            --exclude var        \
+            --exclude tmp        \
+            --exclude run . / /home/taotao | fzf +m'
         else:
             # match files and directories
-            command='fd --hidden --follow -E ".git" -E "node_modules" . / /home/taotao | fzf +m'
+            command='fd --hidden --follow -E ".git" -E "node_modules" \
+            --exclude .git       \
+            --exclude boot       \
+            --exclude lib        \
+            --exclude lib64      \
+            --exclude lost+found \
+            --exclude opt        \
+            --exclude proc       \
+            --exclude root       \
+            --exclude run        \
+            --exclude sys        \
+            --exclude srv        \
+            --exclude sbin       \
+            --exclude tmp        \
+            --exclude var        \
+            --exclude tmp        \
+            --exclude run . / /home/taotao | fzf +m'
         fzf = self.fm.execute_command(command, universal_newlines=True, stdout=subprocess.PIPE)
         stdout, stderr = fzf.communicate()
         if fzf.returncode == 0:
