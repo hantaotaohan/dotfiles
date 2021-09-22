@@ -3,7 +3,7 @@
 
 # theme
 #--theme=OneHalfDark
---theme=TwoDark
+--theme=base16
 
 # style
 --style=full
