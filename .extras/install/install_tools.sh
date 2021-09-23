@@ -561,7 +561,7 @@ Fixnautilus() {
     gsettings set org.gnome.nautilus.preferences show-directory-item-counts "'never'"
     gsettings set org.gnome.nautilus.preferences recursive-search 'never'
     gsettings set org.gtk.Settings.FileChooser sort-directories-first 'true'
-    gsettings set org.gtk.Settings.FileChooser show-hidden false 'true'
+    gsettings set org.gtk.Settings.FileChooser show-hidden 'true'
     gsettings set org.gnome.desktop.wm.preferences audible-bell 'false'
     row
     echo "fix Nautilus Done!"
