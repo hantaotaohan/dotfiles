@@ -1,7 +1,6 @@
 [global]
     monitor = 0
     follow = mouse
-    #geometry = "300x50-0+30"
     geometry = "300x50-10+40"
     indicate_hidden = yes
     shrink = no
@@ -10,8 +9,8 @@
     separator_height = 2
     padding = 10
     horizontal_padding = 10
-    frame_width = 1
-    frame_color = "#232323"
+    frame_width = 2
+    frame_color = "#282c34"
     icon_position = off
     separator_color = frame
     sort = yes
@@ -20,7 +19,6 @@
     line_height = 0
     markup = full
     format = "<b>%b</b>"
-    plain_text = no
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -33,20 +31,13 @@
     sticky_history = yes
     history_length = 20
     always_run_script = true
-    startup_notification = false
-    verbosity = mesg
     corner_radius = 0
     ignore_dbusclose = false
     force_xinerama = false
     mouse_left_click = close_current
     mouse_middle_click = do_action, close_current
     mouse_right_click = close_all
-
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
+    icon_path = /usr/share/icons/Adwaita/32x32/status
 
 [urgency_low]
     background = "#232323"
@@ -59,14 +50,14 @@
     timeout = 10
 
 [urgency_critical]
-    background = "#d64e4e"
-    foreground = "#f0e0e0"
-    frame_color = "#d64e4e"
-    timeout = 0
+    background = "#282c34"
+    foreground = "#e06c75"
+    frame_color = "#e06c75"
+    timeout = 10
 
 [neomutt]
     appname = neomutt
     format = "<span> <b> %b </b></span>"
-    background = "#d64e4e"
-    foreground = "#f0e0e0"
-    timeout = 10
+    background = "#282c34"
+    foreground = "#e06c75"
+    new_icon = "/usr/share/icons/Adwaita/32x32/status/mail-unread.png"
