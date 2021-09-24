@@ -6,6 +6,9 @@ set completion-ignore-case on
 set bell-style none
 set echo-control-characters off
 
+# Don't immediately execute pasted multiline commands.
+set enable-bracketed-paste
+
 # Don't automatically match files beginning with dot.
 set match-hidden-files on
 
