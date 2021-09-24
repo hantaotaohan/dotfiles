@@ -1,63 +1,51 @@
 [global]
-    monitor = 0
-    follow = mouse
-    geometry = "300x50-10+40"
-    indicate_hidden = yes
-    shrink = no
-    transparency = 5
-    notification_height = 0
-    separator_height = 2
-    padding = 10
-    horizontal_padding = 10
-    frame_width = 2
+    frame_width = 2 
     frame_color = "#282c34"
-    icon_position = off
-    separator_color = frame
-    sort = yes
-    idle_threshold = 120
-    font = Source Sans Pro 10
-    line_height = 0
+    font = Fira code 10
     markup = full
     format = "<b>%b</b>"
+    sort = yes
+    indicate_hidden = yes
     alignment = left
-    vertical_alignment = center
-    show_age_threshold = 60
-    word_wrap = yes
-    ellipsize = middle
+    show_age_threshold = -1
+    word_wrap = no
     ignore_newline = no
-    stack_duplicates = true
-    hide_duplicate_count = false
-    show_indicators = no
+    geometry = "260x80-10+40"
+    shrink = no
+    transparency = 5
+    idle_threshold = 120
+    monitor = 0
+    follow = mouse
     sticky_history = yes
     history_length = 20
-    always_run_script = true
-    corner_radius = 0
-    ignore_dbusclose = false
-    force_xinerama = false
-    mouse_left_click = close_current
-    mouse_middle_click = do_action, close_current
-    mouse_right_click = close_all
+    show_indicators = no
+    line_height = 0
+    padding = 8
+    horizontal_padding = 10
+    separator_height = 3
+    separator_color = "#00000000" 
+    dmenu = /usr/bin/dmenu -p dunst:
+    browser = palemoo
+    icon_position = off
     icon_path = /usr/share/icons/Adwaita/32x32/status
+    max_icon_size=128
 
 [urgency_low]
-    background = "#232323"
-    foreground = "#a8a8a8"
-    timeout = 10
+    background = "#282c34"
+    foreground = "#abb2bf"
+    timeout = 0
 
 [urgency_normal]
-    background = "#232323"
-    foreground = "#a8a8a8"
+    background = "#282c34"
+    foreground = "#abb2bf"
     timeout = 10
 
 [urgency_critical]
-    background = "#282c34"
-    foreground = "#e06c75"
-    frame_color = "#e06c75"
-    timeout = 10
+    background = "#e06c75"
+    foreground = "#282c34"
+    timeout = 0
 
 [neomutt]
     appname = neomutt
-    format = "<span> <b> %b </b></span>"
-    background = "#282c34"
-    foreground = "#e06c75"
+    format = "<span> <b>%b</b></span>"
     new_icon = "/usr/share/icons/Adwaita/32x32/status/mail-unread.png"
