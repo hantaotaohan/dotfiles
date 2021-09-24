@@ -161,10 +161,10 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # 下一次开启窗口为水平
-bindsym $mod+backslash split h ;  exec --no-startup-id dunstify -r 6666 normal "Horizontally Mode"
+bindsym $mod+backslash split h ;  exec --no-startup-id dunstify -r 6666 normal "Horizontally Mode\\n\nEnable"
 
 # 下一次开启窗口为垂直
-bindsym $mod+minus split v ;  exec --no-startup-id dunstify -r 6666 normal "Vertically Mode"
+bindsym $mod+minus split v ;  exec --no-startup-id dunstify -r 6666 normal "Vertically Mode\\n\nEnable"
 
 # 切换窗口布局
 # bindsym $mod+s layout stacking
