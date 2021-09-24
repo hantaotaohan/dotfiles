@@ -26,6 +26,9 @@ esac
 # 使用"cd"时自动更正路径名中的键入错误.
 shopt -s cdspell
 
+# 如果命令为路径自动添加CD.
+shopt -s autocd
+
 # Case-insensitive globbing (used in pathname expansion).
 # 不区分大小写的全局搜索(用于路径名扩展)
 shopt -s nocaseglob
