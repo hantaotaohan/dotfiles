@@ -9,9 +9,6 @@ set echo-control-characters off
 # Don't immediately execute pasted multiline commands.
 set enable-bracketed-paste
 
-# Don't automatically match files beginning with dot.
-set match-hidden-files on
-
 # List all matches in case multiple possible completions are possible
 # 列出所有匹配项，以防有多个可能的完成
 set show-all-if-ambiguous on
@@ -29,7 +26,7 @@ set mark-symlinked-directories on
 
 # Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 # 除非模式以点显式开头，否则不要自动完成隐藏文件
-set match-hidden-files off
+set match-hidden-files on
 
 # Show all autocomplete results at once
 # 一次显示所有自动完成结果
@@ -58,7 +55,6 @@ set convert-meta off
 
 # Completed Colors
 set colored-stats On
-set visible-stats On
 
 # TAB cycles forward through completion choices. Press an arrow key to choose a
 # selection.
