@@ -65,6 +65,9 @@ bindsym $mod+d exec --no-startup-id rofi -show drun
 # 切换窗口
 bindsym $mod+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'Alt+p' -kb-accept-entry '!Alt-p'
 
+# 打开fzf-open
+bindsym $mod+f exec --no-startup-id fzf-open 
+
 # 查看CheatSheet
 bindsym $mod+slash exec --no-startup-id cat $HOME/.config/rofi/cheatsheet.conf | rofi -i -dmenu -p 'Cheatsheet' -theme cheatsheet.rasi  | awk -F '# ' '{print $2}' | xclip -selection c
 
