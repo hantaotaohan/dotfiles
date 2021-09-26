@@ -1350,6 +1350,12 @@ let g:startify_files_number = 20
 let g:startify_change_to_dir = 1
 let g:startify_enable_special = 1
 let g:startify_change_cmd = 'lcd'
+
+autocmd User Startified call s:on_startify()
+function! s:on_startify()
+  nnoremap <buffer><localleader>q :q<cr>
+endfunction
+
 let g:startify_custom_header = [
 		\'                                         ',
 		\'                                         ',
