@@ -488,8 +488,8 @@ for_window [class="Alacritty" title="open-alacritty"] floating enable , sticky e
 bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
 
 # Open fzf-open
-for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
-bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
+#for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
+#bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
 
 #for_window [class="Fsearch" title="fsearch"] move to scratchpad , sticky enable , resize set 650 250 , move absolute position center
 #bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Fsearch" -t "fsearch" -e "fsearch"
