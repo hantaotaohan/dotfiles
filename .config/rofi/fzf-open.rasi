@@ -23,7 +23,7 @@
   fg:         #abb2bf;
   bg:         #282c34;
 
-  spacing: 0;
+  spacing: 1;
   background-color: transparent;
   border-color: #2e343f;
 
@@ -31,7 +31,7 @@
   text-color: @text;
   text-color: #8ca0aa;
 
-  width: 70%;
+  width: 60%;
   height:50%;
 }
 
