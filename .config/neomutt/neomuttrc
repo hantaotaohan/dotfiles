@@ -181,6 +181,7 @@ bind index,pager                d       noop
 bind index,pager                u       noop
 bind index,pager                dd      delete-message
 bind index,pager                uu      undelete-message
+bind index,pager                \;e     sidebar-toggle-visible
 bind index,pager                <F8>    sidebar-toggle-visible
 bind index,pager                <Up>    sidebar-prev
 bind index,pager                \Cp     sidebar-prev
