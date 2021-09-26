@@ -685,67 +685,67 @@ augroup END
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Quickly close the current window
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-function! MyBufferClose()
-    let curbid = '%'
-    let allwinid = winnr('$')
-    let allbid = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-    let is_empty_buffer = (bufname(curbid) == '') && !getbufvar(curbid, '&modified')
-    let qflist =  get(getqflist({'winid':0}), 'winid', 0)
-    let loclist = get(getloclist(0, {'winid':0}), 'winid', 0)
-    let allfiletype =  getbufvar(bufnr('$'), '&filetype')
-    let curfiletype =  getbufvar(bufnr('%'), '&filetype')
-    let allmod = len(filter(getbufinfo(), 'v:val.changed == 1'))
-    let tagbar_open = bufwinnr('__Tagbar__') != -1
-    let term = getbufvar(bufnr('$'), '&buftype') == "terminal"
-    let term_cur = getbufvar(bufnr('%'), '&buftype') == "terminal"
-    if exists('t:NERDTreeBufName')
-        let nerdtree_open = bufwinnr(t:NERDTreeBufName) != -1
-    else
-        let nerdtree_open = 0
-    endif
+" function! MyBufferClose()
+"     let curbid = '%'
+"     let allwinid = winnr('$')
+"     let allbid = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+"     let is_empty_buffer = (bufname(curbid) == '') && !getbufvar(curbid, '&modified')
+"     let qflist =  get(getqflist({'winid':0}), 'winid', 0)
+"     let loclist = get(getloclist(0, {'winid':0}), 'winid', 0)
+"     let allfiletype =  getbufvar(bufnr('$'), '&filetype')
+"     let curfiletype =  getbufvar(bufnr('%'), '&filetype')
+"     let allmod = len(filter(getbufinfo(), 'v:val.changed == 1'))
+"     let tagbar_open = bufwinnr('__Tagbar__') != -1
+"     let term = getbufvar(bufnr('$'), '&buftype') == "terminal"
+"     let term_cur = getbufvar(bufnr('%'), '&buftype') == "terminal"
+"     if exists('t:NERDTreeBufName')
+"         let nerdtree_open = bufwinnr(t:NERDTreeBufName) != -1
+"     else
+"         let nerdtree_open = 0
+"     endif
 
-    if loclist > 1
-        execute "lclose"
-    elseif qflist > 1
-        execute "cclose"
-    elseif term == 1 && term_cur == 0
-        call feedkeys("\<C-\>")
-        call feedkeys("\<C-W>c")
-    elseif term == 1 && term_cur == 1
-        call feedkeys("\<C-W>c")
-    elseif nerdtree_open
-        execute "NERDTreeClose"
-    elseif tagbar_open
-        execute "TagbarClose"
-    elseif allwinid > 1 && allfiletype == 'help' && curfiletype == 'vim'
-        execute "close"
-    elseif allbid >= 2 && allmod >= 1
-        execute "silent bm!" | redraw
-        let file = expand('%:P')
-        try
-            if (confirm("将改变保存到 "  . file . '？' , "&Yes\n&No" , 2)==1) | redraw
-                execute "w!"
-                execute "silent bnext!"
-                execute "bdelete#"
-            else
-                execute "edit!"
-            endif
-        endtry
-    elseif allbid >= 2 && allmod == 0
-        try
-            execute "bnext!"
-            execute "bdelete#"
-        endtry
-    elseif allbid == 1 && allmod >= 1
-        execute "confirm q"
-    elseif allbid == 1 && allmod == 0
-        execute "q"
-    endif
-endfunction
+"     if loclist > 1
+"         execute "lclose"
+"     elseif qflist > 1
+"         execute "cclose"
+"     elseif term == 1 && term_cur == 0
+"         call feedkeys("\<C-\>")
+"         call feedkeys("\<C-W>c")
+"     elseif term == 1 && term_cur == 1
+"         call feedkeys("\<C-W>c")
+"     elseif nerdtree_open
+"         execute "NERDTreeClose"
+"     elseif tagbar_open
+"         execute "TagbarClose"
+"     elseif allwinid > 1 && allfiletype == 'help' && curfiletype == 'vim'
+"         execute "close"
+"     elseif allbid >= 2 && allmod >= 1
+"         execute "silent bm!" | redraw
+"         let file = expand('%:P')
+"         try
+"             if (confirm("将改变保存到 "  . file . '？' , "&Yes\n&No" , 2)==1) | redraw
+"                 execute "w!"
+"                 execute "silent bnext!"
+"                 execute "bdelete#"
+"             else
+"                 execute "edit!"
+"             endif
+"         endtry
+"     elseif allbid >= 2 && allmod == 0
+"         try
+"             execute "bnext!"
+"             execute "bdelete#"
+"         endtry
+"     elseif allbid == 1 && allmod >= 1
+"         execute "confirm q"
+"     elseif allbid == 1 && allmod == 0
+"         execute "q"
+"     endif
+" endfunction
 
-nnoremap <silent><localleader>q :call MyBufferClose()<cr>
-inoremap <silent><localleader>q <Esc>:call MyBufferClose()<cr>
-vnoremap <silent><localleader>q <Esc>:call MyBufferClose()<cr>
+" nnoremap <silent><localleader>q :Sayonara<cr>
+" inoremap <silent><localleader>q <Esc>:Sayonara<cr>
+" vnoremap <silent><localleader>q <Esc>:Sayonara<cr>
 
 "=================================================================================================================================
 " Custom Jump List 
@@ -918,6 +918,7 @@ Plug 'jiangmiao/auto-pairs'                                              " 成�
 Plug 'ludovicchabant/vim-gutentags'                                      " Tags管理
 Plug 'smkent/vim-pipe-preview'                                           " 终端预览Markdown插件
 Plug 'vim-scripts/AnsiEsc.vim'                                           " 终端预览Markdown插件
+Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
 if has("python3")
     Plug 'SirVer/ultisnips'                                              " 代码片段管理器
     Plug 'hantaotaohan/vim-snippets'                                     " 代码片段仓库
@@ -2345,3 +2346,12 @@ endif
 " let g:pipe_preview_command = 'mdv -t "767.4327" -'
 let g:pipe_preview_command = 'mdv -t "960.847" -'
 nnoremap <silent><localleader>v :<C-U>PipePreview<CR>
+
+"=================================================================================================================================
+" Sayonara settings
+"=================================================================================================================================
+if exists('g:plugs["clever-f.vim"]')
+	nnoremap <silent><localleader>q :Sayonara<cr>
+	inoremap <silent><localleader>q <Esc>:Sayonara<cr>
+	vnoremap <silent><localleader>q <Esc>:Sayonara<cr>
+endif
