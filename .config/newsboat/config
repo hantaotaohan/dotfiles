@@ -31,9 +31,9 @@ bind-key x pb-delete
 unbind-key q
 
 color listnormal color7 default
-color listfocus color5 color0 bold
+color listfocus color0 color7 bold
 color listnormal_unread color2 default
-color listfocus_unread color5 color0 bold
+color listfocus_unread color0 color7 bold
 color info color5 black bold
 color article color250 default bold
 
@@ -46,9 +46,9 @@ macro b set browser "google-chrome %u" ; open-in-browser ; set browser rdrview -
 macro r open-in-browser 
 macro q quit
 
-highlight all "  Reeder.*" color1
-highlight all "  Other.*" color1
-# highlight all ".*-.*" color1
+highlight all "  Reeder.*." color1
+highlight all "  Other.*." color1
+# highlight all ".*-.*" color8
 # highlight all "(0/0)" color0
 highlight feedlist "^(.+?)((0/0)))" color8
 highlight feedlist ".((0/0)))" color0
