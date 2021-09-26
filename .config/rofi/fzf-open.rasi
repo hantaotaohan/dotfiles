@@ -45,15 +45,18 @@ window {
 
 mainbox {
   padding: 1% 1% 1% 1%;
+  font: "Inziu Iosvka Bold 12";
 }
 
 inputbar {
-  margin: 30px 30px 30px 30px;
-  children: [prompt,entry];
+  font: "Inziu Iosvka Bold 12";
 }
 
 prompt {
+  padding: 2.3%;
+  border: 0 2px 0 0;
   text-color: @blue;
+  font: "Inziu Iosvka Bold 12";
 }
 
 textbox-prompt-colon {
@@ -63,19 +66,22 @@ textbox-prompt-colon {
 }
 
 entry {
-  margin: 0px 10px;
+  margin: 2.3%; 
+  font: "Inziu Iosvka Bold 12";
 }
 
 listview {
+  margin: 0%; 
   spacing: 1px;
   dynamic: true;
   scrollbar: false;
 }
 
 element {
-  padding: 1%;
+  padding: 1.0%;
   text-color: @text-alt;
   highlight: bold #e06c75; /* green */
+  /* border: 0 0 1px 0; */
   border-radius: 10px;
 }
 
@@ -98,6 +104,7 @@ message {
   background-color: @emphasis;
   border: 1px;
   border-color: @cyan;
+  font: "Inziu Iosvka Bold 12";
 }
 
 button selected {
