@@ -2343,14 +2343,15 @@ endif
 "=================================================================================================================================
 " Mdv - pipe preview command  settings
 "=================================================================================================================================
-" let g:pipe_preview_command = 'mdv -t "767.4327" -'
-let g:pipe_preview_command = 'mdv -t "960.847" -'
-nnoremap <silent><localleader>v :<C-U>PipePreview<CR>
+if exists('g:plugs["vim-pipe-preview"]')
+	let g:pipe_preview_command = 'mdv -t "826.2742" -'
+	nnoremap <silent><localleader>v :<C-U>PipePreview<CR>
+endif
 
 "=================================================================================================================================
 " Sayonara settings
 "=================================================================================================================================
-if exists('g:plugs["clever-f.vim"]')
+if exists('g:plugs["vim-sayonara"]')
 	nnoremap <silent><localleader>q :Sayonara<cr>
 	inoremap <silent><localleader>q <Esc>:Sayonara<cr>
 	vnoremap <silent><localleader>q <Esc>:Sayonara<cr>
