@@ -231,12 +231,11 @@ assign [class="Microsoft-edge"]                        $workspace10
 # --------------------------------------------------------------------------------------------------
 # 设定那些程序为浮动窗口
 # --------------------------------------------------------------------------------------------------
-for_window [class="Nautilus"]                       floating enable , resize set 1200 800 , move position center , sticky enable
-for_window [window_role="app"]                      floating enable , resize set 1200 800 , move position center , sticky enable , border normal 0 , title_format "<b>%title</b>"
-for_window [class="Vmware"]                         floating enable , resize set 1200 800 , move position center , sticky enable
-for_window [class="feh"]                            floating enable
-for_window [class="kindle.exe"]                     floating enable , move position center
-for_window [class="qutebrowser"]                    floating_minimum_size 1200 x 800
+for_window [class="Nautilus"]                          floating enable , resize set 1200 800 , move position center , sticky enable
+for_window [window_role="app"]                         floating enable , resize set 1200 800 , move position center , sticky enable , border normal 0 , title_format "<b>%title</b>"
+for_window [class="feh"]                               floating enable
+for_window [class="sxiv"]                              floating enable
+for_window [class="qutebrowser" title="*qutebrowser*"] resize set 1200 800 , move position center
 
 # --------------------------------------------------------------------------------------------------
 # 调整窗口大小配置
