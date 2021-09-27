@@ -236,6 +236,7 @@ for_window [window_role="app"]                      floating enable , resize set
 for_window [class="Vmware"]                         floating enable , resize set 1200 800 , move position center , sticky enable
 for_window [class="feh"]                            floating enable
 for_window [class="kindle.exe"]                     floating enable , move position center
+for_window [class="qutebrowser"]                    floating_minimum_size 1200 x 800
 
 # --------------------------------------------------------------------------------------------------
 # 调整窗口大小配置
