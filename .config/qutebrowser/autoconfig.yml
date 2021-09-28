@@ -7,13 +7,14 @@ settings:
     global:
       q: close
       qa: quit
-      w: session-save
+      w: save
       wq: quit --save
       wqa: quit --save
   bindings.commands:
     global:
       normal:
         ;q: tab-close
+        q: nop
         d: nop
         t: nop
         T: nop
@@ -281,3 +282,5 @@ settings:
       DEFAULT: https://bing.com/?q={}
   url.start_pages:
     global: /home/taotao/.config/qutebrowser/index.html
+  tabs.last_close:
+    global: close
