@@ -1,12 +1,7 @@
-// ==UserScript=0
-// @name         微信读书
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       TaoTao
-// @match        https://weread.qq.com/web/reader/*
-// @grant        GM_addStyle
+// ==UserScript==
+// @match https://weread.qq.com/web/reader/*
 // ==/UserScript==
+
 
 /* 字体 */
 GM_addStyle("*{font-family: 'Fira Code','KaiTi'; font-weight:bold ; !important;}");
