@@ -1,42 +1,110 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Start</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-  </head>
-  <body>
-    <form id="form" role="search">
-      <input
-        type="search"
-        id="query"
-        name="q"
-        placeholder="Search Bing..."
-      />
-    </form>
-    <script>
-      const f = document.getElementById("form");
-      const q = document.getElementById("query");
-      const search = "https://bing.com/?q=";
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Start</title>
+	<style>  
+        body{background: #282c34;}  
+        #search_box{  
+            margin: auto 0;
+        }  
+        #search_form{  
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin: auto 0;
+            height:490px;
+        }  
+        #search_input{  
+            background-color:RGB(30,33,39);  
+            outline:none;
+            border-radius: 35px;
+            text-align:center;
+            color: #6eafef;
+            font-size: 30px;  
+            height:60px;  
+            line-height: 200px;  
+            width: 600px;  
+            border: 0;  
+        }  
+        nav{  
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin: auto 0;
+        }  
+        h2{
+            font-size:26px;
+            color:#abb2bf;
+            border-color: #abb2bf; 
+            border:6px solid #6eafef;
+            border-top:none;
+            border-bottom:none;
+            border-right:none;
+            padding:0px 60px 0px 10px;
+        }
+        ul{
+            list-style-type:none;
+        }
+        ul li{
+            padding:10px 10px 10px 10px;
+        }
+    </style>  
+</head>
+<body>
+    <div id="search_box">  
+        <form  id="search_form" action="https://cn.bing.com/search" target="_blank">  
+            <input type="text" id="search_input" name="q" placeholder="Search Bing...">  
+        </form>  
+    </div>  
 
-      function submitted(event) {
-        event.preventDefault();
-        const url = search + q.value + "&ia=web";
-        window.open(url, "_self");
-      }
-
-      f.addEventListener("submit", submitted);
-    </script>
-        <div id="links">
-      <nav>
+    <hr>
+      
+<div id="links">
+    <nav>
         <ul>
-          <h2>Links</h2>
-          <li><a href="https://github.com/">Github</a></li>
-          <br>
-          <li><a href="https://bing.com/">Bing</a></li>
-          <br>
-          <li><a href="https://weread.qq.com">Weread</a></li>
+            <h2>Links</h2>
+                <li><a href="https://github.com/">Github</a></li>
+                <li><a href="https://bing.com/">Bing</a></li>
+                <li><a href="https://weread.qq.com">Weread</a></li>
         </ul>
-      </nav>
-    </div>
-  </body>
+        <ul>
+            <h2>Links</h2>
+                <li><a href="https://www.kdocs.cn/latest">Kdocs</a></li>
+                <li><a href="https://logseq.com/#/">Logseq</a></li>
+                <li><a href="https://zhihu.com">Zhihu</a></li>
+        </ul>
+        <ul>
+            <h2>Links</h2>
+                <li><a href="https://www.aliyundrive.com/sign">Aliyun</a></li>
+                <li><a href="https://music.163.com/">163-Music</a></li>
+                <li><a href="https://www.baidu.com">Baidu</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+	$('#search_input').on('keyup',function(){
+        var searchText=$(this).val();
+        var getdata = function (data) {
+        	var d = data.AS.Results[0].Suggests;
+        	var html = "";
+        	for(var i = 0;i<d.length;i++) {
+        		html += '<li>' + d[i].Txt + '</li>';
+        	}
+        	$('#suggest_result').html(html);
+        }
+ 
+        $(document).on('click',function() {
+        	$('#suggest').hide();
+        })
+ 
+		$('#suggest').delegate('li','click',function() {
+			var keyword = $(this).text();
+			location.href='http://cn.bing.com/search?q='+keyword; 
+		})
+	})
+</script>
+</body>
 </html>
