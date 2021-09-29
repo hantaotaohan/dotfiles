@@ -14,6 +14,7 @@ settings:
     global:
       normal:
         ;q: tab-close
+        ;s: home
         q: nop
         d: nop
         t: nop
