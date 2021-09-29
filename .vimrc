@@ -919,6 +919,7 @@ Plug 'ludovicchabant/vim-gutentags'                                      " Tags�
 Plug 'smkent/vim-pipe-preview'                                           " 终端预览Markdown插件
 Plug 'vim-scripts/AnsiEsc.vim'                                           " 终端预览Markdown插件
 Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
+Plug 'rlue/vim-barbaric'                                                 " 输入法切换插件
 if has("python3")
     Plug 'SirVer/ultisnips'                                              " 代码片段管理器
     Plug 'hantaotaohan/vim-snippets'                                     " 代码片段仓库
