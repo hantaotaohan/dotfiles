@@ -355,10 +355,10 @@ echo -e "                                                                       
         i3blocks \
         i3lock-fancy \
         deepin-screenshot \
-        --no-install-recommends --no-install-suggests nautilus \
+        nautilus --no-install-recommends --no-install-suggests \
         #-------------------------------------------------------------------------SYSTEM--
         #xinit \
-        --no-install-recommends --no-install-suggests xinit \
+        xinit --no-install-recommends --no-install-suggests \
         lua5.2 \
         #ruby-full \
         openssh-server \
