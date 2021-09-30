@@ -113,7 +113,7 @@ bindsym $mod+Shift+r restart
 
 # 退出i3wm
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec --no-startup-id i3-nagbar -t warning -f "pango:Saber 10" -m "Do you really want to exit?" -B "    Exit " "i3-msg exit" -B "    Lock " "pkill i3-nagbar && i3lock-fancy -f Saber" -B "    Reboot " "pkill i3-nagbar && reboot" -B "    Shutdown " "pkill i3-nagbar && shutdown -h now" 
+bindsym $mod+Shift+e exec --no-startup-id i3-nagbar -t warning -f "pango:Saber 10" -m "Do you really want to exit?" -B "    Exit " "i3-msg exit" -B "    Lock " "pkill i3-nagbar && i3lock-fancy -f Saber" -B "    Reboot " "pkill i3-nagbar && systemctl reboot" -B "    Shutdown " "pkill i3-nagbar && systemctl shutdown -h now" 
 
 # bar toggle settings
 bindsym $mod+w bar mode toggle bar-1
