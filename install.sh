@@ -353,12 +353,14 @@ echo -e "                                                                       
         #alttab \
         zathura \
         i3blocks \
+	nautilus \
+	dbus-x11 \
         i3lock-fancy \
         deepin-screenshot \
-        nautilus --no-install-recommends --no-install-suggests \
+        #nautilus --no-install-recommends --no-install-suggests \
         #-------------------------------------------------------------------------SYSTEM--
         #xinit \
-        xinit --no-install-recommends --no-install-suggests \
+        xinit \
         lua5.2 \
         #ruby-full \
         openssh-server \
