@@ -289,7 +289,7 @@ echo -e "              ${green}[+]Set TimeZone is Successful${reset}\n"
 # echo -e "              ${green}[+]Fix Error:chrome-sandbox is Successful${reset}\n"
 
 # Sudo user reboot options
-sudo chmod u+s /sbin/reboot
+# sudo chmod u+s /sbin/reboot
 }
 
 #----------------------------------------------------------------------------------------#
