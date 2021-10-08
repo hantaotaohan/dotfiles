@@ -67,6 +67,7 @@ Options:
         fzfopen             Setup FZF-Open of the New Alacritty
         i3blocks            Setup I3blocks
         yarn                Setup Yarn
+        vim                 Setup Vim8.2
                                     
     -------------------------------------------------------------------------------
     
@@ -611,6 +612,23 @@ Yarn() {
     yarn -v
     row
 }
+
+Vim() {
+    sudo apt-get remove --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox
+    sudo apt-get install libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/vim8.2.deb
+    cd $Bin_dir
+    sudo dpkg -i vim8.2.deb  > /dev/null 2>&1
+    sudo apt install -f > /dev/null 2>&1
+    sudo dpkg -i vim8.2.deb  > /dev/null 2>&1
+    cd $HOME
+    sudo rm -rf $Bin_dir/vim8.2.deb  > /dev/null 2>&1
+    row
+    Vim8.2 Install Completed
+    vim --version | head -1
+    row
+}
+
 main() {
 
     case "$1" in
@@ -720,6 +738,9 @@ main() {
         yarn)
             Yarn
             ;;
+        vim)
+            Vim
+            ;;
         -a|--all)
             Github_Hosts
             Alttab
@@ -753,6 +774,7 @@ main() {
             SSH_banner
             Fixnautilus
             Fzfopen
+            Vim
             #I3blocks
             #Yarn
             ;;
