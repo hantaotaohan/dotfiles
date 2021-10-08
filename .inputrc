@@ -77,8 +77,9 @@ set colored-stats On
 # \+g 进入navi
 "\\g":"navi\C-m"
 
-# ;+v Paste
-"\;v":"paste-from-clipboard"
+"\C-H": backward-word
+"\C-L": forward-word
+"\C-D": kill-word
 
 # CTRL+ALT+J,K 上下历史命令
 # "\e\C-J": history-search-forward
