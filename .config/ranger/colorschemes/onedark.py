@@ -91,13 +91,13 @@ class OneDark(ColorScheme):
         elif context.in_titlebar:
             attr |= bold
             if context.hostname:
-                fg = 0 if context.bad else 0
+                fg = 3 if context.bad else 2
                 if context.bad:
                     bg = 1
             elif context.directory:
-                fg = 0
+                fg = 4
             elif context.tab:
-                fg = 7 if context.good else 4
+                fg = 4 if context.good else 7
                 bg = 0
             elif context.link:
                 fg = cyan
