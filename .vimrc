@@ -1235,7 +1235,7 @@ inoremap <localleader>t <Esc>:TagbarToggle<CR>                            " ;t�
 let g:tagbar_autofocus = 1                                                " 焦点自动聚焦到Tagbar
 let g:tagbar_autoclose = 1
 let g:tagbar_autopreview = 0
-let g:tagbar_no_autocmds = 1
+let g:tagbar_no_autocmds = 0
 let g:tagbar_jump_lazy_scroll = 1
 let g:tagbar_sort = 0
 let g:tagbar_case_insensitive = 1
