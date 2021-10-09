@@ -990,7 +990,7 @@ if exists('g:plugs["vim-airline"]')
 	let g:airline_powerline_fonts= 1                                         " 使用powerline打过补丁的字体
 	let g:airline#extensions#whitespace#enabled = 0                          " 取消计数
 	let g:airline#extensions#tabline#buf_label_first = 1                     " 在第一个位置显示缓冲区标签"
-	let g:airline#extensions#tabline#buffers_label = 'Buffers'               " airline右上角定制
+	let g:airline#extensions#tabline#buffers_label = 'BUFFERS '               " airline右上角定制
 	let g:airline#extensions#tabline#tabs_label = 'Tabs'                     " Tabs定制
 	let g:airline#extensions#tabline#buffer_nr_format = '%s: '               " Buffer 格式
 	let g:airline#extensions#wordcount#enabled = 1                           " 开启字数统计
@@ -1020,6 +1020,7 @@ if exists('g:plugs["vim-airline"]')
 	let g:airline#extensions#tabline#show_tab_type = 1
 	let g:airline#extensions#tabline#buffer_idx_mode = 1
 	let g:airline#extensions#tabline#formatter = 'default'
+	let g:airline#extensions#term#enabled = 0
 	let g:airline#extensions#tabline#buffer_idx_format = {
 		\ '0': '0 ',
 		\ '1': '1 ',
@@ -1043,7 +1044,7 @@ if exists('g:plugs["vim-airline"]')
 	\ 'defx':  ['defx', '%{b:defx.paths[0]}'],
 	\ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
 	\ 'gundo': [ 'Gundo', '' ],
-	\ 'tagbar': [ 'Tagbar', '' ],
+	\ 'tagbar': [ 'TERMINAL', '' ],
 	\ 'help':  [ 'Help', '%f' ],
 	\ 'minibufexpl': [ 'MiniBufExplorer', '' ],
 	\ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
