@@ -2252,11 +2252,16 @@ endif
 " Floaterm settings
 "=================================================================================================================================
 if exists('g:plugs["vim-floaterm"]')
-    let g:floaterm_keymap_toggle = '<Localleader>c'
     let g:floaterm_wintype = 'split'
+    let g:floaterm_position = 'bottom'
     let g:floaterm_height = 0.3
     let g:floaterm_autoclose = 2
     let g:floaterm_autohide = 0
+    " let g:floaterm_keymap_toggle = '<Localleader>c'
+    nnoremap <silent><Localleader>c :silent FloatermToggle<CR>
+    tnoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
+    vnoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
+    inoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
 endif
 
 "=================================================================================================================================
