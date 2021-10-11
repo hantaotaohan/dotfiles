@@ -280,7 +280,7 @@ tm() {
 # 自动解压缩
 # ----------------------------------------------------------------------------------------------------------------
 # 自动解压：判断文件后缀名并调用相应解压命令
-function qe() {
+function se() {
     if [ -f $1 ] ; then
         case $1 in
         *.tar.bz2)   tar -xvjf $1    ;;
@@ -303,7 +303,7 @@ function qe() {
 }
 
 # 自动压缩：判断后缀名并调用相应压缩程序
-function qc() {
+function sc() {
     if [ -n "$1" ] ; then
         FILE=$1
         case $FILE in
@@ -316,6 +316,6 @@ function qc() {
         *.rar) shift && rar $FILE $* ;;
         esac
     else
-        echo "usage: qc <foo.tar.gz> ./foo ./bar"
+        echo "usage: sc <foo.tar.gz> ./foo ./bar"
     fi
 }
