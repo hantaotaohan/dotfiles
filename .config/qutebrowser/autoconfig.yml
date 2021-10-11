@@ -10,6 +10,8 @@ settings:
       w: save
       wq: quit --save
       wqa: quit --save
+  auto_save.session:
+    global: true
   bindings.commands:
     global:
       normal:
