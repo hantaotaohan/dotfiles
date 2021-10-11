@@ -1,7 +1,7 @@
 [global]
     frame_width = 2 
     frame_color = "#282c34"
-    font = Fira code 10
+    font = "Saber 10"
     markup = full
     format = "<b>%b</b>"
     sort = yes
