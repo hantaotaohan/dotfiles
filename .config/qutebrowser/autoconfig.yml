@@ -21,6 +21,7 @@ settings:
         d: nop
         t: nop
         T: nop
+        <F12>: inspector
   bindings.key_mappings:
     global:
       <Ctrl+6>: <Ctrl+^>
