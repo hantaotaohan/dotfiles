@@ -68,6 +68,7 @@ Options:
         i3blocks            Setup I3blocks
         yarn                Setup Yarn
         vim                 Setup Vim8.2
+        bashdb              Setup Bashdb Bash debuger
                                     
     -------------------------------------------------------------------------------
     
@@ -627,6 +628,20 @@ Vim() {
     row
 }
 
+Bashdb() {
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/bashdb.tar.gz
+    cd $Bin_dir
+    tar -zxvf bashdb.tar.gz
+    cd bashdb-5.0-1.1.2
+    ./configure
+    make
+    sudo make install
+    row
+    echo "BASHDB Install Done!"
+    row
+}
+
+
 main() {
 
     case "$1" in
@@ -739,6 +754,9 @@ main() {
         vim)
             Vim
             ;;
+        bashdb)
+            Bashdb
+            ;;
         -a|--all)
             Github_Hosts
             Alttab
@@ -773,6 +791,7 @@ main() {
             Fixnautilus
             Fzfopen
             Vim
+            Bashdb
             #I3blocks
             #Yarn
             ;;
@@ -798,6 +817,7 @@ main() {
             Fixnautilus
             Fzfopen
             I3blocks
+            Bashdb
             ;;
         -s|--server)
             Github_Hosts
@@ -814,6 +834,7 @@ main() {
             Clone
             Github_SSH
             SSH_banner
+            Bashdb
             ;;             
         *)
             echo "Command not found" >&2
