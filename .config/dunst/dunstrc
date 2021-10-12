@@ -43,7 +43,7 @@
 [urgency_critical]
     background = "#e06c75"
     foreground = "#282c34"
-    timeout = 0
+    timeout = 20
 
 [neomutt]
     appname = neomutt
