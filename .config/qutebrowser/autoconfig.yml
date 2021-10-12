@@ -163,11 +163,11 @@ settings:
   colors.tabs.even.fg:
     global: '#abb2bf'
   colors.tabs.indicator.error:
-    global: '#282c34'
+    global: '#e06c75'
   colors.tabs.indicator.start:
-    global: '#282c34'
+    global: '#98c379'
   colors.tabs.indicator.stop:
-    global: '#282c34'
+    global: '#61afef'
   colors.tabs.indicator.system:
     global: rgb
   colors.tabs.odd.bg:
