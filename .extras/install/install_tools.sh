@@ -89,12 +89,11 @@ row() {
 Alttab() {
     sudo apt install -y -qq libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev ibxpm-dev libxpm4 > /dev/null 2>&1 
     git clone -q $Git_clone/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab && ./configure > /dev/null 2>&1
-    make -s > /dev/null 2>&1
+    make > /dev/null 2>&1
     sudo make install > /dev/null 2>&1
-    alttab -v > $Bin_dir/alttabversion 2>&1
     sudo rm -rf $Bin_dir/alttab
     row
-    grep -o -E '^alttab [1-9]\d*.\d*.\d*.\d*.\d*' $Bin_dir/alttabversion
+    echo "Alttab installation is complete"
     row
     rm -rf $Bin_dir/alttabversion
 }
