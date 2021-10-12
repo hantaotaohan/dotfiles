@@ -175,11 +175,11 @@ settings:
   colors.tabs.odd.fg:
     global: '#abb2bf'
   colors.tabs.selected.even.bg:
-    global: '#343538'
+    global: '#3F4351'
   colors.tabs.selected.even.fg:
     global: '#abb2bf'
   colors.tabs.selected.odd.bg:
-    global: '#343538'
+    global: '#3F4351'
   colors.tabs.selected.odd.fg:
     global: '#abb2bf'
   colors.webpage.bg:
