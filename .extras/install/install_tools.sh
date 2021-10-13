@@ -69,6 +69,7 @@ Options:
         yarn                Setup Yarn
         vim                 Setup Vim8.2
         bashdb              Setup Bashdb Bash debuger
+        i3lock              Setup i3lock_fancy 
                                     
     -------------------------------------------------------------------------------
     
@@ -576,6 +577,7 @@ Fixnautilus() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Fzfopen() {
     git clone -q $Git_clone/hantaotaohan/fzf-open.git $Bin_dir/fzf-open > /dev/null 2>&1
     cd $Bin_dir/fzf-open
@@ -588,6 +590,7 @@ Fzfopen() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 I3blocks() {
     git clone -q $Git_clone/vivien/i3blocks $Bin_dir/i3blocks > /dev/null 2>&1
     cd $Bin_dir/i3blocks
@@ -602,6 +605,7 @@ I3blocks() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Yarn() {
     sudo apt remove yarn
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -612,6 +616,7 @@ Yarn() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Vim() {
     sudo apt-get remove --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox
     sudo apt-get install libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev
@@ -628,6 +633,7 @@ Vim() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
 Bashdb() {
     wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/bashdb.tar.gz
     cd $Bin_dir
@@ -641,6 +647,17 @@ Bashdb() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
+I3lock() {
+    git clone -q $Git_clone/meskarune/i3lock-fancy.git $Bin_dir/i3lock-fancy > /dev/null 2>&1
+    cd $Bin_dir/i3lock-fancy
+    sudo make install
+    cd $Bin_dir
+    rm -rf i3lock-fancy
+    row
+    echo "I3lock-Fancy Install Done!"
+    row
+}
 
 main() {
 
@@ -757,6 +774,9 @@ main() {
         bashdb)
             Bashdb
             ;;
+        i3lock)
+            I3lock
+            ;;
         -a|--all)
             Github_Hosts
             Alttab
@@ -791,6 +811,7 @@ main() {
             Fixnautilus
             Fzfopen
             Vim
+            I3lock
             Bashdb
             #I3blocks
             #Yarn
@@ -817,6 +838,7 @@ main() {
             Fixnautilus
             Fzfopen
             I3blocks
+            I3lock
             Bashdb
             ;;
         -s|--server)
