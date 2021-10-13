@@ -69,7 +69,8 @@ Options:
         yarn                Setup Yarn
         vim                 Setup Vim8.2
         bashdb              Setup Bashdb Bash debuger
-        i3lock              Setup i3lock_fancy 
+        i3lock              Setup i3lock_fancy
+        qutebrowser         Setup Qutebrowser
                                     
     -------------------------------------------------------------------------------
     
@@ -659,6 +660,23 @@ I3lock() {
     row
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
+Qutebrowser() {
+    sudo apt install python3-venv
+    git clone -q $Git_clone/qutebrowser/qutebrowser.git $Bin_dir/qutebrowser > /dev/null 2>&1
+    cd $Bin_dir/qutebrowser
+    python3 scripts/mkvenv.py
+    mkdir releases
+    cd releases
+    echo '#!/bin/bash' >> qutebrowser
+    echo '$HOME/.bin/qutebrowser/.venv/bin/python3 -m qutebrowser "$@"' >> qutebrowser
+    sudo chmod +x qutebrowser
+    sudo cp qutebrowser /usr/local/bin/qutebrowser
+    row
+    $Bin_dir/qutebrowser/.venv/bin/python3 -m qutebrowser -V | head -16 | grep qutebrowser
+    row
+}
+
 main() {
 
     case "$1" in
@@ -777,6 +795,9 @@ main() {
         i3lock)
             I3lock
             ;;
+        qutebrowser)
+            Qutebrowser
+            ;;
         -a|--all)
             Github_Hosts
             Alttab
@@ -813,6 +834,7 @@ main() {
             Vim
             I3lock
             Bashdb
+            Qutebrowser
             #I3blocks
             #Yarn
             ;;
