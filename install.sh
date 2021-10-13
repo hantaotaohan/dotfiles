@@ -389,7 +389,7 @@ echo -e "                                                                       
         xdotool \
         ripgrep \
         newsboat \
-	qutebrowser \
+	#qutebrowser \
         python3-pip \
         inotify-tools \
         universal-ctags \
