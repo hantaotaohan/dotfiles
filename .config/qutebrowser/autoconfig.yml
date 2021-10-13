@@ -22,6 +22,7 @@ settings:
         t: nop
         T: nop
         <F12>: inspector
+        <Escape>: spawn fcitx-remote -c
   bindings.key_mappings:
     global:
       <Ctrl+6>: <Ctrl+^>
