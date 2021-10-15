@@ -217,9 +217,7 @@ settings:
   fonts.messages.warning:
     global: 10pt Saber
   fonts.monospace:
-    global: '"Inziu Iosvka Bold","Saber","微软雅黑","xos4 Terminus", Terminus, Monospace,
-      "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier
-      New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+    global: '"Inziu Iosvka Bold","微软雅黑"'
   fonts.prompts:
     global: 10pt Saber
   fonts.statusbar:
@@ -227,29 +225,17 @@ settings:
   fonts.tabs:
     global: 10pt Saber
   fonts.web.family.cursive:
-    global: '"Inziu Iosvka Bold","Saber","微软雅黑","xos4 Terminus", Terminus, Monospace,
-      "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier
-      New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+    global: '"Inziu Iosvka Bold","微软雅黑"'
   fonts.web.family.fantasy:
-    global: '"Inziu Iosvka Bold","Saber","微软雅黑","xos4 Terminus", Terminus, Monospace,
-      "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier
-      New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+    global: '"Inziu Iosvka Bold","微软雅黑"'
   fonts.web.family.fixed:
-    global: '"Inziu Iosvka Bold","Saber","微软雅黑","xos4 Terminus", Terminus, Monospace,
-      "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier
-      New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+    global: '"Inziu Iosvka Bold","微软雅黑"'
   fonts.web.family.sans_serif:
-    global: '"Inziu Iosvka Bold","Saber","微软雅黑","xos4 Terminus", Terminus, Monospace,
-      "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier
-      New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+    global: '"Inziu Iosvka Bold","微软雅黑"'
   fonts.web.family.serif:
-    global: '"Inziu Iosvka Bold","Saber","微软雅黑","xos4 Terminus", Terminus, Monospace,
-      "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier
-      New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+    global: '"Inziu Iosvka Bold","微软雅黑"'
   fonts.web.family.standard:
-    global: '"Inziu Iosvka Bold","Saber","微软雅黑","xos4 Terminus", Terminus, Monospace,
-      "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier
-      New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+    global: '"Inziu Iosvka Bold","微软雅黑"'
   hints.border:
     global: '1px solid #282c34'
   hints.next_regexes:
