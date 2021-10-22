@@ -67,3 +67,55 @@ URxvt.boldfont:xft:Saber:size=10:style=Bold:antialias=true
 
 ! 输入法
 *inputMethod:fcitx
+
+!----------------------
+! St 
+!----------------------
+!
+st.termname:                 xst-256color
+st.borderless:               0
+st.font:                     Saber:size=10.5:antialias=true:autohint:true
+st.borderpx:                 10
+st.cursorshape:              1
+st.cursorthickness:          2
+st.cursorblinkstyle:         0
+st.cursorblinkontype:        1
+st.disablebold:              1
+st.disableitalics:           1
+st.disableroman:             1
+st.scrollrate:               3
+st.chscale:                  1.0
+st.cwscale:                  1.0
+st.blinktimeout:             300
+st.bellvolume:               100
+st.boxdraw:                  1
+st.boxdraw_bold:             1
+st.boxdraw_braille:          1
+st.depth:                    0
+st.opacity:                  255
+st.disable_alpha_correction: 1
+
+st.foreground:               #ABB2BF
+st.background:               #282C34
+st.color0:                   #282C34
+st.color8:                   #3E4452
+st.color1:                   #E06C75
+st.color9:                   #BE5046
+st.color2:                   #98C379
+st.color10:                  #98C379
+st.color3:                   #E5C07B
+st.color11:                  #D19A66
+st.color4:                   #61AFEF
+st.color12:                  #61AFEF
+st.color5:                   #C678DD
+st.color13:                  #C678DD
+st.color6:                   #56B6C2
+st.color14:                  #56B6C2
+st.color7:                   #5C6370
+st.color15:                  #ABB2BF
+st.color16:                  #cda869
+st.color17:                  #9b703f
+st.color18:                  #323537
+st.color19:                  #464b50
+st.color20:                  #838184
+st.color21:                  #c3c3c3
