@@ -672,6 +672,7 @@ Qutebrowser() {
     echo '$HOME/.bin/qutebrowser/.venv/bin/python3 -m qutebrowser "$@"' >> qutebrowser
     sudo chmod +x qutebrowser
     sudo cp qutebrowser /usr/local/bin/qutebrowser
+    sudo cp /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so $HOME/.bin/qutebrowser/.venv/lib/python3.7/site-packages/PyQt5/Qt5/plugins/platforminputcontexts/
     row
     $Bin_dir/qutebrowser/.venv/bin/python3 -m qutebrowser -V | head -16 | grep qutebrowser
     row
