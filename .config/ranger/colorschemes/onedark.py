@@ -76,7 +76,7 @@ class OneDark(ColorScheme):
             if context.main_column:
                 if context.selected:
                     attr |= bold
-                    fg = 15
+                    fg = 255
                     bg = 8
                 if context.marked:
                     attr |= bold
