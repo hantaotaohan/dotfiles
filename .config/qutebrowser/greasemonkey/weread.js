@@ -4,7 +4,7 @@
 
 
 /* 字体 */
-GM_addStyle("*{font-family: 'Inziu Iosevka SC','KaiTi'; font-weight:bold ; !important;}");
+GM_addStyle("*{font-family: 'FiraCode','kt'; font-weight:bold ; !important;}");
 
 /* app_content */
 GM_addStyle(".app_content{padding:0,100; !important;}");
