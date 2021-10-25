@@ -20,7 +20,7 @@ if has("gui_running")
     set guioptions=T                                                     " 去除VIN得GUI版本中得工具栏
     set guioptions-=m
     set guioptions-=T
-    set guifont=Inziu\ Iosevka\ SC\ Bold\ 10                             " 设置GUI字体
+    set guifont=Inziu\ Iosevka\ SC\ Bold\ 10.5                           " 设置GUI字体
     nnoremap <silent> <S-F2> :if &guioptions =~# 'T' <Bar>
             \set guioptions-=T <Bar>
             \set guioptions-=m <bar>
