@@ -937,6 +937,7 @@ Plug 'smkent/vim-pipe-preview'                                           " 终�
 Plug 'vim-scripts/AnsiEsc.vim'                                           " 终端预览Markdown插件
 Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
 Plug 'rlue/vim-barbaric'                                                 " 输入法切换插件
+Plug 'brooth/far.vim'                                                    " 函数替换插件
 if has("python3")
     Plug 'SirVer/ultisnips'                                              " 代码片段管理器
     Plug 'hantaotaohan/vim-snippets'                                     " 代码片段仓库
@@ -2385,4 +2386,22 @@ if exists('g:plugs["vim-sayonara"]')
 	nnoremap <silent><localleader>q :Sayonara<cr>
 	inoremap <silent><localleader>q <Esc>:Sayonara<cr>
 	vnoremap <silent><localleader>q <Esc>:Sayonara<cr>
+endif
+
+"=================================================================================================================================
+" Far settings
+"=================================================================================================================================
+if exists('g:plugs["far.vim"]')
+set lazyredraw            " improve scrolling performance when navigating through large results
+set regexpengine=0        " use old regexp engine
+set ignorecase smartcase  " ignore case only when the pattern contains no capital letters
+let g:far#source='rg'
+let g:far#glob_mode='rg'
+
+" shortcut for far.vim find
+nnoremap <silent><localleader><F3>  :Farf<cr>
+vnoremap <silent><localleader><F3>  :Farf<cr>
+" shortcut for far.vim replace
+nnoremap <silent><localleader><F2>  :Farr<cr>
+vnoremap <silent><localleader><F2>  :Farr<cr>
 endif
