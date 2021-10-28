@@ -662,20 +662,32 @@ I3lock() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Qutebrowser() {
-    sudo apt install python3-venv
-    git clone -q $Git_clone/qutebrowser/qutebrowser.git $Bin_dir/qutebrowser > /dev/null 2>&1
-    cd $Bin_dir/qutebrowser
-    python3 scripts/mkvenv.py
-    mkdir releases
-    cd releases
-    echo '#!/bin/bash' >> qutebrowser
-    echo '$HOME/.bin/qutebrowser/.venv/bin/python3 -m qutebrowser "$@"' >> qutebrowser
-    sudo chmod +x qutebrowser
-    sudo cp qutebrowser /usr/local/bin/qutebrowser
-    sudo cp /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so $HOME/.bin/qutebrowser/.venv/lib/python3.7/site-packages/PyQt5/Qt5/plugins/platforminputcontexts/
+    sudo apt install qutebrowser
+    if [ -d "$HOME/.local/share/qutebrowser/greasemonkey/" ]; then
+        cp $HOME/.config/qutebrowser/greasemonkey/* $HOME/.local/share/qutebrowser/greasemonkey/
+    else
+        mkdir -p $HOME/.local/share/qutebrowser/greasemonkey
+        cp $HOME/.config/qutebrowser/greasemonkey/* $HOME/.local/share/qutebrowser/greasemonkey/
+    fi
     row
-    $Bin_dir/qutebrowser/.venv/bin/python3 -m qutebrowser -V | head -16 | grep qutebrowser
+    qutebrowser -V | head -16 | grep qutebrowser
     row
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+    # sudo apt install python3-venv
+    # git clone -q $Git_clone/qutebrowser/qutebrowser.git $Bin_dir/qutebrowser > /dev/null 2>&1
+    # cd $Bin_dir/qutebrowser
+    # python3 scripts/mkvenv.py
+    # mkdir releases
+    # cd releases
+    # echo '#!/bin/bash' >> qutebrowser
+    # echo '$HOME/.bin/qutebrowser/.venv/bin/python3 -m qutebrowser "$@"' >> qutebrowser
+    # sudo chmod +x qutebrowser
+    # sudo cp qutebrowser /usr/local/bin/qutebrowser
+    # sudo cp /usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so $HOME/.bin/qutebrowser/.venv/lib/python3.7/site-packages/PyQt5/Qt5/plugins/platforminputcontexts/
+    # row
+    # $Bin_dir/qutebrowser/.venv/bin/python3 -m qutebrowser -V | head -16 | grep qutebrowser
+    # row
 }
 
 main() {
