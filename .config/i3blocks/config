@@ -86,8 +86,8 @@ min_width=80
 [volume]
 label=VOL
 label= 
-instance=Master
-#instance=PCM
+#instance=Master
+instance=PCM
 interval=once
 signal=10
 interval=30
