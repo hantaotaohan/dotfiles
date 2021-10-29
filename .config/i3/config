@@ -268,7 +268,7 @@ bindsym $mod+r mode "$Resize"
 # --------------------------------------------------------------------------------------------------
 # 关机锁屏相关设定
 # --------------------------------------------------------------------------------------------------
-set $mode_system     [L]OCK        [E]XIT        [R]EBOOT        [P]OWEROFF        [B]ACKGROUND
+set $mode_system     [L]OCK        [E]XIT        [R]EBOOT        [P]OWEROFF        [B]ACKGROUND        [U]NSPLA
 
 mode "$mode_system" {
      bindsym l exec --no-startup-id i3lock-fancy, mode "default"
@@ -276,6 +276,7 @@ mode "$mode_system" {
      bindsym r exec --no-startup-id systemctl reboot, mode "default"
      bindsym p exec --no-startup-id systemctl poweroff, mode "default"
      bindsym b exec --no-startup-id feh --randomize --bg-scale ~/.config/i3/background/ , mode "default"
+     bindsym u exec --no-startup-id $HOME/.config/i3/background.sh , mode "default"
      #bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
      # back to normal: Enter or Escape
      bindsym Return mode "default"
