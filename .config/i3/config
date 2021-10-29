@@ -564,4 +564,4 @@ exec --no-startup-id imwheel
 # Alttab
 # exec --no-startup-id "alttab -mk Control_L -s 1 -t 500x200 -d 1 -font xft:Saber:style=Bold:size=10 -i 30x30"
 # exec --no-startup-id "alttab -s 1 -t 500x200 -d 1 -font xft:Saber:style=Bold:size=10 -i 30x30"
-exec --no-startup-id "alttab -s 0 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 1x1"
+exec --no-startup-id "alttab -s 3 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 0x0"
