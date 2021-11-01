@@ -238,6 +238,7 @@ for_window [class="Feh"]                               floating enable , resize 
 for_window [class="Sxiv"]                              floating enable , resize set 1200 800 , move position center , sticky enable
 for_window [class="qutebrowser"]                       floating enable , resize set 1200 800 , move position center , sticky enable
 for_window [class="mpv" title="No file - mpv"]         floating enable , resize set 1200 800 , move position center , sticky enable
+for_window [title="微信"]                               floating enable , resize set 1200 800 , move position center , sticky enable
 
 # --------------------------------------------------------------------------------------------------
 # 调整窗口大小配置
@@ -418,8 +419,8 @@ bar {
     workspace_buttons       yes
     strip_workspace_numbers yes
     position                top
-    tray_output             none #primary
-    tray_padding            0
+    tray_output             primary #none #primary
+    tray_padding            5
 	colors {
         background $base00
         separator  $base04
