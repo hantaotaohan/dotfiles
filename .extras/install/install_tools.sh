@@ -71,7 +71,8 @@ Options:
         bashdb              Setup Bashdb Bash debuger
         i3lock              Setup i3lock_fancy
         qutebrowser         Setup Qutebrowser
-                                    
+        weixin              Setup Weixin
+        
     -------------------------------------------------------------------------------
     
 EOF
@@ -690,6 +691,17 @@ Qutebrowser() {
     # row
 }
 
+Weixin() {
+    wget -q -P $Bin_dir http://archive.ubuntukylin.com/software/pool/partner/ukylin-wine_70.6.3.25_amd64.deb 
+    wget -q -P $Bin_dir http://archive.ubuntukylin.com/software/pool/partner/ukylin-wechat_3.0.0_amd64.deb 
+    cd $Bin_dir
+    sudo apt-get install -f -y ./ukylin-wine_70.6.3.25_amd64.deb
+    sudo apt-get install -f -y ./ukylin-wechat_3.0.0_amd64.deb
+    row
+    echo "Weixin Install Done!"
+    row
+}
+
 main() {
 
     case "$1" in
@@ -810,6 +822,9 @@ main() {
             ;;
         qutebrowser)
             Qutebrowser
+            ;;
+        weixin)
+            Weixin
             ;;
         -a|--all)
             Github_Hosts
