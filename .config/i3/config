@@ -492,7 +492,7 @@ for_window [class="Alacritty" title="open-alacritty"] floating enable , sticky e
 bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
 
 # Open Qutebrowser
-for_window [class="qutebrowser" title="qutebrowser"] floating enable , sticky enable ,  move absolute position center
+for_window [class="qutebrowser"] floating enable , sticky enable ,  move absolute position center
 bindsym $mod+q exec --no-startup-id raiseorlaunch -r -c "qutebrowser" -e "qutebrowser"
 
 # Open fzf-open
