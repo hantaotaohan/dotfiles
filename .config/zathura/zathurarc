@@ -3,6 +3,11 @@
 set font "Saber bold 11"
 
 # Map
+unmap quit
+unmap q
+map ;q quit
+map ;q q
+
 map = zoom in
 map - zoom out
 map i recolor
