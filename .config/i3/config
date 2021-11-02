@@ -42,8 +42,14 @@ title_align center
 # 焦点跟随鼠标
 focus_follows_mouse no
 
-# 激活窗口并将焦点切换至此
-focus_on_window_activation focus
+# 在全平模式下弹出提示消息并离开全屏模式
+popup_during_fullscreen leave_fullscreen  # smart|ignore|leave_fullscreen
+
+# 切换窗口并不按照默认的父级窗口切换
+force_focus_wrapping no
+
+# 专注于焦点切换
+focus_on_window_activation focus # smart|urgent|focus|none
 
 # --------------------------------------------------------------------------------------------------
 # 快捷键设置
