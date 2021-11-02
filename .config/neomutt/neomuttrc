@@ -189,9 +189,9 @@ bind index,pager                \Ck     sidebar-prev
 bind index,pager                <Down>  sidebar-next
 bind index,pager                \Cn     sidebar-next
 bind index,pager                \Cj     sidebar-next
-bind index                      <Right> sidebar-open
-bind index                      \Cl     sidebar-open
-bind index                      \Co     sidebar-open
+bind index,pager                <Right> sidebar-open
+bind index,pager                \Cl     sidebar-open
+bind index,pager                \Co     sidebar-open
 bind index,pager                R       group-reply
 
 # Threads
