@@ -123,6 +123,6 @@ export LESS_TERMCAP_ue=$'\e[0m' # End underline
 # ------------------------------------------------------------------------------------------------------------
 export TLDR_HEADER='magenta bold underline'
 export TLDR_QUOTE='yellow bold italic'
-export TLDR_DESCRIPTION='bold green'
+export TLDR_DESCRIPTION='magenta bold'
 export TLDR_CODE='red'
 export TLDR_PARAM='blue'
