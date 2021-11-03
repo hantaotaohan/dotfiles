@@ -1,38 +1,19 @@
-# Font
-# set font "Inziu Iosevka SC bold 11"
+# ---------- Font Settings
 set font "Saber bold 11"
 
-# Map
-unmap quit
-unmap q
-map ;q quit
-map ;q q
+# ---------- Options
+set incremental-search     "true"
+set smooth-scroll          "true"
+set abort-clear-search     "true"
+set statusbar-home-tilde   "true"
+set adjust-open            "width"
+set window-title-basename  "true"
+set first-page-column      "1:1"
+set selection-clipboard    "clipboard"
+set synctex                "true"
+set synctex-editor-command "vim +%{line} %{input}"
 
-map = zoom in
-map - zoom out
-map i recolor
-map R rotate
-
-map <C-u> scroll half-up
-map <C-d> scroll half-down
-map <C-p> scroll up
-map <C-n> scroll down
-
-
-# Options.
-set incremental-search    "true"
-set smooth-scroll         "true"
-set abort-clear-search    "true"
-set statusbar-home-tilde  "true"
-set adjust-open           "width"
-#set window-height         "566"
-#set window-width          "690"
-set window-title-basename "true"
-set first-page-column     "1:1"
-set selection-clipboard   clipboard
-
-
-# Base16 OneDark
+# ---------- Themes OneDark
 set default-bg                  "#282c34"
 set default-fg                  "#353b45"
 
@@ -66,20 +47,53 @@ set recolor-darkcolor           "#b6bdca"
 set recolor                     "true"
 set recolor-keephue             "false"
 
+# ---------- UnMap Bindings
+unmap m
+unmap q
+unmap "'"
+unmap <C-j>
+
+# ---------- Map Bindings
+map = zoom in
+map - zoom out
+map i recolor
+map R rotate
+map ;q quit
+
+map <C-u> scroll half-up
+map <C-d> scroll half-down
+map <C-p> scroll up
+map <C-n> scroll down
 
 # ---------- Bookmark Bindings
-unmap m
-# Set Mark Bindings
-map m1 feedkeys ":bmark 1<Return>"
-map m2 feedkeys ":bmark 2<Return>"
-map m3 feedkeys ":bmark 3<Return>"
-map m4 feedkeys ":bmark 4<Return>"
-map m5 feedkeys ":bmark 5<Return>"
-# Goto Mark Bindings
-map \1 feedkeys ":blist 1<Return>"
-map \2 feedkeys ":blist 2<Return>"
-map \3 feedkeys ":blist 3<Return>"
-map \4 feedkeys ":blist 4<Return>"
-map \5 feedkeys ":blist 5<Return>"
+map [normal] m1 feedkeys ":bmark 1<Return>"
+map [normal] m2 feedkeys ":bmark 2<Return>"
+map [normal] m3 feedkeys ":bmark 3<Return>"
+map [normal] m4 feedkeys ":bmark 4<Return>"
+map [normal] m5 feedkeys ":bmark 5<Return>"
+map [normal] m6 feedkeys ":bmark 6<Return>"
+map [normal] ma feedkeys ":bmark a<Return>"
+map [normal] mb feedkeys ":bmark b<Return>"
+map [normal] mc feedkeys ":bmark c<Return>"
+map [normal] md feedkeys ":bmark d<Return>"
+map [normal] me feedkeys ":bmark e<Return>"
+map [normal] mf feedkeys ":bmark f<Return>"
+map [normal] mg feedkeys ":bmark g<Return>"
 
-map ml feedkeys ":blist<Tab>"  # List Marks
+map [normal] "'"1 feedkeys ":blist 1<Return>"
+map [normal] "'"2 feedkeys ":blist 2<Return>"
+map [normal] "'"3 feedkeys ":blist 3<Return>"
+map [normal] "'"4 feedkeys ":blist 4<Return>"
+map [normal] "'"5 feedkeys ":blist 5<Return>"
+map [normal] "'"6 feedkeys ":blist 6<Return>"
+map [normal] "'"a feedkeys ":blist a<Return>"
+map [normal] "'"b feedkeys ":blist b<Return>"
+map [normal] "'"c feedkeys ":blist c<Return>"
+map [normal] "'"d feedkeys ":blist d<Return>"
+map [normal] "'"e feedkeys ":blist e<Return>"
+map [normal] "'"f feedkeys ":blist f<Return>"
+map [normal] "'"g feedkeys ":blist g<Return>"
+
+map [normal] ml feedkeys ":blist<Tab>"
+
+map [normal] ;b feedkeys ":open ~/books/"<Tab>
