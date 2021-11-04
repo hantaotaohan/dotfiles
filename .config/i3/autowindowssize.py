@@ -5,7 +5,7 @@ import i3ipc
 def on(i3, e):
     i3 = i3ipc.Connection()
     workspace = i3.get_tree().find_focused().workspace().num
-    if e.container.window_class in ['Microsoft-edge-dev',  'Alacritty'] and workspace == 10:
+    if e.container.window_class in ['Microsoft-edge-dev',  'Alacritty'] and workspace == 3:
         e.container.command('resize set 60 ppt 90 ppt')
 
 i3 = i3ipc.Connection()
