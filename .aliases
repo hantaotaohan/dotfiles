@@ -31,11 +31,10 @@ alias lsd="ls -lF --color=always | grep --color=never '^d'"
 #----------------------------------------------------------------------------------------------------
 # Bookmarks
 #----------------------------------------------------------------------------------------------------
-alias dt='cd ~/desktop'
-alias ws='cd ~/workspace'
+alias d='cd ~/desktop'
 alias dl='cd ~/downloads'
-alias ds='cd ~/dotfiles'
-alias cf='cd ~/.config'
+alias b='cd ~/books'
+alias h='cd $HOME'
 
 #----------------------------------------------------------------------------------------------------
 # Easy report
@@ -43,7 +42,6 @@ alias cf='cd ~/.config'
 alias grep='grep --color=auto'
 alias fdir='find . -type d -name'
 alias ff='find . -type f -name'
-alias h='history'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias ln='ln -iv'
