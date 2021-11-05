@@ -389,6 +389,7 @@ echo -e "                                                                       
         xdotool \
         ripgrep \
         newsboat \
+	tty-clock \
 	#qutebrowser \
         python3-pip \
         inotify-tools \
