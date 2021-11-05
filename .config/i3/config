@@ -494,29 +494,33 @@ for_window [class="copytranslator"] move to scratchpad , sticky enable , resize 
 bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "copytranslator" -t "Copytranslator" -e "copytranslator --no-sandbox"
 
 # Open Alacritty
-for_window [class="Alacritty" title="open-alacritty"] floating enable , sticky enable , resize set 850 350 , move absolute position center
-bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
+# for_window [class="Alacritty" title="open-alacritty"] floating enable , sticky enable , resize set 850 350 , move absolute position center
+# bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
 
 # Open Qutebrowser
 for_window [class="qutebrowser"] floating enable , sticky enable ,  move absolute position center
 bindsym $mod+q exec --no-startup-id raiseorlaunch -r -c "qutebrowser" -e "qutebrowser"
 
+# Open tty-clock
+for_window [class="Alacritty" title="ttyclock"] floating enable , sticky enable , resize set 390 140 , move absolute position center
+bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "ttyclock" -e "alacritty -t 'ttyclock' -e tty-clock -s -C 7 -b -D"
+
 # Open fzf-open
-#for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
-#bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
+# for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
+# bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
 
-#for_window [class="Fsearch" title="fsearch"] move to scratchpad , sticky enable , resize set 650 250 , move absolute position center
-#bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Fsearch" -t "fsearch" -e "fsearch"
+# for_window [class="Fsearch" title="fsearch"] move to scratchpad , sticky enable , resize set 650 250 , move absolute position center
+# bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Fsearch" -t "fsearch" -e "fsearch"
 
-#for_window [class="Crow Translate"] move to scratchpad , sticky enable , resize set 748 380 , move absolute position center
-#bindsym Mod4+4 exec --no-startup-id raiseorlaunch -r -t "Crow Translate" -e "crow"
+# for_window [class="Crow Translate"] move to scratchpad , sticky enable , resize set 748 380 , move absolute position center
+# bindsym Mod4+4 exec --no-startup-id raiseorlaunch -r -t "Crow Translate" -e "crow"
 
 # Scratchpad config
-#for_window [class="Zathura"] move to scratchpad, scratchpad
-#bindsym $mod+z [class="Zathura"] scratchpad show resize set 900 700 , move position center
+# for_window [class="Zathura"] move to scratchpad, scratchpad
+# bindsym $mod+z [class="Zathura"] scratchpad show resize set 900 700 , move position center
 
 #for_window [title ="^阿里"], move scratchpad
-#bindsym Mod4+1 [title="^阿里"] scratchpad show  , move position center
+# bindsym Mod4+1 [title="^阿里"] scratchpad show  , move position center
 
 # --------------------------------------------------------------------------------------------------
 # i3-gaps
