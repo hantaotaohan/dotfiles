@@ -5,6 +5,9 @@
 
 xset r rate 200 60
 
+# 关闭响铃提示
+xset b off
+
 # disable key repeat for keys that are not (or not heavily) used for navigation
 
 xset -r 67	# F1
