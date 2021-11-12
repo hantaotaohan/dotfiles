@@ -502,8 +502,8 @@ for_window [class="qutebrowser"] floating enable , sticky enable ,  move absolut
 bindsym $mod+q exec --no-startup-id raiseorlaunch -r -c "qutebrowser" -e "qutebrowser"
 
 # Open tty-clock
-for_window [class="Alacritty" title="ttyclock"] floating enable , sticky enable , resize set 390 140 , move absolute position center
-bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "ttyclock" -e "alacritty -t 'ttyclock' -e tty-clock -s -C 7 -b -D"
+for_window [class="Alacritty" title="ttyclock"] floating enable , sticky enable , resize set 500 150 , move absolute position center
+bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "ttyclock" -e "alacritty -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
 
 # Open fzf-open
 # for_window [class="Alacritty" title="fzfopen"] floating enable , sticky enable , resize set 850 350 , move absolute position center
