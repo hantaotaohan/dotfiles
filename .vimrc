@@ -273,6 +273,8 @@ set diffopt=filler,internal,algorithm:histogram,indent-heuristic           " 更
 " Editor UI
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 set mouse=a                                                                " 启用鼠标
+set t_RS=                                                                  " 设置获取终端样式
+set t_SH=                                                                  " 设置获取终端样式
 set hidden                                                                 " 针对buffer不保存即可切换
 set noshowmode                                                             " 任务栏不显示状态
 set shortmess=aoOTI                                                        " 避免文字信息提示
