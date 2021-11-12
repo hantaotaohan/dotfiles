@@ -1,99 +1,106 @@
-! Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
-! Copyright (c) 2016-present Sven Greb <code@svengreb.de>
-
 ! Project:    Onedark XResources
 ! Version:    0.1.0
 ! Repository: https://github.com/arcticicestudio/nord-xresources
 ! License:    MIT
 
 !----------------------
-! OneDark Theme
+! XFT Settings
 !----------------------
-*.foreground:   #ABB2BF
-*.background:   #282C34
-*.cursorColor:  #ABB2BF
+
+Xft.dpi:            96
+Xft.rgba:           rgb
+Xft.antialias:      true
+Xft.hinting:        true
+Xft.autohint:       false
+Xft.lcdfilter:      lcddefault
+Xft.hintstyle:      hintslight
+
+!----------------------
+! URxvt OneDark Theme
+!----------------------
+
+URxvt.foreground:   #ABB2BF
+URxvt.background:   #282C34
+URxvt.cursorColor:  #ABB2BF
 
 ! black
-*.color0:       #282C34
-*.color8:       #3E4452
+URxvt.color0:       #282C34
+URxvt.color8:       #3E4452
 
 ! red
-*.color1:       #E06C75
-*.color9:       #BE5046
+URxvt.color1:       #E06C75
+URxvt.color9:       #BE5046
 
 ! green
-*.color2:       #98C379
-*.color10:      #98C379
+URxvt.color2:       #98C379
+URxvt.color10:      #98C379
 
 ! yellow
-*.color3:       #E5C07B
-*.color11:      #D19A66
+URxvt.color3:       #E5C07B
+URxvt.color11:      #D19A66
 
 ! blue
-*.color4:       #61AFEF
-*.color12:      #61AFEF
+URxvt.color4:       #61AFEF
+URxvt.color12:      #61AFEF
 
 ! magenta
-*.color5:       #C678DD
-*.color13:      #C678DD
+URxvt.color5:       #C678DD
+URxvt.color13:      #C678DD
 
 ! cyan
-*.color6:       #56B6C2
-*.color14:      #56B6C2
+URxvt.color6:       #56B6C2
+URxvt.color14:      #56B6C2
 
 ! white
-*.color7:       #5C6370
-*.color15: 	    #ABB2BF
+URxvt.color7:       #5C6370
+URxvt.color15: 	    #ABB2BF
 
 !----------------------
-! Settings
+! URxvt Settings
 !----------------------
+
+! 字间距
+URxvt.letterSpace:       -1
+
+! 上下左右边距
+URxvt.internalBorder:    10
+
+! 无焦点时淡化屏幕
+URxvt*fading:            10
+
 ! 边框
-*.borderLess:False
+URxvt.borderLess:        false
 
 ! 滚动条设置
-*.scrollBar:False
-
-! 字体设置
-Xft.dpi:96
-
-! 英文字体
-! URxvt.font:xft:Inziu Iosevka SC:size=10:style=Bold:antialias=true
-URxvt.font:xft:Inziu Iosevka SC:size=10:style=Bold:antialias=true
-
-! 中文字体
-! URxvt.boldfont:xft:Saber:size=10:style=Bold:antialias=true
-URxvt.boldfont:xft:Saber:size=10:style=Bold:antialias=true
+URxvt.scrollBar:         false
 
 ! 输入法
-*inputMethod:fcitx
+URxvt.inputMethod:       fcitx
+
+! 跳转输入区域
+URxvt.jumpScroll:        true
+
+! 关闭响铃
+URxvt.urgentOnBell:      false
+
+! 关闭响铃
+URxvt.visualBell:        false
+
+! 覆盖
+urxvt.override-redirect: false
+
+! 取消边框
+urxvt.borderLess:        false
+
+! 英文字体
+URxvt.font:              xft:Inziu Iosevka SC:size=10.5:style=Bold:antialias=true
+
+! 中文字体
+URxvt.boldfont:          xft:Inziu Iosevka SC:size=10.5:style=Bold:antialias=true
 
 !----------------------
-! St 
+! St Settings
 !----------------------
-!
-st.termname:                 xst-256color
-st.borderless:               0
-st.font:                     Saber:size=10.5:antialias=true:autohint:true
-st.borderpx:                 10
-st.cursorshape:              1
-st.cursorthickness:          2
-st.cursorblinkstyle:         0
-st.cursorblinkontype:        1
-st.disablebold:              1
-st.disableitalics:           1
-st.disableroman:             1
-st.scrollrate:               3
-st.chscale:                  1.0
-st.cwscale:                  1.0
-st.blinktimeout:             300
-st.bellvolume:               100
-st.boxdraw:                  1
-st.boxdraw_bold:             1
-st.boxdraw_braille:          1
-st.depth:                    0
-st.opacity:                  255
-st.disable_alpha_correction: 1
 
 st.foreground:               #ABB2BF
 st.background:               #282C34
@@ -119,3 +126,83 @@ st.color18:                  #323537
 st.color19:                  #464b50
 st.color20:                  #838184
 st.color21:                  #c3c3c3
+
+st.termname:                 xst-256color
+st.borderless:               0
+st.font:                     Saber:size=10.5:antialias=true:autohint:true
+st.borderpx:                 10
+st.cursorshape:              1
+st.cursorthickness:          2
+st.cursorblinkstyle:         0
+st.cursorblinkontype:        1
+st.disablebold:              1
+st.disableitalics:           1
+st.disableroman:             1
+st.scrollrate:               3
+st.chscale:                  1.0
+st.cwscale:                  1.0
+st.blinktimeout:             300
+st.bellvolume:               100
+st.boxdraw:                  1
+st.boxdraw_bold:             1
+st.boxdraw_braille:          1
+st.depth:                    0
+st.opacity:                  255
+st.disable_alpha_correction: 1
+
+!----------------------
+! Xterm Settings 
+!----------------------
+XTerm.vt100*termName                :       xterm-256color
+XTerm.vt100*locale                  :       true
+XTerm.vt100*cursorBlink             :       true
+XTerm.vt100*activeIcon              :       false
+XTerm.vt100*reverseVideo            :       off
+XTerm.vt100*pointerColor            :		#16A085
+XTerm.vt100*cursorColor             :       #61AFEF
+XTerm.vt100*loginShell              :       false
+XTerm.vt100*renderFont              :       true 
+XTerm.vt100*dynamicColors           :       false
+XTerm.vt100*fading                  :       10
+
+XTerm.vt100*utf8                    :       2
+XTerm.vt100*eightBitInput           :       true
+XTerm.vt100*faceName                :       xft:Iosevka Fixed:style=Extrabold:spacing=terminal:antialias=true:autohint:true
+XTerm.vt100*faceNameDoublesize      :       xft:Saber:spacing=terminal:antialias=true:autohint:true
+XTerm.vt100*internalBorder          :       10
+XTerm.vt100*faceSize                :       10.5
+
+XTerm.vt100*saveLines               :       5000
+XTerm.vt100*scrollTtyKeypress       :       true
+XTerm.vt100*scrollTtyOutput         :       true
+XTerm.vt100*bellIsUrgent            :       false
+XTerm.vt100*altSendsEscape          :       false
+XTerm.vt100*metaSendsEscape         :       false
+
+XTerm.vt100*foreground              :       #ABB2BF
+XTerm.vt100*background              :       #282C34
+XTerm.vt100*color0                  :       #282C34
+XTerm.vt100*color8                  :       #3E4452
+XTerm.vt100*color1                  :       #E06C75
+XTerm.vt100*color9                  :       #BE5046
+XTerm.vt100*color2                  :       #98C379
+XTerm.vt100*color10                 :       #98C379
+XTerm.vt100*color3                  :       #E5C07B
+XTerm.vt100*color11                 :       #D19A66
+XTerm.vt100*color4                  :       #61AFEF
+XTerm.vt100*color12                 :       #61AFEF
+XTerm.vt100*color5                  :       #C678DD
+XTerm.vt100*color13                 :       #C678DD
+XTerm.vt100*color6                  :       #56B6C2
+XTerm.vt100*color14                 :       #56B6C2
+XTerm.vt100*color7                  :       #5C6370
+XTerm.vt100*color15                 :       #ABB2BF
+
+!------------- copy-paste ----------------------!
+XTerm.vt100*selectToClipboard: true
+XTerm.vt100*translations: #override \
+        Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+        Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
+        Ctrl <Key> minus: smaller-vt-font() \n\
+        Ctrl <Key> plus: larger-vt-font() \n\
+        Ctrl <Key> 0: set-vt-font(d)
