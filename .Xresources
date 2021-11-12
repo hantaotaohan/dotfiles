@@ -158,7 +158,7 @@ XTerm.vt100*locale                  :       true
 XTerm.vt100*cursorBlink             :       true
 XTerm.vt100*activeIcon              :       false
 XTerm.vt100*reverseVideo            :       off
-XTerm.vt100*pointerColor            :		#16A085
+XTerm.vt100*pointerColor            :       #16A085
 XTerm.vt100*cursorColor             :       #61AFEF
 XTerm.vt100*loginShell              :       false
 XTerm.vt100*renderFont              :       true 
