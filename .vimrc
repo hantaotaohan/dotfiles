@@ -354,11 +354,17 @@ vnoremap <Space> zf                                                        " 空
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 内部终端颜色设置
 " ----------------------------------------------------------------o--------------------------------------------------------------o
+if exists('+termguicolors')
+ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+ set termguicolors
+endif
+
 if has('nvim')
     let g:terminal_color_0 = "#282c34"
     let g:terminal_color_1 = "#e06c75"
     let g:terminal_color_2 = "#98c379"
-    let g:terminal_color_3 = "#e5c07b"
+    let g:terminal_color_3 = "#d19a66"
     let g:terminal_color_4 = "#61afef"
     let g:terminal_color_5 = "#c678dd"
     let g:terminal_color_6 = "#56b6c2"
@@ -372,11 +378,23 @@ if has('nvim')
     let g:terminal_color_14= "#56b6c2"
     let g:terminal_color_15= "#dcdfe4"
 else
-    let g:terminal_ansi_colors = [
-    \ '#282c34', '#e06c75', '#98c379', '#e5c07b',
-    \ '#61afef', '#c678dd', '#56b6c2', '#abb2bf',
-    \ '#282c34', '#e06c75', '#98c379', '#e5c07b',
-    \ '#61afef', '#c678dd', '#56b6c2', '#abb2bf' ]
+    let g:terminal_ansi_colors = repeat([0], 16)
+    let g:terminal_ansi_colors[0]  = "#282C34" " black
+    let g:terminal_ansi_colors[8]  = "#3E4452" " black bright
+    let g:terminal_ansi_colors[1]  = "#E06C75" " red
+    let g:terminal_ansi_colors[9]  = "#BE5046" " red bright
+    let g:terminal_ansi_colors[2]  = "#98C379" " green
+    let g:terminal_ansi_colors[10] = "#98C379" " green bright
+    let g:terminal_ansi_colors[3]  = "#E5C07B" " yellow
+    let g:terminal_ansi_colors[11] = "#D19A66" " yellow bright
+    let g:terminal_ansi_colors[4]  = "#61AFEF" " blue
+    let g:terminal_ansi_colors[12] = "#61AFEF" " blue bright
+    let g:terminal_ansi_colors[5]  = "#C678DD" " magenta
+    let g:terminal_ansi_colors[13] = "#C678DD" " magenta bright
+    let g:terminal_ansi_colors[6]  = "#56B6C2" " cyan
+    let g:terminal_ansi_colors[14] = "#56B6C2" " cyan bright
+    let g:terminal_ansi_colors[7]  = "#5C6370" " white
+    let g:terminal_ansi_colors[15] = "#ABB2BF" " white bright
 endif
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
