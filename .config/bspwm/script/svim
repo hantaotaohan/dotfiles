@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec alacritty --class 'svim' -e vim $HOME/.scratchpad

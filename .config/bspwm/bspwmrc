@@ -1,0 +1,68 @@
+#!/bin/bash
+xrdb -merge $HOME/.Xresources
+
+# ##############################################################################
+# #                                AUTOSTART APPS                              #
+# ##############################################################################
+fcitx &
+dunst &
+imwheel &
+vmware-user &
+xmodmap ~/.Xmodmap &
+source ~/.config/i3/speedkeyboard.sh &
+picom --config ~/.config/picom/picom.conf &
+feh --bg-scale ~/.config/i3/background/1.jpg & 
+pgrep -x alttab > /dev/null ||alttab -w 1 -s 3 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 1x1 -bg '#282C34' -fg '#ABB2BF' &
+[ -f $HOME/.config/x/Xresources ] && xrdb -merge $HOME/.config/x/Xresources
+[ -f /etc/X11/xinit/.Xmodmap ] && xmodmap /etc/X11/xinit/.Xmodmap
+
+# ##############################################################################
+# #                                  ENV VARS                                  # 
+# ##############################################################################
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# ##############################################################################
+# #                                 WINDOW RULES                               #
+# ##############################################################################
+
+# ##############################################################################
+# #                            GENERAL CONFIGURATION                           #
+# ##############################################################################
+bspc monitor -d I II III IV V VI VII VIII IX X
+
+bspc config automatic_scheme           alternate
+bspc config initial_polarity           second_child
+bspc config pointer_modifier           mod1
+bspc config pointer_action1            move
+bspc config pointer_action2            resize_side
+bspc config pointer_action3            resize_corner
+bspc config click_to_focus             none
+
+config borderless_monocle              true
+config gapless_monocle                 true
+bspc config focus_follows_pointer      true
+bspc config remove_disabled_monitors   true
+bspc config remove_unplugged_monitors  true
+bspc config merge_overlapping_monitors true
+
+bspc config normal_border_color	       "#282C34"
+bspc config active_border_color	       "#282C34"
+bspc config focused_border_color       "#61AFEF"
+bspc config presel_feedback_color	   "#282C34"
+bspc config urgent_border_color        "#282C34"
+
+###---Monitor And Desktop Settings----###
+bspc config top_padding                0
+bspc config bottom_padding             0
+bspc config left_padding               0
+bspc config right_padding              0
+bspc config border_width               1
+bspc config active_frame_opacity       1
+bspc config normal_frame_opacity       1
+bspc config focused_frame_opacity      1
+bspc config window_gap                 10
+bspc config split_ratio			       0.50
+
+bspc rule -a mpv         focus=off locked=off sticky=on state=floating hidden=off center=true desktop=^2 rectangle=1200x600+0+0 
+bspc rule -a scratchpad  focus=off locked=on  sticky=on state=floating hidden=on  center=true
+bspc rule -a qutebrowser focus=on  locked=off sticky=on state=floating hidden=off center=true desktop=^3

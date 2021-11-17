@@ -1,0 +1,122 @@
+#!/usr/bin/env sh
+
+#===============================================================================
+#           _     _       _ 
+#  _____  _| |__ | | ____| |
+# / __\ \/ / '_ \| |/ / _` |
+# \__ \>  <| | | |   < (_| |
+# |___/_/\_\_| |_|_|\_\__,_|
+#
+# Created by RangHo.
+#
+# For a complete reference, run:
+# man sxhkd
+#===============================================================================
+### SXHKD bindigs ###
+
+# Quit bpswm
+mod1 + shift + Escape
+    bspc quit
+
+# Power script
+mod1 + Escape
+	power
+
+# Restart bpswm config
+mod1 + shift + r
+    pkill -USR1 -x sxhkd
+
+# Kill window
+mod1 + shift + q
+    bspc node -c
+
+# Rotate tree
+mod1 + r
+	bspc node @/ -R 90
+
+# alternate between the tiled and monocle layout
+# mod1 + m
+#     bspc node -s biggest.window
+
+
+# Move focus inside workspace
+mod1 + {h,j,k,l}
+    bspc node -f {west,south,north,east}
+
+# Swap window with direction
+mod1 + {_,shift +}{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+
+# Move node to another workspace
+mod1 + {_,shift +}{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
+
+# Toggle fullscreen
+mod1 + shift + f
+    bspc node focused.tiled -t fullscreen || bspc node focused.fullscreen -t tiled
+
+# Toggle floating
+mod1 + shift + space
+    bspc node focused.floating -t tiled || bspc node focused.tiled -t floating
+
+# Toggle floating focused
+mod1 + space
+	if [ -z $(bspc query -N -n focused.floating) ];\
+		then bspc node -f newest.local.floating;\
+		else bspc node -f newest.local.\!floating;\
+	fi
+
+# Open terminal
+mod1 + Return
+	xterm
+
+#rofi_spotlight
+mod1 + d
+	rofi -show drun
+
+# Open firefox
+mod1 + q
+    $HOME/.config/bspwm/script/scratchpad qutebrowser $HOME/.config/bspwm/script/squtebrowser
+
+mod1 + shift {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+    
+# expand a window by moving one of its side outward
+ctrl + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+ctrl + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# Make a window sticky/non-sticky
+super + t
+	bspc node -g sticky={on,off}
+
+# Hide window
+mod1 + shift + n
+  bspc node -g hidden
+
+# Unhide window
+mod1 + shift + s
+  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+
+# hide/unhide a window
+# mod1 + s
+# 	bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden={on,off}
+
+# I'm separating them according to the keyboard row (in the QWERTY layout anyway).
+# mod1 + a ; {z, x, c, v, b, n, m}
+#     { xterm -e vim, code, inkscape, gimp, blender, kdenlive, neomutt }
+
+# mod1 + a ; {f, a, d}
+#     { firefox, $TERMINAL -e lf, krita }
+
+# mod1 + a ; {q, r}
+#     { qutebrowser, thunar }
+
+mod1 + v
+    $HOME/.config/bspwm/script/scratchpad svim $HOME/.config/bspwm/script/svim
+
+mod1 + m
+    $HOME/.config/bspwm/script/scratchpad sneomutt $HOME/.config/bspwm/script/sneomutt
