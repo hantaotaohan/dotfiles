@@ -121,5 +121,5 @@ mod1 + v
 mod1 + m
     $HOME/.config/bspwm/script/scratchpad sneomutt $HOME/.config/bspwm/script/sneomutt
 
-alt + f
+mod1 + f
     fzf-open
