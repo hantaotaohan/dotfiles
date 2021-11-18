@@ -999,12 +999,14 @@ if !empty(glob('$HOME/.vim/plugged/vim-one/'))
     set background=dark                                                      " 开启深色模式
 endif
 
-if $TERM ==# "rxvt"
-	set t_Co=256
-	colorscheme one
-else
-	set termguicolors
-	colorscheme one
+if !empty(glob('$HOME/.vim/plugged/vim-one/'))
+    if $TERM ==# "rxvt"
+        set t_Co=256
+        colorscheme one
+    else
+        set termguicolors
+        colorscheme one
+    endif
 endif
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
