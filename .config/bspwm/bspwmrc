@@ -18,6 +18,7 @@ feh --bg-scale ~/.config/i3/background/1.jpg &
 pgrep -x alttab > /dev/null ||alttab -w 1 -s 3 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 1x1 -bg '#282C34' -fg '#ABB2BF' &
 [ -f $HOME/.config/x/Xresources ] && xrdb -merge $HOME/.config/x/Xresources
 [ -f /etc/X11/xinit/.Xmodmap ] && xmodmap /etc/X11/xinit/.Xmodmap
+source ~/.config/polybar/launch.sh
 
 # ##############################################################################
 # #                                  ENV VARS                                  # 
@@ -31,7 +32,8 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # ##############################################################################
 # #                            GENERAL CONFIGURATION                           #
 # ##############################################################################
-bspc monitor -d I II III IV V VI VII VIII IX X
+# bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor -d 1 2 3 4 5 6 7 8 9
 
 bspc config automatic_scheme           alternate
 bspc config initial_polarity           second_child

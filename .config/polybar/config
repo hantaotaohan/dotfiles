@@ -1,0 +1,546 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+foreground = ${xrdb:color15:#abb2bf}
+foreground-alt = ${xrdb:color2:#abb2bf}
+background = ${xrdb:color0:#282c34}
+background-alt = ${xrdb:color8:#282c34}
+
+primary = ${xrdb:color2:#466349}
+secondary = ${xrdb:color10:#e60053}
+alert = ${xrdb:color1:#bd2c40}
+
+[section/polybar_common]
+height = 26
+radius = 0.0
+fixed-center = true
+padding-right = 1
+module-margin-left = 1
+module-margin-right = 1
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+font-0 = "Saber:size=10;1"
+font-1 = "Saber:size=12:style=Bold;1"
+font-2 = "Saber:size=10;1"
+font-3 = "Saber:size=10;1"
+
+cursor-scroll = default
+scroll-up = bspwm.prev
+scroll-down = bspwm.next
+enable-ipc = true
+
+[bar/laptop]
+inherit = section/polybar_common
+monitor = eDP-1
+
+modules-left = bspwm
+modules-center = date 
+modules-right = pulseaudio 
+
+tray-position = left
+tray-offset-x = 10%
+tray-padding = 2
+tray-detached = true
+wm-restack = bspwm
+
+[bar/external]
+inherit = section/polybar_common
+monitor = ${env:MAIN_MONITOR}
+
+modules-left = bspwm
+modules-center = date 
+modules-right = pulseaudio 
+
+tray-position = left
+tray-offset-x = 10%
+tray-padding = 2
+tray-detached = true
+wm-restack = bspwm
+
+[module/bspwm]
+type = internal/bspwm
+
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
+pin-workspace = true
+
+; Output mode flags after focused state label
+; Default: false
+inline-mode = false
+
+; disabled because the global one is enabled
+enable-scroll = false
+
+label-focused = %{T2}%name%%{T1}
+label-focused-background = ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %name%
+label-occupied-background = ${colors.background-alt}
+label-occupied-padding = 2
+
+label-empty = %name%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+[module/cpu]
+type = internal/cpu
+interval = 0.2
+
+format = <ramp-coreload>
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "CPU "
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = ${colors.background-alt}
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = ${colors.background-alt}
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = ${colors.primary}
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = ${colors.primary}
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = ${colors.secondary}
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = ${colors.secondary}
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = ${colors.alert}
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = ${colors.alert}
+
+bar-load-width = 20
+bar-load-foreground-0 = #55aa55
+bar-load-foreground-1 = #55aa55
+bar-load-foreground-2 = #f5a70a
+bar-load-foreground-3 = #ff5555
+bar-load-gradient = false
+bar-load-indicator = │
+bar-load-indicator-font = 2
+bar-load-indicator-foreground = #ff
+bar-load-fill = ━
+bar-load-fill-font = 2
+bar-load-empty = ━
+bar-load-empty-font = 2
+bar-load-empty-foreground = #444444
+
+[module/memory]
+type = internal/memory
+format-prefix = "RAM "
+format-prefix-foreground = ${colors.primary}
+format = <bar-used>
+
+bar-used-width = 30
+bar-used-foreground-0 = ${colors.primary}
+bar-used-foreground-1 = ${colors.primary}
+bar-used-foreground-2 = ${colors.primary}
+bar-used-foreground-3 = ${colors.primary}
+bar-used-foreground-4 = ${colors.primary}
+bar-used-foreground-5 = ${colors.alert}
+bar-volume-gradient = false
+bar-used-indicator = ""
+bar-used-indicator-font = 2
+bar-used-fill = █
+bar-used-fill-font = 2
+bar-used-empty = █
+bar-used-empty-font = 2
+bar-used-empty-foreground = ${colors.background-alt}
+
+[module/wlan]
+type = internal/network
+; Name of the network interface to display. You can get the names of the
+; interfaces on your machine with `ip link`
+; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
+interface = wlp0s20f3
+; Seconds to sleep between updates
+; Default: 1
+interval = 1.0
+
+; Test connectivity every Nth update
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+; Default: 0
+ping-interval = 3
+
+; Available tags:
+;   <label-connected> (default)
+;   <ramp-signal>
+format-connected = <ramp-signal> <label-connected>
+; Available tags:
+;   <label-disconnected> (default)
+format-disconnected = <label-disconnected>
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+format-packetloss = <animation-packetloss> <label-connected>
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+; Default: %ifname% %local_ip%
+;label-connected = %essid% %downspeed:9%
+;label-connected-foreground = #eefafafa
+label-connected = %essid% %upspeed:8:8% %downspeed:8:8%
+
+; Default: (none)
+label-disconnected = not connected
+
+ramp-signal-0 = 
+ramp-signal-0-foreground = #F03051
+ramp-signal-1 = 
+ramp-signal-1-foreground = #F07127
+ramp-signal-2 = 
+ramp-signal-2-foreground = #F9CE56
+ramp-signal-3 = 
+ramp-signal-3-foreground = ${colors.primary}
+ramp-signal-4 = 
+ramp-signal-4-foreground = ${colors.primary}
+ramp-signal-5 = 
+ramp-signal-5-foreground = ${colors.primary}
+
+; Only applies if <animation-packetloss> is used
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+
+; [module/eth]
+; type = internal/network
+; interface = enp45s0u1u2
+; interval = 3.0
+
+; format-connected-underline = #55aa55
+; format-connected-prefix = "ETH"
+; format-connected-prefix-foreground = ${colors.foreground-alt}
+; label-connected = %local_ip%
+
+; format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 0.01
+
+date = " %Y-%m-%d "
+time = %H:%M:%S
+label = %date% %time% 
+
+[module/pulseaudio]
+type = internal/pulseaudio
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = <label-volume> <bar-volume>
+; Available tokens:
+;   %percentage% (default)
+;   %decibels%
+;label-volume = %percentage%%
+label-volume =  %percentage%%
+label-volume-foreground = ${colors.foreground}
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
+label-muted =  muted
+label-muted-foreground = ${colors.alert}
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.primary}
+bar-volume-foreground-1 = ${colors.primary}
+bar-volume-foreground-2 = ${colors.primary}
+bar-volume-foreground-3 = ${colors.primary}
+bar-volume-foreground-4 = ${colors.primary}
+bar-volume-foreground-5 = ${colors.alert}
+bar-volume-foreground-6 = ${colors.alert}
+bar-volume-gradient = true
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.background-alt}
+
+click-middle = pulseaudio-equalizer-gtk
+click-right = 
+
+[module/battery]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = AC0
+
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
+;
+poll-interval = 5
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging = <animation-charging> <label-charging>
+label-charging = %percentage%%
+; animation-charging-foreground = ${colors.foreground-alt}
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = %percentage%%
+; label-discharging-foreground = ${colors.foreground-alt}
+
+; Only applies if <animation-discharging> is used
+; animation-discharging-0 = 
+; animation-discharging-1 = 
+; animation-discharging-2 = 
+; animation-discharging-3 = 
+; animation-discharging-4 = 
+; Framerate in milliseconds
+; animation-discharging-framerate = 500
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+label-full = %percentage%%
+; label-full-foreground = ${colors.foreground-alt}
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+; ramp-capacity-foreground = ${colors.foreground-alt}
+
+; Only applies if <bar-capacity> is used
+; bar-capacity-width = 10
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 75
+
+format = <label>
+format-warn = <label-warn>
+format-warn-underline = ${colors.primary}
+
+format-prefix = "TEMP "
+format-prefix-foreground = ${colors.foreground-alt}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.alert}
+
+ramp-0 = 
+ramp-1 =
+ramp-2 =
+ramp-foreground = ${colors.foreground-alt}
+
+[module/fanspeed]
+type = custom/script
+
+exec = sensors | grep fan1 | awk '{print $2}'
+
+format-prefix = "FAN "
+format-prefix-foreground = ${colors.foreground-alt}
+; format-suffix = "🌀"
+; format-suffix-foreground = ${colors.foreground-alt}
+interval = 2
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+format-spacing = 1
+
+label-open = " "
+label-open-foreground = ${colors.foreground-alt}
+label-close = cancel
+label-close-foreground = ${colors.foreground-alt}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-0-foreground = ${colors.alert}
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+menu-0-1-foreground = ${colors.alert}
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-0-foreground = ${colors.foreground-alt}
+menu-1-1 = reboot
+menu-1-1-exec = reboot
+menu-1-1-foreground = ${colors.alert}
+
+menu-2-0 = power off
+menu-2-0-exec = poweroff
+menu-2-0-foreground = ${colors.alert}
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+menu-2-1-foreground = ${colors.foreground-alt}
+
+[module/backlight]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+
+; (unreleased)
+; Use the `/sys/class/backlight/actual-brightness` file
+; rather than the regular `brightness` file.
+; Defaults to true unless the specified card is an amdgpu backlight.
+use-actual-brightness = true
+
+; Enable changing the backlight with the scroll wheel
+; NOTE: This may require additional configuration on some systems. Polybar will
+; write to `/sys/class/backlight/${self.card}/brightness` which requires polybar
+; to have write access to that file.
+; DO NOT RUN POLYBAR AS ROOT. 
+; The recommended way is to add the user to the
+; `video` group and give that group write-privileges for the `brightness` file.
+; See the ArchWiki for more information:
+; https://wiki.archlinux.org/index.php/Backlight#ACPI
+; Default: false
+enable-scroll = true
+
+; Additional formatting
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format =  <label> <bar>
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-foreground-0 = ${colors.primary}
+bar-foreground-1 = ${colors.primary}
+bar-foreground-2 = ${colors.primary}
+bar-foreground-3 = ${colors.primary}
+bar-foreground-4 = ${colors.primary}
+bar-foreground-5 = ${colors.alert}
+bar-foreground-6 = ${colors.alert}
+bar-gradient = false
+bar-indicator = |
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.background-alt}
+
+[module/external_backlight_ipc]
+; control the external monitor brightness (not the actual backlight power)
+type = custom/ipc
+;
+; Define the command to be executed when the hook is triggered
+; Available tokens:
+;   %pid% (id of the parent polybar process)
+;
+; get the current brigthness
+; hook-0 = echo '%{T2}ciao'
+hook-0 = echo $(xrandr --verbose | grep ^$MAIN_MONITOR -A5 | tail -n1 | awk '{print $2*100}')
+format =  <output>%
+
+scroll-up = systemctl --user kill -s SIGKILL redshift.service && redshift -x && xrandr --output $MAIN_MONITOR --brightness 1.0 && polybar-msg hook external_backlight_ipc 1 && systemctl --user start redshift.service
+scroll-down = systemctl --user kill -s SIGKILL redshift.service && redshift -x && xrandr --output $MAIN_MONITOR --brightness 0.5 && polybar-msg hook external_backlight_ipc 1 && systemctl --user start redshift.service
+; click-left = systemctl --user start redshift.service
+
+[module/external_backlight_first_call]
+; this is just needed to initialize without any click <external_backlight_ipc>
+type = custom/script
+; Available tags:
+;   <output> - deprecated
+;   <label> (default)
+format = <label>
+; this command must have empty label because the default output is the call to the hook function
+label =
+
+exec = polybar-msg hook external_backlight_ipc 1
+interval = 600
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+; vim:ft=dosini
