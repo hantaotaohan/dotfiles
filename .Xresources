@@ -98,6 +98,14 @@ URxvt.font:              xft:Inziu Iosevka SC:size=10.5:style=Bold:antialias=tru
 ! 中文字体
 URxvt.boldfont:          xft:Inziu Iosevka SC:size=10.5:style=Bold:antialias=true
 
+! 输入配置
+URxvt.iso14755:               false
+URxvt.iso14755_52:            false
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Control-Meta-c:  builtin-string:
+URxvt.keysym.Control-Meta-v:  builtin-string:
+
 !----------------------
 ! St Settings
 !----------------------
