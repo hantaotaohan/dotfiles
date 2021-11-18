@@ -391,6 +391,7 @@ echo -e "                                                                       
         newsboat \
 	tty-clock \
 	#qutebrowser \
+	libgl1-mesa-* \
         python3-pip \
         inotify-tools \
         universal-ctags \
