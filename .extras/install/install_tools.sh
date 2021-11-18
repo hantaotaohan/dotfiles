@@ -72,6 +72,7 @@ Options:
         i3lock              Setup i3lock_fancy
         qutebrowser         Setup Qutebrowser
         weixin              Setup Weixin
+        urxvt               Setup URxvt
         
     -------------------------------------------------------------------------------
     
@@ -702,6 +703,18 @@ Weixin() {
     row
 }
 
+Urxvt() {
+    sudo apt install libperl-dev
+    wget -q -P $Bin_dir http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-9.26.tar.bz2 
+    cd $Bin_dir
+    tar -xvf rxvt-unicode-9.26.tar.bz2
+    cd rxvt-unicode-9.26
+    ./configure --enable-xft --enable-font-styles --enable-iso14755 --enable-unicode3 --enable-256-color --with-x
+    row
+    urxvt --version 2>&1 | grep rxvt-unicode
+    row
+}
+
 main() {
 
     case "$1" in
@@ -826,6 +839,9 @@ main() {
         weixin)
             Weixin
             ;;
+        urxvt)
+            Urxvt
+            ;;            
         -a|--all)
             Github_Hosts
             Alttab
