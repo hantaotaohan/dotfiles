@@ -135,7 +135,7 @@ st.color19:                  #464b50
 st.color20:                  #838184
 st.color21:                  #c3c3c3
 
-st.termname:                 xst-256color
+st.termname:                 xterm-256color
 st.borderless:               0
 st.font:                     Saber:size=10.5:antialias=true:autohint:true
 st.borderpx:                 10
