@@ -721,7 +721,7 @@ St() {
     git clone -q $Git_clone/hantaotaohan/st --depth 1 st && cd st > /dev/null 2>&1
     sudo make clean install
     row
-    st
+    st -v
     row
 }
 
