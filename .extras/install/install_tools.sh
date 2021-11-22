@@ -73,6 +73,7 @@ Options:
         qutebrowser         Setup Qutebrowser
         weixin              Setup Weixin
         urxvt               Setup URxvt
+        st                  Setup St terminal
         
     -------------------------------------------------------------------------------
     
@@ -715,6 +716,15 @@ Urxvt() {
     row
 }
 
+St() {
+    cd "$Bin_dir" || return 
+    git clone -q $Git_clone/hantaotaohan/st --depth 1 st && cd st > /dev/null 2>&1
+    sudo make clean install
+    row
+    st
+    row
+}
+
 main() {
 
     case "$1" in
@@ -841,7 +851,10 @@ main() {
             ;;
         urxvt)
             Urxvt
-            ;;            
+            ;;
+        st)
+            St
+            ;;       
         -a|--all)
             Github_Hosts
             Alttab
