@@ -321,8 +321,9 @@ set tags=./.tags;,.tags                                                    " 设
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 鼠标滚轮设置 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-noremap <ScrollWheelDown><ScrollWheelUp> <ScrollWheelDown>
-noremap <ScrollWheelUp><ScrollWheelUp> <ScrollWheelUp>
+" noremap <ScrollWheelDown><ScrollWheelUp> <ScrollWheelDown>
+" noremap <ScrollWheelUp><ScrollWheelUp> <ScrollWheelUp>
+set ttymouse=sgr
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 折叠设置 
