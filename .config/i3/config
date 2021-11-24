@@ -539,7 +539,10 @@ bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "ttyclock
 # exec --no-startup-id fcitx &
 
 # 启用壁纸 apt install feh
-exec --no-startup-id feh --bg-scale ~/.config/i3/background/1.jpg
+# exec --no-startup-id feh --bg-scale ~/.config/i3/background/1.jpg
+
+# 利用hsetroot改变背景颜色
+exec --no-startup-id hsetroot -solid "#282c34"
 
 # 透明窗口 Compton
 # # exec --no-startup-id compton --config ~/.config/compton/compton.conf
