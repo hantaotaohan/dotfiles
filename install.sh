@@ -388,6 +388,7 @@ echo -e "                                                                       
         ranger \
         xdotool \
         ripgrep \
+	hsetroot \
         newsboat \
 	tty-clock \
 	#qutebrowser \
