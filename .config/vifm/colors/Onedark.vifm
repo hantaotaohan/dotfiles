@@ -1,0 +1,65 @@
+" onedark color scheme for vifm
+
+" Reset all styles first
+highlight clear
+
+highlight Border	    cterm=none	        ctermfg=8	    ctermbg=0
+
+highlight TopLine	    cterm=none	        ctermfg=7	    ctermbg=0
+highlight TopLineSel	cterm=bold	        ctermfg=4	    ctermbg=0
+
+highlight TabLineSel    cterm=none	        ctermfg=4	    ctermbg=0
+highlight Win		    cterm=none	        ctermfg=7	    ctermbg=0
+highlight Directory	    cterm=bold	        ctermfg=4	    ctermbg=0
+highlight OtherLine	    cterm=bold	        ctermfg=7	    ctermbg=8
+highlight Selected	    cterm=none	        ctermfg=3	    ctermbg=8
+highlight CurrLine	    cterm=bold      	ctermfg=255	    ctermbg=8
+
+highlight JobLine	    cterm=bold	        ctermfg=250	    ctermbg=8
+highlight StatusLine	cterm=none	        ctermfg=7	    ctermbg=0
+highlight ErrorMsg	    cterm=bold	        ctermfg=1	    ctermbg=0
+highlight WildMenu	    cterm=bold	        ctermfg=15	    ctermbg=0
+highlight CmdLine	    cterm=none	        ctermfg=7	    ctermbg=0
+
+highlight Executable	cterm=none	        ctermfg=1	    ctermbg=0
+highlight Link		    cterm=bold	        ctermfg=5	    ctermbg=0
+highlight BrokenLink	cterm=bold	        ctermfg=1	    ctermbg=0
+highlight Fifo		    cterm=none	        ctermfg=3	    ctermbg=0
+highlight Socket	    cterm=bold	        ctermfg=5	    ctermbg=0
+highlight Device	    cterm=bold,standout	ctermfg=0	    ctermbg=11
+highlight SuggestBox    cterm=bold          ctermfg=2       ctermbg=0
+
+highlight {*.sh,*.bash,*.bat,*.btm,*.cmd,*.com,*.dll,*.exe,*.run,*.msu,*.msi}
+          \ cterm=none ctermfg=2 ctermbg=0
+
+highlight {*.djvu,*.htm,*.html,*.shtml,*.css,*.markdown,*.md,*[^0-9].[1-9],
+          \*.mkd,*.org,*.pandoc,*.pdc,*.pdf,*.epub,*.fb2,*.tex,*.txt,*.xhtml,
+          \*.xml,*.pptx,*.ppt,*.doc,*.docx,*.xls,*.xls[mx],*.mobi}
+          \ cterm=none ctermfg=3 ctermbg=0
+
+highlight {COPYRIGHT,COPYING*,BUGS,ChangeLog*,FAQ,INSTALL*,LICEN[CS]E,NEWS,
+          \README*,AUTHORS,TODO,THANKS}
+          \ cterm=none ctermfg=147 ctermbg=0
+
+highlight {Makefile,Makefile.am,Makefile.in,Makefile.win,*.mak,*.mk,
+          \CMakeLists.txt,*.pro}
+          \ cterm=none ctermfg=111 ctermbg=0
+
+highlight {*.7z,*.ace,*.arj,*.bz2,*.cpio,*.deb,*.dz,*.gz,*.jar,*.lzh,*.lzma,
+          \*.rar,*.rpm,*.rz,*.tar,*.taz,*.tb2,*.tbz,*.tbz2,*.tgz,*.tlz,*.trz,
+          \*.txz,*.tz,*.tz2,*.xz,*.z,*.zip,*.zoo}
+          \ cterm=none ctermfg=1 ctermbg=0
+
+highlight {*.aac,*.anx,*.asf,*.au,*.avi,*.ts,*.axa,*.axv,*.divx,*.flac,*.m2a,
+          \*.m2v,*.m4a,*.m4p,*.m4v,*.mid,*.midi,*.mka,*.mkv,*.mov,*.mp3,*.mp4,
+          \*.flv,*.mp4v,*.mpc,*.mpeg,*.mpg,*.nuv,*.oga,*.ogg,*.ogv,*.ogx,*.pbm,
+          \*.pgm,*.qt,*.ra,*.ram,*.rm,*.spx,*.vob,*.wav,*.wma,*.wmv,*.xvid,
+          \*.ac3,*.webm}
+          \ cterm=none ctermfg=213 ctermbg=default
+
+highlight {*.bmp,*.gif,*.jpeg,*.jpg,*.ico,*.png,*.ppm,*.svg,*.svgz,*.tga,*.tif,
+          \*.tiff,*.xbm,*.xcf,*.xpm,*.xspf,*.xwd}
+          \ cterm=none ctermfg=5 ctermbg=0
+
+highlight {*.patch,*.diff,*.py,*.[ch]pp,*.mk,*.c,*.h,*.[ch]pp,*.cc,*.hs,*.php}
+          \ cterm=none ctermfg=222 ctermbg=default
