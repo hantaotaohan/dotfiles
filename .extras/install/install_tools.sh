@@ -74,7 +74,8 @@ Options:
         weixin              Setup Weixin
         urxvt               Setup URxvt
         st                  Setup St terminal
-        
+        vifm                Setup Vifm
+
     -------------------------------------------------------------------------------
     
 EOF
@@ -725,6 +726,16 @@ St() {
     row
 }
 
+Vifm() {
+    pip3 install -q --timeout 1000 --retries 20 ueberzug -i https://pypi.tuna.tsinghua.edu.cn/simple
+    cd "$Bin_dir" || return
+    git clone -q $Git_clone/hantaotaohan/vifmimg --depth 1 vifmimg && cd vifmimg > /dev/null 2>&1
+    sudo make install
+    row
+    echo "Vifm - Vifmimg Install Done !"
+    row
+}
+
 main() {
 
     case "$1" in
@@ -854,7 +865,10 @@ main() {
             ;;
         st)
             St
-            ;;       
+            ;;
+        vifm)
+            Vifm
+            ;;   
         -a|--all)
             Github_Hosts
             Alttab
