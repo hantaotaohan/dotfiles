@@ -21,7 +21,7 @@ settings:
         d: nop
         t: nop
         T: nop
-        <F12>: inspector
+        <F12>: devtools
         <Escape>: spawn fcitx-remote -c
   bindings.key_mappings:
     global:
