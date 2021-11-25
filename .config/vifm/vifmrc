@@ -323,10 +323,10 @@ filextype */
     \ {View in thunar}
     \ Thunar %f &,
 
-"
 " 256-color terminal
-fileviewer <text/*> bat --color always --plain %c
-"
+" fileviewer <text/*> bat --color always --plain %c
+fileviewer {.vimrc,*.lua,*.md,*.conf,*.config}
+    \ bat --color always --plain %c
 
 " Displaying pictures in terminal
 fileviewer *.pdf
