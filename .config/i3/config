@@ -246,14 +246,13 @@ for_window [window_role="app"                              ]       floating enab
 for_window [class="Vmware"                                 ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 for_window [class="feh"                                    ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 for_window [class="Sxiv"                                   ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
-for_window [class="qutebrowser"                            ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 for_window [class="mpv"             title="No file - mpv"  ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 for_window [title="微信"                                   ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 
 for_window [class="Alacritty"       title="scratchpad"     ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    , border normal 0   , title_format "<b>%title</b>"
 for_window [class="Alacritty"       title="neomuttt"       ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    , border normal 0   , title_format "<b>%title</b>"
 for_window [class="Microsoft-edge"  title="weread"         ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    
-for_window [class="Qutebrowser"     title="qutebrowser"    ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    
+for_window [class="qutebrowser"     title=".*qutebrowser"  ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    
 for_window [class="Copytranslator"  title="copytranslator" ]       floating enable  , resize set 650  250   , move position center  , sticky enable , move to scratchpad    
 for_window [class="Alacritty"       title="ttyclock"       ]       floating enable  , resize set 500  150   , move position center  , sticky enable , move to scratchpad    
 
@@ -277,7 +276,7 @@ bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "Copytranslator" -t "
 # bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
 
 # Open Qutebrowser
-bindsym $mod+q    exec --no-startup-id raiseorlaunch -r -c "Qutebrowser"    -t "qutebrowser"    -e "qutebrowser"
+bindsym $mod+q    exec --no-startup-id raiseorlaunch -r -c "qutebrowser"    -t ".*qutebrowser"    -e "qutebrowser"
 
 # Open tty-clock
 bindsym $mod+t    exec --no-startup-id raiseorlaunch -r -c "Alacritty"      -t "ttyclock"       -e "alacritty -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
