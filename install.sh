@@ -471,7 +471,7 @@ echo -e "                                                                       
         i3ipc \
         flake8 \
         keyring \
-	ueberzug \
+	#ueberzug \
         raiseorlaunch \
         popupdict \
         you-get \
