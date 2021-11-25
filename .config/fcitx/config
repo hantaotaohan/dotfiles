@@ -1,6 +1,6 @@
 [Hotkey]
 # 切换激活/非激活输入法
-#TriggerKey=CTRL_SPACE
+TriggerKey=SHIFT_LSHIFT
 # 只在用额外切换键取消激活后才使用它进行切换
 # Available Value:
 # True False
@@ -33,7 +33,7 @@ SwitchKey=Disabled
 # 激活输入法
 #ActivateKey=
 # 取消激活输入法
-#InactivateKey=
+InactivateKey=ESCAPE
 # 启用输入法间切换
 # Available Value:
 # True False
@@ -62,9 +62,9 @@ SwitchKey=Disabled
 # 切换全角标点
 #PuncSwitchKey=CTRL_.
 # 上一页
-#PrevPageKey=- UP
+PrevPageKey=, UP
 # 下一页
-#NextPageKey== DOWN
+NextPageKey=. DOWN
 # 选择第二第三候选词
 #SecondThirdCandWordKey=
 # 保存配置及输入历史
@@ -84,7 +84,7 @@ SwitchKey=Disabled
 # No
 # All
 # PerProgram
-#ShareStateAmongWindow=No
+ShareStateAmongWindow=PerProgram
 # 默认输入法状态
 # Available Value:
 # Inactive
