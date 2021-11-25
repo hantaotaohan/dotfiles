@@ -244,7 +244,7 @@ assign [class="Microsoft-edge"]                        $workspace3
 for_window [class="Nautilus"                               ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 for_window [window_role="app"                              ]       floating enable  , resize set 1200 800   , move position center  , sticky enable 
 for_window [class="Vmware"                                 ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
-for_window [class="Feh"                                    ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
+for_window [class="feh"                                    ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 for_window [class="Sxiv"                                   ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 for_window [class="qutebrowser"                            ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
 for_window [class="mpv"             title="No file - mpv"  ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
