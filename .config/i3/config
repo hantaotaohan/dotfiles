@@ -55,46 +55,17 @@ focus_on_window_activation focus # smart|urgent|focus|none
 # 快捷键设置
 # --------------------------------------------------------------------------------------------------
 
+# 关闭窗口快捷键 
+bindsym $mod+Shift+q kill
+
+# 移动当前窗口到便签区
+bindsym $mod+shift+n move scratchpad 
+
 # alt+鼠标中建关闭窗口
 bindsym --whole-window $mod+button2 kill
 
 # 鼠标中建发送到便签区域
 bindsym --whole-window button2 move scratchpad
-
-# 关闭窗口快捷键 
-bindsym $mod+Shift+q kill
-# bindsym $mod+q kill
-
-# 开启Terminal快捷键 
-bindsym $mod+Return exec --no-startup-id alacritty
-
-# rofi 设置及配置 apt install rofi
-bindsym $mod+d exec --no-startup-id rofi -show drun
-
-# 切换窗口
-bindsym $mod+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'Alt+p' -kb-accept-entry '!Alt-p'
-
-# 打开fzf-open
-bindsym $mod+f exec --no-startup-id fzf-open 
-
-# 查看CheatSheet
-bindsym $mod+slash exec --no-startup-id cat $HOME/.config/rofi/cheatsheet.conf | rofi -i -dmenu -p 'Cheatsheet' -theme cheatsheet.rasi  | awk -F '# ' '{print $2}' | xclip -selection c
-
-# 打开Ranger快捷键
-bindsym $mod+Shift+Return exec --no-startup-id alacritty -e ranger
-
-# 打开 Nautilus 快捷键
-bindsym Mod4+e exec --no-startup-id nautilus
-
-# 开启Google Chrome快捷键 
-# bindsym $mod+g exec --no-startup-id raiseorlaunch -c google-chrome-stable --force-dark-mode
-bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode"
-
-# 移动当前窗口到便签区
-# bindsym $mod+shift+n move scratchpad ,resize set 1200 800 , move position center
-# bindsym Mod4+n move scratchpad ,resize set 1200 800 , move position center
-bindsym $mod+shift+n move scratchpad 
-# bindsym Mod4+n move scratchpad
 
 # 切换便签
 bindsym $mod+Control+Tab exec --no-startup-id $HOME/.config/i3/i3-scratchpad-dmenu.py
@@ -107,13 +78,6 @@ bindsym $mod+s scratchpad show , move position center , sticky enable
 # bindsym Ctrl+Tab workspace next
 # bindsym Shift+Tab workspace prev
 
-# 截图快捷键
-#bindsym $mod+a exec --no-startup-id deepin-screenshot | xclip -selection clipboard -t image/png -i
-bindsym --release $mod+a exec "deepin-screenshot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png < /tmp/screenshot.png"
-
-# 锁屏设定
-# bindsym Ctrl+$mod+l exec --no-startup-id i3lock-fancy -f DejaVu-Sans-Bold  -t "Type Password To Unlock"
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -124,11 +88,8 @@ bindsym $mod+Shift+r restart
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+e exec --no-startup-id i3-nagbar -t warning -f "pango:Saber 10" -m "Do you really want to exit?" -B "    Exit " "i3-msg exit" -B "    Lock " "pkill i3-nagbar && i3lock-fancy -f Saber" -B "    Reboot " "pkill i3-nagbar && systemctl reboot" -B "    Shutdown " "pkill i3-nagbar && systemctl shutdown -h now" 
 
-# bar toggle settings
+# bar-1 toggle settings
 bindsym $mod+w bar mode toggle bar-1
-
-# auto windows size for in workspaces "10"
-bindsym $mod+Shift+a exec --no-startup-id $HOME/.config/i3/autowindowssize.py
 
 # --------------------------------------------------------------------------------------------------
 # 窗口设置
@@ -257,32 +218,62 @@ for_window [class="Alacritty"       title="neomuttt"       ]       floating enab
 for_window [class="Microsoft-edge"  title="weread"         ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad    
 for_window [class="qutebrowser"     title=".*qutebrowser"  ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad    
 for_window [class="Copytranslator"  title="copytranslator" ]       floating enable  , resize set 650  250   , move absolute position center  , sticky enable , move to scratchpad    
-for_window [class="Alacritty"       title="ttyclock"       ]       floating enable  , resize set 500  150   , move absolute position 700 10  , sticky enable , move to scratchpad
+for_window [class="Alacritty"       title="ttyclock"       ]       floating enable  , resize set 500  150   , move absolute position 700 60  , sticky enable , move to scratchpad
 
 # --------------------------------------------------------------------------------------------------
-# 便签区域设定
+# 启动程序快捷键设定
 # --------------------------------------------------------------------------------------------------
+
+# 打开 Nautilus 快捷键
+bindsym Mod4+e exec --no-startup-id nautilus
+
+# 打开fzf-open
+bindsym $mod+f exec --no-startup-id fzf-open 
+
+# 开启Terminal快捷键 
+bindsym $mod+Return exec --no-startup-id alacritty
+
+# rofi 设置及配置 apt install rofi
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
+# 打开Ranger快捷键
+bindsym $mod+Shift+Return exec --no-startup-id alacritty -e ranger
+
+# auto windows size for in workspaces "3"
+bindsym $mod+Shift+a exec --no-startup-id $HOME/.config/i3/autowindowssize.py
+
+# 开启Google Chrome快捷键 
+bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode"
+
+# 切换窗口
+bindsym $mod+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'Alt+p' -kb-accept-entry '!Alt-p'
+
+# 截图快捷键
+bindsym --release $mod+a exec "deepin-screenshot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png < /tmp/screenshot.png"
+
+# 查看CheatSheet
+bindsym $mod+slash exec --no-startup-id cat $HOME/.config/rofi/cheatsheet.conf | rofi -i -dmenu -p 'Cheatsheet' -theme cheatsheet.rasi  | awk -F '# ' '{print $2}' | xclip -selection c
 
 # Open vim-scratchpad
-bindsym Control+1 exec --no-startup-id raiseorlaunch -r -c "Alacritty"      -t "scratchpad"     -e "alacritty -t scratchpad -e vim $HOME/.scratchpad"
+bindsym Control+1 exec --no-startup-id raiseorlaunch -r -c "Alacritty"          -t "scratchpad"         -e "alacritty -t scratchpad -e vim $HOME/.scratchpad"
 
 # Open noemutt
-bindsym Control+2 exec --no-startup-id raiseorlaunch -r -c "Alacritty"      -t "neomuttt"       -e "alacritty -t neomuttt -e neomutt"
+bindsym Control+2 exec --no-startup-id raiseorlaunch -r -c "Alacritty"          -t "neomuttt"           -e "alacritty -t neomuttt -e neomutt"
 
 # Open Weread
-bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "Microsoft-edge" -t "weread"         -e "microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://weread.qq.com"
+bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "Microsoft-edge"     -t "weread"             -e "microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://weread.qq.com"
 
 # Open copytranslator
-bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "Copytranslator" -t "copytranslator" -e "copytranslator --no-sandbox"
+bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "Copytranslator"     -t "copytranslator"     -e "copytranslator --no-sandbox"
+
+# Open Qutebrowser
+bindsym $mod+q    exec --no-startup-id raiseorlaunch -r -c "qutebrowser"        -t ".*qutebrowser"      -e "qutebrowser"
+
+# Open tty-clock
+bindsym $mod+t    exec --no-startup-id raiseorlaunch -r -c "Alacritty"          -t "ttyclock"           -e "alacritty -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
 
 # Open Alacritty
 # bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
-
-# Open Qutebrowser
-bindsym $mod+q    exec --no-startup-id raiseorlaunch -r -c "qutebrowser"    -t ".*qutebrowser"    -e "qutebrowser"
-
-# Open tty-clock
-bindsym $mod+t    exec --no-startup-id raiseorlaunch -r -c "Alacritty"      -t "ttyclock"       -e "alacritty -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
 
 # Open fzf-open
 # bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
