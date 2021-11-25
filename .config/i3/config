@@ -58,6 +58,9 @@ focus_on_window_activation focus # smart|urgent|focus|none
 # alt+鼠标中建关闭窗口
 bindsym --whole-window $mod+button2 kill
 
+# 鼠标中建发送到便签区域
+bindsym --whole-window button2 move scratchpad
+
 # 关闭窗口快捷键 
 bindsym $mod+Shift+q kill
 # bindsym $mod+q kill
