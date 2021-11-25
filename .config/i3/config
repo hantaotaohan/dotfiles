@@ -241,23 +241,23 @@ assign [class="Microsoft-edge"]                        $workspace3
 # 设定那些程序为浮动窗口
 # --------------------------------------------------------------------------------------------------
 
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# 规则                                                              浮动开启/关闭   |   设置窗口大小        |   移动到中心区域      |   粘性开关    |   移动到便签区        |   边框设定        |       标题栏设定              |
-# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-for_window [class="Nautilus"                               ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
-for_window [window_role="app"                              ]       floating enable  , resize set 1200 800   , move position center  , sticky enable 
-for_window [class="Vmware"                                 ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
-for_window [class="feh"                                    ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
-for_window [class="Sxiv"                                   ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
-for_window [class="mpv"             title="No file - mpv"  ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
-for_window [title="微信"                                   ]       floating enable  , resize set 1200 800   , move position center  , sticky enable
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# 规则                                                              浮动开启/关闭   |   设置窗口大小        |   移动到中心区域               |   粘性开关    |   移动到便签区        |   边框设定        |       标题栏设定              |
+# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+for_window [class="Nautilus"                               ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable
+for_window [window_role="app"                              ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable 
+for_window [class="Vmware"                                 ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable
+for_window [class="feh"                                    ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable
+for_window [class="Sxiv"                                   ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable
+for_window [class="mpv"             title="No file - mpv"  ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable
+for_window [title="微信"                                   ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable
 
-for_window [class="Alacritty"       title="scratchpad"     ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    , border normal 0   , title_format "<b>%title</b>"
-for_window [class="Alacritty"       title="neomuttt"       ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    , border normal 0   , title_format "<b>%title</b>"
-for_window [class="Microsoft-edge"  title="weread"         ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    
-for_window [class="qutebrowser"     title=".*qutebrowser"  ]       floating enable  , resize set 1200 800   , move position center  , sticky enable , move to scratchpad    
-for_window [class="Copytranslator"  title="copytranslator" ]       floating enable  , resize set 650  250   , move position center  , sticky enable , move to scratchpad    
-for_window [class="Alacritty"       title="ttyclock"       ]       floating enable  , resize set 500  150   , move position center  , sticky enable , move to scratchpad    
+for_window [class="Alacritty"       title="scratchpad"     ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad     , border normal 0   , title_format "<b>%title</b>"
+for_window [class="Alacritty"       title="neomuttt"       ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad     , border normal 0   , title_format "<b>%title</b>"
+for_window [class="Microsoft-edge"  title="weread"         ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad    
+for_window [class="qutebrowser"     title=".*qutebrowser"  ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad    
+for_window [class="Copytranslator"  title="copytranslator" ]       floating enable  , resize set 650  250   , move absolute position center  , sticky enable , move to scratchpad    
+for_window [class="Alacritty"       title="ttyclock"       ]       floating enable  , resize set 500  150   , move absolute position 700 10  , sticky enable , move to scratchpad
 
 # --------------------------------------------------------------------------------------------------
 # 便签区域设定
