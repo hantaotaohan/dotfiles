@@ -268,7 +268,7 @@ bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "Microsoft-edge"     
 bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "Copytranslator"     -t "copytranslator"     -e "copytranslator --no-sandbox"
 
 # Open Qutebrowser
-bindsym $mod+q    exec --no-startup-id raiseorlaunch -r -c "qutebrowser"        -t ".*qutebrowser"      -e "qutebrowser"
+bindsym $mod+q    exec --no-startup-id raiseorlaunch -r -c "qutebrowser"                                -e "qutebrowser"
 
 # Open tty-clock
 bindsym $mod+t    exec --no-startup-id raiseorlaunch -r -c "Alacritty"          -t "ttyclock"           -e "alacritty -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
