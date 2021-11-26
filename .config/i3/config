@@ -565,3 +565,6 @@ exec --no-startup-id "alttab -s 3 -t 200x60 -d 1 -font xft:Saber:style=Bold:size
 
 # 热启动qutebrowser
 exec --no-startup-id qutebrowser
+
+# 启动 i3wm 布局模式
+exec --no-startup-id stacki3 35
