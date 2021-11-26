@@ -62,11 +62,11 @@ bindsym $mod+shift+n move scratchpad
 bindsym --whole-window $mod+button2 kill
 
 # 关闭窗口快捷键 
-bindsym $mod+Shift+q exec --no-startup-id $HOME/.config/i3/skill
+bindsym $mod+Shift+q exec --no-startup-id bash $HOME/.config/i3/skill
 
 # 鼠标中建发送到便签区域
 # bindsym --whole-window button2 move scratchpad
-bindsym --whole-window button2 exec --no-startup-id $HOME/.config/i3/skill
+bindsym --whole-window button2 exec --no-startup-id bash $HOME/.config/i3/skill
 
 # 切换便签
 bindsym $mod+Control+Tab exec --no-startup-id $HOME/.config/i3/i3-scratchpad-dmenu.py
