@@ -727,6 +727,7 @@ St() {
 }
 
 Vifm() {
+    sudo apt install vifm
     pip3 install -q --timeout 1000 --retries 20 ueberzug -i https://pypi.tuna.tsinghua.edu.cn/simple
     cd "$Bin_dir" || return
     git clone -q $Git_clone/hantaotaohan/vifmimg --depth 1 vifmimg && cd vifmimg > /dev/null 2>&1
