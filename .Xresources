@@ -129,12 +129,6 @@ st.color6:                   #56B6C2
 st.color14:                  #56B6C2
 st.color7:                   #5C6370
 st.color15:                  #ABB2BF
-st.color16:                  #cda869
-st.color17:                  #9b703f
-st.color18:                  #323537
-st.color19:                  #464b50
-st.color20:                  #838184
-st.color21:                  #c3c3c3
 
 st.termname:                 xterm-256color
 st.borderless:               0
