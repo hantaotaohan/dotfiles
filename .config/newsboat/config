@@ -33,8 +33,8 @@ unbind-key q
 color listnormal color7 default
 color listfocus color0 color7 bold
 color listnormal_unread color2 default
-color listfocus_unread color0 color7 bold
-color info color5 black bold
+color listfocus_unread color15 color8 bold
+color info color5 color0 bold
 color article color250 default bold
 
 text-width 80
