@@ -170,6 +170,7 @@ XTerm.vt100*fading                  :       10
 
 XTerm.vt100*utf8                    :       2
 XTerm.vt100*eightBitInput           :       true
+!XTerm.vt100*faceName                :       xft:Iosevka Fixed:style=Extrabold:spacing=terminal:antialias=true:autohint:true
 XTerm.vt100*faceName                :       xft:Saber:style=Extrabold:spacing=terminal:antialias=true:autohint:true
 XTerm.vt100*faceNameDoublesize      :       xft:Saber:spacing=terminal:antialias=true:autohint:true
 XTerm.vt100*internalBorder          :       10
