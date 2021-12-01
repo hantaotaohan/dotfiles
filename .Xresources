@@ -93,10 +93,10 @@ urxvt.override-redirect: false
 urxvt.borderLess:        false
 
 ! 英文字体
-URxvt.font:              xft:Inziu Iosevka SC:size=10.5:style=Bold:antialias=true
+URxvt.font:              xft:Saber:size=10.5:style=Bold:antialias=true
 
 ! 中文字体
-URxvt.boldfont:          xft:Inziu Iosevka SC:size=10.5:style=Bold:antialias=true
+URxvt.boldfont:          xft:Saber:size=10.5:style=Bold:antialias=true
 
 ! 输入配置
 URxvt.iso14755:               false
@@ -170,7 +170,7 @@ XTerm.vt100*fading                  :       10
 
 XTerm.vt100*utf8                    :       2
 XTerm.vt100*eightBitInput           :       true
-XTerm.vt100*faceName                :       xft:Iosevka Fixed:style=Extrabold:spacing=terminal:antialias=true:autohint:true
+XTerm.vt100*faceName                :       xft:Saber:style=Extrabold:spacing=terminal:antialias=true:autohint:true
 XTerm.vt100*faceNameDoublesize      :       xft:Saber:spacing=terminal:antialias=true:autohint:true
 XTerm.vt100*internalBorder          :       10
 XTerm.vt100*faceSize                :       10.5
