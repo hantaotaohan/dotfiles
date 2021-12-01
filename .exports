@@ -23,8 +23,8 @@ fi
 
 # Term.
 # Term颜色设定
-# export TERM="xterm-256color"
-export TERM="st-256color"
+export TERM="xterm-256color"
+# export TERM="st-256color"
 
 # Default Editor.
 # 默认编辑器设定
