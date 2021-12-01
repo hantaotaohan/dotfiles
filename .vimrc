@@ -362,6 +362,24 @@ vnoremap <Space> zf                                                        " 空
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 内部终端颜色设置
 " ----------------------------------------------------------------o--------------------------------------------------------------o
+set term=st-256color
+if &term =~ 'st-256color'
+	colorscheme onedark
+	let &t_SI .= "\<Esc>[6 q"
+	let &t_EI .= "\<Esc>[2 q"
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	set t_ut=
+	set t_Co=256
+	set ttymouse=sgr
+	set termguicolors
+	set keymap=russian-jcukenwin
+	set iminsert=0
+	set imsearch=0
+	inoremap <C-l> <C-^>
+	highlight lCursor guifg=NONE guibg=Cyan
+endif
+
 if exists('+termguicolors')
  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
