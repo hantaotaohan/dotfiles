@@ -210,3 +210,11 @@ XTerm.vt100*translations: #override \
         Ctrl <Key> minus: smaller-vt-font() \n\
         Ctrl <Key> plus: larger-vt-font() \n\
         Ctrl <Key> 0: set-vt-font(d)
+
+!----------------------
+! Sxiv
+!----------------------
+
+Sxiv.font: Saber:size=10.5
+Sxiv.foreground: #ABB2BF
+Sxiv.background: #282C34
