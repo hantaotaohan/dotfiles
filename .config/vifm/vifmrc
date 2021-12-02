@@ -353,6 +353,7 @@ fileviewer <image/*>
     \ vifmimg draw %px %py %pw %ph %c
     \ %pc
     \ vifmimg clear
+filextype <image/*> feh %f &
 
 fileviewer <audio/*>
     \ vifmimg audio %px %py %pw %ph %c
