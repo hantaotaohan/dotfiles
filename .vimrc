@@ -364,22 +364,7 @@ vnoremap <Space> zf                                                        " 空
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 set term=st-256color
 
-if &TERM == 'st-256color'
-	colorscheme one
-	" let &t_SI .= "\<Esc>[6 q"
-	" let &t_EI .= "\<Esc>[2 q"
-	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-	set t_ut=
-	set t_Co=256
-	set ttymouse=sgr
-	set termguicolors
-	hi CursorLineNr term=standout ctermfg=4   ctermbg=0   guifg=#61AFEF guibg=#282C34 " 当前光标行序号栏颜色
-	hi Search       term=standout ctermfg=235 ctermbg=204 guifg=#282C34 guibg=#E06C75 " 搜索高亮自定义
-	hi IncSearch    term=standout ctermfg=235 ctermbg=204 guifg=#282C34 guibg=#E06C75 " 搜索行高亮自定义
-endif
-
-if $TERM == "rxvt"
+if $TERM == "st-256color" || "xterm"
 	colorscheme one
 	set t_Co=256
 endif
