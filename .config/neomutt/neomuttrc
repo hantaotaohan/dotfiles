@@ -228,7 +228,7 @@ bind index,pager                \;<Tab> next-unread-mailbox
 
 # UI ------------------------------------------------------------
 color status        color5    brightblack
-color indicator     color0    color5
+color indicator     color15    color8
 color tree          color1    default
 
 # general -------------------------------------------------------
@@ -311,12 +311,12 @@ color header            color31         black       '^user-agent:'
 color header            color29         black       '^reply-to:'
 
 # Sidebar -------------------------------------------------------
-color sidebar_indicator     color0      color4
-color sidebar_divider       color0      color0
-color sidebar_ordinary      color4      color0
-color sidebar_new           color2      color0
-color sidebar_flagged       color4      color0
-color sidebar_highlight     color0      color4
+color sidebar_indicator     color15      color8
+color sidebar_divider       color0       color0
+color sidebar_ordinary      color4       color0
+color sidebar_new           color5       color0
+color sidebar_flagged       color4       color0
+color sidebar_highlight     color15      color8
 
 
 # Credits to https://github.com/sheoak/neomutt-powerline-nerdfonts/
