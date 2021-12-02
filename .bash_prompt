@@ -160,7 +160,7 @@ PS1+="\n";
 PS1+="\[${exitColor}\]❱❱❱ \[${reset}\]"; # `$` (and reset color)
 export PS1;
 
-PS2="\[${yellow}\]→ \[${reset}\]";
+PS2="\[${blue}\]→ \[${reset}\]";
 export PS2;
 }
 
