@@ -363,21 +363,20 @@ vnoremap <Space> zf                                                        " 空
 " 内部终端颜色设置
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 set term=st-256color
+
 if &term =~ 'st-256color'
-	colorscheme onedark
-	let &t_SI .= "\<Esc>[6 q"
-	let &t_EI .= "\<Esc>[2 q"
+	colorscheme one
+	" let &t_SI .= "\<Esc>[6 q"
+	" let &t_EI .= "\<Esc>[2 q"
 	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	set t_ut=
 	set t_Co=256
 	set ttymouse=sgr
 	set termguicolors
-	set keymap=russian-jcukenwin
-	set iminsert=0
-	set imsearch=0
-	inoremap <C-l> <C-^>
-	highlight lCursor guifg=NONE guibg=Cyan
+	hi CursorLineNr term=standout ctermfg=4   ctermbg=0   guifg=#61AFEF guibg=#282C34 " 当前光标行序号栏颜色
+	hi Search       term=standout ctermfg=235 ctermbg=204 guifg=#282C34 guibg=#E06C75 " 搜索高亮自定义
+	hi IncSearch    term=standout ctermfg=235 ctermbg=204 guifg=#282C34 guibg=#E06C75 " 搜索行高亮自定义
 endif
 
 if exists('+termguicolors')
@@ -387,22 +386,22 @@ if exists('+termguicolors')
 endif
 
 if has('nvim')
-    let g:terminal_color_0 = "#282c34"
-    let g:terminal_color_1 = "#e06c75"
-    let g:terminal_color_2 = "#98c379"
-    let g:terminal_color_3 = "#d19a66"
-    let g:terminal_color_4 = "#61afef"
-    let g:terminal_color_5 = "#c678dd"
-    let g:terminal_color_6 = "#56b6c2"
-    let g:terminal_color_7 = "#dcdfe4"
-    let g:terminal_color_8 = "#282c34"
-    let g:terminal_color_9 = "#e06c75"
-    let g:terminal_color_10= "#98c379"
-    let g:terminal_color_11= "#e5c07b"
-    let g:terminal_color_12= "#61afef"
-    let g:terminal_color_13= "#c678dd"
-    let g:terminal_color_14= "#56b6c2"
-    let g:terminal_color_15= "#dcdfe4"
+    let g:terminal_color_0 = "#282C34"
+    let g:terminal_color_1 = "#E06C75"
+    let g:terminal_color_2 = "#98C379"
+    let g:terminal_color_3 = "#D19A66"
+    let g:terminal_color_4 = "#61AFEF"
+    let g:terminal_color_5 = "#C678DD"
+    let g:terminal_color_6 = "#56B6C2"
+    let g:terminal_color_7 = "#DCDFE4"
+    let g:terminal_color_8 = "#282C34"
+    let g:terminal_color_9 = "#E06C75"
+    let g:terminal_color_10= "#98C379"
+    let g:terminal_color_11= "#D19A66"
+    let g:terminal_color_12= "#61AFEF"
+    let g:terminal_color_13= "#C678DD"
+    let g:terminal_color_14= "#56B6C2"
+    let g:terminal_color_15= "#DCDFE4"
 else
     let g:terminal_ansi_colors = repeat([0], 16)
     let g:terminal_ansi_colors[0]  = "#282C34" " black
