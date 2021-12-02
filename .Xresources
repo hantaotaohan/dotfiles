@@ -113,10 +113,10 @@ URxvt.keysym.Control-Meta-v:  builtin-string:
 st.foreground:               #ABB2BF
 st.background:               #282C34
 st.cursorColor:              #ABB2BF
-st.color0:                   #282C34
+st.color0:                   #2C323C
 st.color8:                   #3E4452
 st.color1:                   #E06C75
-st.color9:                   #BE5046
+st.color9:                   #E06C75
 st.color2:                   #98C379
 st.color10:                  #98C379
 st.color3:                   #E5C07B
@@ -170,8 +170,7 @@ XTerm.vt100*fading                  :       10
 
 XTerm.vt100*utf8                    :       2
 XTerm.vt100*eightBitInput           :       true
-!XTerm.vt100*faceName                :       xft:Iosevka Fixed:style=Extrabold:spacing=terminal:antialias=true:autohint:true
-XTerm.vt100*faceName                :       xft:Saber:style=Extrabold:spacing=terminal:antialias=true:autohint:true
+XTerm.vt100*faceName                :       xft:Iosevka Fixed:style=Extrabold:spacing=terminal:antialias=true:autohint:true
 XTerm.vt100*faceNameDoublesize      :       xft:Saber:spacing=terminal:antialias=true:autohint:true
 XTerm.vt100*internalBorder          :       10
 XTerm.vt100*faceSize                :       10.5
