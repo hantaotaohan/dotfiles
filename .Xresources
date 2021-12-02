@@ -156,6 +156,7 @@ st.disable_alpha_correction: 1
 !----------------------
 ! Xterm Settings 
 !----------------------
+Xterm.vt100*directColor             :       true
 XTerm.vt100*termName                :       xterm-256color
 XTerm.vt100*locale                  :       true
 XTerm.vt100*cursorBlink             :       true
