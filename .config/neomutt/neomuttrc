@@ -30,21 +30,18 @@ set use_envelope_from    =       yes       # 让 mutt 使用 msmtp 的 -f 选项
 set folder = ~/mail
 set spoolfile=+bteb/INBOX
 set postponed=~/mail/Postponed
-mailboxes +"----------   BTEB ------------"\
-          +bteb/INBOX \
-          +bteb/草稿 \
-          +bteb/垃圾邮件 \
-          +bteb/已发送 \
-          +bteb/已归档 \
-          +bteb/已删除邮件 \
-          +"---------   HOTMAIL ----------"\
-          +live/Inbox \
-          +live/Archive \
-          +live/Deleted \
-          +live/Drafts \
-          +live/Sent \
-          +"---------   SYSTEM ----------"\
-          +"Postponed"
+named-mailboxes "----------   BTEB ------------" +bteb/INBOX
+named-mailboxes "已经归档"                        +bteb/已归档
+named-mailboxes "已经发送"                        +bteb/已发送
+named-mailboxes "草稿信箱"                        +bteb/草稿
+named-mailboxes "垃圾邮件"                        +bteb/垃圾邮件
+named-mailboxes "已经删除"                        +bteb/已删除邮件
+named-mailboxes "---------   HOTMAIL ----------" +live/Inbox
+named-mailboxes "已经归档"                        +live/Archive
+named-mailboxes "已经发送"                        +live/Sent
+named-mailboxes "草稿信箱"                        +live/Drafts
+named-mailboxes "已经删除"                        +live/Deleted
+named-mailboxes "---------   POSTPONED --------" +/Postponed
 
 ## Where to put the stuff
 set header_cache        =       ~/mail/cache/headers
@@ -117,15 +114,15 @@ set send_charset        =       "utf-8:iso-8859-15:us-ascii"
 # Sidebar
 set mail_check_stats
 set sidebar_visible     =       no
-set sidebar_width       =       30
-set sidebar_divider_char=       '  │'
+set sidebar_width       =       35
+set sidebar_divider_char=       '│'
 #set sidebar_format      =     '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
 #set sidebar_component_depth=3
 #set sidebar_delim_chars='.'
 set sidebar_short_path 
 #set sidebar_folder_indent
-set sidebar_format  ="%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_format  ="%D%?F? [%F]?%* %?N?%N/?%S"
 
 
 # Load atomic theme
@@ -414,5 +411,3 @@ macro index,pager go "<change-folder>=live/Inbox<enter>"
 #timeout-hook 'exec sync-mailbox'
 #startup-hook 'exec sync-mailbox'
 #shutdown-hook 'exec sync-mailbox'
-
-
