@@ -364,7 +364,7 @@ vnoremap <Space> zf                                                        " 空
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 set term=st-256color
 
-if &term =~ 'st-256color'
+if &TERM == 'st-256color'
 	colorscheme one
 	" let &t_SI .= "\<Esc>[6 q"
 	" let &t_EI .= "\<Esc>[2 q"
@@ -379,10 +379,15 @@ if &term =~ 'st-256color'
 	hi IncSearch    term=standout ctermfg=235 ctermbg=204 guifg=#282C34 guibg=#E06C75 " 搜索行高亮自定义
 endif
 
+if $TERM == "rxvt"
+	colorscheme one
+	set t_Co=256
+endif
+
 if exists('+termguicolors')
- let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
- let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
- set termguicolors
+	 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	 set termguicolors
 endif
 
 if has('nvim')
@@ -1032,16 +1037,6 @@ call plug#end()
 if !empty(glob('$HOME/.vim/plugged/vim-one/'))
     colorscheme one                                                          " 终端配色方案
     set background=dark                                                      " 开启深色模式
-endif
-
-if !empty(glob('$HOME/.vim/plugged/vim-one/'))
-    if $TERM ==# "rxvt"
-        set t_Co=256
-        colorscheme one
-    else
-        set termguicolors
-        colorscheme one
-    endif
 endif
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
