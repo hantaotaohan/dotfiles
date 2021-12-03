@@ -145,10 +145,10 @@ st.scrollrate:               3
 st.chscale:                  1.0
 st.cwscale:                  1.0
 st.blinktimeout:             300
-st.bellvolume:               100
+st.bellvolume:               0
 st.boxdraw:                  1
 st.boxdraw_bold:             1
-st.boxdraw_braille:          1
+st.boxdraw_braille:          0
 st.depth:                    0
 st.opacity:                  255
 st.disable_alpha_correction: 1
