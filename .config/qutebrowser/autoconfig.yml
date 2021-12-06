@@ -16,6 +16,17 @@ settings:
     global:
       normal:
         ;q: tab-close
+        ;1: tab-focus 1
+        ;2: tab-focus 2
+        ;3: tab-focus 3
+        ;4: tab-focus 4
+        ;5: tab-focus 5
+        ;6: tab-focus 6
+        ;7: tab-focus 7
+        ;8: tab-focus 8
+        ;9: tab-focus 9
+        ;<Tab>: tab-next
+        ;<Shift+Tab>: tab-prev
         ;s: home
         q: nop
         d: nop
