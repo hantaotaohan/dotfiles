@@ -60,43 +60,44 @@ URxvt.color15: 	    #ABB2BF
 !----------------------
 
 ! 字间距
-URxvt.letterSpace:       -1
+URxvt.letterSpace:       0
 
 ! 上下左右边距
 URxvt.internalBorder:    10
+!URxvt.externalBorder:    10
 
 ! 无焦点时淡化屏幕
 URxvt*fading:            10
 
 ! 边框
-URxvt.borderLess:        false
+URxvt.borderLess:        False
 
 ! 滚动条设置
-URxvt.scrollBar:         false
+URxvt.scrollBar:         False
 
 ! 输入法
 URxvt.inputMethod:       fcitx
 
 ! 跳转输入区域
-URxvt.jumpScroll:        true
+URxvt.jumpScroll:        True
 
 ! 关闭响铃
-URxvt.urgentOnBell:      false
+URxvt.urgentOnBell:      False
 
 ! 关闭响铃
-URxvt.visualBell:        false
+URxvt.visualBell:        False
 
 ! 覆盖
-urxvt.override-redirect: false
+urxvt.override-redirect: False
 
 ! 取消边框
-urxvt.borderLess:        false
+urxvt.borderLess:        False
 
 ! 英文字体
-URxvt.font:              xft:Saber:size=10.5:style=Bold:antialias=true
+URxvt.font:              xft:Iosevka Term:size=10.5:style=bold:antialias=true:autohint:true
 
 ! 中文字体
-URxvt.boldfont:          xft:Saber:size=10.5:style=Bold:antialias=true
+URxvt.boldfont:          xft:Saber:size=10.5:style=bold:antialias=true:autohint:true
 
 ! 输入配置
 URxvt.iso14755:               false
@@ -134,10 +135,10 @@ st.termname:                 xterm-256color
 st.borderless:               0
 st.font:                     Saber:size=10.5:antialias=true:autohint:true
 st.borderpx:                 10
-st.cursorshape:              1
-st.cursorthickness:          2
+st.cursorshape:              0
+st.cursorthickness:          0
 st.cursorblinkstyle:         0
-st.cursorblinkontype:        1
+st.cursorblinkontype:        0
 st.disablebold:              1
 st.disableitalics:           1
 st.disableroman:             1
@@ -171,8 +172,8 @@ XTerm.vt100*fading                  :       10
 
 XTerm.vt100*utf8                    :       2
 XTerm.vt100*eightBitInput           :       true
-XTerm.vt100*faceName                :       xft:Iosevka Fixed:style=Extrabold:spacing=terminal:antialias=true:autohint:true
-XTerm.vt100*faceNameDoublesize      :       xft:Saber:spacing=terminal:antialias=true:autohint:true
+XTerm.vt100*faceName                :       xft:Iosevka Term:style=bold:antialias=true:autohint:true
+XTerm.vt100*faceNameDoublesize      :       xft:Saber:antialias=true:autohint:true
 XTerm.vt100*internalBorder          :       10
 XTerm.vt100*faceSize                :       10.5
 
