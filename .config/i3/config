@@ -242,7 +242,7 @@ bindsym $mod+f exec --no-startup-id fzf-open
 bindsym $mod+Return exec --no-startup-id $TERMINAL
 
 # rofi 设置及配置 apt install rofi
-bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun -theme onedark
 
 # 打开Ranger快捷键
 bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL -e ranger
