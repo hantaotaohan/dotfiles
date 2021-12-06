@@ -3,14 +3,14 @@ configuration {
 /*  width: 50; */
 /*  lines: 15; */
 /*  columns: 1; */
-/*  font: "Saber 10"; */
+ font: "Saber 10";
 /*  bw: 1; */
 /*  location: 0; */
 /*  padding: 5; */
 /*  yoffset: 0; */
 /*  xoffset: 0; */
 /*  fixed-num-lines: true; */
-/*  show-icons: true; */
+ show-icons: true;
 /*  terminal: "st"; */
 /*  ssh-client: "ssh"; */
 /*  ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]"; */
