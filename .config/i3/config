@@ -574,4 +574,4 @@ exec --no-startup-id /usr/bin/vmware-user
 exec --no-startup-id qutebrowser
 
 # 启动 i3wm 布局模式
-# exec --no-startup-id stacki3 35
+exec_always --no-startup-id autotiling
