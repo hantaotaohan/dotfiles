@@ -128,8 +128,8 @@ st.color5:                   #C678DD
 st.color13:                  #C678DD
 st.color6:                   #56B6C2
 st.color14:                  #56B6C2
-st.color7:                   #5C6370
-st.color15:                  #ABB2BF
+st.color7:                   #ABB2BF
+st.color15:                  #5C6370
 
 st.termname:                 xterm-256color
 st.borderless:               0
