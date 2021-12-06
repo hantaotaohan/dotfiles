@@ -471,7 +471,7 @@ echo -e "                                                                       
         i3ipc \
         flake8 \
         keyring \
-	stacki3 \
+	autotiling \
 	#ueberzug \
         raiseorlaunch \
         popupdict \
