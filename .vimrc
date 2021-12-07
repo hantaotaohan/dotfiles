@@ -362,16 +362,12 @@ vnoremap <Space> zf                                                        " 空
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 内部终端颜色设置
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-if $TERM == "st" || "xterm"
-    set term=st-256color
-	colorscheme one
+if $GET_TERMINAL_NAME == "st"
 	set t_Co=256
-endif
-
-if exists('+termguicolors')
-	 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-	 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-	 set termguicolors
+    set term=st-256color
+	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	set termguicolors
 endif
 
 if has('nvim')
