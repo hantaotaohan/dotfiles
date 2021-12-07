@@ -8,6 +8,9 @@
  *
  */
 
+configuration {
+  display-drun:	"Search";
+}
 
 * {
   black:      #000000;
@@ -26,42 +29,51 @@
   spacing: 0;
   background-color: transparent;
 
-  font: "Saber 16";
+  font: "Saber 15";
   text-color: @text;
+
 }
 
 window {
   transparency: "real";
-  fullscreen: true;
+  fullscreen: false;
   background-color: #282c34;
-  /* background-color: #282c34dd; */
+  width: 30%;
+  height:50%;
+  font: "Saber 13";
 
 }
 
 mainbox {
-  padding: 30% 30%;
+  padding: 3% 3%;
+  font: "Saber 13";
 }
 
 inputbar {
   margin: 0px 0px 30px 0px;
-  children: [prompt, textbox-prompt-colon, entry, case-indicator];
+  children: [prompt, textbox-prompt-colon, entry];
+  font: "Saber 13";
 }
 
 prompt {
   text-color: @blue;
+  font: "Saber 16";
 }
 
 textbox-prompt-colon {
   expand: false;
-  str: ":";
+  str: " : ";
   text-color: @text-alt;
+  font: "Saber 13";
 }
 
 entry {
-  margin: 0px 10px;
+  placeholder: "...";
 }
 
 listview {
+  font: "Saber 13";
+  margin: 0%; 
   spacing: 5px;
   dynamic: true;
   scrollbar: false;
@@ -72,19 +84,23 @@ element {
   text-color: @text-alt;
   highlight: bold #e06c75; /* green */
   border-radius: 10px;
+  font: "Saber 13";
 }
 
 element selected {
   background-color:RGB(79,87,103,0.3);
   text-color: @text;
+  font: "Saber 13";
 }
 
 element urgent, element selected urgent {
   text-color: @red;
+  font: "Saber 13";
 }
 
 element active, element selected active {
   text-color: @purple;
+  font: "Saber 13";
 }
 
 message {
@@ -93,10 +109,12 @@ message {
   background-color: @emphasis;
   border: 1px;
   border-color: @cyan;
+  font: "Saber 13";
 }
 
 button selected {
   padding: 5px;
   border-radius: 3px;
   background-color: @emphasis;
+  font: "Saber 13";
 }
