@@ -22,6 +22,8 @@ fi
 # export MESA_GL_VERSION_OVERRIDE=4.5
 
 # Term.
+# 自定义函数-查看当前终端模拟器名称
+export GET_TERMINAL_NAME=$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= -p "$$")))")))")
 # Term颜色设定
 export TERM="xterm-256color"
 # export TERM="st-256color"
