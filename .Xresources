@@ -52,8 +52,8 @@ URxvt.color6:       #56B6C2
 URxvt.color14:      #56B6C2
 
 ! white
-URxvt.color7:       #5C6370
-URxvt.color15: 	    #ABB2BF
+URxvt.color7:       #ABB2BF
+URxvt.color15: 	    #5C6370
 
 !----------------------
 ! URxvt Settings
@@ -200,8 +200,8 @@ XTerm.vt100*color5                  :       #C678DD
 XTerm.vt100*color13                 :       #C678DD
 XTerm.vt100*color6                  :       #56B6C2
 XTerm.vt100*color14                 :       #56B6C2
-XTerm.vt100*color7                  :       #5C6370
-XTerm.vt100*color15                 :       #ABB2BF
+XTerm.vt100*color7                  :       #ABB2BF
+XTerm.vt100*color15                 :       #5C6370
 
 !------------- copy-paste ----------------------!
 XTerm.vt100*selectToClipboard: true
