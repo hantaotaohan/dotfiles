@@ -22,6 +22,8 @@ if has("gui_running")
     set guioptions-=T
     set guifont=Inziu\ Iosevka\ SC\ Bold\ 10.5                           " 设置GUI字体
     set guicursor=a:blinkon0
+    set ttymouse=
+    set nocursorline                                                     " 突出显示当前行
     nnoremap <silent> <S-F2> :if &guioptions =~# 'T' <Bar>
             \set guioptions-=T <Bar>
             \set guioptions-=m <bar>
@@ -1038,7 +1040,7 @@ hi QuickFixLine           term=standout ctermfg=235 ctermbg=180 guifg=#ABB2BF gu
 hi SignColumn             term=standout ctermfg=2   ctermbg=2   guifg=#E06C75 guibg=#282C34   " 标签栏颜色
 hi DiffDelete             term=standout ctermfg=235 ctermbg=204 guifg=#E06C75 guibg=#E06C75   " 差异删除颜色
 hi CursorLineNr           term=standout ctermfg=145 ctermbg=236 guifg=#61AFEF guibg=#282C34   " 当前光标行序号栏颜色
-hi Cursor                 term=standout ctermfg=145 ctermbg=236 guifg=#282c34 guibg=#E06C75   " 当前光标颜色
+hi Cursor                 term=standout ctermfg=0   ctermbg=7   guifg=#282C34 guibg=#ABB2BF   " 当前光标颜色
 hi FoldColumn             term=standout ctermfg=0   ctermbg=5   guifg=#ABB2BF guibg=#282C34   " 折叠边栏提示颜色
 
 "=================================================================================================================================
