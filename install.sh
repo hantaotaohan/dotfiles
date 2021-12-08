@@ -361,6 +361,7 @@ echo -e "                                                                       
         #-------------------------------------------------------------------------SYSTEM--
         #xinit \
         xinit \
+	xorg-dev \
         lua5.2 \
         #ruby-full \
         openssh-server \
