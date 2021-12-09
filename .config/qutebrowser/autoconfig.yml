@@ -34,6 +34,8 @@ settings:
         T: nop
         <F12>: devtools
         <Escape>: spawn fcitx-remote -c
+      insert:
+        <Escape>: spawn fcitx-remote -c ;; mode-leave
   bindings.key_mappings:
     global:
       <Ctrl+6>: <Ctrl+^>
