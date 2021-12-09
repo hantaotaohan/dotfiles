@@ -33,7 +33,7 @@ SwitchKey=Disabled
 # 激活输入法
 #ActivateKey=
 # 取消激活输入法
-InactivateKey=ESCAPE
+#InactivateKey=
 # 启用输入法间切换
 # Available Value:
 # True False
