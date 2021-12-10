@@ -396,6 +396,7 @@ echo -e "                                                                       
 	libgl1-mesa-* \
         python3-pip \
         inotify-tools \
+	translate-shell \
         universal-ctags \
         silversearcher-ag \
         #--------------------------------------------------------------------------EDIT--
@@ -475,7 +476,7 @@ echo -e "                                                                       
 	autotiling \
 	#ueberzug \
         raiseorlaunch \
-        popupdict \
+        #popupdict \
         you-get \
         pyvirtualdisplay 
         #mdv \
