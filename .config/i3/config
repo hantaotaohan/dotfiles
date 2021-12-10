@@ -223,7 +223,7 @@ for_window [title="微信"                                        ]       floati
 
 for_window [class="(!?)$TERMINAL_C"     title="scratchpad"      ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad     , border normal 0   , title_format "<b>%title</b>"
 for_window [class="(!?)$TERMINAL_C"     title="neomuttt"        ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad     , border normal 0   , title_format "<b>%title</b>"
-for_window [class="(!?)Microsoft-edge"  title="weread"          ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad    
+for_window [class="(!?)Microsoft-edge"  title="Google 翻译"     ]       floating enable  , resize set 600  300   , move absolute position center  , sticky enable , move to scratchpad    
 for_window [class="(!?)qutebrowser"     title=".*qutebrowser"   ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable , move to scratchpad    
 for_window [class="(!?)Copytranslator"  title="copytranslator"  ]       floating enable  , resize set 650  250   , move absolute position center  , sticky enable , move to scratchpad    
 for_window [class="(!?)$TERMINAL_C"     title="ttyclock"        ]       floating enable  , resize set 500  170   , move absolute position 700 60  , sticky enable , move to scratchpad
@@ -269,7 +269,7 @@ bindsym Control+1 exec --no-startup-id raiseorlaunch -r -c "$TERMINAL_C"        
 bindsym Control+2 exec --no-startup-id raiseorlaunch -r -c "$TERMINAL_C"        -t "neomuttt"           -e "--no-startup-id $TERMINAL -t neomuttt -e neomutt"
 
 # Open Weread
-bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "Microsoft-edge"     -t "weread"             -e "--no-startup-id microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://weread.qq.com"
+bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "Microsoft-edge"     -t "Google 翻译"        -e "--no-startup-id microsoft-edge --force-dark-mode --enable-features=OverlayScrollbar --enable-plugins --process-per-tab --app=https://translate.google.cn/"
 
 # Open copytranslator
 bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "Copytranslator"     -t "copytranslator"     -e "--no-startup-id copytranslator --no-sandbox"
