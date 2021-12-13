@@ -228,7 +228,7 @@ bind index,pager                \;<Tab> next-unread-mailbox
 
 # UI ------------------------------------------------------------
 color status        color5    brightblack
-color indicator     color15    color8
+color indicator     color7    color8
 color tree          color1    default
 
 # general -------------------------------------------------------
@@ -264,10 +264,10 @@ color index         default    default         "~A"        # 全部邮件
 color index         color13    default         "~E"        # 过期消息
 color index         color3     default         "~F"        # 带标签的消息
 color index         color0     color1          "~D"        # 删除的消息
-color index         color2     color8          "~N"        # 新邮件
-color index         color2     default         "~O"        # 旧消息
-color index         color2     color8          "~U"        # 未读邮件
-color index         color2     color8          "~v~(~N)"   # Collapsed thread with some unread
+color index         color2     color0          "~N"        # 新邮件
+color index         color2     color0         "~O"        # 旧消息
+color index         color2     color0          "~U"        # 未读邮件
+color index         color2     color0          "~v~(~N)"   # Collapsed thread with some unread
 color index         color0     color1          "~N~(~D~N)" # Collapsed thread with some unread & flagged
 #color index         color1     color1          "~v~(~F~N)" # Collapsed thread with some unread & flagged
 #color index         color2     color8          "~U~$"      # 未读邮件+未引用的消息（需要线程视图）
@@ -280,8 +280,8 @@ color index         color3     color8          "~T"        # 标记的消息
 #color index         default     default        "~R"        # 已读消息
 
 # new message
-color index_subject color2        color8          "~N !~T !~D"
-color index_author  color2        color8          "~N !~T !~D"
+color index_subject color2        color0          "~N !~T !~D"
+color index_author  color2        color0          "~N !~T !~D"
 #color index         cyan        color8          "~N"
 
 # message headers -----------------------------------------------
@@ -311,7 +311,7 @@ color header            color31         black       '^user-agent:'
 color header            color29         black       '^reply-to:'
 
 # Sidebar -------------------------------------------------------
-color sidebar_indicator     color15      color8
+color sidebar_indicator     color7      color8
 color sidebar_divider       color0       color0
 color sidebar_ordinary      color4       color0
 color sidebar_new           color5       color0
