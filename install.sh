@@ -65,6 +65,7 @@ Dotfiles_symlinks=( \
         .imwheelrc \
         .gtkrc-2.0 \
         .gemrc \
+	.xinitrc \
         .Xresources
         )
 
