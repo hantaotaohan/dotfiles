@@ -393,10 +393,9 @@ echo -e "                                                                       
         newsboat \
 	tty-clock \
 	qutebrowser \
-	#qutebrowser \
-	libgl1-mesa-* \
         python3-pip \
         inotify-tools \
+	libgl1-mesa-* \
 	#translate-shell \
         universal-ctags \
         silversearcher-ag \
