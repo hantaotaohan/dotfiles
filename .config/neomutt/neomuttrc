@@ -312,12 +312,11 @@ color header            color29         black       '^reply-to:'
 
 # Sidebar -------------------------------------------------------
 color sidebar_indicator     color7      color8
-color sidebar_divider       color0       color0
-color sidebar_ordinary      color4       color0
-color sidebar_new           color5       color0
-color sidebar_flagged       color4       color0
-color sidebar_highlight     color15      color8
-
+color sidebar_divider       color0      color0
+color sidebar_ordinary      color4      color0
+color sidebar_new           color5      color0
+color sidebar_flagged       color4      color0
+color sidebar_highlight     color7      color8
 
 # Credits to https://github.com/sheoak/neomutt-powerline-nerdfonts/
 #set index_format=" %T %{!%Y-%m-%d } %2M %-28.28L  %?X?&·? %s"
