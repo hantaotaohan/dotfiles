@@ -348,9 +348,9 @@ echo -e "                                                                       
         mpv \
         sxiv \
         rofi \
-        #picom \
-        #dunst \
-        #alttab \
+        picom \
+        dunst \
+        alttab \
         zathura \
         i3blocks \
 	nautilus \
@@ -364,8 +364,8 @@ echo -e "                                                                       
 	xorg-dev \
         lua5.2 \
         #ruby-full \
-        openssh-server \
-        openssh-client \
+        #openssh-server \
+        #openssh-client \
         #--------------------------------------------------------------------------FCITX--
         fcitx \
         fcitx-pinyin \
@@ -396,7 +396,7 @@ echo -e "                                                                       
 	libgl1-mesa-* \
         python3-pip \
         inotify-tools \
-	translate-shell \
+	#translate-shell \
         universal-ctags \
         silversearcher-ag \
         #--------------------------------------------------------------------------EDIT--
@@ -472,7 +472,7 @@ echo -e "                                                                       
 	pipApps=( \
         i3ipc \
         flake8 \
-        keyring \
+        #keyring \
 	autotiling \
 	#ueberzug \
         raiseorlaunch \
@@ -566,8 +566,8 @@ echo -e "                                                                       
 	
 	dpkgApps=( \
         fd.deb \
-        bat.deb \
-        Alacritty.deb
+        bat.deb 
+        #Alacritty.deb
         )
 
     for app in "${dpkgApps[@]}"
@@ -673,17 +673,17 @@ echo -e "                                                                       
 # Install trans
 #----------------------------------------------------------------------------------------#
 
-    wget -P $Bin_dir $Gitraw/trans > /dev/null 2>&1
+#    wget -P $Bin_dir $Gitraw/trans > /dev/null 2>&1
 
-    if [ ! -f "/usr/local/bin/trans" ]; then
-        sudo cp -f $Bin_dir/trans /usr/local/bin
-        sudo chmod 777 /usr/local/bin/trans
-    else
-        sudo rm -rf /usr/local/bin/trans
-        sudo cp -f $Bin_dir/trans /usr/local/bin
-        sudo chmod 777 /usr/local/bin/trans
-    fi
-    echo -e "              ${green}[√] Trans Successful${reset}\n"
+#    if [ ! -f "/usr/local/bin/trans" ]; then
+#        sudo cp -f $Bin_dir/trans /usr/local/bin
+#        sudo chmod 777 /usr/local/bin/trans
+#    else
+#        sudo rm -rf /usr/local/bin/trans
+#        sudo cp -f $Bin_dir/trans /usr/local/bin
+#        sudo chmod 777 /usr/local/bin/trans
+#    fi
+#    echo -e "              ${green}[√] Trans Successful${reset}\n"
 	
 #----------------------------------------------------------------------------------------#
 # Install Vim Plug
