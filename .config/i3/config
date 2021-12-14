@@ -554,7 +554,7 @@ exec --no-startup-id bash ~/.config/i3/speedkeyboard.sh
 exec --no-startup-id /usr/bin/vmware-user
 
 # 加载Dunst 任务栏通知
-# exec --no-startup-id dunst
+exec --no-startup-id /usr/bin/dunst &
 
 # 启用输入法ibus
 # exec --no-startup-id ibus-daemon -drx
