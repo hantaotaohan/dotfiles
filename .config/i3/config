@@ -533,12 +533,8 @@ exec --no-startup-id feh --bg-scale ~/.config/i3/background/1.jpg
 # 利用hsetroot改变背景颜色
 # exec --no-startup-id hsetroot -solid "#282c34"
 
-# 透明窗口 Compton
-# # exec --no-startup-id compton --config ~/.config/compton/compton.conf
-#exec_always --no-startup-id picom
-
 # 透明窗口 Picom
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
+exec --no-startup-id picom
 # exec --no-startup-id picom --config ~/.config/picom/picom.conf --experimental-backends --glx-no-rebind-pixmap
 
 # xmodmap
@@ -554,7 +550,7 @@ exec --no-startup-id bash ~/.config/i3/speedkeyboard.sh
 exec --no-startup-id /usr/bin/vmware-user
 
 # 加载Dunst 任务栏通知
-exec_always --no-startup-id /usr/bin/dunst
+# exec_always --no-startup-id /usr/bin/dunst
 
 # 启用输入法ibus
 # exec --no-startup-id ibus-daemon -drx
@@ -571,7 +567,7 @@ exec_always --no-startup-id /usr/bin/dunst
 exec_always --no-startup-id alttab -s 0 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 1x1 -bg "#282c34"
 
 # 热启动qutebrowser
-exec --no-startup-id qutebrowser
+# exec --no-startup-id qutebrowser
 
 # 启动 i3wm 布局模式
 exec_always --no-startup-id autotiling
