@@ -876,8 +876,8 @@ main() {
             Arcthemes
             Arcicons
             #I3gaps
-            Picom
-            Dunst
+            #Picom
+            #Dunst
             Offlineimap
             Navi
             #Ctags
@@ -899,14 +899,14 @@ main() {
             Clone
             Dragon
             #Ly
-            Vmware_Share_Fix
+            #Vmware_Share_Fix
             SSH_banner
             Fixnautilus
             Fzfopen
-            Vim
+            #Vim
             I3lock
-            Bashdb
-            Qutebrowser
+            #Bashdb
+            #Qutebrowser
             #I3blocks
             #Yarn
             ;;
