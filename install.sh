@@ -392,6 +392,7 @@ echo -e "                                                                       
 	hsetroot \
         newsboat \
 	tty-clock \
+	qutebrowser \
 	#qutebrowser \
 	libgl1-mesa-* \
         python3-pip \
