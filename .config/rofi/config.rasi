@@ -1,5 +1,6 @@
 configuration {
-/*  modi: "window,run,ssh"; */
+/*  modi: "drun,run,window,ssh,keys"; */
+ modi: "drun";
 /*  width: 50; */
 /*  lines: 15; */
 /*  columns: 1; */
@@ -9,9 +10,9 @@ configuration {
 /*  padding: 5; */
 /*  yoffset: 0; */
 /*  xoffset: 0; */
-/*  fixed-num-lines: true; */
+ fixed-num-lines: true;
  show-icons: true;
-/*  terminal: "st"; */
+ terminal: "st";
 /*  ssh-client: "ssh"; */
 /*  ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]"; */
 /*  run-command: "{cmd}"; */
@@ -28,8 +29,8 @@ configuration {
 /*  sort: false;*/
 /*  sorting-method: ;*/
 /*  case-sensitive: false;*/
-/*  cycle: true;*/
-/*  sidebar-mode: false;*/
+ cycle: false;
+ /* sidebar-mode: false; */
 /*  eh: 1;*/
 /*  auto-select: false;*/
 /*  parse-hosts: false;*/
@@ -51,7 +52,7 @@ configuration {
 /*  scroll-method: 0;*/
 /*  fake-background: "screenshot"; */
 /*  window-format: "{w}    {c}   {t}";*/
-/*  click-to-exit: true; */
+ click-to-exit: true;
 /*  show-match: true; */
 /*  color-normal: ;*/
 /*  color-urgent: ;*/
@@ -60,7 +61,7 @@ configuration {
 /*  max-history-size: 25;*/
 /*  combi-hide-mode-prefix: false;*/
 /*  matching-negate-char: '-' /* unsupported */;*/
-/*  cache-dir: ;*/
+/* cache-dir: "~/.config/rofi/"; */
 /*  pid: "/run/user/1000/rofi.pid";*/
 /*  display-window: ;*/
 /*  display-windowcd: ;*/
@@ -141,5 +142,6 @@ configuration {
 /*  ml-row-down: "ScrollDown";*/
 /*  me-select-entry: "MousePrimary";*/
 /*  me-accept-entry: "MouseDPrimary";*/
-/*  me-accept-custom: "Control+MouseDPrimary";*/
+/* me-accept-custom: "Control+MouseDPrimary"; */
+ async-pre-read: 10000;
 }
