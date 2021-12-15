@@ -3,160 +3,171 @@
 ! Repository: https://github.com/arcticicestudio/nord-xresources
 ! License:    MIT
 
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 ! XFT Settings
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 
-Xft.dpi:            96
-Xft.rgba:           rgb
-Xft.antialias:      true
-Xft.hinting:        true
-Xft.autohint:       false
-Xft.lcdfilter:      lcddefault
-Xft.hintstyle:      hintslight
+Xft.dpi                             :       96
+Xft.rgba                            :       rgb
+Xft.antialias                       :       True
+Xft.hinting                         :       True
+Xft.autohint                        :       False
+Xft.lcdfilter                       :       lcddefault
+Xft.hintstyle                       :       hintslight
 
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 ! URxvt OneDark Theme
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 
-URxvt.foreground:   #ABB2BF
-URxvt.background:   #282C34
-URxvt.cursorColor:  #ABB2BF
+URxvt.foreground                    :       #ABB2BF
+URxvt.background                    :       #282C34
+URxvt.cursorColor                   :       #ABB2BF
 
 ! black
-URxvt.color0:       #282C34
-URxvt.color8:       #3E4452
+URxvt.color0                        :       #282C34
+URxvt.color8                        :       #3E4452
 
 ! red
-URxvt.color1:       #E06C75
-URxvt.color9:       #BE5046
+URxvt.color1                        :       #E06C75
+URxvt.color9                        :       #BE5046
 
 ! green
-URxvt.color2:       #98C379
-URxvt.color10:      #98C379
+URxvt.color2                        :       #98C379
+URxvt.color10                       :       #98C379
 
 ! yellow
-URxvt.color3:       #E5C07B
-URxvt.color11:      #D19A66
+URxvt.color3                        :       #E5C07B
+URxvt.color11                       :       #D19A66
 
 ! blue
-URxvt.color4:       #61AFEF
-URxvt.color12:      #61AFEF
+URxvt.color4                        :       #61AFEF
+URxvt.color12                       :       #61AFEF
 
 ! magenta
-URxvt.color5:       #C678DD
-URxvt.color13:      #C678DD
+URxvt.color5                        :       #C678DD
+URxvt.color13                       :       #C678DD
 
 ! cyan
-URxvt.color6:       #56B6C2
-URxvt.color14:      #56B6C2
+URxvt.color6                        :       #56B6C2
+URxvt.color14                       :       #56B6C2
 
 ! white
-URxvt.color7:       #ABB2BF
-URxvt.color15: 	    #5C6370
+URxvt.color7                        :       #ABB2BF
+URxvt.color15                       : 	    #5C6370
 
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 ! URxvt Settings
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 
 ! 字间距
-URxvt.letterSpace:       0
+URxvt.letterSpace                   :       0
 
 ! 上下左右边距
-URxvt.internalBorder:    10
-!URxvt.externalBorder:    10
+URxvt.internalBorder                :       10
+
+! 颜色深度
+URxvt.depth                         :       32
+
+! 登录
+URxvt.loginShell                    :       True
+
+! 边距样式
+URxvt.intensityStyles               :       False
+
+! 字符间距
+URxvt.lineSpace                     :       0
 
 ! 无焦点时淡化屏幕
-URxvt*fading:            10
+URxvt*fading                        :       30
 
 ! 边框
-URxvt.borderLess:        False
+URxvt.borderLess                    :       False
 
 ! 滚动条设置
-URxvt.scrollBar:         False
+URxvt.scrollBar                     :       False
 
 ! 输入法
-URxvt.inputMethod:       fcitx
+URxvt.inputMethod                   :       fcitx
 
 ! 跳转输入区域
-URxvt.jumpScroll:        True
+URxvt.jumpScroll                    :       True
 
 ! 关闭响铃
-URxvt.urgentOnBell:      False
+URxvt.urgentOnBell                  :       False
 
 ! 关闭响铃
-URxvt.visualBell:        False
+URxvt.visualBell                    :       False
 
 ! 覆盖
-urxvt.override-redirect: False
+urxvt.override-redirect             :       False
 
 ! 取消边框
-urxvt.borderLess:        False
+urxvt.borderLess                    :       False
 
 ! 英文字体
-URxvt.font:              xft:Iosevka Term:size=10.5:style=bold:antialias=true:autohint:true
+URxvt.font                          :       xft:Iosevka Term:size=10.5:style=bold:antialias=true:autohint:true
 
 ! 中文字体
-URxvt.boldfont:          xft:Saber:size=10.5:style=bold:antialias=true:autohint:true
+URxvt.boldfont                      :       xft:Saber:size=10.5:style=bold:antialias=true:autohint:true
 
 ! 输入配置
-URxvt.iso14755:               false
-URxvt.iso14755_52:            false
-URxvt.keysym.Shift-Control-V: eval:paste_clipboard
-URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
-URxvt.keysym.Control-Meta-c:  builtin-string:
-URxvt.keysym.Control-Meta-v:  builtin-string:
+URxvt.iso14755                      :       False
+URxvt.iso14755_52                   :       False
+URxvt.keysym.Shift-Control-V        :       eval:paste_clipboard
+URxvt.keysym.Shift-Control-C        :       eval:selection_to_clipboard
+URxvt.keysym.Control-Meta-c         :       builtin-string:
+URxvt.keysym.Control-Meta-v         :       builtin-string:
 
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 ! St Settings
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 
-st.foreground:               #ABB2BF
-st.background:               #282C34
-st.cursorColor:              #ABB2BF
-st.color0:                   #282C34
-st.color8:                   #3E4452
-st.color1:                   #E06C75
-st.color9:                   #E06C75
-st.color2:                   #98C379
-st.color10:                  #98C379
-st.color3:                   #E5C07B
-st.color11:                  #D19A66
-st.color4:                   #61AFEF
-st.color12:                  #61AFEF
-st.color5:                   #C678DD
-st.color13:                  #C678DD
-st.color6:                   #56B6C2
-st.color14:                  #56B6C2
-st.color7:                   #ABB2BF
-st.color15:                  #5C6370
+st.foreground                       :       #ABB2BF
+st.background                       :       #282C34
+st.cursorColor                      :       #ABB2BF
+st.color0                           :       #282C34
+st.color8                           :       #3E4452
+st.color1                           :       #E06C75
+st.color9                           :       #E06C75
+st.color2                           :       #98C379
+st.color10                          :       #98C379
+st.color3                           :       #E5C07B
+st.color11                          :       #D19A66
+st.color4                           :       #61AFEF
+st.color12                          :       #61AFEF
+st.color5                           :       #C678DD
+st.color13                          :       #C678DD
+st.color6                           :       #56B6C2
+st.color14                          :       #56B6C2
+st.color7                           :       #ABB2BF
+st.color15                          :       #5C6370
 
-st.termname:                 xterm-256color
-st.borderless:               0
-st.font:                     Saber:size=10.5:antialias=true:autohint:true
-st.borderpx:                 10
-st.cursorshape:              0
-st.cursorthickness:          0
-st.cursorblinkstyle:         0
-st.cursorblinkontype:        0
-st.disablebold:              1
-st.disableitalics:           1
-st.disableroman:             1
-st.scrollrate:               3
-st.chscale:                  1.0
-st.cwscale:                  1.0
-st.blinktimeout:             300
-st.bellvolume:               0
-st.boxdraw:                  1
-st.boxdraw_bold:             1
-st.boxdraw_braille:          0
-st.depth:                    0
-st.opacity:                  255
-st.disable_alpha_correction: 1
+st.termname                         :       xterm-256color
+st.borderless                       :       0
+st.font                             :       Saber:size=10.5:antialias=true:autohint:true
+st.borderpx                         :       10
+st.cursorshape                      :       0
+st.cursorthickness                  :       0
+st.cursorblinkstyle                 :       0
+st.cursorblinkontype                :       0
+st.disablebold                      :       1
+st.disableitalics                   :       1
+st.disableroman                     :       1
+st.scrollrate                       :       3
+st.chscale                          :       1.0
+st.cwscale                          :       1.0
+st.blinktimeout                     :       300
+st.bellvolume                       :       0
+st.boxdraw                          :       1
+st.boxdraw_bold                     :       1
+st.boxdraw_braille                  :       0
+st.depth                            :       0
+st.opacity                          :       255
+st.disable_alpha_correction         :       1
 
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 ! Xterm Settings 
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 Xterm.vt100*directColor             :       true
 XTerm.vt100*termName                :       xterm-256color
 XTerm.vt100*locale                  :       true
@@ -203,19 +214,19 @@ XTerm.vt100*color14                 :       #56B6C2
 XTerm.vt100*color7                  :       #ABB2BF
 XTerm.vt100*color15                 :       #5C6370
 
-!------------- copy-paste ----------------------!
-XTerm.vt100*selectToClipboard: true
-XTerm.vt100*translations: #override \
-        Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
-        Ctrl Shift <Key>V: insert-selection(CLIPBOARD) \n\
-        Ctrl <Key> minus: smaller-vt-font() \n\
-        Ctrl <Key> plus: larger-vt-font() \n\
-        Ctrl <Key> 0: set-vt-font(d)
+!-------------- Copy - Paste ------------------------------------------------------------------------------
+XTerm.vt100*selectToClipboard       :       true
+XTerm.vt100*translations            :       #override \
+        Ctrl Shift <Key>C           :       copy-selection(CLIPBOARD) \n\
+        Ctrl Shift <Key>V           :       insert-selection(CLIPBOARD) \n\
+        Ctrl <Key> minus            :       smaller-vt-font() \n\
+        Ctrl <Key> plus             :       larger-vt-font() \n\
+        Ctrl <Key> 0                :       set-vt-font(d)
 
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 ! Sxiv
-!----------------------
+!----------------------------------------------------------------------------------------------------------
 
-Sxiv.font: Saber:size=10.5
-Sxiv.foreground: #ABB2BF
-Sxiv.background: #282C34
+Sxiv.font                           :       Saber:size=10.5
+Sxiv.foreground                     :       #ABB2BF
+Sxiv.background                     :       #282C34
