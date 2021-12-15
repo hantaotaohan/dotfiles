@@ -20,7 +20,7 @@ new1="$(find $maildirnew1 -type f | wc -l)"
 if [ $new -gt 0 ] || [ $new1 -gt 0 ]
 then
      # dunstify -r 7777 -a "neomutt" normal  "New mail! \n\nBTEB: $new   HOTMAIL: $new1"
-     dunstify -r 7777 -a "neomutt" -u c critical "New mail! \n\nBTEB: $new   HOTMAIL: $new1"
+     dunstify -i /usr/share/icons/Adwaita/32x32/legacy/mail-unread.png -r 7777 -a "neomutt" -u c critical "New mail! \n\nBTEB: $new   HOTMAIL: $new1"
 fi
 
 # powershell.exe -Command New-BurntToastNotification -Text "NewMail", "BTEB：$new",  "HOTMAIL：$new1"
