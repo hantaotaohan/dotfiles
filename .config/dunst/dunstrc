@@ -1,4 +1,6 @@
 [global]
+    monitor = 0
+    follow = mouse
     frame_width = 2 
     frame_color = "#282c34"
     font = "Saber 10"
@@ -10,7 +12,7 @@
     show_age_threshold = -1
     word_wrap = no
     ignore_newline = no
-    geometry = "260x80-10+40"
+    geometry = "300x60-20+48"
     shrink = no
     transparency = 0
     idle_threshold = 120
@@ -22,30 +24,32 @@
     line_height = 0
     padding = 8
     horizontal_padding = 10
-    separator_height = 3
-    separator_color = "#00000000" 
+    separator_height = 2
+    separator_color = frame 
     dmenu = /usr/bin/dmenu -p dunst:
-    browser = palemoo
+    browser = qutebrowser
     icon_position = off
     icon_path = /usr/share/icons/Adwaita/32x32/status
-    max_icon_size=128
+    max_icon_size=32
 
 [urgency_low]
+    timeout = 4
     background = "#282c34"
     foreground = "#abb2bf"
-    timeout = 0
+    frame_color = "#98c379"
 
 [urgency_normal]
+    timeout = 8
     background = "#282c34"
     foreground = "#abb2bf"
-    timeout = 10
+    frame_color = "#61afef"
 
 [urgency_critical]
-    background = "#e06c75"
-    foreground = "#282c34"
-    timeout = 20
+    timeout = 0
+    background = "#282c34"
+    foreground = "#abb2bf"
+    frame_color = "#e06c75"
 
 [neomutt]
     appname = neomutt
-    format = "<span> <b>%b</b></span>"
-    new_icon = "/usr/share/icons/Adwaita/32x32/status/mail-unread.png"
+    format = "<span>  <b>%b</b></span>"
