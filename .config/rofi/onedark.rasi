@@ -47,6 +47,8 @@ element {
 
 element-text {
   highlight: underline #E06C75;
+  background-color: inherit;
+  text-color:       inherit;
 }
 
 element-text selected {
