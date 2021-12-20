@@ -1,120 +1,59 @@
-/*
- * ROFI One Dark
- *
- * Based on OneDark.vim (https://github.com/joshdick/onedark.vim)
- *
- * Author: Benjamin Stauss
- * User: me-benni
- *
- */
-
-configuration {
-  display-drun:	"Search";
-}
-
 * {
-  black:      #000000;
-  red:        #eb6e67;
-  green:      #95ee8f;
-  yellow:     #f8c456;
-  blue:       #6eaafb;
-  mangenta:   #d886f3;
-  cyan:       #6cdcf7;
-  emphasis:   #50536b;
-  text:       #dfdfdf;
-  text-alt:   #b2b2b2;
-  fg:         #abb2bf;
-  bg:         #282c34;
-
+  background-color: #282C34;
+  border-color: #2E343F;
+  text-color: #8CA0AA;
   spacing: 0;
-  background-color: transparent;
-
-  font: "Saber 15";
-  text-color: @text;
-
-}
-
-window {
-  transparency: "real";
-  fullscreen: false;
-  background-color: #282c34;
   width: 30%;
-  height:50%;
-  font: "Saber 13";
-
-}
-
-mainbox {
-  padding: 3% 3%;
-  font: "Saber 13";
+  height: 38%;
+  font: "Saber 11";
 }
 
 inputbar {
-  margin: 0px 0px 30px 0px;
-  children: [prompt, textbox-prompt-colon, entry];
-  font: "Saber 13";
+  border: 0 0 1px 0;
+  children: [prompt,entry];
 }
 
 prompt {
-  text-color: @blue;
   font: "Saber 16";
+  padding: 16px;
+  border: 0 1px 0 0;
 }
 
-textbox-prompt-colon {
-  expand: false;
-  str: " : ";
-  text-color: @text-alt;
-  font: "Saber 13";
+textbox {
+  background-color: #2E343F;
+  border: 0 0 1px 0;
+  border-color: #282C34;
+  padding: 8px 16px;
 }
 
 entry {
-  placeholder: "...";
+  font: "Saber 16";
+  text-color: #abb2bf;
+  padding: 16px;
 }
 
 listview {
-  font: "Saber 13";
-  margin: 0%; 
-  spacing: 5px;
-  dynamic: true;
+  cycle: false;
+  margin: 0 0 -1px 0;
   scrollbar: false;
 }
 
 element {
-  padding: 10px;
-  text-color: @text-alt;
-  highlight: bold #e06c75; /* green */
-  border-radius: 10px;
-  font: "Saber 13";
+  border: 0 0 1px 0;
+  padding: 16px;
+  border-radius: 1px;
+  highlight: underline #E06C75;
+}
+
+element-text {
+  highlight: underline #E06C75;
+}
+
+element-text selected {
+  highlight: underline #E06C75;
 }
 
 element selected {
-  background-color:RGB(79,87,103,0.3);
-  text-color: @text;
-  font: "Saber 13";
-}
-
-element urgent, element selected urgent {
-  text-color: @red;
-  font: "Saber 13";
-}
-
-element active, element selected active {
-  text-color: @purple;
-  font: "Saber 13";
-}
-
-message {
-  padding: 5px;
-  border-radius: 3px;
-  background-color: @emphasis;
-  border: 1px;
-  border-color: @cyan;
-  font: "Saber 13";
-}
-
-button selected {
-  padding: 5px;
-  border-radius: 3px;
-  background-color: @emphasis;
-  font: "Saber 13";
+  background-color: #2E343F;
+  highlight: underline #E06C75;
 }
