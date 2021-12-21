@@ -6,7 +6,7 @@
 
 FILENAME=$( \
     fd --hidden -j 1     \
-    --max-depth 5        \
+    --max-depth 6        \
     --color never        \
     --exclude .git       \
     --exclude boot       \
@@ -34,7 +34,7 @@ FILENAME=$( \
 
 TERMINAL=st
 PDF_VIEWER=zathura
-TEXT_EDITOR=vim
+TEXT_EDITOR=vim_open
 WEB_BROWSER=qutebrowser
 FILE_BROWSER=ranger
 IMAGE_VIEWER=sxiv
@@ -50,10 +50,11 @@ if [ $FILENAME > 0 ]; then
 
     function vim_open() {
         export VIM_FILE_TO_OPEN=$1
-        $TERMINAL -e bash -c 'vim $VIM_FILE_TO_OPEN'
+        $TERMINAL -e bash -c "vim $VIM_FILE_TO_OPEN"
     }
 
     EXTENSION=$(echo "$FILENAME" | sed 's/.*\.//')
+    MIME=$(xdg-mime query filetype "$FILENAME")
     case "$EXTENSION" in
         pdf)
             $PDF_VIEWER "$FILENAME"
@@ -75,9 +76,6 @@ if [ $FILENAME > 0 ]; then
             exit;;
     esac
 
-#--------------------------------------------------------------------------------------------------------------------
-
-    MIME=$(xdg-mime query filetype "$FILENAME")
     case "$MIME" in
         image/*)
             $IMAGE_VIEWER "$FILENAME"
@@ -85,14 +83,11 @@ if [ $FILENAME > 0 ]; then
         text/*)
             $TEXT_EDITOR "$FILENAME"
             exit;;
-        application/x-desktop)
+        application/*)
             exec "$FILENAME"
             exit;;
         inode/directory)
             $TERMINAL -e $FILE_BROWSER "$FILENAME"
-            exit;;
-        application/x-sharedlib)
-            exec "$FILENAME"
             exit;;
     esac
 
