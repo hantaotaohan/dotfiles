@@ -1,0 +1,102 @@
+#! /bin/bash
+
+#--------------------------------------------------------------------------------------------------------------------
+# MAIN
+#--------------------------------------------------------------------------------------------------------------------
+
+FILENAME=$( \
+    fd --hidden -j 1     \
+    --max-depth 5        \
+    --color never        \
+    --exclude .git       \
+    --exclude boot       \
+    --exclude dev        \
+    --exclude lib        \
+    --exclude lib32      \
+    --exclude lib64      \
+    --exclude libx32     \
+    --exclude lost+found \
+    --exclude opt        \
+    --exclude proc       \
+    --exclude root       \
+    --exclude sys        \
+    --exclude srv        \
+    --exclude sbin       \
+    --exclude tmp        \
+    --exclude var        \
+    --exclude tmp        \
+    --exclude run . / |  \
+    rofi -kb-cancel 'Escape' -theme onedark -threads 4 -dmenu -i -keep-right -sort -sorting-method fzf -p FILES)
+
+#--------------------------------------------------------------------------------------------------------------------
+# SETTING VAR
+#--------------------------------------------------------------------------------------------------------------------
+
+TERMINAL=st
+PDF_VIEWER=zathura
+TEXT_EDITOR=vim
+WEB_BROWSER=qutebrowser
+FILE_BROWSER=ranger
+IMAGE_VIEWER=sxiv
+VIDEO_PLAYER=mpv
+FALLBACK_OPENER=xdg-open
+SPREADSHEET_EDITOR=sc-im
+
+#--------------------------------------------------------------------------------------------------------------------
+# EXTENSION & MIME
+#--------------------------------------------------------------------------------------------------------------------
+
+if [ $FILENAME > 0 ]; then
+
+    function vim_open() {
+        export VIM_FILE_TO_OPEN=$1
+        $TERMINAL -e bash -c 'vim $VIM_FILE_TO_OPEN'
+    }
+
+    EXTENSION=$(echo "$FILENAME" | sed 's/.*\.//')
+    case "$EXTENSION" in
+        pdf)
+            $PDF_VIEWER "$FILENAME"
+            exit;;
+        png|jpg|jpeg|PNG|JPG|JPEG)
+            $IMAGE_VIEWER "$FILENAME"
+            exit;;
+        flv|avi|mov|mp4|mp3|mkv)
+            $VIDEO_PLAYER "$FILENAME"
+            exit;;
+        csv|xlsv)
+            $SPREADSHEET_EDITOR "$FILENAME"
+            exit;;
+        htm|html)
+            $WEB_BROWSER "$FILENAME"
+            exit;;
+        bash|sh)
+            $TEXT_EDITOR "$FILENAME"
+            exit;;
+    esac
+
+#--------------------------------------------------------------------------------------------------------------------
+
+    MIME=$(xdg-mime query filetype "$FILENAME")
+    case "$MIME" in
+        image/*)
+            $IMAGE_VIEWER "$FILENAME"
+            exit;;
+        text/*)
+            $TEXT_EDITOR "$FILENAME"
+            exit;;
+        application/x-desktop)
+            exec "$FILENAME"
+            exit;;
+        inode/directory)
+            $TERMINAL -e $FILE_BROWSER "$FILENAME"
+            exit;;
+        application/x-sharedlib)
+            exec "$FILENAME"
+            exit;;
+    esac
+
+    echo "Falling back to $FALLBACK_OPENER"
+    $FALLBACK_OPENER "$FILENAME"
+
+fi
