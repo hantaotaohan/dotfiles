@@ -26,7 +26,7 @@ FILENAME=$( \
     --exclude var        \
     --exclude tmp        \
     --exclude run . / |  \
-    rofi -kb-cancel 'Escape,Alt+f' -theme onedark -threads 4 -dmenu -i -keep-right -sort -sorting-method fzf -p FILES)
+    rofi -kb-cancel 'Escape,Alt+f,Alt+d,Alt+slash' -theme onedark -threads 4 -dmenu -i -keep-right -sort -sorting-method fzf -p Files)
 
 #--------------------------------------------------------------------------------------------------------------------
 # SETTING VAR
