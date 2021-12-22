@@ -1,0 +1,61 @@
+* {
+  background-color: #282C34;
+  border-color: #2E343F;
+  text-color: #8CA0AA;
+  spacing: 0;
+  width: 40%;
+  font: "Saber 11";
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt,entry];
+}
+
+prompt {
+  font: "Saber 16";
+  padding: 16px;
+  border: 0 1px 0 0;
+}
+
+textbox {
+  background-color: #2E343F;
+  border: 0 0 1px 0;
+  border-color: #282C34;
+  padding: 8px 16px;
+}
+
+entry {
+  font: "Saber 16";
+  text-color: #abb2bf;
+  padding: 16px;
+}
+
+listview {
+  cycle: false;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+  lines: 6;
+}
+
+element {
+  border: 0 0 1px 0;
+  padding: 16px;
+  border-radius: 1px;
+  highlight: underline #E06C75;
+}
+
+element-text {
+  highlight: underline #E06C75;
+  background-color: inherit;
+  text-color:       inherit;
+}
+
+element-text selected {
+  highlight: underline #E06C75;
+}
+
+element selected {
+  background-color: #2E343F;
+  highlight: underline #E06C75;
+}
