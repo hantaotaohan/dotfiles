@@ -87,3 +87,5 @@ textbox {
   border-color: #282C33;
   padding: 8px 16px;
 }
+
+// vim: set ft=scss:
