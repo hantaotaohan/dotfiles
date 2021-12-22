@@ -144,3 +144,5 @@ configuration {
       sorting-method:    "name";
   }
 }
+
+// vim: set ft=css:
