@@ -3,9 +3,8 @@
   border-color: #2e343f;
   text-color: #8ca0aa;
   spacing: 0;
-  width: 860;
-  height: 500px;
-  font: "Saber 11";
+  width: 50%;
+  font: "Inziu Iosevka SC bold 10";
 }
 
 inputbar {
@@ -16,6 +15,7 @@ inputbar {
 prompt {
   padding: 16px;
   border: 0 1px 0 0;
+  font: "Inziu Iosevka SC bold 16";
 }
 
 textbox {
@@ -26,6 +26,8 @@ textbox {
 }
 
 entry {
+  font: "Inziu Iosevka SC bold 16";
+  text-color: #abb2bf;
   padding: 16px;
 }
 
@@ -33,6 +35,7 @@ listview {
   cycle: false;
   margin: 0 0 -1px 0;
   scrollbar: false;
+  lines:8;
 }
 
 element {
