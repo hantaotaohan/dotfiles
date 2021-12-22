@@ -4,7 +4,6 @@
   text-color: #8CA0AA;
   spacing: 0;
   width: 30%;
-  height: 38%;
   font: "Saber 11";
 }
 
@@ -36,6 +35,7 @@ listview {
   cycle: false;
   margin: 0 0 -1px 0;
   scrollbar: false;
+  lines: 6;
 }
 
 element {
