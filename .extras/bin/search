@@ -54,7 +54,6 @@ if [ $FILENAME > 0 ]; then
     }
 
     EXTENSION=$(echo "$FILENAME" | sed 's/.*\.//')
-    MIME=$(xdg-mime query filetype "$FILENAME")
     case "$EXTENSION" in
         pdf)
             $PDF_VIEWER "$FILENAME"
@@ -76,6 +75,7 @@ if [ $FILENAME > 0 ]; then
             exit;;
     esac
 
+    MIME=$(xdg-mime query filetype "$FILENAME")
     case "$MIME" in
         image/*)
             $IMAGE_VIEWER "$FILENAME"
