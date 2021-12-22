@@ -1,5 +1,5 @@
 configuration {
-	modi: "drun,window,run,ssh";
+/*	modi: "window,run,ssh";*/
 	font: "Saber 10";
 /*	location: 0;*/
 /*	yoffset: 0;*/
@@ -47,8 +47,8 @@ configuration {
 /*	matching-negate-char: '-' /* unsupported */;*/
 /*	cache-dir: ;*/
 /*	window-thumbnail: false;*/
-/*	drun-use-desktop-cache: false;*/
-/*	drun-reload-desktop-cache: true;*/
+	drun-use-desktop-cache: true;
+	drun-reload-desktop-cache: true;
 /*	normalize-match: false;*/
 /*	steal-focus: false;*/
 /*	application-fallback-icon: ;*/
@@ -135,4 +135,12 @@ configuration {
 /*	me-select-entry: "MousePrimary";*/
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
 }
