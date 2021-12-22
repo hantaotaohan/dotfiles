@@ -59,3 +59,5 @@ element selected {
   background-color: #2E343F;
   highlight: underline #E06C75;
 }
+
+// vim: set ft=scss:
