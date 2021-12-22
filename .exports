@@ -61,8 +61,8 @@ export FZF_DEFAULT_COMMAND="fd --hidden --follow --type f \
   --exclude var"
 
 export FZF_DEFAULT_OPTS="
-  --color=fg:#abb2bf,bg:#282c34,hl:#e06c75,gutter:#282c34,fg+:#e06c75,bg+:#3d4148,hl+:#98c379
-  --color=info:#f7c662,prompt:#e06c75,pointer:#e06c75,marker:#73d0ff,spinner:#73d0ff,header:#6699cc
+  --color=fg:#5C6370,bg:#282C34,hl:#E06C75,gutter:#282C34,fg+:#ABB2BF,bg+:#3E4452,hl+:#E06C75
+  --color=info:#F7C662,prompt:#E06C75,pointer:#61AFEF,marker:#73D0FF,spinner:#73D0FF,header:#6699CC
   --layout=reverse 
   --border
   --inline-info
