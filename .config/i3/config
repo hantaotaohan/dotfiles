@@ -69,14 +69,14 @@ bindsym $mod+shift+n move scratchpad
 bindsym --whole-window $mod+button2 kill
 
 # 关闭窗口快捷键 
-bindsym $mod+Shift+q exec --no-startup-id bash $HOME/.config/i3/skill
+bindsym $mod+Shift+q exec --no-startup-id bash smartkill
 
 # 鼠标中建发送到便签区域
 # bindsym --whole-window button2 move scratchpad
-# bindsym --whole-window button2 exec --no-startup-id bash $HOME/.config/i3/skill
+# bindsym --whole-window button2 exec --no-startup-id bash $HOME/.config/i3/smartkill
 
 # 切换便签
-bindsym $mod+Control+Tab exec --no-startup-id $HOME/.config/i3/i3-scratchpad-dmenu.py
+# bindsym $mod+Control+Tab exec --no-startup-id $HOME/.config/i3/i3-scratchpad-dmenu.py
 
 # 调出便签区的窗口
 # bindsym $mod+Tab scratchpad show ,resize set 1200 800 , move position center , sticky enable
@@ -236,7 +236,7 @@ for_window [class="(!?)$TERMINAL_C"     title="ttyclock"        ]       floating
 bindsym Mod4+e exec --no-startup-id nautilus
 
 # 打开fzf-open
-bindsym $mod+f exec --no-startup-id fzf-open 
+bindsym $mod+f exec --no-startup-id search
 
 # 开启Terminal快捷键 
 bindsym $mod+Return exec --no-startup-id $TERMINAL
@@ -248,7 +248,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -theme onedark
 bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL -e ranger
 
 # auto windows size for in workspaces "3"
-bindsym $mod+Shift+a exec --no-startup-id $HOME/.config/i3/autowindowssize.py
+bindsym $mod+Shift+a exec --no-startup-id autosize
 
 # 开启Google Chrome快捷键 
 bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode"
@@ -313,15 +313,15 @@ bindsym $mod+r mode "$Resize"
 # --------------------------------------------------------------------------------------------------
 # 关机锁屏相关设定
 # --------------------------------------------------------------------------------------------------
-set $mode_system     [L]OCK        [E]XIT        [R]EBOOT        [P]OWEROFF        [B]ACKGROUND        [U]NSPLA
+set $mode_system     [L]OCK        [E]XIT        [R]EBOOT        [P]OWEROFF        [B]ACKGROUND        [W]ALLPAPER
 
 mode "$mode_system" {
      bindsym l exec --no-startup-id i3lock-fancy, mode "default"
      bindsym e exec --no-startup-id i3-msg exit
      bindsym r exec --no-startup-id systemctl reboot, mode "default"
      bindsym p exec --no-startup-id systemctl poweroff, mode "default"
-     bindsym b exec --no-startup-id feh --randomize --bg-scale ~/.config/i3/background/ , mode "default"
-     bindsym u exec --no-startup-id $HOME/.config/i3/background.sh , mode "default"
+     bindsym b exec --no-startup-id feh --randomize --bg-scale ~/.config/i3/background/, mode "default"
+     bindsym u exec --no-startup-id wallpaper, mode "default"
      #bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
      # back to normal: Enter or Escape
      bindsym Return mode "default"
@@ -544,7 +544,7 @@ exec --no-startup-id picom
 # exec --no-startup-id nm-applet
 
 # 加载键盘加速脚本
-exec --no-startup-id bash ~/.config/i3/speedkeyboard.sh
+exec --no-startup-id speedkeyboard
 
 # 加载vmwaretools实现复制粘贴
 exec --no-startup-id /usr/bin/vmware-user

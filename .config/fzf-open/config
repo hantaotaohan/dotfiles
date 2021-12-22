@@ -1,3 +1,0 @@
-OPENER=/usr/share/fzf-open/lopen.sh
-TERMINAL=alacritty
-STARTING_DIR=""
