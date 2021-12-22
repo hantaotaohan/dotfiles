@@ -50,3 +50,5 @@ window {
 mainbox {
   padding: 31% 31% 31% 31%;
 }
+
+// vim: set ft=scss:
