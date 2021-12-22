@@ -259,6 +259,7 @@ set completeopt=menuone,menu,longest,preview                               " 自
 filetype on                                                                " 启用文件类型侦测
 filetype plugin on                                                         " 针对不同的文件类型加载对应的插件
 filetype plugin indent on                                                  " 启用缩进
+set modeline                                                               " 设置行模式用于在文件末尾添加特定字符检测vim文件类型
 set fileencodings=utf-8,cp936,gb18030,big5,latin1                          " 探测即将打开的文件的字符编码
 set fileencoding=utf-8                                                     " 打开文件的字符编码
 set encoding=utf-8                                                         " Vim 内部使用的字符编码方式
