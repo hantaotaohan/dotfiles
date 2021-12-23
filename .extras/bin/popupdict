@@ -1,5 +1,4 @@
 #!/bin/bash
-export LANG="zh_CN.UTF-8"
 
 # start or stop or restart
 optype=$1
@@ -15,20 +14,19 @@ function start {
     # 进程数量
     prog_num=`ps -ef | grep $PROGNAME | grep -v grep | wc -l`
     if [ $prog_num -eq 0 ] ; then
-        echo "start $PROGNAME"
+        # echo "start $PROGNAME"
         nohup $PROGNAME > /dev/null 2>&1 &
-    else
-        echo "$PROGNAME is started"
+        dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 8888 normal "Popup-Dict \n\nEnable" 
+    # else
+        # echo "$PROGNAME is started"
     fi
 }
-
-
 
 function stop {
     # 进程数量
     prog_num=`ps -ef | grep $PROGNAME | grep -v grep | wc -l`
     if [ $prog_num -eq 0 ] ; then
-      echo "$PROGNAME is stopped"
+      # echo "$PROGNAME is stopped"
       return
     fi
     
@@ -39,23 +37,46 @@ function stop {
     do
         kill -9 $pid;
     done
-    echo "stop $PROGNAME"
+    dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 8888 normal "Popup-Dict \n\nDisable" 
+    # echo "stop $PROGNAME"
 }
 
+# case "$optype" in
+#     start)
+#         start
+#         ;;
+#     stop)
+#         stop
+#         ;;
+#     restart)
+#         stop
+#         sleep 1
+#         start
+#         ;;
+#     *)
+#         echo "Only support start|stop|restart"
+#         exit 1
+# esac
 
-case "$optype" in
-    start)
-        start
-        ;;
-    stop)
-        stop
-        ;;
-    restart)
-        stop
-        sleep 1
-        start
-        ;;
-    *)
-        echo "Only support start|stop|restart"
-        exit 1
+
+#----------------------------------------------------
+statefile=$HOME/.script.state
+
+if [ -f "$statefile" ]; then
+    . "$statefile"
+fi
+
+case $state in
+    on) state=off ;;
+    *)  state=on
 esac
+
+if [ "$state" == "off" ]; then
+    start
+elif [ "$state" == "on" ]; then 
+    stop
+fi
+
+declare -p state >"$statefile"
+
+#----------------------------------------------------
