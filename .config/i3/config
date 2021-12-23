@@ -313,15 +313,14 @@ bindsym $mod+r mode "$Resize"
 # --------------------------------------------------------------------------------------------------
 # Apps
 # --------------------------------------------------------------------------------------------------
-set $Apps     [P]OPUPDICT-ON        [I]POPUPDICT-OFF 
+set $Apps     [P]OPUPDICT
 
 mode "$Apps" {
-     bindsym o exec --no-startup-id popupdict start ;  exec --no-startup-id dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 8888 normal "Popup-Dict Enable" , mode "default"
-     bindsym i exec --no-startup-id popupdict stop ;  exec --no-startup-id dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 8888 normal "Popup-Dict Disable" , mode "default"
+     bindsym p exec --no-startup-id popupdict, mode "default"
      bindsym Return mode "default"
      bindsym Escape mode "default"
 }
- bindsym $mod+e mode "$Apps"
+ bindsym $mod+o mode "$Apps"
 
 # --------------------------------------------------------------------------------------------------
 # 关机锁屏相关设定
