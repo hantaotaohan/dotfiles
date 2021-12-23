@@ -254,7 +254,7 @@ bindsym $mod+Shift+a exec --no-startup-id autosize
 bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode"
 
 # 切换窗口
-bindsym $mod+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'Alt+p' -kb-accept-entry '!Alt-p'
+bindsym $mod+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'j' -kb-row-up 'k' 
 
 # 截图快捷键
 bindsym --release $mod+a exec "deepin-screenshot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png < /tmp/screenshot.png"
