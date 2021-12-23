@@ -75,6 +75,7 @@ Options:
         urxvt               Setup URxvt
         st                  Setup St terminal
         vifm                Setup Vifm
+        popupdict           Setup Popupdict
 
     -------------------------------------------------------------------------------
     
@@ -737,6 +738,16 @@ Vifm() {
     row
 }
 
+Popupdict() {
+    cd "$Bin_dir" || return 
+    git clone -q $Git_clone/hantaotaohan/popup-dict --depth 1 popupdict && cd popupdict > /dev/null 2>&1
+    sudo pip3 install -r requirements.txt
+    sudo python3 setup.py develop
+    row
+    echo "Popup-Dict Install Done !"
+    row
+}
+
 main() {
 
     case "$1" in
@@ -869,6 +880,9 @@ main() {
             ;;
         vifm)
             Vifm
+            ;;   
+        popupdict)
+            Popupdict
             ;;   
         -a|--all)
             Github_Hosts

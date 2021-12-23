@@ -184,6 +184,12 @@ echo -e "                                                                       
         cp -rf "$Dotfiles_repo/${dots_copy}" "$HOME/"
     done
 
+    # Install Move .extras/bin/* to ~/.loacl/bin
+    if ! [ -d "$HOME/.local/bin/" ]; then
+        env mkdir -p "$HOME/.local/bin/"
+    fi
+    cp -rf "$Dotfiles_repo/.extras/bin/*" "$HOME/.local/bin/"
+
     echo -e "${blue}New dotfiles is installed!\n${white}" >&2
     echo "There may be some errors when Terminal is restarted." >&2
     echo "Please read carefully the error messages and make sure." >&2
@@ -354,15 +360,15 @@ echo -e "                                                                       
         alttab \
         zathura \
         i3blocks \
-	nautilus \
-	dbus-x11 \
+        nautilus \
+        dbus-x11 \
         #i3lock-fancy \
         deepin-screenshot \
         #nautilus --no-install-recommends --no-install-suggests \
         #-------------------------------------------------------------------------SYSTEM--
         #xinit \
         xinit \
-	xorg-dev \
+        xorg-dev \
         lua5.2 \
         #ruby-full \
         #openssh-server \
@@ -390,14 +396,14 @@ echo -e "                                                                       
         ranger \
         xdotool \
         ripgrep \
-	hsetroot \
+	    hsetroot \
         newsboat \
-	tty-clock \
-	qutebrowser \
+	    tty-clock \
+        qutebrowser \
         python3-pip \
         inotify-tools \
-	libgl1-mesa-* \
-	#translate-shell \
+        libgl1-mesa-* \
+        #translate-shell \
         universal-ctags \
         silversearcher-ag \
         #--------------------------------------------------------------------------EDIT--
@@ -409,7 +415,7 @@ echo -e "                                                                       
         neomutt \
         offlineimap \
         #-------------------------------------------------------------------------OTHER--
-	#peek \
+        #peek \
         yank \
         imwheel
         #------------------------------------------------------------------------IGNORE--
