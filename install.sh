@@ -188,7 +188,7 @@ echo -e "                                                                       
     if ! [ -d "$HOME/.local/bin/" ]; then
         env mkdir -p "$HOME/.local/bin/"
     fi
-    cp -rf "$Dotfiles_repo/.extras/bin/*" "$HOME/.local/bin/"
+    cp -rf $Dotfiles_repo/.extras/bin/* $HOME/.local/bin/
 
     echo -e "${blue}New dotfiles is installed!\n${white}" >&2
     echo "There may be some errors when Terminal is restarted." >&2
