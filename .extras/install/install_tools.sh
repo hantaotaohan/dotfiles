@@ -2,8 +2,8 @@
 
 Dotfiles_repo=$(pwd)
 Extras_dir=$(dirname "$PWD") 
-#Extras_dir=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd )
 Bin_dir="$HOME/.bin"
+Quiet="> /dev/null 2>&1"
 
 #Git_clone="https://hub.fastgit.org"
 #Git_download="https://download.fastgit.org"
@@ -11,7 +11,7 @@ Bin_dir="$HOME/.bin"
 #Git_clone="https://github.com"
 #Git_download="https://github.com"
 
-Git_clone="https://github.com.cnpmjs.org"
+Git_clone="git clone -q https://github.com.cnpmjs.org"
 Git_download="https://github.com.cnpmjs.org"
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -95,31 +95,40 @@ row() {
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Alttab() {
-    sudo apt install -y -qq libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev ibxpm-dev libxpm4 > /dev/null 2>&1 
-    git clone -q $Git_clone/sagb/alttab.git $Bin_dir/alttab && cd $Bin_dir/alttab && ./configure > /dev/null 2>&1
-    make > /dev/null 2>&1
-    sudo make install > /dev/null 2>&1
-    sudo rm -rf $Bin_dir/alttab
+    eval sudo apt install -qq -y libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev libxpm-dev libxpm4 $Quiet
+    eval cd $Bin_dir 
+    if [ -d "alttab" ]; then 
+        eval cd alttab && eval git pull $Quiet
+    else
+        $Git_clone/sagb/alttab && eval cd alttab 
+        ./configure $Quiet && make $Quiet && sudo make install $Quiet
+    fi
     row
-    echo "Alttab installation is complete"
+    echo -e "Alttab Install Is Complete :: Version "  $(alttab -v 2>&1 | grep -i 'alttab' | head -n 1 | sed -e "s/\b\(.\)/\u\1/g" )
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Arcthemes() {
-    sudo apt install -y -qq arc-theme > /dev/null 2>&1
+    eval sudo apt install -y -qq arc-theme $Quiet
     row
     echo "The Arc Themes installation is complete"
     row
 }
 
 Arcicons() {
-    cd "$Bin_dir" || return 
-    git clone -q $Git_clone/horst3180/arc-icon-theme --depth 1 arc-icon-theme && cd arc-icon-theme > /dev/null 2>&1
-    mkdir -p $HOME/.local/share/icons/
-    cp -r Arc/ $HOME/.local/share/icons/
-    cd $HOME
-    sudo rm -rf $Bin_dir/arc-icon-theme
+    cd $Bin_dir 
+    if [ -d "arc-icon-theme" ]; then 
+        eval cd arc-icon-theme && eval git pull $Quiet
+    else
+        $Git_clone/horst3180/arc-icon-theme && cd arc-icon-theme 
+        if ! [ -d "$HOME/.local/share/icons/" ]; then
+            eval mkdir -p $HOME/.local/share/icons/
+            eval cp -rf Arc/ $HOME/.local/share/icons/
+        else
+            eval cp -rf Arc/ $HOME/.local/share/icons/
+        fi
+    fi
     row
     echo "The Arc Icons installation is complete"
     row
@@ -127,197 +136,151 @@ Arcicons() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Copytranslator() {
-    wget -q -P $Bin_dir $Git_download/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
-    cd $Bin_dir
-    sudo dpkg -i copytranslator_10.0.0-beta.2_amd64.deb  > /dev/null 2>&1
-    sudo usermod -a -G input $USER
-    cd $HOME
-    sudo rm -rf $Bin_dir/copytranslator_10.0.0-beta.2_amd64.deb  > /dev/null 2>&1
+    eval cd $Bin_dir
+    eval wget -q $Git_download/CopyTranslator/CopyTranslator/releases/download/v10.0.0-beta.2/copytranslator_10.0.0-beta.2_amd64.deb
+    eval sudo dpkg -i copytranslator_10.0.0-beta.2_amd64.deb $Quiet
     row
-    Copytranslator Install Completed
+    echo "Copytranslator Install Completed :: Version 10.0.0 - beta2"
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Crossover() {
-    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/crossover-20.deb
-    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/winewrapper.exe.so
-    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/kindle.zip
-    sudo dpkg -i $Bin_dir/crossover-20.deb
-    sudo apt install -f -y -qq
-    sudo dpkg -i $Bin_dir/crossover-20.deb
+    eval cd $Bin_dir
+    wget -q $Git_download/hantaotaohan/debian/releases/download/1.0.0/crossover-20.deb && \
+    wget -q $Git_download/hantaotaohan/debian/releases/download/1.0.0/winewrapper.exe.so && \
+    wget -q $Git_download/hantaotaohan/debian/releases/download/1.0.0/kindle.zip && \
+    eval sudo dpkg -i crossover-20.deb $Quiet
+    eval sudo apt install -f -y -qq $Quiet
+    eval sudo dpkg -i crossover-20.deb $Quiet
     sudo mv /opt/cxoffice/lib/wine/winewrapper.exe.so /opt/cxoffice/lib/wine/winewrapper.exe.so.bak
-    sudo cp $Bin_dir/winewrapper.exe.so /opt/cxoffice/lib/wine/
-    cd $HOME
-    sudo rm -rf $Bin_dir/winewrapper.exe.so crossover-20.deb
-    sudo dpkg --add-architecture i386 && \
-    sudo apt-get update -y -qq && \
-    sudo apt-get install -y -qq gstreamer1.0-plugins-base:i386 \
-    gstreamer1.0-plugins-good:i386 \
-    gstreamer1.0-plugins-ugly:i386 \
-    libc6-i386 \
-    libcups2:i386 \
-    libdbus-1-3:i386 \
-    libfontconfig1:i386 \
-    libfreetype6:i386 \
-    libgl1-mesa-dri:i386 \
-    libgl1-mesa-glx:i386 \
-    libglu1-mesa:i386 \
-    libgnutls30:i386 \
-    libgstreamer1.0-0:i386 \
-    libldap-2.4-2:i386 \
-    libpng16-16:i386 \
-    libsane:i386 \
-    libudev1:i386 \
-    libvulkan1:i386 \
-    libx11-6:i386 \
-    libxcomposite1:i386 \
-    libxcursor1:i386 \
-    libxext6:i386 \
-    libxfixes3:i386 \
-    libxi6:i386 \
-    libxinerama1:i386 \
-    libxml2:i386 \
-    libxrandr2:i386 \
-    libxrender1:i386 \
-    libxslt1.1:i386 \
-    libxxf86vm1:i386
+    sudo cp winewrapper.exe.so /opt/cxoffice/lib/wine/
+    sudo dpkg --add-architecture i386
+    sudo apt-get update -y -qq
+    row
+    echo "Crossover Install Completed :: Version 21.1.0"
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
-I3gaps() {
-    cd "$Bin_dir" || return 
-    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/i3gaps.zip
-    unzip -q i3gaps.zip
-    sudo dpkg -i i3gpas1.deb > /dev/null 2>&1
-    sudo dpkg -i i3gpas2.deb > /dev/null 2>&1
-    sudo dpkg -i i3gpas3.deb > /dev/null 2>&1
-    sudo apt-get -y -qq --purge remove rxvt-unicode > /dev/null 2>&1 
-    sed -i 's|# smart_gaps on|smart_gaps on|g' $HOME/.config/i3/config
-    sed -i 's|# gaps inner 8|gaps inner 8|g' $HOME/.config/i3/config
-    sed -i 's|# gaps outer 2|gaps outer 2|g' $HOME/.config/i3/config
-    sed -i 's|# smart_gaps inverse_outer|smart_gaps inverse_outer|g' $HOME/.config/i3/config
-    row
-    echo "I3 - Gaps Install Completed"
-    row
-    rm -rf i3gaps* i3gpas*
-}
+# I3gaps() {
+#     cd "$Bin_dir" || return 
+#     wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/i3gaps.zip
+#     unzip -q i3gaps.zip
+#     sudo dpkg -i i3gpas1.deb > /dev/null 2>&1
+#     sudo dpkg -i i3gpas2.deb > /dev/null 2>&1
+#     sudo dpkg -i i3gpas3.deb > /dev/null 2>&1
+#     sudo apt-get -y -qq --purge remove rxvt-unicode > /dev/null 2>&1 
+#     sed -i 's|# smart_gaps on|smart_gaps on|g' $HOME/.config/i3/config
+#     sed -i 's|# gaps inner 8|gaps inner 8|g' $HOME/.config/i3/config
+#     sed -i 's|# gaps outer 2|gaps outer 2|g' $HOME/.config/i3/config
+#     sed -i 's|# smart_gaps inverse_outer|smart_gaps inverse_outer|g' $HOME/.config/i3/config
+#     row
+#     echo "I3 - Gaps Install Completed"
+#     row
+#     rm -rf i3gaps* i3gpas*
+# }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Imagemagick() {
-    sudo apt install -y -qq imagemagick
+    eval sudo apt install -y -qq imagemagick $Quiet
     if [ -f /etc/ImageMagick-6/policy.xml ]; then
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
     fi
     row
-    Imagemagick Fix Completed
+    echo "Imagemagick Fix Completed"
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Jupyter() {
-    sudo pip3 install -q --timeout 1000 --retries 20 ipython notebook prompt-toolkit -i https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
-    if [ ! -d "$HOME/.jupyter/custom/" ]
-    then
-        mkdir -p $HOME/.jupyter/custom/
-        cp $Extras_dir/jupyter/custom.css $HOME/.jupyter/custom/custom.css
+    eval sudo pip3 install -q --timeout 1000 --retries 20 ipython notebook prompt-toolkit -i https://pypi.tuna.tsinghua.edu.cn/simple $Quiet
+    if [ ! -d "$HOME/.jupyter/custom/" ]; then
+        eval mkdir -p $HOME/.jupyter/custom/
+        eval cp $Extras_dir/jupyter/custom.css $HOME/.jupyter/custom/custom.css
     fi
 
-    if [ ! -d "$HOME/.ipython/profile_default/startup/" ]
-    then
-        mkdir -p $HOME/.ipython/profile_default/startup/
-        cp $Extras_dir/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
+    if [ ! -d "$HOME/.ipython/profile_default/startup/" ]; then
+        eval mkdir -p $HOME/.ipython/profile_default/startup/
+        eval cp $Extras_dir/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
     fi
     row
-    jupyter --version
+    echo -e "Jupyter Install Is Complete :: Version "  $( jupyter --version | grep -iE "ipython|notebook" | sed -e "s/\b\(.\)/\u\1/g" )
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Navi() {
-    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/navi
+    eval cd $Bin_dir
+    eval wget -q $Git_download/hantaotaohan/debian/releases/download/1.0.0/navi
     sudo mv $Bin_dir/navi /usr/local/bin
     if [ -d "$HOME/.local/share/navi/cheats/denisidoro__cheats/" ]; then
-        ln -fs $Extras_dir/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
+        eval ln -fs $Extras_dir/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
     else
-        mkdir -p $HOME/.local/share/navi/cheats/denisidoro__cheats
-        ln -fs $Extras_dir/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
+        eval mkdir -p $HOME/.local/share/navi/cheats/denisidoro__cheats
+        eval ln -fs $Extras_dir/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
     fi
     sudo chmod +x /usr/local/bin/navi
     row
-    navi -V
+    echo -e "Navi Install Is Complete :: Version "  $( navi -V | sed -e "s/\b\(.\)/\u\1/g" )
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
-#Picom() {
-#    sudo apt install -y -qq libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev \
-#    libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
-#    libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev \
-#    meson  > /dev/null 2>&1
-#    git clone -q $Git_clone/yshui/picom.git  $Bin_dir/picom
-#    cd $Bin_dir/picom
-#    git submodule update --init --recursive > /dev/null 2>&1
-#    meson --buildtype=release . build > /dev/null 2>&1
-#    sudo ninja -C build > /dev/null 2>&1
-#    sudo ninja -C build install > /dev/null 2>&1
-#    cd $HOME
-#    sudo rm -rf $Bin_dir/picom
-#    sed -i "s|# exec --no-startup-id picom --config ~/.config/picom/picom.conf|exec --no-startup-id picom --config ~/.config/picom/picom.conf|g" $HOME/.config/i3/config
-#    sed -i "s|exec --no-startup-id compton --config ~/.config/compton/compton.conf|# exec --no-startup-id compton --config ~/.config/compton/compton.conf|g" $HOME/.config/i3/config
-#    row
-#    echo "Picom Version: "picom --version
-#    row
-#}
-
 Picom() {
-    sudo apt install -y -qq libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev \
-    libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev \
-    libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev \
-    meson  > /dev/null 2>&1
-    git clone -q $Git_clone/yshui/picom.git  $Bin_dir/picom
-    cd $Bin_dir/picom
-    rm -rf build
-    git submodule update --init  > /dev/null 2>&1
-    meson --buildtype=release . build -Dwith_docs=false  > /dev/null 2>&1
-    ninja -C build  > /dev/null 2>&1
-    sudo install -Dm755 --verbose build/src/picom /usr/local/bin/picom > /dev/null 2>&1
+    eval sudo apt install -y -qq libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev meson $Quiet
+    eval sudo apt install -y -qq libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev $Quiet
+    eval sudo apt install -y -qq libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev $Quiet
+    eval cd $Bin_dir 
+    if [ -d "picom" ]; then 
+        eval cd picom && eval git pull $Quiet
+    else
+        $Git_clone/yshui/picom && eval cd picom 
+        rm -rf build
+        git submodule update --init $Quiet
+        meson --buildtype=release . build -Dwith_docs=false $Quiet
+        ninja -C build $Quiet
+        sudo install -Dm755 --verbose build/src/picom /usr/local/bin/picom $Quiet
+    fi
     row
-    echo "Picom Version: "picom --version
+    echo "Picom Install Is Complete :: Version: " $(picom --version | sed -e "s/\b\(.\)/\u\1/g")
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 SSR() {
-    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/electron-ssr.deb
-    sudo dpkg -i $Bin_dir/electron-ssr.deb  > /dev/null 2>&1
-    sudo apt install -f -y > /dev/null 2>&1
-    sudo dpkg -i $Bin_dir/electron-ssr.deb  > /dev/null 2>&1
-    cd $HOME
-    sudo rm -rf $Bin_dir/electron-ssr.deb
+    eval cd $Bin_dir 
+    wget -q $Git_download/hantaotaohan/debian/releases/download/1.0.0/electron-ssr.deb
+    eval sudo dpkg -i electron-ssr.deb $Quiet
+    eval sudo apt install -f -y $Quiet
+    eval sudo dpkg -i electron-ssr.deb $Quiet
+    row
+    echo "Picom Install Is Complete :: Version: " $(picom --version | sed -e "s/\b\(.\)/\u\1/g")
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Dunst() {
-    sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev > /dev/null 2>&1
-    git clone -q $Git_clone/dunst-project/dunst.git $Bin_dir/dunst
-    cd $Bin_dir/dunst
-    sudo make  > /dev/null 2>&1
-    sudo make install  > /dev/null 2>&1
-    cd $HOME
-    rm -rf $Bin_dir/dunst
+    eval cd $Bin_dir 
+    eval sudo apt install -y libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev $Quiet
+    if [ -d "dunst" ]; then 
+        eval cd dunst && eval git pull $Quiet
+    else
+        $Git_clone/dunst-project/dunst && eval cd dunst 
+        make $Quiet && sudo make install $Quiet
+    fi
     row
-    dunst -v
+    echo "Dunst Install Is Complete :: Version: " $(dunst -v | sed -e "s/\b\(.\)/\u\1/g")
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Offlineimap() {
-    echo "It Is Now Being Configured Offlineimap ...... "
-    echo "Please Enter The Zip Package Password "
-    unzip -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
+    row
+    echo "Please enter the password to extract the package  "
+    row
+    unzip -o -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
+    row
     if ! [ -f /etc/systemd/user/offlineimap.service ]; then
         sudo cp $Extras_dir/offlineimap/offlineimap.service /etc/systemd/user
         systemctl --user enable offlineimap
@@ -330,39 +293,37 @@ Offlineimap() {
         systemctl --user start offlineimap
     fi
     sudo chmod 600 $HOME/.msmtprc
-    row
-    echo "Neomutt Config Doen! "
-    neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*..."
+    echo "Neomutt Install Is Complete :: Version: " $(neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*...")
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Github_SSH() {
     if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
-        echo 'Please Input Email Addrsses For SSH Key'
+        row
+        echo "Please Input Email Addrsses For SSH Key"
+        row
         read -e ssh_email
-        ssh-keygen -t rsa -P "" -C "$ssh_email"  -f ~/.ssh/id_rsa
+        eval ssh-keygen -t rsa -P "" -C "$ssh_email"  -f ~/.ssh/id_rsa $Quiet
         echo 'Key copied to keyboard'
+        row
         xclip -sel clip < $HOME/.ssh/id_rsa.pub
-        microsoft-edge --new-window 'https://github.com/settings/keys'
+        eval microsoft-edge --new-window 'https://github.com/settings/keys' $Quiet
     else
         echo 'Key copied to keyboard'
+        row
         xclip -sel clip < $HOME/.ssh/id_rsa.pub
-        microsoft-edge --new-window 'https://github.com/settings/keys'
+        eval microsoft-edge --new-window 'https://github.com/settings/keys' $Quiet
     fi
-    row
     echo "Add Github For SSH Key Done!"
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Github_Hosts() {
-    #sudo sed -i '/# GitHub/,$d' /etc/hosts
-    sudo sed -i '$a\# ------------------------------------------------------------------' /etc/hosts
     sudo python3 $Extras_dir/autohosts/github_hosts.py
     row
-    tail -n -3 /etc/hosts 
-    echo ""
+    echo "Github Hosts Install Is Complete :: Update Time: " $(tail -n -4 /etc/hosts  | head -n 1)
     row
 }
 
@@ -371,38 +332,45 @@ Vmware_Share_Fix() {
     if type vmhgfs-fuse >/dev/null 2>&1; then
         sudo vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other,nonempty ;
     fi
+    row
+    echo "Vmware Share Tools is Enable"
+    row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Calibre() {
-    sudo apt install calibre -y -qq >/dev/null 2>&1
-    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/calibre.zip
-    unzip -d $HOME/.config/ $Bin_dir/calibre.zip
-    git clone $Git_clone/hantaotaohan/books $HOME/books
+    eval cd $Bin_dir 
+    eval sudo apt install -y -qq calibre $Quiet
+    wget -q $Git_download/hantaotaohan/debian/releases/download/1.0.0/calibre.zip
+    unzip -o -q -d $HOME/.config/ $Bin_dir/calibre.zip
+    $Git_clone/hantaotaohan/books $HOME/books
     row
-    echo "Install Calibre Done & Calibre Config Done & Git Clone Book Done"
+    echo "Calibre Install Is Complete  & Git Clone Book Done :: Version: " $(calibre --version | sed -e "s/\b\(.\)/\u\1/g")
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Foliate() {
-    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/foliate.deb
-    cd $Bin_dir
-    sudo dpkg -i foliate.deb
+    eval cd $Bin_dir 
+    wget -q $Git_download/hantaotaohan/debian/releases/download/1.0.0/foliate.deb
+    eval sudo dpkg -i foliate.deb $Quiet
     row
-    com.github.johnfactotum.Foliate -v
+    echo "Foliate Install Is Complete :: Version: " $(com.github.johnfactotum.Foliate -v)
     row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Rdrview() {
-    sudo apt install -y -qq libxml2-dev libseccomp-dev libcurl4-gnutls-dev > /dev/null 2>&1
-    git clone -q $Git_clone/eafer/rdrview.git $Bin_dir/rdrview
-    cd $Bin_dir/rdrview
-    make > /dev/null 2>&1
-    sudo make install > /dev/null 2>&1
-    cd $HOME
-    rm -rf $Bin_dir/rdrview
+    eval cd $Bin_dir 
+    eval sudo apt install -y -qq libxml2-dev libseccomp-dev libcurl4-gnutls-dev $Quiet
+    if [ -d "rdrview" ]; then 
+        eval cd rdrview && eval git pull $Quiet
+    else
+        $Git_clone/eafer/rdrview && eval cd rdrview 
+         make $Quiet && sudo make install $Quiet
+    fi
+    row
+    echo -e "Rerview Install Is Complete :: Version "  $(rdrview -v | sed -e "s/\b\(.\)/\u\1/g" )
     row
 }
 
@@ -410,7 +378,7 @@ Rdrview() {
 SSH_banner() {
     sudo sed -i '$a\Banner \/etc\/ssh\/my_ssh_banner' /etc/ssh/sshd_config
     sudo cp $Extras_dir/banner/my_ssh_banner /etc/ssh/
-    systemctl restart sshd
+    # systemctl restart sshd
     row
     echo "SSH Banner Replacement Is Complete"
     row
@@ -724,10 +692,15 @@ Urxvt() {
 }
 
 St() {
-    cd "$Bin_dir" || return 
-    git clone -q $Git_clone/hantaotaohan/st --depth 1 st && cd st > /dev/null 2>&1
-    sudo make clean install
+    eval cd $Bin_dir 
+    if [ -d "st" ]; then 
+        eval cd st && eval git pull $Quiet
+    else
+        $Git_clone/hantaotaohan/st && eval cd st
+        eval sudo make clean install $Quiet
+    fi
     row
+    echo -e "ST Install Is Complete :: Version "  $(st -v | sed -e "s/\b\(.\)/\u\1/g" )
     st -v
     row
 }
@@ -744,17 +717,16 @@ Vifm() {
 }
 
 Popupdict() {
-    cd "$Bin_dir" || return 
-    if [ -d "popupdict" ]; then
-        cd popupdict
-        git pull
+    eval cd $Bin_dir 
+    if [ -d "popup-dict" ]; then 
+        eval cd popup-dict && eval git pull $Quiet
     else
-        git clone -q $Git_clone/hantaotaohan/popup-dict --depth 1 popupdict && cd popupdict > /dev/null 2>&1
+        $Git_clone/hantaotaohan/popup-dict && eval cd popup-dict 
+        eval sudo pip3 install -r requirements.txt $Quiet
+        eval sudo python3 setup.py develop $Quiet
     fi
-    sudo pip3 install -r requirements.txt
-    sudo python3 setup.py develop
     row
-    echo "Popup-Dict Install Done !"
+    echo -e "Popup-Dict Install Is Complete"
     row
 }
 
@@ -899,26 +871,26 @@ main() {
             Alttab
             Arcthemes
             Arcicons
-            #I3gaps
-            #Picom
-            #Dunst
+            # I3gaps
+            # Picom
+            # Dunst
             Offlineimap
             Navi
-            #Ctags
+            # Ctags
             Rdrview
-            Fixrofiicons
-            #Fix_FZF_history
-            #Fixi3terminal
-            #Imagemagick
-            #Jupyter
-            #Nodejs
-            #SSR
-            #Calibre
-            #Foliate
-            #Crossover
-            #Copytranslator
-            #Hugo
-            #Java
+            # Fixrofiicons
+            # Fix_FZF_history
+            # Fixi3terminal
+            # Imagemagick
+            # Jupyter
+            # Nodejs
+            # SSR
+            # Calibre
+            Foliate
+            # Crossover
+            # Copytranslator
+            # Hugo
+            # Java
             Github_SSH
             Clone
             Dragon
@@ -929,6 +901,7 @@ main() {
             Fzfopen
             #Vim
             I3lock
+            Popupdict
             #Bashdb
             #Qutebrowser
             #I3blocks
