@@ -32,50 +32,50 @@ Options:
          -s --server        Setup Server All                                                    
                                                                                    
     -------------------------------------------------------------------------------
-        githubhosts         Config /etc/hosts/ View Github.com
-        sshbanner           Config SSH Login Banner
-        alttab              Same Windows Alt Tab
-        arcthemes           Gtk themes
-        arcicons            Gtk themes Icons
-        githubssh           Settings Github.com SSH Key
-        i3gaps              Setup I3-Gaps
-        picom               Setup Picom
-        dragon              Setup Ranger Plug Dragon
-        dunst               Setup Dunst
-        offlineimap         Auto Setting Neomutt
-        navi                Setup Navi
-        ctags               Setup Ctags
-        rdrview             Setup Rdrview
-        fixrofiicons        Settings Rofi Icons
-        fixfzf              Fix FZF Ctrl + r
-        imagemagick         Fix Imagemagick 
-        jupyter             Setup Jupyter Notebook Settings Themes
-        nodejs              Setup Node.js
-        ssr                 Setup SSR
-        calibre             Setup Calibre Settings Config
-        foliate             Setup Foliate
-        crossover           Setup Crossover Config Kindle
-        copytranslator      Setup Copytranslator
-        hugo                Setup Hugo
-        java                Setup Java
-        fsearch             Setup Fsearch
-        clone               Git clone My github Respones
-        ly                  Commandline Longin 
-        fixvmwareshare      Fix Vmware Share Folads
-        fixi3terminal       Fix I3wm Terminal Alacritty suppose
-        fixnautilus         Fix Nautilus Views
-        fzfopen             Setup FZF-Open of the New Alacritty
-        i3blocks            Setup I3blocks
-        yarn                Setup Yarn
-        vim                 Setup Vim8.2
-        bashdb              Setup Bashdb Bash debuger
-        i3lock              Setup i3lock_fancy
-        qutebrowser         Setup Qutebrowser
-        weixin              Setup Weixin
-        urxvt               Setup URxvt
-        st                  Setup St terminal
-        vifm                Setup Vifm
-        popupdict           Setup Popupdict
+        alttab              Install Program Alttab - Same Windows Alt Tab
+        arcicons            Install Gtk Dark-themes Icons
+        arcthemes           Install Gtk Dark-themes
+        bashdb              Install Program Bashdb Bash Debug Tools
+        ctags               Install Program  News Version Universal-Ctags 
+        clone               Git Clone Need SSH-KEY Is My Github Respones
+        calibre             Install Program Calibre And Settings Config
+        crossover           Install Program Crossover And Config Kindle
+        copytranslator      Install Program Copytranslator - Translate Tools
+        dunst               Install Program Dunst - X11 Message Tools
+        dragon              Install Ranger Plug Dragon - Ranger Drop Function
+        fixfzf              Fix Fzf Of Ctrl+r History Enter Direct Execution
+        foliate             Install Program Foliate - eBook Reader
+        fsearch             Install Program Fsearch - Same Windows Everthing
+        fzfopen             Install Program FZF-Open - Rofi Uses Fzf Search
+        fixnautilus         Fix Nautilus Views Mode
+        fixrofiicons        Fix Rofi Icons - Add Other Icons
+        fixi3terminal       Fix I3wm Terminal Alacritty Suppose
+        fixvmwareshare      Settings Vmware Share Folads
+        githubhosts         Settings Config /etc/hosts/ Uses Fast View Github.com
+        githubssh           Settings Github.com SSH Key - Auto SSH_Ras Copy
+        hugo                Install Program Hugo
+        i3gaps              Install Program I3-Gaps
+        i3lock              Install Program i3lock_fancy
+        i3blocks            Install Program I3blocks
+        imagemagick         Fix Imagemagick - Convert Pdf Normally
+        java                Install Program Java
+        jupyter             Install Program Jupyter Notebook And Settings Themes
+        ly                  Install Program Ly Commandline Longin 
+        navi                Install Program Navi - Cheatsheet Tools
+        nodejs              Install Program Node.js
+        offlineimap         Install Program offlineimap -  Auto Setting Neomutt
+        picom               Install Program Picom
+        popupdict           Install Program Popupdict - Translate Tools
+        qutebrowser         Install Program Qutebrowser - Web Browser
+        rdrview             Install Program Rdrview - HTML Render Tools
+        st                  Install Program St - Terminal
+        ssr                 Install Program SSR - VPN Gtk
+        sshbanner           Settings SSH Login Banner
+        urxvt               Install Program URxvt - Terminal
+        vim                 Install Program Vim Version 8.2
+        vifm                Install Program Vifm - FileBrowser
+        weixin              Install Program Weixin - Linux Weixin
+        yarn                Install Program Yarn
 
     -------------------------------------------------------------------------------
     
@@ -386,7 +386,12 @@ Calibre() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 Foliate() {
-    sudo snap install foliate
+    wget -q -P $Bin_dir $Git_download/hantaotaohan/debian/releases/download/1.0.0/foliate.deb
+    cd $Bin_dir
+    sudo dpkg -i foliate.deb
+    row
+    com.github.johnfactotum.Foliate -v
+    row
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
