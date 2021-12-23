@@ -740,7 +740,12 @@ Vifm() {
 
 Popupdict() {
     cd "$Bin_dir" || return 
-    git clone -q $Git_clone/hantaotaohan/popup-dict --depth 1 popupdict && cd popupdict > /dev/null 2>&1
+    if [ -d "popupdict" ]; then
+        cd popupdict
+        git pull
+    else
+        git clone -q $Git_clone/hantaotaohan/popup-dict --depth 1 popupdict && cd popupdict > /dev/null 2>&1
+    fi
     sudo pip3 install -r requirements.txt
     sudo python3 setup.py develop
     row
