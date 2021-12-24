@@ -131,7 +131,7 @@ cython_debug/
 
 # Virtualenv
 .Python
-[Bb]in
+#[Bb]in
 [Ii]nclude
 [Ll]ib
 [Ll]ib64
