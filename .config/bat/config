@@ -1,9 +1,23 @@
 # Use "gitignore" highlighting for ".ignore" files
---map-syntax .ignore:.gitignore
+--map-syntax "*.rasi:CSS"
+--map-syntax ".curlrc:Bourne Again Shell (bash)"
+--map-syntax ".aliases:Bourne Again Shell (bash)"
+--map-syntax ".exports:Bourne Again Shell (bash)"
+--map-syntax ".dircolors:Bourne Again Shell (bash)"
+--map-syntax ".functions:Bourne Again Shell (bash)"
+--map-syntax "Brewfile:Bourne Again Shell (bash)"
 
 # theme
-#--theme=OneHalfDark
+# --theme=OneHalfDark
+# --theme="TwoDark"
 --theme=base16
+
+# Enable this to use italic text on the terminal. This is not supported on all
+# terminal emulators (like tmux, by default):
+--italic-text=always
+
+# Uncomment the following line to disable automatic paging:
+# --paging=never
 
 # style
 --style=full
