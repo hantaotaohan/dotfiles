@@ -58,6 +58,12 @@ force_focus_wrapping no
 # 专注于焦点切换
 focus_on_window_activation focus # smart|urgent|focus|none
 
+# 设置边框大小
+default_border pixel 0
+
+# 是否隐藏边框
+hide_edge_borders none
+
 # --------------------------------------------------------------------------------------------------
 # 快捷键设置
 # --------------------------------------------------------------------------------------------------
@@ -455,10 +461,10 @@ set $base0I #7fa1bf
 # Basic color configuration using the Base16 variables for windows and borders.
 
 # Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base08 $base08 $base00 $base0D $base0D
-client.focused_inactive $base01 $base01 $base06 $base03 $base01
-client.unfocused        $base00 $base00 $base06 $base01 $base01
-client.urgent           $base08 $base08 $base00 $base08 $base08
+client.focused          $baseII $baseII $baseII $baseII $baseII
+client.focused_inactive $base00 $base00 $base06 $base00 $base00
+client.unfocused        $base00 $base00 $base06 $base00 $base00
+client.urgent           $base00 $base08 $base00 $base08 $base00
 client.placeholder      $base00 $base00 $base06 $base00 $base00
 client.background $base07
 
