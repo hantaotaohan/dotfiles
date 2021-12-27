@@ -376,12 +376,14 @@ vnoremap <Space> zf                                                        " 空
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 if $GET_TERMINAL_NAME == "st"
 	set t_Co=256
+	set termguicolors
 	set term=st-256color
-        execute "set <xUp>=\e[1;*A"
+	execute "set <xUp>=\e[1;*A"
 	execute "set <xDown>=\e[1;*B"
+	execute "set <xRight>=\e[1;*C"
+	execute "set <xLeft>=\e[1;*D"
 	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-	set termguicolors
 elseif $GET_TERMINAL_NAME == "urxvt" || $GET_TERMINAL_NAME == "tmux: server"
     set t_ut=
     set term=xterm-256color
