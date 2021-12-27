@@ -615,12 +615,12 @@ tnoremap <C-l> <C-w><C-l>
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " Shift + Up Down 快速移动整行  
 "-----------------------------------------------------------------o--------------------------------------------------------------o
-nnoremap <S-Down> :m+<CR>==
-nnoremap <S-Up>   :m-2<CR>==
-inoremap <S-Down> <Esc>:m+<CR>==gi
-inoremap <S-Up>   <Esc>:m-2<CR>==gi
-vnoremap <S-Down> :m'>+<CR>gv=gv
-vnoremap <S-Up>   :m-2<CR>gv=gv
+nnoremap <silent><S-Up>   :m-2<CR>==
+nnoremap <silent><S-Down> :m+<CR>==
+inoremap <silent><S-Up>   <Esc>:m-2<CR>==gi
+inoremap <silent><S-Down> <Esc>:m+<CR>==gi
+vnoremap <silent><S-Up>   :m-2<CR>gv=gv
+vnoremap <silent><S-Down> :m'>+<CR>gv=gv
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " F2 行号开关，用于鼠标复制代码用
