@@ -105,10 +105,10 @@ urxvt.override-redirect             :       False
 urxvt.borderLess                    :       False
 
 ! 英文字体
-URxvt.font                          :       xft:Iosevka Term:size=10.5:style=bold:antialias=true:autohint:true
+URxvt.font                          :       xft:Sarasa Mono SC Nerd:size=10.5:style=bold:antialias=true:autohint:true
 
 ! 中文字体
-URxvt.boldfont                      :       xft:Saber:size=10.5:style=bold:antialias=true:autohint:true
+URxvt.boldfont                      :       xft:Sarasa Mono SC Nerd:size=10.5:style=bold:antialias=true:autohint:true
 
 ! 输入配置
 URxvt.iso14755                      :       False
