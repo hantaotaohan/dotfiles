@@ -2125,7 +2125,7 @@ if exists('g:plugs["vim-signature"]')
         \ 'GotoPrevMarker'     :  "[-",
         \ 'GotoNextMarkerAny'  :  "]=",
         \ 'GotoPrevMarkerAny'  :  "[=",
-        \ 'ListBufferMarks'    :  "ma",
+        \ 'ListBufferMarks'    :  "m,",
         \ 'ListBufferMarkers'  :  "m?"
         \ }
 "-----------------------------------------------------------------o--------------------------------------------------------------o
