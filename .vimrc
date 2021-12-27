@@ -380,6 +380,15 @@ if $GET_TERMINAL_NAME == "st"
 	let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 	let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 	set termguicolors
+elseif $GET_TERMINAL_NAME == "urxvt" || $GET_TERMINAL_NAME == "tmux: server"
+    set t_ut=
+    set term=xterm-256color
+	set t_Co=256
+	set termguicolors
+    let g:onedark_termcolors=16
+elseif $GET_TERMINAL_NAME == "xterm"
+	set t_Co=256
+	set termguicolors
 endif
 
 if has('nvim')
