@@ -33,6 +33,7 @@ Options:
                                                                                    
     -------------------------------------------------------------------------------
         alttab              Install Program Alttab - Same Windows Alt Tab
+        anki                Install Program Anki
         arcicons            Install Gtk Dark-themes Icons
         arcthemes           Install Gtk Dark-themes
         bashdb              Install Program Bashdb Bash Debug Tools
@@ -730,6 +731,16 @@ Popupdict() {
     row
 }
 
+Anki() {
+    eval cd $Bin_dir 
+    wget -q $Git_download/hantaotaohan/debian/releases/download/1.0.0/anki.tar.bz2
+    eval tar xf anki.tar.bz2
+    eval cd anki-2.1.49-linux
+    eval sudo bash install.sh $Quiet
+    row
+    echo "Anki Install Is Complete :: Version: " $(anki -v | sed -e "s/\b\(.\)/\u\1/g")
+    row
+}
 main() {
 
     case "$1" in
@@ -865,6 +876,9 @@ main() {
             ;;   
         popupdict)
             Popupdict
+            ;;
+        anki)
+            Anki
             ;;   
         -a|--all)
             Github_Hosts
