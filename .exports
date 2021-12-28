@@ -129,8 +129,15 @@ export LESS_TERMCAP_ue=$'\e[0m' # End underline
 # ------------------------------------------------------------------------------------------------------------
 # Tldr.
 # ------------------------------------------------------------------------------------------------------------
-export TLDR_HEADER='magenta bold underline'
-export TLDR_QUOTE='yellow bold italic'
-export TLDR_DESCRIPTION='magenta bold'
-export TLDR_CODE='red'
-export TLDR_PARAM='blue'
+export TLDR_COLOR_NAME="magenta bold underline"
+export TLDR_COLOR_DESCRIPTION="white dark"
+export TLDR_COLOR_EXAMPLE="blue"
+export TLDR_COLOR_COMMAND="red"
+export TLDR_COLOR_PARAMETER="white underline dark"
+export TLDR_LANGUAGE="es"
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export TLDR_ALLOW_INSECURE=0
+# export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
+export TLDR_PAGES_SOURCE_LOCATION="https://raw.fastgit.org/tldr-pages/tldr/master/pages"
+export TLDR_DOWNLOAD_CACHE_LOCATION="https://raw.fastgit.org/tldr-pages/tldr-pages.github.io/master/assets/tldr.zip"
