@@ -39,18 +39,18 @@
     diff = always
 
 [color "diff"]
-    meta       = 11 bold
-    commit     = cyan bold
-    frag       = magenta bold
-    old        = red bold
-    new        = green bold
-    whitespace = red reverse
+    meta       = 5  0 bold
+    commit     = 15 0 bold
+    frag       = 5  0 bold
+    old        = 1  0 bold
+    new        = 2  0 bold
+    whitespace = 3  0 reverse
 
 [color "diff-highlight"]
-    oldNormal    = red bold
-    oldHighlight = 0 bold 1
-    newNormal    = green bold
-    newHighlight = 0 bold 2
+    oldNormal    = 1 0 bold
+    oldHighlight = 0 1 bold 
+    newNormal    = 2 0 bold
+    newHighlight = 0 2 bold
 
 [color "branch"]
     current = yellow reverse
@@ -72,7 +72,7 @@
 [diff-so-fancy]
     stripLeadingSymbols  = false
     changeHunkIndicators = true
-    markEmptyLines       = true
+    markEmptyLines       = false
     useUnicodeRuler      = true
 
 [url "git@github.com:"]
