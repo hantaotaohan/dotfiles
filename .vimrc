@@ -2441,7 +2441,8 @@ endif
 " Mdv - pipe preview command  settings
 "=================================================================================================================================
 if exists('g:plugs["vim-pipe-preview"]')
-	let g:pipe_preview_command = 'mdv -t "826.2742" -'
+	" let g:pipe_preview_command = 'mdv -t "826.2742" -'
+	let g:pipe_preview_command = "glow -s ~/.config/glow/onedark.json - "
 	nnoremap <silent><localleader>v :<C-U>PipePreview<CR>
 endif
 
