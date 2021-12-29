@@ -719,6 +719,7 @@ Vifm() {
 
 Popupdict() {
     eval cd $Bin_dir 
+    sudo apt install-y -qq python3-gi python3-gi-cairo gir1.2-gtk-3.0
     if [ -d "popup-dict" ]; then 
         eval cd popup-dict && eval git pull $Quiet
     else
