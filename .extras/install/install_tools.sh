@@ -588,6 +588,8 @@ Dragon() {
 
     cd ${BIN_DIR} || return
 
+    ${APT_INSTALL} libgtk-3-dev > /dev/null 2>&1
+
     if [ -d "dragon" ]; then 
         cd dragon && git pull > /dev/null 2>&1
     else
