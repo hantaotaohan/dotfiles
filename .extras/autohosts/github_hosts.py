@@ -25,7 +25,7 @@ def set_hosts():
         f.truncate()
         f.write(final_hosts)
     f.close()
-    print("SUCCESS! /etc/hosts has been changed, visit https://github.com")
+    # print("SUCCESS! /etc/hosts has been changed, visit https://github.com")
 
 
 if __name__ == '__main__':
