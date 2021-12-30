@@ -396,9 +396,10 @@ echo -e "                                                                       
         ranger \
         xdotool \
         ripgrep \
-	    hsetroot \
+	arc-theme
+	hsetroot \
         newsboat \
-	    tty-clock \
+	tty-clock \
         qutebrowser \
         python3-pip \
         inotify-tools \
