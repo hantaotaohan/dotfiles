@@ -597,7 +597,7 @@ Dragon() {
     fi
 
     make  > /dev/null 2>&1
-    sudo make install  > /dev/null 2>&1
+    make install  > /dev/null 2>&1
 
     row
     dragon --version
