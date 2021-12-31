@@ -4,6 +4,7 @@
 # Define Variable.
 #---------------------------------------------------------------------------------------------------------------------------------------
 
+PASSWORD=""
 # Basis Define Variable
 BIN_DIR="$HOME/.bin"
 EXTRAS_DIR=$(dirname "$PWD") 
@@ -269,13 +270,17 @@ Dunst() {
 
 Offlineimap() {
 
-    row
-    echo "Please enter the password to extract the package: ......  "
-    row
+    # row
+    # echo "Please enter the password to extract the package: ......  "
+    # row
 
-    row
-    unzip -o -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
-    row
+    # row
+    # unzip -o -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
+    # row
+
+    cd $HOME/.config/neomutt/
+    gpg --quiet --batch --yes --passphrase=$PASSWORD --output alimail.pass --decrypt alimail.pass.gpg
+    gpg --quiet --batch --yes --passphrase=$PASSWORD --output hotmail.pass --decrypt hotmail.pass.gpg
 
     if [ -f /etc/systemd/user/offlineimap.service ]; then
         sudo rm -rf /etc/systemd/user/offlineimap.service
@@ -885,8 +890,6 @@ I3gaps() {
     row
 
 }
-
-#---------------------------------------------------------------------------------------------------------------------------------------
 
 Vim () {
 
