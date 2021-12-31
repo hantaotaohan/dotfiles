@@ -886,6 +886,61 @@ I3gaps() {
 
 }
 
+Vim () {
+
+    cd "$BIN_DIR" || return
+
+    if [ -d "vim" ]; then 
+        cd vim && git pull > /dev/null 2>&1
+    else
+        $GIT_CLONE/vim/vim && cd vim 
+    fi
+
+    sudo apt remove --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox > /dev/null 2>&1
+    ${APT_INSTALL} libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libgtk-3-dev > /dev/null 2>&1
+    ${APT_INSTALL} libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev > /dev/null 2>&1
+
+    (sudo ./configure --with-features=huge \
+        --enable-multibyte \
+        --enable-fontset \
+        --enable-rubyinterp \
+        --enable-pythoninterp \
+        --enable-python3interp \
+        --enable-luainterp \
+        --enable-cscope \
+        --enable-gui=auto \
+        --enable-perlinterp \
+        --enable-fontset \
+        # --with-python-config-dir=$(python2-config --configdir) \
+        --with-python3-config-dir=$(python3-config --configdir) \
+        --with-compiledby="TaoTao" \
+        --enable-largefile \
+        --with-x \
+        --enable-xim \
+        --enable-fontset \
+        --prefix=/usr/local) > /dev/null 2>&1
+
+    sudo make > /dev/null 2>&1
+    sudo make install > /dev/null 2>&1
+
+    # --with-features=huge：支持最大特性
+    # --enable-rubyinterp：打开对 ruby 编写的插件的支持
+    # --enable-pythoninterp：打开对 python 编写的插件的支持
+    # --enable-python3interp：打开对 python3 编写的插件的支持
+    # --enable-luainterp：打开对 lua 编写的插件的支持
+    # --enable-perlinterp：打开对 perl 编写的插件的支持
+    # --enable-multibyte：打开多字节支持，可以在 Vim 中输入中文
+    # --enable-cscope：打开对cscope的支持
+    # --enable-gui=gtk3 表示生成采用 GNOME3 风格的 gvim
+    # --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/ 指定 python 路径
+    # --with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/ 指定 python3路径
+    # --prefix=/usr/local/vim：指定将要安装到的路径
+
+    row
+    vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]"
+    row
+}
+
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 main() {
@@ -1011,6 +1066,9 @@ main() {
             ;;   
         i3gaps)
             I3gaps
+            ;;   
+        vim)
+            Vim
             ;;   
         -a|--all)
             Github_Hosts
