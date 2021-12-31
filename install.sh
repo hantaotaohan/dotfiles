@@ -803,7 +803,7 @@ main() {
             sudo apt-get clean > /dev/null 2>&1
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
             cd $HOME
-            bash $HOME/debian/.extras/install/install_tools.sh st
+            bash $HOME/dotfiles/.extras/install/install_tools.sh st
             cd $HOME
             bash
             ;;
