@@ -4,7 +4,9 @@
 # Define Variable.
 #---------------------------------------------------------------------------------------------------------------------------------------
 
+# Set Mail Password
 PASSWORD=""
+
 # Basis Define Variable
 BIN_DIR="$HOME/.bin"
 EXTRAS_DIR=$(dirname "$PWD") 
