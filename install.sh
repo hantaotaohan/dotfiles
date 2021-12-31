@@ -820,6 +820,7 @@ main() {
             LocalDpkg
             LoaclConfig
             Make_apps
+            sudo apt-get purge xdg-desktop-portal-gtka > /dev/null 2>&1
             sudo apt-get -y -qq --purge remove byobu gnome-terminal yelp > /dev/null 2>&1
             sudo apt autoremove -y -qq > /dev/null 2>&1
             sudo apt-get clean
