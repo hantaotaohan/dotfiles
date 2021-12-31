@@ -61,8 +61,9 @@ usage() {
         githubhosts         Settings Config /etc/hosts/ Uses Fast View Github.com
         githubssh           Settings Github.com SSH Key - Auto SSH_Ras Copy
         hugo                Install Program Hugo
-        i3lockfancy         Install Program i3lock_fancy
+        i3gaps              Install Program I3gaps
         i3blocks            Install Program I3blocks
+        i3lockfancy         Install Program i3lock_fancy
         imagemagick         Fix Imagemagick - Convert Pdf Normally
         java                Install Program Java
         jupyter             Install Program Jupyter Notebook And Settings Themes
@@ -844,6 +845,49 @@ Anki() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
+I3gaps() {
+
+    cd "$BIN_DIR" || return
+
+    if [ -d "i3-gaps" ]; then 
+        cd i3-gaps && git pull > /dev/null 2>&1
+    else
+        $GIT_CLONE/Airblader/i3 i3-gaps && cd i3-gaps 
+    fi
+
+    ${APT_INSTALL} meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev > /dev/null 2>&1
+    ${APT_INSTALL} libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev > /dev/null 2>&1
+    ${APT_INSTALL} libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev > /dev/null 2>&1
+    ${APT_INSTALL} libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev > /dev/null 2>&1
+    ${APT_INSTALL} libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev > /dev/null 2>&1
+
+    rm -rf build
+    mkdir build
+    meson --buildtype=release . build
+    ninja -C build
+
+    sudo install -Dm755 --verbose build/i3 /usr/bin/i3
+    sudo install -Dm755 --verbose build/i3bar /usr/bin/i3bar
+    sudo install -Dm755 --verbose build/i3-config-wizard /usr/bin/i3-config-wizard
+    sudo install -Dm755 --verbose build/i3-dump-log /usr/bin/i3-dump-log
+    sudo install -Dm755 --verbose build/i3-input /usr/bin/i3-input
+    sudo install -Dm755 --verbose build/i3-msg /usr/bin/i3-msg
+    sudo install -Dm755 --verbose build/i3-nagbar /usr/bin/i3-nagbar
+    sudo install -Dm755 --verbose i3-dmenu-desktop /usr/bin/i3-dmenu-desktop
+    sudo install -Dm755 --verbose i3-migrate-config-to-v4 /usr/bin/i3-migrate-config-to-v4
+    sudo install -Dm755 --verbose i3-save-tree /usr/bin/i3-save-tree
+    sudo install -Dm755 --verbose i3-sensible-editor /usr/bin/i3-sensible-editor
+    sudo install -Dm755 --verbose i3-sensible-pager /usr/bin/i3-sensible-pager
+    sudo install -Dm755 --verbose i3-sensible-terminal /usr/bin/i3-sensible-terminal
+
+    row
+    i3 -v
+    row
+
+}
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+
 main() {
 
     case "$1" in
@@ -965,6 +1009,9 @@ main() {
         anki)
             Anki
             ;;   
+        i3gaps)
+            I3gaps
+            ;;   
         -a|--all)
             Github_Hosts
             Alttab
@@ -988,17 +1035,20 @@ main() {
             Github_SSH
             Clone
             Dragon
-            #Ly
-            #Vmware_Share_Fix
+            # Ly
+            # Vmware_Share_Fix
             SSH_banner
             Fixnautilus
-            #Vim
+            # Vim
+            # Vifm
             I3lockfancy
             Popupdict
-            #Bashdb
-            #Qutebrowser
-            #I3blocks
-            #Yarn
+            # Bashdb
+            # Qutebrowser
+            # I3blocks
+            # Yarn
+            # I3gaps
+            # Anki
             ;;
         *)
             echo "Command not found" >&2
