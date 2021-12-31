@@ -192,7 +192,7 @@ Navi() {
 
     cd ${BIN_DIR} || return
 
-    wget -q $GIT_DOWNLOAD/hantaotaohan/debian/releases/download/1.0.0/navi
+    wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/navi
 
     sudo cp $BIN_DIR/navi /usr/local/bin
 
@@ -367,7 +367,7 @@ Foliate() {
 
     cd ${BIN_DIR} || return
 
-    wget -q $GIT_DOWNLOAD/hantaotaohan/debian/releases/download/1.0.0/foliate.deb
+    wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/foliate.deb
     sudo dpkg -i foliate.deb > /dev/null 2>&1
 
     row
@@ -551,10 +551,10 @@ Clone() {
 
 Fixrofiicons() {
 
-    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/pdf.png' /usr/share/applications/org.pwmt.zathura.desktop
-    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
-    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
-    sudo sed -i '$a\Icon=/home/taotao/debian/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
+    sudo sed -i '$a\Icon=/home/taotao/dotfiles/.extras/icons/pdf.png' /usr/share/applications/org.pwmt.zathura.desktop
+    sudo sed -i '$a\Icon=/home/taotao/dotfiles/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
+    sudo sed -i '$a\Icon=/home/taotao/dotfiles/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
+    sudo sed -i '$a\Icon=/home/taotao/dotfiles/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
     # fix ranger open path
     sudo sed -i '$a\Exec=/home/taotao/.config/ranger/ranger-oepn %U' /usr/share/applications/ranger.desktop
 
@@ -669,7 +669,7 @@ Bashdb() {
 
     cd ${BIN_DIR} || return
 
-    wget -q -P ${BIN_DIR} $GIT_DOWNLOAD/hantaotaohan/debian/releases/download/1.0.0/bashdb.tar.gz
+    wget -q -P ${BIN_DIR} $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/bashdb.tar.gz
     tar -zxvf bashdb.tar.gz  > /dev/null 2>&1
 
     cd bashdb-5.0-1.1.2
@@ -831,7 +831,7 @@ Anki() {
 
     cd "$BIN_DIR" || return
 
-    wget -q $GIT_DOWNLOAD/hantaotaohan/debian/releases/download/1.0.0/anki.tar.bz2
+    wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/anki.tar.bz2
     tar xf anki.tar.bz2 > /dev/null 2>&1
     cd anki-2.1.49-linux
     sudo bash install.sh > /dev/null 2>&1  
