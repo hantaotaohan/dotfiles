@@ -295,6 +295,10 @@ Offlineimap() {
     systemctl --user start offlineimap
 
     sudo chmod 600 $HOME/.msmtprc
+    
+    if [ -d $HOME/mail/ ]; then
+        touch $HOME/mail/Postponed
+    fi
 
     row
     echo "Neomutt Install Is Complete :: Version: " $(neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*...")
