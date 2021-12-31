@@ -842,6 +842,8 @@ Popupdict() {
 Anki() {
 
     cd "$BIN_DIR" || return
+    
+    rm -rf anki.tar.bz2
 
     wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/anki.tar.bz2
     tar xf anki.tar.bz2 > /dev/null 2>&1
