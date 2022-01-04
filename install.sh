@@ -738,6 +738,44 @@ echo -e "                                                                       
 }
 
 #----------------------------------------------------------------------------------------#
+# Apt Remove 
+#----------------------------------------------------------------------------------------#
+
+echo -e "                                                                               ";
+echo -e "-------------------------------------------------------------------------------";
+echo -e "                                                                               ";           
+echo -e "              _ __ ___ _ __ ___   _____   _____                                ";
+echo -e "             | '__/ _ \ '_ ' _ \ / _ \ \ / / _ \                               ";
+echo -e "             | | |  __/ | | | | | (_) \ V /  __/                               ";
+echo -e "             |_|  \___|_| |_| |_|\___/ \_/ \___|                               ";
+echo -e "                                                                               ";           
+echo -e "-------------------------------------------------------------------------------";
+echo -e "              ${blue}Apt Remove ${reset}                                       ";
+echo -e "-------------------------------------------------------------------------------";
+echo -e "                                                                               ";
+                                   
+aptRemove() {
+
+	aptApps=( \
+        yelp \
+        byobu \
+        rxvt-unicode \
+        gnome-terminal \
+        xdg-desktop-portal-gtk 
+        )
+
+    for app in "${aptApps[@]}"
+    do
+        echo -e "              [*] Remove: $app";
+        sudo apt-get -y -qq --purge $app > /dev/null 2>&1
+        sudo apt autoremove -y -qq > /dev/null 2>&1
+        sudo apt-get clean > /dev/null 2>&1
+        installSuccess $? $app
+    done
+
+}
+
+#----------------------------------------------------------------------------------------#
 # Make apps
 #----------------------------------------------------------------------------------------#
 
@@ -798,9 +836,7 @@ main() {
             LoaclConfig
             installFonts
             #Make_apps
-            sudo apt-get -y -qq --purge remove byobu gnome-terminal yelp rxvt-unicode > /dev/null 2>&1
-            sudo apt autoremove -y -qq > /dev/null 2>&1
-            sudo apt-get clean > /dev/null 2>&1
+            aptRemove
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
             cd $HOME
             bash $HOME/dotfiles/.extras/install/install_tools.sh st
