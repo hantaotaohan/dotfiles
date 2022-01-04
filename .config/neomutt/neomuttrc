@@ -353,12 +353,12 @@ color status yellow         black   ' '
 color status red            black   ' '
 color status color0         blue    '(.*)' 1 # bottom left
 color status blue           black   '.*()' 1
-color status brightwhite    blue    '\s* [0-9]+\s*' # bottom right
-color status blue           black   '().*$' 1
+color status black          blue    '\s* [0-9]+\s*' # bottom right
+color status black          black   '().*$' 1
 color status yellow         black   '()\s* \s*[0-9]+\s*' 1
 color status black          yellow  '\s* \s*[0-9]+\s*'
-color status blue           yellow  '() ([0-9]+%|all|end)  \s*' 1
-color status black          blue    '.([0-9]+%|all|end)  \s*'
+color status blue           yellow  '() ([0-9]+%|all|end|结束|所有)  \s*' 1
+color status black          blue    '.([0-9]+%|all|end|结束|所有)  \s*'
 color status yellow         black   '()\s*' 1
 color status default        black   ''
 
