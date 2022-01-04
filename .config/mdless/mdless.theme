@@ -1,0 +1,68 @@
+---
+metadata:
+  border: d blue on_black
+  marker: d black on_black
+  color: d white on_black
+emphasis:
+  bold: b red
+  italic: u i on_black 
+  bold-italic: b u i on_black red
+h1:
+  color: b on_magenta black
+  pad: b on_magenta black
+  pad_char: "─"
+h2:
+  color: b on_blue black
+  pad: b on_blue black
+  pad_char: "─"
+h3:
+  color: u b green
+h4:
+  color: u b yellow 
+h5:
+  color: u b cyan
+h6:
+  color: u b white
+link:
+  brackets: b black
+  text: u b blue
+  url: u b blue
+image:
+  bang: red
+  brackets: b black
+  title: cyan
+  url: u yellow
+list:
+  bullet: b d red
+  number: b d blue
+  color: b intense_white
+footnote:
+  brackets: b black on_black
+  caret: b yellow on_black
+  title: x yellow on_black
+  note: u white on_black
+code_span:
+  marker: b white
+  color: b white on_intense_black
+code_block:
+  marker: b intense_black
+  bg: b on_black
+  color: b white on_black
+  border: b d black
+  title: b magenta
+  eol: b intense_black on_black
+  pygments_theme: vim
+dd:
+  marker: b red
+  color: b white
+hr:
+  color: b d white
+table:
+  border: b d black
+  header: b yellow
+  divider: b black
+  color: b white
+  bg: b on_black
+html:
+  brackets: b d yellow on_black
+  color: b yellow on_black
