@@ -289,7 +289,7 @@ Offlineimap() {
     fi
 
     sudo cp $EXTRAS_DIR/offlineimap/offlineimap.service /etc/systemd/user
-
+    sudo chmod 664 /etc/systemd/user/offlineimap.service
     systemctl --user daemon-reload
     systemctl --user enable offlineimap
     systemctl --user start offlineimap
