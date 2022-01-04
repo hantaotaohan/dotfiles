@@ -532,7 +532,8 @@ echo -e "                                                                       
 
 #	wget -P $Bin_dir $Gitraw/vimwiki_markdown.gem > /dev/null 2>&1
 	gemApps=(\
-        vimwiki_markdown
+        vimwiki_markdown\
+	mdless
         )
 
         for app in "${gemApps[@]}"
