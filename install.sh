@@ -825,7 +825,7 @@ main() {
             usage
             exit 0
             ;;
-        -[aA]|-all)
+        -a|--all)
             install_dotfiles
             workspace_settings
             sysUpdate
@@ -843,65 +843,37 @@ main() {
             cd $HOME
             bash
             ;;
-        -[dD])
-            install_dotfiles
-            workspace_settings
-            bash
-            ;;
-        -[sS])
-            sysUpdate
-            aptInstall
-            pipInstall
-            gemInstall
-            LocalDpkg
-            LoaclConfig
-            Make_apps
-            sudo apt-get purge xdg-desktop-portal-gtka > /dev/null 2>&1
-            sudo apt-get -y -qq --purge remove byobu gnome-terminal yelp > /dev/null 2>&1
-            sudo apt autoremove -y -qq > /dev/null 2>&1
-            sudo apt-get clean
-            echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
-            bash
-            ;;
-        -1)
+        -d|--dotfiles)
             install_dotfiles
             bash
             ;;
-        -2)
+        -D|--remove-dotfiles)
             uninstall_dotfiles
             bash
             ;;
-        -3)
+        -w|--workspace)
             workspace_settings
             bash
             ;;
-        -4)
+        -a|--aptinstall)
             aptInstall
             bash
             ;;
-        -5)
+        -p|--pipinstall)
             pipInstall
             bash
             ;;
-        -6)
+        -g|--geminstall)
             gemInstall
             bash
             ;;
-        -7)
+        -k|--dpkginstall)
             LocalDpkg
             LoaclConfig
             bash
             ;;
-        -8)
+        -f|--fontsinstall)
             installFonts
-            bash
-            ;;
-    	-9)
-            bash $Dotfiles_repo/setup/install_server.sh
-            bash
-            ;;
-	-[tT])
-            bash $Dotfiles_repo/setup/setup_tools.sh
             bash
             ;;
         [qQ]) 
