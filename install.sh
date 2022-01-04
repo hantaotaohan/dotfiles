@@ -96,21 +96,18 @@ Options:
                                                                             
  -h        Print this message                                               
                                                                             
- -A        Install All                                                      
- -D        Install Dotfiles & Enviroment                                    
- -S        Update System & Setup Alls Tools & Enviroment                    
+ -a        Install All                                                                     
                                                                             
 ------------------------------------------------------------------------------------------
                                                                             
- -1        Install Dotfiles                                                 
- -2        Uninstall Dotfiles                                               
- -3        Install Environment                                              
- -4        Install APT Tools                                                
- -5        Install PIP3 Tools                                               
- -6        Install GEM Tools                                                
- -7        Install Local Bin Folder Tools                                   
- -8        Install Fonts                                                    
- -9        Install Server Edition                                           
+ -d        Install Dotfiles                                                 
+ -D        Uninstall Dotfiles                                               
+ -w        Install Environment                                              
+ -a        Install APT Tools                                                
+ -p        Install PIP3 Tools                                               
+ -g        Install GEM Tools                                                
+ -k        Install Local Bin Folder Tools                                   
+ -f        Install Fonts                                                    
                                                                       
  -q        Exit                                                             
                                                                             
