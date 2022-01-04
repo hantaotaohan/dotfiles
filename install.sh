@@ -654,16 +654,14 @@ echo -e "                                                                       
 # Tmux
 #----------------------------------------------------------------------------------------#
 
-    if [ ! -d "$HOME/.tmux" ]; then
-        git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-    else
+    if [ -d "$HOME/.tmux" ]; then
         sudo rm -rf $HOME/.tmux
-        git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
+    git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     tmux start-server
     tmux new-session -d
     $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
-    tmux kill-server
+    tmux kill-server && bash
     echo -e "              ${green}[√] TMUX Successful${reset}\n"
 
 #----------------------------------------------------------------------------------------#
@@ -673,7 +671,7 @@ echo -e "                                                                       
     wget -P $Bin_dir $Gitraw/diff-so-fancy > /dev/null 2>&1
 	
     if [ ! -f "/usr/local/bin/diff-so-fancy" ]; then
-		sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
+        sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
         sudo chmod 777 /usr/local/bin/diff-so-fancy
     else
         sudo rm -rf /usr/local/bin/diff-so-fancy
@@ -795,11 +793,13 @@ installSuccess() {
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
-echo -e "               __  _          _                                                ";
-echo -e "              / _\| |_  __ _ | |_  _   _  ___                                  ";
-echo -e "              \ \ | __|/ _' || __|| | | |/ __|                                 ";
-echo -e "              _\ \| |_| (_| || |_ | |_| |\__ \                                 ";
-echo -e "              \__/ \__|\__,_| \__| \__,_||___/                                 ";
+echo -e "               _____ _        _                                                ";
+echo -e "              /  ___| |      | |                                               ";
+echo -e "              \ '--.| |_ __ _| |_ _   _ ___                                    ";
+echo -e "               '--. \ __/ _' | __| | | / __|                                   ";
+echo -e "              /\__/ / || (_| | |_| |_| \__ \                                   ";
+echo -e "              \____/ \__\__,_|\__|\__,_|___/                                   ";
+echo -e "                                                                               ";
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "              ${blue}Status Code ${reset}                                      ";
@@ -807,9 +807,9 @@ echo -e "-----------------------------------------------------------------------
 echo -e "                                                                               ";
 
 	if [ $1 -eq 0 ]; then
-        echo -e "              ${green}[√] Install Success: $2${reset}\n";
+            echo -e "              ${green}[√] Install Success: $2${reset}\n";
 	else
-        echo -e "              ${red}[X] Install Failed: $2${reset}\n";
+            echo -e "              ${red}[X] Install Failed: $2${reset}\n";
 	fi
 	
 }
@@ -820,6 +820,25 @@ echo -e "                                                                       
 #----------------------------------------------------------------------------------------#
 
 Sync_Dotfiles() {
+
+echo -e "                                                                               ";
+echo -e "-------------------------------------------------------------------------------";
+echo -e "                                                                               ";
+echo -e "                                                                               ";
+echo -e "               _____ _ _   _           _                                       ";
+echo -e "              |  __ (_) | | |         | |                                      ";
+echo -e "              | |  \/_| |_| |__  _   _| |__    ___ _   _ _ __   ___            ";
+echo -e "              | | __| | __| |_ \| | | | '_ \  / __| | | | |_ \ / __|           ";
+echo -e "              | |_\ \ | |_| | | | |_| | |_| | \__ \ |_| | | | | |__            ";
+echo -e "               \____/_|\__|_| |_|\__,_|_.__/  |___/\__, |_| |_|\___|           ";
+echo -e "                                                    __/ |                      ";
+echo -e "                                                   |___/                       ";
+echo -e "                                                                               ";
+echo -e "-------------------------------------------------------------------------------";
+echo -e "              ${blue}Github Sync ${reset}                                      ";
+echo -e "-------------------------------------------------------------------------------";
+echo -e "                                                                               ";
+
     git reset -q --hard && git pull -q
     echo -e "${green} ● Dotfiles Update Sync Complete ${reset}"
 }
