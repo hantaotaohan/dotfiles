@@ -741,6 +741,8 @@ echo -e "                                                                       
 # Apt Remove 
 #----------------------------------------------------------------------------------------#
 
+aptRemove() {
+
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";           
@@ -754,24 +756,22 @@ echo -e "              ${blue}Apt Remove ${reset}                               
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
                                    
-aptRemove() {
-
 	aptApps=( \
-        yelp \
-        byobu \
-        rxvt-unicode \
-        gnome-terminal \
-        xdg-desktop-portal-gtk 
-        )
+            yelp \
+            byobu \
+            rxvt-unicode \
+            gnome-terminal \
+            xdg-desktop-portal-gtk 
+            )
 
-    for app in "${aptApps[@]}"
-    do
-        echo -e "              [*] Remove: $app";
-        sudo apt-get -y -qq --purge $app > /dev/null 2>&1
-        sudo apt autoremove -y -qq > /dev/null 2>&1
-        sudo apt-get clean > /dev/null 2>&1
-        installSuccess $? $app
-    done
+	for app in "${aptApps[@]}"
+	do
+            echo -e "              [*] Remove: $app";
+            sudo apt-get -y -qq --purge $app > /dev/null 2>&1
+            sudo apt autoremove -y -qq > /dev/null 2>&1
+            sudo apt-get clean > /dev/null 2>&1
+            installSuccess $? $app
+	done
 
 }
 
@@ -791,11 +791,27 @@ aptRemove() {
 #----------------------------------------------------------------------------------------#
 
 installSuccess() {
+
+echo -e "                                                                               ";
+echo -e "-------------------------------------------------------------------------------";
+echo -e "                                                                               ";
+echo -e "                                                                               ";
+echo -e "                 ___|   |           |                                          ";
+echo -e "               \___ \   __|   _' |  __|  |   |   __|                           ";
+echo -e "                     |  |    (   |  |    |   | \__ \                           ";
+echo -e "               _____/  \__| \__,_| \__| \__,_| ____/                           ";
+echo -e "                                                                               ";
+echo -e "-------------------------------------------------------------------------------";
+echo -e "              ${blue}Status Code ${reset}                                      ";
+echo -e "-------------------------------------------------------------------------------";
+echo -e "                                                                               ";
+
 	if [ $1 -eq 0 ]; then
         echo -e "              ${green}[√] Install Success: $2${reset}\n";
 	else
         echo -e "              ${red}[X] Install Failed: $2${reset}\n";
 	fi
+	
 }
 
 
