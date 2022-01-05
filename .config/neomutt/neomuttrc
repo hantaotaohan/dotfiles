@@ -65,16 +65,15 @@ alternative_order               text/enriched text/plain text/html text
 set fast_reply          =       yes
 set sleep_time          =       0
 set edit_headers        =       yes
-#unset help
+unset help
 unset wait_key
 
 # UI
 set sort                =       threads
 set sort_aux            =       reverse-last-date-received
-set index_format        =       "%[%b %D %H:%M]   %-15.15L   %?M?<%03M> &      ?%s"
 set include             =       yes
 set pager_index_lines   =       10
-set ts_status_format    =       'mutt %m messages%?n?, %n new?'
+set pager_stop
 set folder_format       =       '%4C %t %f'
 set smart_wrap
 set tilde
@@ -84,7 +83,6 @@ set uncollapse_jump
 set sort_re
 set reply_regexp        =       "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 set date_format         =       "%Y"
-# set pager_format        =       '=%b %C/%m: %-20.20F   %s%* (%P)'
 set forward_format      =       "Fwd: %s"
 set editor              =       "vim +':set textwidth=70' +':set wrap' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
 set collapse_all
@@ -126,8 +124,7 @@ set sidebar_divider_char=       '│'
 #set sidebar_delim_chars='.'
 set sidebar_short_path 
 #set sidebar_folder_indent
-set sidebar_format  ="%D%?F? [%F]?%* %?N?%N/?%S"
-
+set sidebar_format  =" %D%?F? [%F]?%* %?N?%N/?%S "
 
 # Load atomic theme
 # source ~/Desktop/colors
@@ -233,26 +230,26 @@ bind index,pager                \;<Tab> next-unread-mailbox
 set header_color_partial= yes
 
 # UI ------------------------------------------------------------
-color normal        white     default       # 背景色选 default 实现透明
-color status        color5    brightblack
-color indicator     color7    color8
-color tree          color1    default
+color normal        white       default       # 背景色选 default 实现透明
+color status        color5      default
+color indicator     color7      color8
+color tree          color1      default
 
 # general -------------------------------------------------------
-color normal        default    default
-color message       default    default
-color markers       color1     default
-color error         color1     default
-color tilde         color0     default
-color attachment    color3     default
-color signature     color102   default
-color search        color1     default
+color normal        default     default
+color message       default     default
+color markers       color1      default
+color error         color1      default
+color tilde         color0      default
+color attachment    color3      default
+color signature     color102    default
+color search        color1      default
 
 # message body --------------------------------------------------
-#color quoted        color4    default
-color bold          color16   default
-color underline     color16   default
-color body          color9    default         "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+#color quoted        color4     default
+color bold          color16     default
+color underline     color16     default
+color body          color9      default         "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
 
 # quoted -------------------------------------------------------
 color quoted        cyan        default
@@ -284,17 +281,17 @@ color index         color0     color1          "~N~(~D~N)" # Collapsed thread wi
 color index         color3     color8          "~T"        # 标记的消息
 #color index         color13    color8          "~Q"        # 已回复的邮件
 #color index         color13    color8          "~P"        # 来自我发的消息
-#color index         default     default        "~R"        # 已读消息
+#color index         default    default        "~R"        # 已读消息
 
 # new message
-color index_subject color2        color0          "~N !~T !~D"
-color index_author  color2        color0          "~N !~T !~D"
-#color index         cyan        color8          "~N"
+color index_subject color2     color0          "~N !~T !~D"
+color index_author  color2     color0          "~N !~T !~D"
+#color index         cyan       color8          "~N"
 
 # message headers -----------------------------------------------
-color hdrdefault    color4    default
-color header        color4    default         "^(From)"
-color header        color4    default         "^(Subject)"
+color hdrdefault    color4     default
+color header        color4     default         "^(From)"
+color header        color4     default         "^(Subject)"
 
 
 #color index         color2     color8          "~>(~U)"   # Collapsed thread with some unread
@@ -326,6 +323,7 @@ color sidebar_ordinary      color4      color0
 color sidebar_new           color5      color0
 color sidebar_flagged       color4      color0
 color sidebar_highlight     color7      color8
+color sidebar_divider       color15     color0
 
 # Credits to https://github.com/sheoak/neomutt-powerline-nerdfonts/
 #set index_format=" %T %{!%Y-%m-%d } %2M %-28.28L  %?X?&·? %s"
@@ -356,20 +354,20 @@ tag-formats "replied" "GR" \
     "attachment" "GA" \
 
 # powerline status bar hack
-color status white          black
-color status green          black   ' '
-color status yellow         black   ' '
-color status red            black   ' '
+color status white          color8
+color status green          color8   ' '
+color status yellow         color8   ' '
+color status red            color8   ' '
 color status color0         blue    '(.*)' 1 # bottom left
-color status blue           black   '.*()' 1
+color status blue           color8   '.*()' 1
 color status black          red    '\s* [0-9]+\s*' 1 # bottom right
-color status black          black   '().*$' 1
-color status yellow         black   '()\s* \s*[0-9]+\s*' 1
+color status color8         color8   '().*$' 1
+color status yellow         color8   '()\s* \s*[0-9]+\s*' 1
 color status black          yellow  '\s* \s*[0-9]+\s*'
 color status blue           yellow  '() ([0-9]+%|all|end|结束|所有)  \s*' 1
 color status black          blue    '.([0-9]+%|all|end|结束|所有)  \s*'
-color status yellow         black   '()\s*' 1
-color status black          black   ''
+color status yellow         color8   '()\s*' 1
+color status color8         color8   ''
 
 # other ---------------------------------------------------------
 #mono index     bold '~h "^content-type: *(multipart/(mixed|signed|encrypted)|application/)"'
