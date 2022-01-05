@@ -26,7 +26,7 @@ set use_envelope_from    =       yes       # 让 mutt 使用 msmtp 的 -f 选项
 #set folder              =       "imaps://imap.mxhichina.com:993/"
 #set spoolfile           =       "imaps://imap.mxhichina.com:993/INBOX"
 #set imap_check_subscribed
-
+set mbox_type="Maildir" 
 set folder = ~/mail
 set spoolfile=+bteb/INBOX
 set postponed=~/mail/Postponed
@@ -61,7 +61,7 @@ set move                =       no                          # 移动已读邮件
 set timeout 		    =       1
 set quit
 auto_view                       text/html                                         # 自动显示HTML
-alternative_order               text/enriched text/plain text/html
+alternative_order               text/enriched text/plain text/html text
 set fast_reply          =       yes
 set sleep_time          =       0
 set edit_headers        =       yes
@@ -71,7 +71,7 @@ unset wait_key
 # UI
 set sort                =       threads
 set sort_aux            =       reverse-last-date-received
-set index_format        =       "%[%b %d %H:%M]   %-15.15L   %?M?<%03M> &      ?%s"
+set index_format        =       "%[%b %D %H:%M]   %-15.15L   %?M?<%03M> &      ?%s"
 set include             =       yes
 set pager_index_lines   =       10
 set ts_status_format    =       'mutt %m messages%?n?, %n new?'
@@ -80,23 +80,27 @@ set smart_wrap
 set tilde
 set menu_scroll
 set quote_regexp        =       "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
-set uncollapse_jump # don't collapse on an unread message
-set sort_re # thread based on regex
+set uncollapse_jump 
+set sort_re
 set reply_regexp        =       "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
-set date_format         =       "%m/%d"
-set pager_format        =       '=%b %C/%m: %-20.20F   %s%* (%P)'
+set date_format         =       "%Y"
+# set pager_format        =       '=%b %C/%m: %-20.20F   %s%* (%P)'
 set forward_format      =       "Fwd: %s"
 set editor              =       "vim +':set textwidth=70' +':set wrap' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
 set collapse_all
+set display_filter="sed -e '/\\[-- 类型.* --\\]/d' | sed -e '/\\[-- 自动显示.* --\\]/d' | sed -e '/\\[-- 使用.* --\\]/d' |  sed -e '/\\[-- 附件 #[0-9] --\\]/d' | sed -e 's/附件 #[0-9]: //g' | sed '/./,/^$/!d' | sed -e 's/^To:/To     :/g' | sed -e 's/^Date:/Date   :/g'| sed -e 's/^From:/From   :/g'"
+
 
 # status
-set status_format="$from/%f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?F? Flag:%F?%?t? Tag:%t?%?d? Del:%d?]%>-(%P)---"
+# set status_format="$from/%f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?F? Flag:%F?%?t? Tag:%t?%?d? Del:%d?]%>-(%P)---"
 # 发件箱显示to subject date 邮件
 ignore *
 unignore from date subject to cc
-unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
+unignore organization organisation x-newsreader: x-mailing-list:
+# unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
 unignore posted-to:
-alternative_order text/plain
+hdr_order Subject: From: Date: To: CC: BCC: Reply-To: Pager: Newsgroups: Followup-to: X-Lable: Organization:
+set auto_subscribe=yes
 
 # Certificates
 set certificate_file    =       "~/.mutt/certificates"
@@ -226,7 +230,10 @@ bind index,pager                \;<Tab> next-unread-mailbox
 #  URL     : https://github.com/gerardbm/atomic
 #----------------------------------------------------------------
 
+set header_color_partial= yes
+
 # UI ------------------------------------------------------------
+color normal        white     default       # 背景色选 default 实现透明
 color status        color5    brightblack
 color indicator     color7    color8
 color tree          color1    default
@@ -239,7 +246,7 @@ color error         color1     default
 color tilde         color0     default
 color attachment    color3     default
 color signature     color102   default
-color search        color196   default
+color search        color1     default
 
 # message body --------------------------------------------------
 #color quoted        color4    default
@@ -265,7 +272,7 @@ color index         color13    default         "~E"        # 过期消息
 color index         color3     default         "~F"        # 带标签的消息
 color index         color0     color1          "~D"        # 删除的消息
 color index         color2     color0          "~N"        # 新邮件
-color index         color2     color0         "~O"        # 旧消息
+color index         color2     color0          "~O"        # 旧消息
 color index         color2     color0          "~U"        # 未读邮件
 color index         color2     color0          "~v~(~N)"   # Collapsed thread with some unread
 color index         color0     color1          "~N~(~D~N)" # Collapsed thread with some unread & flagged
@@ -302,13 +309,15 @@ mono body bold "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
 color body brightgreen black "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
 ## header -------------------------------------------------------
-color hdrdefault        color30         black
-color header            magenta         black       '^date:'
-color header            color153        black       '^(to|cc|bcc):'
-color header            cyan            black       '^from:'
-color header            brightyellow    black       '^subject:'
-color header            color31         black       '^user-agent:'
-color header            color29         black       '^reply-to:'
+color hdrdefault        color15         black
+color header            color4          black       '^Date   '
+# color header            magenta         black       '[^Date:]'
+color header            color4          black       '^(To     |cc     |bcc     )'
+color header            color7          black       '[-a-z_0-9.]+@[-a-z_0-9.]+'
+color header            color4          black       '^From   '
+color header            color4          black       '^Subject'
+color header            color4          black       '^User-agent:'
+color header            color4          black       '^Reply-to:'
 
 # Sidebar -------------------------------------------------------
 color sidebar_indicator     color7      color8
@@ -321,14 +330,14 @@ color sidebar_highlight     color7      color8
 # Credits to https://github.com/sheoak/neomutt-powerline-nerdfonts/
 #set index_format=" %T %{!%Y-%m-%d } %2M %-28.28L  %?X?&·? %s"
 set index_format=" %Gx %zs %zc %zt | %{!%Y-%m-%d · %H:%M } | %?M?+& ? %02M  | %-28.28L  %?X?&·? %s"
-set pager_format=" %n  %t %s%*   %{!%Y-%m-%d · %H:%M} %?X?  %X ? %P  "
+set pager_format=" %n  %t · %s%*  ·    %{!%Y-%m-%d · %H:%M} %?X?  %X ? %P  "
 set status_format = " %f%?r? %r?   %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %> %?p?   %p ?"
 set vfolder_format = " %N %?n?%3n&   ?  %8m  · %f"
-set attach_format = "%u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
+set attach_format = " %u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
 
 
 # no addressed to me, to me, group, cc, sent by me, mailing list
-#set to_chars=""
+set to_chars=""
 # unchanged mailbox, changed, read only, attach mode
 set status_chars = " "
 # mail is tagged, important, deletion, attachments marked for deletion, \
