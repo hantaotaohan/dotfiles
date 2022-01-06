@@ -1,6 +1,6 @@
 # Add `~/bin` to the `$PATH`
 # export PATH="$HOME/bin:$PATH";
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH";
+export PATH="$HOME/bin:$HOME/.local/bin:/home/taotao/.local/share/gem/ruby/2.7.0/bin:$PATH";
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -22,34 +22,30 @@ case $- in
       *) return;;
 esac
 
-# Autocorrect typos in path names when using `cd`.
-# 使用"cd"时自动更正路径名中的键入错误.
+	
+# 纠正 cd命令中目录名的较小拼写错误 .检查的错误包括颠倒顺序的字符 ,遗漏的字符以及重复的字符 .如果找到一处需修改之处 ,正确的路径将打印出 ,命令将继续 .只用于交互式 shell
 shopt -s cdspell
 
 # 如果命令为路径自动添加CD.
 shopt -s autocd
 
-# Case-insensitive globbing (used in pathname expansion).
-# 不区分大小写的全局搜索(用于路径名扩展)
+# 如果设置 ,当执行文件名扩展时 ,bash在不区分大小写的方式下匹配文件名
 shopt -s nocaseglob
 
-# append to the history file, don't overwrite it
-# 附加到历史文件，不要覆盖它
+# 如果 readline正被使用 ,用户有机会重新编辑一个失败的历史替换
 shopt -s histappend
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-# 命令更新和检查错误设置
+# bash在每个命令后检查窗口大小 ,如果有必要 ,就更新 LINES和 COLUMNS的值
 shopt -s checkwinsize
 
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-# 如果设置了，在路径名扩展上下文中使用的模式“**”将              
-# 匹配所有文件以及零个或多个目录和子目录。
+# 如果设置了，在路径名扩展上下文中使用的模式“**”将匹配所有文件以及零个或多个目录和子目录。
 shopt -s globstar
 
-# 打开extglob模式
+# 打开扩展的模式匹配特性
 shopt -s extglob
+
+# 如果给 cd内置命令的参数不是一个目录 ,就假设它是一个变量名 ,变量的值是将要转换到的目录
+shopt -s cdable_vars
 
 # don't put duplicate lines or lines starting with space in the history.
 # 不要在历史中放置重复的行或以空格开头的行。 
