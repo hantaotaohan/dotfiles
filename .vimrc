@@ -109,18 +109,9 @@ endif
 " Clipborad Settings
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 if has('clipboard') && has('vim_starting') && has('unnamedplus')
-    set clipboard& clipboard^=unnamed,unnamedplus
-    xnoremap <silent> p p:let @+=@0<CR>:let @"=@0<CR>
-endif
-
-if has('windows') && executable('clip.exe') && has('unix') && system('uname -r') =~ ".*microsoft.*"
-    let s:clip = 'clip.exe'
-    if executable(s:clip)
-        augroup WSLYank
-            autocmd!
-            autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-        augroup END
-    endif
+    set clipboard& clipboard^=unnamed,unnamedplus 
+    xnoremap <silent> p p:let @+=@0<CR>
+    autocmd VimLeave * call system("xsel -ib", getreg('+'))
 endif
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
@@ -592,11 +583,10 @@ nnoremap g, g,zz
 " 跨终端粘贴 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 nnoremap <silent><localleader>y "+yy
-vnoremap <silent><localleader>y "+yy
+vnoremap <silent><localleader>y "+y
 
 nnoremap <silent><localleader>p "+p
 vnoremap <silent><localleader>p "+p
-inoremap <silent><localleader>p <Esc>"+p
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " Ctrl + h j k l 切换窗口快捷键设置  
