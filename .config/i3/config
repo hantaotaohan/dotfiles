@@ -263,7 +263,8 @@ bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "micros
 bindsym $mod+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'j' -kb-row-up 'k' 
 
 # 截图快捷键
-bindsym --release $mod+a exec "deepin-screenshot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png < /tmp/screenshot.png"
+# bindsym $mod+a exec "deepin-screenshot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png < /tmp/screenshot.png"
+bindsym --release $mod+a exec --no-startup-id "import $HOME/desktop/screenshot/screenshot.png ; dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 1010 normal 'ScreenShot Save As \\n\n$HOME/desktop/screenshot'"
 
 # 查看CheatSheet
 bindsym $mod+slash exec --no-startup-id cat $HOME/.config/rofi/cheatsheet.conf | rofi -i -dmenu -p 'Cheatsheet' -theme cheatsheet.rasi  | awk -F '# ' '{print $2}' | xclip -selection c
