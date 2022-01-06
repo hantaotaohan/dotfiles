@@ -1,6 +1,6 @@
 [Hotkey]
 # 切换激活/非激活输入法
-TriggerKey=SHIFT_LSHIFT
+#TriggerKey=CTRL_SPACE
 # 只在用额外切换键取消激活后才使用它进行切换
 # Available Value:
 # True False
@@ -84,7 +84,7 @@ NextPageKey=. DOWN
 # No
 # All
 # PerProgram
-ShareStateAmongWindow=PerProgram
+#ShareStateAmongWindow=No
 # 默认输入法状态
 # Available Value:
 # Inactive
@@ -144,4 +144,3 @@ ShareStateAmongWindow=PerProgram
 # Available Value:
 # True False
 #HideInputWindowWhenOnlyOneCandidate=False
-
