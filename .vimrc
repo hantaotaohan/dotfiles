@@ -285,7 +285,7 @@ set redrawtime=20000
 " Editor UI
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 set notitle                                                                " 无标题模式
-"set mouse=a                                                                " 启用鼠标
+set esckeys                                                                " 按Esc并立即退出插入模式
 set t_RS=                                                                  " 设置获取终端样式
 set t_SH=                                                                  " 设置获取终端样式
 set hidden                                                                 " 针对buffer不保存即可切换
@@ -324,6 +324,7 @@ set formatoptions+=j                                                       " 合
 set fileformats=unix,dos,mac                                               " 文件换行符，默认使用 unix 换行符
 set tags=./.tags;,.tags                                                    " 设置Tags
 
+" set mouse=a                                                              " 启用鼠标
 " set colorcolumn=+0                                                       " 高亮显示textwidth的最大宽度
 " set noequalalways                                                        " 不要在拆分或关闭时调整窗口大小
 " set display=lastline                                                     " 显示最后一行信息
