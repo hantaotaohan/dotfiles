@@ -617,18 +617,13 @@ echo -e "                                                                       
 #----------------------------------------------------------------------------------------#
 # TLDR 
 #----------------------------------------------------------------------------------------#
-#
-#	wget -P $Bin_dir $Gitraw/tldr > /dev/null 2>&1
-#	
-#	if [ ! -f "/bin/tldr" ];then
-#		sudo cp $Bin_dir/tldr /bin
-#		sudo chmod +x /bin/tldr
-#	else
-#		sudo rm -rf /bin/tldr
-#		sudo cp $Bin_dir/tldr /bin
-#		sudo chmod +x /bin/tldr
-#	fi
-#	echo -e "              ${green}[√] TLDR Successful${reset}\n"
+
+	if [ -d "$HOME/.tldr" ];then
+		sudo rm -rf $HOME/.tldr
+	fi
+	git clone https://hub.fastgit.org/hantaotaohan/tldr $HOME/.tldr
+
+	echo -e "              ${green}[√] TLDR Successful${reset}\n"
 
 #----------------------------------------------------------------------------------------#
 # Edge
