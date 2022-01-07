@@ -77,6 +77,7 @@ usage() {
         picom               Install Program Picom
         popupdict           Install Program Popupdict - Translate Tools
         qutebrowser         Install Program Qutebrowser - Web Browser
+        rofi                Install Program Rofi
         rdrview             Install Program Rdrview - HTML Render Tools
         st                  Install Program St - Terminal
         sshbanner           Settings SSH Login Banner
@@ -899,6 +900,8 @@ I3gaps() {
 
 }
 
+#---------------------------------------------------------------------------------------------------------------------------------------
+
 Vim () {
 
     cd "$BIN_DIR" || return
@@ -952,6 +955,33 @@ Vim () {
     row
     vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]"
     row
+}
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+
+Rofi() {
+
+    cd "$BIN_DIR" || return
+
+    if [ -d "rofi" ]; then 
+        cd rofi && git pull > /dev/null 2>&1
+    else
+        $GIT_CLONE/davatorium/rofi && cd rofi 
+    fi
+
+    rm -rf build
+    git submodule update --init > /dev/null 2>&1
+    autoreconf -i > /dev/null 2>&1
+    mkdir build
+    cd build || return
+    ../configure --disable-check > /dev/null 2>&1
+    make > /dev/null 2>&1
+    sudo make install > /dev/null 2>&1
+
+    row
+    rofi -v
+    row
+
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -1082,6 +1112,9 @@ main() {
             ;;   
         vim)
             Vim
+            ;;   
+        rofi)
+            Rofi
             ;;   
         -a|--all)
             Github_Hosts
