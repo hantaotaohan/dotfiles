@@ -480,7 +480,7 @@ echo -e "                                                                       
         flake8 \
         #keyring \
 	autotiling \
-	#ueberzug \
+	ueberzug \
         raiseorlaunch \
         #popupdict \
         you-get \
