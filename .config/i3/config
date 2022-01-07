@@ -210,7 +210,8 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # --------------------------------------------------------------------------------------------------
 # 打开指定程序到指定的工作区-可用 xprop | grep WM_CLASS 命令获取wm_class
 # --------------------------------------------------------------------------------------------------
-assign [class="Microsoft-edge"]                        $workspace3
+assign [class="Microsoft-edge"  title="(!?)Microsoft Edge Dev"]      $workspace3
+assign [class="(!?)$TERMINAL_C" title="ranger"                ]      $workspace2
 
 # --------------------------------------------------------------------------------------------------
 # 设定那些程序为浮动窗口
@@ -251,7 +252,8 @@ bindsym $mod+Return exec --no-startup-id $TERMINAL
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme onedark
 
 # 打开Ranger快捷键
-bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL -e ranger
+# bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL -e ranger
+bindsym $mod+Shift+Return exec --no-startup-id raiseorlaunch  -c "St" -t "ranger" -s "st"  -e "--no-startup-id $TERMINAL  -t ranger -e ranger"
 
 # auto windows size for in workspaces "3"
 bindsym $mod+Shift+a exec --no-startup-id autosize
