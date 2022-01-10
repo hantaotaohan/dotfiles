@@ -618,7 +618,7 @@ echo -e "                                                                       
 # TLDR 
 #----------------------------------------------------------------------------------------#
 
-	if [ -d "$HOME/.tldr" ];then
+	if [ -d "$HOME/.tldr" ]; then
 		sudo rm -rf $HOME/.tldr
 	fi
 	git clone -q https://hub.fastgit.org/hantaotaohan/tldr $HOME/.tldr
