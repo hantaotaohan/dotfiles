@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 # Set Mail Password
-PASSWORD=""
+# PASSWORD=""
 
 # Basis Define Variable
 BIN_DIR="$HOME/.bin"
@@ -281,6 +281,7 @@ Offlineimap() {
     # unzip -o -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
     # row
 
+    read -p "Please Input Your GPG Password: " PASSWORD
     cd $HOME/.config/neomutt/
     gpg --quiet --batch --yes --passphrase=$PASSWORD --output alimail.pass --decrypt alimail.pass.gpg
     gpg --quiet --batch --yes --passphrase=$PASSWORD --output hotmail.pass --decrypt hotmail.pass.gpg
