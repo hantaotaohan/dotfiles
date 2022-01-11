@@ -854,7 +854,7 @@ main() {
             aptRemove
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
             cd $HOME
-            bash $HOME/dotfiles/.extras/install/install_tools.sh st
+            $HOME/dotfiles/.extras/install/install_tools.sh st
             cd $HOME
             bash
             ;;
