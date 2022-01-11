@@ -655,7 +655,7 @@ echo -e "                                                                       
     git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     tmux start-server
     tmux new-session -d
-    $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
+    bash $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
     tmux kill-server && bash
     echo -e "              ${green}[√] TMUX Successful${reset}\n"
 
