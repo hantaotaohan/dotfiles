@@ -618,12 +618,12 @@ echo -e "                                                                       
 # TLDR 
 #----------------------------------------------------------------------------------------#
 
-	if [ -d "$HOME/.tldr" ]; then
-		sudo rm -rf $HOME/.tldr
-	fi
-	git clone -q https://hub.fastgit.org/hantaotaohan/tldr $HOME/.tldr
+    if [ -d "$HOME/.tldr" ]; then
+        sudo rm -rf $HOME/.tldr
+    fi
+        git clone -q https://hub.fastgit.org/hantaotaohan/tldr $HOME/.tldr
 
-	echo -e "              ${green}[√] TLDR Successful${reset}\n"
+    echo -e "              ${green}[√] TLDR Successful${reset}\n"
 
 #----------------------------------------------------------------------------------------#
 # Edge
@@ -782,22 +782,6 @@ echo -e "                                                                       
 #----------------------------------------------------------------------------------------#
 
 installSuccess() {
-
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
-echo -e "               _____ _        _                                                ";
-echo -e "              /  ___| |      | |                                               ";
-echo -e "              \ '--.| |_ __ _| |_ _   _ ___                                    ";
-echo -e "               '--. \ __/ _' | __| | | / __|                                   ";
-echo -e "              /\__/ / || (_| | |_| |_| \__ \                                   ";
-echo -e "              \____/ \__\__,_|\__|\__,_|___/                                   ";
-echo -e "                                                                               ";
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Status Code ${reset}                                      ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
 
 	if [ $1 -eq 0 ]; then
             echo -e "              ${green}[√] Install Success: $2${reset}\n";
