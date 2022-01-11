@@ -621,7 +621,8 @@ echo -e "                                                                       
     if [ -d "$HOME/.tldr" ]; then
         sudo rm -rf $HOME/.tldr
     fi
-        git clone -q https://hub.fastgit.org/hantaotaohan/tldr $HOME/.tldr
+    
+    git clone -q https://hub.fastgit.org/hantaotaohan/tldr $HOME/.tldr
 
     echo -e "              ${green}[√] TLDR Successful${reset}\n"
 
@@ -650,6 +651,7 @@ echo -e "                                                                       
     if [ -d "$HOME/.tmux" ]; then
         sudo rm -rf $HOME/.tmux
     fi
+    
     git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     tmux start-server
     tmux new-session -d
