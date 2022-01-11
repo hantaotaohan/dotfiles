@@ -648,15 +648,16 @@ echo -e "                                                                       
 # Tmux
 #----------------------------------------------------------------------------------------#
 
-    if [ -d "$HOME/.tmux" ]; then
+    if [ ! -d "$HOME/.tmux" ]; then
+        git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    else
         sudo rm -rf $HOME/.tmux
+        git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
-    
-    git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     tmux start-server
     tmux new-session -d
-    bash $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
-    tmux kill-server && bash
+    $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
+    tmux kill-server
     echo -e "              ${green}[√] TMUX Successful${reset}\n"
 
 #----------------------------------------------------------------------------------------#
