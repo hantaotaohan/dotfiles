@@ -12,7 +12,7 @@ autorefresh = 0.2
 quick = 10
 utf8foldernames = yes
 maxage = 10
-postsynchook = mailnotify
+postsynchook = ~/.local/bin/mailnotify
 
 [Repository bteb-local]
 type = Maildir
@@ -44,6 +44,7 @@ autorefresh = 0.2
 quick = 10
 utf8foldernames = yes
 maxage = 10
+postsynchook = ~/.local/bin/mailnotify
 # postsynchook = ~/.config/offlineimap/notify.sh
 
 [Repository live-local]
