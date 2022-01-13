@@ -1461,6 +1461,8 @@ let g:startify_bookmarks = [
     \ { 'b': '$HOME/.config/i3blocks/config' },
     \ { 'p': '$HOME/.config/picom/picom.conf' },
     \ { 's': '$HOME/.bashrc' },
+    \ { 't': '$HOME/.tmux.conf' },
+    \ { 'r': '$HOME/.config/rofi/config.rasi' },
     \ ]
 
 let g:startify_custom_footer = [
