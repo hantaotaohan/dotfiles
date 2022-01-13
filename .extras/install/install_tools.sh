@@ -1150,7 +1150,7 @@ main() {
             Fixnautilus
             # Vim
             # Vifm
-            I3lockfancy
+            # I3lockfancy
             Popupdict
             # Bashdb
             # Qutebrowser
