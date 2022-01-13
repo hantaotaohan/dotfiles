@@ -359,8 +359,8 @@ echo -e "                                                                       
         i3blocks \
         nautilus \
         dbus-x11 \
-        #i3lock-fancy \
-        deepin-screenshot \
+        i3lock-fancy \
+        #deepin-screenshot \
         #nautilus --no-install-recommends --no-install-suggests \
         #-------------------------------------------------------------------------SYSTEM--
         #xinit \
