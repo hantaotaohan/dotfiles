@@ -337,7 +337,7 @@ mode "$Apps" {
 set $mode_system     [L]OCK        [E]XIT        [R]EBOOT        [P]OWEROFF        [B]ACKGROUND        [W]ALLPAPER
 
 mode "$mode_system" {
-     bindsym l exec --no-startup-id i3lock-fancy, mode "default"
+     bindsym l exec --no-startup-id i3lock-fancy -f Saber, mode "default"
      bindsym e exec --no-startup-id i3-msg exit
      bindsym r exec --no-startup-id systemctl reboot, mode "default"
      bindsym p exec --no-startup-id systemctl poweroff, mode "default"
