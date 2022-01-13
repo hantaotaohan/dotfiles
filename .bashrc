@@ -196,13 +196,11 @@ set $_ZL_ROOT_MARKERS=".git,.svn,.hg,.root,package.json"
 
 # Install FZF
 # 安装FZF模糊所搜
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash 
 
 # Xmodmap Install
 # 用于xserver的键盘自定义
 # 判断是否为桌面环境
-
 if [ ! "$XDG_CURRENT_DESKTOP" = "" ]; then
     xmodmap "$HOME/.Xmodmap"
 fi
@@ -212,7 +210,9 @@ fi
 #     source <(echo "$(navi widget bash)")
 # fi
 
-# 自定义颜色
+# 自定义补全(setup)
+source setup-completion.bash
+
 # 自定义颜色
 red='\e[0;41m' # 红色  
 RED='\e[1;31m' 
