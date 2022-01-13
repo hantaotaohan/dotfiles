@@ -753,6 +753,7 @@ echo -e "                                                                       
             byobu \
             rxvt-unicode \
             gnome-terminal \
+	    rxvt-unicode \
             xdg-desktop-portal-gtk 
             )
 
