@@ -650,10 +650,8 @@ echo -e "                                                                       
 
     if [ ! -d "$HOME/.tmux" ]; then
         git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-    else
-        sudo rm -rf $HOME/.tmux
-        git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
+    
     tmux start-server
     tmux new-session -d
     $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
@@ -853,7 +851,7 @@ main() {
             #Make_apps
             aptRemove
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
-            cd $HOME/dotfiles/.extras/install && ./install_tools.sh st
+            cd $HOME/dotfiles/.extras/install && ./install_tools.sh "st"
             cd $HOME
             bash
             ;;
