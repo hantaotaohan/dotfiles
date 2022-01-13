@@ -966,7 +966,7 @@ Rofi() {
 
     cd "$BIN_DIR" || return
 
-    ${APT_INSTALL} bison flex libxcb-ewmh-dev > /dev/null 2>&1
+    ${APT_INSTALL} bison flex libxcb-ewmh-dev autoconf > /dev/null 2>&1
 
     if [ -d "rofi" ]; then 
         cd rofi && git pull > /dev/null 2>&1
