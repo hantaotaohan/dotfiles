@@ -853,8 +853,7 @@ main() {
             #Make_apps
             aptRemove
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
-            cd $HOME
-            $HOME/dotfiles/.extras/install/install_tools.sh st
+            cd $HOME/dotfiles/.extras/install && ./install_tools.sh st
             cd $HOME
             bash
             ;;
