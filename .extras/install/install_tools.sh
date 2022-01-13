@@ -787,6 +787,8 @@ St() {
         $GIT_CLONE/hantaotaohan/st && cd st 
     fi
 
+    sudo make clean install > /dev/null 2>&1
+    
     row
     echo -e "ST Install Is Complete :: Version "  $(st -v | sed -e "s/\b\(.\)/\u\1/g" )
     row
