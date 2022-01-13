@@ -850,7 +850,7 @@ main() {
             LoaclConfig
             installFonts
             #Make_apps
-            cd $HOME/dotfiles/.extras/install && ./install_tools.sh "st"
+            cd $HOME/dotfiles/.extras/install && ./setup "st"
             aptRemove
             echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
             cd $HOME
