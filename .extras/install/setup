@@ -807,7 +807,7 @@ Vifm() {
     if [ -d "vifming" ]; then 
         cd vifmimg && git pull > /dev/null 2>&1
     else
-        $GIT_CLONE/hantaotaohan/vifmimg && cd vifmimg 
+        $GIT_CLONE/cirala/vifmimg && cd vifmimg 
     fi
 
     sudo make install > /dev/null 2>&1
