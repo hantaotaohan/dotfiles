@@ -721,7 +721,7 @@ echo -e "                                                                       
 
     if [ ! -d "$HOME/.fonts" ]; then
         git clone -q\
-            https://hub.fastgit.org/hantaotaohan/fonts_minimize.git\
+            https://hub.fastgit.org/hantaotaohan/fonts.git\
             $HOME/.fonts && cd $HOME/.fonts && ./install.sh
     else
         cd $HOME/.fonts &&\
