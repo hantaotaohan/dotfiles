@@ -251,6 +251,9 @@ bindsym $mod+Return exec --no-startup-id $TERMINAL
 # rofi 设置及配置 apt install rofi
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme onedark
 
+# Open Popup-dict
+bindsym $mod+t exec --no-startup-id popupdict
+
 # 打开Ranger快捷键
 # bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL -e ranger
 bindsym $mod+Shift+Return exec --no-startup-id raiseorlaunch  -c "St" -t "ranger" -s "st"  -e "--no-startup-id $TERMINAL  -t ranger -e ranger"
@@ -287,7 +290,7 @@ bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "Copytranslator"     
 bindsym $mod+q    exec --no-startup-id raiseorlaunch -r -c "qutebrowser"        -t ".*qutebrowser"      -e "--no-startup-id qutebrowser"
 
 # Open tty-clock
-bindsym $mod+t    exec --no-startup-id raiseorlaunch -r -c "$TERMINAL_C"        -t "ttyclock"           -e "--no-startup-id $TERMINAL -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
+bindsym $mod+shift+t    exec --no-startup-id raiseorlaunch -r -c "$TERMINAL_C"        -t "ttyclock"           -e "--no-startup-id $TERMINAL -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
 
 # Open Alacritty
 # bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
