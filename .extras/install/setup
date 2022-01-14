@@ -847,7 +847,7 @@ Anki() {
 
     cd "$BIN_DIR" || return
     
-    rm -rf anki.zip
+    # rm -rf anki.zip
 
     wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/anki.zip
     unzip anki.zip > /dev/null 2>&1
