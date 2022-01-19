@@ -969,8 +969,6 @@ Plug 'skywind3000/asyncrun.vim'                                          " 配�
 Plug 'christoomey/vim-tmux-navigator'                                    " 同步vim与tmux快捷键
 Plug 'Yggdroot/indentLine' , { 'on': 'IndentLinesToggle' }               " 缩进线显示插件
 Plug 'mhinz/vim-startify'                                                " 定制vim开始页面
-Plug 'jszakmeister/markdown2ctags'                                       " Tags的Toc插件
-Plug 'ferrine/md-img-paste.vim'                                          " Markdown截图自动粘贴
 Plug 'vimwiki/vimwiki' , { 'on': '<Plug>VimwikiIndex' ,'branch': 'dev' } " Vimwiki插件
 Plug 'michal-h21/vim-zettel'                                             " 配合vimwiki的功能插件
 Plug 'liuchengxu/vim-which-key'                                          " Leader辅助
@@ -978,9 +976,6 @@ Plug 'kshenoy/vim-signature'                                             " 书�
 Plug 'yianwillis/vimcdoc'                                                " 中文帮助
 Plug 'voldikss/vim-floaterm'                                             " 终端插件
 Plug 'jiangmiao/auto-pairs'                                              " 成对添加括号等
-Plug 'ludovicchabant/vim-gutentags'                                      " Tags管理
-Plug 'smkent/vim-pipe-preview'                                           " 终端预览Markdown插件
-Plug 'vim-scripts/AnsiEsc.vim'                                           " 终端预览Markdown插件
 Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
 Plug 'rlue/vim-barbaric'                                                 " 输入法切换插件
 Plug 'brooth/far.vim'                                                    " 函数替换插件
@@ -988,6 +983,11 @@ if has("python3")
     Plug 'SirVer/ultisnips'                                              " 代码片段管理器
     Plug 'hantaotaohan/vim-snippets'                                     " 代码片段仓库
 endif
+" Plug 'jszakmeister/markdown2ctags'                                       " Tags的Toc插件
+" Plug 'ferrine/md-img-paste.vim'                                          " Markdown截图自动粘贴
+" Plug 'ludovicchabant/vim-gutentags'                                      " Tags管理
+" Plug 'smkent/vim-pipe-preview'                                           " 终端预览Markdown插件
+" Plug 'vim-scripts/AnsiEsc.vim'                                           " 终端预览Markdown插件
 " Plug 'iamcco/markdown-preview.nvim' , { 'do': 'cd app && yarn install' } " MarkdownPreview插件
 " Plug 'chriskempson/base16-vim'                                           " Themes
 " Plug 'arcticicestudio/nord-vim'                                          " Themes
@@ -1377,8 +1377,13 @@ func! CompileRunGcc1()
         execute 'AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
     elseif &filetype == 'javascript'
         exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time node %"
+    " elseif &filetype == 'markdown'
+    "     MarkdownPreview
     elseif &filetype == 'markdown'
-        MarkdownPreview
+        exec "AsyncStop"
+        set cursorbind
+        exec "AsyncRun -mode=term -pos=right -focus=0 -listed=0 -hidden=1 -strip mdless --no-pager %"
+        exec "autocmd BufWritePre,FileWritePre *.md  exec 'AsyncRun -mode=term -pos=right -focus=0 -listed=0 -hidden=1 -strip mdless --no-pager %'"
     elseif fm == "/home/taotao/blog/content/posts"
         exec "AsyncStop"
         exec PreviewHugo()
@@ -1391,7 +1396,7 @@ endfunc
 "=================================================================================================================================
 " MarkdownClipborad 
 "=================================================================================================================================
-autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
 " there are some defaults for image directory and image name, you can change them
 " let g:mdip_imgdir = 'img'
 " let g:mdip_imgname = 'image'
