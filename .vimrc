@@ -969,7 +969,8 @@ Plug 'skywind3000/asyncrun.vim'                                          " 配�
 Plug 'christoomey/vim-tmux-navigator'                                    " 同步vim与tmux快捷键
 Plug 'Yggdroot/indentLine' , { 'on': 'IndentLinesToggle' }               " 缩进线显示插件
 Plug 'mhinz/vim-startify'                                                " 定制vim开始页面
-Plug 'vimwiki/vimwiki' , { 'on': '<Plug>VimwikiIndex' ,'branch': 'dev' } " Vimwiki插件
+Plug 'vimwiki/vimwiki' , {'branch': 'dev' }                              " Vimwiki插件
+Plug 'jszakmeister/markdown2ctags'                                       " Tags的Toc插件
 Plug 'michal-h21/vim-zettel'                                             " 配合vimwiki的功能插件
 Plug 'liuchengxu/vim-which-key'                                          " Leader辅助
 Plug 'kshenoy/vim-signature'                                             " 书签插件
@@ -983,7 +984,6 @@ if has("python3")
     Plug 'SirVer/ultisnips'                                              " 代码片段管理器
     Plug 'hantaotaohan/vim-snippets'                                     " 代码片段仓库
 endif
-" Plug 'jszakmeister/markdown2ctags'                                       " Tags的Toc插件
 " Plug 'ferrine/md-img-paste.vim'                                          " Markdown截图自动粘贴
 " Plug 'ludovicchabant/vim-gutentags'                                      " Tags管理
 " Plug 'smkent/vim-pipe-preview'                                           " 终端预览Markdown插件
@@ -1377,13 +1377,8 @@ func! CompileRunGcc1()
         execute 'AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
     elseif &filetype == 'javascript'
         exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time node %"
-    " elseif &filetype == 'markdown'
-    "     MarkdownPreview
     elseif &filetype == 'markdown'
-        exec "AsyncStop"
-        set cursorbind
-        exec "AsyncRun -mode=term -pos=right -focus=0 -listed=0 -hidden=1 -strip mdless --no-pager %"
-        exec "autocmd BufWritePre,FileWritePre *.md  exec 'AsyncRun -mode=term -pos=right -focus=0 -listed=0 -hidden=1 -strip mdless --no-pager %'"
+        MarkdownPreview
     elseif fm == "/home/taotao/blog/content/posts"
         exec "AsyncStop"
         exec PreviewHugo()
@@ -1392,6 +1387,18 @@ func! CompileRunGcc1()
         exec ":silent Vimwiki2HTMLBrowse"
     endif
 endfunc
+
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+func! MarkdownPreviews()
+    exec "w"
+    if &filetype == 'markdown' || &filetype == 'vimwiki'
+        set cursorbind
+        exec "AsyncRun -mode=term -pos=right -focus=0 -listed=0 -hidden=1 -strip mdless --no-pager %"
+        exec "autocmd BufWritePre,FileWritePre *.md  exec 'AsyncRun -mode=term -pos=right -focus=0 -listed=0 -hidden=1 -strip mdless --no-pager %'"
+    endif
+endfunc
+
+nnoremap <silent><localleader>v :call MarkdownPreviews()<CR>
 
 "=================================================================================================================================
 " MarkdownClipborad 
