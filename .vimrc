@@ -1393,12 +1393,13 @@ func! MarkdownPreviews()
     exec "w"
     if &filetype == 'markdown' || &filetype == 'vimwiki'
         set cursorbind
-        exec "AsyncRun -mode=term -pos=right -focus=0 -listed=0 -hidden=1 -strip mdless --no-pager %"
-        exec "autocmd BufWritePre,FileWritePre *.md  exec 'AsyncRun -mode=term -pos=right -focus=0 -listed=0 -hidden=1 -strip mdless --no-pager %'"
+        exec "AsyncRun -mode=term -pos=right -focus=0 -listed=1 -hidden=0 -strip mdless --no-pager %"
     endif
 endfunc
 
 nnoremap <silent><localleader>v :call MarkdownPreviews()<CR>
+inoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
+vnoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
 
 "=================================================================================================================================
 " MarkdownClipborad 
@@ -2434,13 +2435,13 @@ endif
 "=================================================================================================================================
 " Mdv - pipe preview command  settings
 "=================================================================================================================================
-if exists('g:plugs["vim-pipe-preview"]')
-    let g:local_path = string(resolve(expand('%:p')))
-	" let g:pipe_preview_command = 'mdv -t "826.2742" -'
-	" let g:pipe_preview_command = "glow -s ~/.config/glow/onedark.json " . g:local_path
-	let g:pipe_preview_command = 'mdless ' . g:local_path
-	nnoremap <silent><localleader>v :<C-U>PipePreview<CR>
-endif
+" if exists('g:plugs["vim-pipe-preview"]')
+"     let g:local_path = string(resolve(expand('%:p')))
+" 	" let g:pipe_preview_command = 'mdv -t "826.2742" -'
+" 	" let g:pipe_preview_command = "glow -s ~/.config/glow/onedark.json " . g:local_path
+" 	let g:pipe_preview_command = 'mdless ' . g:local_path
+" 	nnoremap <silent><localleader>v :<C-U>PipePreview<CR>
+" endif
 
 "=================================================================================================================================
 " Sayonara settings
