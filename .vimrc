@@ -1186,11 +1186,6 @@ if exists('g:plugs["nerdtree"]')
         endif                                                       
     endfunction                                                     
 
-    augroup filetype_nerdtree
-        autocmd!
-        autocmd BufEnter,FileType nerdtree  nnoremap <LocalLeader>s <nop>
-    augroup END
-
 " ----------------------------------------------------------------o--------------------------------------------------------------o
     let g:NERDTreeShowBookmarks=1                                             " 显示书签
     let g:NERDTreeChDirMode=2                                                 " 是否改变PWD目录路径
@@ -1523,7 +1518,7 @@ autocmd FileType vimwiki nnoremap <silent><localleader>f :call VWS()<CR>
 autocmd FileType vimwiki nnoremap <silent><localleader>b :VimwikiBacklinks<cr>
 autocmd FileType vimwiki nnoremap <silent><localleader>j :lnext<cr>
 autocmd FileType vimwiki nnoremap <silent><localleader>k :lprevious<cr>
-autocmd FileType vimwiki nnoremap <silent><localleader>ss :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
+autocmd FileType vimwiki nnoremap <silent><localleader>v :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
 " autocmd FileType vimwiki nnoremap <leader>wv :VimwikiUISelect<CR>
 " autocmd FileType vimwiki nnoremap <silent><localleader>p :call GitPush()<cr>
 " autocmd FileType vimwiki nnoremap <silent><localleader>bl :ZettelBackLinks<cr>
