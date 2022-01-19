@@ -482,6 +482,7 @@ echo -e "                                                                       
 	autotiling \
 	ueberzug \
         raiseorlaunch \
+	pygments==2.11.2 \
         #popupdict \
         you-get \
         pyvirtualdisplay 
