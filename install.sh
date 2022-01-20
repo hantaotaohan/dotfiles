@@ -849,7 +849,7 @@ main() {
             sysUpdate
             aptInstall
             pipInstall
-            #gemInstall
+            gemInstall
             LocalDpkg
             LoaclConfig
             installFonts
