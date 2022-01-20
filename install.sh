@@ -38,9 +38,12 @@ reset='\e[0;37m'
 Backup_dir="$HOME/.dotfiles.orig"
 Bin_dir="$HOME/.bin"
 Dotfiles_repo=$(pwd)
+
 Github="github.com"
 Gitfast="hub.fastgit.org"
 Gitraw="https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.0"
+
+Gitfast="github.com.cnpmjs.org"
 
 Dotfiles_symlinks=( \
         .aliases \
@@ -623,7 +626,7 @@ echo -e "                                                                       
         sudo rm -rf $HOME/.tldr
     fi
     
-    git clone -q https://hub.fastgit.org/hantaotaohan/tldr $HOME/.tldr
+    git clone -q https://${Gitfast}/hantaotaohan/tldr $HOME/.tldr
 
     echo -e "              ${green}[√] TLDR Successful${reset}\n"
 
@@ -650,7 +653,7 @@ echo -e "                                                                       
 #----------------------------------------------------------------------------------------#
 
     if [ ! -d "$HOME/.tmux" ]; then
-        git clone -q https://hub.fastgit.org/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+        git clone -q https://${Gitfast}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
     
     tmux start-server
@@ -722,7 +725,7 @@ echo -e "                                                                       
 
     if [ ! -d "$HOME/.fonts" ]; then
         git clone -q\
-            https://hub.fastgit.org/hantaotaohan/fonts.git\
+            https://${Gitfast}/hantaotaohan/fonts.git\
             $HOME/.fonts && cd $HOME/.fonts && ./install.sh
     else
         cd $HOME/.fonts &&\
