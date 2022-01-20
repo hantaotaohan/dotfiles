@@ -944,7 +944,8 @@ au VimEnter *
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Vim-Plug-Config   
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-let g:plug_url_format = 'https://hub.fastgit.org/%s.git'
+" let g:plug_url_format = 'https://hub.fastgit.org/%s.git'
+let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'
 
 call plug#begin('$HOME/.vim/plugged')
 Plug 'laggardkernel/vim-one'                                             " 主题文件
