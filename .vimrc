@@ -1123,7 +1123,8 @@ if exists('g:plugs["vim-airline"]')
 " 自定义airline c x z 区域的各项功能
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 	if !empty(glob('$HOME/.vim/plugged/vim-airline'))
-		let g:airline_section_c = airline#section#create(['readonly','  ','%{getcwd()}/','file'])
+		" let g:airline_section_c = airline#section#create(['readonly','  ','%{getcwd()}/','file'])
+		let g:airline_section_c = airline#section#create(['readonly','  ','%F'])
 		let g:airline_section_x = " "
 		let g:airline_section_y = airline#section#create(['file'])
 		let g:airline_section_z = airline#section#create(['%3p%',' %%  ', '%l' , ':%3v'])
