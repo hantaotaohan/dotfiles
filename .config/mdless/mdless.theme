@@ -10,11 +10,11 @@ emphasis:
 h1:
   color: b on_magenta black
   pad: b on_magenta black
-  pad_char: "─"
+  pad_char: ""
 h2:
   color: b on_blue black
   pad: b on_blue black
-  pad_char: "─"
+  pad_char: ""
 h3:
   color: u b green
 h4:
@@ -42,25 +42,25 @@ footnote:
   title: x yellow on_black
   note: u white on_black
 code_span:
-  marker: b white
-  color: b white on_intense_black
+  marker: b intense_black on_intense_black
+  color: b on_intense_black on_intense_black
 code_block:
   marker: b intense_black
-  bg: b on_black
+  bg: b d black
   color: b white on_black
-  border: b d black
+  border: b d i intense_black intense_black
   title: b magenta
   eol: b intense_black on_black
-  pygments_theme: vim
+  pygments_theme: one-dark
 dd:
   marker: b red
   color: b white
 hr:
   color: b d white
 table:
-  border: b d black
+  border: b d intense_black intense_black
   header: b yellow
-  divider: b black
+  divider: b d intense_black intense_black
   color: b white
   bg: b on_black
 html:
