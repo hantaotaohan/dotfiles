@@ -110,7 +110,8 @@ Options:
  -p        Install PIP3 Tools                                               
  -g        Install GEM Tools                                                
  -k        Install Local Bin Folder Tools                                   
- -f        Install Fonts                                                    
+ -f        Install Fonts      
+ -r        Remove Apps   
                                                                       
  -q        Exit                                                             
                                                                             
@@ -891,6 +892,10 @@ main() {
             ;;
         -f|--fontsinstall)
             installFonts
+            bash
+            ;;
+        -r|--remove)
+            aptRemove
             bash
             ;;
         [qQ]) 
