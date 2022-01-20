@@ -1387,16 +1387,17 @@ endfunc
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 func! MarkdownPreviews()
-    exec "w"
-    if &filetype == 'markdown' || &filetype == 'vimwiki'
+    if &filetype == 'vimwiki' 
+        exec "AsyncStop"
         set cursorbind
-        exec "AsyncRun -mode=term -pos=right -focus=0 -listed=1 -hidden=0 -strip mdless --no-pager %"
+        exec "AsyncRun -mode=term -pos=right -scroll=0 -focus=0 -listed=1 -hidden=0 mdless --no-pager '$(VIM_FILEPATH)'"
     endif
 endfunc
 
 nnoremap <silent><localleader>v :call MarkdownPreviews()<CR>
 inoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
 vnoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
+
 
 "=================================================================================================================================
 " MarkdownClipborad 
