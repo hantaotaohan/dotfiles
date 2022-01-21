@@ -1041,14 +1041,14 @@ let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'
 
 call plug#begin('$HOME/.vim/plugged')
 Plug 'laggardkernel/vim-one'                                             " 主题文件
-Plug 'joshdick/onedark.vim'                                              " 主题文件
+Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                       " 主题文件
 Plug 'vim-airline/vim-airline'                                           " 状态栏
 Plug 'tpope/vim-fugitive'                                                " git插件
 Plug 'tpope/vim-commentary'                                              " 快速注释插件
 Plug 'tpope/vim-surround'                                                " 成对更改删除括号等
 Plug 'tpope/vim-rsi'                                                     " 更改编辑方式为Emac模式
 Plug 'tpope/vim-repeat'                                                  " 重复键插件
-Plug 'tpope/vim-unimpaired'                                              " 括号映射
+Plug 'tpope/vim-unimpaired'                                              " 括号功能键映射
 Plug 'neomake/neomake'                                                   " 语法检查
 Plug 'junegunn/fzf.vim'                                                  " 为vim安装fzf插件
 Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }       " 为系统安装fzf工具
@@ -1342,7 +1342,7 @@ if exists('g:plugs["markdown-preview.nvim"]')
     let g:mkdp_open_ip = ''
 
     " 指定浏览器以打开预览页面
-    let g:mkdp_browser = ''
+    let g:mkdp_browser = 'microsoft-edge'
 
     " 设置为1时，打开预览页时在命令行中回显预览页网址
     let g:mkdp_echo_preview_url = 1
@@ -1510,8 +1510,8 @@ if exists('g:plugs["asyncrun.vim"]')
             execute 'AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
         elseif &filetype == 'javascript'
             exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time node %"
-        elseif &filetype == 'markdown'
-            MarkdownPreview
+        elseif &filetype == 'markdown' || &filetype == "vimwiki"
+            exec "MarkdownPreviewToggle"
         elseif fm == "/home/taotao/blog/content/posts"
             exec "AsyncStop"
             exec PreviewHugo()
