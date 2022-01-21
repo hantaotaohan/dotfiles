@@ -295,6 +295,7 @@ set encoding=utf-8                                                         " Vim
 set linebreak                                                              " 在breakat设定的字符上换行
 set breakat=\ \	;:,!?                                                      " 换行符号设置
 set backspace=indent,eol,start                                             " 删除键行为
+set showbreak=↳                                                            " 设置换行符号
 set diffopt=filler,internal,algorithm:histogram,indent-heuristic           " 更新diff配置
 " set nostartofline                                                          " Cursor in same column for few commands
 " set whichwrap+=h,l,<,>,[,],~                                               " Move to following line on certain keys
@@ -346,8 +347,6 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<                        " 设
 set formatoptions+=j                                                       " 合并两行中文时，不在中间加空格
 set fileformats=unix,dos,mac                                               " 文件换行符，默认使用 unix 换行符
 set tags=./.tags;,.tags                                                    " 设置Tags
-
-let &showbreak='↳  '                                                       " 设置换行符号
 
 " set mouse=a                                                                " 启用鼠标
 " set colorcolumn=+0                                                         " 高亮显示textwidth的最大宽度
