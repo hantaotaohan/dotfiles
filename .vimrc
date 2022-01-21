@@ -1528,6 +1528,7 @@ if exists('g:plugs["asyncrun.vim"]')
             exec "AsyncStop"
             set cursorbind
             exec "AsyncRun -mode=term -pos=right -scroll=0 -focus=0 -listed=1 -hidden=0 mdless --no-pager '$(VIM_FILEPATH)'"
+            exec "AsyncStop"
         endif
     endfunction
 
@@ -1538,9 +1539,13 @@ if exists('g:plugs["asyncrun.vim"]')
         endfor
     endfunction
 
-    autocmd BufEnter *.md,vimwiki  if &filetype != 'vimwiki' | call <sid>TermForceCloseAll() | endif
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+
     autocmd FileType startify call <sid>TermForceCloseAll() 
-    autocmd BufWritePost *.md,vimwiki :call MarkdownPreviews()
+    autocmd BufEnter *.md,vimwiki  if &filetype != 'vimwiki' | call <sid>TermForceCloseAll() | endif
+    autocmd BufWritePost *.md,vimwiki if len(term_list()) != 0 | call MarkdownPreviews() | endif
+
+"-----------------------------------------------------------------o--------------------------------------------------------------o
 
     nnoremap <silent><localleader>v :call MarkdownPreviews()<CR>
     inoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
