@@ -1394,10 +1394,20 @@ func! MarkdownPreviews()
     endif
 endfunc
 
+function! s:TermForceCloseAll() abort
+    let term_bufs = filter(range(1, bufnr('$')), 'getbufvar(v:val, "&buftype") == "terminal"')
+    for t in term_bufs
+            execute "bd! " t
+    endfor
+endfunction
+
+autocmd BufEnter *.md,vimwiki  if &filetype != 'vimwiki' | call <sid>TermForceCloseAll() | endif
+autocmd FileType startify call <sid>TermForceCloseAll() 
+autocmd BufWritePost *.md,vimwiki :call MarkdownPreviews()
+
 nnoremap <silent><localleader>v :call MarkdownPreviews()<CR>
 inoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
 vnoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
-
 
 "=================================================================================================================================
 " MarkdownClipborad 
