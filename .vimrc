@@ -674,6 +674,13 @@ vnoremap <silent><S-Up>   :m-2<CR>gv=gv
 vnoremap <silent><S-Down> :m'>+<CR>gv=gv
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
+" LocalLeader + d  快速复制行
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+
+nnoremap <LocalLeader>d m`YP``<esc>
+vnoremap <LocalLeader>d YPgv<esc>
+
+"-----------------------------------------------------------------o--------------------------------------------------------------o
 " F2 行号开关，用于鼠标复制代码用
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
@@ -1266,14 +1273,18 @@ if exists('g:plugs["vim-airline"]')
 	nmap <silent><LocalLeader>7        <Plug>AirlineSelectTab7
 	nmap <silent><LocalLeader>8        <Plug>AirlineSelectTab8
 	nmap <silent><LocalLeader>9        <Plug>AirlineSelectTab9
+
+	nmap <silent><S-H>                 <Plug>AirlineSelectPrevTab
+	nmap <silent><S-L>                 <Plug>AirlineSelectNextTab
+	vmap <silent><S-H>                 <Esc><Plug>AirlineSelectPrevTab
+	vmap <silent><S-L>                 <Esc><Plug>AirlineSelectNextTab
+
 	nmap <silent><LocalLeader><tab>    <Plug>AirlineSelectNextTab
 	nmap <silent><LocalLeader><S-tab>  <Plug>AirlineSelectPrevTab
-	nmap <silent><S-Left>              <Plug>AirlineSelectPrevTab
-	nmap <silent><S-Right>             <Plug>AirlineSelectNextTab
 	imap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
 	imap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
-	imap <silent><S-Left>              <Esc><Plug>AirlineSelectPrevTab
-	imap <silent><S-Right>             <Esc><Plug>AirlineSelectNextTab
+	vmap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
+	vmap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
 
 endif
 
