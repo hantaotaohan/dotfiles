@@ -40,10 +40,13 @@ Bin_dir="$HOME/.bin"
 Dotfiles_repo=$(pwd)
 
 Github="github.com"
-#Gitfast="hub.fastgit.org"
-#Gitraw="https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.0"
 
-Gitfast="github.com.cnpmjs.org"
+Gitfast="hub.fastgit.org"
+Gitraw="https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.0"
+
+# Gitfast="github.com.cnpmjs.org"
+# Gitraw="github.com.cnpmjs.org/hantaotaohan/dotfiles/releases/download/1.0.0"
+
 
 Dotfiles_symlinks=( \
         .aliases \
