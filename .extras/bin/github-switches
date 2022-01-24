@@ -1,0 +1,116 @@
+#! /bin/bash
+
+# 切换Vim-Plug更新源
+
+usage() {
+
+local program_name
+program_name=${0##*/}
+cat <<EOF
+
+Usage: $program_name [-option]
+
+Options:
+                                                                            
+------------------------------------------------------------------------------------------
+                                                                            
+ -h --help          Print this message                                               
+                                                                            
+------------------------------------------------------------------------------------------
+                                                                            
+ -g --github        https://www.github.com/                                                 
+
+ -f --fastgit       https://hub.fastgit.org/                                               
+
+ -c --cnpmjs        https://github.com.cnpmjs.org/                                              
+                                                                            
+------------------------------------------------------------------------------------------
+                                                                            
+EOF
+}
+
+# Vim - Plug - Use - Github.com
+
+Github_Enable="let g:plug_url_format = 'https://github.com/%s.git'"
+Cnpmjs_Enable="let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'"
+FastGit_Enable="let g:plug_url_format = 'https://hub.fastgit.org/%s.git'"
+
+Github_Diasble="\" let g:plug_url_format = 'https://github.com/%s.git'"
+Cnpmjs_Diasble="\" let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'"
+FastGit_Diasble="\" let g:plug_url_format = 'https://hub.fastgit.org/%s.git'"
+
+# Enable - Github
+Github_Enable_On() {
+    sed -i "s|$Github_Diasble|$Github_Enable|g" $HOME/.vimrc
+}
+
+# Enable - Fastgit
+FastGit_Enable_On() {
+    sed -i "s|$FastGit_Diasble|$FastGit_Enable|g" $HOME/.vimrc
+}
+
+# Enable - Cmpmjs
+Cnpmjs_Enable_On() {
+    sed -i "s|$Cnpmjs_Diasble|$Cnpmjs_Enable|g" $HOME/.vimrc
+}
+
+# Diasble - Github
+Github_Disable_Off(){
+    sed -i "s|$Github_Enable|$Github_Diasble|g" $HOME/.vimrc
+}
+
+# Diasble - Fastgit
+FastGit_Diasble_Off() {
+    sed -i "s|$FastGit_Enable|$FastGit_Diasble|g" $HOME/.vimrc
+}
+
+# Diasble - Cmpmjs
+Cnpmjs_Diasble_Off() {
+    sed -i "s|$Cnpmjs_Enable|$Cnpmjs_Diasble|g" $HOME/.vimrc
+}
+
+# Reset
+
+reset() {
+    if grep -q "^let g:plug_url_format = 'https://github.com/%s.git'" $HOME/.vimrc ; then 
+        Github_Disable_Off
+    fi
+
+    if grep -q "^let g:plug_url_format = 'https://hub.fastgit.org/%s.git'" $HOME/.vimrc ; then 
+        FastGit_Diasble_Off
+    fi
+
+    if grep -q "^let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'" $HOME/.vimrc; then 
+        Cnpmjs_Diasble_Off
+    fi
+}
+
+# Main Runner
+
+main() {
+    case "$1" in
+        ''|-h|--help)
+            usage
+            exit 0
+            ;;
+        -g|--github)
+            reset
+            Github_Enable_On
+            ;;
+        -f|--fastgit)
+            reset
+            FastGit_Enable_On
+            ;;
+        -c|--cnpmjs)
+            reset
+            Cnpmjs_Enable_On
+            ;;
+        -q|--quit]) 
+            exit; break 
+            ;;
+        *)
+            echo -e"\nCommand not found" >&2
+            exit 1
+    esac
+}
+main "$@"
