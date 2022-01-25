@@ -18,6 +18,8 @@
     dvc    = difftool --cached --tool=vimdiff -y
     ds     = diff --stat
     w      = whatchanged
+    l      = log --graph --abbrev-commit --decorate=no --date=format:'%A %Y-%m-%d %H:%M:%S' --format=format:'%C(01)%>(1)%h%C(reset) - %C(07)%ad%C(reset)  %C(4)%<(13,trunc)%an%C(reset) | %C(2)%<(15,trunc)%ar%C(reset) | %C(1)%<(30,trunc)%d%C(reset) | %C(bold 7)%>|(1)%s%C(reset)' --all
+
 
 [user]
     email = hantaotaohan@gmail.com 
