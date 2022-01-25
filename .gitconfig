@@ -29,7 +29,7 @@
     pager    = diff-so-fancy | less --tabs=4 -RFX
 
 [log]
-	date = iso
+    date = format:%A %Y-%m-%d %H:%M:%S
 
 [merge]
     tool = vimdiff
