@@ -28,6 +28,9 @@
     autocrlf = false
     pager    = diff-so-fancy | less --tabs=4 -RFX
 
+[log]
+	date = iso
+
 [merge]
     tool = vimdiff
 
