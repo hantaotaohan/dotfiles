@@ -1729,7 +1729,7 @@ endif
 
 if exists('g:plugs["vimwiki"]')
 
-    nmap <Leader>ww <Plug>VimwikiIndex
+    nnoremap <Leader>ww :VimwikiIndex<cr>
     autocmd FileType vimwiki nnoremap <silent><localleader>f :call VWS()<CR>
     autocmd FileType vimwiki nnoremap <silent><localleader>b :VimwikiBacklinks<cr>
     autocmd FileType vimwiki nnoremap <silent><localleader>j :lnext<cr>
