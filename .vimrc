@@ -335,7 +335,6 @@ set matchtime=2                                                            " 显
 set pythondll=                                                             " python3.6支持
 set writebackup                                                            " 保存文件前建立备份，保存成功后删除该备份
 set autoread                                                               " 当文件在外部被修改，自动更新该文件
-set autochdir                                                              " 自动切换目录 
 set ambiwidth=single                                                       " 设置为双字宽显示默认值double
 
 set wildmenu                                                               " 允许下方显示目录
@@ -348,6 +347,7 @@ set formatoptions+=j                                                       " 合
 set fileformats=unix,dos,mac                                               " 文件换行符，默认使用 unix 换行符
 set tags=./.tags;,.tags                                                    " 设置Tags
 
+" set autochdir                                                              " 自动切换目录 
 " set mouse=a                                                                " 启用鼠标
 " set colorcolumn=+0                                                         " 高亮显示textwidth的最大宽度
 " set noequalalways                                                          " 不要在拆分或关闭时调整窗口大小
@@ -1789,10 +1789,15 @@ if exists('g:plugs["vimwiki"]')
 
     let wiki_3 = {}
     let wiki_3.name= '<Logseq>'
-    let wiki_3.path= '$HOME/logseq/pages/'
+    let wiki_3.path= '$HOME/wiki/pages/'
     let wiki_3.index = 'contents'
     let wiki_3.ext= '.md'
-    let wiki_3.vimwiki_auto_chdir= 2
+    let wiki_3.syntax= 'markdown'
+    let wiki_3.vimwiki_global_ext=1
+    let wiki_3.vimwiki_auto_chdir= 1
+    let wiki_3.diary_rel_path= '.'
+    let wiki_3.diary_index='diary'
+    let g:vimwiki_ext2syntax = {'.md': 'markdown',  '.wiki': 'media'}
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
     let g:vimwiki_list = [wiki_3]
@@ -1801,7 +1806,7 @@ if exists('g:plugs["vimwiki"]')
     let g:vimwiki_CJK_length = 1
     let g:vimwiki_hl_cb_checked = 2
     let g:vimwiki_global_ext = 1 " make sure vimwiki doesn't own all .md files
-    let g:vimwiki_use_mouse = 1
+    let g:vimwiki_use_mouse = 0
     let g:vimwiki_conceallevel=1
     let g:vimwiki_markdown_link_ext = 1
     let g:list_margin=0
@@ -1873,7 +1878,7 @@ if exists('g:plugs["vimwiki"]')
         exec ":cd %:h"
         .normal ^L
         exec ":AsyncStop"
-        exec ":AsyncRun git pull origin master"
+        exec ":AsyncRun git pull origin main"
         autocmd User AsyncRunStop exec ":ccl"
         autocmd User AsyncRunStop exec ":e %"
         let g:asyncrun_exit = "echom 'Sync Done'"
@@ -1894,10 +1899,17 @@ if exists('g:plugs["vimwiki"]')
         exec ":cd %:h"
         call system("git add --all")
         call system("git commit -m \"Update `whoami` at `hostname` in `date +%Y-%m-%d` `date +%H:%M:%S`\"")
-        exec ":AsyncRun -mode=hide git push origin master"
+        exec ":AsyncRun -mode=hide git push origin main"
         exec ":AsyncStop"
         let g:asyncrun_exit = "echom 'Done'"
     endfunc
+
+    augroup Github_Logseq
+        autocmd!
+        autocmd BufReadPost $HOME/wiki/pages/contents.md call GitPull()
+        autocmd BufWritePost $HOME/wiki/pages/.md call GitCommit()
+        autocmd BufDelete,VimLeave $HOME/wiki/pages/contents.md call GitPush() 
+    augroup END
 
     " augroup Github_Hogo
     " 	autocmd!
@@ -1912,13 +1924,6 @@ if exists('g:plugs["vimwiki"]')
     " 	autocmd BufWritePost $HOME/vimwiki/src/*.md call GitCommit()
     " 	autocmd VimLeavePre $HOME/vimwiki/src/index.md call GitPush() 
     " augroup END
-
-    augroup Github_Hogo
-        autocmd!
-        autocmd BufReadPost $HOME/logseq/pages/contents.md call GitPull()
-        autocmd BufWritePost $HOME/logseq/pages/.md call GitCommit()
-        autocmd VimLeavePre $HOME/logseq/pages/contents.md call GitPush() 
-    augroup END
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 自定义airline同步通知颜色
