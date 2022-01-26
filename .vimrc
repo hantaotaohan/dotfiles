@@ -1878,41 +1878,38 @@ if exists('g:plugs["vimwiki"]')
 
     function! GitPull()
         " 获取云端最新版
-        exec "w"
-        exec ":cd %:h"
-        .normal ^L
-        exec ":AsyncStop"
-        exec ":AsyncRun git pull origin main"
-        autocmd User AsyncRunStop exec ":ccl"
-        autocmd User AsyncRunStop exec ":e %"
+        exec ":cd %:p:h"
+        exec "AsyncStop"
+        exec "AsyncRun git pull origin main"
+        " autocmd User AsyncRunStop exec ":ccl"
+        " autocmd User AsyncRunStop exec ":e %"
         let g:asyncrun_exit = "echom 'Sync Done'"
     endfunc
 
     function! GitCommit()
         " call s:backlinks()
-        exec "w"
-        exec ":cd %:h"
-        exec ":AsyncRun git add --all"
-        exec ":AsyncRun git add -m\"Update `whoami` at `hostname` in `date +%Y-%m-%d` `date +%H:%M:%S`\""
+        exec "cd %:p:h"
+        exec "AsyncStop"
+        exec "AsyncRun git add --all"
+        exec "AsyncRun git add -m\"Update `whoami` at `hostname` in `date +%Y-%m-%d` `date +%H:%M:%S`\""
         let g:asyncrun_exit = "echom 'Git Add and Commit Done'"
     endfunc
 
     function! GitPush()
         " 上传到云端
-        exec "w"
-        exec ":cd %:h"
+        exec "cd %:p:h"
+        exec "AsyncStop"
         call system("git add --all")
         call system("git commit -m \"Update `whoami` at `hostname` in `date +%Y-%m-%d` `date +%H:%M:%S`\"")
-        exec ":AsyncRun -mode=hide git push origin main"
-        exec ":AsyncStop"
+        exec "AsyncRun -mode=hide git push origin main"
         let g:asyncrun_exit = "echom 'Done'"
     endfunc
 
     augroup Github_Logseq
         autocmd!
         autocmd BufReadPost $HOME/wiki/pages/contents.md call GitPull()
-        autocmd BufWritePost $HOME/wiki/pages/.md call GitCommit()
-        autocmd BufDelete,VimLeave $HOME/wiki/pages/contents.md call GitPush() 
+        autocmd BufWritePost $HOME/wiki/pages/*.md call GitCommit()
+        autocmd VimLeave * call GitPush() 
     augroup END
 
     " augroup Github_Hogo
