@@ -1909,7 +1909,7 @@ if exists('g:plugs["vimwiki"]')
         autocmd!
         autocmd BufReadPost $HOME/wiki/pages/contents.md call GitPull()
         autocmd BufWritePost $HOME/wiki/pages/*.md call GitCommit()
-        autocmd VimLeave * call GitPush() 
+        autocmd BufWinLeave contents.md call GitPush() 
     augroup END
 
     " augroup Github_Hogo
