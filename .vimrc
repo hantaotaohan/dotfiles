@@ -1730,19 +1730,23 @@ endif
 if exists('g:plugs["vimwiki"]')
 
     nnoremap <Leader>ww :VimwikiIndex<cr>
-    autocmd FileType vimwiki nnoremap <silent><localleader>f :call VWS()<CR>
-    autocmd FileType vimwiki nnoremap <silent><localleader>b :VimwikiBacklinks<cr>
-    autocmd FileType vimwiki nnoremap <silent><localleader>j :lnext<cr>
-    autocmd FileType vimwiki nnoremap <silent><localleader>k :lprevious<cr>
-    autocmd FileType vimwiki nnoremap <silent><localleader>g :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
-    " autocmd FileType vimwiki nnoremap <leader>wv :VimwikiUISelect<CR>
-    " autocmd FileType vimwiki nnoremap <silent><localleader>p :call GitPush()<cr>
-    " autocmd FileType vimwiki nnoremap <silent><localleader>bl :ZettelBackLinks<cr>
 
     function! VWS()
         execute ":VimwikiSearch " . input("VimwikiSearch:")
         :lopen
     endfunction
+
+    augroup vimwiki_group
+        autocmd!
+        autocmd FileType vimwiki nnoremap <silent><localleader>f :call VWS()<CR>
+        autocmd FileType vimwiki nnoremap <silent><localleader>b :VimwikiBacklinks<cr>
+        autocmd FileType vimwiki nnoremap <silent><localleader>j :lnext<cr>
+        autocmd FileType vimwiki nnoremap <silent><localleader>k :lprevious<cr>
+        autocmd FileType vimwiki nnoremap <silent><localleader>g :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
+        " autocmd FileType vimwiki nnoremap <leader>wv :VimwikiUISelect<CR>
+        " autocmd FileType vimwiki nnoremap <silent><localleader>p :call GitPush()<cr>
+        " autocmd FileType vimwiki nnoremap <silent><localleader>bl :ZettelBackLinks<cr>
+    augroup end
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
