@@ -20,7 +20,7 @@ Options:
                                                                             
  -g --github        https://www.github.com/                                                 
 
- -f --fastgit       https://hub.fastgit.org/                                               
+ -f --fastgit       https://hub.fastgit.xyz/                                               
 
  -c --cnpmjs        https://github.com.cnpmjs.org/                                              
                                                                             
@@ -33,11 +33,11 @@ EOF
 
 Github_Enable="let g:plug_url_format = 'https://github.com/%s.git'"
 Cnpmjs_Enable="let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'"
-FastGit_Enable="let g:plug_url_format = 'https://hub.fastgit.org/%s.git'"
+FastGit_Enable="let g:plug_url_format = 'https://hub.fastgit.xyz/%s.git'"
 
 Github_Diasble="\" let g:plug_url_format = 'https://github.com/%s.git'"
 Cnpmjs_Diasble="\" let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'"
-FastGit_Diasble="\" let g:plug_url_format = 'https://hub.fastgit.org/%s.git'"
+FastGit_Diasble="\" let g:plug_url_format = 'https://hub.fastgit.xyz/%s.git'"
 
 # Enable - Github
 Github_Enable_On() {
@@ -76,7 +76,7 @@ reset() {
         Github_Disable_Off
     fi
 
-    if grep -q "^let g:plug_url_format = 'https://hub.fastgit.org/%s.git'" $HOME/.vimrc ; then 
+    if grep -q "^let g:plug_url_format = 'https://hub.fastgit.xyz/%s.git'" $HOME/.vimrc ; then 
         FastGit_Diasble_Off
     fi
 
