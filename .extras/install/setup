@@ -18,8 +18,8 @@ DOTFILES_REPO=$(pwd)
 # GIT_DOWNLOAD="https://github.com"
 
 # Line Scheme "Fastgit"
-GIT_CLONE="git clone -q https://hub.fastgit.org"
-GIT_DOWNLOAD="https://download.fastgit.org"
+GIT_CLONE="git clone -q https://hub.fastgit.xyz"
+GIT_DOWNLOAD="https://download.fastgit.xyz"
 
 # Line Scheme "Cnpmjs"
 # GIT_CLONE="git clone -q https://github.com.cnpmjs.org"
