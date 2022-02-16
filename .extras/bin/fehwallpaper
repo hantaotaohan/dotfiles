@@ -1,0 +1,12 @@
+#!/bin/bash    
+n=12
+end_n=7 
+
+next_n=$[$n+1]
+curn=$(sed -i "2s/.*/n=$next_n/" ${0})
+
+if  [ $n -ge 8 ]; then
+    curn=$(sed -i "2s/.*/n=$[$n*0+1]/" ${0})
+fi
+
+feh --bg-scale $HOME/.config/i3/background/$n.jpg
