@@ -1746,6 +1746,7 @@ if exists('g:plugs["vimwiki"]')
         " autocmd FileType vimwiki nnoremap <leader>wv :VimwikiUISelect<CR>
         " autocmd FileType vimwiki nnoremap <silent><localleader>p :call GitPush()<cr>
         " autocmd FileType vimwiki nnoremap <silent><localleader>bl :ZettelBackLinks<cr>
+	autocmd FileType vimwiki let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1']
     augroup end
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
