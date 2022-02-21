@@ -1730,23 +1730,36 @@ endif
 if exists('g:plugs["vimwiki"]')
 
     nnoremap <Leader>ww :VimwikiIndex<cr>
-
-    function! VWS()
-        execute ":VimwikiSearch " . input("VimwikiSearch:")
-        :lopen
-    endfunction
+    
+"=================================================================================================================================
+" Vimwiki Group
+"=================================================================================================================================
 
     augroup vimwiki_group
+
         autocmd!
+
+        " 自定义搜索方式
         autocmd FileType vimwiki nnoremap <silent><localleader>f :call VWS()<CR>
+
+        " 查看BackLinks链接
         autocmd FileType vimwiki nnoremap <silent><localleader>b :VimwikiBacklinks<cr>
+
+        " 搜索的结果向下跳转并预览该文件
         autocmd FileType vimwiki nnoremap <silent><localleader>j :lnext<cr>
+
+        " 搜索的结果向上跳转并预览该文件
         autocmd FileType vimwiki nnoremap <silent><localleader>k :lprevious<cr>
+
+        " 自定义搜索方式 - 搜索当前光标下的单词
         autocmd FileType vimwiki nnoremap <silent><localleader>g :execute "VWS /" . expand("<cword>") . "/" <Bar> :lopen<CR>
-        " autocmd FileType vimwiki nnoremap <leader>wv :VimwikiUISelect<CR>
-        " autocmd FileType vimwiki nnoremap <silent><localleader>p :call GitPush()<cr>
-        " autocmd FileType vimwiki nnoremap <silent><localleader>bl :ZettelBackLinks<cr>
-	autocmd FileType vimwiki let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1']
+
+        " 改变vimwiki创建链接的样式
+        autocmd FileType vimwiki let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1']
+
+        " 改变Vimwiki Diary的路径
+        autocmd FileType vimwiki call vimwiki#path#mkdir(vimwiki#vars#get_wikilocal('diary_rel_path'))
+
     augroup end
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
@@ -1990,6 +2003,17 @@ if exists('g:plugs["vimwiki"]')
     "     echom 'Hugo Server Done! You Can Preview Hugo ...'
     " endfunc
     " autocmd FileType vimwiki nnoremap <F12> :call PreviewHugo()<cr>
+
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+" 设置Vimwiki搜索模式
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+
+    function! VWS()
+        execute ":VimwikiSearch " . input("VimwikiSearch:")
+        :lopen
+    endfunction
+
+"-----------------------------------------------------------------o--------------------------------------------------------------o
 
 endif
 
