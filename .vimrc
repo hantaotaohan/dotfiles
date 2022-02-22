@@ -1829,9 +1829,9 @@ if exists('g:plugs["vimwiki"]')
     let g:vimwiki_conceallevel=1
     let g:vimwiki_markdown_link_ext = 1
     let g:list_margin=0
-    let g:diary_header="Diary"
     let g:auto_diary_index=1
     let g:auto_generate_links=1
+    " let g:diary_header="Diary"
     " let g:vimwiki_user_htmls = '404.html,search.html,books.html,todo,html,contact.html,tags.html,inbox.html'
     " let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1,nav,body,aside'
     " let g:vimwiki_tag_format = {'pre': 'tags:.*', 'pre_mark': '\[', 'post_mark': '\]', 'sep': ','}
