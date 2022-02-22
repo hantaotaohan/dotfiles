@@ -1709,17 +1709,17 @@ endif
 " Vimwiki Zettel settings
 "=================================================================================================================================
 
-if exists('g:plugs["vim-zattel"]')
+if exists('g:plugs["vim-zettel"]')
 
-    let g:zettel_format = "%title""
+    let g:zettel_format = "%title"
     let g:zettel_link_format="[[%title]]"
-    let g:zettel_fzf_command = "rg --column --ignore-case --no-heading --color=always"
+    " let g:zettel_fzf_command = "rg --column --ignore-case --no-heading --color=always"
+    let g:zettel_options = [{"disable_front_matter": 1}]
+
     " let g:zettel_format = "%Y%m%d%H%M"
     " let g:zettel_format = "%Y-%m-%d"
     " let g:zettel_link_format="[%title](%link)"
     " let g:zettel_options = [{"template":"$HOME/.vim/zettelnew.tpl", "disable_front_matter": 1}]
-    " let g:zettel_options = [{"disable_front_matter": 1}]
-    " let g:zettel_fzf_options = ['--exact', '--tiebreak=end']
 
 endif
 
