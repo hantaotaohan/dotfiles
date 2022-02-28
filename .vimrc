@@ -1930,57 +1930,47 @@ if exists('g:plugs["vimwiki"]')
         autocmd BufWinLeave contents.md call GitPush() 
     augroup END
 
-    " augroup Github_Hogo
-    " 	autocmd!
-    " 	autocmd BufReadPost $HOME/blog/content/posts/inbox.md call GitPull()
-    " 	autocmd BufWritePost $HOME/blog/content/posts/*.md call GitCommit()
-    " 	autocmd VimLeavePre $HOME/blog/content/posts/inbox.md call GitPush() 
-    " augroup END
-
-    " augroup Github_Vimwiki
-    " 	autocmd!
-    " 	autocmd BufReadPost $HOME/vimwiki/src/index.md call GitPull()
-    " 	autocmd BufWritePost $HOME/vimwiki/src/*.md call GitCommit()
-    " 	autocmd VimLeavePre $HOME/vimwiki/src/index.md call GitPush() 
-    " augroup END
-
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 自定义airline同步通知颜色
 "-----------------------------------------------------------------o--------------------------------------------------------------o
+	
+	if exists('g:plugs["vim-airline"]')
 
-    function! AirlineThemePatch(palette)
-        let a:palette.accents.running = [ '#c678dd', '' , '', '', '' ]
-        let a:palette.accents.success = [ '#61afef', '' , '', '', '' ]
-        let a:palette.accents.failure = [ '#e06c75', '' , '', '', '' ]
-    endfunction
-    let g:airline_theme_patch_func = 'AirlineThemePatch'
+		function! AirlineThemePatch(palette)
+			let a:palette.accents.running = [ '#c678dd', '' , '', '', '' ]
+			let a:palette.accents.success = [ '#61afef', '' , '', '', '' ]
+			let a:palette.accents.failure = [ '#e06c75', '' , '', '', '' ]
+		endfunction
+		let g:airline_theme_patch_func = 'AirlineThemePatch'
 
-    let g:asyncrun_status = ''
-    let g:async_status_old = ''
-    function! Get_asyncrun_running()
-        let async_status = g:asyncrun_status
-        if async_status != g:async_status_old
-            if async_status == 'running'
-                call airline#parts#define_accent('asyncrun_status', 'running')
-            elseif async_status == 'success'
-                call airline#parts#define_accent('asyncrun_status', 'success')
-            elseif async_status == 'failure'
-                call airline#parts#define_accent('asyncrun_status', 'failure')
-            endif
-            let g:airline_section_x = airline#section#create(['asyncrun_status'])
-            AirlineRefresh
-            let g:async_status_old = async_status
-        endif
-        return async_status
-    endfunction
+		let g:asyncrun_status = ''
+		let g:async_status_old = ''
+		function! Get_asyncrun_running()
+			let async_status = g:asyncrun_status
+			if async_status != g:async_status_old
+				if async_status == 'running'
+					call airline#parts#define_accent('asyncrun_status', 'running')
+				elseif async_status == 'success'
+					call airline#parts#define_accent('asyncrun_status', 'success')
+				elseif async_status == 'failure'
+					call airline#parts#define_accent('asyncrun_status', 'failure')
+				endif
+				let g:airline_section_x = airline#section#create(['asyncrun_status'])
+				AirlineRefresh
+				let g:async_status_old = async_status
+			endif
+			return async_status
+		endfunction
 
-    try 
-        call airline#parts#define_function('asyncrun_status', 'Get_asyncrun_running')
-        let g:airline_section_x = airline#section#create(['asyncrun_status'])
-        AirlineRefresh
-    catch
-    endtry
+		try 
+			call airline#parts#define_function('asyncrun_status', 'Get_asyncrun_running')
+			let g:airline_section_x = airline#section#create(['asyncrun_status'])
+			AirlineRefresh
+		catch
+		endtry
 
+	endif
+	
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " 使用wd删除markdown时自动删除相对应不使用的HTML文件
 "-----------------------------------------------------------------o--------------------------------------------------------------o
