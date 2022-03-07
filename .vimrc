@@ -1816,7 +1816,7 @@ if exists('g:plugs["vimwiki"]')
     let wiki_3.syntax= 'markdown'
     let wiki_3.vimwiki_global_ext=1
     let wiki_3.vimwiki_auto_chdir= 1
-    let wiki_3.diary_rel_path= '/journals/'
+    let wiki_3.diary_rel_path= './journals/'
     let wiki_3.diary_index='Diary'
     let g:vimwiki_ext2syntax = {'.md': 'markdown',  '.wiki': 'media'}
 
