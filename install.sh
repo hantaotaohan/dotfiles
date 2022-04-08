@@ -54,7 +54,7 @@ Dotfiles_symlinks=( \
         .bash_profile \
         .bash_prompt \
         .curlrc \
-	.ctags \
+        .ctags \
         .exports \
         .functions \
         .fonts.conf \
