@@ -1,3 +1,5 @@
+--recurse
+
 --langdef=markdown
 --langmap=markdown:.mkd
 --regex-markdown=/^#[ \t]+(.*)/\1/h,Heading_L1/
@@ -5,4 +7,11 @@
 --regex-markdown=/^###[ \t]+(.*)/\1/k,Heading_L3/
 --regex-markdown=/^####[ \t]+(.*)/\1/k,Heading_L4/
 --regex-markdown=/^#####[ \t]+(.*)/\1/k,Heading_L5/
---regex-markdown=/^######[ \t]+(.*)/\1/k,Heading_L6/
+
+--langdef=bash
+--langmap=bash:.sh
+--regex-sh=
+--regex-sh=/^\s+(\w+)/\1/f,function/
+--regex-sh=/^\s*function\s+(\w+)/\1/f,function/
+--regex-sh=/^\s*alias\s+=\s*(\w+)=/\1/f,alias/
+--regex-sh=/^### ([^#]+) #/\1/f,function/
