@@ -924,9 +924,9 @@ au VimEnter *
 " Vim-Plug-Config   
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-let g:plug_url_format = 'https://hub.fastgit.org/%s.git'
+let g:plug_url_format = 'https://hub.fastgit.xyz/%s.git'
 
-call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'laggardkernel/vim-one'                                             " 主题文件
 Plug 'joshdick/onedark.vim'                                              " 主题文件
 Plug 'vim-airline/vim-airline'                                           " 状态栏
