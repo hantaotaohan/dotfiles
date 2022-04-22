@@ -573,6 +573,8 @@ inoremap <C-k> <ESC><C-w>k
 tnoremap <C-h> <C-w><C-h>
 tnoremap <C-j> <C-w><C-j>
 tnoremap <C-k> <C-w><C-k>
+" windows user
+" tnoremap <C-k> <C-\><C-n><C-w><C-k>  
 tnoremap <C-l> <C-w><C-l>
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
