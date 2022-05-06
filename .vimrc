@@ -42,15 +42,21 @@ endif
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
 if has("win32") && has("gui_running")
+    winpos 235 235
     let $LANG='zh_CN'                                                      " 设置语言为中文
-    set helplang=cn                                                        " 设置帮助语言为中文
-    set encoding=utf8                                                      " 设置文件打开编码为UTF-8
-    set langmenu=zh_CN.UTF-8                                               " 设置菜单语言为中文
-    set guifont=Inziu_Iosevka_SC:b:h9                                      " 设置GUI字体
-    set guicursor+=a:blinkon0                                              " 设置光标不闪烁
-    source $VIMRUNTIME/delmenu.vim                                         " 重新加载菜单文件
-    source $VIMRUNTIME/menu.vim                                            " 重新加载菜单文件
+    set helplang=cn                                                           " 设置帮助语言为中文
+    set encoding=utf8                                                       " 设置文件打开编码为UTF-8
+    set langmenu=zh_CN.UTF-8                                        " 设置菜单语言为中文
+    set guifont=Inziu_Iosevka_SC:h12:b                            " 设置GUI字体
+    set guicursor+=a:blinkon0                                          " 设置光标不闪烁
+    set lines=30 columns=180
+    set renderoptions=type:directx
+    " set linespace=6
+    source $VIMRUNTIME/delmenu.vim                           " 重新加载菜单文件
+    source $VIMRUNTIME/menu.vim                                " 重新加载菜单文件
+    let $PYTHONUNBUFFERED=1
 endif
+
 
 "=================================================================================================================================
 
@@ -1529,7 +1535,8 @@ if exists('g:plugs["asyncrun.vim"]')
         " exec "w"
         let fm = expand('%:p:h')
         if &filetype == 'python'
-            exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 python3 %"
+            exec 'AsyncRun -cwd=$(VIM_FILEDIR) -mode=term -pos=bottom -rows=16 python3 "$(VIM_FILEPATH)"'
+            " exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 python3 %"
             exec "wincmd p"
         elseif &filetype == 'sh'
             exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time bash %"
