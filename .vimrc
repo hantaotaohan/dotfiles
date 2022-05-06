@@ -55,6 +55,9 @@ if has("win32") && has("gui_running")
     source $VIMRUNTIME/delmenu.vim                           " 重新加载菜单文件
     source $VIMRUNTIME/menu.vim                                " 重新加载菜单文件
     let $PYTHONUNBUFFERED=1
+    map <M-0> :Fontzoom!<cr>
+    map <M-=> <Plug>(fontzoom-larger)
+    map <M--> <Plug>(fontzoom-smaller)
 endif
 
 
@@ -1099,6 +1102,7 @@ Plug 'voldikss/vim-floaterm'                                             " 终�
 Plug 'jiangmiao/auto-pairs'                                              " 成对添加括号等
 Plug 'rlue/vim-barbaric'                                                 " 输入法切换插件
 Plug 'brooth/far.vim'                                                    " 全局查找替换插件
+Plug 'thinca/vim-fontzoom'                                        " 快捷键调整字体大小
 if has("python3")
     Plug 'SirVer/ultisnips'                                              " 代码片段管理器
     Plug 'hantaotaohan/vim-snippets'                                     " 代码片段仓库
