@@ -1588,6 +1588,9 @@ if exists('g:plugs["asyncrun.vim"]')
     nnoremap <silent><localleader>v :call MarkdownPreviews()<CR>
     inoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
     vnoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
+    
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+    if &filetype == 'python' | nnoremap <F12> :AsyncRun -cwd=<root> -mode=term -pos=right python manage.py makemigrations && python manage.py migrate && python manage.py runserver<CR> | endif
 
 endif
 
