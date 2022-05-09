@@ -1538,9 +1538,11 @@ if exists('g:plugs["asyncrun.vim"]')
     function! CompileRunGcc1()
         " exec "w"
         let fm = expand('%:p:h')
-        if &filetype == 'python'
+        if &filetype == 'python' && !filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
             exec 'AsyncRun -cwd=$(VIM_FILEDIR) -mode=term -pos=bottom -rows=16 python3 "$(VIM_FILEPATH)"'
-            " exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 python3 %"
+            exec "wincmd p"
+        elseif &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+            exec 'AsyncRun -cwd=<root> -mode=term -pos=right python manage.py makemigrations && python manage.py migrate && python manage.py runserver'
             exec "wincmd p"
         elseif &filetype == 'sh'
             exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time bash %"
@@ -1589,9 +1591,6 @@ if exists('g:plugs["asyncrun.vim"]')
     inoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
     vnoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
     
-"-----------------------------------------------------------------o--------------------------------------------------------------o
-    if &filetype == 'python' | nnoremap <F12> :AsyncRun -cwd=<root> -mode=term -pos=right python manage.py makemigrations && python manage.py migrate && python manage.py runserver<CR> | endif
-
 endif
 
 "=================================================================================================================================
