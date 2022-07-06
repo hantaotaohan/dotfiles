@@ -1100,7 +1100,7 @@ Plug 'dhruvasagar/vim-table-mode' , { 'on': 'TableModeToggle' }          " 表�
 Plug 'majutsushi/tagbar' , { 'on': 'TagbarToggle' }                      " Tag浏览
 Plug 'skywind3000/asyncrun.vim'                                          " 配合调测python插件
 Plug 'christoomey/vim-tmux-navigator'                                    " 同步vim与tmux快捷键
-Plug 'Yggdroot/indentLine' , { 'on': 'IndentLinesToggle' }               " 缩进线显示插件
+Plug 'Yggdroot/indentLine'                                                   " 缩进线显示插件
 Plug 'vimwiki/vimwiki' , {'branch': 'dev' }                              " Vimwiki插件
 Plug 'jszakmeister/markdown2ctags'                                       " Tags的Toc插件
 Plug 'michal-h21/vim-zettel'                                             " 配合vimwiki的功能插件
@@ -1622,7 +1622,7 @@ endif
 " IndentLine
 "=================================================================================================================================
 
-if exists('g:plugs["indentLine.vim"]')
+if exists('g:plugs["indentLine"]')
 
     nnoremap <LocalLeader>l :IndentLinesToggle<CR>
     inoremap <LocalLeader>l <esc> :IndentLinesToggle<CR>
@@ -1630,6 +1630,7 @@ if exists('g:plugs["indentLine.vim"]')
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
     let g:indentLine_enabled = 0
+    let g:indentLine_conceallevel = 1
     let g:indentLine_defaultGroup = 'SpecialKey'
 
 endif
