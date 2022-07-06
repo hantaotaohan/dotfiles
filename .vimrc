@@ -1341,7 +1341,7 @@ if exists('g:plugs["nerdtree"]')
     let g:NERDTreeChDirMode=2                                                 " 是否改变PWD目录路径
     let g:NERDTreeQuitOnOpen=1                                                " 打开后是否关闭NT窗口
     let g:NERDTreeMinimalUI=1                                                 " 不显示帮助面板
-    let g:NERDTreeWinSize=35                                                  " 窗口宽度
+    let g:NERDTreeWinSize=30                                                  " 窗口宽度
     let g:NERDTreeShowHidden=1                                                " 是否显示隐藏文件
     let g:NERDTreeIgnore=['\.pyc','\~$','\.swp','_gsdata_']                   " 过滤所有指定的文件和文件夹
     let g:NERDTreeShowLineNumbers=0                                           " 是否显示行号
