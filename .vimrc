@@ -2921,8 +2921,9 @@ if exists('g:plugs["vim-auto-popmenu"]')
 
     let g:apc_enable_ft = { '*':1 }
     let g:apc_cr_confirm = 1
-    " set cpt=.,k,w,b
-    " set shortmess+=c
+    set completeopt=menu,menuone,noselect
+    set cpt=.,k,w,b
+    set shortmess+=c
 
 endif
 
