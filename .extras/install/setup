@@ -937,9 +937,9 @@ Vim () {
         --with-x \
         --enable-xim \
         --enable-fontset \
-        --prefix=/usr/local) > /dev/null 2>&1
+        --prefix=/usr/local) > /dev/null 2>&1 && \
 
-    sudo make > /dev/null 2>&1
+    sudo make > /dev/null 2>&1 && \
     sudo make install > /dev/null 2>&1
 
     # --with-features=huge：支持最大特性
