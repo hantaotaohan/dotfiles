@@ -704,8 +704,8 @@ vnoremap <silent><S-Down> :m'>+<CR>gv=gv
 " LocalLeader + d  快速复制行
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
-nnoremap <LocalLeader>d m`YP``<esc>
-vnoremap <LocalLeader>d YPgv<esc>
+" nnoremap <LocalLeader>d m`YP``<esc>
+" vnoremap <LocalLeader>d YPgv<esc>
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 " F2 行号开关，用于鼠标复制代码用
@@ -1114,7 +1114,9 @@ Plug 'scrooloose/nerdtree' , { 'on': ['NERDTreeToggle','NERDTreeFind'] } " 文�
 Plug 'godlygeek/tabular' , { 'on': 'Tabularize'}                         " 文本对齐插件
 Plug 'dhruvasagar/vim-table-mode' , { 'on': 'TableModeToggle' }          " 表格模式
 Plug 'majutsushi/tagbar' , { 'on': 'TagbarToggle' }                      " Tag浏览
+Plug 'preservim/vimux'                                                   " 配合Tmux运行程序的插件
 Plug 'skywind3000/asyncrun.vim'                                          " 配合调测python插件
+Plug 'skywind3000/asyncrun.extra'                                        " 异步运行扩展
 Plug 'skywind3000/vim-auto-popmenu'                                      " 自动弹出补全插件
 Plug 'christoomey/vim-tmux-navigator'                                    " 同步vim与tmux快捷键
 Plug 'Yggdroot/indentLine'                                               " 缩进线显示插件
@@ -1202,45 +1204,46 @@ hi FoldColumn        term=standout  cterm=bold  ctermfg=0    ctermbg=5    guifg=
 
 if exists('g:plugs["vim-airline"]')
 
-	let g:airline_theme='one'                                                " 设置状态栏主题默认powerlineish
+	let g:airline_theme='onedark'                                            " 设置状态栏主题默认powerlineish
+    let g:airline_experimental = 1
+    let g:airline_detect_modified=1
+	let g:airline_inactive_alt_sep=1                                         " 对非活动窗口的状态行使用替代分隔符
+	let g:airline_powerline_fonts= 1                                         " 使用powerline打过补丁的字体
+	let g:airline_inactive_collapse=1                                        " 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
+	let g:airline_highlighting_cache = 1                                     " 将更改缓存到突出显示组中，因此应更快。如果遇到缓慢的Vim，请将其设置为1
+	let g:airline_focuslost_inactive = 0                                     " 使用FocusLost自动命令禁用航空公
+	let g:airline_stl_path_style = 'short'                                   " 在状态栏显示短路经
+	let g:airline_skip_empty_sections = 0
 	let g:airline#extensions#tabline#enabled= 1                              " 开启tabline
 	let g:airline#extensions#tabline#show_tabs = 0                           " 显示Tabls文字
 	let g:airline#extensions#tabline#buffer_nr_show = 0                      " tabline中buffer显示编号
 	let g:airline#extensions#tabline#fnamemod = ':t'                         " 只显示文件名称
-	let g:airline_powerline_fonts= 1                                         " 使用powerline打过补丁的字体
 	let g:airline#extensions#whitespace#enabled = 0                          " 取消计数
 	let g:airline#extensions#tabline#buf_label_first = 1                     " 在第一个位置显示缓冲区标签
 	let g:airline#extensions#tabline#buffers_label = 'BUFFERS '              " airline右上角定制
 	let g:airline#extensions#tabline#tabs_label = 'Tabs'                     " Tabs定制
-	let g:airline#extensions#tabline#buffer_nr_format = '%s: '               " Buffer 格式
-	let g:airline#extensions#wordcount#enabled = 1                           " 开启字数统计
+	let g:airline#extensions#tabline#buffer_nr_format = '%s:'                " Buffer 格式
+	let g:airline#extensions#wordcount#enabled = 0                           " 开启字数统计
 	let g:airline#extensions#wordcount#filetypes = ['all']                   " 开启字数统计文件类型
 	let g:airline#extensions#wordcount#formatter#default#fmt = '%s words'    " 自定义字数统计格式
-	let g:airline_inactive_collapse=0                                        " 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
-	let g:airline_inactive_alt_sep=0                                         " 对非活动窗口的状态行使用替代分隔符
-	let g:airline_highlighting_cache = 0                                     " 将更改缓存到突出显示组中，因此应更快。如果遇到缓慢的Vim，请将其设置为1
-	let g:airline_focuslost_inactive = 1                                     " 使用FocusLost自动命令禁用航空公
-	let g:airline_stl_path_style = 'short'                                   " 在状态栏显示短路经
 	let g:airline#extensions#fzf#enabled = 1                                 " 启用FZF集成
 	let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'             " 配置快速修复缓冲区的标题文本
 	let g:airline#extensions#quickfix#location_text = 'Location'             " 配置位置列表缓冲区的标题文本
 	let g:airline#extensions#tabline#show_close_button = 1                   " 是否显示关闭按钮
 	let g:airline#extensions#tabline#close_symbol = 'X'                      " 关闭按钮的符号
-	let airline#extensions#tabline#disable_refresh = 0                       " 在| BufAdd |上启用Tabline缓冲区的刷新自动命令
-	let airline#extensions#tabline#middle_click_preserves_windows = 1        " 从缓冲区关闭时保留窗口
-	let g:airline#extensions#tabline#show_splits = 1                         " 启用/禁用显示每个选项卡的打开拆分（仅在打开选项卡时）
-	let g:airline#extensions#tabline#exclude_preview = 1                     " 在选项行中启用/禁用显示预览窗口缓冲区。
-	let g:airline_skip_empty_sections = 0
-	let g:airline_focuslost_inactive = 1
+	let g:airline#extensions#tabline#disable_refresh = 0                     " 在| BufAdd |上启用Tabline缓冲区的刷新自动命令
+	let g:airline#extensions#tabline#show_splits = 0                         " 启用/禁用显示每个选项卡的打开拆分（仅在打开选项卡时）
+	let g:airline#extensions#tabline#exclude_preview = 0                     " 在选项行中启用/禁用显示预览窗口缓冲区。
 	let g:airline#extensions#tabline#alt_sep = 0
-	let g:airline#extensions#tabline#show_splits = 1
 	let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 	let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
-	let g:airline#extensions#tabline#show_tab_nr = 1
+	let g:airline#extensions#tabline#show_tab_nr = 0
 	let g:airline#extensions#tabline#show_tab_type = 1
 	let g:airline#extensions#tabline#buffer_idx_mode = 1
-	let g:airline#extensions#tabline#formatter = 'default'
-	let g:airline#extensions#term#enabled = 0
+	let g:airline#extensions#tabline#formatter = 'unique_tail'
+	let g:airline#extensions#term#enabled = 1
+    let g:airline#extensions#default#section_use_groupitems = 1
+    let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 	let g:airline#extensions#tabline#buffer_idx_format = {
 		\ '0': '0 ',
 		\ '1': '1 ',
@@ -1252,9 +1255,8 @@ if exists('g:plugs["vim-airline"]')
 		\ '7': '7 ',
 		\ '8': '8 ',
 		\ '9': '9 '
-		\}
-	" let g:airline_statusline_ontop = 1                                       " 在状态栏中显示状态行（第一行)
-	" let g:airline_disable_statusline = 1                                     " 禁用每个缓冲区
+		\ }
+	let g:airlinerline#extensions#tabline#middle_click_preserves_windows = 1 " 从缓冲区关闭时保留窗口
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 定义要显示的名称集，而不是特定的文件类型
@@ -1262,18 +1264,12 @@ if exists('g:plugs["vim-airline"]')
 
 	let g:airline_filetype_overrides = {
         \ 'coc-explorer':  [ 'CoC Explorer', '' ],
-        \ 'defx':  ['defx', '%{b:defx.paths[0]}'],
-        \ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
-        \ 'gundo': [ 'Gundo', '' ],
+        \ 'fugitive': ['fugitive', '%{airline"util"wrap(airline"extensions"branch"get_head(),80)}'],
         \ 'tagbar': [ 'TERMINAL', '' ],
         \ 'help':  [ 'Help', '%f' ],
-        \ 'minibufexpl': [ 'MiniBufExplorer', '' ],
         \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
         \ 'startify': [ 'startify', '' ],
         \ 'vim-plug': [ 'Plugins', '' ],
-        \ 'vimfiler': [ 'vimfiler', '%{vimfiler#get_status_string()}' ],
-        \ 'vimshell': ['vimshell','%{vimshell#get_status_string()}'],
-        \ 'vaffle' : [ 'Vaffle', '%{b:vaffle.dir}' ],
         \ }
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
@@ -1281,13 +1277,35 @@ if exists('g:plugs["vim-airline"]')
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
 	function! AirlineInit()
-		let g:airline_section_c = airline#section#create(['readonly','  ','%F'])
-		let g:airline_section_x = " "
-		let g:airline_section_y = airline#section#create(['file'])
-		let g:airline_section_z = airline#section#create(['%3p%',' %%  ', '%l' , ':%3v'])
+		let g:airline_section_c = airline#section#create(['readonly', '  ', 'file'])
+		let g:airline_section_x = airline#section#create([''])
+		let g:airline_section_y = airline#section#create(['%t'])
+        let g:airline_section_z = airline#section#create([' %P%   ', '%l' , ':%3v'])
 	endfunction
-	autocmd VimEnter * call AirlineInit()
-	
+
+    augroup AleRedrawStatus
+        autocmd!
+        autocmd User AirlineAfterInit call  AirlineInit()
+        autocmd  WinEnter * :AirlineRefresh
+    augroup END
+
+" ----------------------------------------------------------------o--------------------------------------------------------------o
+" Path Terminal
+" ----------------------------------------------------------------o--------------------------------------------------------------o
+
+    let s:saved_theme = []
+	let g:airline_theme_patch_func = 'AirlineThemePatch'
+	function! AirlineThemePatch(palette)
+		for colors in values(a:palette)
+			if has_key(colors, 'airline_c') 
+				let s:saved_theme = colors.airline_c
+			endif
+			if has_key(colors, 'airline_term')
+				let colors.airline_term = s:saved_theme
+			endif
+		endfor
+	endfunction
+
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Symbols
 " ----------------------------------------------------------------o--------------------------------------------------------------o
@@ -1303,6 +1321,7 @@ if exists('g:plugs["vim-airline"]')
         let g:airline_symbols.linenr = ''
         let g:airline_symbols.maxlinenr = ''
         let g:airline_symbols.dirty = ' ●'
+        let g:airline_symbols.modified = '+'
 	endif
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
@@ -1556,34 +1575,40 @@ if exists('g:plugs["asyncrun.vim"]')
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
-    nnoremap <F5> :call CompileRunGcc1()<cr>
-    nnoremap <silent><localleader>r :call CompileRunGcc1()<cr>
-    inoremap <silent><localleader>r <esc>:call CompileRunGcc1()<cr>
-    vnoremap <silent><localleader>r <esc>:call CompileRunGcc1()<cr>
+    nnoremap <F5> :call RunCode()<cr>
+    nnoremap <silent><localleader>r :call RunCode()<cr>
+    inoremap <silent><localleader>r <esc>:call RunCode()<cr>
+    vnoremap <silent><localleader>r <esc>:call RunCode()<cr>
 
-    function! CompileRunGcc1()
-        " exec "w"
+    function! RunCode()
+        exec "w"
         let fm = expand('%:p:h')
-        if &filetype == 'python' && !filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
-            exec 'AsyncRun -cwd=$(VIM_FILEDIR) -mode=term -pos=bottom -rows=16 python3 "$(VIM_FILEPATH)"'
-            exec "wincmd p"
-        elseif &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
-            exec 'AsyncRun -cwd=<root> -mode=term -pos=right python manage.py makemigrations && python manage.py migrate && python manage.py runserver'
-            exec "wincmd p"
-        elseif &filetype == 'sh'
-            exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time bash %"
-        elseif &filetype == 'java'
-            execute 'AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
-        elseif &filetype == 'javascript'
-            exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time node %"
-        elseif &filetype == 'markdown' || &filetype == "vimwiki"
-            exec "MarkdownPreviewToggle"
-        elseif fm == "/home/taotao/blog/content/posts"
-            exec "AsyncStop"
-            exec PreviewHugo()
-        elseif fm == "/home/taotao/vimwiki/src"
-            exec "AsyncStop"
-            exec ":silent Vimwiki2HTMLBrowse"
+        if exists('$TMUX')
+            if &filetype == 'python'
+                exec 'AsyncRun -mode=term -pos=tmux -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"'
+            " elseif &filetype == 'python' && filereadable(globpath(asyncrun"get_root('%'),'manage.py'))
+            "     exec 'AsyncRun -mode=term -pos=tmux -cwd=<root> -mode=term -pos=right python manage.py makemigrations && python manage.py migrate && python manage.py runserver'
+            elseif &filetype == 'sh'
+                exec "AsyncRun -mode=term -pos=tmux -focus=0 time bash %"
+            elseif &filetype == 'java'
+                execute 'AsyncRun -mode=term -pos=tmux -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
+            elseif &filetype == 'javascript'
+                exec "AsyncRun -mode=term -pos=tmux -rows=10 -focus=0 time node %"
+            endif
+        else
+            if &filetype == 'python' && !filereadable(globpath(asyncrun"get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=$(VIM_FILEDIR) -mode=term -pos=bottom -rows=16 python3 "$(VIM_FILEPATH)"'
+                exec "wincmd p"
+            elseif &filetype == 'python' && filereadable(globpath(asyncrun"get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=right python manage.py makemigrations && python manage.py migrate && python manage.py runserver'
+                exec "wincmd p"
+            elseif &filetype == 'sh'
+                exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time bash %"
+            elseif &filetype == 'java'
+                execute 'AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
+            elseif &filetype == 'javascript'
+                exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time node %"
+            endif
         endif
     endfunction
 
@@ -2103,8 +2128,8 @@ endif
 if exists('g:plugs["vim-visual-multi"]')
 
     let g:VM_maps = {}
-    let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
-    let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+    let g:VM_maps['Find Under']         = '<LocalLeader>d'           " replace C-n
+    let g:VM_maps['Find Subword Under'] = '<LocalLeader>d'           " replace visual C-n
 
 endif
 
@@ -2894,11 +2919,26 @@ endif
 " vim-auto-popmenu 
 "=================================================================================================================================
 
-if exists('g:plugs["vim-sayonarm-auto-popmenua"]')
+if exists('g:plugs["vim-auto-popmenu"]')
 
     let g:apc_enable_ft = { '*':1 }
     " set cpt=.,k,w,b
     " set shortmess+=c
 
 endif
+
+"=================================================================================================================================
+
+"=================================================================================================================================
+" Vimux
+"=================================================================================================================================
+
+if exists('g:plugs["vimux"]')
+
+    let g:VimuxOrientation = "h"
+    let g:VimuxHeight = "40"
+
+endif
+
+"=================================================================================================================================
 
