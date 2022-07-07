@@ -553,11 +553,14 @@ let mapleader="\\"
 let maplocalleader = ";"
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-" Disable <q>
+" Disable Keymap
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
 nnoremap q <nop>
 vnoremap q <nop>
+
+nnoremap <C-f> <nop>
+nnoremap <C-b> <nop>
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Keep Search Pattern At The Center Of The Screen.
@@ -578,8 +581,8 @@ nnoremap <silent> ]] ]]zz
 nnoremap <silent> <C-u> <C-u>zz
 nnoremap <silent> <C-d> <C-d>zz
 
-nnoremap <silent> <C-b> <C-b>zz
-nnoremap <silent> <C-f> <C-f>zz
+" nnoremap <silent> <C-b> <C-b>zz
+" nnoremap <silent> <C-f> <C-f>zz
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Clear Highlighted Search
@@ -794,6 +797,15 @@ cnoreabbrev q1 q!
 "=================================================================================================================================
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
+" 保存vimrc的时候自动应用设置
+" ----------------------------------------------------------------o--------------------------------------------------------------o
+
+augroup AutoRead
+    autocmd!
+    autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END
+
+" ----------------------------------------------------------------o--------------------------------------------------------------o
 " 如果鼠标不动,检查是否有缓冲区在 Vim 之外被改变,如果改变就会出现提示
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
@@ -965,6 +977,10 @@ autocmd FileType markdown,vimwiki setlocal textwidth=80 formatoptions+=tnmMltr] 
 " Quickly Save the current window
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
+if exists('*MySave')
+     finish
+ endif
+ 
 function! MySave()
     let cantSave = "redraw | echohl ErrorMsg | echo \"Can't save the file: \" . v:exception | return | echohl None"
     let notSaved = "redraw | echohl ErrorMsg | echo 'This buffer was NOT saved!' | return | echohl None"
