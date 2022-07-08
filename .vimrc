@@ -1203,9 +1203,9 @@ hi FoldColumn        term=standout  cterm=bold  ctermfg=0    ctermbg=5    guifg=
 if exists('g:plugs["vim-airline"]')
 
 	let g:airline_theme='onedark'                                            " 设置状态栏主题默认powerlineish
-    let g:airline_experimental = 1
-    let g:airline_detect_modified=1
-	let g:airline_inactive_alt_sep=1                                         " 对非活动窗口的状态行使用替代分隔符
+	let g:airline_experimental = 1
+	let g:airline_detect_modified=1
+	let g:airline_inactive_alt_sep=0                                         " 对非活动窗口的状态行使用替代分隔符
 	let g:airline_powerline_fonts= 1                                         " 使用powerline打过补丁的字体
 	let g:airline_inactive_collapse=1                                        " 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
 	let g:airline_highlighting_cache = 1                                     " 将更改缓存到突出显示组中，因此应更快。如果遇到缓慢的Vim，请将其设置为1
