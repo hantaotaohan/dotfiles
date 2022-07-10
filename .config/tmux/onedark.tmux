@@ -58,18 +58,16 @@ setw "window-status-activity-attr" "none"
 
 setw "window-status-separator" ""
 
-set "window-style" "fg=$onedark_comment_grey"
-set "window-active-style" "fg=$onedark_white"
+set "window-style" "bg=#23272E fg=$onedark_comment_grey"
+set "window-active-style" "bg=#282C34 fg=$onedark_white"
 
-set "pane-border-fg" "$onedark_white"
-set "pane-border-bg" "$onedark_black"
-set "pane-active-border-fg" "$onedark_green"
-set "pane-active-border-bg" "$onedark_black"
+set "pane-border-style" "fg=$onedark_comment_grey bg=$onedark_black"
+set "pane-active-border-style" "fg=$onedark_blue bg=$onedark_black"
 
 set "display-panes-active-colour" "$onedark_yellow"
 set "display-panes-colour" "$onedark_blue"
 
-set "status-bg" "$onedark_black"
+set "status-bg" "#2c323c"
 set "status-fg" "$onedark_white"
 
 set "@prefix_highlight_fg" "$onedark_black"
@@ -81,8 +79,8 @@ status_widgets=$(get "@onedark_widgets")
 time_format=$(get "@onedark_time_format" "%R")
 date_format=$(get "@onedark_date_format" "%d/%m/%Y")
 
-set "status-right" "#[fg=$onedark_white,bg=$onedark_black,nounderscore,noitalics]  ${date_format} #[fg=$onedark_visual_grey,bg=$onedark_black]#[fg=$onedark_visual_grey,bg=$onedark_visual_grey]#[fg=$onedark_white, bg=$onedark_visual_grey]${status_widgets} #[fg=$onedark_green,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_black,bg=$onedark_green,bold] #h #[fg=$onedark_yellow, bg=$onedark_green]#[fg=$onedark_red,bg=$onedark_yellow]"
+set "status-right" "#[fg=$onedark_black,bg=#2c323c,nounderscore,noitalics] #[fg=$onedark_white,bg=$onedark_black,nounderscore,noitalics] ${date_format} #[fg=$onedark_visual_grey,bg=$onedark_black]#[fg=$onedark_visual_grey,bg=$onedark_visual_grey]#[fg=$onedark_white, bg=$onedark_visual_grey]${status_widgets} #[fg=$onedark_green,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_black,bg=$onedark_green,bold] #h #[fg=$onedark_yellow, bg=$onedark_green]#[fg=$onedark_red,bg=$onedark_yellow]"
 set "status-left" "#[fg=$onedark_black,bg=$onedark_green,bold] #S #{prefix_highlight}#[fg=$onedark_green,bg=$onedark_black,nobold,nounderscore,noitalics]"
 
-set "window-status-format" "#[fg=$onedark_black,bg=$onedark_black,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_black] #I.#W #[fg=$onedark_black,bg=$onedark_black,nobold,nounderscore,noitalics]"
-set "window-status-current-format" "#[fg=$onedark_black,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_visual_grey,nobold] #I.#W #[fg=$onedark_visual_grey,bg=$onedark_black,nobold,nounderscore,noitalics]"
+set "window-status-format" "#[fg=#2c323c,bg=#2c323c,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=#2c323c] #I.#W #[fg=#2c323c,bg=#2c323c,nobold,nounderscore,noitalics]"
+set "window-status-current-format" "#[fg=#2c323c,bg=$onedark_visual_grey,nobold,nounderscore,noitalics]#[fg=$onedark_white,bg=$onedark_visual_grey,nobold] #I.#W #[fg=$onedark_visual_grey,bg=#2c323c,nobold,nounderscore,noitalics]"
