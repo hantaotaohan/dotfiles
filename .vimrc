@@ -1109,6 +1109,7 @@ Plug 'junegunn/limelight.vim'                                            " 专�
 Plug 'mhinz/vim-startify'                                                " 定制vim开始页面
 Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
 Plug 'scrooloose/nerdtree' , { 'on': ['NERDTreeToggle','NERDTreeFind'] } " 文件树插件
+Plug 'Xuyuanp/nerdtree-git-plugin'                                         " 文件数git显示插件
 Plug 'godlygeek/tabular' , { 'on': 'Tabularize'}                         " 文本对齐插件
 Plug 'dhruvasagar/vim-table-mode' , { 'on': 'TableModeToggle' }          " 表格模式
 Plug 'majutsushi/tagbar' , { 'on': 'TagbarToggle' }                      " Tag浏览
@@ -2942,3 +2943,23 @@ endif
 
 "=================================================================================================================================
 
+if exists('g:plugs["nerdtree-git-plugin"]')
+
+    let g:NERDTreeGitStatusShowClean = 0 " default: 0
+    let g:NERDTreeGitStatusUseNerdFonts = 1
+    let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+    let g:NERDTreeGitStatusUntrackedFilesMode = 'all' 
+    let g:NERDTreeGitStatusIndicatorMapCustom = {
+        \ 'Modified'  :'M',
+        \ 'Staged'    :'✚',
+        \ 'Untracked' :'U',
+        \ 'Renamed'   :'➜',
+        \ 'Unmerged'  :'═',
+        \ 'Deleted'   :'✖',
+        \ 'Dirty'     :'✗',
+        \ 'Ignored'   :'.',
+        \ 'Clean'     :'✔︎',
+        \ 'Unknown'   :'?',
+        \ }
+
+endif
