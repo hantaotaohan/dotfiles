@@ -81,7 +81,7 @@ endif
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
 let g:loaded_gzip              = 1
-let g:loaded_tar               = 1
+let g:loaded_tar                = 1
 let g:loaded_tarPlugin         = 1
 let g:loaded_zip               = 1
 let g:loaded_zipPlugin         = 1
@@ -1095,6 +1095,7 @@ call plug#begin('$HOME/.vim/plugged')
 Plug 'laggardkernel/vim-one'                                             " 主题文件
 Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                       " 主题文件
 Plug 'vim-airline/vim-airline'                                           " 状态栏
+Plug 'airblade/vim-gitgutter'                                          " git插件
 Plug 'tpope/vim-fugitive'                                                " git插件
 Plug 'tpope/vim-commentary'                                              " 快速注释插件
 Plug 'tpope/vim-surround'                                                " 成对更改删除括号等
