@@ -2740,6 +2740,8 @@ if exists('g:plugs["vim-floaterm"]')
     vnoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
     inoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
 
+    autocmd ExitPre * FloatermKill!
+
 endif
 
 "=================================================================================================================================
