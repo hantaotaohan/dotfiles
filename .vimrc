@@ -1353,38 +1353,53 @@ if exists('g:plugs["vim-airline"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " NERDTree 插件配置
 "=================================================================================================================================
-"
+
 if exists('g:plugs["nerdtree"]')
 
     nnoremap <silent><localleader>e :call <SID>NERDTreetoggle()<CR> 
-    inoremap <silent><localleader>e <Esc> :call <SID>nerdtreeToggle()<CR> 
+    inoremap <silent><localleader>e <Esc> :call <SID>NERDTreetoggle()<CR> 
 
     function! s:NERDTreetoggle()                                    
         if &filetype == 'nerdtree'                                  
             NERDTreeToggle %p:h                                     
         else                                                        
-            NERDTreeFind                                            
+            silent! NERDTreeFind                                            
         endif                                                       
     endfunction                                                     
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-    let g:NERDTreeShowBookmarks=1                                             " 显示书签
-    let g:NERDTreeChDirMode=2                                                 " 是否改变PWD目录路径
-    let g:NERDTreeQuitOnOpen=1                                                " 打开后是否关闭NT窗口
-    let g:NERDTreeMinimalUI=1                                                 " 不显示帮助面板
-    let g:NERDTreeWinSize=30                                                  " 窗口宽度
-    let g:NERDTreeShowHidden=1                                                " 是否显示隐藏文件
-    let g:NERDTreeIgnore=['\.pyc','\~$','\.swp','_gsdata_']                   " 过滤所有指定的文件和文件夹
-    let g:NERDTreeShowLineNumbers=0                                           " 是否显示行号
+    let g:NERDTreeAutoCenter = 1                                              " 光标居中
+    let g:NERDTreeAutoCenterThreshold = 1                                     " 控制自动居中灵敏度
+    let g:NERDTreeSortHiddenFirst = 1                                         " 隐藏文件排序往上
+    let g:NERDTreeNaturalSort = 0                                             " 自然序号排序
+    let g:NERDTreeUseTCD = 1                                                  " 打开Tcd模式
+    let g:NERDTreeChDirMode = 2                                               " 是否改变PWD目录路径
+    let g:NERDTreeHighlightCursorline = 1                                     " 突出显示光标所在的行
+    let g:NERDTreeHijackNetrw = 1                                             " 劫持Netrw
+    let g:NERDTreeIgnore = ['\.pyc','\~$','\.swp','_gsdata_']                 " 屏蔽过滤所有指定的文件和文件夹
+    let g:NERDTreeRespectWildIgnore = 1                                       " 设置为1的话遵循widignore设置
+    let g:NERDTreeBookmarksFile = '$HOME/.vim/.NERDTreeBookmarks'             " 书签存放路径
+    let g:NERDTreeMarkBookmarks = 0                                           " 当书签文件夹出现时禁用提示
+    let g:NERDTreeQuitOnOpen = 3                                              " 打开后是否关闭NT窗口
+    let g:NERDTreeShowBookmarks = 1                                           " 显示书签
+    let g:NERDTreeShowHidden = 1                                              " 是否显示隐藏文件
+    let g:NERDTreeShowLineNumbers = 0                                         " 是否显示行号
+    let g:NERDTreeWinPos = 'left'                                             " NERDTree显示位置
+    let g:NERDTreeWinSize = 30                                                " 窗口宽度
+    let g:NERDTreeMinimalUI = 1                                               " 不显示帮助面板
+    let g:NERDTreeMinimalMenu = 1                                             " Mini功能窗口
+    let g:NERDTreeAutoDeleteBuffer=1                                          " 自动删除重命名的缓冲区
     let g:NERDTreeDirArrowExpandable = '▸'                                    " 设置树的显示图标
     let g:NERDTreeDirArrowCollapsible = '▾'                                   " 设置树的显示图标
-    let g:NERDTreeUseTCD=1                                                    " 打开Tcd模式
-    " let NERDTreeSortOrder=[1]                                                " 排序设置0 or 1
+    " let NERDTreeSortOrder=[1]                                               " 排序设置0 or 1
+    " let NERDTreeCreatePrefix='silent keepalt keepjumps readonly'
+
+    hi NERDTreeDirSlash term=bold ctermfg=0 
+    hi NERDTreeExecFile term=bold ctermfg=1
+    hi NERDTreeLinkTarget  ctermfg=8
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 当NERDTree为剩下的唯一窗口时自动关闭
