@@ -1408,7 +1408,7 @@ if exists('g:plugs["nerdtree"]')
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | nnoremap <silent><LocalLeader>s <CR> | else | nnoremap <silent><LocalLeader>s :Startify <CR> | endif
     autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | nnoremap <silent><LocalLeader>c <CR> | else | nnoremap <silent><Localleader>c :silent FloatermToggle<CR> | endif
-    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | nnoremap <silent><LocalLeader>w <CR> | else | nnoremap <silent><localleader>w :call MySave()<CR> | endif
+    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | nnoremap <silent><LocalLeader>w <CR> | else | nnoremap <silent><localleader>w :call <SID>MySave()<CR> | endif
 
 endif
 
