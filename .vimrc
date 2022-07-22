@@ -1392,8 +1392,8 @@ if exists('g:plugs["nerdtree"]')
     let g:NERDTreeMinimalUI = 1                                               " 不显示帮助面板
     let g:NERDTreeMinimalMenu = 1                                             " Mini功能窗口
     let g:NERDTreeAutoDeleteBuffer=1                                          " 自动删除重命名的缓冲区
-    let g:NERDTreeDirArrowExpandable = '▸'                                    " 设置树的显示图标
-    let g:NERDTreeDirArrowCollapsible = '▾'                                   " 设置树的显示图标
+    let g:NERDTreeDirArrowExpandable = '◆'                                    " 设置树的显示图标
+    let g:NERDTreeDirArrowCollapsible = '◇'                                   " 设置树的显示图标
     " let NERDTreeSortOrder=[1]                                               " 排序设置0 or 1
     " let NERDTreeCreatePrefix='silent keepalt keepjumps readonly'
 
@@ -1408,6 +1408,7 @@ if exists('g:plugs["nerdtree"]')
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     autocmd BufEnter * if bufname('$') == "NERD_tree_1" | nnoremap <silent><LocalLeader>s :<CR> | endif
     autocmd BufEnter * if bufname('$') == "NERD_tree_1" | nnoremap <silent><LocalLeader>c :<CR> | endif
+    autocmd BufEnter * if bufname('$') == "NERD_tree_1" | nnoremap <silent><LocalLeader>w :<CR> | endif
 
 endif
 
