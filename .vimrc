@@ -1402,10 +1402,12 @@ if exists('g:plugs["nerdtree"]')
     hi NERDTreeLinkTarget  ctermfg=8
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
-" 当NERDTree为剩下的唯一窗口时自动关闭
+" 当NERDTree为剩下的唯一窗口时自动关闭 , 屏蔽;s ;c
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    autocmd BufEnter * if bufname('$') == "NERD_tree_1" | nnoremap <silent><LocalLeader>s :<CR> | endif
+    autocmd BufEnter * if bufname('$') == "NERD_tree_1" | nnoremap <silent><LocalLeader>c :<CR> | endif
 
 endif
 
