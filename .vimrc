@@ -1381,7 +1381,7 @@ if exists('g:plugs["nerdtree"]')
     let g:NERDTreeHijackNetrw = 1                                             " 劫持Netrw
     let g:NERDTreeIgnore = ['\.pyc','\~$','\.swp','_gsdata_']                 " 屏蔽过滤所有指定的文件和文件夹
     let g:NERDTreeRespectWildIgnore = 1                                       " 设置为1的话遵循widignore设置
-    let g:NERDTreeBookmarksFile = '$HOME/.vim/.NERDTreeBookmarks'             " 书签存放路径
+    let g:NERDTreeBookmarksFile = expand('~/.vim/NERDTreeBookmarks')            " 书签存放路径
     let g:NERDTreeMarkBookmarks = 0                                           " 当书签文件夹出现时禁用提示
     let g:NERDTreeQuitOnOpen = 3                                              " 打开后是否关闭NT窗口
     let g:NERDTreeShowBookmarks = 1                                           " 显示书签
