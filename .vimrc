@@ -979,7 +979,7 @@ if exists('*MySave')
      finish
  endif
  
-function! MySave()
+function! s:MySave()
     let cantSave = "redraw | echohl ErrorMsg | echo \"Can't save the file: \" . v:exception | return | echohl None"
     let notSaved = "redraw | echohl ErrorMsg | echo 'This buffer was NOT saved!' | return | echohl None"
     let time = strftime("%T")
@@ -1009,9 +1009,9 @@ function! MySave()
     echohl None
 endfunction
 
-nnoremap <silent><localleader>w :call MySave()<CR>
-vnoremap <silent><localleader>w <ESC>:call MySave()<CR>
-inoremap <silent><localleader>w <ESC>:call MySave()<CR>
+nnoremap <silent><localleader>w :call <SID>MySave()<CR>
+vnoremap <silent><localleader>w <ESC>:call <SID>MySave()<CR>
+inoremap <silent><localleader>w <ESC>:call <SID>MySave()<CR>
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Quickly Rename current Files
