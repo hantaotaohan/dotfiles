@@ -8,7 +8,7 @@
 
 "=================================================================================================================================
 "                                                                                                                                
-"                                                          GUI Gvim配置文件                                                      
+"                                                          GUI Gvim 配置文件                                                      
 "                                                                                                                                
 "=================================================================================================================================
 
@@ -44,16 +44,16 @@ endif
 if has("win32") && has("gui_running")
     winpos 235 235
     let $LANG='zh_CN'                                                      " 设置语言为中文
-    set helplang=cn                                                           " 设置帮助语言为中文
-    set encoding=utf8                                                       " 设置文件打开编码为UTF-8
-    set langmenu=zh_CN.UTF-8                                        " 设置菜单语言为中文
-    set guifont=Inziu_Iosevka_SC:h12:b                            " 设置GUI字体
-    set guicursor+=a:blinkon0                                          " 设置光标不闪烁
+    set helplang=cn                                                        " 设置帮助语言为中文
+    set encoding=utf8                                                      " 设置文件打开编码为UTF-8
+    set langmenu=zh_CN.UTF-8                                               " 设置菜单语言为中文
+    set guifont=Inziu_Iosevka_SC:h12:b                                     " 设置GUI字体
+    set guicursor+=a:blinkon0                                              " 设置光标不闪烁
     set lines=30 columns=180
     set renderoptions=type:directx
     " set linespace=6
-    source $VIMRUNTIME/delmenu.vim                           " 重新加载菜单文件
-    source $VIMRUNTIME/menu.vim                                " 重新加载菜单文件
+    source $VIMRUNTIME/delmenu.vim                                         " 重新加载菜单文件
+    source $VIMRUNTIME/menu.vim                                            " 重新加载菜单文件
     let $PYTHONUNBUFFERED=1
     map <M-0> :Fontzoom!<cr>
     map <M-=> <Plug>(fontzoom-larger)
@@ -81,7 +81,7 @@ endif
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
 let g:loaded_gzip              = 1
-let g:loaded_tar                = 1
+let g:loaded_tar               = 1
 let g:loaded_tarPlugin         = 1
 let g:loaded_zip               = 1
 let g:loaded_zipPlugin         = 1
@@ -166,7 +166,7 @@ if has('wildmenu')
     set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
     set wildignore+=**/node_modules/**,**/bower_modules/**,*/.sass-cache/*
     set wildignore+=__pycache__,*.egg-info,.pytest_cache,.mypy_cache/**
-    set wildignore=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib 
+    set wildignore+=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib 
     set wildignore+=*.so,*.dll,*.swp,*.egg,*.jar,*.class,*.pyc,*.pyo,*.bin,*.dex
     set wildignore+=*.zip,*.7z,*.rar,*.gz,*.tar,*.gzip,*.bz2,*.tgz,*.xz 
     set wildignore+=*DS_Store*,*.ipch
@@ -402,14 +402,14 @@ if has('folding') && has('vim_starting')
     endfunction
 endif
 
-" 空格打开关闭折叠视图(在不自动打开关闭折叠的情况下)
-" nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>           
-
 " 空格打开关闭折叠视图(在光标自动打开关闭折叠的情况下)
 nnoremap <expr> <Space> &foldlevel ? 'zM' :'zR'                            
 
 " 空格打开关闭折叠视图
 vnoremap <Space> zf                                                        
+
+" 空格打开关闭折叠视图(在不自动打开关闭折叠的情况下)
+" nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>                                    
 
 "=================================================================================================================================
 "
@@ -538,8 +538,6 @@ call s:key_escape('<S-F11>', '[23;2~')
 call s:key_escape('<S-F12>', '[24;2~')
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 "
 "                                                         GENERAL - Mapping
 "
@@ -621,7 +619,7 @@ nnoremap <BS> ,
 " Mapping %
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-nnoremap <LocalLeader><Space> %
+" nnoremap <LocalLeader><Space> %
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Scroll Step Sideways
@@ -634,8 +632,8 @@ nnoremap zh z4h
 " Yank Buffer's Relative/Absolute Path To Clipboard
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-nnoremap <Leader>Y :let @+= expand("%:~:.")<CR>:echo 'Yanked relative path'<CR>
-nnoremap <Leader>y :let @+= expand("%:p")<CR>:echo 'Yanked absolute path'<CR>
+" nnoremap <Leader>Y :let @+= expand("%:~:.")<CR>:echo 'Yanked relative path'<CR>
+" nnoremap <Leader>y :let @+= expand("%:p")<CR>:echo 'Yanked absolute path'<CR>
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Select last paste
@@ -660,7 +658,7 @@ nmap <<  <<_
 " Smart wrap toggle (breakindent and colorcolumn toggle as-well)
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-nmap <Leader>tw :execute('setlocal wrap! breakindent!')<CR>
+" nmap <Leader>tw :execute('setlocal wrap! breakindent!')<CR>
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Jumps
@@ -718,8 +716,8 @@ vnoremap <silent><S-Down> :m'>+<CR>gv=gv
 " F2 行号开关，用于鼠标复制代码用
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
-nnoremap <F2> :call HideNumber()<CR>
-function! HideNumber()
+nnoremap <silent><F2> :call <SID>HideNumber()<CR>
+function! s:HideNumber()
     if(&number == 1)
         set nonumber
     else
@@ -731,8 +729,8 @@ endfunc
 " CTRL + N 切换相对行号和绝对行号
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
-nnoremap <C-n> :call NumberToggle()<cr>
-function! NumberToggle()
+nnoremap <silent><C-n> :call <SID>NumberToggle()<cr>
+function! s:NumberToggle()
     if(&relativenumber == 1)
         set norelativenumber number
     else
@@ -1017,7 +1015,7 @@ inoremap <silent><localleader>w <ESC>:call <SID>MySave()<CR>
 " Quickly Rename current Files
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-function! ReName()
+function! s:ReName()
     let old_name = expand('%')
     let new_name = input('Rename files name: ', expand('%'), 'file')
     if new_name != '' && new_name != old_name
@@ -1034,16 +1032,16 @@ function! ReName()
     endif
 endfunction
 
-nnoremap <Localleader>n :call ReName()<CR>
-vnoremap <Localleader>n <ESC>:call ReName()<CR>
-inoremap <Localleader>n <ESC>:call ReName()<CR>
+nnoremap <Localleader>n :call <SID>ReName()<CR>
+vnoremap <Localleader>n <ESC>:call <SID>ReName()<CR>
+inoremap <Localleader>n <ESC>:call <SID>ReName()<CR>
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Simple zoom toggle
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-nnoremap <silent><LocalLeader>z  :<C-u>call <SID>zoom()<CR>
-function! s:zoom()
+nnoremap <silent><LocalLeader>z :call <SID>Zoom()<CR>
+function! s:Zoom()
     if exists('t:zoomed')
         unlet t:zoomed
         wincmd =
@@ -1073,7 +1071,6 @@ endfunction
 "                                                                                                                                
 "=================================================================================================================================
 
-
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Vim-Plug-AutoSync 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
@@ -1095,7 +1092,7 @@ call plug#begin('$HOME/.vim/plugged')
 Plug 'laggardkernel/vim-one'                                             " 主题文件
 Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                       " 主题文件
 Plug 'vim-airline/vim-airline'                                           " 状态栏
-Plug 'airblade/vim-gitgutter'                                          " git插件
+Plug 'airblade/vim-gitgutter'                                            " git插件
 Plug 'tpope/vim-fugitive'                                                " git插件
 Plug 'tpope/vim-commentary'                                              " 快速注释插件
 Plug 'tpope/vim-surround'                                                " 成对更改删除括号等
@@ -1109,8 +1106,8 @@ Plug 'junegunn/goyo.vim'                                                 " 专�
 Plug 'junegunn/limelight.vim'                                            " 专注模式辅助
 Plug 'mhinz/vim-startify'                                                " 定制vim开始页面
 Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
-Plug 'scrooloose/nerdtree' , { 'on': ['NERDTreeToggle','NERDTreeFind'] } " 文件树插件
-Plug 'Xuyuanp/nerdtree-git-plugin'                                         " 文件数git显示插件
+Plug 'scrooloose/nerdtree'                                               " 文件树插件
+Plug 'Xuyuanp/nerdtree-git-plugin'                                       " 文件数git显示插件
 Plug 'godlygeek/tabular' , { 'on': 'Tabularize'}                         " 文本对齐插件
 Plug 'dhruvasagar/vim-table-mode' , { 'on': 'TableModeToggle' }          " 表格模式
 Plug 'majutsushi/tagbar' , { 'on': 'TagbarToggle' }                      " Tag浏览
@@ -1131,6 +1128,9 @@ Plug 'jiangmiao/auto-pairs'                                              " 成�
 Plug 'rlue/vim-barbaric'                                                 " 输入法切换插件
 Plug 'brooth/far.vim'                                                    " 全局查找替换插件
 Plug 'thinca/vim-fontzoom'                                               " 快捷键调整字体大小
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}                      " 多光标输入
+Plug 'TaDaa/vimade'                                                      " 非聚焦窗口颜色变浅
+Plug 'brooth/far.vim'                                                    " 代码重构
 if has("python3")
     Plug 'SirVer/ultisnips'                                              " 代码片段管理器
     Plug 'hantaotaohan/vim-snippets'                                     " 代码片段仓库
@@ -1164,8 +1164,6 @@ endif
 call plug#end()
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 "                                                          主题及颜色配置 
 "=================================================================================================================================
 
@@ -1174,7 +1172,7 @@ call plug#end()
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
 if !empty(glob('$HOME/.vim/plugged/vim-one/'))
-    colorscheme one                                                          " 终端配色方案
+    colorscheme onedark                                                      " 终端配色方案
     set background=dark                                                      " 开启深色模式
 endif
 
@@ -1203,35 +1201,43 @@ hi FoldColumn        term=standout  cterm=bold  ctermfg=0    ctermbg=5    guifg=
 "=================================================================================================================================
 
 if exists('g:plugs["vim-airline"]')
-
 	let g:airline_theme='onedark'                                            " 设置状态栏主题默认powerlineish
 	let g:airline_experimental = 1
 	let g:airline_detect_modified=1
 	let g:airline_inactive_alt_sep=0                                         " 对非活动窗口的状态行使用替代分隔符
 	let g:airline_powerline_fonts= 1                                         " 使用powerline打过补丁的字体
-	let g:airline_inactive_collapse=1                                        " 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
+	let g:airline_inactive_collapse=0                                        " 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
 	let g:airline_highlighting_cache = 1                                     " 将更改缓存到突出显示组中，因此应更快。如果遇到缓慢的Vim，请将其设置为1
 	let g:airline_focuslost_inactive = 0                                     " 使用FocusLost自动命令禁用航空公
-	let g:airline_stl_path_style = 'short'                                   " 在状态栏显示短路经
+	let g:airline_stl_path_style = 'full'                                    " 在状态栏显示短路经
 	let g:airline_skip_empty_sections = 0
+    let g:airline_section_c_only_filename = 1                                " 仅仅显示文件名
+
+	let g:airline#extensions#wordcount#enabled = 0                           " 开启字数统计
+	let g:airline#extensions#wordcount#filetypes = ['all']                   " 开启字数统计文件类型
+	let g:airline#extensions#wordcount#formatter#default#fmt = '%s words'    " 自定义字数统计格式
+	let g:airline#extensions#whitespace#enabled = 0                          " 取消计数
+
+	let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'             " 配置快速修复缓冲区的标题文本
+	let g:airline#extensions#quickfix#location_text = 'Location'             " 配置位置列表缓冲区的标题文本
+
+	let g:airline#extensions#term#enabled = 0
+	let g:airline#extensions#tagbar#enabled = 0
+	let g:airline#extensions#fzf#enabled = 1                                 " 启用FZF集成
+    let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+    let g:airline#extensions#default#section_use_groupitems = 1
+
 	let g:airline#extensions#tabline#enabled= 1                              " 开启tabline
 	let g:airline#extensions#tabline#show_tabs = 0                           " 显示Tabls文字
 	let g:airline#extensions#tabline#buffer_nr_show = 0                      " tabline中buffer显示编号
 	let g:airline#extensions#tabline#fnamemod = ':t'                         " 只显示文件名称
-	let g:airline#extensions#whitespace#enabled = 0                          " 取消计数
 	let g:airline#extensions#tabline#buf_label_first = 1                     " 在第一个位置显示缓冲区标签
 	let g:airline#extensions#tabline#buffers_label = 'BUFFERS '              " airline右上角定制
 	let g:airline#extensions#tabline#tabs_label = 'Tabs'                     " Tabs定制
 	let g:airline#extensions#tabline#buffer_nr_format = '%s:'                " Buffer 格式
-	let g:airline#extensions#wordcount#enabled = 0                           " 开启字数统计
-	let g:airline#extensions#wordcount#filetypes = ['all']                   " 开启字数统计文件类型
-	let g:airline#extensions#wordcount#formatter#default#fmt = '%s words'    " 自定义字数统计格式
-	let g:airline#extensions#fzf#enabled = 1                                 " 启用FZF集成
-	let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'             " 配置快速修复缓冲区的标题文本
-	let g:airline#extensions#quickfix#location_text = 'Location'             " 配置位置列表缓冲区的标题文本
 	let g:airline#extensions#tabline#show_close_button = 1                   " 是否显示关闭按钮
 	let g:airline#extensions#tabline#close_symbol = 'X'                      " 关闭按钮的符号
-	let g:airline#extensions#tabline#disable_refresh = 0                     " 在| BufAdd |上启用Tabline缓冲区的刷新自动命令
+	let g:airline#extensions#tabline#disable_refresh = 1                     " 在| BufAdd |上启用Tabline缓冲区的刷新自动命令
 	let g:airline#extensions#tabline#show_splits = 0                         " 启用/禁用显示每个选项卡的打开拆分（仅在打开选项卡时）
 	let g:airline#extensions#tabline#exclude_preview = 0                     " 在选项行中启用/禁用显示预览窗口缓冲区。
 	let g:airline#extensions#tabline#alt_sep = 0
@@ -1241,9 +1247,8 @@ if exists('g:plugs["vim-airline"]')
 	let g:airline#extensions#tabline#show_tab_type = 1
 	let g:airline#extensions#tabline#buffer_idx_mode = 1
 	let g:airline#extensions#tabline#formatter = 'unique_tail'
-	let g:airline#extensions#term#enabled = 1
-    let g:airline#extensions#default#section_use_groupitems = 1
-    let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+	let g:airline#extensions#tabline#middle_click_preserves_windows = 0      " 从缓冲区关闭时保留窗口
+    let g:airline#extensions#tabline#ignore_bufadd_pat = '!|floaterm|defx|gundo|nerd_tree|startify|tagbar|term://|undotree|vimfiler'
 	let g:airline#extensions#tabline#buffer_idx_format = {
 		\ '0': '0 ',
 		\ '1': '1 ',
@@ -1256,28 +1261,29 @@ if exists('g:plugs["vim-airline"]')
 		\ '8': '8 ',
 		\ '9': '9 '
 		\ }
-	let g:airlinerline#extensions#tabline#middle_click_preserves_windows = 1 " 从缓冲区关闭时保留窗口
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 定义要显示的名称集，而不是特定的文件类型
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
 	let g:airline_filetype_overrides = {
-        \ 'coc-explorer':  [ 'CoC Explorer', '' ],
-        \ 'fugitive': ['fugitive', '%{airline"util"wrap(airline"extensions"branch"get_head(),80)}'],
-        \ 'tagbar': [ 'TERMINAL', '' ],
+        \ 'fugitive': ['Fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
         \ 'help':  [ 'Help', '%f' ],
         \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
-        \ 'startify': [ 'startify', '' ],
+        \ 'startify': [ 'Startify', '' ],
         \ 'vim-plug': [ 'Plugins', '' ],
+        \ 'tagbar': [ 'Tagbar', ''],
+        \ 'floaterm': [ 'Floaterm', '%{Airline_FloatermInfo()}' ],
+        \ 'terminal': [ 'TERMINAL', '' ],
         \ }
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 自定义airline c x z 区域的各项功能
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-	function! AirlineInit()
-		let g:airline_section_c = airline#section#create(['readonly', '  ', 'file'])
+	function! s:AirlineInit()
+        let g:airline_section_b = airline#section#create(['branch', ' ', 'hunks'])
+		let g:airline_section_c = airline#section#create(['readonly', '  ', 'path'])
 		let g:airline_section_x = airline#section#create([''])
 		let g:airline_section_y = airline#section#create(['%t'])
         let g:airline_section_z = airline#section#create([' %P%   ', '%l' , ':%3v'])
@@ -1285,8 +1291,8 @@ if exists('g:plugs["vim-airline"]')
 
     augroup AleRedrawStatus
         autocmd!
-        autocmd User AirlineAfterInit call  AirlineInit()
-        autocmd  WinEnter * :AirlineRefresh
+        autocmd User AirlineAfterInit call <SID>AirlineInit()
+        autocmd WinEnter * AirlineRefresh
     augroup END
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
@@ -1305,6 +1311,7 @@ if exists('g:plugs["vim-airline"]')
 			endif
 		endfor
 	endfunction
+
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " Symbols
@@ -1381,7 +1388,7 @@ if exists('g:plugs["nerdtree"]')
     let g:NERDTreeHijackNetrw = 1                                             " 劫持Netrw
     let g:NERDTreeIgnore = ['\.pyc','\~$','\.swp','_gsdata_']                 " 屏蔽过滤所有指定的文件和文件夹
     let g:NERDTreeRespectWildIgnore = 1                                       " 设置为1的话遵循widignore设置
-    let g:NERDTreeBookmarksFile = expand('~/.vim/NERDTreeBookmarks')            " 书签存放路径
+    let g:NERDTreeBookmarksFile = expand('~/.vim/NERDTreeBookmarks')          " 书签存放路径
     let g:NERDTreeMarkBookmarks = 0                                           " 当书签文件夹出现时禁用提示
     let g:NERDTreeQuitOnOpen = 3                                              " 打开后是否关闭NT窗口
     let g:NERDTreeShowBookmarks = 1                                           " 显示书签
@@ -1397,22 +1404,22 @@ if exists('g:plugs["nerdtree"]')
     " let NERDTreeSortOrder=[1]                                               " 排序设置0 or 1
     " let NERDTreeCreatePrefix='silent keepalt keepjumps readonly'
 
-    hi NERDTreeDirSlash term=bold ctermfg=0 
-    hi NERDTreeExecFile term=bold ctermfg=1
-    hi NERDTreeLinkTarget  ctermfg=8
+    hi NERDTreeDirSlash           term=bold  ctermfg=0 
+    hi NERDTreeExecFile           term=bold  ctermfg=1
+    hi NERDTreeLinkTarget         term=bold  ctermfg=8
+    hi NERDTreeBookmarksLeader    term=bold  ctermfg=8
+    hi NERDTreeBookmark           term=bold  ctermfg=0
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 " 当NERDTree为剩下的唯一窗口时自动关闭 , 屏蔽;s ;c
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | nnoremap <silent><LocalLeader>s <CR> | else | nnoremap <silent><LocalLeader>s :Startify <CR> | endif
-    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | nnoremap <silent><LocalLeader>c <CR> | else | nnoremap <silent><Localleader>c :silent FloatermToggle<CR> | endif
-    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | nnoremap <silent><LocalLeader>w <CR> | else | nnoremap <silent><localleader>w :call <SID>MySave()<CR> | endif
+    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>s <Esc>| endif
+    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>c <Esc>| endif
+    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>w <Esc>| endif
 
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " MarkdownPreview插件配置
@@ -1480,8 +1487,6 @@ if exists('g:plugs["markdown-preview.nvim"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Vim-table-mode 插件配置
 "=================================================================================================================================
 
@@ -1490,20 +1495,14 @@ if exists('g:plugs["vim-table-mode"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Tagbar   
 "=================================================================================================================================
 
 if exists('g:plugs["tagbar"]')
 
-    " F9打开关闭Tagbar
-    nnoremap <F9> :TagbarToggle<CR>
-    inoremap <F9> <Esc>:TagbarToggle<CR>
-
     " ;t打开关闭Tagbar
-    nnoremap <silent><localleader>t :TagbarToggle<CR>
-    inoremap <silent><localleader>t <Esc>:TagbarToggle<CR>
+    nnoremap <silent><localleader>t :TagbarToggle<CR>:AirlineRefresh<CR>
+    inoremap <silent><localleader>t <Esc>:TagbarToggle<CR>:AirlineRefresh<CR>
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
@@ -1511,7 +1510,9 @@ if exists('g:plugs["tagbar"]')
     let g:tagbar_autoclose = 1
     let g:tagbar_autopreview = 0
     let g:tagbar_no_autocmds = 0
+    let g:tagbar_autoclose_netrw = 1
     let g:tagbar_jump_lazy_scroll = 1
+    let g:tagbar_use_cache = 1
     let g:tagbar_sort = 0
     let g:tagbar_case_insensitive = 1
     let g:tagbar_compact = 1
@@ -1520,16 +1521,24 @@ if exists('g:plugs["tagbar"]')
     let g:tagbar_show_visibility = 1
     let g:tagbar_expand = 1
     let g:tagbar_autoshowtag = 2
-    let g:no_status_line = 1
+    let g:no_status_line = 0
     let g:tagbar_silent = 1
     let g:tagbar_scrolloff = 10
     let g:tagbar_hide_nonpublic = 1
+    let g:tagbar_width = 25
     let g:tagbar_map_preview = '<SPACE>'
     let g:tagbar_map_showproto = "d"
 
-endif
+" ----------------------------------------------------------------o--------------------------------------------------------------o
+" 当 Tagbar 剩下的唯一窗口时自动关闭 , 屏蔽;s ;c
+" ----------------------------------------------------------------o--------------------------------------------------------------o
 
-"=================================================================================================================================
+    autocmd BufEnter * if (winnr("$") == 1 && bufname('#') =~# "^__Tagbar__") | q | endif
+    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>s <Esc>| endif
+    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>c <Esc>| endif
+    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>w <Esc>| endif
+
+endif
 
 "=================================================================================================================================
 " Markdown2-Ctags
@@ -1565,22 +1574,21 @@ if exists('g:plugs["markdown2ctags"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " FZF
 "=================================================================================================================================
 
 if exists('g:plugs["fzf.vim"]')
 
-    nnoremap <silent><Leader>ff :Files $HOME<CR>
-    nnoremap <silent><Leader>fl :BLines<CR>
-    nnoremap <silent><Leader>fo :Colors<CR>
-    nnoremap <silent><Leader>ft :BTags<CR>
-    nnoremap <silent><Leader>fb :Buffers<CR>
+    nnoremap <silent><LocalLeader>fa :Files<CR>
+    nnoremap <silent><LocalLeader>ff :GFiles<CR>
+    nnoremap <silent><LocalLeader>fl :BLines<CR>
+    nnoremap <silent><LocalLeader>fo :Colors<CR>
+    nnoremap <silent><LocalLeader>fr :Rg<Cr>
+
+    " 禁用浮动窗口
+    let g:fzf_layout = { 'down':'40%' }
 
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " Asyncru
@@ -1588,24 +1596,24 @@ endif
 
 if exists('g:plugs["asyncrun.vim"]')
 
-    nnoremap <F7> :call asyncrun#quickfix_toggle(6)<cr>
-    inoremap <F7> <esc> :call asyncrun#quickfix_toggle(6)<cr>
+    let g:asyncrun_open = 6
+
+    nnoremap <silent><F7> :silent call asyncrun#quickfix_toggle(6)<cr>
+    inoremap <silent><F7> <esc> :silent call asyncrun#quickfix_toggle(6)<cr>
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
-    nnoremap <F5> :call RunCode()<cr>
-    nnoremap <silent><localleader>r :call RunCode()<cr>
-    inoremap <silent><localleader>r <esc>:call RunCode()<cr>
-    vnoremap <silent><localleader>r <esc>:call RunCode()<cr>
+    nnoremap <F5> :call <SID>RunCode()<cr>
+    nnoremap <silent><localleader>r :call <SID>RunCode()<cr>
+    inoremap <silent><localleader>r <esc>:call <SID>RunCode()<cr>
+    vnoremap <silent><localleader>r <esc>:call <SID>RunCode()<cr>
 
-    function! RunCode()
+    function! s:RunCode()
         exec "w"
         let fm = expand('%:p:h')
         if exists('$TMUX')
             if &filetype == 'python'
                 exec 'AsyncRun -mode=term -pos=tmux -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"'
-            " elseif &filetype == 'python' && filereadable(globpath(asyncrun"get_root('%'),'manage.py'))
-            "     exec 'AsyncRun -mode=term -pos=tmux -cwd=<root> -mode=term -pos=right python manage.py makemigrations && python manage.py migrate && python manage.py runserver'
             elseif &filetype == 'sh'
                 exec "AsyncRun -mode=term -pos=tmux -focus=0 time bash %"
             elseif &filetype == 'java'
@@ -1614,11 +1622,8 @@ if exists('g:plugs["asyncrun.vim"]')
                 exec "AsyncRun -mode=term -pos=tmux -rows=10 -focus=0 time node %"
             endif
         else
-            if &filetype == 'python' && !filereadable(globpath(asyncrun"get_root('%'),'manage.py'))
+            if &filetype == 'python'
                 exec 'AsyncRun -cwd=$(VIM_FILEDIR) -mode=term -pos=bottom -rows=16 python3 "$(VIM_FILEPATH)"'
-                exec "wincmd p"
-            elseif &filetype == 'python' && filereadable(globpath(asyncrun"get_root('%'),'manage.py'))
-                exec 'AsyncRun -cwd=<root> -mode=term -pos=right python manage.py makemigrations && python manage.py migrate && python manage.py runserver'
                 exec "wincmd p"
             elseif &filetype == 'sh'
                 exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time bash %"
@@ -1632,37 +1637,45 @@ if exists('g:plugs["asyncrun.vim"]')
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
-    function! MarkdownPreviews()
-        if &filetype == 'vimwiki' 
-            exec "AsyncStop"
-            set cursorbind
-            exec "AsyncRun -mode=term -pos=right -scroll=0 -focus=0 -listed=1 -hidden=0 mdless --no-pager '$(VIM_FILEPATH)'"
-            exec "AsyncStop"
+    nnoremap <silent><localleader>dj :call <SID>Django()<cr>
+    inoremap <silent><localleader>dj <esc>:call <SID>Django()<cr>
+    vnoremap <silent><localleader>dj <esc>:call <SID>Django()<cr>
+
+    function! s:Django()
+        exec "w"
+        if exists('$TMUX')
+            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=tmux python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver'
+            endif
+        else
+            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=bottom python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver'
+                exec "wincmd p"
+            endif
         endif
     endfunction
 
-    function! s:TermForceCloseAll() abort
-        let term_bufs = filter(range(1, bufnr('$')), 'getbufvar(v:val, "&buftype") == "terminal"')
-        for t in term_bufs
-            execute "bd! " t
-        endfor
+"-----------------------------------------------------------------o--------------------------------------------------------------o
+
+    nnoremap <silent><localleader>dd :call <SID>Django_Dev()<cr>
+    inoremap <silent><localleader>dd <esc>:call <SID>Django_Dev()<cr>
+    vnoremap <silent><localleader>dd <esc>:call <SID>Django_Dev()<cr>
+
+    function! s:Django_Dev()
+        exec "w"
+        if exists('$TMUX')
+            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=tmux python3 manage.py makemigrations --settings=Database.settings-dev && python3 manage.py migrate --settings=Database.settings-dev  && python3 manage.py runserver --settings=Database.settings-dev'
+            endif
+        else
+            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=floaterm python3 manage.py makemigrations --settings=Database.settings-dev && python3 manage.py migrate --settings=Database.settings-dev  && python3 manage.py runserver --settings=Database.settings-dev'
+                exec "wincmd p"
+            endif
+        endif
     endfunction
 
-"-----------------------------------------------------------------o--------------------------------------------------------------o
-
-    autocmd FileType startify call <sid>TermForceCloseAll() 
-    autocmd BufEnter *.md,vimwiki  if &filetype != 'vimwiki' | call <sid>TermForceCloseAll() | endif
-    autocmd BufWritePost *.md,vimwiki if len(term_list()) != 0 | call MarkdownPreviews() | endif
-
-"-----------------------------------------------------------------o--------------------------------------------------------------o
-
-    nnoremap <silent><localleader>v :call MarkdownPreviews()<CR>
-    inoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
-    vnoremap <silent><localleader>v <esc>:call MarkdownPreviews()<cr>
-    
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " MarkdownClipborad 
@@ -1675,8 +1688,6 @@ if exists('g:plugs["md-img-paste.vim"]')
     let g:mdip_imgname = 'image'
 
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " IndentLine
@@ -2093,11 +2104,7 @@ if exists('g:plugs["vimwiki"]')
         :lopen
     endfunction
 
-"-----------------------------------------------------------------o--------------------------------------------------------------o
-
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " EasyAlign  settings
@@ -2138,20 +2145,22 @@ if exists('g:plugs["vim-easy-align"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Vim-visual-multi  settings
 "=================================================================================================================================
 
 if exists('g:plugs["vim-visual-multi"]')
 
-    let g:VM_maps = {}
+    let g:VM_maps                       = {}
+    let g:VM_maps['Motion ;']           = ';;'
+    let g:VM_maps["Select All"]         = '<LocalLeader>a'
     let g:VM_maps['Find Under']         = '<LocalLeader>d'           " replace C-n
     let g:VM_maps['Find Subword Under'] = '<LocalLeader>d'           " replace visual C-n
+    let g:VM_maps["Skip Region"]        = 'q'
+    let g:VM_maps["Undo"]               = 'u'
+    let g:VM_maps["Redo"]               = '<C-r>'
+    let g:VM_maps["Replace Pattern"]    = 'r'
 
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " Goyo  settings
@@ -2193,35 +2202,34 @@ if exists('g:plugs["goyo.vim"]')
 
 "-----------------------------------------------------------------o--------------------------------------------------------------o
 
-    function! Switch_goyo()
+    function! s:Switch_goyo()
         if  winnr('$') == 1
             Goyo 200x200
         elseif exists('#goyo')
             Goyo!
         endif
     endfunction
-    nnoremap <silent><Leader>go :call Switch_goyo()<cr>
+    nnoremap <silent><Leader>go :call <SID>Switch_goyo()<cr>
 
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " Limelight  settings
 "=================================================================================================================================
 
 if exists('g:plugs["limelight"]')
+
     autocmd! User GoyoEnter Limelight
     autocmd! User GoyoLeave Limelight!
-endif
 
-"=================================================================================================================================
+endif
 
 "=================================================================================================================================
 " AutoPairs  settings
 "=================================================================================================================================
 
 if exists('g:plugs["auto-pairs"]')
+
     let g:AutoPairsMapCh = 0
     let g:AutoPairsMapBS = 0
     let g:AutoPairsMapCR = 0
@@ -2229,9 +2237,8 @@ if exists('g:plugs["auto-pairs"]')
     let g:AutoPairsshortcutFastWrap = ''
     let g:AutoPairsShortcutJump = ''
     let g:AutoPairsShortcutBackInsert = ''
-endif
 
-"=================================================================================================================================
+endif
 
 "=================================================================================================================================
 " Which Key Map  settings
@@ -2384,7 +2391,6 @@ if exists('g:plugs["vim-which-key"]')
         \
         \ }
 
-
     let g:which_key_map.t = {
         \ 'name' : '+Table Mode',
         \
@@ -2464,8 +2470,6 @@ if exists('g:plugs["vim-which-key"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Signature  settings
 "=================================================================================================================================
 
@@ -2512,8 +2516,6 @@ if exists('g:plugs["vim-signature"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Vim-bookmarks  settings
 "=================================================================================================================================
 
@@ -2536,8 +2538,6 @@ if exists('g:plugs["vim-bookmarks"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Ultisnips settings
 "=================================================================================================================================
 
@@ -2550,8 +2550,6 @@ if exists('g:plugs["ultisnips"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Gutentags settings
 "=================================================================================================================================
 
@@ -2559,15 +2557,18 @@ if exists('g:plugs["vim-gutentags"]')
 
     " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
     let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+	
     " 所生成的数据文件的名称
     let g:gutentags_ctags_tagfile = '.tags'
+	
     " 同时开启 ctags 和 gtags 支持：
     let g:gutentags_modules = []
 
     if executable('ctags')
         let g:gutentags_modules += ['ctags']
     endif
-    if executable('gtags-cscope') && executable('gtags')
+    
+	if executable('gtags-cscope') && executable('gtags')
         let g:gutentags_modules += ['gtags_cscope']
     endif
 
@@ -2589,8 +2590,6 @@ if exists('g:plugs["vim-gutentags"]')
     endif
 
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " LeaderF settings
@@ -2740,8 +2739,6 @@ if exists('g:plugs["LeaderF"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Floaterm settings
 "=================================================================================================================================
 
@@ -2749,20 +2746,32 @@ if exists('g:plugs["vim-floaterm"]')
 
     let g:floaterm_wintype = 'split'
     let g:floaterm_position = 'bottom'
+    let g:floaterm_title = 'TERMINAL: $1/$2'
     let g:floaterm_height = 0.3
     let g:floaterm_autoclose = 2
-    let g:floaterm_autohide = 0
-    " let g:floaterm_keymap_toggle = '<Localleader>c'
+    let g:floaterm_autohide = 2
+    let g:floaterm_borderchars = '─│─│┌┐┘└'
+
     nnoremap <silent><Localleader>c :silent FloatermToggle<CR>
     tnoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
     vnoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
     inoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
 
+    tnoremap <silent><Localleader>n <C-\><C-n>:silent FloatermNew<CR>
+    tnoremap <silent><Localleader>k <C-\><C-n>:silent FloatermPrev<CR>
+    tnoremap <silent><Localleader>j <C-\><C-n>:silent FloatermNext<CR>
+
+    function! Airline_FloatermInfo() abort
+        let buffers = floaterm#buflist#gather()
+        let cnt = len(buffers)
+        let cur = floaterm#buflist#curr()
+        let idx = index(buffers, cur) + 1
+        return printf(' %s/%s', idx, cnt)
+    endfunction
+
     autocmd ExitPre * FloatermKill!
 
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " Coc.nvim settings
@@ -2830,8 +2839,6 @@ if exists('g:plugs["coc.nvim"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 "Clever-F Settings
 "=================================================================================================================================
 
@@ -2854,8 +2861,6 @@ if exists('g:plugs["clever-f.vim"]')
     hi CleverFChar         cterm=bold,underline ctermfg=9 gui=bold,underline guifg=#e06c75
 
 endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " Pangu settings
@@ -2881,8 +2886,6 @@ if exists('g:plugs["neomake"]')
 endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Mdv - pipe preview command  settings
 "=================================================================================================================================
 
@@ -2897,8 +2900,6 @@ endif
 " endif
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 " Sayonara settings
 "=================================================================================================================================
 
@@ -2909,31 +2910,6 @@ if exists('g:plugs["vim-sayonara"]')
 	vnoremap <silent><localleader>q <Esc>:Sayonara<cr>
 
 endif
-
-"=================================================================================================================================
-
-"=================================================================================================================================
-" Far settings
-"=================================================================================================================================
-
-if exists('g:plugs["far.vim"]')
-
-    set lazyredraw            " improve scrolling performance when navigating through large results
-    set regexpengine=0        " use old regexp engine
-    set ignorecase smartcase  " ignore case only when the pattern contains no capital letters
-    let g:far#source='rg'
-    let g:far#glob_mode='rg'
-
-    " shortcut for far.vim find
-    nnoremap <silent><localleader><F3>  :Farf<cr>
-    vnoremap <silent><localleader><F3>  :Farf<cr>
-    " shortcut for far.vim replace
-    nnoremap <silent><localleader><F2>  :Farr<cr>
-    vnoremap <silent><localleader><F2>  :Farr<cr>
-
-endif
-
-"=================================================================================================================================
 
 "=================================================================================================================================
 " vim-auto-popmenu 
@@ -2950,6 +2926,41 @@ if exists('g:plugs["vim-auto-popmenu"]')
 endif
 
 "=================================================================================================================================
+" Far.vim
+"=================================================================================================================================
+
+if exists('g:plugs["far.vim"]')
+
+    let g:far#enable_undo = 1
+    let g:far#source = 'rg'
+    let g:far#glob_mode = 'rg'
+    let g:far#window_layout = 'left'
+    let g:far#preview_window_layout = 'right'
+    let g:far#collapse_result = 1
+    let g:far#auto_preview = 0
+    let g:far#auto_preview_on_start = 0
+    let g:far#result_preview = 0
+    let g:far#window_width = 30
+
+    let g:far#mapping = {
+        \ "exclude" : ["x"],
+        \ "include" : ["i"],
+        \ "toggle_exclude" : ["t"],
+        \ "stoggle_exclude" : ["<Tab>"],
+        \ "jump_to_source" : ["<CR>"],
+        \ "close_preview" : ["q"],
+        \ "open_preview" : ["p"], 
+        \ "toggle_expand" : ["<Space>","o"],
+        \ "replace_do" : ["s"],
+        \ "replace_undo" : ["u"],
+        \ "replace_undo_all" : ["U"],
+        \ "preview_scroll_up" : "<PageUp>",
+        \ "preview_scroll_down" : "<PageDown>",
+        \ }
+
+    nnoremap <LocalLeader><F2> :Far <C-R><C-W><Space>
+
+endif
 
 "=================================================================================================================================
 " Vimux
@@ -2963,12 +2974,14 @@ if exists('g:plugs["vimux"]')
 endif
 
 "=================================================================================================================================
+" Nerdtree-Git
+"=================================================================================================================================
 
 if exists('g:plugs["nerdtree-git-plugin"]')
 
     let g:NERDTreeGitStatusShowClean = 0 " default: 0
     let g:NERDTreeGitStatusUseNerdFonts = 1
-    let g:NERDTreeGitStatusConcealBrackets = 1 " default: 0
+    let g:NERDTreeGitStatusConcealBrackets = 0 " default: 0
     let g:NERDTreeGitStatusUntrackedFilesMode = 'all' 
     let g:NERDTreeGitStatusIndicatorMapCustom = {
         \ 'Modified'  :'M',
@@ -2982,5 +2995,40 @@ if exists('g:plugs["nerdtree-git-plugin"]')
         \ 'Clean'     :'✔︎',
         \ 'Unknown'   :'?',
         \ }
+
+endif
+
+"=================================================================================================================================
+" Vimade.vim
+"=================================================================================================================================
+
+if exists('g:plugs["vimade.vim"]')
+
+    function! MyVimadeWinDisable()
+        if exists('g:vimade_init') && exists('g:vimade_running')
+            if g:vimade_running == 1
+                if !exists('g:vimade_disabled')
+                    call vimade#WinDisable()
+                elseif w:vimade_disabled == 0
+                    call vimade#WinDisable()
+                endif
+            endif
+        endif
+    endfunction
+
+    function! MyVimadeWinEnable()
+        if exists('g:vimade_init') && exists('g:vimade_running')
+            if g:vimade_running == 1
+                if !exists('g:vimade_disabled')
+                    return
+                elseif w:vimade_disabled != 0
+                    call vimade#WinEnable()
+                endif
+            endif
+        endif
+    endfunction
+
+    au! CompleteChanged * call MyVimadeWinDisable()
+    au! CompleteDone    * call MyVimadeWinEnable()
 
 endif
