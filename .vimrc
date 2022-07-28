@@ -386,11 +386,11 @@ if has('folding') && has('vim_starting')
     set foldclose=all                                                      " 设置为折叠自动关闭
     set foldopen=all                                                       " 设置为折叠自动打开
     set foldnestmax=1                                                      " 设置 indent 和 syntax 方法的最大折叠嵌套层数
-    set foldtext=NeatFoldText()
+    set foldtext=<SID>NeatFoldText()
 
     " 自定义折叠样式
     
-    function! NeatFoldText() 
+    function! s:NeatFoldText() 
         let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
         let lines_count = v:foldend - v:foldstart + 1
         let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
@@ -794,8 +794,6 @@ cnoreabbrev Qa qa
 cnoreabbrev q1 q!
 
 "=================================================================================================================================
-
-"=================================================================================================================================
 "
 "                                                         GENERAL - Autocmd
 "
@@ -1126,7 +1124,6 @@ Plug 'yianwillis/vimcdoc'                                                " 中�
 Plug 'voldikss/vim-floaterm'                                             " 终端插件
 Plug 'jiangmiao/auto-pairs'                                              " 成对添加括号等
 Plug 'rlue/vim-barbaric'                                                 " 输入法切换插件
-Plug 'brooth/far.vim'                                                    " 全局查找替换插件
 Plug 'thinca/vim-fontzoom'                                               " 快捷键调整字体大小
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                      " 多光标输入
 Plug 'TaDaa/vimade'                                                      " 非聚焦窗口颜色变浅
@@ -1171,7 +1168,7 @@ call plug#end()
 "  Themes Settings ...
 " ----------------------------------------------------------------o--------------------------------------------------------------o
 
-if !empty(glob('$HOME/.vim/plugged/vim-one/'))
+if !empty(glob('$HOME/.vim/plugged/onedark.vim/'))
     colorscheme onedark                                                      " 终端配色方案
     set background=dark                                                      " 开启深色模式
 endif
@@ -1283,9 +1280,9 @@ if exists('g:plugs["vim-airline"]')
 
 	function! s:AirlineInit()
         let g:airline_section_b = airline#section#create(['branch', ' ', 'hunks'])
-		let g:airline_section_c = airline#section#create(['readonly', '  ', 'path'])
-		let g:airline_section_x = airline#section#create([''])
-		let g:airline_section_y = airline#section#create(['%t'])
+        let g:airline_section_c = airline#section#create(['readonly', '  ', 'path'])
+        let g:airline_section_x = airline#section#create([''])
+        let g:airline_section_y = airline#section#create(['%t'])
         let g:airline_section_z = airline#section#create([' %P%   ', '%l' , ':%3v'])
 	endfunction
 
@@ -1302,15 +1299,15 @@ if exists('g:plugs["vim-airline"]')
     let s:saved_theme = []
 	let g:airline_theme_patch_func = 'AirlineThemePatch'
 	function! AirlineThemePatch(palette)
-		for colors in values(a:palette)
-			if has_key(colors, 'airline_c') 
-				let s:saved_theme = colors.airline_c
-			endif
-			if has_key(colors, 'airline_term')
-				let colors.airline_term = s:saved_theme
-			endif
-		endfor
-	endfunction
+        for colors in values(a:palette)
+            if has_key(colors, 'airline_c') 
+                let s:saved_theme = colors.airline_c
+            endif
+            if has_key(colors, 'airline_term')
+                let colors.airline_term = s:saved_theme
+            endif
+        endfor
+    endfunction
 
 
 " ----------------------------------------------------------------o--------------------------------------------------------------o
