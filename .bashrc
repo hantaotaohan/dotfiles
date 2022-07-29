@@ -214,7 +214,7 @@ fi
 source setup-completion.bash
 
 # 如果是SSH登录自动进入TMUX
-if [[ -z"$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]] && [ ! -d /mnt/c ];then
+if [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]] && [ ! -d /mnt/c ];then
     tmux attach-session -t Server || tmux new-session -s Server
 fi
 
