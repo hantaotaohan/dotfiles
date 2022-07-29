@@ -213,6 +213,11 @@ fi
 # 自定义补全(setup)
 source setup-completion.bash
 
+# 如果是SSH登录自动进入TMUX
+if [[ -z"$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]] && [ ! -d /mnt/c ];then
+    tmux attach-session -t Server || tmux new-session -s Server
+fi
+
 # 自定义颜色
 red='\e[0;41m' # 红色  
 RED='\e[1;31m' 
