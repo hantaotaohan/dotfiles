@@ -1,0 +1,1336 @@
+vim9script
+# ========================================================= #
+#                                                           #
+#                            VIMRC                          #
+#                                                           #
+#                     Update: 2021.05.06                    #
+#                                                           #
+# ========================================================= #
+
+# ========================================================= #
+#                                                           #
+#                     GENERAL - Settings                    #
+#                                                           #
+# ========================================================= #
+
+# ----------------------------o---------------------------- o
+#                      Disable Plugins                      o
+# ----------------------------o---------------------------- o
+
+g:loaded_gzip              = 1
+g:loaded_tar               = 1
+g:loaded_tarPlugin         = 1
+g:loaded_zip               = 1
+g:loaded_zipPlugin         = 1
+g:loaded_getscript         = 1
+g:loaded_getscriptPlugin   = 1
+g:loaded_vimball           = 1
+g:loaded_vimballPlugin     = 1
+g:loaded_matchit           = 1
+g:loaded_2html_plugin      = 1
+g:loaded_logiPat           = 1
+g:loaded_rrhelper          = 1
+g:loaded_netrw             = 1
+g:loaded_netrwPlugin       = 1
+g:loaded_netrwSettings     = 1
+g:loaded_netrwFileHandlers = 1
+g:loaded_rrhelper          = 1
+g:no_mail_maps             = 1
+g:no_status_line           = 1
+g:loaded_matchparen        = 1
+
+# ----------------------------o---------------------------- o
+#                  Vim Disable Compatible                   o
+# ----------------------------o---------------------------- o
+
+if &compatible
+    set nocompatible
+endif
+
+# ----------------------------o---------------------------- o
+#          Enables 24-bit RGB Color In The Terminal         o
+# ----------------------------o---------------------------- o
+
+if has('termguicolors')
+    if empty($COLORTERM) || $COLORTERM =~# 'truecolor\|24bit'
+        set termguicolors
+    endif
+endif
+
+# ----------------------------o---------------------------- o
+#                Enables Syntax HighLighting                o
+# ----------------------------o---------------------------- o
+
+if has("syntax")
+    syntax on 
+endif
+
+# ----------------------------o---------------------------- o
+#                     Clipborad Settings                    o
+# ----------------------------o---------------------------- o
+
+if has('clipboard') && has('vim_starting') && has('unnamedplus')
+    set clipboard& clipboard^=unnamed,unnamedplus 
+    xnoremap <silent> p p:let @+=@0<CR>
+    autocmd VimLeave * call system("xsel -ib", getreg('+'))
+endif
+
+# --------------------------- WSL ------------------------- o
+
+var clip = '/mnt/c/Windows/System32/clip.exe'
+if executable(clip)
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(clip, @0) | endif
+    augroup END
+endif
+
+
+# ----------------------------o---------------------------- o
+#                      Wildmenu Settings                    o
+# ----------------------------o---------------------------- o
+
+if has('wildmenu')
+    set wildignorecase
+    set wildignore+=.git,.hg,.svn,.stversions,*.pyc,*.spl,*.o,*.out,*~,%*
+    set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store
+    set wildignore+=**/node_modules/**,**/bower_modules/**,*/.sass-cache/*
+    set wildignore+=__pycache__,*.egg-info,.pytest_cache,.mypy_cache/**
+    set wildignore+=*.o,*.obj,*~,*.exe,*.a,*.pdb,*.lib 
+    set wildignore+=*.so,*.dll,*.swp,*.egg,*.jar,*.class,*.pyc,*.pyo,*.bin,*.dex
+    set wildignore+=*.zip,*.7z,*.rar,*.gz,*.tar,*.gzip,*.bz2,*.tgz,*.xz 
+    set wildignore+=*DS_Store*,*.ipch
+    set wildignore+=*.gem
+    set wildignore+=*.png,*.jpg,*.gif,*.bmp,*.tga,*.pcx,*.ppm,*.img,*.iso
+    set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/.rbenv/**
+    set wildignore+=*/.nx/**,*.app,*.git,.git
+    set wildignore+=*.wav,*.mp3,*.ogg,*.pcm
+    set wildignore+=*.mht,*.suo,*.sdf,*.jnlp
+    set wildignore+=*.chm,*.epub,*.pdf,*.mobi,*.ttf
+    set wildignore+=*.mp4,*.avi,*.flv,*.mov,*.mkv,*.swf,*.swc
+    set wildignore+=*.ppt,*.pptx,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps
+    set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.bin,*.msu
+    set wildignore+=*.gba,*.sfc,*.078,*.nds,*.smd,*.smc
+    set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
+endif
+
+# ----------------------------o---------------------------- o
+#                Vim Directories Path Settings              o
+# ----------------------------o---------------------------- o
+
+var DATA_PATH = expand('$HOME') .. '/.vim'                        # 设置Vim主目录
+
+set undofile                                                      # 开启撤销功能
+set nobackup                                                      # 设置无备份文件
+set noswapfile                                                    # 设置无临时文件
+set undodir=DATA_PATH/undo//,DATA_PATH,~/tmp,/var/tmp,/tmp        # 设置撤销文件目录
+set backupdir=DATA_PATH/backup/,DATA_PATH,~/tmp,/var/tmp,/tmp     # 设置备份文件目录
+set directory=DATA_PATH/swap//,DATA_PATH,~/tmp,/var/tmp,/tmp      # 设置临时文件目录
+set viewdir=DATA_PATH/view/                                       # 设置视图文件目录
+set viewoptions=folds,cursor,curdir,slash,unix                    # 设置视图文件功能
+
+# ----------------------------o---------------------------- o
+#                      History Settings                     o
+# ----------------------------o---------------------------- o
+
+set history=9000                                                  # 保存历史记录行数
+augroup user_persistent_undo
+    autocmd!
+    au BufWritePre /tmp/*          setlocal noundofile
+    au BufWritePre COMMIT_EDITMSG  setlocal noundofile
+    au BufWritePre MERGE_MSG       setlocal noundofile
+    au BufWritePre *.tmp           setlocal noundofile
+    au BufWritePre *.bak           setlocal noundofile
+augroup END
+
+# ----------------------------o---------------------------- o
+#                 Auto BreakIndent Settings                 o
+# ----------------------------o---------------------------- o
+
+set textwidth=80                                                  # 插入文本的最大宽度。更长的行会在空白之后截断
+set expandtab                                                     # 将制表符转换为空格
+set tabstop=4                                                     # 设置Tab键的宽度，可以更改，如：宽度为2
+set shiftwidth=4                                                  # 换行时自动缩进宽度，可更改（宽度同tabstop）
+set softtabstop=-1                                                # 自动与shiftwidth保持同步
+set autoindent                                                    # 换行时候代码自动缩进
+set smartindent                                                   # 启用智能对齐方式
+set smarttab                                                      # 指定按一次backspace就删除shiftwidth宽度
+set shiftround                                                    # 将缩进舍入为shiftwidth的倍数
+set breakindent                                                   # 回绕行保持视觉上的缩进
+
+# ------------------ Breakindent 扩展设定 ----------------- o
+
+if exists('&breakindent')
+    set breakindentopt=shift:4,min:20
+endif
+
+# ----------------------------o---------------------------- o
+#                      Timeing Settings                     o
+# ----------------------------o---------------------------- o
+
+set timeout ttimeout                                              # 开启超时功能
+set timeoutlen=500                                                # 映射超时
+set ttimeoutlen=10                                                # 按键密码超时
+set updatetime=400                                                # 空闲时间以写入交换并触发CursorHold
+set redrawtime=20000                                              # 重画屏幕以毫秒计的时间
+
+# ----------------------------o---------------------------- o
+#                      Search Settings                      o
+# ----------------------------o---------------------------- o
+
+set ignorecase                                                    # 搜索模式里忽略大小写
+set smartcase                                                     # 如果搜索模式包含大写字符，不使用 'ignorecase' 选项
+set infercase                                                     # 补全模式忽略大小写
+set incsearch                                                     # 查找输入时动态增量显示查找结果
+set wrapscan                                                      # 开启循环搜索
+
+# ----------------------------o---------------------------- o
+#                     Complete Settings                     o
+# ----------------------------o---------------------------- o
+
+set complete=.,w,b,k                            # 补全设置
+set completeopt=menuone,menu,longest,preview    # 自动补全
+
+# ----------------------------o---------------------------- o
+#                     Behavior Settings                     o
+# ----------------------------o---------------------------- o
+
+filetype on                                                       # 启用文件类型侦测
+filetype plugin on                                                # 针对不同的文件类型加载对应的插件
+filetype plugin indent on                                         # 启用缩进
+set fileencodings=utf-8,cp936,gb18030,big5,latin1                 # 探测即将打开的文件的字符编码
+set fileencoding=utf-8                                            # 打开文件的字符编码
+set encoding=utf-8                                                # Vim 内部使用的字符编码方式
+set linebreak                                                     # 在breakat设定的字符上换行
+set breakat=\ \	;:,!?                                             # 换行符号设置
+set backspace=indent,eol,start                                    # 删除键行为
+set showbreak=↳                                                   # 设置换行符号
+set diffopt=filler,internal,algorithm:histogram,indent-heuristic  # 更新diff配置
+
+# ----------------------------o---------------------------- o
+#                        UI Settings                        o
+# ----------------------------o---------------------------- o
+
+set re=1                                                          # 正则匹配模式
+set notitle                                                       # 无标题模式
+set nowrap                                                        # 设置不自动换行
+set esckeys                                                       # 按Esc并立即退出插入模式
+set modeline                                                      # 设置行模式用于在文件末尾添加特定字符检测vim文件类型
+set t_RS=                                                         # 设置获取终端样式
+set t_SH=                                                         # 设置获取终端样式
+set hidden                                                        # 针对buffer不保存即可切换
+set noshowmode                                                    # 任务栏不显示状态
+set shortmess=aoOTI                                               # 避免文字信息提示
+set scrolloff=6                                                   # 光标上下两侧最少保留的屏幕行数
+set sidescrolloff=6                                               # 光标左右两侧最少保留的屏幕行数
+set number                                                        # 显示行号
+set noruler                                                       # 右下角不显示光标位置
+set showcmd                                                       # 显示命令
+set showtabline=2                                                 # 永远显示标签页
+set laststatus=2                                                  # 启用状态栏信息
+set helpheight=12                                                 # 帮助文件最小高度
+set previewheight=12                                              # 预览窗口高度
+set pumheight=15                                                  # 弹出窗口高度
+set cmdheight=1                                                   # 设置命令行的高度为2，默认为1
+set cursorline                                                    # 突出显示当前行
+set helplang=cn                                                   # 帮助文件语言
+set showmatch                                                     # 匹配模式,括号匹配
+set hlsearch                                                      # 高亮搜索的关键字
+set matchtime=2                                                   # 显示括号匹配的时间
+set pythondll=                                                    # python3.6支持
+set writebackup                                                   # 保存文件前建立备份，保存成功后删除该备份
+set autoread                                                      # 当文件在外部被修改，自动更新该文件
+set ambiwidth=single                                              # 设置为双字宽显示默认值double
+set wildmenu                                                      # 允许下方显示目录
+set lazyredraw                                                    # 延迟绘制（提升性能）
+set ttyfast                                                       # 刷新更快
+set ttyscroll=3                                                   # 鼠标滚轮速度
+set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m                       # 错误格式
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<               # 设置分隔符可视
+set formatoptions+=j                                              # 合并两行中文时，不在中间加空格
+set fileformats=unix,dos,mac                                      # 文件换行符，默认使用 unix 换行符
+set tags=./.tags;,.tags                                           # 设置Tags
+
+# ----------------------------o---------------------------- o
+#                       Fold Settings                       o
+# ----------------------------o---------------------------- o
+
+if has('folding') && has('vim_starting')
+    set foldenable
+    set foldmethod=manual                                         # 启用手动折叠zf
+    set foldcolumn=2                                              # 侧边栏宽度
+    set foldlevel=0                                               # 设置折层所有内容
+    # set foldclose=all                                           # 设置为折叠自动关闭
+    # set foldopen=all                                            # 设置为折叠自动打开
+    set foldnestmax=1                                             # 设置 indent 和 syntax 方法的最大折叠嵌套层数
+    set foldtext=NeatFoldText()
+
+    # 自定义折叠样式
+    def NeatFoldText(): any
+        var line = ' ' .. substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' .. '{\d*\s*', '', 'g') .. ' '
+        var lines_count = v:foldend - v:foldstart + 1
+        var lines_count_text = '| ' .. printf("%10s", lines_count .. ' lines') .. ' |'
+        var foldchar = matchstr(&fillchars, 'fold:\zs.')
+        return lines_count_text .. " ------ Title: [ " .. line .. " ]"
+    enddef
+endif
+
+# 空格打开关闭折叠视图(在光标自动打开关闭折叠的情况下)
+# nnoremap <expr> <Space>  &foldlevel ? 'zM' : 'zR'
+
+# 空格打开关闭折叠视图
+vnoremap <Space> zf
+
+# 空格打开关闭折叠视图(在不自动打开关闭折叠的情况下)
+nnoremap <silent> <Space> @=(foldlevel('.')?'za' : "\<Space>")<CR>           
+
+# ========================================================= #
+#                                                           #
+#                         Terminal                          #
+#                                                           #
+# ========================================================= #
+
+# ----------------------------o---------------------------- o
+#                  Terminal Colors Settings                 o
+# ----------------------------o---------------------------- o
+
+g:terminal_ansi_colors = repeat([0], 16)
+g:terminal_ansi_colors[0]  = "#282C34" # black
+g:terminal_ansi_colors[8]  = "#3E4452" # black bright
+g:terminal_ansi_colors[1]  = "#E06C75" # red
+g:terminal_ansi_colors[9]  = "#BE5046" # red bright
+g:terminal_ansi_colors[2]  = "#98C379" # green
+g:terminal_ansi_colors[10] = "#98C379" # green bright
+g:terminal_ansi_colors[3]  = "#E5C07B" # yellow
+g:terminal_ansi_colors[11] = "#D19A66" # yellow bright
+g:terminal_ansi_colors[4]  = "#61AFEF" # blue
+g:terminal_ansi_colors[12] = "#61AFEF" # blue bright
+g:terminal_ansi_colors[5]  = "#C678DD" # magenta
+g:terminal_ansi_colors[13] = "#C678DD" # magenta bright
+g:terminal_ansi_colors[6]  = "#56B6C2" # cyan
+g:terminal_ansi_colors[14] = "#56B6C2" # cyan bright
+g:terminal_ansi_colors[7]  = "#5C6370" # white
+g:terminal_ansi_colors[15] = "#ABB2BF" # white bright
+
+
+# ========================================================= #
+#                                                           #
+#                   GENERAL - KeysMapping                   #
+#                                                           #
+# ========================================================= #
+
+# ----------------------------o---------------------------- o
+#              Leader and LocalLeader Settings              o
+# ----------------------------o---------------------------- o
+
+g:mapleader = "\\"
+g:maplocalleader = ";"
+
+# ----------------------------o---------------------------- o
+#                       Disable Keymap                      o
+# ----------------------------o---------------------------- o
+
+nnoremap q <nop>
+vnoremap q <nop>
+
+nnoremap <C-f> <nop>
+nnoremap <C-b> <nop>
+
+# ----------------------------o---------------------------- o
+#                      映射补全 Keymap                      o
+# ----------------------------o---------------------------- o
+
+inoremap <expr> <Up> pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+
+# ----------------------------o---------------------------- o
+#                     Keep Search Screen                    o
+# ----------------------------o---------------------------- o
+
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+
+nnoremap <silent> { {zz
+nnoremap <silent> } }zz
+
+nnoremap <silent> ( (zz
+nnoremap <silent> ) )zz
+
+nnoremap <silent> [[ [[zz
+nnoremap <silent> ]] ]]zz
+
+nnoremap <silent> <C-u> <C-u>zz
+nnoremap <silent> <C-d> <C-d>zz
+
+# nnoremap <silent> <C-b> <C-b>zz
+# nnoremap <silent> <C-f> <C-f>zz
+
+# ----------------------------o---------------------------- o
+#                     Clear Highlighted                     o
+# ----------------------------o---------------------------- o
+
+nnoremap <silent> <LocalLeader><SPACE> <ScriptCmd> nohlsearch<CR>
+
+# ----------------------------o---------------------------- o
+#                            Yank                           o
+# ----------------------------o---------------------------- o
+
+nnoremap Y y$
+
+# ----------------------------o---------------------------- o
+#                    Go To Home And End                     o
+# ----------------------------o---------------------------- o
+
+# nnoremap <C-a> ^
+# nnoremap <C-e> $
+
+# ----------------------------o---------------------------- o
+#                      SuperF/f-T/t                         o
+# ----------------------------o---------------------------- o
+
+nnoremap <CR> ;
+nnoremap <BS> ,
+
+# ----------------------------o---------------------------- o
+#                         Mapping %                         o
+# ----------------------------o---------------------------- o
+
+# nnoremap <LocalLeader><Space> %
+
+# ----------------------------o---------------------------- o
+#                    Scroll Step Sideways                   o
+# ----------------------------o---------------------------- o
+
+nnoremap zl z4l
+nnoremap zh z4h
+
+# ----------------------------o---------------------------- o
+#    Yank Buffer's Relative/Absolute Path To Clipboard      o
+# ----------------------------o---------------------------- o
+
+# nnoremap <Leader>Y :let @+= expand("%:~:.")<CR>:echo 'Yanked relative path'<CR>
+# nnoremap <Leader>y :let @+= expand("%:p")<CR>:echo 'Yanked absolute path'<CR>
+
+# ----------------------------o---------------------------- o
+#   Re-Select Blocks After Indenting In Visual/Select Mode  o
+# ----------------------------o---------------------------- o
+
+nmap >>  >>_
+nmap <<  <<_
+
+xnoremap < <gv
+xnoremap > >gv|
+
+xnoremap <Tab> >gv|
+xnoremap <S-Tab> <gv
+
+# ----------------------------o---------------------------- o
+#              Smart wrap toggle (breakindent)              o
+# ----------------------------o---------------------------- o
+
+# nmap <Leader>tw :execute('setlocal wrap! breakindent!')<CR>
+
+# ----------------------------o---------------------------- o
+#                           Jumps                           o
+# ----------------------------o---------------------------- o
+
+nnoremap g; g;zz
+nnoremap g, g,zz
+
+# ----------------------------o---------------------------- o
+#                         跨终端粘贴                        o
+# ----------------------------o---------------------------- o
+
+nnoremap <silent><localleader>y "+yy
+vnoremap <silent><localleader>y "+y
+
+nnoremap <silent><localleader>p "+p
+vnoremap <silent><localleader>p "+p
+
+# ----------------------------o---------------------------- o
+#                      切换窗口快捷键                       o
+# ----------------------------o---------------------------- o
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+inoremap <C-h> <ESC><C-w>h
+inoremap <C-l> <ESC><C-w>l
+inoremap <C-j> <ESC><C-w>j
+inoremap <C-k> <ESC><C-w>k
+tnoremap <C-h> <C-w><C-h>
+tnoremap <C-j> <C-w><C-j>
+tnoremap <C-k> <C-w><C-k>
+tnoremap <C-l> <C-w><C-l>
+
+# ----------------------------o---------------------------- o
+#                        快速移动整行                       o
+# ----------------------------o---------------------------- o
+
+nnoremap <silent><S-Up>   :m-2<CR>==
+nnoremap <silent><S-Down> :m+<CR>==
+inoremap <silent><S-Up>   <Esc>:m-2<CR>==gi
+inoremap <silent><S-Down> <Esc>:m+<CR>==gi
+vnoremap <silent><S-Up>   :m-2<CR>gv=gv
+vnoremap <silent><S-Down> :m'>+<CR>gv=gv
+
+# ----------------------------o---------------------------- o
+#                         快速复制行                        o
+# ----------------------------o---------------------------- o
+
+# nnoremap <LocalLeader>d m`YP``<esc>
+# vnoremap <LocalLeader>d YPgv<esc>
+
+# ----------------------------o---------------------------- o
+#                        F2 行号开关                        o
+# ----------------------------o---------------------------- o
+
+nnoremap <silent> <F2> <ScriptCmd> HideNumber()<CR>
+
+def HideNumber()
+    if &number == true
+        set nonumber
+    else
+        set number
+    endif
+enddef
+# ----------------------------o---------------------------- o
+#       F3 语法开关，关闭语法可以加快大文件的展示           o
+# ----------------------------o---------------------------- o
+
+nnoremap <silent> <F3> <ScriptCmd> ToggleSyntax()<CR>
+
+def ToggleSyntax()
+    if exists("g:syntax_on")
+        syntax off
+   else
+        syntax enable
+   endif
+enddef
+
+
+# ----------------------------o---------------------------- o
+#             CTRL + N 切换相对行号和绝对行号               o
+# ----------------------------o---------------------------- o
+
+nnoremap <silent> <C-n> <ScriptCmd> NumberToggle()<CR>
+
+def NumberToggle()
+    if &relativenumber == true
+        set norelativenumber number
+    else
+        set relativenumber
+    endif
+enddef
+
+# ----------------------------o---------------------------- o
+#                      F4 粘贴模式开关                      o
+# ----------------------------o---------------------------- o
+
+set pastetoggle=<F4>     
+
+# ----------------------------o---------------------------- o
+#                     F8 切换边界线（80）                   o
+# ----------------------------o---------------------------- o
+
+nnoremap <silent> <F8> <ScriptCmd> ToggleColorColumn()<CR>
+
+def ToggleColorColumn()
+    if &colorcolumn == ""
+        set colorcolumn=81
+    else
+        set colorcolumn&
+    endif
+enddef
+
+# ========================================================= #
+#                                                           #
+#                     GENERAL - Autocmd                     #
+#                                                           #
+# ========================================================= #
+
+# ----------------------------o---------------------------- o
+#     如果显示QuickFix窗口,那么隐藏行编号,并设置行高为6     o
+# ----------------------------o---------------------------- o
+
+augroup QuickFix
+    autocmd!
+    autocmd FileType qf setlocal nonumber
+    autocmd FileType qf 6wincmd_
+augroup END
+
+# ----------------------------o---------------------------- o
+#            打开文件时恢复上一次光标所在位置               o
+# ----------------------------o---------------------------- o
+
+augroup ReadCur
+    autocmd!
+    autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+
+# ----------------------------o---------------------------- o
+#                  自动保存及读取view设置                   o
+# ----------------------------o---------------------------- o
+
+augroup AutoSaveView
+    autocmd!
+    autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre * silent! mkview! 
+    autocmd BufWinEnter * silent! loadview                                              
+augroup END
+
+# ----------------------------o---------------------------- o
+#                       加速语法渲染                        o
+# ----------------------------o---------------------------- o
+
+# augroup AutoSyntax
+#     autocmd!
+#     autocmd Syntax * syn sync clear | syntax sync minlines=10 | syntax sync maxlines=10
+# augroup END
+
+# ========================================================= #
+#                                                           #
+#                     GENERAL - Fuction                     #
+#                                                           #
+# ========================================================= #
+
+# ----------------------------o---------------------------- o
+#                       Quickly Save                        o
+# ----------------------------o---------------------------- o
+
+if exists('*MySave')
+     finish
+ endif
+ 
+def MySave()
+    var cantSave = "redraw | echohl ErrorMsg | echo \"Can't save the file: \" . v:exception | return | echohl None"
+    var notSaved = "redraw | echohl ErrorMsg | echo 'This buffer was NOT saved!' | return | echohl None"
+    var time = strftime("%T")
+    var file = expand('%:P')
+    var permissions = getfperm(file)
+        try
+            silent w
+        catch /:E45:\|:E505:\|:E212:/
+            if (confirm("This Buffer is read only! Wanna save it anyway?", "&Yes\n&No", 2) == 1)
+                redraw
+                try | silent w! | catch /:E212:/ |
+                    if (confirm("Can't open the file, do you want to save it as Root?", "&Yes\n&No", 2) == 1)
+                        try | execute 'silent! write !sudo tee % >/dev/null' | edit! | catch | exe cantSave | endtry
+                    else
+                        exe notSaved
+                    endif
+                catch
+                    exe cantSave
+                endtry
+            else
+                exe notSaved
+            endif
+        endtry
+    redraw
+    echom '"' .. file .. '"' .. " Save Done" .. ' ' .. time
+    redraw
+    echohl None
+enddef
+
+nnoremap <silent><localleader>w <ScriptCmd> MySave()<CR>
+vnoremap <silent><localleader>w <ESC> <ScriptCmd> MySave()<CR>
+inoremap <silent><localleader>w <ESC> <ScriptCmd> MySave()<CR>
+
+# ----------------------------o---------------------------- o
+#                      Quickly Rename                       o
+# ----------------------------o---------------------------- o
+
+def ReName()
+    var old_name = expand('%')
+    var new_name = input('Rename files name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        try
+            execute 'saveas ' .. new_name
+            call delete(expand('#'))
+            execute "bdelete#"
+            redraw!
+        catch /:E13:/
+            echohl ErrorMsg | echo " The file name already exists" | echohl None| redraw
+        endtry
+    else
+        echohl ErrorMsg | echo " Not Changed Filename!" | echohl None| redraw
+    endif
+enddef
+
+nnoremap <localleader>n <ScriptCmd> ReName()<CR>
+vnoremap <localleader>n <ESC> <ScriptCmd> ReName()<CR>
+inoremap <localleader>n <ESC> <ScriptCmd> ReName()<CR>
+
+# ========================================================= #
+#                                                           #
+#                        插件管理器                         #
+#                                                           #
+# ========================================================= #
+
+# ----------------------------o---------------------------- o
+#                           Plugs                           o
+# ----------------------------o---------------------------- o
+
+# ------------------------ Install ------------------------ o
+
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | qa! | endif
+
+# ------------------------- Config ------------------------ o
+
+g:plug_url_format = 'https://hub.fastgit.xyz/%s.git'
+# let g:plug_url_format = 'https://github.com/%s.git'
+# let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'
+
+plug#begin('$HOME/.vim/plugged')
+
+    Plug 'joshdick/onedark.vim'                       # 主题文件
+    Plug 'vim-airline/vim-airline'                                           # 状态栏
+    Plug 'tpope/vim-fugitive'                                                # git插件
+    Plug 'tpope/vim-commentary'                                              # 快速注释插件
+    Plug 'tpope/vim-surround'                                                # 成对更改删除括号等
+    Plug 'junegunn/fzf.vim'                                                  # 为vim安装fzf插件
+    Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }       # 为系统安装fzf工具
+    Plug 'mhinz/vim-startify'                                                # 定制vim开始页面
+    Plug 'mhinz/vim-sayonara'                                                # 代替 command q 插件
+    Plug 'skywind3000/asyncrun.vim'                                          # 配合调测python插件
+    Plug 'skywind3000/vim-auto-popmenu'                                      # 自动弹出补全插件
+    Plug 'scrooloose/nerdtree'                                               # 文件树插件
+    Plug 'airblade/vim-gitgutter'                                            # git插件
+    Plug 'Xuyuanp/nerdtree-git-plugin'                                       # 文件数git显示插件
+    Plug 'majutsushi/tagbar'                                                 # Tag浏览
+    Plug 'preservim/vimux'                                                   # 配合Tmux运行程序的插件
+    Plug 'christoomey/vim-tmux-navigator'                                    # 同步vim与tmux快捷键
+    Plug 'Yggdroot/indentLine'                                               # 缩进线显示插件
+    Plug 'kshenoy/vim-signature'                                             # 书签插件
+    Plug 'voldikss/vim-floaterm'                                             # 终端插件
+    Plug 'rlue/vim-barbaric'                                                 # 输入法切换插件
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}                      # 多光标输入
+    Plug 'TaDaa/vimade'                                                      # 非聚焦窗口颜色变浅
+    Plug 'brooth/far.vim'                                                    # 代码重构
+
+plug#end()
+
+# ----------------------------o---------------------------- o
+#                      Themes Settings                      o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["onedark.vim"]')
+    colorscheme onedark
+    g:onedark_termcolors = 256
+    g:onedark_hide_endofbuffer = 1
+endif
+
+# ----------------------------o---------------------------- o
+#                   Highlighted Settings                    o
+# ----------------------------o---------------------------- o
+
+hi Search            term=standout  cterm=bold  ctermfg=235  ctermbg=204  guifg=#282C34  guibg=#E06C75   # 搜索高亮自定义
+hi IncSearch         term=standout  cterm=bold  ctermfg=1    ctermbg=1    guifg=#282C34  guibg=#E06C75   # 搜索行高亮自定义 
+hi Folded            term=standout  cterm=bold  ctermfg=0    ctermbg=5    guifg=#282c34  guibg=#80868F   # 折叠提示颜色
+hi QuickFixLine      term=standout  cterm=bold  ctermfg=235  ctermbg=180  guifg=#ABB2BF  guibg=#282C34   # 快速栏颜色
+hi SignColumn        term=standout  cterm=bold  ctermfg=2    ctermbg=2    guifg=#E06C75  guibg=#282C34   # 标签栏颜色
+hi DiffDelete        term=standout  cterm=bold  ctermfg=235  ctermbg=204  guifg=#E06C75  guibg=#E06C75   # 差异删除颜色
+hi CursorLineNr      term=standout  cterm=bold  ctermfg=145  ctermbg=236  guifg=#61AFEF  guibg=#282C34   # 当前光标行序号栏颜色
+hi Cursor            term=standout  cterm=bold  ctermfg=0    ctermbg=7    guifg=#282C34  guibg=#ABB2BF   # 当前光标颜色
+hi FoldColumn        term=standout  cterm=bold  ctermfg=0    ctermbg=5    guifg=#ABB2BF  guibg=#282C34   # 折叠边栏提示颜色
+
+# ----------------------------o---------------------------- o
+#                          Airline                          o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["vim-airline"]')
+	g:airline_theme = 'onedark'                                          # 设置状态栏主题默认powerlineish
+	g:airline_experimental = 1
+	g:airline_detect_modified = 1
+	g:airline_inactive_alt_sep = 0                                       # 对非活动窗口的状态行使用替代分隔符
+	g:airline_powerline_fonts = 1                                        # 使用powerline打过补丁的字体
+	g:airline_inactive_collapse = 0                                      # 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
+	g:airline_highlighting_cache = 1                                     # 将更改缓存到突出显示组中，因此应更快。如果遇到缓慢的Vim，请将其设置为1
+	g:airline_focuslost_inactive = 0                                     # 使用FocusLost自动命令禁用航空公
+	g:airline_stl_path_style = 'full'                                    # 在状态栏显示短路经
+	g:airline_skip_empty_sections = 0
+    g:airline_section_c_only_filename = 1                                # 仅仅显示文件名
+	g:airline#extensions#wordcount#enabled = 0                           # 开启字数统计
+	g:airline#extensions#wordcount#filetypes = ['all']                   # 开启字数统计文件类型
+	g:airline#extensions#wordcount#formatter#default#fmt = '%s words'    # 自定义字数统计格式
+	g:airline#extensions#whitespace#enabled = 0                          # 取消计数
+	g:airline#extensions#quickfix#quickfix_text = 'Quickfix'             # 配置快速修复缓冲区的标题文本
+	g:airline#extensions#quickfix#location_text = 'Location'             # 配置位置列表缓冲区的标题文本
+	g:airline#extensions#term#enabled = 0
+	g:airline#extensions#tagbar#enabled = 0
+	g:airline#extensions#fzf#enabled = 1                                 # 启用FZF集成
+    g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+    g:airline#extensions#default#section_use_groupitems = 1
+	g:airline#extensions#tabline#enabled = 1                             # 开启tabline
+	g:airline#extensions#tabline#show_tabs = 0                           # 显示Tabls文字
+	g:airline#extensions#tabline#buffer_nr_show = 0                      # tabline中buffer显示编号
+	g:airline#extensions#tabline#fnamemod = ':t'                         # 只显示文件名称
+	g:airline#extensions#tabline#buf_label_first = 1                     # 在第一个位置显示缓冲区标签
+	g:airline#extensions#tabline#buffers_label = 'BUFFERS '              # airline右上角定制
+	g:airline#extensions#tabline#tabs_label = 'Tabs'                     # Tabs定制
+	g:airline#extensions#tabline#buffer_nr_format = '%s:'                # Buffer 格式
+	g:airline#extensions#tabline#show_close_button = 1                   # 是否显示关闭按钮
+	g:airline#extensions#tabline#close_symbol = 'X'                      # 关闭按钮的符号
+	g:airline#extensions#tabline#disable_refresh = 1                     # 在| BufAdd |上启用Tabline缓冲区的刷新自动命令
+	g:airline#extensions#tabline#show_splits = 0                         # 启用/禁用显示每个选项卡的打开拆分（仅在打开选项卡时）
+	g:airline#extensions#tabline#exclude_preview = 0                     # 在选项行中启用/禁用显示预览窗口缓冲区。
+	g:airline#extensions#tabline#alt_sep = 0
+	g:airline#extensions#tabline#tab_nr_type = 1                         # tab number
+	g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
+	g:airline#extensions#tabline#show_tab_nr = 0
+	g:airline#extensions#tabline#show_tab_type = 1
+	g:airline#extensions#tabline#buffer_idx_mode = 1
+	g:airline#extensions#tabline#formatter = 'unique_tail'
+	g:airline#extensions#tabline#middle_click_preserves_windows = 0      # 从缓冲区关闭时保留窗口
+    g:airline#extensions#tabline#ignore_bufadd_pat = '!|floaterm|defx|gundo|nerd_tree|startify|tagbar|term://|undotree|vimfiler'
+	g:airline#extensions#tabline#buffer_idx_format = {
+        '0': '0 ',
+        '1': '1 ',
+        '2': '2 ',
+        '3': '3 ',
+        '4': '4 ',
+        '5': '5 ',
+        '6': '6 ',
+        '7': '7 ',
+        '8': '8 ',
+        '9': '9 '
+        }
+
+# ------------------------- FileType Title ------------------------ o
+
+	g:airline_filetype_overrides = {
+        'fugitive': ['Fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
+        'help':  [ 'Help', '%f' ],
+        'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
+        'startify': [ 'Startify', '' ],
+        'vim-plug': [ 'Plugins', '' ],
+        'tagbar': [ 'Tagbar', ''],
+        'floaterm': [ 'Floaterm', '%{Airline_FloatermInfo()}' ],
+        'terminal': [ 'TERMINAL', '' ],
+        }
+
+# -------------------------- Aero Settings ----------------------- o
+
+	def AirlineInit()
+        g:airline_section_b = airline#section#create(['branch', ' ', 'hunks'])
+        g:airline_section_c = airline#section#create(['readonly', '  ', 'path'])
+        g:airline_section_x = airline#section#create([''])
+        g:airline_section_y = airline#section#create(['%t'])
+        g:airline_section_z = airline#section#create([' %P%   ', '%l', ':%3v'])
+    enddef
+
+    augroup AleRedrawStatus
+        autocmd!
+        autocmd User AirlineAfterInit AirlineInit()
+        autocmd WinEnter * AirlineRefresh
+    augroup END
+
+# ------------------------------ Symbols ------------------------- o
+
+	if !exists('g:airline_symbols')
+        g:airline_symbols = {}
+        g:airline_left_sep = ''
+        g:airline_left_alt_sep = ''
+        g:airline_right_sep = ''
+        g:airline_right_alt_sep = ''
+        g:airline_symbols.branch = ''
+        g:airline_symbols.readonly = 'RO'
+        g:airline_symbols.linenr = ''
+        g:airline_symbols.maxlinenr = ''
+        g:airline_symbols.dirty = ' ●'
+        g:airline_symbols.modified = '+'
+	endif
+
+# ---------------------------- Keymapping ------------------------ o
+
+	nmap <silent><LocalLeader>1        <Plug>AirlineSelectTab1
+	nmap <silent><LocalLeader>2        <Plug>AirlineSelectTab2
+	nmap <silent><LocalLeader>3        <Plug>AirlineSelectTab3
+	nmap <silent><LocalLeader>4        <Plug>AirlineSelectTab4
+	nmap <silent><LocalLeader>5        <Plug>AirlineSelectTab5
+	nmap <silent><LocalLeader>6        <Plug>AirlineSelectTab6
+	nmap <silent><LocalLeader>7        <Plug>AirlineSelectTab7
+	nmap <silent><LocalLeader>8        <Plug>AirlineSelectTab8
+	nmap <silent><LocalLeader>9        <Plug>AirlineSelectTab9
+
+	nmap <silent><S-H>                 <Plug>AirlineSelectPrevTab
+	nmap <silent><S-L>                 <Plug>AirlineSelectNextTab
+	vmap <silent><S-H>                 <Esc><Plug>AirlineSelectPrevTab
+	vmap <silent><S-L>                 <Esc><Plug>AirlineSelectNextTab
+
+	nmap <silent><LocalLeader><tab>    <Plug>AirlineSelectNextTab
+	nmap <silent><LocalLeader><S-tab>  <Plug>AirlineSelectPrevTab
+	imap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
+	imap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
+	vmap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
+	vmap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
+
+endif
+
+# ----------------------------o---------------------------- o
+#                         NERDTree                          o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["nerdtree"]')
+
+    nnoremap <silent><localleader>e <ScriptCmd> NERDTreetoggle()<CR> 
+    inoremap <silent><localleader>e <Esc> <ScriptCmd> NERDTreetoggle()<CR> 
+
+    def NERDTreetoggle()                                    
+        if &filetype == 'nerdtree'                                  
+            NERDTreeToggle %p:h                                     
+        else                                                        
+            silent! NERDTreeFind                                            
+        endif                                                       
+    enddef
+
+    g:NERDTreeAutoCenter = 1                                              # 光标居中
+    g:NERDTreeAutoCenterThreshold = 1                                     # 控制自动居中灵敏度
+    g:NERDTreeSortHiddenFirst = 1                                         # 隐藏文件排序往上
+    g:NERDTreeNaturalSort = 0                                             # 自然序号排序
+    g:NERDTreeUseTCD = 1                                                  # 打开Tcd模式
+    g:NERDTreeChDirMode = 2                                               # 是否改变PWD目录路径
+    g:NERDTreeHighlightCursorline = 1                                     # 突出显示光标所在的行
+    g:NERDTreeHijackNetrw = 1                                             # 劫持Netrw
+    g:NERDTreeIgnore = ['\.pyc', '\~$', '\.swp', '_gsdata_']              # 屏蔽过滤所有指定的文件和文件夹
+    g:NERDTreeRespectWildIgnore = 1                                       # 设置为1的话遵循widignore设置
+    g:NERDTreeBookmarksFile = expand('~/.vim/NERDTreeBookmarks')          # 书签存放路径
+    g:NERDTreeMarkBookmarks = 0                                           # 当书签文件夹出现时禁用提示
+    g:NERDTreeQuitOnOpen = 3                                              # 打开后是否关闭NT窗口
+    g:NERDTreeShowBookmarks = 1                                           # 显示书签
+    g:NERDTreeShowHidden = 1                                              # 是否显示隐藏文件
+    g:NERDTreeShowLineNumbers = 0                                         # 是否显示行号
+    g:NERDTreeWinPos = 'left'                                             # NERDTree显示位置
+    g:NERDTreeWinSize = 30                                                # 窗口宽度
+    g:NERDTreeMinimalUI = 1                                               # 不显示帮助面板
+    g:NERDTreeMinimalMenu = 1                                             # Mini功能窗口
+    g:NERDTreeAutoDeleteBuffer = 1                                        # 自动删除重命名的缓冲区
+    g:NERDTreeDirArrowExpandable = '◆'                                    # 设置树的显示图标
+    g:NERDTreeDirArrowCollapsible = '◇'                                   # 设置树的显示图标
+    # NERDTreeSortOrder=[1]                                               # 排序设置0 or 1
+    # NERDTreeCreatePrefix='silent keepalt keepjumps readonly'
+
+    hi NERDTreeDirSlash           term=bold  ctermfg=0 
+    hi NERDTreeExecFile           term=bold  ctermfg=1
+    hi NERDTreeLinkTarget         term=bold  ctermfg=8
+    hi NERDTreeBookmarksLeader    term=bold  ctermfg=8
+    hi NERDTreeBookmark           term=bold  ctermfg=0
+
+# ----当NERDTree为剩下的唯一窗口时自动关闭 , 屏蔽;s ;c--------- o
+
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>s <Esc>| endif
+    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>c <Esc>| endif
+    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>w <Esc>| endif
+
+endif
+
+# ----------------------------o---------------------------- o
+#                          Tagbar                           o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["tagbar"]')
+
+    nnoremap <silent><localleader>t <ScriptCmd> TagbarToggle<CR><ScriptCmd> AirlineRefresh<CR>
+    inoremap <silent><localleader>t <Esc><ScriptCmd> TagbarToggle<CR><ScriptCmd> AirlineRefresh<CR>
+
+    g:tagbar_autofocus = 1                                                # 焦点自动聚焦到Tagbar
+    g:tagbar_autoclose = 1
+    g:tagbar_autopreview = 0
+    g:tagbar_no_autocmds = 0
+    g:tagbar_autoclose_netrw = 1
+    g:tagbar_jump_lazy_scroll = 1
+    g:tagbar_use_cache = 1
+    g:tagbar_sort = 0
+    g:tagbar_case_insensitive = 1
+    g:tagbar_compact = 1
+    g:tagbar_show_balloon = 0
+    g:tagbar_show_data_type = 0
+    g:tagbar_show_visibility = 1
+    g:tagbar_expand = 1
+    g:tagbar_autoshowtag = 2
+    g:no_status_line = 0
+    g:tagbar_silent = 1
+    g:tagbar_scrolloff = 10
+    g:tagbar_hide_nonpublic = 1
+    g:tagbar_width = 25
+    g:tagbar_map_preview = '<SPACE>'
+    g:tagbar_map_showproto = "d"
+
+# ----当Tagbar为剩下的唯一窗口时自动关闭 , 屏蔽;s ;c--------- o
+
+    autocmd BufEnter * if (winnr("$") == 1 && bufname('#') =~# "^__Tagbar__") | q | endif
+    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>s <Esc>| endif
+    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>c <Esc>| endif
+    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>w <Esc>| endif
+
+endif
+
+# ----------------------------o---------------------------- o
+#                            FZF                            o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["fzf.vim"]')
+
+    nnoremap <silent><LocalLeader>fa <ScriptCmd> Files<CR>
+    nnoremap <silent><LocalLeader>ff <ScriptCmd> GFiles<CR>
+    nnoremap <silent><LocalLeader>fl <ScriptCmd> BLines<CR>
+    nnoremap <silent><LocalLeader>fo <ScriptCmd> Colors<CR>
+    nnoremap <silent><LocalLeader>fr <ScriptCmd> Rg<Cr>
+
+    # 禁用浮动窗口
+    g:fzf_layout = {'down': '40%'}
+
+endif
+
+# ----------------------------o---------------------------- o
+#                          Asyncru                          o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["asyncrun.vim"]')
+
+    g:asyncrun_open = 6
+
+    nnoremap <silent><F7> <ScriptCmd> silent asyncrun#quickfix_toggle(6)<CR>
+    inoremap <silent><F7> <esc> <ScriptCmd> silent asyncrun#quickfix_toggle(6)<CR>
+
+    nnoremap <F5> <ScriptCmd> RunCode()<CR>
+    nnoremap <silent><localleader>r <ScriptCmd> RunCode()<CR>
+    inoremap <silent><localleader>r <esc><ScriptCmd> RunCode()<CR>
+    vnoremap <silent><localleader>r <esc><ScriptCmd> RunCode()<CR>
+
+    def RunCode()
+        exec "w"
+        var fm = expand('%:p:h')
+        if exists('$TMUX')
+            if &filetype == 'python'
+                exec 'AsyncRun -mode=term -pos=tmux -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"'
+            elseif &filetype == 'sh'
+                exec "AsyncRun -mode=term -pos=tmux -focus=0 time bash %"
+            elseif &filetype == 'java'
+                execute 'AsyncRun -mode=term -pos=tmux -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
+            elseif &filetype == 'javascript'
+                exec "AsyncRun -mode=term -pos=tmux -rows=10 -focus=0 time node %"
+            endif
+        else
+            if &filetype == 'python'
+                exec 'AsyncRun -cwd=$(VIM_FILEDIR) -mode=term -pos=bottom -rows=16 python3 "$(VIM_FILEPATH)"'
+                exec "wincmd p"
+            elseif &filetype == 'sh'
+                exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time bash %"
+            elseif &filetype == 'java'
+                execute 'AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
+            elseif &filetype == 'javascript'
+                exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time node %"
+            endif
+        endif
+    enddef
+
+#-----------------------------------------------------------------o--------------------------------------------------------------o
+
+    nnoremap <silent><localleader>dj <ScriptCmd> Django()<CR>
+    inoremap <silent><localleader>dj <esc><ScriptCmd> Django()<CR>
+    vnoremap <silent><localleader>dj <esc><ScriptCmd> Django()<CR>
+
+    def Django()
+        exec "w"
+        if exists('$TMUX')
+            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=tmux python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver'
+            endif
+        else
+            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=bottom python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver'
+                exec "wincmd p"
+            endif
+        endif
+    enddef
+
+#-----------------------------------------------------------------o--------------------------------------------------------------o
+
+    nnoremap <silent><localleader>dd <ScriptCmd> Django_Dev()<CR>
+    inoremap <silent><localleader>dd <esc><ScriptCmd> Django_Dev()<CR>
+    vnoremap <silent><localleader>dd <esc><ScriptCmd> Django_Dev()<CR>
+
+    def Django_Dev()
+        exec "w"
+        if exists('$TMUX')
+            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=tmux python3 manage.py makemigrations --settings=Database.settings-dev && python3 manage.py migrate --settings=Database.settings-dev  && python3 manage.py runserver --settings=Database.settings-dev'
+            endif
+        else
+            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
+                exec 'AsyncRun -cwd=<root> -mode=term -pos=floaterm python3 manage.py makemigrations --settings=Database.settings-dev && python3 manage.py migrate --settings=Database.settings-dev  && python3 manage.py runserver --settings=Database.settings-dev'
+                exec "wincmd p"
+            endif
+        endif
+    enddef
+
+endif
+
+# ----------------------------o---------------------------- o
+#                         IndentLine                        o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["indentLine"]')
+
+    nnoremap <LocalLeader>l <ScriptCmd> IndentLinesToggle<CR>
+    inoremap <LocalLeader>l <esc> <ScriptCmd> IndentLinesToggle<CR>
+
+    g:indentLine_enabled = 0
+    g:indentLine_conceallevel = 1
+    g:indentLine_defaultGroup = 'SpecialKey'
+
+endif
+
+# ----------------------------o---------------------------- o
+#                          Startify                         o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["vim-startify"]')
+
+    nnoremap <silent><LocalLeader>s <ScriptCmd> Startify<CR>
+    inoremap <silent><LocalLeader>s <Esc> <ScriptCmd> Startify<CR>
+
+    g:startify_session_delete_buffers = 1
+    g:startify_files_number = 20
+    g:startify_change_to_dir = 1
+    g:startify_enable_special = 1
+    g:startify_change_cmd = 'tcd'
+
+    g:startify_custom_header = [
+        '                                         ',
+        '                                         ',
+        '  _____                 _____            ',
+        ' |_   _|_ _  ___       |_   _|_ _  ___   ',
+        '   | |/ _` |/ _ \        | |/ _` |/ _ \  ',
+        '   | | (_| | (_) |  _    | | (_| | (_) | ',
+        '   |_|\__,_|\___/  (_)   |_|\__,_|\___/  ',
+        '                                         ',
+        '                                         ',
+         ]
+
+    g:startify_list_order = [
+        ['   Files:'],
+        'files',
+        ['   Bookmarks:'],
+        'bookmarks',
+        ]
+
+    g:startify_skiplist = [
+        'COMMIT_EDITMSG',
+        ]
+
+    g:startify_bookmarks = [
+        { 'v': '$HOME/.vimrc' },
+        { 'i': '$HOME/.config/i3/config' },
+        { 'a': '$HOME/.config/alacritty/alacritty.yml' },
+        { 'b': '$HOME/.config/i3blocks/config' },
+        { 'p': '$HOME/.config/picom/picom.conf' },
+        { 's': '$HOME/.bashrc' },
+        { 't': '$HOME/.tmux.conf' },
+        { 'r': '$HOME/.config/rofi/config.rasi' },
+        ]
+
+    g:startify_custom_footer = [
+        '    +------------------------------+',
+        '    |     Keep an open mind!       |',
+        '    +----------------+-------------+',
+        ]
+
+endif
+
+# ----------------------------o---------------------------- o
+#                     Vim-visual-multi                      o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["vim-visual-multi"]')
+
+    g:VM_maps                       = {}
+    g:VM_maps['Motion ;']           = ';;'
+    g:VM_maps["Select All"]         = '<LocalLeader>a'
+    g:VM_maps['Find Under']         = '<LocalLeader>d'
+    g:VM_maps['Find Subword Under'] = '<LocalLeader>d'
+    g:VM_maps["Skip Region"]        = 'q'
+    g:VM_maps["Undo"]               = 'u'
+    g:VM_maps["Redo"]               = '<C-r>'
+    g:VM_maps["Replace Pattern"]    = 'r'
+
+endif
+
+# ----------------------------o---------------------------- o
+#                         Signature                         o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["vim-signature"]')
+
+    nnoremap <silent><localleader>m <ScriptCmd> SignatureToggleSigns<CR> 
+
+    g:SignatureEnabledAtStartup = 1
+    g:SignatureForceMarkPlacement = 1
+    g:SignatureForceMarkerPlacement = 1
+    g:SignatureWrapJumps = 0
+    g:SignatureMarkOrder = "\m"
+    g:SignatureMap = {
+        'Leader':             "m",
+        'PlaceNextMark':      "m.",
+        'ToggleMarkAtLine':   "mm",
+        'PurgeMarksAtLine':   "m-",
+        'DeleteMark':         "md",
+        'PurgeMarks':         "mx",
+        'PurgeMarkers':       "m<SPACE>",
+        'GotoNextLineAlpha':  "']",
+        'GotoPrevLineAlpha':  "'[",
+        'GotoNextSpotAlpha':  "`]",
+        'GotoPrevSpotAlpha':  "`[",
+        'GotoNextLineByPos':  "mn",
+        'GotoPrevLineByPos':  "mp",
+        'GotoNextSpotByPos':  "mf",
+        'GotoPrevSpotByPos':  "mb",
+        'GotoNextMarker':     "]-",
+        'GotoPrevMarker':     "[-",
+        'GotoNextMarkerAny':  "]=",
+        'GotoPrevMarkerAny':  "[=",
+        'ListBufferMarks':    "m,",
+        'ListBufferMarkers':  "m?"
+        }
+
+    hi SignatureMarkText   term=standout ctermbg=2   ctermbg=2   guifg=#E06C75 guibg=#282C34   # 书签标记颜色
+    hi SignatureMarkerText term=standout ctermbg=2   ctermbg=2   guifg=#E06C75 guibg=#282C34   # 折叠提示颜色
+
+endif
+
+# ----------------------------o---------------------------- o
+#                          Floaterm                         o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["vim-floaterm"]')
+
+    g:floaterm_wintype = 'split'
+    g:floaterm_position = 'bottom'
+    g:floaterm_title = 'TERMINAL: $1/$2'
+    g:floaterm_height = 0.3
+    g:floaterm_autoclose = 2
+    g:floaterm_autohide = 2
+    g:floaterm_borderchars = '─│─│┌┐┘└'
+
+    nnoremap <silent><Localleader>c <ScriptCmd> silent FloatermToggle<CR>
+    tnoremap <silent><Localleader>c <C-\><C-n><ScriptCmd> silent FloatermToggle<CR>
+    vnoremap <silent><Localleader>c <C-\><C-n><ScriptCmd> silent FloatermToggle<CR>
+    inoremap <silent><Localleader>c <C-\><C-n><ScriptCmd> silent FloatermToggle<CR>
+
+    tnoremap <silent><Localleader>n <C-\><C-n>ScriptCmd> silent FloatermNew<CR>
+    tnoremap <silent><Localleader>k <C-\><C-n>ScriptCmd> silent FloatermPrev<CR>
+    tnoremap <silent><Localleader>j <C-\><C-n>ScriptCmd> silent FloatermNext<CR>
+
+    def Airline_FloatermInfo()
+        var buffers = floaterm#buflist#gather()
+        var cnt = len(buffers)
+        var cur = floaterm#buflist#curr()
+        var idx = index(buffers, cur) + 1
+        return printf(' %s/%s', idx, cnt)
+    enddef
+
+    autocmd ExitPre * FloatermKill!
+
+endif
+
+# ----------------------------o---------------------------- o
+#                         Sayonara                          o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["vim-sayonara"]')
+
+	nnoremap <silent><localleader>q <ScriptCmd> Sayonara<CR>
+	inoremap <silent><localleader>q <Esc><ScriptCmd> Sayonara<CR>
+	vnoremap <silent><localleader>q <Esc><ScriptCmd> Sayonara<CR>
+
+endif
+
+# ----------------------------o---------------------------- o
+#                     Vim-auto-popmenu                      o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["vim-auto-popmenu"]')
+
+    g:apc_enable_ft = { '*': 1 }
+    g:apc_cr_confirm = 1
+    set completeopt=menu,menuone,noselect
+    set cpt=.,k,w,b
+    set shortmess+=c
+
+endif
+
+# ----------------------------o---------------------------- o
+#                           Vimux                           o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["vimux"]')
+
+    g:VimuxOrientation = "h"
+    g:VimuxHeight = "40"
+
+endif
+
+# ----------------------------o---------------------------- o
+#                       Nerdtree-Git                        o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["nerdtree-git-plugin"]')
+
+    g:NERDTreeGitStatusShowClean = 0
+    g:NERDTreeGitStatusUseNerdFonts = 1
+    g:NERDTreeGitStatusConcealBrackets = 0
+    g:NERDTreeGitStatusUntrackedFilesMode = 'normal' 
+    g:NERDTreeGitStatusIndicatorMapCustom = {
+        'Modified':  'M',
+        'Staged':    'A',
+        'Untracked': 'U',
+        'Renamed':   'R',
+        'Unmerged':  'UU',
+        'Deleted':   'D',
+        'Dirty':     'M',
+        'Ignored':   '.',
+        'Clean':     '✔︎',
+        'Unknown':   '?',
+        }
+
+endif
+
+# ----------------------------o---------------------------- o
+#                            Far                            o
+# ----------------------------o---------------------------- o
+
+if exists('g:plugs["far.vim"]')
+
+    g:far#enable_undo = 1
+    g:far#source = 'rg'
+    g:far#glob_mode = 'rg'
+    g:far#window_layout = 'left'
+    g:far#preview_window_layout = 'right'
+    g:far#collapse_result = 1
+    g:far#auto_preview = 0
+    g:far#auto_preview_on_start = 0
+    g:far#result_preview = 0
+    g:far#window_width = 30
+
+    g:far#mapping = {
+        "exclude":              ["x"],
+        "include":              ["i"],
+        "toggle_exclude":       ["t"],
+        "stoggle_exclude":      ["<Tab>"],
+        "jump_to_source":       ["<CR>"],
+        "close_preview":        ["q"],
+        "open_preview":         ["p"], 
+        "toggle_expand":        ["<Space>", "o"],
+        "replace_do":           ["s"],
+        "replace_undo":         ["u"],
+        "replace_undo_all":     ["U"],
+        "preview_scroll_up":    "<PageUp>",
+        "preview_scroll_down":  "<PageDown>",
+        }
+
+    nnoremap <LocalLeader><F2> <ScriptCmd> Far <C-R><C-W><Space>
+
+endif
+
