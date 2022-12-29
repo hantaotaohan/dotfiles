@@ -701,6 +701,8 @@ let g:plug_url_format = 'https://hub.nuaa.cf/%s.git'
 " let g:plug_url_format = 'https://github.com/%s.git'
 " let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'
 
+let g:plug_window = 'enew'
+
 call plug#begin('$HOME/.vim/plugged')
 
     Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                       " 主题文件

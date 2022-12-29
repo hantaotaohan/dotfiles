@@ -622,8 +622,8 @@ main() {
             Install_Dotfiles
             Workspace_Settings
             System_Update
-            Install_Hosts
             Apt_Install
+            Install_Hosts
             Pip_Install
             Deb_Install
             LoaclConfig
