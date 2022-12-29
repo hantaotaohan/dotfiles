@@ -4,24 +4,29 @@
 # Define Variable.
 #---------------------------------------------------------------------------------------------------------------------------------------
 
-# Set Mail Password
+# >>> Set Mail Password
+
 # PASSWORD=""
 
-# Basis Define Variable
-BIN_DIR="$HOME/.bin"
+# >>> Basis Define Variable
+
+BIN_DIR="$HOME/.local/bin"
 EXTRAS_DIR=$(dirname "$PWD") 
 APT_INSTALL="sudo apt install -qq -y"
 DOTFILES_REPO=$(pwd)
 
-# Line Scheme "Github"
-# GIT_CLONE="git clone -q https://github.com"
-# GIT_DOWNLOAD="https://github.com"
+# >>> Line Scheme "Github"
 
-# Line Scheme "Fastgit"
-GIT_CLONE="git clone -q https://hub.fastgit.xyz"
-GIT_DOWNLOAD="https://download.fastgit.org"
+GIT_CLONE="git clone -q https://github.com"
+GIT_DOWNLOAD="https://github.com"
 
-# Line Scheme "Cnpmjs"
+# >>> Line Scheme "Fastgit"
+
+# GIT_CLONE="git clone -q https://hub.fastgit.xyz"
+# GIT_DOWNLOAD="https://download.fastgit.org"
+
+# >>> Line Scheme "Cnpmjs"
+
 # GIT_CLONE="git clone -q https://github.com.cnpmjs.org"
 # GIT_DOWNLOAD="https://github.com.cnpmjs.org"
 
@@ -565,10 +570,10 @@ Clone() {
 
 Fixrofiicons() {
 
-    sudo sed -i '$a\Icon=/home/taotao/dotfiles/.extras/icons/pdf.png' /usr/share/applications/org.pwmt.zathura.desktop
-    sudo sed -i '$a\Icon=/home/taotao/dotfiles/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
-    sudo sed -i '$a\Icon=/home/taotao/dotfiles/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
-    sudo sed -i '$a\Icon=/home/taotao/dotfiles/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
+    sudo sed -i '$a\Icon=/home/taotao/.extras/icons/pdf.png' /usr/share/applications/org.pwmt.zathura.desktop
+    sudo sed -i '$a\Icon=/home/taotao/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
+    sudo sed -i '$a\Icon=/home/taotao/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
+    sudo sed -i '$a\Icon=/home/taotao/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
     # fix ranger open path
     sudo sed -i '$a\Exec=/home/taotao/.config/ranger/ranger-oepn %U' /usr/share/applications/ranger.desktop
 
@@ -1123,13 +1128,13 @@ main() {
             Rofi
             ;;   
         -a|--all)
-            Github_Hosts
+            # Github_Hosts
             Alttab
             Arcicons
             # Picom
             # Dunst
             Offlineimap
-            Navi
+            # Navi
             # Ctags
             Rdrview
             # Fixrofiicons
@@ -1142,7 +1147,7 @@ main() {
             Foliate
             # Hugo
             # Java
-            Github_SSH
+            # Github_SSH
             Clone
             Dragon
             # Ly

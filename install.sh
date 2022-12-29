@@ -22,69 +22,61 @@ echo -e "-----------------------------------------------------------------------
 echo -e "                                                                               ";
 
 #----------------------------------------------------------------------------------------#
-# Setting Bash Colors
+# Setting Bash Colors Variable
 #----------------------------------------------------------------------------------------#
 
-red='\e[1;31m'
-blue='\e[0;34m'
-green='\e[0;32m'
-white='\e[0;37m'
-reset='\e[0;37m'
+RED='\e[1;31m'
+BLUE='\e[0;34m'
+GREEN='\e[0;32m'
+WHITE='\e[0;37m'
+RESET='\e[0;37m'
 
 #----------------------------------------------------------------------------------------#
 # Setting Bash Variable
 #----------------------------------------------------------------------------------------#
 
-Backup_dir="$HOME/.dotfiles.orig"
-Bin_dir="$HOME/.bin"
-Dotfiles_repo=$(pwd)
+BACKUP_DIR="$HOME/.dotfiles.orig"
+BIN_DIR="$HOME/.local/bin"
+DOTFILES_REPO=$(pwd)
 
-Github="github.com"
+GITHUB="github.com"
+GITHUBRAW="https://github.com/hantaotaohan/dotfiles/releases/download/1.0.0"
 
-Gitfast="hub.fastgit.xyz"
-Gitraw="https://download.fastgit.org/hantaotaohan/dotfiles/releases/download/1.0.0"
-
-# Gitfast="github.com.cnpmjs.org"
-# Gitraw="github.com.cnpmjs.org/hantaotaohan/dotfiles/releases/download/1.0.0"
-
-
-Dotfiles_symlinks=( \
-        .aliases \
-        .bashrc \
-        .bash_profile \
-        .bash_prompt \
-        .curlrc \
-        .ctags \
-        .exports \
-        .functions \
-        .fonts.conf \
-        .dircolors \
-        .gitignore \
-        .gitconfig \
-        .inputrc \
-        .ripgreprc \
-        .tmux.conf \
-        .vimrc \
-        .offlineimaprc \
-        .msmtprc \
-        .wgetrc \
-        .Xmodmap \
-        .imwheelrc \
-        .gtkrc-2.0 \
-        .gemrc \
-        .xinitrc \
-        .Xresources
-        )
-
-Dotfiles_copy=( \
-        .config \
-        .vim \
-        .w3m \
-        .pip \
-        .cargo \
-        .config/.gtk-bookmarks \
-        .extras/z.lua/z.lua
-        )
+DOTFILES_COPY=( \
+    .cargo \
+    .config \
+    .extras \
+    .pip \
+    .vim \
+    .w3m \
+    .Xmodmap \
+    .Xresources
+    .aliases \
+    .bash_profile \
+    .bash_prompt \
+    .bashrc \
+    .ctags \
+    .curlrc \
+    .dircolors \
+    .exports \
+    .fonts.conf \
+    .functions \
+    .gemrc \
+    .gitconfig \
+    .gitignore \
+    .gtkrc-2.0 \
+    .imwheelrc \
+    .inputrc \
+    .msmtprc \
+    .npmrc \
+    .offlineimaprc \
+    .ripgreprc \
+    .tmux.conf \
+    .vimrc \
+    .wgetrc \
+    .xinitrc \
+    .xinputrc
+)
 
 #----------------------------------------------------------------------------------------#
 # Setting Print usage message.
@@ -122,13 +114,14 @@ Options:
 ------------------------------------------------------------------------------------------
                                                                             
 EOF
+
 }
 
 #----------------------------------------------------------------------------------------#
 # Start Install Dotfiles 
 #----------------------------------------------------------------------------------------#
 
-install_dotfiles() {
+Install_Dotfiles() {
  
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -139,29 +132,26 @@ echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                      
 echo -e "              |____/ \___/ \__|_| |_|_|\___||___/                              ";
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Start Backup and Install Dotfiles${reset}                 ";
+echo -e "              ${BLUE}Start Backup and Install Dotfiles${RESET}                 ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-    # Backup config.
-    if ! [ -f "$Backup_dir/check-backup.txt" ]; then
-        env mkdir -p "$Backup_dir/.config"
-        cd "$Backup_dir" || exit
+    # >>> Backup Config.
+
+    if ! [ -f "$BACKUP_DIR/check-backup.txt" ]; then
+        env mkdir -p "$BACKUP_DIR/.config"
+        cd "$BACKUP_DIR" || exit
         touch check-backup.txt
 
-        # Backup to ~/.dotfiles.orig
-        for dots_symlinks in "${Dotfiles_symlinks[@]}"
+    # >>> Backup Some Folder In ~/.config To ~/.dotfiles.orig/.config
+
+        for dots_copy in "${DOTFILES_COPY[@]//./}"
         do
-            env cp -rf "$HOME/${dots_symlinks}" "$Backup_dir" &> /dev/null
+            env cp -rf "$HOME/${dots_copy}" "$BACKUP_DIR/.config" &> /dev/null
         done
 
-        # Backup some folder in ~/.config to ~/.dotfiles.orig/.config
-        for dots_copy in "${Dotfiles_copy[@]//./}"
-        do
-            env cp -rf "$HOME/${dots_copy}" "$Backup_dir/.config" &> /dev/null
-        done
+    # >>> Backup Again With Git.
 
-        # Backup again with Git.
         if [ -x "$(command -v git)" ]; then
             git init &> /dev/null
             git add -u &> /dev/null
@@ -169,46 +159,42 @@ echo -e "                                                                       
             git commit -m "Backup original config on $(date '+%Y-%m-%d %H:%M')" &> /dev/null
         fi
 
-        # Output.
-        echo -e "${blue}Your config is backed up in ${Backup_dir}\n" >&2
-        echo -e "${red}Please do not delete check-backup.txt in .dotfiles.orig folder.${white}" >&2
-        echo -e "It's used to backup and restore your old config.\n" >&2
+    # >>> Output.
+
+        echo -e "\t\t${BLUE}Your config is backed up in ${BACKUP_DIR}\n" >&2
+        echo -e "\t\t${RED}Please do not delete check-backup.txt in .dotfiles.orig folder.${WHITE}" >&2
+        echo -e "\t\tIt's used to backup and restore your old config.\n" >&2
     fi
 
-    # Install config.
-    for dots_symlinks in "${Dotfiles_symlinks[@]}"
-    do
-        env rm -rf "$HOME/${dots_symlinks}"
-        env ln -fs "$Dotfiles_repo/${dots_symlinks}" "$HOME/"
-    done
+    # >>> Install Move(CP) .config/ To $HOME/.config
 
-    # Install Move .config to ~/.config.
-    for dots_copy in "${Dotfiles_copy[@]}"
+    for dots_copy in "${DOTFILES_COPY[@]}"
     do
         sudo rm -rf "$HOME/${dots_copy}"
-        cp -rf "$Dotfiles_repo/${dots_copy}" "$HOME/"
+        cp -rf "$DOTFILES_REPO/${dots_copy}" "$HOME/"
     done
 
-    # Install Move .extras/bin/* to ~/.loacl/bin
-    if ! [ -d "$HOME/.local/bin/" ]; then
-        env mkdir -p "$HOME/.local/bin/"
-    fi
-    cp -rf $Dotfiles_repo/.extras/bin/* $HOME/.local/bin/
+    # >>> Install Sources.list | .source To etc/apt/sources.list
 
-    echo -e "${blue}New dotfiles is installed!\n${white}" >&2
-    echo "There may be some errors when Terminal is restarted." >&2
-    echo "Please read carefully the error messages and make sure." >&2
-    echo "all packages are installed. See more info in README.md." >&2
-    echo "Note that the author of this dotfiles uses dev branch in some packages." >&2
-    echo -e "If you want to restore your old config, " >&2
-    echo -e "you can use ${red}./install.sh -r${white} command.\n" >&2
+    sudo cp -rf "$DOTFILES_REPO/sources.list" "/etc/apt/sources.list"
+    echo -e "\t\t${GREEN}[+]Repace sources.list Done !${RESET}\n"
+
+    # >>> Output.
+
+    echo -e "\t\t${BLUE}New dotfiles is installed!\n${WHITE}" >&2
+    echo -e "\t\tThere may be some errors when Terminal is restarted." >&2
+    echo -e "\t\tPlease read carefully the error messages and make sure." >&2
+    echo -e "\t\tall packages are installed. See more info in README.md." >&2
+    echo -e "\t\tNote that the author of this dotfiles uses dev branch in some packages." >&2
+    echo -e "\t\tIf you want to restore your old config, " >&2
+    echo -e "\t\tyou can use ${RED}./install.sh -r${WHITE} command.\n" >&2
 }
 
 #----------------------------------------------------------------------------------------#
 # Uninstall Dotfiles
 #----------------------------------------------------------------------------------------#
 
-uninstall_dotfiles() {
+Uninstall_Dotfiles() {
 
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -219,51 +205,45 @@ echo -e "              | |_| | (_) | |_|  _| | |  __/\__ \                      
 echo -e "              |____/ \___/ \__|_| |_|_|\___||___/    - Restore                 ";
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Restore Dotfile Initial State${reset}                     ";
+echo -e "              ${BLUE}Restore Dotfile Initial State${RESET}                     ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-    if [ -f "$Backup_dir/check-backup.txt" ]; then
-        for dots_symlinks in "${Dotfiles_symlinks[@]}"
-        do
-            env rm -rf "$HOME/${dots_symlinks}"
-            env cp -rf "$Backup_dir/${dots_symlinks}" "$HOME/" &> /dev/null
-            env rm -rf "$Backup_dir/${dots_symlinks}"
-        done
-
-        for dots_copy in "${Dotfiles_copy[@]}"
+    if [ -f "$BACKUP_DIR/check-backup.txt" ]; then
+        for dots_copy in "${DOTFILES_COPY[@]}"
         do
             env rm -rf "$HOME/${dots_copy}"
-            env cp -rf "$Backup_dir/${dots_copy}" "$HOME/" &> /dev/null
-            env rm -rf "$Backup_dir/${dots_copy}"
+            env cp -rf "$BACKUP_DIR/${dots_copy}" "$HOME/" &> /dev/null
+            env rm -rf "$BACKUP_DIR/${dots_copy}"
         done
 
-        # Save old config in backup directory with Git.
+        # >>> Save Old Config In Backup Directory With Git.
         if [ -x "$(command -v git)" ]; then
-            cd "$Backup_dir" || exit
+            cd "$BACKUP_DIR" || exit
             git add -u &> /dev/null
             git add . &> /dev/null
             git commit -m "Restore original on $(date '+%Y-%m-%d %H:%M')" &> /dev/null
         fi
     fi
 
-    if ! [ -f "$Backup_dir/check-backup.txt" ]; then
-        echo -e "${red}You have not installed this dotfiles yet.${white}" >&2
+    if ! [ -f "$BACKUP_DIR/check-backup.txt" ]; then
+        echo -e "\t\t${RED}You have not installed this dotfiles yet.${WHITE}" >&2
         exit 1
     else
-        echo -e "${blue}Your old config has been restored!\n${white}" >&2
-        echo "Thanks for using my dotfiles." >&2
-        echo "Enjoy your next journey!" >&2
+        echo -e "\t\t${BLUE}Your old config has been restoRED!\n${WHITE}" >&2
+        echo -e "\t\tThanks for using my dotfiles." >&2
+        echo -e "\t\tEnjoy your next journey!" >&2
     fi
 
-    env rm -rf "$Backup_dir/check-backup.txt"
+    env rm -rf "$BACKUP_DIR/check-backup.txt"
+
 }
 
 #----------------------------------------------------------------------------------------#
 # Workspace Settings
 #----------------------------------------------------------------------------------------#
 
-workspace_settings() {
+Workspace_Settings() {
 
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -275,40 +255,47 @@ echo -e "              | |___  | |\  |   \ V /                                  
 echo -e "              |_____| |_| \_|    \_/                                           ";
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}System Environment Configuration${reset}                  ";
+echo -e "              ${BLUE}System Environment Configuration${RESET}                  ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-# Make Floder
+# >>> Make Floder
+
 if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace"; fi
 if [ ! -d "$HOME/desktop" ]; then mkdir -p "$HOME/desktop"; fi
 if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
 
-# Set Locales Language
+# >>> Set Locales Language
+
 ## sudo dpkg-reconfigure locales
 ## sudo locale-gen "zh_CN.UTF-8" > /dev/null 2>&1
+
 sudo sed -i -e 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen
 sudo locale-gen > /dev/null 2>&1
 sudo dpkg-reconfigure --frontend=noninteractive locales > /dev/null 2>&1
-echo -e "              ${green}[+]Set Locales Language is Successful${reset}\n"
+echo -e "\t\t${GREEN}[+]Set Locales Language is Successful${RESET}\n"
 
-# Set TimeZone
+# >>> Set TimeZone
+
 sudo timedatectl set-timezone "Asia/Shanghai"
-echo -e "              ${green}[+]Set TimeZone is Successful${reset}\n"
+echo -e "\t\t${GREEN}[+]Set TimeZone is Successful${RESET}\n"
 
-# Fix Sanbox
+# >>> Fix Sanbox
+
 # echo 'kernel.unprivileged_userns_clone=1' | sudo tee /etc/sysctl.d/userns.conf > /dev/null 2>&1
-# echo -e "              ${green}[+]Fix Error:chrome-sandbox is Successful${reset}\n"
+# echo -e "\t\t${GREEN}[+]Fix Error:chrome-sandbox is Successful${RESET}\n"
 
-# Sudo user reboot options
+# >>> Sudo user reboot options
+
 # sudo chmod u+s /sbin/reboot
+
 }
 
 #----------------------------------------------------------------------------------------#
 # Repace Sources and System Update & Upgrade Packages
 #----------------------------------------------------------------------------------------#
 
-sysUpdate(){
+System_Update() {
 
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -321,23 +308,24 @@ echo -e "              |____/ \__, |___/\__\___|_| |_| |_|                      
 echo -e "                     |___/                                                     ";
 echo -e "                                                                               ";           
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Repace Sources and System Update ${reset}                 ";
+echo -e "              ${BLUE}Repace Sources and System Update ${RESET}                 ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-sudo ln -sf "$Dotfiles_repo/sources.list" "/etc/apt/sources.list"
-echo -e "              ${green}[+]Repace sources.list Done !${reset}\n"
+sudo cp -rf "$DOTFILES_REPO/sources.list" "/etc/apt/sources.list"
+echo -e "\t\t${GREEN}[+]Repace sources.list Done !${RESET}\n"
 sudo apt update -y -qq > /dev/null 2>&1
-echo -e "              ${green}[+]Update Successful !${reset}\n"
+echo -e "\t\t${GREEN}[+]Update Successful !${RESET}\n"
 sudo apt upgrade -y -qq > /dev/null 2>&1
-echo -e "              ${green}[+]Upgrade Successful !${reset}\n"
+echo -e "\t\t${GREEN}[+]Upgrade Successful !${RESET}\n"
+
 }
 
 #----------------------------------------------------------------------------------------#
 # Apt - Install
 #----------------------------------------------------------------------------------------#
 
-aptInstall() {
+Apt_Install() {
 
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -349,12 +337,11 @@ echo -e "               / ___ \  |  __/    | |                                  
 echo -e "              /_/   \_\ |_|       |_|                                          ";
 echo -e "                                                                               ";           
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Apt - Install${reset}                                     ";
+echo -e "              ${BLUE}Apt - Install${RESET}                                     ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-	aptApps=( \
-        #--------------------------------------------------------------------------I3WM--
+	APTAPPS=( \
         i3 \
         feh \
         mpv \
@@ -368,26 +355,20 @@ echo -e "                                                                       
         nautilus \
         dbus-x11 \
         i3lock-fancy \
-        #deepin-screenshot \
-        #nautilus --no-install-recommends --no-install-suggests \
-        #-------------------------------------------------------------------------SYSTEM--
-        #xinit \
+        # deepin-screenshot \
+        # nautilus --no-install-recommends --no-install-suggests \
         xinit \
         xorg-dev \
         lua5.2 \
-        #ruby-full \
-        #openssh-server \
-        #openssh-client \
-        #--------------------------------------------------------------------------FCITX--
+        # ruby-full \
+        # openssh-server \
+        # openssh-client \
         fcitx \
         fcitx-pinyin \
-        #-----------------------------------------------------------------------LANGUAGE--
-        #language-pack-zh-hans \
-        #language-pack-gnome-zh-hans \
-        #-------------------------------------------------------------------------VMWARE--
-        #open-vm-tools \
+        # language-pack-zh-hans \
+        # language-pack-gnome-zh-hans \
+        # open-vm-tools \
         open-vm-tools-desktop \
-        #--------------------------------------------------------------------------TOOLS--
         jq \
         w3m \
         zip \
@@ -401,72 +382,69 @@ echo -e "                                                                       
         ranger \
         xdotool \
         ripgrep \
-	arc-theme
-	hsetroot \
+        arc-theme
+        hsetroot \
         newsboat \
-	tty-clock \
+        tty-clock \
         qutebrowser \
         python3-pip \
         inotify-tools \
         libgl1-mesa-* \
-        #translate-shell \
+        # translate-shell \
         universal-ctags \
         silversearcher-ag \
-        #--------------------------------------------------------------------------EDIT--
         vim \
         tmux \
         vim-gtk \
-        #--------------------------------------------------------------------------MAIL--
         msmtp \
         neomutt \
         offlineimap \
-        #-------------------------------------------------------------------------OTHER--
-        #peek \
+        # peek \
         yank \
         imwheel
-        #------------------------------------------------------------------------IGNORE--
-        #pv \
-        #rar \
-        #vlc \
-        #bat \
-        #xvfb \
-        #tree \
-        #axel \
-        #unrar \
-        #aria2 \
-        #ffmpeg \
-        #xinput \
-        #ctags \
-        #solaar \
-        #compton \
-        #i3status \
-        #calibre \
-        #dbus-x11 \
-        #alacritty \
-        #xautolock \
-        #zlib1g-dev \ 
-        #p7zip-full \
-        #python-pip \
-        #gnome-keyring \
-        #libsecret-tools \
-        #x11-xserver-utils \
-        #fonts-wqy-microhei \
-        #fcitx-module-cloudpinyin \
-        )
+        # pv \
+        # rar \
+        # vlc \
+        # bat \
+        # xvfb \
+        # tree \
+        # axel \
+        # unrar \
+        # aria2 \
+        # ffmpeg \
+        # xinput \
+        # ctags \
+        # solaar \
+        # compton \
+        # i3status \
+        # calibre \
+        # dbus-x11 \
+        # alacritty \
+        # xautolock \
+        # zlib1g-dev \ 
+        # p7zip-full \
+        # python-pip \
+        # gnome-keyring \
+        # libsecret-tools \
+        # x11-xserver-utils \
+        # fonts-wqy-microhei \
+        # fcitx-module-cloudpinyin \
+    )
 
-    for app in "${aptApps[@]}"
+    for app in "${APTAPPS[@]}"
     do
-        echo -e "              [*] Installing: $app";
+        echo -e "\t\t[*] Installing: $app";
         sudo apt install -y -qq $app > /dev/null 2>&1
-        installSuccess $? $app
+        Install_Status $? $app
     done
+
 }
 
 #----------------------------------------------------------------------------------------#
 # Pip3 - Install
 #----------------------------------------------------------------------------------------#
 
-pipInstall() {
+Pip_Install() {
 
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -478,19 +456,19 @@ echo -e "              |  __/   | |  |  __/   ___) |                            
 echo -e "              |_|     |___| |_|     |____/                                     ";
 echo -e "                                                                               ";           
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}PIP3 - Install${reset}                                    ";
+echo -e "              ${BLUE}PIP3 - Install${RESET}                                    ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-	pipApps=( \
-	tldr \
+	PIPAPPS=( \
+        tldr \
         i3ipc \
         flake8 \
         #keyring \
-	autotiling \
-	ueberzug \
+        autotiling \
+        ueberzug \
         raiseorlaunch \
-	pygments==2.11.2 \
+        pygments==2.11.2 \
         #popupdict \
         you-get \
         pyvirtualdisplay 
@@ -508,59 +486,23 @@ echo -e "                                                                       
         #beautifulsoup4 \
         #prompt-toolkit \
         #powerline-shell \
-        )
+    )
 
-    for app in "${pipApps[@]}"
+    for app in "${PIPAPPS[@]}"
     do
-        echo -e "              [*] Installing: $app";
+        echo -e "\t\t[*] Installing: $app";
         sudo pip3 install -q --timeout 1000 --retries 20  $app -i \
         https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
-        installSuccess $? $app
+        Install_Status $? $app
     done
-}
 
-#----------------------------------------------------------------------------------------#
-# Gem - Install
-#----------------------------------------------------------------------------------------#
-
-gemInstall() {
-
-echo -e "                                                                               ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";           
-echo -e "                ____   _____   __  __                                          ";
-echo -e "               / ___| | ____| |  \/  |                                         ";
-echo -e "              | |  _  |  _|   | |\/| |                                         ";
-echo -e "              | |_| | | |___  | |  | |                                         ";
-echo -e "               \____| |_____| |_|  |_|                                         ";
-echo -e "                                                                               ";           
-echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}GEM - Install${reset}                                     ";
-echo -e "-------------------------------------------------------------------------------";
-echo -e "                                                                               ";
-
-#	wget -P $Bin_dir $Gitraw/vimwiki_markdown.gem > /dev/null 2>&1
-	gemApps=(\
-        vimwiki_markdown\
-	mdless
-        )
-
-        for app in "${gemApps[@]}"
-        do
-            echo -e "              [*] Installing: $app";
-#            gem sources --remove https://rubygems.org/ > /dev/null 2>&1
-#            gem sources -a https://gems.ruby-china.com/ > /dev/null 2>&1
-#            sudo gem install --local $Bin_dir/$app.gem > /dev/null 2>&1
-            sudo gem install $app > /dev/null 2>&1
-            installSuccess $? $app
-        done
 }
 
 #----------------------------------------------------------------------------------------#
 # Local - Install & Config
 #----------------------------------------------------------------------------------------#
 
-LocalDpkg() {
+Deb_Install() {
 
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -572,30 +514,33 @@ echo -e "              | |__| (_) | (_| (_| | |                                 
 echo -e "              |_____\___/ \___\__,_|_|  - Dpkg Install                         ";
 echo -e "                                                                               ";           
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Local - Install ${reset}                                  ";
+echo -e "              ${BLUE}Local - Install ${RESET}                                  ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
-	wget -P $Bin_dir $Gitraw/fd.deb > /dev/null 2>&1
-	wget -P $Bin_dir $Gitraw/bat.deb > /dev/null 2>&1
-	wget -P $Bin_dir $Gitraw/glow.deb > /dev/null 2>&1
-	wget -P $Bin_dir $Gitraw/foliate.deb > /dev/null 2>&1
-	wget -P $Bin_dir $Gitraw/Alacritty.deb > /dev/null 2>&1
-	wget -P $Bin_dir $Gitraw/timeshift.deb > /dev/null 2>&1
+	wget -P $BIN_DIR $GITHUBRAW/fd.deb > /dev/null 2>&1
+	wget -P $BIN_DIR $GITHUBRAW/bat.deb > /dev/null 2>&1
+	wget -P $BIN_DIR $GITHUBRAW/glow.deb > /dev/null 2>&1
+	wget -P $BIN_DIR $GITHUBRAW/delta.deb > /dev/null 2>&1
+	wget -P $BIN_DIR $GITHUBRAW/foliate.deb > /dev/null 2>&1
+	wget -P $BIN_DIR $GITHUBRAW/Alacritty.deb > /dev/null 2>&1
+	wget -P $BIN_DIR $GITHUBRAW/timeshift.deb > /dev/null 2>&1
 	
-	dpkgApps=( \
+	DPKGAPPS=( \
         fd.deb \
         bat.deb \
-        glow.deb
-        #Alacritty.deb
-        )
+        glow.deb \
+        delta.deb
+        # Alacritty.deb
+    )
 
-    for app in "${dpkgApps[@]}"
+    for app in "${DPKGAPPS[@]}"
     do
-        echo -e "              [*] Installing: $app";
-        sudo dpkg -i $Bin_dir/$app > /dev/null 2>&1
-        installSuccess $? $app
+        echo -e "\t\t[*] Installing: $app";
+        sudo dpkg -i $BIN_DIR/$app > /dev/null 2>&1
+        Install_Status $? $app
     done
+
 }
 
 LoaclConfig() {
@@ -610,9 +555,15 @@ echo -e "              | |__| (_) | (_| (_| | |                                 
 echo -e "              |_____\___/ \___\__,_|_|  - Software Config & Settings           ";
 echo -e "                                                                               ";           
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Local Software- Config & Settings  ${reset}               ";
+echo -e "              ${BLUE}Local Software- Config & Settings  ${RESET}               ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
+
+#----------------------------------------------------------------------------------------#
+# Install ST (Terminal) 
+#----------------------------------------------------------------------------------------#
+
+    cd $HOME/.extras/install && ./setup "st"
 
 #----------------------------------------------------------------------------------------#
 # Fcitx 
@@ -620,7 +571,7 @@ echo -e "                                                                       
 
     im-config -n fcitx > /dev/null 2>&1
     im-config -s fcitx > /dev/null 2>&1
-    echo -e "              ${green}[√] Fcitx Successful${reset}\n"
+    echo -e "\t\t${GREEN}[√] Fcitx Successful${RESET}\n"
 
 	
 #----------------------------------------------------------------------------------------#
@@ -631,15 +582,16 @@ echo -e "                                                                       
         sudo rm -rf $HOME/.tldr
     fi
     
-    git clone -q https://${Gitfast}/hantaotaohan/tldr $HOME/.tldr
+    git clone -q https://${GITHUB}/hantaotaohan/tldr $HOME/.tldr
 
-    echo -e "              ${green}[√] TLDR Successful${reset}\n"
+    echo -e "\t\t${GREEN}[√] TLDR Successful${RESET}\n"
 
 #----------------------------------------------------------------------------------------#
 # Edge
 #----------------------------------------------------------------------------------------#
 
-    # Setup
+    # >>> Setup
+
     curl -s https://packages.microsoft.com/keys/microsoft.asc \
         | gpg --dearmor > microsoft.gpg
     sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
@@ -648,63 +600,32 @@ echo -e "                                                                       
         > /etc/apt/sources.list.d/microsoft-edge-dev.list' > /dev/null 2>&1
     sudo rm microsoft.gpg
 
-    # Install
+    # >>> Install
+
     sudo apt update -y -qq > /dev/null 2>&1
     sudo apt install -y -qq microsoft-edge-dev > /dev/null 2>&1
-    echo -e "              ${green}[√] Edge Successful${reset}\n"
+    echo -e "\t\t${GREEN}[√] Edge Successful${RESET}\n"
 
 #----------------------------------------------------------------------------------------#
 # Tmux
 #----------------------------------------------------------------------------------------#
 
     if [ ! -d "$HOME/.tmux" ]; then
-        git clone -q https://${Gitfast}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+        git clone -q https://${GITHUB}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
     
     tmux start-server
     tmux new-session -d
     $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
     tmux kill-server
-    echo -e "              ${green}[√] TMUX Successful${reset}\n"
+    echo -e "\t\t${GREEN}[√] TMUX Successful${RESET}\n"
 
-#----------------------------------------------------------------------------------------#
-# diff-so-fancy
-#----------------------------------------------------------------------------------------#
-
-    wget -P $Bin_dir $Gitraw/diff-so-fancy > /dev/null 2>&1
-	
-    if [ ! -f "/usr/local/bin/diff-so-fancy" ]; then
-        sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
-        sudo chmod 777 /usr/local/bin/diff-so-fancy
-    else
-        sudo rm -rf /usr/local/bin/diff-so-fancy
-        sudo cp -f $Bin_dir/diff-so-fancy /usr/local/bin
-        sudo chmod 777 /usr/local/bin/diff-so-fancy
-    fi
-    echo -e "              ${green}[√] Diff-So-Fancy Successful${reset}\n"
-	
-#----------------------------------------------------------------------------------------#
-# Install trans
-#----------------------------------------------------------------------------------------#
-
-#    wget -P $Bin_dir $Gitraw/trans > /dev/null 2>&1
-
-#    if [ ! -f "/usr/local/bin/trans" ]; then
-#        sudo cp -f $Bin_dir/trans /usr/local/bin
-#        sudo chmod 777 /usr/local/bin/trans
-#    else
-#        sudo rm -rf /usr/local/bin/trans
-#        sudo cp -f $Bin_dir/trans /usr/local/bin
-#        sudo chmod 777 /usr/local/bin/trans
-#    fi
-#    echo -e "              ${green}[√] Trans Successful${reset}\n"
-	
 #----------------------------------------------------------------------------------------#
 # Install Vim Plug
 #----------------------------------------------------------------------------------------#
 
     vim
-    echo -e "              ${green}[√] Vim Successful${reset}\n"
+    echo -e "\t\t${GREEN}[√] Vim Successful${RESET}\n"
 
 }
 
@@ -712,7 +633,7 @@ echo -e "                                                                       
 # Install - Fonts
 #----------------------------------------------------------------------------------------#
 
-installFonts() {
+Fonts_Install() {
 
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -724,25 +645,26 @@ echo -e "              |  _| (_) | | | | |_\__ \                                
 echo -e "              |_|  \___/|_| |_|\__|___/   - Install                            ";
 echo -e "                                                                               ";           
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Fonts Install ${reset}                                    ";
+echo -e "              ${BLUE}Fonts Install ${RESET}                                    ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
     if [ ! -d "$HOME/.fonts" ]; then
         git clone -q\
-            https://${Gitfast}/hantaotaohan/fonts.git\
+            https://${GITHUB}/hantaotaohan/fonts.git\
             $HOME/.fonts && cd $HOME/.fonts && ./install.sh
     else
         cd $HOME/.fonts &&\
         git reset -q --hard && git pull -q && ./install.sh
     fi
+
 }
 
 #----------------------------------------------------------------------------------------#
 # Apt Remove 
 #----------------------------------------------------------------------------------------#
 
-aptRemove() {
+Apt_Remove() {
 
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
@@ -753,54 +675,52 @@ echo -e "             | | |  __/ | | | | | (_) \ V /  __/                       
 echo -e "             |_|  \___|_| |_| |_|\___/ \_/ \___|                               ";
 echo -e "                                                                               ";           
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Apt Remove ${reset}                                       ";
+echo -e "              ${BLUE}Apt Remove ${RESET}                                       ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
                                    
-	aptApps=( \
-            yelp \
-            byobu \
-            rxvt-unicode \
-            gnome-terminal \
-            xdg-desktop-portal-gtk 
-            )
+	APTAPPS=( \
+        yelp \
+        byobu \
+        rxvt-unicode \
+        gnome-terminal \
+        xdg-desktop-portal-gtk 
+    )
 
-	for app in "${aptApps[@]}"
+	for app in "${APTAPPS[@]}"
 	do
-            echo -e "              [*] Remove: $app";
-            sudo apt-get -y -qq --purge $app > /dev/null 2>&1
-            sudo apt autoremove -y -qq > /dev/null 2>&1
-            sudo apt-get clean > /dev/null 2>&1
-            installSuccess $? $app
+        echo -e "\t\t[*] Remove: $app";
+        sudo apt-get -y -qq --purge $app > /dev/null 2>&1
+        sudo apt autoremove -y -qq > /dev/null 2>&1
+        sudo apt-get clean > /dev/null 2>&1
+        Install_Status $? $app
 	done
 
 }
 
 #----------------------------------------------------------------------------------------#
-# Make apps
-#----------------------------------------------------------------------------------------#
-
-# Make_apps() {
-# 	pushd $Dotfiles_repo/setup/i3lock_fancy > /dev/null
-# 	sudo make install
-# 	popd > /dev/null
-# 	echo -e "              ${green}[√] Make_apps Successful${reset}\n"
-# }
-
-#----------------------------------------------------------------------------------------#
 # Install - Status
 #----------------------------------------------------------------------------------------#
 
-installSuccess() {
+Install_Status() {
 
 	if [ $1 -eq 0 ]; then
-            echo -e "              ${green}[√] Install Success: $2${reset}\n";
+        echo -e "\t\t${GREEN}[√] Install Success: $2${RESET}\n";
 	else
-            echo -e "              ${red}[X] Install Failed: $2${reset}\n";
+        echo -e "\t\t${RED}[X] Install Failed: $2${RESET}\n";
 	fi
 	
 }
 
+#----------------------------------------------------------------------------------------#
+# Install - Hosts
+#----------------------------------------------------------------------------------------#
+
+Install_Hosts() {
+
+    sudo sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl https://raw.hellogithub.com/hosts >> /etc/hosts
+
+}
 
 #----------------------------------------------------------------------------------------#
 # Sync & Update - Dotfiles
@@ -822,12 +742,12 @@ echo -e "                                                    __/ |              
 echo -e "                                                   |___/                       ";
 echo -e "                                                                               ";
 echo -e "-------------------------------------------------------------------------------";
-echo -e "              ${blue}Github Sync ${reset}                                      ";
+echo -e "              ${BLUE}Github Sync ${RESET}                                      ";
 echo -e "-------------------------------------------------------------------------------";
 echo -e "                                                                               ";
 
     git reset -q --hard && git pull -q
-    echo -e "${green} ● Dotfiles Update Sync Complete ${reset}"
+    echo -e "\t\t${GREEN} ● Dotfiles Update Sync Complete ${RESET}"
 }
 
 #----------------------------------------------------------------------------------------#
@@ -848,57 +768,55 @@ main() {
             exit 0
             ;;
         -a|--all)
-            install_dotfiles
-            workspace_settings
-            sysUpdate
-            aptInstall
-            pipInstall
-            gemInstall
-            LocalDpkg
+            Install_Dotfiles
+            Workspace_Settings
+            System_Update
+            Install_Hosts
+            Apt_Install
+            Pip_Install
+            Deb_Install
             LoaclConfig
-            installFonts
-            #Make_apps
-            cd $HOME/dotfiles/.extras/install && ./setup "st"
-            aptRemove
-            echo -e "              ${green}[√] *** All Install Successful *** ${reset}\n"
+            Fonts_Install
+            Apt_Remove
+            echo -e "\t\t${GREEN}[√] *** All Install Successful *** ${RESET}\n"
             cd $HOME
             bash
             ;;
         -d|--dotfiles)
-            install_dotfiles
+            Install_Dotfiles
             bash
             ;;
         -D|--remove-dotfiles)
-            uninstall_dotfiles
+            Uninstall_Dotfiles
             bash
             ;;
         -w|--workspace)
-            workspace_settings
+            Workspace_Settings
             bash
             ;;
-        -a|--aptinstall)
-            aptInstall
+        -h|--hosts)
+            Install_Hosts
             bash
             ;;
-        -p|--pipinstall)
-            pipInstall
+        -a|--apt)
+            Apt_Install
             bash
             ;;
-        -g|--geminstall)
-            gemInstall
+        -p|--pip)
+            Pip_Install
             bash
             ;;
-        -k|--dpkginstall)
-            LocalDpkg
+        -b|--deb)
+            Deb_Install
             LoaclConfig
             bash
             ;;
-        -f|--fontsinstall)
-            installFonts
+        -f|--fonts)
+            Fonts_Install
             bash
             ;;
         -r|--remove)
-            aptRemove
+            Apt_Remove
             bash
             ;;
         [qQ]) 

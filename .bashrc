@@ -1,6 +1,6 @@
 # Add `~/bin` to the `$PATH`
 # export PATH="$HOME/bin:$PATH";
-export PATH="$HOME/bin:$HOME/.local/bin:/home/taotao/.local/share/gem/ruby/2.7.0/bin:$HOME/dotfiles/.extras/install:$PATH";
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/.extras/bin:$PATH";
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
@@ -185,14 +185,16 @@ fi
 #fi
 
 # Install Z.sh
+
 # 设定 z.sh
-# source "$HOME/extras/z.sh"
+source "$HOME/.extras/z/z.sh"
+
 # 设定 z.lua
-[ -f ~/z.lua ] && eval "$(lua $HOME/z.lua --init bash enhanced fzf)"
-export _ZL_CD=my_cd_func
-set $_ZL_ECHO=0
-set $_ZL_MATCH_MODE=1
-set $_ZL_ROOT_MARKERS=".git,.svn,.hg,.root,package.json"
+# [ -f ~/z.lua ] && eval "$(lua $HOME/z.lua --init bash enhanced fzf)"
+# export _ZL_CD=my_cd_func
+# set $_ZL_ECHO=0
+# set $_ZL_MATCH_MODE=1
+# set $_ZL_ROOT_MARKERS=".git,.svn,.hg,.root,package.json"
 
 # Install FZF
 # 安装FZF模糊所搜
@@ -211,7 +213,7 @@ fi
 # fi
 
 # 自定义补全(setup)
-source setup-completion.bash
+# source setup-completion.bash
 
 # 如果是SSH登录自动进入TMUX
 if [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]] && [ ! -d /mnt/c ];then
