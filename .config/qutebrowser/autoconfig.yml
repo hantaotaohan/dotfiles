@@ -212,43 +212,43 @@ settings:
   downloads.position:
     global: bottom
   fonts.completion.category:
-    global: bold 10pt Saber
+    global: bold 10pt Iosevka 
   fonts.completion.entry:
-    global: 10pt Saber
+    global: 10pt Iosevka 
   fonts.debug_console:
-    global: 10pt Saber
+    global: 10pt Iosevka
   fonts.downloads:
-    global: 10pt Saber
+    global: 10pt Iosevka 
   fonts.hints:
-    global: bold 10pt Inziu Iosvka Bold
+    global: bold 10pt Iosevka Bold
   fonts.keyhint:
-    global: bold 10pt Inziu Iosvka Bold
+    global: bold 10pt Iosevka Bold
   fonts.messages.error:
-    global: 10pt Saber
+    global: 10pt Iosevka 
   fonts.messages.info:
-    global: 10pt Saber
+    global: 10pt Iosevka 
   fonts.messages.warning:
-    global: 10pt Saber
+    global: 10pt Iosevka
   fonts.monospace:
-    global: '"Inziu Iosvka Bold","微软雅黑"'
+    global: '"Iosvka","微软雅黑"'
   fonts.prompts:
-    global: 10pt Saber
+    global: 10pt Iosevka 
   fonts.statusbar:
-    global: 10pt Saber
+    global: 10pt Iosevka 
   fonts.tabs:
-    global: 10pt Saber
+    global: 10pt Iosevka 
   fonts.web.family.cursive:
-    global: '"Inziu Iosvka Bold","微软雅黑"'
+    global: '"Iosvka","微软雅黑"'
   fonts.web.family.fantasy:
-    global: '"Inziu Iosvka Bold","微软雅黑"'
+    global: '"Iosvka","微软雅黑"'
   fonts.web.family.fixed:
-    global: '"Inziu Iosvka Bold","微软雅黑"'
+    global: '"Iosvka","微软雅黑"'
   fonts.web.family.sans_serif:
-    global: '"Inziu Iosvka Bold","微软雅黑"'
+    global: '"Iosvka","微软雅黑"'
   fonts.web.family.serif:
-    global: '"Inziu Iosvka Bold","微软雅黑"'
+    global: '"Iosvka","微软雅黑"'
   fonts.web.family.standard:
-    global: '"Inziu Iosvka Bold","微软雅黑"'
+    global: '"Iosvka","微软雅黑"'
   hints.border:
     global: '1px solid #282c34'
   hints.next_regexes:

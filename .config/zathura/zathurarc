@@ -1,5 +1,5 @@
 # ---------- Font Settings
-set font "Saber bold 11"
+set font "Iosevka bold 11"
 
 # ---------- Options
 set incremental-search     "true"

@@ -15,7 +15,7 @@ xmodmap ~/.Xmodmap &
 source ~/.config/i3/speedkeyboard.sh &
 picom --config ~/.config/picom/picom.conf &
 feh --bg-scale ~/.config/i3/background/1.jpg & 
-pgrep -x alttab > /dev/null ||alttab -w 1 -s 3 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 1x1 -bg '#282C34' -fg '#ABB2BF' &
+pgrep -x alttab > /dev/null ||alttab -w 1 -s 3 -t 200x60 -d 1 -font xft:Iosevka:style=Bold:size=10 -i 1x1 -bg '#282C34' -fg '#ABB2BF' &
 [ -f $HOME/.config/x/Xresources ] && xrdb -merge $HOME/.config/x/Xresources
 [ -f /etc/X11/xinit/.Xmodmap ] && xmodmap /etc/X11/xinit/.Xmodmap
 source ~/.config/polybar/launch.sh

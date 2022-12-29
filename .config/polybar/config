@@ -37,10 +37,10 @@ module-margin-right = 1
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-font-0 = "Saber:size=10;1"
-font-1 = "Saber:size=12:style=Bold;1"
-font-2 = "Saber:size=10;1"
-font-3 = "Saber:size=10;1"
+font-0 = "Iosevka:size=10;1"
+font-1 = "Iosevka:size=12:style=Bold;1"
+font-2 = "Iosevka:size=10;1"
+font-3 = "Iosevka:size=10;1"
 
 cursor-scroll = default
 scroll-up = bspwm.prev
