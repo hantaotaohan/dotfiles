@@ -795,9 +795,12 @@ main() {
             Pip_Install
             bash
             ;;
+        -l|--local)
+            LoaclConfig
+            bash
+            ;;
         -b|--deb)
             Deb_Install
-            LoaclConfig
             bash
             ;;
         -f|--fonts)

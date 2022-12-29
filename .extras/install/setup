@@ -88,7 +88,7 @@ usage() {
         sshbanner           Settings SSH Login Banner
         urxvt               Install Program URxvt - Terminal
         vim                 Install Program Vim Version 8.2
-        vifm                Install Program Vifm - FileBrowser
+        vifm                Install Program Vifm - Filebrowser
         weixin              Install Program Weixin - Linux Weixin
         yarn                Install Program Yarn
 
@@ -102,7 +102,7 @@ EOF
 # Public Tools Functions . 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
-row() {
+ROW() {
     seq -s '─' 0 "$(tput cols)" | tr -d '[:digit:]'
 }
 
@@ -126,9 +126,9 @@ Alttab() {
     make > /dev/null 2>&1 
     sudo make install > /dev/null 2>&1
 
-    row
+    ROW
     echo -e "Alttab Install Is Complete :: Version "  $(alttab -v 2>&1 | grep -i 'alttab' | head -n 1 | sed -e "s/\b\(.\)/\u\1/g" )
-    row
+    ROW
 
 }
 
@@ -150,9 +150,9 @@ Arcicons() {
 
     cp -rf Arc/ $HOME/.local/share/icons/
 
-    row
+    ROW
     echo "The Arc Icons installation is complete"
-    row
+    ROW
 
 }
 
@@ -166,9 +166,9 @@ Imagemagick() {
         sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
     fi
 
-    row
+    ROW
     echo "Imagemagick Fix Completed"
-    row
+    ROW
 
 }
 
@@ -190,9 +190,9 @@ Jupyter() {
 
     cp $EXTRAS_DIR/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
 
-    row
+    ROW
     echo -e "Jupyter Install Is Complete :: Version "  $( jupyter --version | grep -iE "ipython|notebook" | sed -e "s/\b\(.\)/\u\1/g" )
-    row
+    ROW
 
 }
 
@@ -214,9 +214,9 @@ Navi() {
 
     sudo chmod +x /usr/local/bin/navi
 
-    row
+    ROW
     echo -e "Navi Install Is Complete :: Version "  $( navi -V | sed -e "s/\b\(.\)/\u\1/g" )
-    row
+    ROW
 
 }
 
@@ -244,9 +244,9 @@ Picom() {
     ninja -C build > /dev/null 2>&1
     sudo install -Dm755 --verbose build/src/picom /usr/local/bin/picom > /dev/null 2>&1
 
-    row
+    ROW
     echo "Picom Install Is Complete :: Version: " $(picom --version | sed -e "s/\b\(.\)/\u\1/g")
-    row
+    ROW
 
 }
 
@@ -268,9 +268,9 @@ Dunst() {
     make > /dev/null 2>&1
     sudo make install > /dev/null 2>&1
 
-    row
+    ROW
     echo "Dunst Install Is Complete :: Version: " $(dunst -v | sed -e "s/\b\(.\)/\u\1/g")
-    row
+    ROW
 
 }
 
@@ -278,13 +278,13 @@ Dunst() {
 
 Offlineimap() {
 
-    # row
+    # ROW
     # echo "Please enter the password to extract the package: ......  "
-    # row
+    # ROW
 
-    # row
+    # ROW
     # unzip -o -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
-    # row
+    # ROW
 
     read -p "Please Input Your GPG Password: " PASSWORD
     cd $HOME/.config/neomutt/
@@ -307,9 +307,9 @@ Offlineimap() {
         touch $HOME/mail/Postponed
     fi
 
-    row
+    ROW
     echo "Neomutt Install Is Complete :: Version: " $(neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*...")
-    row
+    ROW
 
 }
 
@@ -318,23 +318,23 @@ Offlineimap() {
 Github_SSH() {
 
     if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
-        row
+        ROW
         echo "Please Input Email Addrsses For SSH Key: ...... "
-        row
+        ROW
         read -e ssh_email
         ssh-keygen -t rsa -P "" -C "$ssh_email"  -f ~/.ssh/id_rsa  > /dev/null 2>&1
     fi
 
-    row
+    ROW
     echo 'Key Copied to keyboard'
-    row
+    ROW
 
     xclip -sel clip < $HOME/.ssh/id_rsa.pub
     microsoft-edge --new-window 'https://github.com/settings/keys' > /dev/null 2>&1
 
-    row
+    ROW
     echo "Add Github For SSH Key Done!"
-    row
+    ROW
 
 }
 
@@ -344,9 +344,9 @@ Github_Hosts() {
 
     sudo python3 $EXTRAS_DIR/autohosts/github_hosts.py
 
-    row
+    ROW
     echo "Github Hosts Install Is Complete :: Update Time: " $(tail -n -4 /etc/hosts  | head -n 1)
-    row
+    ROW
 
 }
 
@@ -358,9 +358,9 @@ Vmware_Share_Fix() {
         sudo vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other,nonempty ;
     fi
 
-    row
+    ROW
     echo "Vmware Share Tools is Enable"
-    row
+    ROW
 
 }
 
@@ -374,9 +374,9 @@ Calibre() {
 
     $GIT_CLONE/hantaotaohan/books $HOME/books
 
-    row
+    ROW
     echo "Calibre Install Is Complete  & Git Clone Book Done :: Version: " $(calibre --version | sed -e "s/\b\(.\)/\u\1/g")
-    row
+    ROW
 
 }
 
@@ -389,9 +389,9 @@ Foliate() {
     wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/foliate.deb
     sudo dpkg -i foliate.deb > /dev/null 2>&1
 
-    row
+    ROW
     echo "Foliate Install Is Complete :: Version: " $(com.github.johnfactotum.Foliate -v)
-    row
+    ROW
 
 }
 
@@ -412,9 +412,9 @@ Rdrview() {
     make > /dev/null 2>&1 
     sudo make install > /dev/null 2>&1
 
-    row
+    ROW
     echo -e "Rerview Install Is Complete :: Version "  $(rdrview -v | sed -e "s/\b\(.\)/\u\1/g" )
-    row
+    ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -426,9 +426,9 @@ SSH_banner() {
 
     # systemctl restart sshd
 
-    row
+    ROW
     echo "SSH Banner Replacement Is Complete"
-    row
+    ROW
 
 }
 
@@ -450,9 +450,9 @@ Ly() {
     sudo make install > /dev/null 2>&1
     sudo systemctl enable ly.service
     
-    row
+    ROW
     echo "LY Install Is Complete "
-    row
+    ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -475,9 +475,9 @@ Ctags() {
     make > /dev/null 2>&1
     sudo make install > /dev/null 2>&1
 
-    row
+    ROW
     ctags --version | grep "Universal Ctags"
-    row
+    ROW
 
 }
 
@@ -488,9 +488,9 @@ Nodejs() {
     ( curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - ) > /dev/null 2>&1
     ${APT_INSTALL} nodejs > /dev/null 2>&1
 
-    row
+    ROW
     node --version
-    row
+    ROW
 
     ( curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - ) > /dev/null 2>&1
     ( echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list ) > /dev/null 2>&1
@@ -500,9 +500,9 @@ Nodejs() {
 
     sudo rm -rf /etc/apt/sources.list.d/yarn.list
 
-    row
+    ROW
     yarn --version
-    row
+    ROW
 
 }
 
@@ -516,9 +516,9 @@ Hugo() {
 
     sudo dpkg -i hugo.deb > /dev/null 2>&1
 
-    row
+    ROW
     hugo version
-    row
+    ROW
 
 }
 
@@ -529,13 +529,13 @@ Java() {
     ${APT_INSTALL} default-jre > /dev/null 2>&1
     ${APT_INSTALL} default-jdk > /dev/null 2>&1
 
-    row
+    ROW
     java -version
-    row
+    ROW
 
-    row
+    ROW
     javac -version
-    row
+    ROW
 
 }
 
@@ -545,9 +545,9 @@ Fix_FZF_history() {
 
     echo "bind -m emacs-standard '\"\\C-r\": \"\\C-e \\C-u\\C-y\\ey\\C-u\"\$(__fzf_history__)\"\\e\\C-e\\er\\C-m\"'" >> $HOME/.fzf/shell/key-bindings.bash
 
-    row
+    ROW
     echo "Fix FZF History Done!"
-    row
+    ROW
 
 }
 
@@ -560,9 +560,9 @@ Clone() {
     git clone -q git@github.com:hantaotaohan/books.git $HOME/books
     git clone -q git@github.com:hantaotaohan/wiki.git $HOME/wiki
 
-    row
+    ROW
     echo "Git Clone Done!"
-    row
+    ROW
 
 }
 
@@ -577,9 +577,9 @@ Fixrofiicons() {
     # fix ranger open path
     sudo sed -i '$a\Exec=/home/taotao/.config/ranger/ranger-oepn %U' /usr/share/applications/ranger.desktop
 
-    row
+    ROW
     echo "Fix Rofi Icons Done!"
-    row
+    ROW
 
 }
 
@@ -595,9 +595,9 @@ Fixi3terminal() {
         sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/i3-sensible-terminal
     fi
 
-    row
+    ROW
     echo "I3wm Terminal for Alacritty Doen!"
-    row
+    ROW
 
 }
 
@@ -618,9 +618,9 @@ Dragon() {
     make  > /dev/null 2>&1
     make install  > /dev/null 2>&1
 
-    row
+    ROW
     dragon --version
-    row
+    ROW
 
 }
 
@@ -636,9 +636,9 @@ Fixnautilus() {
     gsettings set org.gtk.Settings.FileChooser show-hidden 'true'
     gsettings set org.gnome.desktop.wm.preferences audible-bell 'false'
 
-    row
+    ROW
     echo "fix Nautilus Done!"
-    row
+    ROW
 
 }
 
@@ -659,9 +659,9 @@ I3blocks() {
     make > /dev/null 2>&1
     sudo make install > /dev/null 2>&1
 
-    row
+    ROW
     i3blocks -V
-    row
+    ROW
 
 }
 
@@ -676,9 +676,9 @@ Yarn() {
     sudo apt update -y -qq > /dev/null 2>&1
     ${APT_INSTALL} yarn
 
-    row
+    ROW
     yarn -v
-    row
+    ROW
 
 }
 
@@ -696,9 +696,9 @@ Bashdb() {
     make  > /dev/null 2>&1
     sudo make install  > /dev/null 2>&1
 
-    row
+    ROW
     echo "BASHDB Install Done!"
-    row
+    ROW
 
 }
 
@@ -716,9 +716,9 @@ I3lockfancy() {
 
     sudo make install
 
-    row
+    ROW
     echo "I3lock-Fancy Install Done!"
-    row
+    ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -733,9 +733,9 @@ Qutebrowser() {
 
     cp $HOME/.config/qutebrowser/greasemonkey/* $HOME/.local/share/qutebrowser/greasemonkey/
 
-    row
+    ROW
     qutebrowser -V | head -16 | grep qutebrowser
-    row
+    ROW
 
 }
 
@@ -751,9 +751,9 @@ Weixin() {
     sudo apt-get install -f -y -qq ./ukylin-wine_70.6.3.25_amd64.deb > /dev/null 2>&1
     sudo apt-get install -f -y -qq ./ukylin-wechat_3.0.0_amd64.deb > /dev/null 2>&1
 
-    row
+    ROW
     echo "Weixin Install Done!"
-    row
+    ROW
 
 }
 
@@ -773,9 +773,9 @@ Urxvt() {
 
     ./configure --enable-xft --enable-font-styles --enable-iso14755 --enable-unicode3 --enable-256-color --with-x > /dev/null 2>&1
 
-    row
+    ROW
     urxvt --version 2>&1 | grep rxvt-unicode
-    row
+    ROW
 
 }
 
@@ -785,7 +785,6 @@ St() {
 
     cd ${BIN_DIR} || return
 
-
     if [ -d "st" ]; then 
         cd st && git pull > /dev/null 2>&1
     else
@@ -794,9 +793,9 @@ St() {
 
     sudo make clean install > /dev/null 2>&1
     
-    row
+    ROW
     echo -e "ST Install Is Complete :: Version "  $(st -v | sed -e "s/\b\(.\)/\u\1/g" )
-    row
+    ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -817,9 +816,9 @@ Vifm() {
 
     sudo make install > /dev/null 2>&1
 
-    row
+    ROW
     echo "Vifm - Vifmimg Install Done !"
-    row
+    ROW
 
 }
 
@@ -840,9 +839,9 @@ Popupdict() {
     sudo pip3 install -r requirements.txt  > /dev/null 2>&1
     sudo python3 setup.py develop  > /dev/null 2>&1
 
-    row
+    ROW
     echo -e "Popup-Dict Install Is Complete"
-    row
+    ROW
 
 }
 
@@ -859,9 +858,9 @@ Anki() {
     cd anki-2.1.49-linux
     sudo bash install.sh > /dev/null 2>&1  
 
-    row
+    ROW
     echo "Anki Install Is Complete :: Version: " $(anki -v | sed -e "s/\b\(.\)/\u\1/g")
-    row
+    ROW
 
 }
 
@@ -902,9 +901,9 @@ I3gaps() {
     sudo install -Dm755 --verbose i3-sensible-pager /usr/bin/i3-sensible-pager
     sudo install -Dm755 --verbose i3-sensible-terminal /usr/bin/i3-sensible-terminal
 
-    row
+    ROW
     i3 -v
-    row
+    ROW
 
 }
 
@@ -960,9 +959,9 @@ Vim () {
     # --with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/ 指定 python3路径
     # --prefix=/usr/local/vim：指定将要安装到的路径
 
-    row
+    ROW
     vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]"
-    row
+    ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
@@ -989,9 +988,9 @@ Rofi() {
     make > /dev/null 2>&1
     sudo make install > /dev/null 2>&1
 
-    row
+    ROW
     rofi -v
-    row
+    ROW
 
 }
 
