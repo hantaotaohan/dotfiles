@@ -7,18 +7,18 @@
 
 set $mod Mod1
 
-set $TERMINAL st
-set $TERMINAL_C St
+# set $TERMINAL st
+# set $TERMINAL_C St
 
-# set $TERMINAL alacritty
-# set $TERMINAL_C Alacritty
+set $TERMINAL alacritty
+set $TERMINAL_C Alacritty
 
 # --------------------------------------------------------------------------------------------------
 # 基础设置
 # --------------------------------------------------------------------------------------------------
 
 # 字体配置 
-font pango:Inziu_Iosevka_SC_Bold 10
+font pango:Iosevka Bold 10
 
 # 鼠标移动调整方向设置
 set $up k
@@ -479,7 +479,7 @@ client.background $base07
 # i3bar设定
 # --------------------------------------------------------------------------------------------------
 bar {
-    font pango:Inziu Iosevka SC Bold 10
+    font pango:Iosevka Bold 10
     id			            bar-0
     status_command 	        i3blocks -c ~/.config/i3blocks/config
     bindsym button4         nop
@@ -506,7 +506,7 @@ bar {
 # --------------------------------------------------------------------------------------------------
 
 bar {
-    font pango:Inziu Iosevka SC Bold 10
+    font pango:Iosevka Bold 10
     id			            bar-1
     status_command 	        i3blocks -c ~/.config/i3blocks/configb
     bindsym button1         nop
@@ -589,7 +589,7 @@ exec --no-startup-id /usr/bin/vmware-user
 # Alttab
 # exec --no-startup-id "alttab -mk Control_L -s 1 -t 500x200 -d 1 -font xft:Saber:style=Bold:size=10 -i 30x30"
 # exec --no-startup-id "alttab -s 1 -t 500x200 -d 1 -font xft:Saber:style=Bold:size=10 -i 30x30"
-exec_always --no-startup-id alttab -s 0 -t 200x60 -d 1 -font xft:Saber:style=Bold:size=10 -i 1x1 -bg "#282c34"
+exec_always --no-startup-id alttab -s 0 -t 200x60 -d 1 -font xft:Iosevka:style=Bold:size=10 -i 1x1 -bg "#282c34"
 
 # 热启动qutebrowser
 # exec --no-startup-id qutebrowser

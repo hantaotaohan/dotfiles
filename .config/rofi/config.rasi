@@ -1,6 +1,6 @@
 configuration {
 /*	modi: "window,run,ssh";*/
-	font: "Saber 10";
+	font: "Iosevka Bold 10";
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
@@ -135,14 +135,14 @@ configuration {
 /*	me-select-entry: "MousePrimary";*/
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
-  timeout {
-      action: "kb-cancel";
-      delay:  0;
-  }
-  filebrowser {
-      directories-first: true;
-      sorting-method:    "name";
-  }
+/*  timeout {
+/*      action: "kb-cancel";
+/*      delay:  0;
+/*  }
+/*  filebrowser {
+/*      directories-first: true;
+/*      sorting-method:    "name";
+/*  }
 }
 
 // vim: set ft=css:

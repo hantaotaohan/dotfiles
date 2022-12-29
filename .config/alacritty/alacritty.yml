@@ -46,19 +46,19 @@ scrolling:
 # Font configuration
 font:
     normal:
-        family: Inziu Iosevka SC
+        family: Iosevka
         style: Bold
 
     bold:
-        family: Inziu Iosevka SC
+        family: Iosevka
         style: Bold
 
     italic:
-        family: Inziu Iosevka SC
+        family: Iosevka
         style: Italic
 
     bolditalic:
-        family: Inziu Iosevka SC
+        family: Iosevka
         style: BoldItalic
 
     # Font size (pt)
