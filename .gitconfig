@@ -28,7 +28,8 @@
 [core]
     editor   = vim
     autocrlf = false
-    pager    = diff-so-fancy | less --tabs=4 -RFX
+    pager    = delta
+    ; pager    = diff-so-fancy | less --tabs=4 -RFX
 
 [log]
     date = format:%A %Y-%m-%d %H:%M:%S
@@ -67,12 +68,13 @@
     changed   = yellow
     untracked = red
 
-[pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX
-    show = diff-so-fancy | less --tabs=4 -RFX
+; [pager]
+;     diff = diff-so-fancy | less --tabs=4 -RFX
+;     show = diff-so-fancy | less --tabs=4 -RFX
 
 [interactive]
-    diffFilter = "diff-so-fancy --patch"
+    ; diffFilter = "diff-so-fancy --patch"
+    diffFilter = delta --color-only
 
 [diff-so-fancy]
     stripLeadingSymbols  = false
