@@ -178,6 +178,7 @@ Install_Dotfiles() {
     ROWLIN
     CENTER "       ${BLUE}Start Backup and Install Dotfiles${RESET}      ";
     ROWLIN
+    CENTER "                                                             ";
 
     # ─────────────────────────────────────────────────────────────────── #
 
@@ -253,6 +254,7 @@ Uninstall_Dotfiles() {
     ROWLIN
     CENTER "                 ${BLUE}Restore Dotfile Initial State${RESET}                      ";
     ROWLIN
+    CENTER "                                                                                   ";
 
     # ───────────────────────────────────────────────────────────────────────────────────────── #
 
@@ -304,6 +306,7 @@ Workspace_Settings() {
     ROWLIN
     CENTER "                       ${BLUE}System Environment Configuration${RESET}                         ";
     ROWLIN
+    CENTER "                                                                                               ";
 
     # ───────────────────────────────────────────────────────────────────────────────────────────────────── #
 
@@ -313,6 +316,7 @@ Workspace_Settings() {
     if [ ! -d "$HOME/desktop" ]; then mkdir -p "$HOME/desktop"; fi
     if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
 
+    echo -e "\t\t${GREEN}[+]Make Folder Done !${RESET}\n"
 }
 
 #-----------------------------------------------------------------------------------------------------------#
@@ -333,6 +337,7 @@ System_Update() {
     ROWLIN
     CENTER "  ${BLUE}Repace Sources and System Update ${RESET}   ";
     ROWLIN
+    CENTER "                                                     ";
 
     # ─────────────────────────────────────────────────────────── #
 
@@ -363,6 +368,7 @@ Apt_Install() {
     ROWLIN
     CENTER "${BLUE}Apt - Install${RESET}";
     ROWLIN
+    CENTER "                            ";
 
     # ────────────────────────────────── #
 
@@ -421,6 +427,7 @@ Pip_Install() {
     ROWLIN
     CENTER " ${BLUE}PIP3 - Install${RESET} ";
     ROWLIN
+    CENTER "                               ";
 
     # ───────────────────────────────────── #
 
@@ -474,6 +481,7 @@ Deb_Install() {
     ROWLIN
     CENTER "${BLUE}DEB - Install ${RESET}";
     ROWLIN
+    CENTER "                             ";
 
     # ─────────────────────────────────── #
 
@@ -512,6 +520,7 @@ LoaclConfig() {
     ROWLIN
     CENTER "${BLUE}Local Software- Config & Settings${RESET}";
     ROWLIN
+    CENTER "                                                ";
 
     # ────────────────────────────────────────────────────── #
 
@@ -556,6 +565,7 @@ Apt_Remove() {
     ROWLIN
     CENTER "            ${BLUE}Apt Remove ${RESET}               ";
     ROWLIN
+    CENTER "                                                     ";
                                    
     # ─────────────────────────────────────────────────────────── #
 
@@ -620,10 +630,11 @@ Install_Hosts() {
     ROWLIN
     CENTER "       ${BLUE}HOSTS Install ${RESET}      ";
     ROWLIN
+    CENTER "                                          ";
 
     # ──────────────────────────────────────────────── #
 
-    sudo sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl https://raw.hellogithub.com/hosts | sudo tee -a /etc/hosts > /dev/null 2>&1
+    sudo sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl -s https://raw.hellogithub.com/hosts | sudo tee -a /etc/hosts > /dev/null 2>&1
     echo -e "\t\t${GREEN}[√] Hosts Repace Successful${RESET}\n"
 
 }
@@ -646,6 +657,7 @@ Sync_Dotfiles() {
     ROWLIN
     CENTER "                            ${BLUE}Github Sync ${RESET}                                ";
     ROWLIN
+    CENTER "                                                                                       ";
 
     # ───────────────────────────────────────────────────────────────────────────────────────────── #
 
@@ -679,7 +691,6 @@ main() {
             Pip_Install
             Deb_Install
             LoaclConfig
-            Fonts_Install
             Apt_Remove
             echo -e "\t\t${GREEN}[√] *** All Install Successful *** ${RESET}\n"
             cd $HOME
