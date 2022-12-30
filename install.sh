@@ -90,7 +90,8 @@ BIN_DIR="$HOME/.local/bin"
 DOTFILES_REPO=$(pwd)
 
 GITHUB="github.com"
-GITHUBRAW="https://github.com/hantaotaohan/dotfiles/releases/download/1.0.0"
+GITHUBRAW="https://gitee.com/hantaotaohan/dotfiles/raw/master"
+# GITHUBRAW="https://github.com/hantaotaohan/dotfiles/releases/download/1.0.0"
 
 DOTFILES_COPY=( \
     .cargo \
@@ -229,8 +230,8 @@ Install_Dotfiles() {
 
     # >>> Install Sources.list | .source To etc/apt/sources.list
 
-    sudo cp -rf "$DOTFILES_REPO/sources.list" "/etc/apt/sources.list"
-    echo -e "\t\t${GREEN}[+]Repace sources.list Done !${RESET}\n"
+    sudo ln -sf "$DOTFILES_REPO/sources.list" "/etc/apt/sources.list"
+    echo -e "\n\t\t${GREEN}[+]Repace sources.list Done !${RESET}\n"
 
     # >>> Output.
 
@@ -322,7 +323,7 @@ Workspace_Settings() {
     if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace"; fi
     if [ ! -d "$HOME/desktop" ]; then mkdir -p "$HOME/desktop"; fi
     if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
-    echo -e "\t\t${GREEN}[+]Make Folder Successful${RESET}\n"
+    echo -e "\n\t\t${GREEN}[+]Make Folder Successful${RESET}\n"
 
     # >>> Set Locales Language
 
@@ -332,12 +333,12 @@ Workspace_Settings() {
     sudo sed -i -e 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen
     sudo locale-gen > /dev/null 2>&1
     sudo dpkg-reconfigure --frontend=noninteractive locales > /dev/null 2>&1
-    echo -e "\t\t${GREEN}[+]Set Locales Language is Successful${RESET}\n"
+    echo -e "\n\t\t${GREEN}[+]Set Locales Language is Successful${RESET}\n"
 
     # >>> Set TimeZone
 
     sudo timedatectl set-timezone "Asia/Shanghai"
-    echo -e "\t\t${GREEN}[+]Set TimeZone is Successful${RESET}\n"
+    echo -e "\n\t\t${GREEN}[+]Set TimeZone is Successful${RESET}\n"
 
     # >>> Fix Sanbox
 
@@ -372,12 +373,12 @@ System_Update() {
 
     # ─────────────────────────────────────────────────────────── #
 
-    sudo cp -rf "$DOTFILES_REPO/sources.list" "/etc/apt/sources.list"
-    echo -e "\t\t${GREEN}[+]Repace sources.list Done !${RESET}\n"
+    sudo ln -sf "$DOTFILES_REPO/sources.list" "/etc/apt/sources.list"
+    echo -e "\n\t\t${GREEN}[+]Repace sources.list Done !${RESET}\n"
     sudo apt update -y -qq > /dev/null 2>&1
-    echo -e "\t\t${GREEN}[+]Update Successful !${RESET}\n"
+    echo -e "\n\t\t${GREEN}[+]Update Successful !${RESET}\n"
     sudo apt upgrade -y -qq > /dev/null 2>&1
-    echo -e "\t\t${GREEN}[+]Upgrade Successful !${RESET}\n"
+    echo -e "\n\t\t${GREEN}[+]Upgrade Successful !${RESET}\n"
 
 }
 
@@ -495,7 +496,7 @@ Apt_Install() {
 
     for app in "${APTAPPS[@]}"
     do
-        echo -e "\t\t[*] Installing: $app";
+        echo -e "\n\t\t[*] Installing: $app";
         sudo apt install -y -qq $app > /dev/null 2>&1
         Install_Status $? $app
     done
@@ -554,7 +555,7 @@ Pip_Install() {
 
     for app in "${PIPAPPS[@]}"
     do
-        echo -e "\t\t[*] Installing: $app";
+        echo -e "\n\t\t[*] Installing: $app";
         sudo pip3 install -q --timeout 1000 --retries 20  $app -i \
         https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
         Install_Status $? $app
@@ -602,7 +603,7 @@ Deb_Install() {
 
     for app in "${DPKGAPPS[@]}"
     do
-        echo -e "\t\t[*] Installing: $app";
+        echo -e "\n\t\t[*] Installing: $app";
         sudo dpkg -i $BIN_DIR/$app > /dev/null 2>&1
         Install_Status $? $app
     done
@@ -640,7 +641,7 @@ LoaclConfig() {
 
     im-config -n fcitx > /dev/null 2>&1
     im-config -s fcitx > /dev/null 2>&1
-    echo -e "\t\t${GREEN}[√] Fcitx Successful${RESET}\n"
+    echo -e "\n\t\t${GREEN}[√] Fcitx Successful${RESET}\n"
 	
     #-------------------------------------------------------------------------------------------------------#
     # Edge                              
@@ -660,7 +661,7 @@ LoaclConfig() {
 
     sudo apt update -y -qq > /dev/null 2>&1
     sudo apt install -y -qq microsoft-edge-dev > /dev/null 2>&1
-    echo -e "\t\t${GREEN}[√] Edge Successful${RESET}\n"
+    echo -e "\n\t\t${GREEN}[√] Edge Successful${RESET}\n"
 
     #-------------------------------------------------------------------------------------------------------#
     # Tmux                                
@@ -674,14 +675,14 @@ LoaclConfig() {
     tmux new-session -d
     $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
     tmux kill-server
-    echo -e "\t\t${GREEN}[√] TMUX Successful${RESET}\n"
+    echo -e "\n\t\t${GREEN}[√] TMUX Successful${RESET}\n"
 
     #-------------------------------------------------------------------------------------------------------#
     # Install Vim Plug                      
     #-------------------------------------------------------------------------------------------------------#
 
     vim
-    echo -e "\t\t${GREEN}[√] Vim Successful${RESET}\n"
+    echo -e "\n\t\t${GREEN}[√] Vim Successful${RESET}\n"
 
 }
 
@@ -709,7 +710,8 @@ Fonts_Install() {
 
     if [ ! -d "$HOME/.fonts" ]; then
         git clone -q\
-            https://${GITHUB}/hantaotaohan/fonts.git\
+            # https://${GITHUB}/hantaotaohan/fonts.git\
+            https://gitee.com/hantaotaohan/fonts.git\
             $HOME/.fonts && cd $HOME/.fonts && ./install.sh
     else
         cd $HOME/.fonts &&\
@@ -750,7 +752,7 @@ Apt_Remove() {
 
 	for app in "${APTAPPS[@]}"
 	do
-        echo -e "\t\t[*] Remove: $app";
+        echo -e "\n\t\t[*] Remove: $app";
         sudo apt-get -y -qq --purge $app > /dev/null 2>&1
         sudo apt autoremove -y -qq > /dev/null 2>&1
         sudo apt-get clean > /dev/null 2>&1
@@ -806,7 +808,7 @@ Install_Hosts() {
     # ──────────────────────────────────────────────── #
 
     sudo sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl -s https://raw.hellogithub.com/hosts | sudo tee -a /etc/hosts > /dev/null 2>&1
-    echo -e "\t\t${GREEN}[√] Hosts Repace Successful${RESET}\n"
+    echo -e "\n\t\t${GREEN}[√] Hosts Repace Successful${RESET}\n"
 
 }
 
@@ -833,7 +835,7 @@ Sync_Dotfiles() {
     # ───────────────────────────────────────────────────────────────────────────────────────────── #
 
     git reset -q --hard && git pull -q
-    echo -e "\t\t${GREEN} ● Dotfiles Update Sync Complete ${RESET}"
+    echo -e "\n\t\t${GREEN} ● Dotfiles Update Sync Complete ${RESET}"
 }
 
 #-----------------------------------------------------------------------------------------------------------#
