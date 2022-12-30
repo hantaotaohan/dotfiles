@@ -83,7 +83,7 @@
     useUnicodeRuler      = true
 
 [delta]
-    syntax-theme = Nord
+    syntax-theme = base16 
     features = interactive side-by-side onedark
 
 [delta "interactive"]
@@ -94,9 +94,9 @@
     #author: https://github.com/AirOnSkin
     dark = true
     line-numbers = true
-    side-by-side = false
+    side-by-side = true
     keep-plus-minus-markers = false
-    syntax-theme = Nord
+    syntax-theme = base16 
     file-style = "#61afef" bold
     file-decoration-style = "#61afef" ul
     file-added-label = [+]
@@ -118,11 +118,11 @@
     minus-empty-line-marker-style = minus-style
     plus-empty-line-marker-style = plus-style
     minus-style = bold "#282c34" red
-    minus-emph-style = bold "#282C34" "#98C379"
-    minus-non-emph-style = bold
+    minus-emph-style = bold "#ffffff" blue
+    minus-non-emph-style = bold "#282C34" "#E5c07b"
     plus-style = bold "#282c34" green
-    plus-emph-style = bold "#282c34" "#E5c07b"
-    plus-non-emph-style = bold
+    plus-emph-style = bold "#ffffff" blue
+    plus-non-emph-style = bold "#282C34" "#E5c07b" 
     zero-style = syntax
     blame-code-style = syntax
     blame-format = "{author:<18} ({commit:>9}) {timestamp:^16}"
