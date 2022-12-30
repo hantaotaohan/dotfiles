@@ -28,7 +28,7 @@
 [core]
     editor   = vim
     autocrlf = false
-    pager    = delta
+    pager    = diff-so-fancy | less --tabs=4 -RFX
 
 [log]
     date = format:%A %Y-%m-%d %H:%M:%S
@@ -43,10 +43,45 @@
     ui   = always
     diff = always
 
+[color "diff"]
+    meta       = 5  0 bold
+    commit     = 15 0 bold
+    frag       = 5  0 bold
+    old        = 1  0 bold
+    new        = 2  0 bold
+    whitespace = 3  0 reverse
+
+[color "diff-highlight"]
+    oldNormal    = 1 0 bold
+    oldHighlight = 0 1 bold 
+    newNormal    = 2 0 bold
+    newHighlight = 0 2 bold
+
+[color "branch"]
+    current = yellow reverse
+    local   = yellow
+    remote  = green
+
+[color "status"]
+    added     = green
+    changed   = yellow
+    untracked = red
+
+[pager]
+    diff = diff-so-fancy | less --tabs=4 -RFX
+    show = diff-so-fancy | less --tabs=4 -RFX
+
 [interactive]
-    diffFilter = delta --color-only --features=interactive
+    diffFilter = "diff-so-fancy --patch"
+
+[diff-so-fancy]
+    stripLeadingSymbols  = false
+    changeHunkIndicators = true
+    markEmptyLines       = false
+    useUnicodeRuler      = true
 
 [delta]
+    syntax-theme = TwoDark
     features = interactive side-by-side onedark
 
 [delta "interactive"]
@@ -56,11 +91,11 @@
     #author: https://github.com/AirOnSkin
     dark = true
     line-numbers = true
-    side-by-side = true
+    side-by-side = false
     keep-plus-minus-markers = false
     syntax-theme = Nord
-    file-style = "#434C5E" bold
-    file-decoration-style = "#434C5E" ul
+    file-style = "#61afef" bold
+    file-decoration-style = "#61afef" ul
     file-added-label = [+]
     file-copied-label = [==]
     file-modified-label = [*]
@@ -71,25 +106,25 @@
     line-numbers-left-style = red
     line-numbers-right-format = " {np:>3} │"
     line-numbers-right-style = green
-    line-numbers-minus-style = red italic black
-    line-numbers-plus-style = green italic black
-    line-numbers-zero-style = "#434C5E" italic
-    minus-style = bold red
-    minus-emph-style = bold "#202020" "#FF5555"
+    line-numbers-minus-style = red black
+    line-numbers-plus-style = green black
+    line-numbers-zero-style = "#282c34" italic
+    minus-style = bold "#282c34" red
+    minus-emph-style = bold "#282C34" "#98C379"
     minus-non-emph-style = bold
-    plus-style = bold green
-    plus-emph-style = bold "#202020" "#50FA7B"
+    plus-style = bold "#282c34" green
+    plus-emph-style = bold "#282c34" "#E5c07b"
     plus-non-emph-style = bold
     zero-style = syntax
     blame-code-style = syntax
     blame-format = "{author:<18} ({commit:>9}) {timestamp:^16}"
-    blame-palette = "#2E3440" "#3B4252" "#434C5E" "#4C566A"
+    blame-palette = "#282c34" "#3B4252" "#434C5E" "#4C566A"
     merge-conflict-begin-symbol = ~
     merge-conflict-end-symbol = ~
-    merge-conflict-ours-diff-header-style = "#F1FA8C" bold
+    merge-conflict-ours-diff-header-style = "#E5c07b" bold
     merge-conflict-ours-diff-header-decoration-style = "#434C5E" box
-    merge-conflict-theirs-diff-header-style = "#F1FA8C" bold
-    merge-conflict-theirs-diff-header-decoration-style = "#434C5E" box
+    merge-conflict-theirs-diff-header-style = "#E5c07b" bold
+    merge-conflict-theirs-diff-header-decoration-style = "#282C34" box
 
 [diff]
     colorMoved = default
