@@ -77,6 +77,10 @@ set incsearch
 " Try to leave some space from cursor to upper/lower border in lists
 set scrolloff=4
 
+" miller view
+set millerview
+set milleroptions="lsize:1,csize:2,rsize:0,rpreview:all"
+
 " Don't do too many requests to slow file systems
 if !has('win')
     set slowfs=curlftpfs
@@ -115,11 +119,11 @@ set lsoptions=transposed
 " Columns format
 set viewcolumns=-60%{name},40%{size}
 
-set tablabel=" "
+" set tablabel=" "
 
-set tabprefix="%N"
+" set tabprefix="%N"
 
-set tabsuffix=" "
+" set tabsuffix=" "
 
 set laststatus
 

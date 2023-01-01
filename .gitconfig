@@ -117,12 +117,12 @@
     line-numbers-zero-style = bold white black        # 无修改编号颜色
     minus-empty-line-marker-style = minus-style
     plus-empty-line-marker-style = plus-style
-    minus-style = bold dim black red
-    minus-emph-style = bold "#000000" "#e5c07b" 
-    minus-non-emph-style = bold "#FFFFFF" "#93474d"
+    minus-style = bold "#282c34" red
+    minus-emph-style = bold  "#282c34" "#d7af87"
+    minus-non-emph-style = bold  "#d7af87" 
     plus-style = bold "#282c34" green
-    plus-emph-style = bold "#000000" "#e5c07b"
-    plus-non-emph-style = bold "#FFFFFF" "#45aa26" 
+    plus-emph-style = bold  "#282c34" yellow
+    plus-non-emph-style = bold "#e5c07b"  
     zero-style = syntax
     blame-code-style = syntax
     blame-format = "{author:<18} ({commit:>9}) {timestamp:^16}"
