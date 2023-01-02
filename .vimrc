@@ -134,7 +134,7 @@ set breakat=\ \	;:,!?                                                      " 换
 set showbreak=↳                                                            " 设置换行符号
 
 set backspace=indent,eol,start                                             " 删除键行为
-set diffopt=filler,internal,algorithm:histogram,indent-heuristic           " 更新diff配置
+set diffopt=filler,internal,algorithm:histogram,indent-heuristic,vertical  " 更新diff配置
 " set fillchars=fold:\—
 set fillchars+=vert:\│
 
@@ -167,6 +167,9 @@ set noruler                                                                " 右
 set noshowmode                                                             " 任务栏不显示状态
 set laststatus=2                                                           " 启用状态栏信息
 set showtabline=2                                                          " 永远显示标签页
+
+set splitbelow                                                             " 如果水平拆分, 默认在下面
+set splitright                                                             " 如果垂直拆分, 默认在右边
 
 set cursorline                                                             " 突出显示当前行
 set scrolloff=6                                                            " 光标上下两侧最少保留的屏幕行数
