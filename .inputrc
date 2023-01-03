@@ -81,6 +81,8 @@ set bind-tty-special-chars Off
 
 "\C-H": backward-word
 "\C-L": forward-word
+"\C-[[1;2D": backward-word
+"\C-[[1;2C": forward-word
 "\C-D": kill-word
 "\C-w": backward-kill-word
 

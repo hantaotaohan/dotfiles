@@ -28,7 +28,8 @@
 [core]
     editor   = vim
     autocrlf = false
-    pager = delta --diff-so-fancy
+    ; pager = delta --diff-so-fancy
+    pager = delta --diff-so-fancy  --wrap-max-lines 1 --max-line-length=$((COLUMNS - 10))
     ; pager    = diff-so-fancy | less --tabs=4 -RFX
 
 [log]
@@ -46,7 +47,7 @@
 
 [color "diff"]
     meta       = 3  0 bold
-    commit     = 15 0 bold
+    commit     = 3  0 bold
     frag       = 5  0 bold
     old        = 1  0 bold
     new        = 2  0 bold
@@ -54,9 +55,9 @@
 
 [color "diff-highlight"]
     oldNormal    = 1 0 bold
-    oldHighlight = 16 1 
+    oldHighlight = 1 52 bold
     newNormal    = 2 0 bold
-    newHighlight = 16 2 
+    newHighlight = 10 22 bold
 
 [color "branch"]
     current = yellow reverse
@@ -84,7 +85,7 @@
 
 [delta]
     syntax-theme = base16 
-    features = interactive side-by-side onedark
+    features = space-separated interactive side-by-side onedark
 
 [delta "interactive"]
     keep-plus-minus-markers = false
@@ -95,50 +96,54 @@
     dark = true
     line-numbers = true
     side-by-side = false
-    syntax-theme = base16 
     keep-plus-minus-markers = false
-    file-style =  omit bold blue
-    file-decoration-style = ul blue bold
-    file-added-label = [+]
+    max-line-length = 130
+    true-color = always
+    syntax-theme = base16
+    file-style =  omit bold "#61AFEF"
+    file-decoration-style = ul bold "#61AFEF"
+    file-added-label = [A]
     file-copied-label = [==]
-    file-modified-label = [*]
-    file-removed-label = [-]
+    file-modified-label = [M]
+    file-removed-label = [D]
     file-renamed-label = [->]
-    commit-style = bold box italic magenta black
-    commit-decoration-style = bold box yellow black
-    hunk-header-style = file line-number syntax 
-    hunk-header-line-number-style = bold box "#003300"
-    hunk-header-decoration-style = blue box
+    commit-style = box bold italic "#C678DD" "#282C34"
+    commit-decoration-style = bold box "#E5C07B" "#282C34"
+    hunk-header-style = file line-number syntax
+    hunk-header-line-number-style = box bold "#E5C07B"
+    hunk-header-decoration-style = box bold "#61AFEF"
     line-numbers-left-format = " {nm:>3} │"
     line-numbers-right-format = " {np:>3} │"
     line-numbers-left-style = "#E06C75" "#282C34"        # left编号颜色
     line-numbers-right-style = "#98C379" "#282C34"       # right编号颜色
     line-numbers-minus-style = "#E06C75" "#282C34"       # - 编号颜色
     line-numbers-plus-style = "#98C379" "#282C34"        # + 编号颜色
-    line-numbers-zero-style =  8 black     # 无修改编号颜色
+    line-numbers-zero-style =  "#5A6374" "#282C34"       # 无修改编号颜色
     minus-empty-line-marker-style = minus-style
     plus-empty-line-marker-style = plus-style
-    minus-style = bold "#282c34" "#E06C75" 
-    minus-emph-style = bold  "#282c34" "#d7af87"
-    minus-non-emph-style = bold  "#d7af87" 
-    plus-style = bold "#282c34" "#98C379" 
-    plus-emph-style = bold  "#282c34" yellow
-    plus-non-emph-style = bold "#e5c07b"  
-    zero-style = syntax
+
+    minus-style = bold "#E06C75" "#282C34" 
+    minus-emph-style = bold "#F06372" "#680000"
+    minus-non-emph-style = bold  "#F06372" 
+
+    plus-style = bold "#98C379" "#282C34" 
+    plus-emph-style = bold "#8BC66F" "#006200" 
+    plus-non-emph-style = bold "#8BC66F"  
+
+    zero-style = syntax normal
     blame-code-style = syntax
     blame-format = "{author:<18} ({commit:>9}) {timestamp:^16}"
     blame-palette = "#282c34" "#3B4252" "#434C5E" "#4C566A"
     merge-conflict-begin-symbol = ~
     merge-conflict-end-symbol = ~
-    merge-conflict-ours-diff-header-style = "#E5c07b" bold
+    merge-conflict-ours-diff-header-style = "#E5C07B" bold
     merge-conflict-ours-diff-header-decoration-style = "#434C5E" box
-    merge-conflict-theirs-diff-header-style = "#E5c07b" bold
+    merge-conflict-theirs-diff-header-style = "#E5C07B" bold
     merge-conflict-theirs-diff-header-decoration-style = "#282C34" box
-    whitespace-error-style = "#280050" reverse
+    whitespace-error-style = "#D7AF87" reverse
 
 [diff]
     colorMoved = default
-    interHunkContext = 99999
     
 [url "git@github.com:"]
     insteadOf     = "gh:"
