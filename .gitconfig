@@ -28,7 +28,7 @@
 [core]
     editor   = vim
     autocrlf = false
-    pager    = delta
+    pager = delta --diff-so-fancy
     ; pager    = diff-so-fancy | less --tabs=4 -RFX
 
 [log]
@@ -45,7 +45,7 @@
     diff = always
 
 [color "diff"]
-    meta       = 5  0 bold
+    meta       = 3  0 bold
     commit     = 15 0 bold
     frag       = 5  0 bold
     old        = 1  0 bold
@@ -54,9 +54,9 @@
 
 [color "diff-highlight"]
     oldNormal    = 1 0 bold
-    oldHighlight = 0 1 bold 
+    oldHighlight = 16 1 
     newNormal    = 2 0 bold
-    newHighlight = 0 2 bold
+    newHighlight = 16 2 
 
 [color "branch"]
     current = yellow reverse
@@ -94,33 +94,34 @@
     #author: https://github.com/AirOnSkin
     dark = true
     line-numbers = true
-    side-by-side = true
+    side-by-side = false
     syntax-theme = base16 
     keep-plus-minus-markers = false
-    file-style =  bold blue
-    file-decoration-style = ul blue
+    file-style =  omit bold blue
+    file-decoration-style = ul blue bold
     file-added-label = [+]
     file-copied-label = [==]
     file-modified-label = [*]
     file-removed-label = [-]
     file-renamed-label = [->]
-    commit-style = bold italic magenta black
-    commit-decoration-style = bold box magenta black
-    hunk-header-style = omit
-    hunk-header-line-number-style = bold "#003300"
+    commit-style = bold box italic magenta black
+    commit-decoration-style = bold box yellow black
+    hunk-header-style = file line-number syntax 
+    hunk-header-line-number-style = bold box "#003300"
+    hunk-header-decoration-style = blue box
     line-numbers-left-format = " {nm:>3} │"
     line-numbers-right-format = " {np:>3} │"
-    line-numbers-left-style = bold red black        # left编号颜色
-    line-numbers-right-style = bold green black       # right编号颜色
-    line-numbers-minus-style = bold red black       # - 编号颜色
-    line-numbers-plus-style = bold green black        # + 编号颜色
-    line-numbers-zero-style = bold white black        # 无修改编号颜色
+    line-numbers-left-style = "#E06C75" "#282C34"        # left编号颜色
+    line-numbers-right-style = "#98C379" "#282C34"       # right编号颜色
+    line-numbers-minus-style = "#E06C75" "#282C34"       # - 编号颜色
+    line-numbers-plus-style = "#98C379" "#282C34"        # + 编号颜色
+    line-numbers-zero-style =  8 black     # 无修改编号颜色
     minus-empty-line-marker-style = minus-style
     plus-empty-line-marker-style = plus-style
-    minus-style = bold "#282c34" red
+    minus-style = bold "#282c34" "#E06C75" 
     minus-emph-style = bold  "#282c34" "#d7af87"
     minus-non-emph-style = bold  "#d7af87" 
-    plus-style = bold "#282c34" green
+    plus-style = bold "#282c34" "#98C379" 
     plus-emph-style = bold  "#282c34" yellow
     plus-non-emph-style = bold "#e5c07b"  
     zero-style = syntax
@@ -137,6 +138,7 @@
 
 [diff]
     colorMoved = default
+    interHunkContext = 99999
     
 [url "git@github.com:"]
     insteadOf     = "gh:"
