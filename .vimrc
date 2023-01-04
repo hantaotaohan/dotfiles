@@ -367,11 +367,11 @@ nnoremap <silent> ) )zz
 nnoremap <silent> [[ [[zz
 nnoremap <silent> ]] ]]zz
 
-nnoremap <silent> <C-u> <C-u>zz
-nnoremap <silent> <C-d> <C-d>zz
+nnoremap <silent> <C-u> <C-u>0zz
+nnoremap <silent> <C-d> <C-d>0zz
 
-nnoremap <silent> <C-b> <C-b>zz
-nnoremap <silent> <C-f> <C-f>zz
+nnoremap <silent> <C-b> <C-b>0zz
+nnoremap <silent> <C-f> <C-f>0zz
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " Clear Highlighted Search
@@ -782,26 +782,25 @@ hi NonText                          cterm=bold  ctermfg=0    ctermbg=0    guifg=
 " ================================================================================================================================
 
 if exists('g:plugs["vim-airline"]')
-
-	let g:airline_theme='onedark'                                            " 设置状态栏主题默认powerlineish
-	let g:airline_experimental = 1
-	let g:airline_detect_modified=0
-	let g:airline_inactive_alt_sep=0                                         " 对非活动窗口的状态行使用替代分隔符
-	let g:airline_powerline_fonts= 1                                         " 使用powerline打过补丁的字体
-	let g:airline_inactive_collapse=0                                        " 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
-	let g:airline_highlighting_cache = 1                                     " 将更改缓存到突出显示组中，因此应更快。如果遇到缓慢的Vim，请将其设置为1
-	let g:airline_focuslost_inactive = 0                                     " 使用FocusLost自动命令禁用航空公
-	let g:airline_stl_path_style = 'full'                                    " 在状态栏显示短路经
-	let g:airline_skip_empty_sections = 0
+    let g:airline_theme='onedark'                                            " 设置状态栏主题默认powerlineish
+    let g:airline_experimental = 1
+    let g:airline_detect_modified=0
+    let g:airline_inactive_alt_sep=0                                         " 对非活动窗口的状态行使用替代分隔符
+    let g:airline_powerline_fonts= 1                                         " 使用powerline打过补丁的字体
+    let g:airline_inactive_collapse=0                                        " 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
+    let g:airline_highlighting_cache = 1                                     " 将更改缓存到突出显示组中，因此应更快。如果遇到缓慢的Vim，请将其设置为1
+    let g:airline_focuslost_inactive = 0                                     " 使用FocusLost自动命令禁用航空公
+    let g:airline_stl_path_style = 'full'                                    " 在状态栏显示短路经
+    let g:airline_skip_empty_sections = 0
     let g:airline_section_c_only_filename = 1                                " 仅仅显示文件名
-	let g:airline#extensions#wordcount#enabled = 0                           " 开启字数统计
-	let g:airline#extensions#wordcount#filetypes = ['all']                   " 开启字数统计文件类型
-	let g:airline#extensions#wordcount#formatter#default#fmt = '%s words'    " 自定义字数统计格式
-	let g:airline#extensions#whitespace#enabled = 0                          " 取消计数
-	let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'             " 配置快速修复缓冲区的标题文本
-	let g:airline#extensions#quickfix#location_text = 'Location'             " 配置位置列表缓冲区的标题文本
-	let g:airline#extensions#term#enabled = 0
-	let g:airline#extensions#fzf#enabled = 1                                 " 启用FZF集成
+    let g:airline#extensions#wordcount#enabled = 0                           " 开启字数统计
+    let g:airline#extensions#wordcount#filetypes = ['all']                   " 开启字数统计文件类型
+    let g:airline#extensions#wordcount#formatter#default#fmt = '%s words'    " 自定义字数统计格式
+    let g:airline#extensions#whitespace#enabled = 0                          " 取消计数
+    let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'             " 配置快速修复缓冲区的标题文本
+    let g:airline#extensions#quickfix#location_text = 'Location'             " 配置位置列表缓冲区的标题文本
+    let g:airline#extensions#term#enabled = 0
+    let g:airline#extensions#fzf#enabled = 1                                 " 启用FZF集成
     let g:airline#extensions#hunks#enabled = 1
     let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
     let g:airline#extensions#hunks#non_zero_only = 1
@@ -813,47 +812,47 @@ if exists('g:plugs["vim-airline"]')
     let g:airline#extensions#branch#enabled = 1
     let g:airline#extensions#branch#empty_message = ''
     let g:airline#extensions#branch#vcs_checks = ['untracked', 'dirty']
-	let g:airline#extensions#tabline#enabled= 1                              " 开启tabline
-	let g:airline#extensions#tabline#show_tabs = 0                           " 显示Tabls文字
-	let g:airline#extensions#tabline#buffer_nr_show = 0                      " tabline中buffer显示编号
-	let g:airline#extensions#tabline#fnamemod = ':t'                         " 只显示文件名称
-	let g:airline#extensions#tabline#buf_label_first = 1                     " 在第一个位置显示缓冲区标签
-	let g:airline#extensions#tabline#buffers_label = 'BUFFERS '              " airline右上角定制
-	let g:airline#extensions#tabline#tabs_label = 'Tabs'                     " Tabs定制
-	let g:airline#extensions#tabline#buffer_nr_format = '%s:'                " Buffer 格式
-	let g:airline#extensions#tabline#show_close_button = 1                   " 是否显示关闭按钮
-	let g:airline#extensions#tabline#close_symbol = 'X'                      " 关闭按钮的符号
-	let g:airline#extensions#tabline#disable_refresh = 1                     " 在| BufAdd |上启用Tabline缓冲区的刷新自动命令
-	let g:airline#extensions#tabline#show_splits = 1                         " 启用/禁用显示每个选项卡的打开拆分（仅在打开选项卡时）
-	let g:airline#extensions#tabline#exclude_preview = 0                     " 在选项行中启用/禁用显示预览窗口缓冲区。
-	let g:airline#extensions#tabline#alt_sep = 0
-	let g:airline#extensions#tabline#tab_nr_type = 1                         " tab number
-	let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
-	let g:airline#extensions#tabline#show_tab_nr = 0
-	let g:airline#extensions#tabline#show_tab_type = 1
-	let g:airline#extensions#tabline#buffer_idx_mode = 1
-	let g:airline#extensions#tabline#formatter = 'unique_tail'
-	let g:airline#extensions#tabline#middle_click_preserves_windows = 0      " 从缓冲区关闭时保留窗口
+    let g:airline#extensions#tabline#enabled= 1                              " 开启tabline
+    let g:airline#extensions#tabline#show_tabs = 0                           " 显示Tabls文字
+    let g:airline#extensions#tabline#buffer_nr_show = 0                      " tabline中buffer显示编号
+    let g:airline#extensions#tabline#fnamemod = ':t'                         " 只显示文件名称
+    let g:airline#extensions#tabline#buf_label_first = 1                     " 在第一个位置显示缓冲区标签
+    let g:airline#extensions#tabline#buffers_label = 'BUFFERS '              " airline右上角定制
+    let g:airline#extensions#tabline#tabs_label = 'Tabs'                     " Tabs定制
+    let g:airline#extensions#tabline#buffer_nr_format = '%s:'                " Buffer 格式
+    let g:airline#extensions#tabline#show_close_button = 1                   " 是否显示关闭按钮
+    let g:airline#extensions#tabline#close_symbol = 'X'                      " 关闭按钮的符号
+    let g:airline#extensions#tabline#disable_refresh = 1                     " 在| BufAdd |上启用Tabline缓冲区的刷新自动命令
+    let g:airline#extensions#tabline#show_splits = 1                         " 启用/禁用显示每个选项卡的打开拆分（仅在打开选项卡时）
+    let g:airline#extensions#tabline#exclude_preview = 0                     " 在选项行中启用/禁用显示预览窗口缓冲区。
+    let g:airline#extensions#tabline#alt_sep = 0
+    let g:airline#extensions#tabline#tab_nr_type = 1                         " tab number
+    let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
+    let g:airline#extensions#tabline#show_tab_nr = 0
+    let g:airline#extensions#tabline#show_tab_type = 1
+    let g:airline#extensions#tabline#buffer_idx_mode = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+    let g:airline#extensions#tabline#middle_click_preserves_windows = 0      " 从缓冲区关闭时保留窗口
     let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|term://|undotree|vimfiler'
     let g:airline_extensions = ['branch', 'tabline', 'hunks']
-	let g:airline#extensions#tabline#buffer_idx_format = {
-		\ '0': '0 ',
-		\ '1': '1 ',
-		\ '2': '2 ',
-		\ '3': '3 ',
-		\ '4': '4 ',
-		\ '5': '5 ',
-		\ '6': '6 ',
-		\ '7': '7 ',
-		\ '8': '8 ',
-		\ '9': '9 '
-		\ }
+    let g:airline#extensions#tabline#buffer_idx_format = {
+        \ '0': '0 ',
+        \ '1': '1 ',
+        \ '2': '2 ',
+        \ '3': '3 ',
+        \ '4': '4 ',
+        \ '5': '5 ',
+        \ '6': '6 ',
+        \ '7': '7 ',
+        \ '8': '8 ',
+        \ '9': '9 '
+        \ }
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 定义要显示的名称集，而不是特定的文件类型
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-	let g:airline_filetype_overrides = {
+    let g:airline_filetype_overrides = {
         \ 'fugitive': ['Fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
         \ 'help':  [ 'Help', '%f' ],
         \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
@@ -874,7 +873,7 @@ if exists('g:plugs["vim-airline"]')
         let g:airline_section_x = airline#section#create(['  ', 'hunks'])
         let g:airline_section_y = airline#section#create([' ⭕ ', '%t', ' ', ' ⭕ ', 'filetype', ' '])
         let g:airline_section_z = airline#section#create(['%3P %', ' ', '%4l', ':%3v'])
-	endfunction
+    endfunction
 
     augroup AleRedrawStatus
         autocmd!
@@ -887,8 +886,8 @@ if exists('g:plugs["vim-airline"]')
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
     let s:saved_theme = []
-	let g:airline_theme_patch_func = 'AirlineThemePatch'
-	function! AirlineThemePatch(palette)
+    let g:airline_theme_patch_func = 'AirlineThemePatch'
+    function! AirlineThemePatch(palette)
         for colors in values(a:palette)
             if has_key(colors, 'airline_c') 
                 let s:saved_theme = colors.airline_c
@@ -916,15 +915,15 @@ if exists('g:plugs["vim-airline"]')
 " Highlighted
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-	" function! s:update_highlights()
-	" 	hi CursorLine ctermbg=none guibg=NONE
-	" 	hi VertSplit ctermbg=none guibg=NONE
+    " function! s:update_highlights()
+        " hi CursorLine ctermbg=none guibg=NONE
+        " hi VertSplit ctermbg=none guibg=NONE
         " hi airline_tabmod_unsel  ctermfg=7 ctermbg=0 guifg=#abb2bf guibg=#282C34
         " hi airline_tab_right  ctermfg=7 ctermbg=0 guifg=#abb2bf guibg=#212524
         " hi airline_tabhid  ctermfg=7 ctermbg=0 guifg=#abb2bf guibg=#282C34
         " hi airline_tabhid_right  ctermfg=7 ctermbg=0 guifg=#abb2bf guibg=#282C34
-	" endfunction
-	" autocmd User AirlineAfterTheme call s:update_highlights()
+    " endfunction
+    " autocmd User AirlineAfterTheme call s:update_highlights()
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " Symbols
@@ -948,27 +947,27 @@ if exists('g:plugs["vim-airline"]')
 " 快捷键
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-	nmap <silent><LocalLeader>1        <Plug>AirlineSelectTab1
-	nmap <silent><LocalLeader>2        <Plug>AirlineSelectTab2
-	nmap <silent><LocalLeader>3        <Plug>AirlineSelectTab3
-	nmap <silent><LocalLeader>4        <Plug>AirlineSelectTab4
-	nmap <silent><LocalLeader>5        <Plug>AirlineSelectTab5
-	nmap <silent><LocalLeader>6        <Plug>AirlineSelectTab6
-	nmap <silent><LocalLeader>7        <Plug>AirlineSelectTab7
-	nmap <silent><LocalLeader>8        <Plug>AirlineSelectTab8
-	nmap <silent><LocalLeader>9        <Plug>AirlineSelectTab9
+    nmap <silent><LocalLeader>1        <Plug>AirlineSelectTab1
+    nmap <silent><LocalLeader>2        <Plug>AirlineSelectTab2
+    nmap <silent><LocalLeader>3        <Plug>AirlineSelectTab3
+    nmap <silent><LocalLeader>4        <Plug>AirlineSelectTab4
+    nmap <silent><LocalLeader>5        <Plug>AirlineSelectTab5
+    nmap <silent><LocalLeader>6        <Plug>AirlineSelectTab6
+    nmap <silent><LocalLeader>7        <Plug>AirlineSelectTab7
+    nmap <silent><LocalLeader>8        <Plug>AirlineSelectTab8
+    nmap <silent><LocalLeader>9        <Plug>AirlineSelectTab9
 
-	nmap <silent><S-H>                 <Plug>AirlineSelectPrevTab
-	nmap <silent><S-L>                 <Plug>AirlineSelectNextTab
-	vmap <silent><S-H>                 <Esc><Plug>AirlineSelectPrevTab
-	vmap <silent><S-L>                 <Esc><Plug>AirlineSelectNextTab
+    nmap <silent><S-H>                 <Plug>AirlineSelectPrevTab
+    nmap <silent><S-L>                 <Plug>AirlineSelectNextTab
+    vmap <silent><S-H>                 <Esc><Plug>AirlineSelectPrevTab
+    vmap <silent><S-L>                 <Esc><Plug>AirlineSelectNextTab
 
-	nmap <silent><LocalLeader><tab>    <Plug>AirlineSelectNextTab
-	nmap <silent><LocalLeader><S-tab>  <Plug>AirlineSelectPrevTab
-	imap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
-	imap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
-	vmap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
-	vmap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
+    nmap <silent><LocalLeader><tab>    <Plug>AirlineSelectNextTab
+    nmap <silent><LocalLeader><S-tab>  <Plug>AirlineSelectPrevTab
+    imap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
+    imap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
+    vmap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
+    vmap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
 
 endif
 
@@ -1448,9 +1447,9 @@ endif
 
 if exists('g:plugs["vim-sayonara"]')
 
-	nnoremap <silent><localleader>q :Sayonara<cr>
-	inoremap <silent><localleader>q <Esc>:Sayonara<cr>
-	vnoremap <silent><localleader>q <Esc>:Sayonara<cr>
+    nnoremap <silent><localleader>q :Sayonara<cr>
+    inoremap <silent><localleader>q <Esc>:Sayonara<cr>
+    vnoremap <silent><localleader>q <Esc>:Sayonara<cr>
 
 endif
 
