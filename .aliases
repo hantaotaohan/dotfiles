@@ -92,7 +92,6 @@ alias pbpaste="powershell.exe -command 'Get-Clipboard' | tr -d '\r' | head -n -1
 #----------------------------------------------------------------------------------------------------
 # Other
 #----------------------------------------------------------------------------------------------------
-alias sai='sudo apt install'
 alias mail='neomutt ; clear'
 alias rss='newsboat'
 alias file='nautilus . &'
@@ -101,5 +100,4 @@ alias tr='popup-dict'
 alias online='you-get -p mpv '
 alias mime='mimeopen -d ' 
 alias mpv='mpv --player-operation-mode=pseudo-gui'
-alias vifm='vifmrun' 
 alias gif='sxiv -b ' 

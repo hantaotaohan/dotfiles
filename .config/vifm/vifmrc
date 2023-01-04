@@ -78,8 +78,11 @@ set incsearch
 set scrolloff=4
 
 " miller view
+only
 set millerview
-set milleroptions="lsize:1,csize:2,rsize:0,rpreview:all"
+set milleroptions="lsize:1,csize:2,rsize:2,rpreview:all"
+
+set quickview
 
 " Don't do too many requests to slow file systems
 if !has('win')
@@ -87,10 +90,12 @@ if !has('win')
 endif
 
 " Set custom status line look
-highlight User1 cterm=none  ctermfg=4   ctermbg=0
-highlight User2 cterm=none  ctermfg=5   ctermbg=0
-highlight User3 cterm=none  ctermfg=3   ctermbg=0
-set statusline="  Hint:  %1*%t%= %A %10u:%-7g %3*%15s %2*%20d  "
+highlight User2 cterm=none  ctermfg=4   ctermbg=16
+highlight User3 cterm=none  ctermfg=5   ctermbg=16
+highlight User4 cterm=none  ctermfg=3   ctermbg=16
+highlight User1 cterm=none  ctermfg=3   ctermbg=16
+set statusline="  %1*Directory: %2*%{system('echo $PWD')}/%3*%t%= %A %10u:%-7g %4*%15E %2*%20d  "
+" set statusline="%2* %1*  : %{system('echo $PWD')} "
 
 set fillchars=vborder:"\│"
 set tuioptions-=s
@@ -117,9 +122,12 @@ set slowfs=curlftpfs
 set lsoptions=transposed
 
 " Columns format
+" set viewcolumns=-60%{name},40%{size}
 set viewcolumns=-60%{name},40%{size}
 
-" set tablabel=" "
+set dirsize=nitems
+set iec
+set sizefmt=units:iec,precision:2
 
 " set tabprefix="%N"
 
@@ -127,10 +135,15 @@ set viewcolumns=-60%{name},40%{size}
 
 set laststatus
 
-
 set rulerformat=" "
 
 set findprg="find %s %a"
+
+" Use ripgrep instead of grep
+set grepprg=rg\ --color=never\ -Hn\ %i\ %a\ %s
+
+" Use fd instead of find
+set findprg=fd\ --color=never\ %p\ %s
 
 " ------------------------------------------------------------------------------
 
@@ -502,113 +515,113 @@ nnoremap K    <C-w>w5k<C-w>w
 " ------------------------------------------------------------------------------
 
 " Filetypes
-set classify='  :dir:/,  :exe:,  :reg:,  :link:,? :?:,  ::../::'
+
+" set classify='  :dir:/,  :exe:,  :reg:,  :link:,? :?:,  ::../::'
 
 " Dirs
-set classify+='  ::.git/::/,
-    \   ::.config/::/,
-    \   ::Desktop/::/,
-    \   ::Documents/::/,
-    \   ::Development/::/,
-    \   ::Downloads/::/,
-    \   ::Dropbox/::/,
-    \   ::Google\ Drive/::/,
-    \   ::gitrepos/::/,
-    \   ::Music/::/,
-    \   ::Pictures/::/,
-    \   ::Public/::/,
-    \   ::Templates/::/,
-    \   ::Videos/::/,
-    \   ::node_modules/::/'
+
+" set classify+='  ::.git/::/,
+"     \   ::.config/::/,
+"     \   ::Desktop/::/,
+"     \   ::Documents/::/,
+"     \   ::Development/::/,
+"     \   ::Downloads/::/,
+"     \   ::Dropbox/::/,
+"     \   ::Google\ Drive/::/,
+"     \   ::gitrepos/::/,
+"     \   ::Music/::/,
+"     \   ::Pictures/::/,
+"     \   ::Public/::/,
+"     \   ::Templates/::/,
+"     \   ::Videos/::/,
+"     \   ::node_modules/::/'
 
 " Files
-set classify+='  ::.Xauthority,,.Xdefaults,,.Xresources,,.bash_aliases,,.bashprofile,,.bash_profile,,.bash_logout,,.bash_history,,.bashrc,,.dmrc,,.DS_Store,,.fasd,,.gitconfig,,.gitattributes,,.gitignore,,.inputrc,,.jack-settings,,.mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile,,.recently-used,,.selected_editor,,.tmux.conf,,.xinitrc,,.xinputrc,,config,,bspwmrc,,sxhkdrc,,Makefile,,Makefile.in,,Makefile.ac,,mimeapps.list,,.zshenv,,.zprofile,,.zshrc,,.zlogin,,.zlogout,,vifmrc,,yabairc,,skhdrc,,ini,,user-dirs.dirs::,
-    \   ::.fehbg::,
-    \   ::.vim,,.vimrc,,.viminfo,,init.vim::,
-    \   ::Dockerfile,,docker-compose.yml::,
-    \   ::dropbox::,
-    \   ::favicon.ico::,
-    \   ::a.out,,configure::,
-    \   ::config.mk,,config.m4,,config.ac::,
-    \   ::Rakefile::, \  ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::,
-    \   ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::,
-    \   ::ledger::,
-    \   ::package.json,,package-lock.json,,webpack.config.js::,
-    \   ::.ncmpcpp,,playlists::,
-    \   ::known_hosts,,authorized_keys,,license,,LICENSE.md,,LICENSE,,LICENSE.txt::,
-    \   ::procfile::,
-    \   ::react.jsx::,
-    \   ::README.rst,,README.md,,README.markdown,,README,,README.txt::'
+
+" set classify+='  ::.Xauthority,,.Xdefaults,,.Xresources,,.bash_aliases,,.bashprofile,,.bash_profile,,.bash_logout,,.bash_history,,.bashrc,,.dmrc,,.DS_Store,,.fasd,,.gitconfig,,.gitattributes,,.gitignore,,.inputrc,,.jack-settings,,.mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile,,.recently-used,,.selected_editor,,.tmux.conf,,.xinitrc,,.xinputrc,,config,,bspwmrc,,sxhkdrc,,Makefile,,Makefile.in,,Makefile.ac,,mimeapps.list,,.zshenv,,.zprofile,,.zshrc,,.zlogin,,.zlogout,,vifmrc,,yabairc,,skhdrc,,ini,,user-dirs.dirs::,
+"     \   ::.fehbg::,
+"     \   ::.vim,,.vimrc,,.viminfo,,init.vim::,
+"     \   ::Dockerfile,,docker-compose.yml::,
+"     \   ::dropbox::,
+"     \   ::favicon.ico::,
+"     \   ::a.out,,configure::,
+"     \   ::config.mk,,config.m4,,config.ac::,
+"     \   ::Rakefile::, \  ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::,
+"     \   ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::,
+"     \   ::ledger::,
+"     \   ::package.json,,package-lock.json,,webpack.config.js::,
+"     \   ::.ncmpcpp,,playlists::,
+"     \   ::known_hosts,,authorized_keys,,license,,LICENSE.md,,LICENSE,,LICENSE.txt::,
+"     \   ::procfile::,
+"     \   ::react.jsx::,
+"     \   ::README.rst,,README.md,,README.markdown,,README,,README.txt::'
 
 " Extentions
-set classify+='  ::*.7z,,*.apk,,*.bz2,,*.cpio,,*.deb,,*.gz,,*.gzip,,*.gem,,*.lha,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xbps,,*.xz,,*.zip::,
-    \   ::*.a,,*.cmake,,*.jl,,*.o,,*.so::,
-    \   ::*.ai::,
-    \   ::*.asm,,*.css,,*.less,,*.s,,*.sh,,*.zsh::,
-    \   ::*.asp,,*.rom,,*.efi,,*.elf,,*.fish::,
-    \   ::*.aup,,*.cue,,*.flac,,*.m4a,,*.mp3,,*.ogg,,*.wav::,
-    \   ::*.avi,,*.flv,,*.m4v,,*.mkv,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm::,
-    \   ::*.bat,,*.conf,,*.cvs,,*.htaccess,,*.htpasswd,,*.ini,,*.rc,,*.yaml,,*.yml::,
-    \   ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.ppt,,*.pptx::,
-    \   ::*.c,,*.h::,
-    \   ::*.cbr,,*.cbz::,
-    \   ::*.class,,*.jar,,*.java::,
-    \   ::*.clj,,*.cljc::,
-    \   ::*.cljs,,*.edn::,
-    \   ::*.coffee::,
-    \   ::*.cs::,
-    \   ::*.cxx,,*.c++,,*.cc,,*.cp,,*.cpp::,
-    \   ::*.d::,
-    \   ::*.dart::,
-    \   ::*.db,,*.dump,,*.img,,*.iso,,*.sql::,
-    \   ::*.diff::,
-    \   ::*.dll,,*.exe,,*.msi::,
-    \   ::*.doc,,*.docx,,*.epub,,*.pdf,,*.rtf,,*.xls,,*.xlsx::,
-    \   ::*.ejs,,*.htm,,*.html,,*.slim,,*.xhtml,,*.xml::,
-    \   ::*.elm::,
-    \   ::*.erl,,*.hrl::,
-    \   ::*.ex,,*.exs,,*.eex::,
-    \   ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::,
-    \ |  ::*.fifo::,
-    \   ::*.go::,
-    \   ::*.hbs,,*.mustache::,
-    \   ::*.hs,,*.lhs::,
-    \   ::*.js::,
-    \   ::*.json::,
-    \   ::*.jsx::,
-    \   ::*.key,,*.pub::,
-    \   ::*.log::,
-    \   ::*.lua::,
-    \   ::*.markdown,,*.md::,
-    \ λ  ::*.ml,,*.mli::,
-    \   ::*.php::,
-    \   ::*.pl,,*.pm,,*.t::,
-    \   ::*.psb,,*.psd::,
-    \   ::*.py,,*.pyc,,*.pyd,,*.pyo::,
-    \   ::*.rb::,
-    \   ::*.rlib,,*.rs::,
-    \   ::*.rss::,
-    \   ::*.scala::,
-    \   ::*.scss::,
-    \   ::*.sln,,*.suo::,
-    \   ::*.styl::,
-    \   ::*.ts::,
-    \   ::*.twig::,
-    \   ::*.vim,,*.vimrc::,
-    \   ::*.xul::'
+
+" set classify+='  ::*.7z,,*.apk,,*.bz2,,*.cpio,,*.deb,,*.gz,,*.gzip,,*.gem,,*.lha,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xbps,,*.xz,,*.zip::,
+"     \   ::*.a,,*.cmake,,*.jl,,*.o,,*.so::,
+"     \   ::*.ai::,
+"     \   ::*.asm,,*.css,,*.less,,*.s,,*.sh,,*.zsh::,
+"     \   ::*.asp,,*.rom,,*.efi,,*.elf,,*.fish::,
+"     \   ::*.aup,,*.cue,,*.flac,,*.m4a,,*.mp3,,*.ogg,,*.wav::,
+"     \   ::*.avi,,*.flv,,*.m4v,,*.mkv,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm::,
+"     \   ::*.bat,,*.conf,,*.cvs,,*.htaccess,,*.htpasswd,,*.ini,,*.rc,,*.yaml,,*.yml::,
+"     \   ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.ppt,,*.pptx::,
+"     \   ::*.c,,*.h::,
+"     \   ::*.cbr,,*.cbz::,
+"     \   ::*.class,,*.jar,,*.java::,
+"     \   ::*.clj,,*.cljc::,
+"     \   ::*.cljs,,*.edn::,
+"     \   ::*.coffee::,
+"     \   ::*.cs::,
+"     \   ::*.cxx,,*.c++,,*.cc,,*.cp,,*.cpp::,
+"     \   ::*.d::,
+"     \   ::*.dart::,
+"     \   ::*.db,,*.dump,,*.img,,*.iso,,*.sql::,
+"     \   ::*.diff::,
+"     \   ::*.dll,,*.exe,,*.msi::,
+"     \   ::*.doc,,*.docx,,*.epub,,*.pdf,,*.rtf,,*.xls,,*.xlsx::,
+"     \   ::*.ejs,,*.htm,,*.html,,*.slim,,*.xhtml,,*.xml::,
+"     \   ::*.elm::,
+"     \   ::*.erl,,*.hrl::,
+"     \   ::*.ex,,*.exs,,*.eex::,
+"     \   ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::,
+"     \ |  ::*.fifo::,
+"     \   ::*.go::,
+"     \   ::*.hbs,,*.mustache::,
+"     \   ::*.hs,,*.lhs::,
+"     \   ::*.js::,
+"     \   ::*.json::,
+"     \   ::*.jsx::,
+"     \   ::*.key,,*.pub::,
+"     \   ::*.log::,
+"     \   ::*.lua::,
+"     \   ::*.markdown,,*.md::,
+"     \ λ  ::*.ml,,*.mli::,
+"     \   ::*.php::,
+"     \   ::*.pl,,*.pm,,*.t::,
+"     \   ::*.psb,,*.psd::,
+"     \   ::*.py,,*.pyc,,*.pyd,,*.pyo::,
+"     \   ::*.rb::,
+"     \   ::*.rlib,,*.rs::,
+"     \   ::*.rss::,
+"     \   ::*.scala::,
+"     \   ::*.scss::,
+"     \   ::*.sln,,*.suo::,
+"     \   ::*.styl::,
+"     \   ::*.ts::,
+"     \   ::*.twig::,
+"     \   ::*.vim,,*.vimrc::,
+"     \   ::*.xul::'
 
 " fzf integration
 command! fzffind
     \   :set noquickview
     \ | :execute 'goto "'.system('find \( -name ".*" -or -name "*" \)
     \ | fzf
-        \ --layout="reverse-list"
-        \ --height=100
-        \ --preview="grep -sq -P ''[^\x00-\x7F]'' {}
-            \ && echo binary file: {}
-            \ || cat {}"
-        \ --preview-window="right:70%%:wrap"
+        \ --height=30
+        \ --border
         \ 2>/dev/tty').'"%IU'
     \ | :set quickview
     \ | redraw
-nnoremap <c-f> :fzffind<cr>
+nnoremap ;f :fzffind<cr>
