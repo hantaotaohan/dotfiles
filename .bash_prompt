@@ -156,6 +156,7 @@ PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${white}\] in ";
 PS1+="\[${green}\]\w"; # working directory full path
 PS1+="\$(prompt_git \"\[${whitee}\] on \[${bold}\${violet}\]\UE0A0 \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+if [ -n "$RANGER_LEVEL" ]; then PS1+="\[${purple}\] [Ranger] "; fi
 PS1+="\n";
 PS1+="\[${exitColor}\]❱❱❱ \[${reset}\]"; # `$` (and reset color)
 export PS1;

@@ -68,7 +68,7 @@ class OneDark(ColorScheme):
             if context.tag_marker and not context.selected:
                 attr |= bold
                 if fg in (red, magenta):
-                    fg = white
+                    fg = 2
                 else:
                     fg = red
             if not context.selected and (context.cut or context.copied):
@@ -77,10 +77,11 @@ class OneDark(ColorScheme):
                 if context.selected:
                     attr |= bold
                     fg = 255
-                    bg = 8
-                if context.marked:
+                    bg = 4
+                if context.marked and not context.selected:
                     attr |= bold
-                    fg = 15
+                    fg = 255
+                    bg = 8
             if context.badinfo:
                 if attr & reverse:
                     bg = magenta
@@ -141,3 +142,4 @@ class OneDark(ColorScheme):
                     bg = self.progress_bar_color
 
         return fg, bg, attr
+
