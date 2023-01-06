@@ -2,7 +2,7 @@
 "                                                                                                                                 
 "                                                             VIMRC                                                            
 "                                                                                                                                                                                                 
-"                                                       Update: 2021.05.06                                                      
+"                                                       Update: 2023.01.06                                                      
 "                                                                                                                                 
 " ================================================================================================================================
 
@@ -134,9 +134,6 @@ set breakat=\ \	;:,!?                                                      " 换
 set showbreak=↳                                                            " 设置换行符号
 
 set backspace=indent,eol,start                                             " 删除键行为
-set diffopt=filler,internal,algorithm:histogram,indent-heuristic,vertical  " 更新diff配置
-" set fillchars=fold:\—
-set fillchars+=vert:\│
 
 set formatoptions+=j                                                       " 合并两行中文时，不在中间加空格
 set fileformats=unix,dos,mac                                               " 文件换行符，默认使用 unix 换行符
@@ -192,6 +189,10 @@ set ambiwidth=single                                                       " 设
 set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m                                " 错误格式
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<                        " 设置分隔符可视
 
+set fillchars=fold:\─
+set fillchars+=vert:\│
+set diffopt=filler,internal,algorithm:histogram,indent-heuristic,vertical  " 更新diff配置
+
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                         Fold Settings
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -206,17 +207,29 @@ if has('folding') && has('vim_starting')
     set foldnestmax=1                                                      " 设置 indent 和 syntax 方法的最大折叠嵌套层数
     set foldtext=<SID>NeatFoldText()
 
-    " 自定义折叠样式
+    " 自定义折叠样式1
     function! s:NeatFoldText() 
-        let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+        let line = ' █    ' . substitute(getline(v:foldstart), '\s* \{2,}s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
         let lines_count = v:foldend - v:foldstart + 1
-        let lines_count_text = '  ' . printf("%10s", lines_count . ' lines') . '    '
+        let lines_count_text = '  █  ' . printf("%12s", lines_count . ' LINES') . '     █ '
         let foldchar = matchstr(&fillchars, 'fold:\zs.')
-        let foldtextstart = strpart(' ❱❱❱ ' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-        let foldtextend = lines_count_text . repeat(foldchar, 8)
+        let foldtextstart = strpart(' ⭕  INFORMATION  ⭕  █ ' . repeat(foldchar, v:foldlevel*6) . line, 0, (winwidth(0)*2)/3)
+        let foldtextend = lines_count_text . repeat(foldchar, 0)
         let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
         return foldtextend . foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength)
     endfunction
+
+    " 自定义折叠样式2
+    " function! s:NeatFoldText() 
+    "     let line = ' ' . substitute(getline(v:foldstart), '\s* \{2,}s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+    "     let lines_count = v:foldend - v:foldstart + 1
+    "     let lines_count_text = '  █  ' . printf("%10s", lines_count . ' LINES') . '     █ '
+    "     let foldchar = matchstr(&fillchars, 'fold:\zs.')
+    "     let foldtextstart = strpart(' INFORMATION  █ ' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+    "     let foldtextend = lines_count_text . repeat(foldchar, 20)
+    "     let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+    "     return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+    " endfunction
 endif
 
 " 空格打开关闭折叠视图(在光标自动打开关闭折叠的情况下)
@@ -1650,3 +1663,4 @@ if exists('g:plugs["vimwiki"]')
     " autocmd filetype vimwiki nnoremap <buffer> <leader>wd :call VimwikiDeleteClean()<CR>
 
 endif
+
