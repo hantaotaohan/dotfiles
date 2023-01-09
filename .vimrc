@@ -128,6 +128,7 @@ endif
 
 function! GetClip() abort
     silent let clipboard = system('powershell.exe -NonInteractive -NoLogo -NoProfile -Command Get-Clipboard')
+    let clipboard = substitute(clipboard, '\r\n', '\n', 'g')
     call setreg('9', clipboard)
 endfunction
 
@@ -471,11 +472,11 @@ nmap <Leader>tw :execute('setlocal wrap! breakindent!')<CR>
 " 跨终端粘贴 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-nnoremap <silent><localleader>y "+yy
-vnoremap <silent><localleader>y "+y
+" nnoremap <silent><localleader>y "+yy
+" vnoremap <silent><localleader>y "+y
 
-nnoremap <silent><localleader>p "+p
-vnoremap <silent><localleader>p "+p
+" nnoremap <silent><localleader>p "+p
+" vnoremap <silent><localleader>p "+p
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 切换窗口快捷键设置  
