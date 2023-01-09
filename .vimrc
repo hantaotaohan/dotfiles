@@ -107,7 +107,15 @@ if has('clipboard') && has('vim_starting') && has('unnamedplus')
     set clipboard& clipboard^=unnamed,unnamedplus 
 endif
 
-let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
+xnoremap p "_dP
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+"                                                          WSL Settings
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+let s:clip = '/mnt/c/Windows/System32/clip.exe'
+
+" -- Copy --
 
 if executable(s:clip)
     augroup WSLYank
@@ -116,7 +124,15 @@ if executable(s:clip)
     augroup END
 endif
 
-xnoremap p "_dP
+" -- Paste --
+
+function! GetClip() abort
+    silent let clipboard = system('powershell.exe -NonInteractive -NoLogo -NoProfile -Command Get-Clipboard')
+    call setreg('9', clipboard)
+endfunction
+
+nnoremap <silent><expr> ;p ':<c-u>call GetClip()<cr>' . v:count . '"9p:<c-u>silent! call repeat#set("p",' . v:count . ')<cr>'
+nnoremap <silent><expr> ;P ':<c-u>call GetClip()<cr>' . v:count . '"9P:<c-u>silent! call repeat#set("P",' . v:count . ')<cr>'
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                       Complete Settings
@@ -154,9 +170,9 @@ set esckeys                                                                " 按
 set ttyfast                                                                " 刷新更快
 set modeline                                                               " 设置行模式用于在文件末尾添加特定字符检测vim文件类型
 set autoread                                                               " 当文件在外部被修改，自动更新该文件
-set lazyredraw                                                             " 延迟绘制（提升性能）
 set writebackup                                                            " 保存文件前建立备份，保存成功后删除该备份
 set regexpengine=1                                                         " 匹配模式 0:默认, 1:老版本, 2:新版本
+" set lazyredraw                                                             " 延迟绘制（提升性能）
 " set ttyscroll=3                                                            " 鼠标滚轮速度
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
