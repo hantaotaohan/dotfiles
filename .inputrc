@@ -1,90 +1,92 @@
-# Make Tab autocomplete regardless of filename case
-# 使Tab自动完成而不考虑文件名大小写
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                             Bashrc                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.o6                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
+# ================================================================================================================================
+#                                                       GENERAL - Settings
+# ================================================================================================================================
+
+# 使补全忽略大小写
 set completion-ignore-case on
 
-# Keep terminal quiet and clean.
+# 禁用响铃
 set bell-style none
+
+# 禁止输出控制字符
 set echo-control-characters off
 
-# Don't immediately execute pasted multiline commands.
-set enable-bracketed-paste
+# 启用多行粘贴模式
+set enable-bracketed-paste on
 
-# List all matches in case multiple possible completions are possible
-# 列出所有匹配项，以防有多个可能的完成
+# 完成时显示颜色，就像“ls-F”一样
+set visible-stats on
+
+# 一次显示所有自动完成结果
+set page-completions on
+
+# 补全时列出所有匹配项
 set show-all-if-ambiguous on
 
-# Immediately add a trailing slash when autocompleting symlinks to directories
 # 当自动完成指向目录的符号链接时，立即在结尾添加斜杠
-set mark-symlinked-directories on
+set mark-symlinked-directories off
 
-# Use the text that has already been typed as the prefix for searching through
-# commands (i.e. more intelligent Up/Down behavior)
-# 使用已键入的文本作为搜索前缀              
-# 命令(即更智能的上/下行为)
-"\e[B": history-search-forward
-"\e[A": history-search-backward
-
-# Do not autocomplete hidden files unless the pattern explicitly begins with a dot
 # 除非模式以点显式开头，否则不要自动完成隐藏文件
 set match-hidden-files on
 
-# Show all autocomplete results at once
-# 一次显示所有自动完成结果
-set page-completions off
-
-# If there are more than 200 possible completions for a word, ask to show them all
 # 如果一个单词有超过200个可能的补全词，要求把它们全部显示出来
 set completion-query-items 200
 
-# Show extra file information when completing, like `ls -F` does
-# 完成时显示额外的文件信息，就像“ls-F”一样
-set visible-stats on
-
-# Be more intelligent when autocompleting by also looking at the text after
-# the cursor. For example, when the current line is "cd ~/src/mozil", and
-# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
-# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
-# Readline used by Bash 4.)
+# 自动补全时更智能，同时查看之后的文本
 set skip-completed-text on
 
-# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
-# 允许UTF-8输入和输出
+# 自动扩展波浪号
+set expand-tilde on
+
+# 补全匹配字符前缀部分
+set colored-completion-prefix on
+set completion-prefix-display-length 2
+
+# 补全完成期间为可执行文件、目录等显示不同的颜色
+set colored-stats on
+
+# 禁用特殊字符
+set bind-tty-special-chars Off
+
+# 允许 UTF8 输入和输出
 set input-meta on
 set output-meta on
 set convert-meta off
 
-# Completed Colors
-set colored-stats On
+# ================================================================================================================================
+#                                                       KEYMAP - Settings
+# ================================================================================================================================
 
-set bind-tty-special-chars Off
+# 使用已键入的文本作为搜索前缀(即更智能的上/下行为)
+"\e[B": history-search-forward
+"\e[A": history-search-backward
 
-# TAB cycles forward through completion choices. Press an arrow key to choose a
-# selection.
-# Shift-TAB cycles backward through completion choices. Press an arrow key to
-# choose a selection
-# TAB: menu-complete
+"\C-H": backward-word
+"\C-L": forward-word
+"\C-D": kill-word
+"\C-w": backward-kill-word
+"\C-[[1;2D": backward-word
+"\C-[[1;2C": forward-word
 
-# Use Alt/Meta + Delete to delete the preceding word
-# 使用Alt/Meta+Delete删除前面的单词
+# 使用 Alt/Meta+Delete 删除前面的单词
 "\e[3;3~": kill-word
-
-# 自定义按键绑定
 
 # F5 进入HOME
 "\e[15~":"cd $HOME\C-m"
 
-# ;+q 退出bash
+# ;q 退出bash
 "\;q":"exit\C-m"
 
 # \+g 进入navi
 "\\g":"navi\C-m"
-
-"\C-H": backward-word
-"\C-L": forward-word
-"\C-[[1;2D": backward-word
-"\C-[[1;2C": forward-word
-"\C-D": kill-word
-"\C-w": backward-kill-word
 
 # CTRL+ALT+J,K 上下历史命令
 # "\e\C-J": history-search-forward

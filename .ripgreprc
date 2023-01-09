@@ -1,44 +1,64 @@
-# Search hidden files and directories.
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                             Ripgrep                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.09                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
 # 搜索隐藏文件
 --hidden
 
-# Follow symbolic links.
 # 跟踪软连接
 --follow
 
-# Don't respect ignore files (.gitignore, .ignore, etc.).
-# 不忽略任何文件
+# 不要忽略任何文件
 --no-ignore
 
-# Exclude directories.
-# 排除目录
---glob=!{.git,.svn,.tldr,node_modules,Trash,vendor}
-
-# Exclude file types.
-# 排除文件类型
---glob=!*.{lock}
-
-# Exclude files.
-# 排除文件
---glob=!{package-lock.json}
-
-# Don't print lines longer than this limit.
 # 不要显示超过10000的行
---max-columns=10000
+--max-columns=500
 
-# Searches case insensitively.
-# 开启智能搜索
+# 多行预览
+--max-columns-preview
+
+# 开启智能搜索,不区分大小写
 --smart-case
 
-# Sort by file path.
 # 按照文件路径排序
 --sort=path
 
-# Configure color settings and styles.
+# 匹配上下文分割线
+--field-context-separator=\t│\t
+
+# 已匹配的分割线
+--field-match-separator=\t│\t
+
+# 只搜索一个操作系统
+--one-file-system
+
+# 禁用错误信息
+--no-messages
+
+# 跨行搜索
+--multiline
+
+# 排除目录
+--glob=!.git
+--glob=!.svn
+--glob=!node_modules
+--glob=!vendor
+
+# 排除文件类型
+--glob=!*.{lock}
+
+# 排除文件
+--glob=!{package-lock.json}
+
 # 配置颜色设定
 --colors=path:bg:0
---colors=path:fg:5
+--colors=path:fg:6
 --colors=line:fg:4
 --colors=match:bg:0
 --colors=match:fg:1
 --colors=match:style:bold
+
