@@ -113,27 +113,39 @@ xnoremap p "_dP
 "                                                          WSL Settings
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-let s:clip = '/mnt/c/Windows/System32/clip.exe'
+" -- Determine WSL --
 
-" -- Copy --
+let uname = substitute(system('uname'),'\n','','')
 
-if executable(s:clip)
-    augroup WSLYank
-        autocmd!
-        autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-    augroup END
+if uname == 'Linux'
+    let lines = readfile("/proc/version")
+    if lines[0] =~ "Microsoft"
+
+        let s:clip = '/mnt/c/Windows/System32/clip.exe'
+
+        " -- Copy --
+
+        if executable(s:clip)
+            augroup WSLYank
+                autocmd!
+                autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
+            augroup END
+        endif
+
+        " -- Paste --
+
+        function! GetClip() abort
+            silent let clipboard = system('powershell.exe -NonInteractive -NoLogo -NoProfile -Command Get-Clipboard')
+            let clipboard = substitute(clipboard, '\r\n', '\n', 'g')
+            call setreg('9', clipboard)
+        endfunction
+
+        nnoremap <silent><expr> ;p ':<c-u>call GetClip()<cr>' . v:count . '"9p:<c-u>silent! call repeat#set("p",' . v:count . ')<cr>'
+        nnoremap <silent><expr> ;P ':<c-u>call GetClip()<cr>' . v:count . '"9P:<c-u>silent! call repeat#set("P",' . v:count . ')<cr>'
+
+    endif
 endif
 
-" -- Paste --
-
-function! GetClip() abort
-    silent let clipboard = system('powershell.exe -NonInteractive -NoLogo -NoProfile -Command Get-Clipboard')
-    let clipboard = substitute(clipboard, '\r\n', '\n', 'g')
-    call setreg('9', clipboard)
-endfunction
-
-nnoremap <silent><expr> ;p ':<c-u>call GetClip()<cr>' . v:count . '"9p:<c-u>silent! call repeat#set("p",' . v:count . ')<cr>'
-nnoremap <silent><expr> ;P ':<c-u>call GetClip()<cr>' . v:count . '"9P:<c-u>silent! call repeat#set("P",' . v:count . ')<cr>'
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                       Complete Settings
@@ -759,7 +771,7 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'tpope/vim-commentary'                                              " 快速注释插件
     Plug 'tpope/vim-surround'                                                " 成对更改删除括号等
     Plug 'junegunn/fzf.vim'                                                  " 为vim安装fzf插件
-    Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }       " 为系统安装fzf工具
+    Plug 'junegunn/fzf' , { 'do': { -> fzf#install() } }                     " 为系统安装fzf工具
     Plug 'mhinz/vim-startify'                                                " 定制vim开始页面
     Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
     Plug 'skywind3000/asyncrun.vim'                                          " 配合调测python插件
@@ -1194,7 +1206,44 @@ if exists('g:plugs["fzf.vim"]')
     " 禁用浮动窗口
     " let g:fzf_layout = { 'down':'40%' }
 
+    " 启用浮动窗口
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+    " [Buffers] Jump to the existing window if possible
+    let g:fzf_buffers_jump = 1
+
+    " [[B]Commits] Customize the options used by 'git log':
+    let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+    " [Tags] Command to generate tags file
+    let g:fzf_tags_command = 'ctags -R'
+
+    " [Commands] --expect expression for directly executing the command
+    let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+    " 额外按键绑定
+    let g:fzf_action = {
+        \ 'ctrl-t': 'tab split',
+        \ 'ctrl-x': 'split',
+        \ 'ctrl-v': 'vsplit'}
+
+    let g:fzf_colors =
+        \ { 'fg':    ['fg', 'TabLine'],
+        \ 'bg':      ['bg', 'Normal'],
+        \ 'hl':      ['fg', 'SignColumn'],
+        \ 'fg+':     ['fg', 'Visual', 'Visual', 'Normal'],
+        \ 'bg+':     ['bg', 'Comment', 'Pmenu'],
+        \ 'hl+':     ['fg', 'SignColumn'],
+        \ 'info':    ['fg', 'PreProc'],
+        \ 'border':  ['fg', 'Directory'],
+        \ 'prompt':  ['fg', 'ErrorMsg'],
+        \ 'pointer': ['fg', 'Exception'],
+        \ 'marker':  ['fg', 'Keyword'],
+        \ 'spinner': ['fg', 'Label'],
+        \ 'header':  ['fg', 'Comment'] }
+
     nnoremap <silent><LocalLeader>fa :Files<CR>
+    nnoremap <silent><LocalLeader>fb :Buffers<CR>
     nnoremap <silent><LocalLeader>ff :GFiles<CR>
     nnoremap <silent><LocalLeader>fl :BLines<CR>
     nnoremap <silent><LocalLeader>fo :Colors<CR>

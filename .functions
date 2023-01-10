@@ -146,7 +146,8 @@ frg() {
 
 # ----------------------------------------------------------------------------------------------------------------
 
-function fff() {
+function ff() {
+# Switch between Ripgrep launcher mode (CTRL-R) and fzf filtering mode (CTRL-F)
     RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
     INITIAL_QUERY="${*:-}"
     IFS=: read -ra selected < <(
@@ -155,9 +156,11 @@ function fff() {
         --color "hl:-1:underline,hl+:-1:underline:reverse" \
         --disabled --query "$INITIAL_QUERY" \
         --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
-        --bind "ctrl-a:unbind(change,alt-enter)+change-prompt(3. fzf> )+enable-search+clear-query" \
-        --prompt '1. ripgrep> ' \
+        --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(2. fzf> )+enable-search+clear-query+rebind(ctrl-r)" \
+        --bind "ctrl-r:unbind(ctrl-r)+change-prompt(1. ripgrep> )+disable-search+reload($RG_PREFIX {q} || true)+rebind(change,ctrl-f)" \
+        --prompt '1. Ripgrep> ' \
         --delimiter : \
+        --header '╱ CTRL-R (Ripgrep mode) ╱ CTRL-F (fzf mode) ╱' \
         --preview 'bat --color=always {1} --highlight-line {2}' \
         --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
     )
