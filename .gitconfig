@@ -1,87 +1,120 @@
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                            GITCONFIG                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.11                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
 [alias]
-    a      = add -A
-    s      = status -sb
-    d      = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
-    l      = log --abbrev-commit --decorate --graph --date=format:'%A \t│%Y-%m-%d %H:%M:%S' --format=format:'%C(01)%>(1)%h%C(reset) │ %C(07)%ad%C(reset) │ %C(4)%<(13,trunc)%an%C(reset) │ %C(2)%<(20,trunc)%ar%C(reset) │ %C(1)%<(30,trunc)%d%C(reset) │ %C(bold 7)MESSAGE: %s%C(reset)' --all
-    di     = difftool --tool=vimdiff -y
-    ds     = difftool --staged --tool=vimdiff -y
-    dc     = difftool --cached --tool=vimdiff -y
-    dt     = diff --stat
-    ll     = log --numstat --decorate --graph --date=format:'%Y-%m-%d %H:%M:%S' --format=format:'%C(1)%><(40,trunc) ❚ %H ❚  %C(4) [%cn] %C(reset) ❚  %C(reset) %C(8)%ad%C(reset) ❚  %C(reset) %C(8)%s%C(reset)  ❚  '
+
+    a         = add -A
+    s         = status -sb
+    d         = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
+    l         = log --abbrev-commit --decorate --graph --date=format:'%A \t│%Y-%m-%d %H:%M:%S' --format=format:'%C(01)%>(1)%h%C(reset) │ %C(07)%ad%C(reset) │ %C(4)%<(13,trunc)%an%C(reset) │ %C(2)%<(20,trunc)%ar%C(reset) │ %C(1)%<(30,trunc)%d%C(reset) │ %C(bold 7)MESSAGE: %s%C(reset)' --all
+    di        = difftool --tool=vimdiff -y
+    ds        = difftool --staged --tool=vimdiff -y
+    dc        = difftool --cached --tool=vimdiff -y
+    dt        = diff --stat
+    ll        = log --numstat --decorate --graph --date=format:'%Y-%m-%d %H:%M:%S' --format=format:'%C(1)%><(40,trunc) ❚ %H ❚  %C(4) [%cn] %C(reset) ❚  %C(reset) %C(8)%ad%C(reset) ❚  %C(reset) %C(8)%s%C(reset)  ❚  '
+
+# ================================================================================================================================
 
 [user]
-    email = hantaotaohan@gmail.com 
-    name  = hantaotaohan
+
+    email     = hantaotaohan@gmail.com 
+    name      = hantaotaohan
 
 [core]
-    editor   = vim
-    autocrlf = false
-    pager = delta --diff-so-fancy  --wrap-max-lines 1 --max-line-length=$((COLUMNS - 10))
+
+    editor    = vim
+    autocrlf  = false
+    pager     = delta --diff-so-fancy  --wrap-max-lines 1 --max-line-length=$((COLUMNS - 10))
 
 [pull]
-    rebase = false
+
+    rebase    = false
 
 [log]
-    date = format:%A %Y-%m-%d %H:%M:%S
+
+    date      = format:%A %Y-%m-%d %H:%M:%S
 
 [merge]
-    tool = diff3
+
+    tool      = diff3
 
 [http]
+
     sslVerify = false
 
+# ================================================================================================================================
+
 [color]
-    ui   = always
-    diff = always
+
+    ui                   = always
+    diff                 = always
 
 [color "diff"]
-    meta         = 3  0 bold
-    commit       = 3  0 bold
-    frag         = 5  0 bold
-    old          = 1  0 bold
-    new          = 2  0 bold
-    whitespace   = 3  0 reverse
+
+    meta                 = 3    0 bold
+    commit               = 3    0 bold
+    frag                 = 5    0 bold
+    old                  = 1    0 bold
+    new                  = 2    0 bold
+    whitespace           = 3    0 reverse
 
 [color "diff-highlight"]
-    oldNormal    = 1   0
-    oldHighlight = 255 124
-    newNormal    = 2   0
-    newHighlight = 255 28
+
+    oldNormal            = 1    0
+    oldHighlight         = 255  124
+    newNormal            = 2    0
+    newHighlight         = 255  28
 
 [color "branch"]
-    current      = 3 reverse
-    local        = 3
-    remote       = 2
+
+    current              = 3    reverse
+    local                = 3
+    remote               = 2
 
 [color "status"]
-    added        = 2
-    changed      = 3
-    untracked    = 1
 
-; [pager]
-;     diff = diff-so-fancy | less --tabs=4 -RFX
-;     show = diff-so-fancy | less --tabs=4 -RFX
+    added                = 2
+    changed              = 3
+    untracked            = 1
 
-[interactive]
-    ; diffFilter = "diff-so-fancy --patch"
-    diffFilter = delta --color-only
 
 [diff-so-fancy]
+
     stripLeadingSymbols  = false
     changeHunkIndicators = true
     markEmptyLines       = false
     useUnicodeRuler      = true
 
+# ================================================================================================================================
+
+# [pager]
+
+#     diff = diff-so-fancy | less --tabs=4 -RFX
+#     show = diff-so-fancy | less --tabs=4 -RFX
+
+# ================================================================================================================================
+
+[interactive]
+
+    diffFilter   = delta --color-only
+
 [delta]
+
+    features     = space-separated interactive side-by-side onedark
     syntax-theme = base16 
-    features = space-separated interactive side-by-side onedark
 
 [delta "interactive"]
+
     keep-plus-minus-markers = false
 
 [delta "onedark"]
 
-    #author: https://github.com/AirOnSkin
+    # author: https://github.com/AirOnSkin
     dark = true
     line-numbers = true
     side-by-side = false
@@ -132,24 +165,32 @@
     whitespace-error-style = "#D7AF87" reverse
 
 [diff]
+
     colorMoved = default
     
+# ================================================================================================================================
+
 [url "git@github.com:"]
+
     insteadOf     = "gh:"
     pushInsteadOf = "github:"
     pushInsteadOf = "git://github.com/"
 
 [url "git://github.com/"]
-    insteadOf = "github:"
+
+    insteadOf     = "github:"
 
 [url "git@gist.github.com:"]
+
     insteadOf     = "gst:"
     pushInsteadOf = "gist:"
     pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-    insteadOf = "gist:"
+
+    insteadOf     = "gist:"
 
 [init]
+
     defaultBranch = main
 

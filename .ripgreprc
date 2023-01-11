@@ -28,10 +28,10 @@
 --sort=path
 
 # 匹配上下文分割线
---field-context-separator=\t│\t
+# --field-context-separator=\t│\t
 
 # 已匹配的分割线
---field-match-separator=\t│\t
+# --field-match-separator=\t│\t
 
 # 只搜索一个操作系统
 --one-file-system

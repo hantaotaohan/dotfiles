@@ -1,44 +1,107 @@
-# ----------------------------------------------------------------------------------------------------------------
-# Tree View
-# ----------------------------------------------------------------------------------------------------------------
-function tre() {
-	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
+#!/usr/bin/env bash
+
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                            FUNCTION                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.11                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
+# ================================================================================================================================
+#                                                       COMPRESSED PACKAGES 
+# ================================================================================================================================
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# 解压缩
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function ce() {
+
+    if [ -f $1 ] ; then
+        case $1 in
+        *.tar.bz2)   tar -xvjf $1    ;;
+        *.tar.gz)    tar -xvzf $1    ;;
+        *.tar.xz)    tar -xvJf $1    ;;
+        *.bz2)       bunzip2 $1      ;;
+        *.rar)       rar x $1        ;;
+        *.gz)        gunzip $1       ;;
+        *.tar)       tar -xvf $1     ;;
+        *.tbz2)      tar -xvjf $1    ;;
+        *.tgz)       tar -xvzf $1    ;;
+        *.zip)       unzip $1        ;;
+        *.Z)         uncompress $1   ;;
+        *.7z)        7z x $1         ;;
+        *)           echo "Don't Know How To Extract '$1'..." ;;
+        esac
+    else
+        echo "'$1' Is Not A Valid File !"
+    fi
+
 }
 
-# ----------------------------------------------------------------------------------------------------------------
-# Create a new directory and enter it
-# ----------------------------------------------------------------------------------------------------------------
-function mkd() {
-	mkdir -p "$@" && cd "$_";
+# --------------------------------------------------------------------------------------------------------------------------------
+# 压缩
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function cc() {
+
+    if [ -n "$1" ] ; then
+        FILE=$1
+        case $FILE in
+        *.tar) shift && tar -cf $FILE $* ;;
+        *.tar.bz2) shift && tar -cjf $FILE $* ;;
+        *.tar.xz) shift && tar -cJf $FILE $* ;;
+        *.tar.gz) shift && tar -czf $FILE $* ;;
+        *.tgz) shift && tar -czf $FILE $* ;;
+        *.zip) shift && zip $FILE $* ;;
+        *.rar) shift && rar $FILE $* ;;
+        esac
+    else
+        echo "USAGE: sc <Foo.tar.gz> ./foo ./bar"
+    fi
+
 }
 
-# ----------------------------------------------------------------------------------------------------------------
-# Git Add submit and upload
-# ----------------------------------------------------------------------------------------------------------------
-function lazygit() {
+# ================================================================================================================================
+#                                                           GIT = GITHUB 
+# ================================================================================================================================
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# Git Add Submit And Upload ( Git Push )
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function gitpush() {
+
     git add .
     git commit -a -m "$1"
     git push
+
 }
 
-# ----------------------------------------------------------------------------------------------------------------
-# Git commit browser
-# ----------------------------------------------------------------------------------------------------------------
-fshow() {
+# --------------------------------------------------------------------------------------------------------------------------------
+# Git Commit Browser
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function gitshow() {
+
     local commit_hash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
     local view_commit="$commit_hash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
     git log --color=always \
         --format="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" "$@" | \
-    fzf --no-sort --tiebreak=index --no-multi --reverse --ansi \
+        fzf --no-sort --tiebreak=index --no-multi --reverse --ansi \
         --header="enter to view, alt-y to copy hash" --preview="$view_commit" \
         --bind="enter:execute:$view_commit | less -R" \
         --bind="alt-y:execute:$commit_hash | xclip -selection clipboard"
+
 }
 
-# ----------------------------------------------------------------------------------------------------------------
-# Remove all commit in Git
-# ----------------------------------------------------------------------------------------------------------------
-git-remove-all-commit() {
+# --------------------------------------------------------------------------------------------------------------------------------
+# Remove All Commit in Git ( Multi In One )
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function git-remove-all-commit() {
+
     local branch
     branch=$(git symbolic-ref --short HEAD)
     echo -e "\nDo you want to remove all your commit in \033[1m$branch\033[0m branch? [Y/n] "
@@ -56,24 +119,34 @@ git-remove-all-commit() {
             echo "Cancelled."
             ;;
     esac
+
 }
 
-# ----------------------------------------------------------------------------------------------------------------
-# Colors List - style1
-# ----------------------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                              COLORS 
+# ================================================================================================================================
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# Colors List - Style 1
+# --------------------------------------------------------------------------------------------------------------------------------
+
 function colors() {
+
     for i in {0..255}; do
         printf "\x1b[38;5;${i}mcolor%-5i\x1b[0m" $i
         if ! (( ($i + 1 ) % 8 )); then
             echo ""
         fi
     done
+
 }
 
-# ----------------------------------------------------------------------------------------------------------------
-# Colors List - style2
-# ----------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------------------
+# Colors List - Style 2
+# --------------------------------------------------------------------------------------------------------------------------------
+
 function colorss() {
+
     for x in {0..8}; do
         for i in {30..37}; do
             for a in {40..47}; do
@@ -83,12 +156,194 @@ function colorss() {
         done
     done
     echo ""
+
+}
+
+# ================================================================================================================================
+#                                                           FZF = SEARCH 
+# ================================================================================================================================
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# FZF-Ripgrep
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function f() {
+
+    [[ -n $1 ]] && cd $1 # go to provided folder or noop
+    RG_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
+
+    selected=$(
+    FZF_DEFAULT_COMMAND="rg --files" fzf \
+        -m \
+        -e \
+        --ansi \
+        --phony \
+        --reverse \
+        --bind "ctrl-a:select-all" \
+        --bind "f12:execute-silent:(vim {})" \
+        --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
+        --preview "rg -i --pretty --context 2 {q} {}" | cut -d":" -f1,2
+    )
+    [[ -n $selected ]] && vim $selected # open multiple files in editor
+
+}
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# FZF-Ripgrep
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function ff() {
+
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    INITIAL_QUERY="${*:-}"
+    IFS=: read -ra selected < <(
+    FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")" \
+    fzf --ansi \
+        --color "hl:-1:underline,hl+:-1:underline:reverse" \
+        --disabled --query "$INITIAL_QUERY" \
+        --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
+        --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(2. fzf> )+enable-search+clear-query+rebind(ctrl-r)" \
+        --bind "ctrl-r:unbind(ctrl-r)+change-prompt(1. ripgrep> )+disable-search+reload($RG_PREFIX {q} || true)+rebind(change,ctrl-f)" \
+        --prompt '1. Ripgrep> ' \
+        --delimiter : \
+        --header '╱ CTRL-R (Ripgrep mode) ╱ CTRL-F (fzf mode) ╱' \
+        --preview 'bat --color=always {1} --highlight-line {2}' \
+        --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
+    )
+    [ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"
+
+}
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# FZF-Kill-Processes 
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function fk() {
+
+    local pid
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi
+
+}
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# 通过fzf搜索文件并用vim打开
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function fe() {
+
+    local file
+
+    file="$(fd --type f ${1:-.} ${2:-.} \
+        --hidden \
+        --follow \
+        --exclude .git \
+        --exclude boot \
+        --exclude lib \
+        --exclude lib64 \
+        --exclude lost+found \
+        --exclude opt \
+        --exclude proc \
+        --exclude root \
+        --exclude run \
+        --exclude sbin \
+        --exclude srv \
+        --exclude sys \
+        --exclude tmp \
+        --exclude var / | fzf --multi --exit-0 --select-1)"
+
+    if [[ -n $file ]]; then
+        VIMRUNTIME= vim -p $file
+    fi
+    if [ -z "${file}" ]; then
+        return 1
+    fi
+    history -w
+    : > /tmp/fzf_tmp
+    for files in ${file[@]}; do
+        echo $files >> /tmp/fzf_tmp
+    done
+
+    arguments=$(cat /tmp/fzf_tmp)
+    echo vim ${arguments} >> ~/.bash_history
+    history -r
+    rm -rf /tmp/fzf_tmp
+
+}
+
+# ================================================================================================================================
+#                                                               TMUX 
+# ================================================================================================================================
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# TMUX
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function tm() {
+
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+
+  if [ $1 ]; then
+        tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+
+}
+# ================================================================================================================================
+#                                                               UNIX 
+# ================================================================================================================================
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# LS
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function l() {
+
+    ll -ht | awk '{printf "%-10s%-8s%-15s%-12s%-20s\n",$3,$4,$5,$6,$7}'
+
+}
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# Watch Dir
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function wls(){
+
+    path=$1
+
+    inotifywait --quiet --monitor --event attrib,modify,move,delete,create --timefmt '%Y-%m-%dT%H:%M:%S' --format '%T %w %f %e' $path |
+    while read -r file; do
+        clear
+        ls -alhtovqF --color=always --group-directories-first --time-style +"%F %T" $path | awk '{printf "%-10s%-8s%-15s%-12s%-20s\n",$3,$4,$5,$6,$7}'
+    done
+
+}
+
+# --------------------------------------------------------------------------------------------------------------------------------
+# Create A New Directory And Enter It
+# --------------------------------------------------------------------------------------------------------------------------------
+
+function mkd() {
+
+	mkdir -p "$@" && cd "$_";
+
 }
 
 # ----------------------------------------------------------------------------------------------------------------
-# Check Web-Files size
+# Check Web-Files Size
 # ----------------------------------------------------------------------------------------------------------------
-sizeof() {
+
+function sizeof() {
+
     URL="$1"
     humanize_size() {
         local SIZE=$1
@@ -120,225 +375,6 @@ sizeof() {
         echo "Please provide a valid URL of a file"
         exit 1
     fi
-}
 
-# ----------------------------------------------------------------------------------------------------------------
-# FZF-Ripgrep
-# ----------------------------------------------------------------------------------------------------------------
-frg() {
-    [[ -n $1 ]] && cd $1 # go to provided folder or noop
-    RG_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
-
-    selected=$(
-    FZF_DEFAULT_COMMAND="rg --files" fzf \
-      -m \
-      -e \
-      --ansi \
-      --phony \
-      --reverse \
-      --bind "ctrl-a:select-all" \
-      --bind "f12:execute-silent:(vim {})" \
-      --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
-      --preview "rg -i --pretty --context 2 {q} {}" | cut -d":" -f1,2
-    )
-    [[ -n $selected ]] && vim $selected # open multiple files in editor
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-
-function ff() {
-# Switch between Ripgrep launcher mode (CTRL-R) and fzf filtering mode (CTRL-F)
-    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
-    INITIAL_QUERY="${*:-}"
-    IFS=: read -ra selected < <(
-    FZF_DEFAULT_COMMAND="$RG_PREFIX $(printf %q "$INITIAL_QUERY")" \
-    fzf --ansi \
-        --color "hl:-1:underline,hl+:-1:underline:reverse" \
-        --disabled --query "$INITIAL_QUERY" \
-        --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
-        --bind "ctrl-f:unbind(change,ctrl-f)+change-prompt(2. fzf> )+enable-search+clear-query+rebind(ctrl-r)" \
-        --bind "ctrl-r:unbind(ctrl-r)+change-prompt(1. ripgrep> )+disable-search+reload($RG_PREFIX {q} || true)+rebind(change,ctrl-f)" \
-        --prompt '1. Ripgrep> ' \
-        --delimiter : \
-        --header '╱ CTRL-R (Ripgrep mode) ╱ CTRL-F (fzf mode) ╱' \
-        --preview 'bat --color=always {1} --highlight-line {2}' \
-        --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
-    )
-    [ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# FZF-Kill-Processes 
-# ----------------------------------------------------------------------------------------------------------------
-fkill() {
-    local pid
-    if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
-    else
-        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-    fi
-
-    if [ "x$pid" != "x" ]
-    then
-        echo $pid | xargs kill -${1:-9}
-    fi
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# CD_Func
-# ----------------------------------------------------------------------------------------------------------------
-my_cd_func() {
-    \cd "${1}" 
-    ls -alhovqF --color=always --group-directories-first
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# CD到所选文件的目录中
-# ----------------------------------------------------------------------------------------------------------------
-cdf() {
-   local file
-   local dir
-   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# 通过fzf搜索文件并用vim打开
-# ----------------------------------------------------------------------------------------------------------------
-fe() {
-    local file
-    file="$(fd --type f ${1:-.} ${2:-.} \
-    --hidden \
-    --follow \
-    --exclude .git \
-    --exclude boot \
-    --exclude lib \
-    --exclude lib64 \
-    --exclude lost+found \
-    --exclude opt \
-    --exclude proc \
-    --exclude root \
-    --exclude run \
-    --exclude sbin \
-    --exclude srv \
-    --exclude sys \
-    --exclude tmp \
-    --exclude var / | fzf --multi --exit-0 --select-1)"
-    if [[ -n $file ]]; then
-        VIMRUNTIME= vim -p $file
-    fi
-    if [ -z "${file}" ]; then
-        return 1
-    fi
-    history -w
-    : > /tmp/fzf_tmp
-    for files in ${file[@]}; do
-        echo $files >> /tmp/fzf_tmp
-    done
-    # sed -i 's/\n//g; s/ /\\ /g; s/(/\\(/; s/)/\\)/' /tmp/fzf_tmp
-    # # If the program is on the GUI list add a '&' to the command history
-    # if [[ $1 =~ ^(vim|zathura|vlc|eog|kolourpaint)$ ]]; then
-    #     sed -i '${s/$/ \&/}' /tmp/fzf_tmp
-    # fi
-    arguments=$(cat /tmp/fzf_tmp)
-    echo vim ${arguments} >> ~/.bash_history
-    history -r
-    rm -rf /tmp/fzf_tmp
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# Normalize `open` across Linux, macOS, and Windows.
-# This is needed to make the `o` function (see below) cross-platform.
-# ----------------------------------------------------------------------------------------------------------------
-if [ ! $(uname -s) = 'Darwin' ]; then
-	if grep -q Microsoft /proc/version; then
-		# Ubuntu on Windows using the Linux subsystem
-		alias open='explorer.exe';
-	else
-		alias open='xdg-open';
-	fi
-fi
-
-# `o` with no arguments opens the current directory, otherwise opens the given
-# location
-function o() {
-	if [ $# -eq 0 ]; then
-		open .;
-	else
-		open "$@";
-	fi;
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# ls Dir
-# ----------------------------------------------------------------------------------------------------------------
-function l() {
-ll -ht | awk '{printf "%-10s%-8s%-15s%-12s%-20s\n",$3,$4,$5,$6,$7}'
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# Watch Dir
-# ----------------------------------------------------------------------------------------------------------------
-function wls(){
-path=$1
-inotifywait --quiet --monitor --event attrib,modify,move,delete,create --timefmt '%Y-%m-%dT%H:%M:%S' --format '%T %w %f %e' $path |
-while read -r file; do
-    clear
-    ls -alhtovqF --color=always --group-directories-first --time-style +"%F %T" $path | awk '{printf "%-10s%-8s%-15s%-12s%-20s\n",$3,$4,$5,$6,$7}'
-done
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# TMUX
-# ----------------------------------------------------------------------------------------------------------------
-tm() {
-  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
-  if [ $1 ]; then
-    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
-  fi
-  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
-}
-
-# ----------------------------------------------------------------------------------------------------------------
-# 自动解压缩
-# ----------------------------------------------------------------------------------------------------------------
-# 自动解压：判断文件后缀名并调用相应解压命令
-function se() {
-    if [ -f $1 ] ; then
-        case $1 in
-        *.tar.bz2)   tar -xvjf $1    ;;
-        *.tar.gz)    tar -xvzf $1    ;;
-        *.tar.xz)    tar -xvJf $1    ;;
-        *.bz2)       bunzip2 $1     ;;
-        *.rar)       rar x $1       ;;
-        *.gz)        gunzip $1      ;;
-        *.tar)       tar -xvf $1     ;;
-        *.tbz2)      tar -xvjf $1    ;;
-        *.tgz)       tar -xvzf $1    ;;
-        *.zip)       unzip $1       ;;
-        *.Z)         uncompress $1  ;;
-        *.7z)        7z x $1        ;;
-        *)           echo "don't know how to extract '$1'..." ;;
-        esac
-    else
-        echo "'$1' is not a valid file!"
-    fi
-}
-
-# 自动压缩：判断后缀名并调用相应压缩程序
-function sc() {
-    if [ -n "$1" ] ; then
-        FILE=$1
-        case $FILE in
-        *.tar) shift && tar -cf $FILE $* ;;
-        *.tar.bz2) shift && tar -cjf $FILE $* ;;
-        *.tar.xz) shift && tar -cJf $FILE $* ;;
-        *.tar.gz) shift && tar -czf $FILE $* ;;
-        *.tgz) shift && tar -czf $FILE $* ;;
-        *.zip) shift && zip $FILE $* ;;
-        *.rar) shift && rar $FILE $* ;;
-        esac
-    else
-        echo "usage: sc <foo.tar.gz> ./foo ./bar"
-    fi
 }
 

@@ -1,7 +1,11 @@
 ---
 :backtrace: false
+:bulk_threshold: 1000
 :sources:
 - https://mirrors.tuna.tsinghua.edu.cn/rubygems/
 :update_sources: true
 :verbose: true
+install: "--no-rdoc --no-ri --env-shebang"
+update: "--no-rdoc --no-ri --env-shebang"
+benchmark: false
 gem: --user-install --no-document
