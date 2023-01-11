@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # ================================================================================================================================
 #                                                                                                                                 
 #                                                             Exports                                                            
@@ -73,7 +74,10 @@ export GET_TERMINAL_NAME=$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 # FZF默认功能设定及颜色设定
 # --------------------------------------------------------------o----------------------------------------------------------------o
-    
+
+export FZF_TMUX=1
+export FZF_TMUX_OPTS="-p 90%"
+
 export FZF_DEFAULT_COMMAND="fd --hidden --follow --type f \
     --exclude .git \
     --exclude boot \
@@ -98,31 +102,37 @@ export FZF_DEFAULT_OPTS="
     --cycle
     --exit-0
     --reverse
+    --no-mouse
+    --keep-right
+    --height=60%
     --inline-info
-    --height 100%
-    --border
+    --border=rounded
+    --no-separator
     --preview-window=hidden
+
     --marker='*'
     --pointer='> '
-    --prompt='Search: '
-    --preview 'bat --style=numbers --color=always --line-range :500 {}'
+    --prompt='SEARCH: '
     --bind '?:toggle-preview'
+    --preview-label=PREVIEW
+    --preview 'bat --style=numbers --color=always --line-range :500 {}'
+
 "
 
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS"
     --color=fg:#5C6370
     --color=bg:#282C34
     --color=hl:#E06C75
-    --color=gutter:#282C34
     --color=fg+:#ABB2BF
     --color=bg+:#3E4452
     --color=hl+:#E06C75
-    --color=info:#F7C662
-    --color=prompt:#E06C75
-    --color=pointer:#61AFEF
-    --color=marker:#73D0FF
-    --color=spinner:#73D0FF
+    --color=info:#6699CC
     --color=header:#6699CC
+    --color=marker:#73D0FF
+    --color=prompt:#E06C75
+    --color=gutter:#282C34
+    --color=pointer:#61AFEF
+    --color=spinner:#73D0FF
 "
 
 # --------------------------------------------------------------o----------------------------------------------------------------o

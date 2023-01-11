@@ -56,7 +56,7 @@
 
 # 配置颜色设定
 --colors=path:bg:0
---colors=path:fg:6
+--colors=path:fg:5
 --colors=line:fg:4
 --colors=match:bg:0
 --colors=match:fg:1
