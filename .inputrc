@@ -48,13 +48,13 @@ set expand-tilde on
 
 # 补全匹配字符前缀部分
 set colored-completion-prefix on
-set completion-prefix-display-length 2
+set completion-prefix-display-length 0
 
 # 补全完成期间为可执行文件、目录等显示不同的颜色
 set colored-stats on
 
 # 禁用特殊字符
-set bind-tty-special-chars Off
+set bind-tty-special-chars off
 
 # 允许 UTF8 输入和输出
 set input-meta on
