@@ -92,7 +92,7 @@ DOTFILES_REPO=$(pwd)
 [ -d "$BIN_DIR" ] || mkdir -p "$BIN_DIR" > /dev/null 2>&1
 
 GITHUB="github.com"
-GITHUBRAW="https://gitee.com/hantaotaohan/dotfiles/raw/master"
+GITHUBRAW="https://gitee.com/hantaotaohan/dotfiles/releases/download/1"
 # GITHUBRAW="https://github.com/hantaotaohan/dotfiles/releases/download/1.0.0"
 
 DOTFILES_COPY=( \
