@@ -1206,6 +1206,13 @@ if exists('g:plugs["fzf.vim"]')
     " 禁用浮动窗口
     " let g:fzf_layout = { 'down':'40%' }
 
+    " See `man fzf-tmux` for available options
+    if exists('$TMUX')
+        let g:fzf_layout = { 'tmux': '-p90%,60%' }
+    else
+        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+    endif
+
     " 启用浮动窗口
     let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
