@@ -89,8 +89,6 @@ BACKUP_DIR="$HOME/.dotfiles.orig"
 BIN_DIR="$HOME/.local/bin"
 DOTFILES_REPO=$(pwd)
 
-[ -d "$BIN_DIR" ] || mkdir -p "$BIN_DIR" > /dev/null 2>&1
-
 GITHUB="github.com"
 GITHUBRAW="https://gitee.com/hantaotaohan/dotfiles/releases/download/1"
 # GITHUBRAW="https://github.com/hantaotaohan/dotfiles/releases/download/1.0.0"
