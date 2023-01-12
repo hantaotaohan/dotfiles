@@ -1249,12 +1249,15 @@ if exists('g:plugs["fzf.vim"]')
         \ 'spinner': ['fg', 'Label'],
         \ 'header':  ['fg', 'Comment'] }
 
+    nnoremap <silent><LocalLeader>fr :Rg<CR>
     nnoremap <silent><LocalLeader>fa :Files<CR>
-    nnoremap <silent><LocalLeader>fb :Buffers<CR>
     nnoremap <silent><LocalLeader>ff :GFiles<CR>
     nnoremap <silent><LocalLeader>fl :BLines<CR>
     nnoremap <silent><LocalLeader>fo :Colors<CR>
-    nnoremap <silent><LocalLeader>fr :Rg<Cr>
+    nnoremap <silent><LocalLeader>fh :History<CR>
+    nnoremap <silent><LocalLeader>fb :Buffers<CR>
+
+    command! -bang Dot call fzf#vim#files('~/dotfiles', <bang>0)
 
 endif
 
