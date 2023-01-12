@@ -771,7 +771,7 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'tpope/vim-commentary'                                              " 快速注释插件
     Plug 'tpope/vim-surround'                                                " 成对更改删除括号等
     Plug 'junegunn/fzf.vim'                                                  " 为vim安装fzf插件
-    Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': { -> fzf#install() } }    " 为系统安装fzf工具
+    Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }       " 为系统安装fzf工具
     Plug 'mhinz/vim-startify'                                                " 定制vim开始页面
     Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
     Plug 'skywind3000/asyncrun.vim'                                          " 配合调测python插件
