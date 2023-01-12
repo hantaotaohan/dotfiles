@@ -589,7 +589,6 @@ Deb_Install() {
 
 	wget -P $BIN_DIR $GITHUBRAW/fd.deb > /dev/null 2>&1
 	wget -P $BIN_DIR $GITHUBRAW/bat.deb > /dev/null 2>&1
-	wget -P $BIN_DIR $GITHUBRAW/glow.deb > /dev/null 2>&1
 	wget -P $BIN_DIR $GITHUBRAW/delta.deb > /dev/null 2>&1
 	# wget -P $BIN_DIR $GITHUBRAW/foliate.deb > /dev/null 2>&1
 	# wget -P $BIN_DIR $GITHUBRAW/Alacritty.deb > /dev/null 2>&1
@@ -598,7 +597,6 @@ Deb_Install() {
 	DPKGAPPS=( \
         fd.deb \
         bat.deb \
-        glow.deb \
         delta.deb
         # Alacritty.deb
     )
