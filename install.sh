@@ -106,7 +106,6 @@ DOTFILES_COPY=( \
     .bash_profile \
     .bash_prompt \
     .bashrc \
-    .ctags \
     .curlrc \
     .dircolors \
     .exports \

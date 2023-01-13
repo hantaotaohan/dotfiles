@@ -1152,30 +1152,33 @@ if exists('g:plugs["tagbar"]')
     let g:tagbar_map_togglesort = 'r'
     let g:tagbar_iconchars = ['+', '-']
     let g:tagbar_previewwin_pos = "aboveleft"
-    let g:tagbar_type_markdown = {
-        \ 'ctagstype'	: 'markdown',
+
+    " VIMWIKI CTAGS
+    let g:tagbar_type_vimwiki = {
+        \ 'ctagsbin': 'ctags',
+        \ 'ctagstype'	: 'vimwiki',
         \ 'kinds'		: [
-            \ 'c:chapter:0:1',
-            \ 's:section:0:1',
-            \ 'S:subsection:0:1',
-            \ 't:subsubsection:0:1',
-            \ 'T:l4subsection:0:1',
-            \ 'u:l5subsection:0:1',
+            \ 'c:Heading1:0:1',
+            \ 's:Heading2:0:1',
+            \ 'S:Heading3:0:1',
+            \ 't:Heading4:0:1',
+            \ 'T:Heading5:0:1',
+            \ 'u:Heading6:0:1',
         \ ],
         \ 'sro'			: '""',
         \ 'kind2scope'	: {
-            \ 'c' : 'chapter',
-            \ 's' : 'section',
-            \ 'S' : 'subsection',
-            \ 't' : 'subsubsection',
-            \ 'T' : 'l4subsection',
-        \ },
+            \ 'c' : 'Heading1',
+            \ 's' : 'Heading2',
+            \ 'S' : 'Heading3',
+            \ 't' : 'Heading4',
+            \ 'T' : 'Heading5',
+            \},
         \ 'scope2kind'	: {
-            \ 'chapter' : 'c',
-            \ 'section' : 's',
-            \ 'subsection' : 'S',
-            \ 'subsubsection' : 't',
-            \ 'l4subsection' : 'T',
+            \ 'Heading1' : 'c',
+            \ 'Heading2' : 's',
+            \ 'Heading3' : 'S',
+            \ 'Heading4' : 't',
+            \ 'Heading5' : 'T',
         \ },
     \ }
 
