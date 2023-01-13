@@ -391,6 +391,7 @@ Apt_Install() {
         tty-clock \
         python3-pip \
         inotify-tools \
+	bash-completion \
         universal-ctags \
         silversearcher-ag \
         vim \
