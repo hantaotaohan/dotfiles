@@ -103,6 +103,7 @@ DOTFILES_COPY=( \
     .aliases \
     .bash_profile \
     .bash_prompt \
+    .ctags.d \
     .bashrc \
     .curlrc \
     .dircolors \
@@ -390,7 +391,7 @@ Apt_Install() {
         tty-clock \
         python3-pip \
         inotify-tools \
-	bash-completion \
+        bash-completion \
         universal-ctags \
         silversearcher-ag \
         vim \

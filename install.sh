@@ -108,6 +108,7 @@ DOTFILES_COPY=( \
     .bashrc \
     .curlrc \
     .dircolors \
+    .ctags.d \
     .exports \
     .fonts.conf \
     .functions \
@@ -452,7 +453,7 @@ Apt_Install() {
         python3-pip \
         inotify-tools \
         libgl1-mesa-* \
-	bash-completion \
+        bash-completion \
         # translate-shell \
         universal-ctags \
         silversearcher-ag \
