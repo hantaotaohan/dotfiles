@@ -452,6 +452,7 @@ Apt_Install() {
         python3-pip \
         inotify-tools \
         libgl1-mesa-* \
+	bash-completion \
         # translate-shell \
         universal-ctags \
         silversearcher-ag \
