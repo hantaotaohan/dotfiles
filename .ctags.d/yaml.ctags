@@ -1,0 +1,5 @@
+--langmap=yaml:.yml.yaml
+--kinddef-yaml=s,section,sections
+--kinddef-yaml=e,entry,entries
+--regex-yaml=/^([a-zA-Z0-9_\/-]+):/\1/s/{scope=set}
+--regex-yaml=/^ *- (name: .*)$/\1/e/{scope=ref}

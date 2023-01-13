@@ -11,7 +11,8 @@
 # >>> Basis Define Variable
 
 BIN_DIR="$HOME/.local/bin"
-EXTRAS_DIR=$(dirname "$PWD") 
+EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
+EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")
 APT_INSTALL="sudo apt install -qq -y"
 DOTFILES_REPO=$(pwd)
 
@@ -107,6 +108,32 @@ ROW() {
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
+# Install Tmux
+#---------------------------------------------------------------------------------------------------------------------------------------
+
+Tmux() {
+
+    ${APT_INSTALL} libevent-dev ncurses-dev build-essential bison pkg-config > /dev/null 2>&1
+    
+    cd ${BIN_DIR} || return
+
+    if [ -d "tmux" ]; then 
+        cd tmux && git pull > /dev/null 2>&1
+    else
+        $GIT_CLONE/tmux/tmux.git && cd tmux 
+    fi
+
+    bash autogen.sh
+    ./configure
+    make &&
+    sudo make install
+
+    ROW
+    echo -e "Tmux Install Is Complete :: Version "  $(tmux -V)
+    ROW
+
+}
+#---------------------------------------------------------------------------------------------------------------------------------------
 # Install Tools
 #---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -182,40 +209,16 @@ Jupyter() {
         mkdir -p $HOME/.jupyter/custom/
     fi
 
-    cp $EXTRAS_DIR/jupyter/custom.css $HOME/.jupyter/custom/custom.css
+    cp $EXTRAS_UP_DIR/jupyter/custom.css $HOME/.jupyter/custom/custom.css
 
     if [ ! -d "$HOME/.ipython/profile_default/startup/" ]; then
         mkdir -p $HOME/.ipython/profile_default/startup/
     fi
 
-    cp $EXTRAS_DIR/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
+    cp $EXTRAS_UP_DIR/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
 
     ROW
     echo -e "Jupyter Install Is Complete :: Version "  $( jupyter --version | grep -iE "ipython|notebook" | sed -e "s/\b\(.\)/\u\1/g" )
-    ROW
-
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Navi() {
-
-    cd ${BIN_DIR} || return
-
-    wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/navi
-
-    sudo cp $BIN_DIR/navi /usr/local/bin
-
-    if [ ! -d "$HOME/.local/share/navi/cheats/denisidoro__cheats/" ]; then
-        mkdir -p $HOME/.local/share/navi/cheats/denisidoro__cheats
-    fi
-
-    ln -fs $EXTRAS_DIR/cheatsheets/cheatsheets.cheat $HOME/.local/share/navi/cheats/denisidoro__cheats/cheatsheets.cheat
-
-    sudo chmod +x /usr/local/bin/navi
-
-    ROW
-    echo -e "Navi Install Is Complete :: Version "  $( navi -V | sed -e "s/\b\(.\)/\u\1/g" )
     ROW
 
 }
@@ -295,7 +298,7 @@ Offlineimap() {
         sudo rm -rf /etc/systemd/user/offlineimap.service
     fi
 
-    sudo cp $EXTRAS_DIR/offlineimap/offlineimap.service /etc/systemd/user
+    sudo cp $EXTRAS_UP_DIR/offlineimap/offlineimap.service /etc/systemd/user
     sudo chmod 664 /etc/systemd/user/offlineimap.service
     systemctl --user daemon-reload
     systemctl --user enable offlineimap
@@ -342,7 +345,7 @@ Github_SSH() {
 
 Github_Hosts() {
 
-    sudo python3 $EXTRAS_DIR/autohosts/github_hosts.py
+    sudo sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl -s https://raw.hellogithub.com/hosts | sudo tee -a /etc/hosts > /dev/null 2>&1
 
     ROW
     echo "Github Hosts Install Is Complete :: Update Time: " $(tail -n -4 /etc/hosts  | head -n 1)
@@ -422,7 +425,7 @@ Rdrview() {
 SSH_banner() {
 
     sudo sed -i '$a\Banner \/etc\/ssh\/my_ssh_banner' /etc/ssh/sshd_config
-    sudo cp $EXTRAS_DIR/banner/my_ssh_banner /etc/ssh/
+    sudo cp $EXTRAS_UP_DIR/banner/my_ssh_banner /etc/ssh/
 
     # systemctl restart sshd
 
@@ -535,18 +538,6 @@ Java() {
 
     ROW
     javac -version
-    ROW
-
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Fix_FZF_history() {
-
-    echo "bind -m emacs-standard '\"\\C-r\": \"\\C-e \\C-u\\C-y\\ey\\C-u\"\$(__fzf_history__)\"\\e\\C-e\\er\\C-m\"'" >> $HOME/.fzf/shell/key-bindings.bash
-
-    ROW
-    echo "Fix FZF History Done!"
     ROW
 
 }
@@ -1125,6 +1116,9 @@ main() {
             ;;   
         rofi)
             Rofi
+            ;;   
+        tmux)
+            Tmux
             ;;   
         -a|--all)
             # Github_Hosts
