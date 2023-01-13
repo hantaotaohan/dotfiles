@@ -1,39 +1,97 @@
 #!/usr/bin/env bash
 
-#---------------------------------------------------------------------------------------------------------------------------------------
-# Define Variable.
-#---------------------------------------------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                             SETUP                                                            
+#
+#                                                       Update: 2023.01.13                                                      
+#                                                                                                                                 
+# ================================================================================================================================
 
-# >>> Set Mail Password
+# ================================================================================================================================
+#                                                      ENVIRONMENT SETTINGS
+# ================================================================================================================================
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# Set E-Mail Password
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 # PASSWORD=""
 
-# >>> Basis Define Variable
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# Basis Define Path Variable
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-BIN_DIR="$HOME/.local/bin"
+# BIN_DIR="$HOME/.local/bin"
+BIN_DIR="$HOME/.bin"
 EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
 EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")
 APT_INSTALL="sudo apt install -qq -y"
-DOTFILES_REPO=$(pwd)
 
-# >>> Line Scheme "Github"
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Github --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 GIT_CLONE="git clone -q https://github.com"
 GIT_DOWNLOAD="https://github.com"
 
-# >>> Line Scheme "Fastgit"
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Fastgit --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 # GIT_CLONE="git clone -q https://hub.fastgit.xyz"
 # GIT_DOWNLOAD="https://download.fastgit.org"
 
-# >>> Line Scheme "Cnpmjs"
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Cnpmjs --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 # GIT_CLONE="git clone -q https://github.com.cnpmjs.org"
 # GIT_DOWNLOAD="https://github.com.cnpmjs.org"
 
-#---------------------------------------------------------------------------------------------------------------------------------------
-# Print usage message.
-#---------------------------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------o----------------------------------------------------------------o
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# Setting Bash Colors Variable
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+RESET=$(tput sgr0)
+RED=$(tput setaf 1)
+BLUE=$(tput setaf 4)
+CYAN=$(tput setaf 6)
+GREEN=$(tput setaf 2)
+WHITE=$(tput setaf 7)
+BLACK=$(tput setaf 0)
+YELLOW=$(tput setaf 3)
+MAGENTA=$(tput setaf 5)
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# ANSI Draw Lines Functions
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+ROW() {
+
+    seq -s '─' 0 "$(tput cols)" | tr -d '[:digit:]'
+
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# Status - Box - Functions
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+Install_Status() {
+
+	if [ $1 -eq 0 ]; then
+        echo -e "\t\t${GREEN}[√] Installation Successful: $2${RESET}\n";
+	else
+        echo -e "\t\t${RED}[X] Install Failed: $2${RESET}\n";
+	fi
+	
+}
+
+# ================================================================================================================================
+#                                                      PRINT USAGE MESSAGE 
+# ================================================================================================================================
 
 usage() {
 
@@ -44,92 +102,139 @@ usage() {
     Usage: $program_name [-option]
     Options:
     
-    -------------------------------------------------------------------------------
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
                                                                                    
          -h --help          Print this message                                                  
          -a --all           Setup All                                                           
          -m --minimize      Setup All   
          -s --server        Setup Server All                                                    
                                                                                    
-    -------------------------------------------------------------------------------
-        alttab              Install Program Alttab - Same Windows Alt Tab
-        anki                Install Program Anki
-        arcicons            Install Gtk Dark-themes Icons
-        bashdb              Install Program Bashdb Bash Debug Tools
-        ctags               Install Program  News Version Universal-Ctags 
-        clone               Git Clone Need SSH-KEY Is My Github Respones
-        calibre             Install Program Calibre And Settings Config
-        dunst               Install Program Dunst - X11 Message Tools
-        dragon              Install Ranger Plug Dragon - Ranger Drop Function
-        fixfzf              Fix Fzf Of Ctrl+r History Enter Direct Execution
-        foliate             Install Program Foliate - eBook Reader
-        fixnautilus         Fix Nautilus Views Mode
-        fixrofiicons        Fix Rofi Icons - Add Other Icons
-        fixi3terminal       Fix I3wm Terminal Alacritty Suppose
-        fixvmwareshare      Settings Vmware Share Folads
-        githubhosts         Settings Config /etc/hosts/ Uses Fast View Github.com
-        githubssh           Settings Github.com SSH Key - Auto SSH_Ras Copy
-        hugo                Install Program Hugo
-        i3gaps              Install Program I3gaps
-        i3blocks            Install Program I3blocks
-        i3lockfancy         Install Program i3lock_fancy
-        imagemagick         Fix Imagemagick - Convert Pdf Normally
-        java                Install Program Java
-        jupyter             Install Program Jupyter Notebook And Settings Themes
-        ly                  Install Program Ly Commandline Longin 
-        navi                Install Program Navi - Cheatsheet Tools
-        nodejs              Install Program Node.js
-        offlineimap         Install Program offlineimap -  Auto Setting Neomutt
-        picom               Install Program Picom
-        popupdict           Install Program Popupdict - Translate Tools
-        qutebrowser         Install Program Qutebrowser - Web Browser
-        rofi                Install Program Rofi
-        rdrview             Install Program Rdrview - HTML Render Tools
-        st                  Install Program St - Terminal
-        sshbanner           Settings SSH Login Banner
-        urxvt               Install Program URxvt - Terminal
-        vim                 Install Program Vim Version 8.2
-        vifm                Install Program Vifm - Filebrowser
-        weixin              Install Program Weixin - Linux Weixin
-        yarn                Install Program Yarn
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-    -------------------------------------------------------------------------------
+         alttab              Install Program Alttab - Same Windows Alt Tab
+         anki                Install Program Anki
+         arcicons            Install Gtk Dark-themes Icons
+         bashdb              Install Program Bashdb Bash Debug Tools
+         ctags               Install Program  News Version Universal-Ctags 
+         clone               Git Clone Need SSH-KEY Is My Github Respones
+         calibre             Install Program Calibre And Settings Config
+         dunst               Install Program Dunst - X11 Message Tools
+         dragon              Install Ranger Plug Dragon - Ranger Drop Function
+         fixfzf              Fix Fzf Of Ctrl+r History Enter Direct Execution
+         foliate             Install Program Foliate - eBook Reader
+         fixnautilus         Fix Nautilus Views Mode
+         fixrofiicons        Fix Rofi Icons - Add Other Icons
+         fixi3terminal       Fix I3wm Terminal Alacritty Suppose
+         fixvmwareshare      Settings Vmware Share Folads
+         githubhosts         Settings Config /etc/hosts/ Uses Fast View Github.com
+         githubssh           Settings Github.com SSH Key - Auto SSH_Ras Copy
+         hugo                Install Program Hugo
+         i3gaps              Install Program I3gaps
+         i3blocks            Install Program I3blocks
+         i3lockfancy         Install Program i3lock_fancy
+         imagemagick         Fix Imagemagick - Convert Pdf Normally
+         java                Install Program Java
+         jupyter             Install Program Jupyter Notebook And Settings Themes
+         ly                  Install Program Ly Commandline Longin 
+         navi                Install Program Navi - Cheatsheet Tools
+         nodejs              Install Program Node.js
+         offlineimap         Install Program offlineimap -  Auto Setting Neomutt
+         picom               Install Program Picom
+         popupdict           Install Program Popupdict - Translate Tools
+         qutebrowser         Install Program Qutebrowser - Web Browser
+         rofi                Install Program Rofi
+         rdrview             Install Program Rdrview - HTML Render Tools
+         st                  Install Program St - Terminal
+         sshbanner           Settings SSH Login Banner
+         urxvt               Install Program URxvt - Terminal
+         vim                 Install Program Vim Version 8.2
+         vifm                Install Program Vifm - Filebrowser
+         weixin              Install Program Weixin - Linux Weixin
+         yarn                Install Program Yarn
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
     
 EOF
 
 }
 
-#---------------------------------------------------------------------------------------------------------------------------------------
-# Public Tools Functions . 
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-ROW() {
-    seq -s '─' 0 "$(tput cols)" | tr -d '[:digit:]'
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-# Install Tmux
-#---------------------------------------------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+# TMUX 
+# ================================================================================================================================
 
 Tmux() {
+
+# --------------------------------------------------------------o----------------------------------------------------------------o
+
+    ROW
+    echo -e ""
+    echo -e "${YELLOW}TMUX Is Being Installed${RESET}"
+    echo -e ""
+
+# >>> INSTALL DEPENDENCIES
 
     ${APT_INSTALL} libevent-dev ncurses-dev build-essential bison pkg-config > /dev/null 2>&1
     
     cd ${BIN_DIR} || return
 
+# --------------------------------------------------------------o----------------------------------------------------------------o
+
+# >>> REMOVE ALREADY EXISTS
+    
+    sudo apt remove tmux > /dev/null 2>&1
+
+    [ -d $HOME/.tmux ] && rm -rf $HOME/.tmux
+
+# --------------------------------------------------------------o----------------------------------------------------------------o
+    
+# >>> PRETO BUILD
+
     if [ -d "tmux" ]; then 
-        cd tmux && git pull > /dev/null 2>&1
+        cd tmux && git reset --hard && git pull > /dev/null 2>&1
     else
-        $GIT_CLONE/tmux/tmux.git && cd tmux 
+        $GIT_CLONE/tmux/tmux.git ${BIN_DIR}/tmux && cd ${BIN_DIR}/tmux 
     fi
 
-    bash autogen.sh
-    ./configure
-    make &&
-    sudo make install
+# --------------------------------------------------------------o----------------------------------------------------------------o
+    
+# >>> START BUILD
 
-    ROW
-    echo -e "Tmux Install Is Complete :: Version "  $(tmux -V)
+    bash autogen.sh > /dev/null 2>&1
+    ./configure > /dev/null 2>&1
+    make && sudo make install > /dev/null 2>&1
+
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}[√] Installation Successful${RESET}\n";
+        echo -e "Tmux Install Is Complete :: Version "  $(tmux -V)\n;
+    else
+        echo -e "${RED}[X] Installation Failed$2${RESET}\n";
+    fi
+    echo -e ""
+
+# --------------------------------------------------------------o----------------------------------------------------------------o
+    
+# >>> INSTALL TPM PLUGINS
+
+    if [ ! -d "$HOME/.tmux" ]; then
+        git clone -q https://${GITHUB}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    fi
+
+    tmux kill-server
+    tmux start-server
+    tmux new-session -d
+    $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
+    tmux kill-server
+    
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}[√]TPM Installation Successful${RESET}\n";
+    else
+        echo -e "${RED}[X]TPM Installation Failed${RESET}\n";
+    fi
+
+# --------------------------------------------------------------o----------------------------------------------------------------o
+    
+# >>> OUTPUT
+
     ROW
 
 }
