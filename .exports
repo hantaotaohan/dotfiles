@@ -17,6 +17,7 @@
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.extras/bin:$PATH"
+export PATH="$HOME/.extras/install:$PATH"
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 # 本地语言环境设定
