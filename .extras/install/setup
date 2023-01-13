@@ -23,7 +23,7 @@
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 # BIN_DIR="$HOME/.local/bin"
-BIN_DIR="$HOME/.bin"
+BIN_DIR="${HOME/.bin}"
 EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
 EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")
 APT_INSTALL="sudo apt install -qq -y"
@@ -32,8 +32,8 @@ APT_INSTALL="sudo apt install -qq -y"
 # -- Github --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-GIT_CLONE="git clone -q https://github.com"
-GIT_DOWNLOAD="https://github.com"
+# GIT_CLONE="git clone -q https://github.com"
+# GIT_DOWNLOAD="https://github.com"
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # -- Fastgit --
@@ -48,6 +48,13 @@ GIT_DOWNLOAD="https://github.com"
 
 # GIT_CLONE="git clone -q https://github.com.cnpmjs.org"
 # GIT_DOWNLOAD="https://github.com.cnpmjs.org"
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Nuaa --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+GIT_CLONE="git clone -q https://hub.nuaa.cf"
+GIT_DOWNLOAD="https://hub.nuaa.cf"
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
@@ -171,28 +178,32 @@ Tmux() {
     echo -e "${YELLOW}TMUX Is Being Installed${RESET}"
     echo -e ""
 
-# >>> INSTALL DEPENDENCIES
-
-    ${APT_INSTALL} libevent-dev ncurses-dev build-essential bison pkg-config > /dev/null 2>&1
-    
-    cd ${BIN_DIR} || return
-
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
 # >>> REMOVE ALREADY EXISTS
-    
-    sudo apt remove tmux > /dev/null 2>&1
 
-    [ -d $HOME/.tmux ] && rm -rf $HOME/.tmux
+    if command -v tmux >/dev/null 2>&1; then 
+        sudo apt remove tmux > /dev/null 2>&1
+    fi
+
+# --------------------------------------------------------------o----------------------------------------------------------------o
+
+# >>> INSTALL DEPENDENCIES
+
+    echo -e "${MAGENTA}Install Dependencies${RESET}"
+    ${APT_INSTALL} libevent-dev ncurses-dev build-essential bison pkg-config > /dev/null 2>&1
+    
+    if [ $? -eq 0 ]; then echo -e "${GREEN}[√]Dependencies Installation Successful${RESET}\n"; else echo -e "${RED}[X] Installation Failed$2${RESET}\n"; fi
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
     
 # >>> PRETO BUILD
 
     if [ -d "tmux" ]; then 
-        cd tmux && git reset --hard && git pull > /dev/null 2>&1
+        cd ${BIN_DIR}/tmux && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1
     else
-        $GIT_CLONE/tmux/tmux.git ${BIN_DIR}/tmux && cd ${BIN_DIR}/tmux 
+        $GIT_CLONE/tmux/tmux.git ${BIN_DIR}/tmux 
+        cd ${BIN_DIR}/tmux 
     fi
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
@@ -201,7 +212,7 @@ Tmux() {
 
     bash autogen.sh > /dev/null 2>&1
     ./configure > /dev/null 2>&1
-    make && sudo make install > /dev/null 2>&1
+    make > /dev/null 2>&1 && sudo make install > /dev/null 2>&1
 
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}[√] Installation Successful${RESET}\n";
@@ -216,10 +227,12 @@ Tmux() {
 # >>> INSTALL TPM PLUGINS
 
     if [ ! -d "$HOME/.tmux" ]; then
-        git clone -q https://${GITHUB}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+        ${GIT_CLONE}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    else
+        rm -rf $HOME/.tmux 
+        ${GIT_CLONE}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     fi
 
-    tmux kill-server
     tmux start-server
     tmux new-session -d
     $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
