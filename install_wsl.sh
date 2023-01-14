@@ -90,7 +90,7 @@ CENTER "                                                      ";
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
 BACKUP_DIR="$HOME/.dotfiles.orig"
-BIN_DIR="$HOME/.bin"
+SOURCE_DIR="$HOME/.local/src"
 DOTFILES_REPO=$(pwd)
 
 GITHUB="github.com"
@@ -98,6 +98,7 @@ GITHUBRAW="https://gitee.com/hantaotaohan/dotfiles/releases/download/1"
 # GITHUBRAW="https://github.com/hantaotaohan/dotfiles/releases/download/1.0.0"
 
 DOTFILES_COPY=( \
+    .bin \
     .cargo \
     .config \
     .ctags.d \
@@ -441,11 +442,11 @@ Pip_Install() {
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
 	PIPAPPS=( \
-        tldr \
         flake8 \
         pygments==2.11.2 \
         you-get \
         pyvirtualdisplay 
+        # tldr \
         #mdv \
         #sncli \
         #pandas \
@@ -494,9 +495,9 @@ Deb_Install() {
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
-	wget -P $BIN_DIR $GITHUBRAW/fd.deb > /dev/null 2>&1
-	wget -P $BIN_DIR $GITHUBRAW/bat.deb > /dev/null 2>&1
-	wget -P $BIN_DIR $GITHUBRAW/delta.deb > /dev/null 2>&1
+	wget -P $SOURCE_DIR $GITHUBRAW/fd.deb > /dev/null 2>&1
+	wget -P $SOURCE_DIR $GITHUBRAW/bat.deb > /dev/null 2>&1
+	wget -P $SOURCE_DIR $GITHUBRAW/delta.deb > /dev/null 2>&1
 	
 	DPKGAPPS=( \
         fd.deb \
@@ -507,7 +508,7 @@ Deb_Install() {
     for app in "${DPKGAPPS[@]}"
     do
         echo -e "\n\t\t[*] Installing: $app";
-        sudo dpkg -i $BIN_DIR/$app > /dev/null 2>&1
+        sudo dpkg -i $SOURCE_DIR/$app > /dev/null 2>&1
         Install_Status $? $app
     done
 

@@ -12,7 +12,8 @@ dunst &
 imwheel &
 vmware-user &
 xmodmap ~/.Xmodmap &
-source ~/.config/i3/speedkeyboard.sh &
+source i3-speedkeyboard &
+# source ~/.config/i3/speedkeyboard.sh &
 picom --config ~/.config/picom/picom.conf &
 feh --bg-scale ~/.config/i3/background/1.jpg & 
 pgrep -x alttab > /dev/null ||alttab -w 1 -s 3 -t 200x60 -d 1 -font xft:Iosevka:style=Bold:size=10 -i 1x1 -bg '#282C34' -fg '#ABB2BF' &

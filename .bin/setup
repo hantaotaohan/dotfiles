@@ -22,8 +22,7 @@
 # Basis Define Path Variable
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-# BIN_DIR="$HOME/.local/bin"
-BIN_DIR="${HOME/.bin}"
+SOURCE_DIR="{$HOME/.local/src}"
 EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
 EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")
 APT_INSTALL="sudo apt install -qq -y"
@@ -200,10 +199,10 @@ Tmux() {
 # >>> PRETO BUILD
 
     if [ -d "tmux" ]; then 
-        cd ${BIN_DIR}/tmux && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1
+        cd ${SOURCE_DIR}/tmux && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1
     else
-        $GIT_CLONE/tmux/tmux.git ${BIN_DIR}/tmux 
-        cd ${BIN_DIR}/tmux 
+        $GIT_CLONE/tmux/tmux.git ${SOURCE_DIR}/tmux 
+        cd ${SOURCE_DIR}/tmux 
     fi
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
@@ -259,7 +258,7 @@ Alttab() {
 
     ${APT_INSTALL} libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev libxpm-dev libxpm4 > /dev/null 2>&1
     
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     if [ -d "alttab" ]; then 
         cd alttab && git pull > /dev/null 2>&1
@@ -281,7 +280,7 @@ Alttab() {
 
 Arcicons() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     if [ -d "arc-icon-theme" ]; then 
         cd arc-icon-theme && git pull > /dev/null 2>&1
@@ -351,7 +350,7 @@ Picom() {
     ${APT_INSTALL} libevdev-dev uthash-dev libev-dev libx11-xcb-dev  libxcb-present-dev > /dev/null 2>&1
     ${APT_INSTALL} libxcb-xinerama0-dev libxcb-glx0-dev libxcb-render-util0-dev meson > /dev/null 2>&1
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     if [ -d "picom" ]; then 
         cd picom && git pull > /dev/null 2>&1
@@ -375,7 +374,7 @@ Picom() {
 
 Dunst() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     ${APT_INSTALL} libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev > /dev/null 2>&1
     ${APT_INSTALL} libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev > /dev/null 2>&1
@@ -489,7 +488,7 @@ Vmware_Share_Fix() {
 
 Calibre() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     ${APT_INSTALL} calibre > /dev/null 2>&1
 
@@ -505,7 +504,7 @@ Calibre() {
 
 Foliate() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/foliate.deb
     sudo dpkg -i foliate.deb > /dev/null 2>&1
@@ -520,7 +519,7 @@ Foliate() {
 
 Rdrview() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     ${APT_INSTALL} libxml2-dev libseccomp-dev libcurl4-gnutls-dev > /dev/null 2>&1
 
@@ -557,7 +556,7 @@ SSH_banner() {
 
 Ly() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     ${APT_INSTALL} build-essential libpam0g-dev libxcb-xkb-dev > /dev/null 2>&1
 
@@ -580,7 +579,7 @@ Ly() {
 
 Ctags() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     sudo apt remove --purge ctags > /dev/null 2>&1
     ${APT_INSTALL} libjansson-dev autotools-dev autoconf > /dev/null 2>&1
@@ -631,9 +630,9 @@ Nodejs() {
 
 Hugo() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
-    wget -q $GIT_DOWNLOAD/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $BIN_DIR/hugo.deb
+    wget -q $GIT_DOWNLOAD/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $SOURCE_DIR/hugo.deb
 
     sudo dpkg -i hugo.deb > /dev/null 2>&1
 
@@ -714,7 +713,7 @@ Fixi3terminal() {
 
 Dragon() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     ${APT_INSTALL} libgtk-3-dev > /dev/null 2>&1
 
@@ -755,7 +754,7 @@ Fixnautilus() {
 
 I3blocks() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     if [ -d "i3blocks" ]; then 
         cd i3blocks && git pull > /dev/null 2>&1
@@ -795,9 +794,9 @@ Yarn() {
 
 Bashdb() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
-    wget -q -P ${BIN_DIR} $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/bashdb.tar.gz
+    wget -q -P ${SOURCE_DIR} $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/bashdb.tar.gz
     tar -zxvf bashdb.tar.gz  > /dev/null 2>&1
 
     cd bashdb-5.0-1.1.2
@@ -815,7 +814,7 @@ Bashdb() {
 
 I3lockfancy() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     if [ -d "i3lock-fancy" ]; then 
         cd i3lock-fancy && git pull > /dev/null 2>&1
@@ -852,10 +851,10 @@ Qutebrowser() {
 
 Weixin() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
-    wget -q -P ${BIN_DIR} http://archive.ubuntukylin.com/software/pool/partner/ukylin-wine_70.6.3.25_amd64.deb 
-    wget -q -P ${BIN_DIR} http://archive.ubuntukylin.com/software/pool/partner/ukylin-wechat_3.0.0_amd64.deb 
+    wget -q -P ${SOURCE_DIR} http://archive.ubuntukylin.com/software/pool/partner/ukylin-wine_70.6.3.25_amd64.deb 
+    wget -q -P ${SOURCE_DIR} http://archive.ubuntukylin.com/software/pool/partner/ukylin-wechat_3.0.0_amd64.deb 
 
     sudo apt-get install -f -y -qq ./ukylin-wine_70.6.3.25_amd64.deb > /dev/null 2>&1
     sudo apt-get install -f -y -qq ./ukylin-wechat_3.0.0_amd64.deb > /dev/null 2>&1
@@ -870,11 +869,11 @@ Weixin() {
 
 Urxvt() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     ${APT_INSTALL} libperl-dev > /dev/null 2>&1
 
-    wget -q -P ${BIN_DIR} http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-9.26.tar.bz2  
+    wget -q -P ${SOURCE_DIR} http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-9.26.tar.bz2  
 
     tar -xvf rxvt-unicode-9.26.tar.bz2 > /dev/null 2>&1
 
@@ -892,7 +891,7 @@ Urxvt() {
 
 St() {
 
-    cd ${BIN_DIR} || return
+    cd ${SOURCE_DIR} || return
 
     if [ -d "st" ]; then 
         cd st && git pull > /dev/null 2>&1
@@ -911,7 +910,7 @@ St() {
 
 Vifm() {
 
-    cd "$BIN_DIR" || return
+    cd "$SOURCE_DIR" || return
 
     ${APT_INSTALL} vifm > /dev/null 2>&1
 
@@ -935,7 +934,7 @@ Vifm() {
 
 Popupdict() {
 
-    cd "$BIN_DIR" || return
+    cd "$SOURCE_DIR" || return
 
     ${APT_INSTALL} python3-gi python3-gi-cairo gir1.2-gtk-3.0 > /dev/null 2>&1
 
@@ -958,7 +957,7 @@ Popupdict() {
 
 Anki() {
 
-    cd "$BIN_DIR" || return
+    cd "$SOURCE_DIR" || return
     
     rm -rf anki.tar.bz2
 
@@ -977,7 +976,7 @@ Anki() {
 
 I3gaps() {
 
-    cd "$BIN_DIR" || return
+    cd "$SOURCE_DIR" || return
 
     if [ -d "i3-gaps" ]; then 
         cd i3-gaps && git pull > /dev/null 2>&1
@@ -1020,7 +1019,7 @@ I3gaps() {
 
 Vim () {
 
-    cd "$BIN_DIR" || return
+    cd "$SOURCE_DIR" || return
 
     if [ -d "vim" ]; then 
         cd vim && git pull > /dev/null 2>&1
@@ -1077,7 +1076,7 @@ Vim () {
 
 Rofi() {
 
-    cd "$BIN_DIR" || return
+    cd "$SOURCE_DIR" || return
 
     ${APT_INSTALL} bison flex libxcb-ewmh-dev autoconf libxcb-xkb-dev libxkbcommon-x11-dev libxcb-icccm4-dev > /dev/null 2>&1
     ${APT_INSTALL} libxcb-cursor-dev libxcb-randr0-dev libxcb-xinerama0-dev libxcb-util-dev libstartup-notification0-dev > /dev/null 2>&1

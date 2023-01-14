@@ -75,7 +75,7 @@ bindsym $mod+shift+n move scratchpad
 bindsym --whole-window $mod+button2 kill
 
 # 关闭窗口快捷键 
-bindsym $mod+Shift+q exec --no-startup-id bash smartkill
+bindsym $mod+Shift+q exec --no-startup-id bash i3-smart-kill
 
 # 鼠标中建发送到便签区域
 # bindsym --whole-window button2 move scratchpad
@@ -243,7 +243,7 @@ for_window [class="(!?)$TERMINAL_C"     title="ttyclock"        ]       floating
 bindsym Mod4+e exec --no-startup-id nautilus
 
 # 打开fzf-open
-bindsym $mod+f exec --no-startup-id search
+bindsym $mod+f exec --no-startup-id i3-rofi-search
 
 # 开启Terminal快捷键 
 bindsym $mod+Return exec --no-startup-id $TERMINAL
@@ -252,14 +252,14 @@ bindsym $mod+Return exec --no-startup-id $TERMINAL
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme onedark
 
 # Open Popup-dict
-bindsym $mod+t exec --no-startup-id popupdict
+bindsym $mod+t exec --no-startup-id i3-popupdict-switch
 
 # 打开Ranger快捷键
 # bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL -e ranger
 bindsym $mod+Shift+Return exec --no-startup-id raiseorlaunch  -c "St" -t "ranger" -s "st"  -e "--no-startup-id $TERMINAL  -t ranger -e ranger"
 
 # auto windows size for in workspaces "3"
-bindsym $mod+Shift+a exec --no-startup-id autosize
+bindsym $mod+Shift+a exec --no-startup-id i3-autosize
 
 # 开启Google Chrome快捷键 
 bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode"
@@ -345,8 +345,8 @@ mode "$mode_system" {
      bindsym r exec --no-startup-id systemctl reboot, mode "default"
      bindsym p exec --no-startup-id systemctl poweroff, mode "default"
      # bindsym b exec --no-startup-id feh --randomize --bg-scale ~/.config/i3/background/, mode "default"
-     bindsym b exec --no-startup-id fehwallpaper, mode "default"
-     bindsym u exec --no-startup-id wallpaper, mode "default"
+     bindsym b exec --no-startup-id i3-switch-wallpapers, mode "default"
+     bindsym u exec --no-startup-id i3-random-wallpapers, mode "default"
      #bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
      # back to normal: Enter or Escape
      bindsym Return mode "default"
@@ -569,7 +569,7 @@ exec --no-startup-id picom
 # exec --no-startup-id nm-applet
 
 # 加载键盘加速脚本
-exec --no-startup-id speedkeyboard
+exec --no-startup-id i3-speedkeyboard
 
 # 加载vmwaretools实现复制粘贴
 exec --no-startup-id /usr/bin/vmware-user
