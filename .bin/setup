@@ -541,8 +541,8 @@ Rdrview() {
 
 SSH_banner() {
 
-    sudo sed -i '$a\Banner \/etc\/ssh\/my_ssh_banner' /etc/ssh/sshd_config
-    sudo cp $EXTRAS_UP_DIR/banner/my_ssh_banner /etc/ssh/
+    sudo sed -i '$a\Banner \/etc\/ssh\/banner' /etc/ssh/sshd_config
+    sudo cp $EXTRAS_UP_DIR/ssh-banner/banner /etc/ssh/
 
     # systemctl restart sshd
 
