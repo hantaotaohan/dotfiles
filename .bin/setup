@@ -24,7 +24,7 @@
 
 SOURCE_DIR="{$HOME/.local/src}"
 EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
-EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")
+EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")/.extras/
 APT_INSTALL="sudo apt install -qq -y"
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
