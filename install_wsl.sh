@@ -90,7 +90,7 @@ CENTER "                                                      ";
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
 BACKUP_DIR="$HOME/.dotfiles.orig"
-BIN_DIR="$HOME/.local/bin"
+BIN_DIR="$HOME/.bin"
 DOTFILES_REPO=$(pwd)
 
 GITHUB="github.com"
