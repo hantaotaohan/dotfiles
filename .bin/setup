@@ -22,7 +22,7 @@
 # Basis Define Path Variable
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-SOURCE_DIR="{$HOME/.local/src}"
+SOURCE_DIR="$HOME/.local/src"
 EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
 EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")/.extras/
 APT_INSTALL="sudo apt install -qq -y"
@@ -182,7 +182,7 @@ Tmux() {
 # >>> REMOVE ALREADY EXISTS
 
     if command -v tmux >/dev/null 2>&1; then 
-        sudo apt remove tmux > /dev/null 2>&1
+        sudo apt remove tmux -y > /dev/null 2>&1
     fi
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
@@ -191,40 +191,36 @@ Tmux() {
 
     echo -e "${MAGENTA}Install Dependencies${RESET}"
     ${APT_INSTALL} libevent-dev ncurses-dev build-essential bison pkg-config > /dev/null 2>&1
-    
-    if [ $? -eq 0 ]; then echo -e "${GREEN}[√]Dependencies Installation Successful${RESET}\n"; else echo -e "${RED}[X] Installation Failed$2${RESET}\n"; fi
+    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
     
 # >>> PRETO BUILD
 
-    if [ -d "tmux" ]; then 
-        cd ${SOURCE_DIR}/tmux && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1
+    echo -e "${MAGENTA}Git Clone Or Update TMUX${RESET}"
+    if [ -d "${SOURCE_DIR}/tmux" ]; then 
+        cd ${SOURCE_DIR}/tmux || return && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1
     else
         $GIT_CLONE/tmux/tmux.git ${SOURCE_DIR}/tmux 
-        cd ${SOURCE_DIR}/tmux 
+        cd ${SOURCE_DIR}/tmux || return
     fi
+    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
     
 # >>> START BUILD
 
+    echo -e "${MAGENTA}Start Build${RESET}"
     bash autogen.sh > /dev/null 2>&1
     ./configure > /dev/null 2>&1
     make > /dev/null 2>&1 && sudo make install > /dev/null 2>&1
-
-    if [ $? -eq 0 ]; then
-        echo -e "${GREEN}[√] Installation Successful${RESET}\n";
-        echo -e "Tmux Install Is Complete :: Version "  $(tmux -V)\n;
-    else
-        echo -e "${RED}[X] Installation Failed$2${RESET}\n";
-    fi
-    echo -e ""
+    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
     
 # >>> INSTALL TPM PLUGINS
 
+    echo -e "${MAGENTA}Install Tpm Plugins${RESET}"
     if [ ! -d "$HOME/.tmux" ]; then
         ${GIT_CLONE}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     else
@@ -236,12 +232,9 @@ Tmux() {
     tmux new-session -d
     $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
     tmux kill-server
-    
-    if [ $? -eq 0 ]; then
-        echo -e "${GREEN}[√]TPM Installation Successful${RESET}\n";
-    else
-        echo -e "${RED}[X]TPM Installation Failed${RESET}\n";
-    fi
+    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
+
+    echo -e "${BLUE}Tmux Install Is Complete :: Version ${RESET} ${RED}$(tmux -V)${RESET} ";
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
     
@@ -1235,7 +1228,7 @@ main() {
             Rofi
             ;;   
         tmux)
-            Tmux
+            Tmux | pv
             ;;   
         -a|--all)
             # Github_Hosts
