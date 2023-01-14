@@ -171,7 +171,7 @@ fi
 #                                                CUSTOM COMPLETION - SETTINGS
 # ================================================================================================================================
 
-[ -f $HOME/.extras/install/setup-completion.bash ] && source $HOME/.extras/install/setup-completion.bash 
+[ -f $HOME/.bin/setup-completion.bash ] && source $HOME/.bin/setup-completion.bash 
 
 # ================================================================================================================================
 #                                                      TMUX - SETTINGS
