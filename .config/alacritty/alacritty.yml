@@ -1,129 +1,116 @@
-#     _    _                 _ _   _                               _
-#    / \  | | __ _  ___ _ __(_) |_| |_ _   _       _   _ _ __ ___ | |
-#   / _ \ | |/ _` |/ __| '__| | __| __| | | |     | | | | '_ ` _ \| |
-#  / ___ \| | (_| | (__| |  | | |_| |_| |_| |  _  | |_| | | | | | | |
-# /_/   \_\_|\__,_|\___|_|  |_|\__|\__|\__, | (_)  \__, |_| |_| |_|_|
-#                                      |___/       |___/
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                            ALACRITTY                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.15                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
+# ================================================================================================================================
+#                                 _    _                 _ _   _                               _
+#                                / \  | | __ _  ___ _ __(_) |_| |_ _   _       _   _ _ __ ___ | |
+#                               / _ \ | |/ _` |/ __| '__| | __| __| | | |     | | | | '_ ` _ \| |
+#                              / ___ \| | (_| | (__| |  | | |_| |_| |_| |  _  | |_| | | | | | | |
+#                             /_/   \_\_|\__,_|\___|_|  |_|\__|\__|\__, | (_)  \__, |_| |_| |_|_|
+#                                                                  |___/       |___/
+# ================================================================================================================================
 
 env:
-    # Using 'alacritty' as $TERM breaks some commands on remote servers,
-    # where Alacritty is missing from the terminfo database
     TERM: xterm-256color
 
+# ================================================================================================================================
+
 window:
-    # Window dimensions
-    # Only needed when Alacritty is started as a floating window
-    dimensions:
-        columns: 80
-        lines: 24
+  dimensions:
+    columns: 80
+    lines: 24
 
-    # Blank space between text and window border
-    # 0 means that it is diabled
     padding:
-        x: 10
-        y: 10
+      x: 10
+      y: 10
 
-    # Spread padding evenly (of non-complete cells)
     dynamic_padding: false
-
-    # Window decorations
-    # One of 'full' or 'none'
     decorations: full
-    
     startup_mode: Windowed
 
+# ================================================================================================================================
+
 scrolling:
-    # Size of scrollback buffer (lines)
-    history: 10000
+  history: 10000
+  multiplier: 1
+  # auto_scroll: false
 
-    # Number of lines that are scrolled at once
-    # Faux multiplier is the same, but for commands like man and less
-    multiplier: 1
+# ================================================================================================================================
 
-    # Scroll to bottom when new text is printed
-    # auto_scroll: false
-
-# Font configuration
 font:
-    normal:
-        family: Iosevka
-        style: Bold
+  normal:
+    family: Iosevka
+    style: Bold
 
     bold:
-        family: Iosevka
-        style: Bold
+      family: Iosevka
+      style: Bold
 
     italic:
-        family: Iosevka
-        style: Italic
+      family: Iosevka
+      style: Italic
 
     bolditalic:
-        family: Iosevka
-        style: BoldItalic
+      family: Iosevka
+      style: BoldItalic
 
-    # Font size (pt)
     size: 10.5
 
-    # Offset around characters
-    # x = letter spacing
-    # y = line spacing
     offset:
-        x: 0
-        y: 0
+      x: 0
+      y: 0
 
-    # Offset of each glyph within its cell
     glyph_offset:
-        x: 0
-        y: 0
+      x: 0
+      y: 0
+
+# ================================================================================================================================
 
 mouse:
-    # Multi-click time
-    double_click: { threshold: 300 }
-    triple_click: { threshold: 300 }
+  double_click: { threshold: 300 }
+  triple_click: { threshold: 300 }
+  hide_when_typing: true
 
-    # Make mouse invisible while typing
-    hide_when_typing: true
+# ================================================================================================================================
 
 selection:
-    semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+  save_to_clipboard: true
 
-    # Copy text to primary and selection clipboard
-    save_to_clipboard: true
+# ================================================================================================================================
 
-# Write running command to window title
 dynamic_title: true
-
-# Hide mouse cursor  while typing
 mouse.hide__when_typing: true
-
-# Cursor style
-# One of: 'Block', 'Underline', 'Beam'
 cursor.style: Block
-
-# Make cursor a hollow Block when alacritty is not the focuse window
 cursor.unfocused_hollow: true
-
-# Reload this config once it is edited
 live_config_reload: true
 
-
-
-#   ____      _
-#  / ___|___ | | ___  _ __ ___
-# | |   / _ \| |/ _ \| '__/ __|
-# | |__| (_) | | (_) | |  \__ \
-#  \____\___/|_|\___/|_|  |___/
+# ================================================================================================================================
+#                                                       ____      _
+#                                                      / ___|___ | | ___  _ __ ___
+#                                                     | |   / _ \| |/ _ \| '__/ __|
+#                                                     | |__| (_) | | (_) | |  \__ \
+#                                                      \____\___/|_|\___/|_|  |___/
+#                                                    
+#                                                             Theme: OneDark
 #
-# Theme: OneDark
+# ================================================================================================================================
+
 draw_bold_text_with_bright_colors: true
 #background_opacity: 0.90
+
+# ================================================================================================================================
+
 colors:
-  # Default colors
   primary:
     background: '0x282c34'
     foreground: '0xabb2bf'
 
-  # Cursor colors
   cursor:
     text: '0x282c34'
     cursor: '0xabb2bf'
@@ -149,6 +136,8 @@ colors:
     magenta: '0xc678dd'
     cyan:    '0x56b6c2'
     white:   '0x5c6370'
+
+# ================================================================================================================================
 
 # key_bindings:
 #   - { key: C,              mods: Control,         action: Copy               }

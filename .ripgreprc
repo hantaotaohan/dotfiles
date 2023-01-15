@@ -62,3 +62,4 @@
 --colors=match:fg:1
 --colors=match:style:bold
 
+# vim:ts=4:shiftwidth=4:syntax=sh

@@ -1,55 +1,65 @@
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                             DUNSTRC                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.16                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
 [global]
-    monitor = 0
-    follow = mouse
-    frame_width = 2 
-    frame_color = "#282c34"
-    font = "Iosevka 10"
-    markup = full
-    format = "<b>%b</b>"
-    sort = yes
-    indicate_hidden = yes
-    alignment = left
+    monitor            = 0
+    follow             = mouse
+    frame_width        = 2 
+    frame_color        = "#282c34"
+    font               = "Iosevka 10"
+    markup             = full
+    format             = "<b>%b</b>"
+    sort               = yes
+    indicate_hidden    = yes
+    alignment          = left
     show_age_threshold = -1
-    word_wrap = no
-    ignore_newline = no
-    geometry = "300x60-20+48"
-    shrink = no
-    transparency = 0
-    idle_threshold = 120
-    monitor = 0
-    follow = mouse
-    sticky_history = yes
-    history_length = 20
-    show_indicators = no
-    line_height = 0
-    padding = 8
+    word_wrap          = no
+    ignore_newline     = no
+    geometry           = "300x60-20+48"
+    shrink             = no
+    transparency       = 0
+    idle_threshold     = 120
+    monitor            = 0
+    follow             = mouse
+    sticky_history     = yes
+    history_length     = 20
+    show_indicators    = no
+    line_height        = 0
+    padding            = 8
     horizontal_padding = 10
-    separator_height = 2
-    separator_color = frame 
-    dmenu = /usr/bin/dmenu -p dunst:
-    browser = qutebrowser
-    icon_position = off
-    icon_path = /usr/share/icons/Adwaita/32x32/status
-    max_icon_size=32
+    separator_height   = 2
+    separator_color    = frame 
+    dmenu              = /usr/bin/dmenu -p dunst:
+    browser            = qutebrowser
+    icon_position      = off
+    icon_path          = /usr/share/icons/Adwaita/32x32/status
+    max_icon_size      = 32
 
 [urgency_low]
-    timeout = 4
-    background = "#282c34"
-    foreground = "#abb2bf"
-    frame_color = "#98c379"
+    timeout            = 4
+    background         = "#282c34"
+    foreground         = "#abb2bf"
+    frame_color        = "#98c379"
 
 [urgency_normal]
-    timeout = 8
-    background = "#282c34"
-    foreground = "#abb2bf"
-    frame_color = "#61afef"
+    timeout            = 8
+    background         = "#282c34"
+    foreground         = "#abb2bf"
+    frame_color        = "#61afef"
 
 [urgency_critical]
-    timeout = 0
-    background = "#282c34"
-    foreground = "#abb2bf"
-    frame_color = "#e06c75"
+    timeout            = 0
+    background         = "#282c34"
+    foreground         = "#abb2bf"
+    frame_color        = "#e06c75"
 
 [neomutt]
-    appname = neomutt
-    format = "<span>  <b>%b</b></span>"
+    appname            = neomutt
+    format             = "<span>  <b>%b</b></span>"
+
+# vim:ts=4:shiftwidth=4:syntax=toml

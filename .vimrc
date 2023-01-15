@@ -176,7 +176,8 @@ set backspace=indent,eol,start                                             " 删
 set formatoptions+=j                                                       " 合并两行中文时，不在中间加空格
 set fileformats=unix,dos,mac                                               " 文件换行符，默认使用 unix 换行符
 
-set tags=./.tags;,.tags                                                    " 设置Tags
+set tags=./.tags;,.tags                                                    " 设置TAGS
+set viminfo='100,<50,s10,h,n~/.vim/cache/.viminfo                          " 设置VIMINFO
 
 set hidden                                                                 " 针对buffer不保存即可切换
 set esckeys                                                                " 按Esc并立即退出插入模式
@@ -767,28 +768,29 @@ call plug#begin('$HOME/.vim/plugged')
 
     Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                       " 主题文件
     Plug 'vim-airline/vim-airline'                                           " 状态栏
-    Plug 'tpope/vim-fugitive'                                                " git插件
+    Plug 'tpope/vim-fugitive'                                                " GIT插件
     Plug 'tpope/vim-commentary'                                              " 快速注释插件
     Plug 'tpope/vim-surround'                                                " 成对更改删除括号等
-    Plug 'junegunn/fzf.vim'                                                  " 为vim安装fzf插件
-    Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }       " 为系统安装fzf工具
-    Plug 'mhinz/vim-startify'                                                " 定制vim开始页面
-    Plug 'mhinz/vim-sayonara'                                                " 代替 command q 插件
-    Plug 'skywind3000/asyncrun.vim'                                          " 配合调测python插件
+    Plug 'junegunn/fzf.vim'                                                  " 为VIM安装FZF插件
+    Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }       " 为系统安装FZF工具
+    Plug 'mhinz/vim-startify'                                                " 定制VIM开始页面
+    Plug 'mhinz/vim-sayonara'                                                " 代替QUIT插件
+    Plug 'skywind3000/asyncrun.vim'                                          " 配合调测PYTHON插件
     Plug 'skywind3000/vim-auto-popmenu'                                      " 自动弹出补全插件
     Plug 'scrooloose/nerdtree'                                               " 文件树插件
-    Plug 'airblade/vim-gitgutter'                                            " git插件
-    Plug 'Xuyuanp/nerdtree-git-plugin'                                       " 文件数git显示插件
-    Plug 'majutsushi/tagbar'                                                 " Tag浏览
-    Plug 'christoomey/vim-tmux-navigator'                                    " 同步vim与tmux快捷键
+    Plug 'airblade/vim-gitgutter'                                            " GIT插件
+    Plug 'Xuyuanp/nerdtree-git-plugin'                                       " 文件数GIT显示插件
+    Plug 'majutsushi/tagbar'                                                 " TAG浏览
+    Plug 'christoomey/vim-tmux-navigator'                                    " 同步VIM与TMUX快捷键
     Plug 'Yggdroot/indentLine'                                               " 缩进线显示插件
     Plug 'kshenoy/vim-signature'                                             " 书签插件
     Plug 'voldikss/vim-floaterm'                                             " 终端插件
     Plug 'rlue/vim-barbaric'                                                 " 输入法切换插件
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}                      " 多光标输入
     Plug 'brooth/far.vim'                                                    " 代码重构
-    Plug 'vimwiki/vimwiki' , {'branch': 'dev' }                              " Vimwiki插件
-    Plug 'michal-h21/vim-zettel'                                             " 配合vimwiki的功能插件
+    Plug 'vimwiki/vimwiki' , {'branch': 'dev' }                              " VIMWIKI插件
+    Plug 'michal-h21/vim-zettel'                                             " 配合VIMWIKI的功能插件
+    Plug 'cespare/vim-toml'                                                  " TOML支持
     " Plug 'TaDaa/vimade'                                                      " 非聚焦窗口颜色变浅
     " Plug 'preservim/vimux'                                                   " 配合Tmux运行程序的插件
 

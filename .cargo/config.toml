@@ -1,0 +1,45 @@
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                             CARGO                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.15                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
+[build]
+jobs               = 1                                                                 # 并行运行数量
+
+[http]
+debug              = false                                                             # HTTP调试
+timeout            = 30                                                                # 每个HTTP请求的超时，以秒为单位
+low-speed-limit    = 10                                                                # 低速限制=10#网络超时阈值（字节/秒）
+check-revoke       = false                                                             # 检查SSL证书吊销
+
+[net]
+retry = 2                                                                              # 重试次数
+git-fetch-with-cli = true                                                              # 对 GIT 操作使用 GIT 可执行文件
+offline            = false                                                             # 不访问网络
+
+[term]
+quiet              = false                                                             # whether cargo output is quiet
+verbose            = false                                                             # whether cargo provides verbose output
+color              = 'auto'                                                            # whether cargo colorizes output
+progress.when      = 'auto'                                                            # whether cargo shows progress bar
+progress.width     = 80                                                                # width of progress bar
+
+[source.crates-io]
+registry           = "https://github.com/rust-lang/crates.io-index"
+replace-with       = 'ustc'                                                            # 替换成你偏好的镜像源
+
+[source.tuna]
+registry           = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"    # 清华大学
+
+[source.ustc]
+registry           = "git://mirrors.ustc.edu.cn/crates.io-index"                       # 中国科学技术大学
+
+[source.sjtu]
+registry           = "https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index"           # 上海交通大学
+
+[source.rustcc]    
+registry           = "git://crates.rustcc.cn/crates.io-index"                          # rustcc社区
+
