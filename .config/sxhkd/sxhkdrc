@@ -1,18 +1,12 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-#===============================================================================
-#           _     _       _ 
-#  _____  _| |__ | | ____| |
-# / __\ \/ / '_ \| |/ / _` |
-# \__ \>  <| | | |   < (_| |
-# |___/_/\_\_| |_|_|\_\__,_|
-#
-# Created by RangHo.
-#
-# For a complete reference, run:
-# man sxhkd
-#===============================================================================
-### SXHKD bindigs ###
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                            SXHKDRC                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.16                                                      
+#                                                                                                                                 
+# ================================================================================================================================
 
 # Quit bpswm
 mod1 + shift + Escape
@@ -33,11 +27,6 @@ mod1 + shift + q
 # Rotate tree
 mod1 + r
 	bspc node @/ -R 90
-
-# alternate between the tiled and monocle layout
-# mod1 + m
-#     bspc node -s biggest.window
-
 
 # Move focus inside workspace
 mod1 + {h,j,k,l}
@@ -101,6 +90,15 @@ mod1 + shift + n
 mod1 + shift + s
   bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
 
+mod1 + v
+    $HOME/.config/bspwm/script/scratchpad svim $HOME/.config/bspwm/script/svim
+
+mod1 + m
+    $HOME/.config/bspwm/script/scratchpad sneomutt $HOME/.config/bspwm/script/sneomutt
+
+mod1 + f
+    fzf-open
+
 # hide/unhide a window
 # mod1 + s
 # 	bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden={on,off}
@@ -115,11 +113,8 @@ mod1 + shift + s
 # mod1 + a ; {q, r}
 #     { qutebrowser, thunar }
 
-mod1 + v
-    $HOME/.config/bspwm/script/scratchpad svim $HOME/.config/bspwm/script/svim
+# alternate between the tiled and monocle layout
+# mod1 + m
+#     bspc node -s biggest.window
 
-mod1 + m
-    $HOME/.config/bspwm/script/scratchpad sneomutt $HOME/.config/bspwm/script/sneomutt
 
-mod1 + f
-    fzf-open
