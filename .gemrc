@@ -1,11 +1,31 @@
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                             GEMRC                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.15                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
 ---
+
+# 如果已指定backtrace选项，或已启用调试，则为True
 :backtrace: false
-:bulk_threshold: 1000
+
+# 替换官方源为清华源
 :sources:
 - https://mirrors.tuna.tsinghua.edu.cn/rubygems/
+
+# 忽略SSL证书错误
+:ssl_verify_mode: 0
+
+# 升级源码
 :update_sources: true
+
+# 详细输出级别
 :verbose: true
+
 install: "--no-rdoc --no-ri --env-shebang"
 update: "--no-rdoc --no-ri --env-shebang"
-benchmark: false
+
+# 在每次安装gem时不安装文档 加快安装速度
 gem: --user-install --no-document
