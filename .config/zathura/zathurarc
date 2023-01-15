@@ -1,19 +1,36 @@
-# ---------- Font Settings
-set font "Iosevka bold 11"
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                             ZATHURA                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.16                                                      
+#                                                                                                                                 
+# ================================================================================================================================
 
-# ---------- Options
-set incremental-search     "true"
-set smooth-scroll          "true"
-set abort-clear-search     "true"
-set statusbar-home-tilde   "true"
-set adjust-open            "width"
-set window-title-basename  "true"
-set first-page-column      "1:1"
-set selection-clipboard    "clipboard"
-set synctex                "true"
-set synctex-editor-command "vim +%{line} %{input}"
+# ================================================================================================================================
+#                                                             FONTS
+# ================================================================================================================================
 
-# ---------- Themes OneDark
+set font                        "Iosevka bold 11"
+
+# ================================================================================================================================
+#                                                            OPTIONS
+# ================================================================================================================================
+
+set incremental-search          "true"
+set smooth-scroll               "true"
+set abort-clear-search          "true"
+set statusbar-home-tilde        "true"
+set adjust-open                 "width"
+set window-title-basename       "true"
+set first-page-column           "1:1"
+set selection-clipboard         "clipboard"
+set synctex                     "true"
+set synctex-editor-command      "vim +%{line} %{input}"
+
+# ================================================================================================================================
+#                                                        THEMES - ONEDARK
+# ================================================================================================================================
+
 set default-bg                  "#282c34"
 set default-fg                  "#353b45"
 
@@ -47,13 +64,15 @@ set recolor-darkcolor           "#b6bdca"
 set recolor                     "true"
 set recolor-keephue             "false"
 
-# ---------- UnMap Bindings
+# ================================================================================================================================
+#                                                            KEYBINDS                                                        
+# ================================================================================================================================
+
 unmap m
 unmap q
 unmap "'"
 unmap <C-j>
 
-# ---------- Map Bindings
 map = zoom in
 map - zoom out
 map i recolor
@@ -65,7 +84,6 @@ map <C-d> scroll half-down
 map <C-p> scroll up
 map <C-n> scroll down
 
-# ---------- Bookmark Bindings
 map [normal] m1 feedkeys ":bmark 1<Return>"
 map [normal] m2 feedkeys ":bmark 2<Return>"
 map [normal] m3 feedkeys ":bmark 3<Return>"
