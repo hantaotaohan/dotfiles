@@ -1,0 +1,36 @@
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                          LSD - ONEDARD                                                           
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.16                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
+user: 7
+group: 7
+permission:
+  read: 7
+  write: 7
+  exec: 7
+  exec-sticky: 7
+  no-access: 7
+  octal: 7
+  acl: 7
+  context: 7
+date:
+  hour-old: 7
+  day-old: 7
+  older: 7
+size:
+  none: 7
+  small: 7
+  medium: 7
+  large: 7
+inode:
+  valid: 1
+  invalid: 245
+links:
+  valid: 1
+  invalid: 245
+tree-edge: 245
+
