@@ -10,44 +10,41 @@
 #                                                            NAVIGATION 
 # ================================================================================================================================
 
+alias ~='cd ~'
+alias -- -="cd -"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ~='cd ~'
-alias -- -="cd -"
 
 # ================================================================================================================================
 #                                                             DIRLIST 
 # ================================================================================================================================
 
-alias ll='ls -alhovqF --color=always --group-directories-first --time-style +"%F %T"'
-alias la='ls -A'
-alias lk='ls -AlXHLF --color=always'
+alias l='lsd -lah --total-size --group-directories-first' 
 alias ls='ls -Fh --color=auto --group-directories-first'
-alias lsd="ls -lF --color=always | grep --color=never '^d'"
+alias ll='ls -alhovqF --color=always --group-directories-first --time-style +"%F %T"'
 
 # ================================================================================================================================
 #                                                            BOOKMARKS 
 # ================================================================================================================================
 
-alias d='cd ~/desktop'
-alias dl='cd ~/downloads'
-alias b='cd ~/books'
 alias h='cd $HOME'
+alias d='cd ~/desktop'
+alias w='cd ~/workspace'
 
 # ================================================================================================================================
 #                                                             REPORT 
 # ================================================================================================================================
 
-alias grep='grep --color=auto'
-alias fdir='find . -type d -name'
 alias cp='cp -iv'
 alias mv='mv -iv'
 alias ln='ln -iv'
-alias mkdir='mkdir -v'
 alias rm='rm -i'
 alias rmf='rm -rf'
+alias mkdir='mkdir -v'
+alias grep='grep --color=auto'
+alias fdir='find . -type d -name'
 
 # ================================================================================================================================
 #                                                              TMUX 
@@ -59,9 +56,9 @@ alias rmf='rm -rf'
 #                                                            SHORTCUTS 
 # ================================================================================================================================
 
-alias cl='clear'
-alias cat='bat'
 alias e='exit'
+alias cat='bat'
+alias cl='clear'
 
 # ================================================================================================================================
 #                                                            DEVELOPER 
@@ -104,12 +101,12 @@ alias pbpaste="powershell.exe -command 'Get-Clipboard' | tr -d '\r' | head -n -1
 # OTHER
 # --------------------------------------------------------------------------------------------------------------------------------
 
-alias mail='neomutt ; clear'
+alias gif='sxiv -b ' 
 alias rss='newsboat'
+alias mime='mimeopen -d ' 
 alias file='nautilus . &'
 alias pdf='zathura --fork'
+alias mail='neomutt ; clear'
 alias online='you-get -p mpv '
-alias mime='mimeopen -d ' 
 alias mpv='mpv --player-operation-mode=pseudo-gui'
-alias gif='sxiv -b ' 
 # alias tr='popup-dict'
