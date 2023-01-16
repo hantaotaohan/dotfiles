@@ -76,7 +76,7 @@ export GET_TERMINAL_NAME=$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
 export FZF_TMUX=1
-export FZF_TMUX_OPTS="-p 90%"
+export FZF_TMUX_OPTS="-p 90%,60%"
 
 export FZF_DEFAULT_COMMAND="fd --hidden --follow --type f \
     --exclude .git \

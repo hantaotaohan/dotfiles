@@ -814,18 +814,18 @@ endif
 " Vim System HighLighting Settings
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-hi Search            term=standout  cterm=bold  ctermfg=235  ctermbg=204  guifg=#282C34  guibg=#E06C75   " 搜索高亮自定义
-hi IncSearch         term=standout  cterm=bold  ctermfg=1    ctermbg=1    guifg=#282C34  guibg=#E06C75   " 搜索行高亮自定义 
-hi Folded            term=standout  cterm=bold  ctermfg=0    ctermbg=5    guifg=#282c34  guibg=#80868F   " 折叠提示颜色
-hi QuickFixLine      term=standout  cterm=bold  ctermfg=235  ctermbg=180  guifg=#ABB2BF  guibg=#282C34   " 快速栏颜色
-hi SignColumn        term=standout  cterm=bold  ctermfg=2    ctermbg=2    guifg=#E06C75  guibg=#282C34   " 标签栏颜色
-hi DiffDelete        term=standout  cterm=bold  ctermfg=235  ctermbg=204  guifg=#E06C75  guibg=#E06C75   " 差异删除颜色
-hi CursorLineNr      term=standout  cterm=bold  ctermfg=145  ctermbg=236  guifg=#61AFEF  guibg=#282C34   " 当前光标行序号栏颜色
-hi Cursor            term=standout  cterm=bold  ctermfg=0    ctermbg=7    guifg=#282C34  guibg=#ABB2BF   " 当前光标颜色
-hi FoldColumn        term=standout  cterm=bold  ctermfg=0    ctermbg=5    guifg=#ABB2BF  guibg=#282C34   " 折叠边栏提示颜色
-hi NonText                          cterm=bold  ctermfg=0    ctermbg=0    guifg=#282C34  guibg=#282C34   " 隐藏波浪线
-
-
+hi Search            term=standout  cterm=bold  ctermfg=0    ctermbg=1    guifg=#282C34    guibg=#E06C75    " 搜索高亮自定义
+hi IncSearch         term=standout  cterm=bold  ctermfg=0    ctermbg=1    guifg=#282C34    guibg=#E06C75    " 搜索行高亮自定义 
+hi Folded            term=standout  cterm=bold  ctermfg=0    ctermbg=8    guifg=#282c34    guibg=NONE       " 折叠提示颜色
+hi QuickFixLine      term=standout  cterm=bold  ctermfg=7    ctermbg=0    guifg=#ABB2BF    guibg=NONE       " 快速栏颜色
+hi SignColumn        term=standout  cterm=bold  ctermfg=1    ctermbg=0    guifg=#E06C75    guibg=NONE       " 标签栏颜色
+hi DiffDelete        term=standout  cterm=bold  ctermfg=1    ctermbg=1    guifg=#E06C75    guibg=NONE       " 差异删除颜色
+hi CursorLineNr      term=standout  cterm=bold  ctermfg=4    ctermbg=0    guifg=#61AFEF    guibg=NONE       " 当前光标行序号栏颜色
+hi Cursor            term=standout  cterm=bold  ctermfg=0    ctermbg=7    guifg=#282C34    guibg=NONE       " 当前光标颜色
+hi FoldColumn        term=standout  cterm=bold  ctermfg=7    ctermbg=0    guifg=#ABB2BF    guibg=NONE       " 折叠边栏提示颜色
+hi NonText                          cterm=bold  ctermfg=0    ctermbg=0    guifg=#282C34    guibg=NONE       " 隐藏波浪线
+hi Normal                                                                                  guibg=NONE
+hi LineNr                                                                                  guibg=NONE
 " ================================================================================================================================
 "                                                         各类插件设置
 " ================================================================================================================================
