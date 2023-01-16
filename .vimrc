@@ -1559,9 +1559,9 @@ if exists('g:plugs["vim-floaterm"]')
     vnoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
     inoremap <silent><Localleader>c <C-\><C-n>:silent FloatermToggle<CR>
 
-    tnoremap <silent><Localleader>n <C-\><C-n>:silent FloatermNew<CR>
-    tnoremap <silent><Localleader>k <C-\><C-n>:silent FloatermPrev<CR>
-    tnoremap <silent><Localleader>j <C-\><C-n>:silent FloatermNext<CR>
+    tnoremap <silent><Localleader>C <C-\><C-n>:silent FloatermNew<CR>
+    tnoremap <silent><Localleader>p <C-\><C-n>:silent FloatermPrev<CR>
+    tnoremap <silent><Localleader>n <C-\><C-n>:silent FloatermNext<CR>
 
 endif
 
