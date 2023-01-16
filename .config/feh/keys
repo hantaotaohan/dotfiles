@@ -1,45 +1,62 @@
+# ================================================================================================================================
+#                                                                                                                                 
+#                                                              FEH                                                            
+#                                                                                                                                                                                                 
+#                                                       Update: 2023.01.16                                                      
+#                                                                                                                                 
+# ================================================================================================================================
+
 # feh key configuration.
 # Comments start with a # sign, do not use them mid-line.
 # Each line must be blank, a comment, or a key definition.
-#
+
 # key definition: <action name> <key1> [<key2> [<key3>]]
-#
+
 # Each <key> is an X11 keysym (as output by xev) with optional modifier.
 # For instance, C-x would be Ctrl+X, or 4-space Mod4+Space
 
 # Examples for vim-like menu bindings on a qwerty keyboard:
-#menu_parent H Left
-#menu_child  L Right
-#menu_down   J Down
-#menu_up     K Up
-#menu_select space Return
 
-# Same for image navigation ...
+# menu_parent H Left
+# menu_child  L Right
+# menu_down   J Down
+# menu_up     K Up
+# menu_select space Return
+
+# ================================================================================================================================
+
+# -- SAME FOR IMAGE NAVIGATION --
+
 next_img j Right space 
 prev_img k Left BackSpace 
 
-# and image movement
+# -- AND IMAGE MOVEMENT --
+
 scroll_up    K C-Up
 scroll_down  J C-Down
 scroll_left  H C-Left
 scroll_right L C-Right
 
-# File deletion
+# -- FILE DELETION --
+
 remove     d   Delete
 delete   C-d C-Delete
 
-# remove now conflicts with toggle_filenames, so change that
+# -- REMOVE NOW CONFLICTS WITH TOGGLE_FILENAMES --
+
 toggle_filenames f
 
-# zooming
+# -- ZOOMING --
+
 zoom_in  C-k equal
 zoom_out C-j minus
 zoom_default z
 zoom_fit w
 
-# I only hit these accidentaly
+# -- I ONLY HIT THESE ACCIDENTALY --
+
 save_image
 save_filelist
 
-# This leaves some conflicts with existing default bindings, but you should
-# get the idea.  And I'm not gonna fix the conflicts, I don't use qwerty ;-)
+
+# vim:ts=4:shiftwidth=4:syntax=config

@@ -635,3 +635,5 @@ command! fzffind
     \ | :set quickview
     \ | redraw
 nnoremap ;f :fzffind<cr>
+
+# vim:ts=4:shiftwidth=4:syntax=sh

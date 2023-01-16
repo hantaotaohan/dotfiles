@@ -1,3 +1,11 @@
+# ================================================================================================================================
+#
+#                                                       MAIL BOX SETTINGS                                                          
+#
+#                                                       Update: 2023.01.16                                                      
+#
+# ================================================================================================================================
+
 set imap_user           =           "hantaotaohan@hotmail.com"
 set imap_pass           =           ""
 set smtp_url            =           "smtp://hantaotaohan@hotmail.com@smtp.live.com:587/"
@@ -8,3 +16,5 @@ set folder              =           "imaps://imap-mail.outlook.com:993"
 set spoolfile           =           "+INBOX"
 set postponed           =           "+[Hotmail]/Drafts"
 set ssl_force_tls       =           yes
+
+# vim: filetype=neomuttrc

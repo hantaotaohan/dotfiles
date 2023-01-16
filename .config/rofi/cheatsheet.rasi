@@ -1,65 +1,65 @@
 * {
-  background-color: #282C33;
-  border-color: #2e343f;
-  text-color: #8ca0aa;
-  spacing: 0;
-  width: 50%;
-  font: "Inziu Iosevka SC bold 10";
+    background-color: #282C33;
+    border-color: #2e343f;
+    text-color: #8ca0aa;
+    spacing: 0;
+    width: 50%;
+    font: "Inziu Iosevka SC bold 10";
 }
 
 inputbar {
-  border: 0 0 1px 0;
-  children: [prompt,entry];
+    border: 0 0 1px 0;
+    children: [prompt,entry];
 }
 
 prompt {
-  padding: 16px;
-  border: 0 1px 0 0;
-  font: "Inziu Iosevka SC bold 16";
+    padding: 16px;
+    border: 0 1px 0 0;
+    font: "Inziu Iosevka SC bold 16";
 }
 
 textbox {
-  background-color: #2e343f;
-  border: 0 0 1px 0;
-  border-color: #282C33;
-  padding: 8px 16px;
+    background-color: #2e343f;
+    border: 0 0 1px 0;
+    border-color: #282C33;
+    padding: 8px 16px;
 }
 
 entry {
-  font: "Inziu Iosevka SC bold 16";
-  text-color: #abb2bf;
-  padding: 16px;
+    font: "Inziu Iosevka SC bold 16";
+    text-color: #abb2bf;
+    padding: 16px;
 }
 
 listview {
-  cycle: false;
-  margin: 0 0 -1px 0;
-  scrollbar: false;
-  lines:8;
+    cycle: false;
+    margin: 0 0 -1px 0;
+    scrollbar: false;
+    lines:8;
 }
 
 element {
-  border: 0 0 1px 0;
-  padding: 16px;
+    border: 0 0 1px 0;
+    padding: 16px;
 }
 
 element selected {
-  background-color: #2e343f;
+    background-color: #2e343f;
 }
 
 element-text {
-  highlight: underline #E06C75;
-  background-color: inherit;
-  text-color:       inherit;
+    highlight: underline #E06C75;
+    background-color: inherit;
+    text-color:       inherit;
 }
 
 window {
-  transparency: "real";
-  fullscreen: false;
+    transparency: "real";
+    fullscreen: false;
 }
 
 mainbox {
-  padding: 1% 1% 1% 1%;
+    padding: 1% 1% 1% 1%;
 }
 
 // vim: set ft=scss:

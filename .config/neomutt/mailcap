@@ -1,4 +1,12 @@
-#! /bin/bash      just for vscode highlighting
+#!/usr/bin/env bash
+
+# ================================================================================================================================
+#
+#                                                             MAILCAP                                                          
+#
+#                                                       Update: 2023.01.16                                                      
+#
+# ================================================================================================================================
 
 image/bmp;feh %s
 image/gif;feh %s
@@ -54,5 +62,4 @@ application/x-msexcel;gnumeric %s; copiousoutput; nametemplate=%s.xls
 text/calendar; mutt-ics; copiousoutput
 application/ics; mutt-ics; copiousoutput
 
-# vim: fdm=marker
-# vim: filetype=muttrc
+# vim: filetype=mailcap

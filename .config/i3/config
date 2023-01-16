@@ -1,30 +1,70 @@
-# Mod1=Alt
-# Mod2=
-# Mod3=
-# Mod4=Win
+# ================================================================================================================================
+#
+#                                                              I3WM
+#
+#                                                       Update: 2023.01.16
+#
+# ================================================================================================================================
 
-# 设定变量为Alt
+# ================================================================================================================================
+#                                                            变量设置 
+# ================================================================================================================================
 
-set $mod Mod1
+# Shift   ==    SHIFT
+# Lock    ==    CAPS_LOCK
+# Control ==    CONTRAL
+# Mod1    ==    ALT
+# Mod2    ==    NUM_LOCK
+# Mod3    ==
+# Mod4    ==    WIN
 
-# set $TERMINAL st
-# set $TERMINAL_C St
+set $MOD1 Mod1
 
-set $TERMINAL alacritty
+set $UP    k
+set $DOWN  j
+set $LEFT  h
+set $RIGHT l
+
+set $TERMINAL   alacritty
 set $TERMINAL_C Alacritty
 
-# --------------------------------------------------------------------------------------------------
-# 基础设置
-# --------------------------------------------------------------------------------------------------
+set $WORKSPACE1 "1: 1 "
+set $WORKSPACE2 "2: 2 "
+set $WORKSPACE3 "3: 3 "
+set $WORKSPACE4 "4: 4 "
+set $WORKSPACE5 "5: 5 "
+set $WORKSPACE6 "6: 6 "
+set $WORKSPACE7 "7: 7 "
+set $WORKSPACE8 "8: 8 "
+set $WORKSPACE9 "9: 9 "
+set $WORKSPACE10 "10:   Edge "
+
+set $BASE00 #282c34
+set $BASE01 #353b45
+set $BASE02 #3e4451
+set $BASE03 #545862
+set $BASE04 #565c64
+set $BASE05 #abb2bf
+set $BASE06 #b6bdca
+set $BASE07 #c8ccd4
+set $BASE08 #e06c75
+set $BASE09 #d19a66
+set $BASE0A #e5c07b
+set $BASE0B #98c379
+set $BASE0C #56b6c2
+set $BASE0D #61afef
+set $BASE0E #c678dd
+set $BASE0F #be5046
+set $BASE0G #50545f
+set $BASE0H #d2dfea
+set $BASE0I #7fa1bf
+
+# ================================================================================================================================
+#                                                            基础设置 
+# ================================================================================================================================
 
 # 字体配置 
 font pango:Iosevka Bold 10
-
-# 鼠标移动调整方向设置
-set $up k
-set $down j
-set $left h
-set $right l
 
 # 新窗口无边框
 new_window none
@@ -33,12 +73,12 @@ new_window none
 new_float none
 
 # 启用鼠标托放浮动窗口
-floating_modifier $mod
+floating_modifier $MOD1
 
 # 开启工作区自动返回
 workspace_auto_back_and_forth no
 
-# 默认浮动窗口大小
+# 浮动窗口大小
 # floating_minimum_size 1200 x 800
 floating_minimum_size -1 x -1
 floating_maximum_size -1 x -1
@@ -49,14 +89,14 @@ title_align center
 # 焦点跟随鼠标
 focus_follows_mouse no
 
-# 在全平模式下弹出提示消息并离开全屏模式
-popup_during_fullscreen leave_fullscreen  # smart|ignore|leave_fullscreen
+# 在全屏模式下弹出提示消息并离开全屏模式
+popup_during_fullscreen leave_fullscreen                                # smart | ignore | leave_fullscreen
 
 # 切换窗口并不按照默认的父级窗口切换
 force_focus_wrapping no
 
 # 专注于焦点切换
-focus_on_window_activation focus # smart|urgent|focus|none
+focus_on_window_activation focus                                        # smart | urgent | focus | none
 
 # 设置边框大小
 default_border pixel 0
@@ -64,162 +104,134 @@ default_border pixel 0
 # 是否隐藏边框
 hide_edge_borders none
 
-# --------------------------------------------------------------------------------------------------
-# 快捷键设置
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                            快捷键设置 
+# ================================================================================================================================
 
 # 移动当前窗口到便签区
-bindsym $mod+shift+n move scratchpad 
+bindsym $MOD1+shift+n move scratchpad 
 
-# alt+鼠标中建关闭窗口
-bindsym --whole-window $mod+button2 kill
+# 鼠标中建关闭窗口
+bindsym --whole-window $MOD1+button2 kill
 
 # 关闭窗口快捷键 
-bindsym $mod+Shift+q exec --no-startup-id bash i3-smart-kill
+bindsym $MOD1+Shift+q exec --no-startup-id bash i3-smart-kill
 
 # 鼠标中建发送到便签区域
 # bindsym --whole-window button2 move scratchpad
 # bindsym --whole-window button2 exec --no-startup-id bash $HOME/.config/i3/smartkill
 
 # 切换便签
-# bindsym $mod+Control+Tab exec --no-startup-id $HOME/.config/i3/i3-scratchpad-dmenu.py
+# bindsym $MOD1+Control+Tab exec --no-startup-id $HOME/.config/i3/i3-scratchpad-dmenu.py
 
 # 调出便签区的窗口
-# bindsym $mod+Tab scratchpad show ,resize set 1200 800 , move position center , sticky enable
-bindsym $mod+s scratchpad show , move position center , sticky enable
+# bindsym $MOD1+Tab scratchpad show ,resize set 1200 800 , move position center , sticky enable
+bindsym $MOD1+s scratchpad show , move position center , sticky enable
 
 # 切换工作区
 # bindsym Ctrl+Tab workspace next
 # bindsym Shift+Tab workspace prev
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $MOD1+Shift+c reload
 
 # 重置ℹ3wm配置文件
-bindsym $mod+Shift+r restart
+bindsym $MOD1+Shift+r restart
 
 # 退出i3wm
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec --no-startup-id i3-nagbar -t warning -f "pango:Saber 10" -m "Do you really want to exit?" -B "    Exit " "i3-msg exit" -B "    Lock " "pkill i3-nagbar && i3lock-fancy -f Saber" -B "    Reboot " "pkill i3-nagbar && systemctl reboot" -B "    Shutdown " "pkill i3-nagbar && systemctl shutdown -h now" 
+# bindsym $MOD1+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $MOD1+Shift+e exec --no-startup-id i3-nagbar -t warning -f "pango:Saber 10" -m "Do you really want to exit?" -B "    Exit " "i3-msg exit" -B "    Lock " "pkill i3-nagbar && i3lock-fancy -f Saber" -B "    Reboot " "pkill i3-nagbar && systemctl reboot" -B "    Shutdown " "pkill i3-nagbar && systemctl shutdown -h now" 
 
 # bar-1 toggle settings
-bindsym $mod+w bar mode toggle bar-1
+bindsym $MOD1+w bar mode toggle bar-1
 
-# --------------------------------------------------------------------------------------------------
-# 窗口设置
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                            窗口设置 
+# ================================================================================================================================
 
-# 窗口焦点切换 - 方案一
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+# 窗口焦点切换
+bindsym $MOD1+h focus left
+bindsym $MOD1+j focus down
+bindsym $MOD1+k focus up
+bindsym $MOD1+l focus right
 
-# 移动窗口 - 方案一 
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+# 移动窗口
+bindsym $MOD1+Shift+h move left
+bindsym $MOD1+Shift+j move down
+bindsym $MOD1+Shift+k move up
+bindsym $MOD1+Shift+l move right
 
-# --------------------------------------------------------------------------------------------------
-
-# 窗口焦点切换 - 方案二
-#bindsym $mod+Left focus left
-#bindsym $mod+Down focus down
-#bindsym $mod+Up focus up
-#bindsym $mod+Right focus right
-
-# 移动窗口 - 方案二 
-#bindsym $mod+Shift+Left move left
-#bindsym $mod+Shift+Down move down
-#bindsym $mod+Shift+Up move up
-#bindsym $mod+Shift+Right move right
-
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
 
 # 开启全屏模式
-bindsym $mod+Shift+f fullscreen toggle
+bindsym $MOD1+Shift+f fullscreen toggle
 
 # 切换模式 窗口模式与浮动窗口模式
-bindsym $mod+Shift+space floating toggle
+bindsym $MOD1+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $MOD1+space focus mode_toggle
 
 # 下一次开启窗口为水平
-bindsym $mod+backslash split h ;  exec --no-startup-id dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 6666 normal "Horizontally Mode\\n\nEnable"
+bindsym $MOD1+backslash split h ;  exec --no-startup-id dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 6666 normal "Horizontally Mode\\n\nEnable"
 
 # 下一次开启窗口为垂直
-bindsym $mod+minus split v ;  exec --no-startup-id dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 6666 normal "Vertically Mode\\n\nEnable"
+bindsym $MOD1+minus split v ;  exec --no-startup-id dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 6666 normal "Vertically Mode\\n\nEnable"
 
 # 切换窗口布局
-# bindsym $mod+s layout stacking
-# bindsym $mod+w layout tabbed
-# bindsym $mod+e layout toggle split
+# bindsym $MOD1+s layout stacking
+# bindsym $MOD1+w layout tabbed
+# bindsym $MOD1+e layout toggle split
 
 # focus the parent container
-# bindsym $mod+a focus parent
+# bindsym $MOD1+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+#bindsym $MOD1+d focus child
 
-# --------------------------------------------------------------------------------------------------
-# 工作区设置
-# --------------------------------------------------------------------------------------------------
-
-set $workspace1 "1: 1 "
-set $workspace2 "2: 2 "
-set $workspace3 "3: 3 "
-set $workspace4 "4: 4 "
-set $workspace5 "5: 5 "
-set $workspace6 "6: 6 "
-set $workspace7 "7: 7 "
-set $workspace8 "8: 8 "
-set $workspace9 "9: 9 "
-set $workspace10 "10:   Edge "
-
+# ================================================================================================================================
+#                                                            工作区设置 
+# ================================================================================================================================
 
 # 切换工作区
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindsym $MOD1+1 workspace $WORKSPACE1
+bindsym $MOD1+2 workspace $WORKSPACE2
+bindsym $MOD1+3 workspace $WORKSPACE3
+bindsym $MOD1+4 workspace $WORKSPACE4
+bindsym $MOD1+5 workspace $WORKSPACE5
+bindsym $MOD1+6 workspace $WORKSPACE6
+bindsym $MOD1+7 workspace $WORKSPACE7
+bindsym $MOD1+8 workspace $WORKSPACE8
+bindsym $MOD1+9 workspace $WORKSPACE9
+bindsym $MOD1+0 workspace $WORKSPACE10
 
 # 移动当前至工作区
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $MOD1+Shift+1 move container to workspace $WORKSPACE1
+bindsym $MOD1+Shift+2 move container to workspace $WORKSPACE2
+bindsym $MOD1+Shift+3 move container to workspace $WORKSPACE3
+bindsym $MOD1+Shift+4 move container to workspace $WORKSPACE4
+bindsym $MOD1+Shift+5 move container to workspace $WORKSPACE5
+bindsym $MOD1+Shift+6 move container to workspace $WORKSPACE6
+bindsym $MOD1+Shift+7 move container to workspace $WORKSPACE7
+bindsym $MOD1+Shift+8 move container to workspace $WORKSPACE8
+bindsym $MOD1+Shift+9 move container to workspace $WORKSPACE9
+bindsym $MOD1+Shift+0 move container to workspace $WORKSPACE10
 
-# --------------------------------------------------------------------------------------------------
-# 自定义窗口及发送到工作区设置
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                  自定义窗口及发送到工作区设置 
+# ================================================================================================================================
 
-# --------------------------------------------------------------------------------------------------
-# 打开指定程序到指定的工作区-可用 xprop | grep WM_CLASS 命令获取wm_class
-# --------------------------------------------------------------------------------------------------
-assign [class="(!?)Microsoft-edge-dev"  title="(!?).*Dev"]      $workspace3
-assign [class="(!?)$TERMINAL_C"         title="ranger"   ]      $workspace2
+assign [class="(!?)Microsoft-edge-dev"  title="(!?).*Dev"]      $WORKSPACE3
+assign [class="(!?)$TERMINAL_C"         title="ranger"   ]      $WORKSPACE2
 
-# --------------------------------------------------------------------------------------------------
-# 设定那些程序为浮动窗口
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                    设定那些程序为浮动窗口 
+# ================================================================================================================================
 
-# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# 规则                                                                  浮动开启/关闭    |   设置窗口大小        |   移动到中心区域               |   粘性开关    |   移动到便签区        |   边框设定        |       标题栏设定              |
-# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# 规则                                                                  浮动开启/关闭    │   设置窗口大小        │   移动到中心区域               │   粘性开关    │   移动到便签区         │   边框设定        │       标题栏设定         │
+# ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
 for_window [class="(!?).*Nautilus"                              ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable
 for_window [window_role="app"                                   ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable 
 for_window [class="Vmware"                                      ]       floating enable  , resize set 1200 800   , move absolute position center  , sticky enable
@@ -235,44 +247,44 @@ for_window [class="(!?)qutebrowser"     title=".*qutebrowser"   ]       floating
 for_window [class="(!?)Copytranslator"  title="copytranslator"  ]       floating enable  , resize set 650  250   , move absolute position center  , sticky enable , move to scratchpad    
 for_window [class="(!?)$TERMINAL_C"     title="ttyclock"        ]       floating enable  , resize set 500  170   , move absolute position 700 60  , sticky enable , move to scratchpad
 
-# --------------------------------------------------------------------------------------------------
-# 启动程序快捷键设定
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                    启动程序快捷键设定 
+# ================================================================================================================================
 
 # 打开 Nautilus 快捷键
 bindsym Mod4+e exec --no-startup-id nautilus
 
 # 打开fzf-open
-bindsym $mod+f exec --no-startup-id i3-rofi-search
+bindsym $MOD1+f exec --no-startup-id i3-rofi-search
 
 # 开启Terminal快捷键 
-bindsym $mod+Return exec --no-startup-id $TERMINAL
+bindsym $MOD1+Return exec --no-startup-id $TERMINAL
 
 # rofi 设置及配置 apt install rofi
-bindsym $mod+d exec --no-startup-id rofi -show drun -theme onedark
+bindsym $MOD1+d exec --no-startup-id rofi -show drun -theme onedark
 
 # Open Popup-dict
-bindsym $mod+t exec --no-startup-id i3-popupdict-switch
+bindsym $MOD1+t exec --no-startup-id i3-popupdict-switch
 
 # 打开Ranger快捷键
-# bindsym $mod+Shift+Return exec --no-startup-id $TERMINAL -e ranger
-bindsym $mod+Shift+Return exec --no-startup-id raiseorlaunch  -c "St" -t "ranger" -s "st"  -e "--no-startup-id $TERMINAL  -t ranger -e ranger"
+# bindsym $MOD1+Shift+Return exec --no-startup-id $TERMINAL -e ranger
+bindsym $MOD1+Shift+Return exec --no-startup-id raiseorlaunch  -c "St" -t "ranger" -s "st"  -e "--no-startup-id $TERMINAL  -t ranger -e ranger"
 
 # auto windows size for in workspaces "3"
-bindsym $mod+Shift+a exec --no-startup-id i3-autosize
+bindsym $MOD1+Shift+a exec --no-startup-id i3-autosize
 
 # 开启Google Chrome快捷键 
-bindsym $mod+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode"
+bindsym $MOD1+g exec --no-startup-id raiseorlaunch -c "Microsoft-edge" -e "microsoft-edge --force-dark-mode"
 
 # 切换窗口
-bindsym $mod+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'j' -kb-row-up 'k' 
+bindsym $MOD1+p exec --no-startup-id rofi -show window -theme sidetab -window-format {t} -kb-row-down 'j' -kb-row-up 'k' 
 
 # 截图快捷键
-# bindsym $mod+a exec "deepin-screenshot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png < /tmp/screenshot.png"
-bindsym --release $mod+a exec --no-startup-id "import $HOME/desktop/screenshot/screenshot.png ; dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 1010 normal 'ScreenShot Save As \\n\n$HOME/desktop/screenshot'"
+# bindsym $MOD1+a exec "deepin-screenshot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png < /tmp/screenshot.png"
+bindsym --release $MOD1+a exec --no-startup-id "import $HOME/desktop/screenshot/screenshot.png ; dunstify -i /usr/share/icons/Adwaita/32x32/places/folder.png -r 1010 normal 'ScreenShot Save As \\n\n$HOME/desktop/screenshot'"
 
 # 查看CheatSheet
-bindsym $mod+slash exec --no-startup-id cat $HOME/.config/rofi/cheatsheet.conf | rofi -i -dmenu -p 'Cheatsheet' -theme cheatsheet.rasi  | awk -F '# ' '{print $2}' | xclip -selection c
+bindsym $MOD1+slash exec --no-startup-id cat $HOME/.config/rofi/cheatsheet.conf | rofi -i -dmenu -p 'Cheatsheet' -theme cheatsheet.rasi  | awk -F '# ' '{print $2}' | xclip -selection c
 
 # Open vim-scratchpad
 bindsym Control+1 exec --no-startup-id raiseorlaunch -r -c "$TERMINAL_C"        -t "scratchpad"         -e "--no-startup-id $TERMINAL -t scratchpad -e vim $HOME/.scratchpad"
@@ -287,59 +299,61 @@ bindsym Control+3 exec --no-startup-id raiseorlaunch -r -c "Microsoft-edge"     
 bindsym Control+4 exec --no-startup-id raiseorlaunch -r -c "Copytranslator"     -t "copytranslator"     -e "--no-startup-id copytranslator --no-sandbox"
 
 # Open Qutebrowser
-bindsym $mod+q    exec --no-startup-id raiseorlaunch -r -c "qutebrowser"        -t ".*qutebrowser"      -e "--no-startup-id qutebrowser"
+bindsym $MOD1+q    exec --no-startup-id raiseorlaunch -r -c "qutebrowser"        -t ".*qutebrowser"      -e "--no-startup-id qutebrowser"
 
 # Open tty-clock
-bindsym $mod+shift+t    exec --no-startup-id raiseorlaunch -r -c "$TERMINAL_C"        -t "ttyclock"           -e "--no-startup-id $TERMINAL -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
+bindsym $MOD1+shift+t    exec --no-startup-id raiseorlaunch -r -c "$TERMINAL_C"        -t "ttyclock"           -e "--no-startup-id $TERMINAL -t 'ttyclock' -e tty-clock -s -C 7 -b -D -c"
 
 # Open Alacritty
-# bindsym $mod+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
+# bindsym $MOD1+t exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "open-alacritty" -e "alacritty -t 'open-alacritty'"
 
 # Open fzf-open
-# bindsym $mod+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
+# bindsym $MOD1+f exec --no-startup-id raiseorlaunch -r -c "Alacritty" -t "fzfopen" -e "--no-startup-id fzf-open"
 
-# --------------------------------------------------------------------------------------------------
-# 调整窗口大小配置
-# --------------------------------------------------------------------------------------------------
-set $Resize Resize - Mode
+# ================================================================================================================================
+#                                                    调整窗口大小配置 
+# ================================================================================================================================
+
+set $RESIZE Resize - Mode
+
 mode "$Resize" {
-        # 调整窗口大小-方案一
         bindsym l resize shrink width 10 px or 10 ppt
         bindsym j resize grow height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym h resize grow width 10 px or 10 ppt
 
-        # 调整窗口大小-方案二
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # 推出调整模式: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-# 调整窗口大小快捷键
-bindsym $mod+r mode "$Resize"
 
-# --------------------------------------------------------------------------------------------------
-# Apps
-# --------------------------------------------------------------------------------------------------
-set $Apps     [P]OPUPDICT
+bindsym $MOD1+r mode "$RESIZE"
+
+# ================================================================================================================================
+#                                                              Apps 
+# ================================================================================================================================
+
+set $APPS     [P]OPUPDICT
 
 mode "$Apps" {
      bindsym p exec --no-startup-id popupdict, mode "default"
      bindsym Return mode "default"
      bindsym Escape mode "default"
 }
- bindsym $mod+o mode "$Apps"
 
-# --------------------------------------------------------------------------------------------------
-# 关机锁屏相关设定
-# --------------------------------------------------------------------------------------------------
-set $mode_system     [L]OCK        [E]XIT        [R]EBOOT        [P]OWEROFF        [B]ACKGROUND        [W]ALLPAPER
+bindsym $MOD1+o mode "$APPS"
 
-mode "$mode_system" {
+# ================================================================================================================================
+#                                                        关机锁屏相关设定 
+# ================================================================================================================================
+
+set $MOD1E_SYSTEM     [L]OCK        [E]XIT        [R]EBOOT        [P]OWEROFF        [B]ACKGROUND        [W]ALLPAPER
+
+mode "$MOD1e_system" {
      bindsym l exec --no-startup-id i3lock-fancy -f Saber, mode "default"
      bindsym e exec --no-startup-id i3-msg exit
      bindsym r exec --no-startup-id systemctl reboot, mode "default"
@@ -352,12 +366,15 @@ mode "$mode_system" {
      bindsym Return mode "default"
      bindsym Escape mode "default"
 }
- bindsym $mod+e mode "$mode_system"
 
-# --------------------------------------------------------------------------------------------------
-# 鼠标键设置
-# --------------------------------------------------------------------------------------------------
-set $MouseMode Mouse - Mode
+bindsym $MOD1+e mode "$MOD1E_SYSTEM"
+
+# ================================================================================================================================
+#                                                           鼠标键设置 
+# ================================================================================================================================
+
+set $MOUSEMODE Mouse - Mode
+
 mode "$MouseMode" {
     set $slow 1
     set $quick 15
@@ -438,46 +455,24 @@ mode "$MouseMode" {
     bindsym Escape mode "default"
 }
 
-bindsym $mod+m mode "$MouseMode"
+bindsym $MOD1+m mode "$MOUSEMODE"
 
-# --------------------------------------------------------------------------------------------------
-# 颜色设定
-# --------------------------------------------------------------------------------------------------
-
-# Themes  Base16 OneDark
-set $base00 #282c34
-set $base01 #353b45
-set $base02 #3e4451
-set $base03 #545862
-set $base04 #565c64
-set $base05 #abb2bf
-set $base06 #b6bdca
-set $base07 #c8ccd4
-set $base08 #e06c75
-set $base09 #d19a66
-set $base0A #e5c07b
-set $base0B #98c379
-set $base0C #56b6c2
-set $base0D #61afef
-set $base0E #c678dd
-set $base0F #be5046
-set $base0G #50545f
-set $base0H #d2dfea
-set $base0I #7fa1bf
-
-# Basic color configuration using the Base16 variables for windows and borders.
+# ================================================================================================================================
+#                                                           颜色设定 
+# ================================================================================================================================
 
 # Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base08 $base08 $base00 $base08 $base08
-client.focused_inactive $base00 $base00 $base06 $base00 $base00
-client.unfocused        $base00 $base00 $base06 $base00 $base00
-client.urgent           $base00 $base08 $base00 $base08 $base00
-client.placeholder      $base00 $base00 $base06 $base00 $base00
-client.background $base07
+client.focused          $BASE08 $BASE08 $BASE00 $BASE08 $BASE08
+client.focused_inactive $BASE00 $BASE00 $BASE06 $BASE00 $BASE00
+client.unfocused        $BASE00 $BASE00 $BASE06 $BASE00 $BASE00
+client.urgent           $BASE00 $BASE08 $BASE00 $BASE08 $BASE00
+client.placeholder      $BASE00 $BASE00 $BASE06 $BASE00 $BASE00
+client.background       $BASE07
 
-# --------------------------------------------------------------------------------------------------
-# i3bar设定
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                           I3BAR设定
+# ================================================================================================================================
+
 bar {
     font pango:Iosevka Bold 10
     id			            bar-0
@@ -491,19 +486,19 @@ bar {
     tray_output             primary #none #primary
     tray_padding            5
 	colors {
-        background $base00
-        separator  $base04
-        statusline $base06
+        background $BASE00
+        separator  $BASE04
+        statusline $BASE06
         # State             Border  BG      Text
-        focused_workspace   $base00 $base0G $base0H
-        active_workspace    $base00 $base00 $base06
-        inactive_workspace  $base00 $base00 $base06
-        urgent_workspace    $base00 $base0I $base00
-        binding_mode        $base00 $base00 $base0I
+        focused_workspace   $BASE00 $BASE0G $BASE0H
+        active_workspace    $BASE00 $BASE00 $BASE06
+        inactive_workspace  $BASE00 $BASE00 $BASE06
+        urgent_workspace    $BASE00 $BASE0I $BASE00
+        binding_mode        $BASE00 $BASE00 $BASE0I
     }
 }
 
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
 
 bar {
     font pango:Iosevka Bold 10
@@ -521,33 +516,33 @@ bar {
     hidden_state            hide
     modifier                Mod4
 	colors {
-        background $base00
-        separator  $base04
-        statusline $base06
+        background $BASE00
+        separator  $BASE04
+        statusline $BASE06
         # State             Border  BG      Text
-        focused_workspace   $base00 $base00 $base0D
-        active_workspace    $base00 $base00 $base06
-        inactive_workspace  $base00 $base00 $base06
-        urgent_workspace    $base00 $base08 $base00
-        binding_mode        $base00 $base0E $base00
+        focused_workspace   $BASE00 $BASE00 $BASE0D
+        active_workspace    $BASE00 $BASE00 $BASE06
+        inactive_workspace  $BASE00 $BASE00 $BASE06
+        urgent_workspace    $BASE00 $BASE08 $BASE00
+        binding_mode        $BASE00 $BASE0E $BASE00
     }
 }
 
 # Toggle between hide state and show state
 bindsym Mod4+Return bar hidden_state toggle
 
-# --------------------------------------------------------------------------------------------------
-# i3-gaps
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                          I3-GAPS
+# ================================================================================================================================
 
 # smart_gaps on
 # gaps inner 8
 # gaps outer 2
 # smart_gaps inverse_outer
 
-# --------------------------------------------------------------------------------------------------
-# 随机启动设置
-# --------------------------------------------------------------------------------------------------
+# ================================================================================================================================
+#                                                        随机启动设
+# ================================================================================================================================
 
 # 启用输入法fcitx
 # exec --no-startup-id fcitx &

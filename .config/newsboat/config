@@ -1,4 +1,15 @@
-# Feed options
+# ================================================================================================================================
+#
+#                                                            NEWSBOAT
+#
+#                                                       Update: 2023.01.16                                                      
+#
+# ================================================================================================================================
+
+# ================================================================================================================================
+#                                                       GENERAL - Settings
+# ================================================================================================================================
+
 auto-reload yes
 reload-time 180
 reload-threads 4
@@ -6,10 +17,24 @@ download-retries 2
 download-timeout 10
 download-full-page yes
 html-renderer "rdrview -B w3m"
+text-width 80
+browser rdrview -B w3m
 # html-renderer "w3m -dump -T text/html"
-
 # external-url-viewer "urlscan -dc -r 'google-chrome {}'"
 
+# ================================================================================================================================
+#                                                        MACRO - SETTINGS
+# ================================================================================================================================
+
+macro b set browser "google-chrome %u" ; open-in-browser ; set browser rdrview -B w3m
+macro r open-in-browser 
+macro q quit
+
+# ================================================================================================================================
+#                                                     KEYBINDINGS - SETTINGS
+# ================================================================================================================================
+
+unbind-key ,
 bind-key j down
 bind-key k up
 bind-key j next articlelist
@@ -28,7 +53,12 @@ bind-key N prev-unread
 bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
+bind-key ; macro-prefix
 unbind-key q
+
+# ================================================================================================================================
+#                                                       COLORS - SETTINGS
+# ================================================================================================================================
 
 color listnormal color15 default
 color listfocus color7 color8
@@ -37,14 +67,9 @@ color listfocus_unread color7 color8
 color info color5 color0
 color article color250 default
 
-text-width 80
-
-browser rdrview -B w3m
-bind-key ; macro-prefix
-unbind-key ,
-macro b set browser "google-chrome %u" ; open-in-browser ; set browser rdrview -B w3m
-macro r open-in-browser 
-macro q quit
+# ================================================================================================================================
+#                                                      HIGHLIGHT - SETTINGS
+# ================================================================================================================================
 
 highlight all "  Reeder.*." color1
 highlight all "  Other.*." color1
@@ -64,8 +89,12 @@ highlight article ":.*\\(link\\)$" cyan default
 highlight article ":.*\\(image\\)$" blue default
 highlight article ":.*\\(embedded flash\\)$" magenta default
 
-# Related to the title formats of the dialog boxes
+# ================================================================================================================================
+#                                       RELATED TO THE TITLE FORMATS OF THE DIALOG BOXES
+# ================================================================================================================================
+
 datetime-format "%Y-%m-%d %H:%M"
-# feedlist-format " %t %> %n %4i  %11u %"
 feedlist-format "%t  %> %n  %11u %"
+# feedlist-format " %t %> %n %4i  %11u %"
+
 # vim: ft=apachestyle cms=#\ %s :

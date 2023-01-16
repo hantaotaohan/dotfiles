@@ -1,33 +1,24 @@
-#!/bin/bash
-# Copyright (C) 2014 Julien Bonjean <julien@bonjean.info>
-# Copyright (C) 2014 Alexander Keller <github@nycroth.com>
+#!/usr/bin/env bash
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# ================================================================================================================================
+#
+#                                                             IFACE                                                          
+#
+#                                                       Update: 2023.01.16                                                      
+#
+# ================================================================================================================================
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-#------------------------------------------------------------------------
-
-# Use the provided interface, otherwise the device used for the default route.
+# USE THE PROVIDED INTERFACE, OTHERWISE THE DEVICE USED FOR THE DEFAULT ROUTE.
 IF="${IFACE:-$BLOCK_INSTANCE}"
 IF="${IF:-$(ip route | awk '/^default/ { print $5 ; exit }')}"
 
-# Exit if there is no default route
+# EXIT IF THERE IS NO DEFAULT ROUTE
 [[ -z "$IF" ]] && exit
 
 #------------------------------------------------------------------------
 
-# As per #36 -- It is transparent: e.g. if the machine has no battery or wireless
-# connection (think desktop), the corresponding block should not be displayed.
+# AS PER #36 -- IT IS TRANSPARENT: E.G. IF THE MACHINE HAS NO BATTERY OR WIRELESS
+# CONNECTION (THINK DESKTOP), THE CORRESPONDING BLOCK SHOULD NOT BE DISPLAYED.
 [[ ! -d /sys/class/net/${IF} ]] && exit
 
 #------------------------------------------------------------------------
@@ -51,13 +42,13 @@ for flag in "$1" "$2"; do
 done
 
 if [[ "$IF" = "" ]] || [[ "$(cat /sys/class/net/$IF/operstate)" = 'down' ]]; then
-  echo "${LABEL}down" # full text
-  echo "${LABEL}down" # short text
-  echo \#FF0000 # color
+  echo "${LABEL}down" # FULL TEXT
+  echo "${LABEL}down" # SHORT TEXT
+  echo \#FF0000       # COLOR
   exit
 fi
 
-# if no interface is found, use the first device with a global scope
+# IF NO INTERFACE IS FOUND, USE THE FIRST DEVICE WITH A GLOBAL SCOPE
 IPADDR=$(ip addr show $IF | perl -n -e "/$AF ([^ \/]+).* scope global/ && print \$1 and exit")
 
 case $BLOCK_BUTTON in
@@ -66,5 +57,5 @@ esac
 
 #------------------------------------------------------------------------
 
-echo "$LABEL$IPADDR" # full text
-echo "$LABEL$IPADDR" # short text
+echo "$LABEL$IPADDR" # FULL TEXT
+echo "$LABEL$IPADDR" # SHORT TEXT

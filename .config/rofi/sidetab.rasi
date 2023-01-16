@@ -1,59 +1,59 @@
 * {
-  background-color: #282C34;
-  border-color: #2e343f;
-  text-color: #8ca0aa;
-  spacing: 2;
-  width: 512px;
-  font: "Saber 10";
+    background-color: #282C34;
+    border-color: #2e343f;
+    text-color: #8ca0aa;
+    spacing: 2;
+    width: 512px;
+    font: "Saber 10";
 }
 
 #window {
-        anchor:   west;
-        location: west;
-        width:    20%;
-        height:   100%;
+    anchor:   west;
+    location: west;
+    width:    20%;
+    height:   100%;
 }
 
 inputbar {
-  border: 0 0 1px 0;
-  children: [prompt,entry];
+    border: 0 0 1px 0;
+    children: [prompt,entry];
 }
 
 prompt {
-  padding: 16px;
-  border: 0 1px 0 0;
+    padding: 16px;
+    border: 0 1px 0 0;
 }
 
 textbox {
-  background-color: #2e343f;
-  border: 0 0 1px 0;
-  border-color: #282C33;
-  padding: 8px 16px;
+    background-color: #2e343f;
+    border: 0 0 1px 0;
+    border-color: #282C33;
+    padding: 8px 16px;
 }
 
 entry {
-  padding: 16px;
+    padding: 16px;
 }
 
 listview {
-  cycle: false;
-  margin: 0 0 -1px 0;
-  scrollbar: false;
+    cycle: false;
+    margin: 0 0 -1px 0;
+    scrollbar: false;
 }
 
 element {
-  border: 0 0 1px 0;
-  padding: 16px;
+    border: 0 0 1px 0;
+    padding: 16px;
 }
 
 element selected {
-  background-color: #2e343f;
+    background-color: #2e343f;
 }
 
 element-text {
-  highlight: underline #E06C75;
-  background-color: inherit;
-  text-color:       inherit;
+    highlight: underline #E06C75;
+    background-color: inherit;
+    text-color:       inherit;
 }
 
 // vim: set ft=scss:

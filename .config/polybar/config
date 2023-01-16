@@ -1,22 +1,24 @@
-;==========================================================
+; ================================================================================================================================
 ;
+;                                                                 POLYBAR                                                            
 ;
-;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
-;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
-;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
-;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
-;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
-;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;                                                           Update: 2023.01.16                                                      
 ;
+; ================================================================================================================================
+
+; ================================================================================================================================
 ;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/polybar/polybar
+;                                         ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;                                         ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;                                         ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;                                         ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;                                         ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;                                         ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 ;
-;   The README contains a lot of information
-;
-;==========================================================
+; ================================================================================================================================
 
 [colors]
+
 foreground = ${xrdb:color15:#abb2bf}
 foreground-alt = ${xrdb:color2:#abb2bf}
 background = ${xrdb:color0:#282c34}
@@ -27,6 +29,7 @@ secondary = ${xrdb:color10:#e60053}
 alert = ${xrdb:color1:#bd2c40}
 
 [section/polybar_common]
+
 height = 26
 radius = 0.0
 fixed-center = true
@@ -48,6 +51,7 @@ scroll-down = bspwm.next
 enable-ipc = true
 
 [bar/laptop]
+
 inherit = section/polybar_common
 monitor = eDP-1
 
@@ -62,6 +66,7 @@ tray-detached = true
 wm-restack = bspwm
 
 [bar/external]
+
 inherit = section/polybar_common
 monitor = ${env:MAIN_MONITOR}
 
@@ -76,6 +81,7 @@ tray-detached = true
 wm-restack = bspwm
 
 [module/bspwm]
+
 type = internal/bspwm
 
 ; Only show workspaces defined on the same output as the bar
@@ -105,6 +111,7 @@ label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
 [module/cpu]
+
 type = internal/cpu
 interval = 0.2
 
@@ -153,6 +160,7 @@ bar-load-empty-font = 2
 bar-load-empty-foreground = #444444
 
 [module/memory]
+
 type = internal/memory
 format-prefix = "RAM "
 format-prefix-foreground = ${colors.primary}
@@ -175,6 +183,7 @@ bar-used-empty-font = 2
 bar-used-empty-foreground = ${colors.background-alt}
 
 [module/wlan]
+
 type = internal/network
 ; Name of the network interface to display. You can get the names of the
 ; interfaces on your machine with `ip link`
@@ -257,6 +266,7 @@ animation-packetloss-framerate = 500
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
+
 type = internal/date
 interval = 0.01
 
@@ -265,6 +275,7 @@ time = %H:%M:%S
 label = %date% %time% 
 
 [module/pulseaudio]
+
 type = internal/pulseaudio
 ; Available tags:
 ;   <label-volume> (default)
@@ -306,6 +317,7 @@ click-middle = pulseaudio-equalizer-gtk
 click-right = 
 
 [module/battery]
+
 type = internal/battery
 
 ; This is useful in case the battery never reports 100% charge
@@ -383,6 +395,7 @@ ramp-capacity-4 = 
 
 
 [module/temperature]
+
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 75
@@ -404,6 +417,7 @@ ramp-2 =
 ramp-foreground = ${colors.foreground-alt}
 
 [module/fanspeed]
+
 type = custom/script
 
 exec = sensors | grep fan1 | awk '{print $2}'
@@ -415,6 +429,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 interval = 2
 
 [module/powermenu]
+
 type = custom/menu
 
 expand-right = true
@@ -449,6 +464,7 @@ menu-2-1-exec = menu-open-0
 menu-2-1-foreground = ${colors.foreground-alt}
 
 [module/backlight]
+
 type = internal/backlight
 
 ; Use the following command to list available cards:
@@ -503,6 +519,7 @@ bar-empty-font = 2
 bar-empty-foreground = ${colors.background-alt}
 
 [module/external_backlight_ipc]
+
 ; control the external monitor brightness (not the actual backlight power)
 type = custom/ipc
 ;
@@ -520,6 +537,7 @@ scroll-down = systemctl --user kill -s SIGKILL redshift.service && redshift -x &
 ; click-left = systemctl --user start redshift.service
 
 [module/external_backlight_first_call]
+
 ; this is just needed to initialize without any click <external_backlight_ipc>
 type = custom/script
 ; Available tags:
@@ -533,6 +551,7 @@ exec = polybar-msg hook external_backlight_ipc 1
 interval = 600
 
 [settings]
+
 screenchange-reload = true
 ;compositing-background = xor
 ;compositing-background = screen
@@ -541,6 +560,7 @@ screenchange-reload = true
 ;pseudo-transparency = false
 
 [global/wm]
+
 margin-top = 5
 margin-bottom = 5
 ; vim:ft=dosini

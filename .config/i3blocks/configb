@@ -1,10 +1,11 @@
-# i3blocks config file
+# ================================================================================================================================
 #
-# Please see man i3blocks for a complete reference!
-# The man page is also hosted at http://vivien.github.io/i3blocks
+#                                                         BUTTOM CONFIG                                                          
 #
-# List of valid properties:
+#                                                       Update: 2023.01.16                                                      
 #
+# ================================================================================================================================
+
 # align
 # color
 # command
@@ -21,7 +22,7 @@
 # urgent
 
 # Global properties
-#
+
 # The top properties below are applied to every block, but can be overridden.
 # Each block command defaults to the script name to avoid boilerplate.
 command=/usr/share/i3blocks/$BLOCK_NAME

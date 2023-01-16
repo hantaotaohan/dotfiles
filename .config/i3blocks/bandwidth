@@ -1,25 +1,18 @@
-#!/bin/bash
-# Copyright (C) 2012 Stefan Breunig <stefan+measure-net-speed@mathphys.fsk.uni-heidelberg.de>
-# Copyright (C) 2014 kaueraal
-# Copyright (C) 2015 Thiago Perrotta <perrotta dot thiago at poli dot ufrj dot br>
+#!/usr/bin/env bash
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# ================================================================================================================================
+#
+#                                                           BANDWIDTH                                                          
+#
+#                                                       Update: 2023.01.16                                                      
+#
+# ================================================================================================================================
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# GET CUSTOM IN AND OUT LABELS IF PROVIDED BY COMMAND LINE ARGUMENTS
 
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-# Get custom IN and OUT labels if provided by command line arguments
 while [[ $# -gt 1 ]]; do
-    key="$1"
-    case "$key" in 
+    KEY="$1"
+    case "$KEY" in 
         -i|--inlabel)
             INLABEL="$2"
             shift;;
@@ -30,78 +23,85 @@ while [[ $# -gt 1 ]]; do
     shift
 done
 
-# [[ -z "$INLABEL" ]] && INLABEL=" "
-# [[ -z "$OUTLABEL" ]] && OUTLABEL=" "
-
 [[ -z "$INLABEL" ]] && INLABEL=""
 [[ -z "$OUTLABEL" ]] && OUTLABEL=""
 
-# Use the provided interface, otherwise the device used for the default route.
+# USE THE PROVIDED INTERFACE, OTHERWISE THE DEVICE USED FOR THE DEFAULT ROUTE.
+
 if [[ -z $INTERFACE ]] && [[ -n $BLOCK_INSTANCE ]]; then
-  INTERFACE=$BLOCK_INSTANCE
+    INTERFACE=$BLOCK_INSTANCE
 elif [[ -z $INTERFACE ]]; then
-  INTERFACE=$(ip route | awk '/^default/ { print $5 ; exit }')
+    INTERFACE=$(ip route | awk '/^default/ { print $5 ; exit }')
 fi
 
-# Exit if there is no default route
+# EXIT IF THERE IS NO DEFAULT ROUTE
+
 [[ -z "$INTERFACE" ]] && exit
 
 
-# path to store the old results in
-path="/dev/shm/$(basename $0)-${INTERFACE}"
+# PATH TO STORE THE OLD RESULTS IN
 
-# grabbing data for each adapter.
+PATH="/dev/shm/$(basename $0)-${INTERFACE}"
+
+# GRABBING DATA FOR EACH ADAPTER.
+
 read rx < "/sys/class/net/${INTERFACE}/statistics/rx_bytes"
 read tx < "/sys/class/net/${INTERFACE}/statistics/tx_bytes"
 
-# get time
-time=$(date +%s)
+# GET TIME
 
-# write current data if file does not exist. Do not exit, this will cause
-# problems if this file is sourced instead of executed as another process.
-if ! [[ -f "${path}" ]]; then
-  echo "${time} ${rx} ${tx}" > "${path}"
-  chmod 0666 "${path}"
+TIME=$(date +%s)
+
+# WRITE CURRENT DATA IF FILE DOES NOT EXIST. DO NOT EXIT, THIS WILL CAUSE
+# PROBLEMS IF THIS FILE IS SOURCED INSTEAD OF EXECUTED AS ANOTHER PROCESS.
+
+if ! [[ -f "${PATH}" ]]; then
+    echo "${TIME} ${rx} ${tx}" > "${PATH}"
+    chmod 0666 "${PATH}"
 fi
 
 
-# read previous state and update data storage
-read old < "${path}"
-echo "${time} ${rx} ${tx}" > "${path}"
+# READ PREVIOUS STATE AND UPDATE DATA STORAGE
 
-# parse old data and calc time passed
-old=(${old//;/ })
-time_diff=$(( $time - ${old[0]} ))
+read OLD < "${PATH}"
+echo "${TIME} ${rx} ${tx}" > "${PATH}"
 
-# sanity check: has a positive amount of time passed
-[[ "${time_diff}" -gt 0 ]] || exit
+# PARSE OLD DATA AND CALC TIME PASSED
 
-# calc bytes transferred, and their rate in byte/s
-rx_diff=$(( $rx - ${old[1]} ))
-tx_diff=$(( $tx - ${old[2]} ))
-rx_rate=$(( $rx_diff / $time_diff ))
-tx_rate=$(( $tx_diff / $time_diff ))
+OLD=(${OLD//;/ })
+TIME_diff=$(( $TIME - ${OLD[0]} ))
 
-# shift by 10 bytes to get KiB/s. If the value is larger than
-# 1024^2 = 1048576, then display MiB/s instead
+# SANITY CHECK: HAS A POSITIVE AMOUNT OF TIME PASSED
 
-# incoming
+[[ "${TIME_diff}" -gt 0 ]] || exit
+
+# CALC BYTES TRANSFERRED, AND THEIR RATE IN BYTE/S
+
+RX_DIFF=$(( $rx - ${OLD[1]} ))
+TX_DIFF=$(( $tx - ${OLD[2]} ))
+RX_RATE=$(( $RX_DIFF / $TIME_diff ))
+TX_RATE=$(( $TX_DIFF / $TIME_diff ))
+
+# SHIFT BY 10 BYTES TO GET KIB/S. IF THE VALUE IS LARGER THAN
+# 1024^2 = 1048576, THEN DISPLAY MIB/S INSTEAD
+
+# INCOMING
 echo -n "$INLABEL"
-rx_kib=$(( $rx_rate >> 10 ))
-if hash bc 2>/dev/null && [[ "$rx_rate" -gt 1048576 ]]; then
-  printf '%sM' "`echo "scale=1; $rx_kib / 1024" | bc`"
+RX_KIB=$(( $RX_RATE >> 10 ))
+if hash bc 2>/dev/null && [[ "$RX_RATE" -gt 1048576 ]]; then
+    printf '%sM' "`echo "scale=1; $RX_KIB / 1024" | bc`"
 else
-  echo -n "${rx_kib}K"
+    echo -n "${RX_KIB}K"
 fi
 
 echo -n " - "
-# echo -n " ● "
 
-# outgoing
+# OUTGOING
+
 echo -n "$OUTLABEL"
-tx_kib=$(( $tx_rate >> 10 ))
-if hash bc 2>/dev/null && [[ "$tx_rate" -gt 1048576 ]]; then
-  printf '%sM\n' "`echo "scale=1; $tx_kib / 1024" | bc`"
+TX_KIB=$(( $TX_RATE >> 10 ))
+if hash bc 2>/dev/null && [[ "$TX_RATE" -gt 1048576 ]]; then
+    printf '%sM\n' "`echo "scale=1; $TX_KIB / 1024" | bc`"
 else
-  echo "${tx_kib}K"
+    echo "${TX_KIB}K"
 fi

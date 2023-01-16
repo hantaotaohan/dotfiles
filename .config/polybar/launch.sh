@@ -1,20 +1,32 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Terminate already running bar instances
+# ================================================================================================================================
+#
+#                                                             STARTUP POLYBAR                                                          
+#
+#                                                           Update: 2023.01.16                                                      
+#
+# ================================================================================================================================
+
+# TERMINATE ALREADY RUNNING BAR INSTANCES
+
 killall -q polybar
 
-# Wait until the processes have been shut down
+# WAIT UNTIL THE PROCESSES HAVE BEEN SHUT DOWN
+
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 if [ -n $SECOND_MONITOR ]; then
-	echo "launching polybar on two screens"
-	# launch external second such that the tray is visible in this monitor
-	polybar external &
-	sleep 0.2
-	polybar laptop &
+    echo "LAUNCHING POLYBAR ON TWO SCREENS"
+
+    # LAUNCH EXTERNAL SECOND SUCH THAT THE TRAY IS VISIBLE IN THIS MONITOR
+
+    polybar external &
+    sleep 0.2
+    polybar laptop &
 else
-	echo "launching polybar on a single screen"
-	polybar laptop &
+    echo "LAUNCHING POLYBAR ON A SINGLE SCREEN"
+    polybar laptop &
 fi
 
-echo "Polybar launched..."
+echo "POLYBAR LAUNCHED..."
