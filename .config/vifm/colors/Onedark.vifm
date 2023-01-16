@@ -69,4 +69,4 @@ highlight {*.bmp,*.gif,*.jpeg,*.jpg,*.ico,*.png,*.ppm,*.svg,*.svgz,*.tga,*.tif,
 highlight {*.patch,*.diff,*.py,*.[ch]pp,*.mk,*.c,*.h,*.[ch]pp,*.cc,*.hs,*.php}
           \ cterm=none ctermfg=1 ctermbg=default
 
-# vim:ts=4:shiftwidth=4:syntax=sh
+# vim:ts=4:shiftwidth=4:syntax=vim
