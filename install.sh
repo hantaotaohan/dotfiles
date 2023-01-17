@@ -617,7 +617,7 @@ Deb_Install() {
 	wget -P $SOURCE_DIR $GITHUBRAW/fd.deb > /dev/null 2>&1
 	wget -P $SOURCE_DIR $GITHUBRAW/bat.deb > /dev/null 2>&1
 	wget -P $SOURCE_DIR $GITHUBRAW/delta.deb > /dev/null 2>&1
-	# wget -P $SOURCE_DIR $GITHUBRAW/lsd.deb > /dev/null 2>&1
+	wget -P $SOURCE_DIR $GITHUBRAW/watchexec.deb > /dev/null 2>&1
 	# wget -P $SOURCE_DIR $GITHUBRAW/foliate.deb > /dev/null 2>&1
 	# wget -P $SOURCE_DIR $GITHUBRAW/Alacritty.deb > /dev/null 2>&1
 	# wget -P $SOURCE_DIR $GITHUBRAW/timeshift.deb > /dev/null 2>&1
@@ -625,8 +625,8 @@ Deb_Install() {
 	DPKGAPPS=( \
         fd.deb \
         bat.deb \
-        delta.deb
-        # lsd.deb \
+        delta.deb \
+        watchexec.deb
         # Alacritty.deb
     )
 
