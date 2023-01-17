@@ -497,14 +497,14 @@ Deb_Install() {
 
 	wget -P $SOURCE_DIR $GITHUBRAW/fd.deb > /dev/null 2>&1
 	wget -P $SOURCE_DIR $GITHUBRAW/bat.deb > /dev/null 2>&1
-	wget -P $SOURCE_DIR $GITHUBRAW/lsd.deb > /dev/null 2>&1
 	wget -P $SOURCE_DIR $GITHUBRAW/delta.deb > /dev/null 2>&1
+	# wget -P $SOURCE_DIR $GITHUBRAW/lsd.deb > /dev/null 2>&1
 	
 	DPKGAPPS=( \
         fd.deb \
         bat.deb \
-        lsd.deb \
         delta.deb
+        # lsd.deb \
     )
 
     for app in "${DPKGAPPS[@]}"
