@@ -826,6 +826,7 @@ hi FoldColumn        term=standout  cterm=bold  ctermfg=7    ctermbg=0    guifg=
 hi NonText                          cterm=bold  ctermfg=0    ctermbg=0    guifg=#282C34    guibg=NONE       " 隐藏波浪线
 hi Normal                                                                                  guibg=NONE
 hi LineNr                                                                                  guibg=NONE
+
 " ================================================================================================================================
 "                                                         各类插件设置
 " ================================================================================================================================
@@ -1229,29 +1230,32 @@ endif
 
 if exists('g:plugs["fzf.vim"]')
 
+    " 启用浮动窗口
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
     " 禁用浮动窗口
     " let g:fzf_layout = { 'down':'40%' }
 
-    " See `man fzf-tmux` for available options
+    " 预览窗口设置
+    let g:fzf_preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
+
+    " SEE `MAN FZF-TMUX` FOR AVAILABLE OPTIONS
     if exists('$TMUX')
         let g:fzf_layout = { 'tmux': '-p90%,60%' }
     else
         let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
     endif
 
-    " 启用浮动窗口
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-
-    " [Buffers] Jump to the existing window if possible
+    " [BUFFERS] JUMP TO THE EXISTING WINDOW IF POSSIBLE
     let g:fzf_buffers_jump = 1
 
-    " [[B]Commits] Customize the options used by 'git log':
+    " [[B]COMMITS] CUSTOMIZE THE OPTIONS USED BY 'GIT LOG':
     let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
-    " [Tags] Command to generate tags file
+    " [TAGS] COMMAND TO GENERATE TAGS FILE
     let g:fzf_tags_command = 'ctags -R'
 
-    " [Commands] --expect expression for directly executing the command
+    " [COMMANDS] --EXPECT EXPRESSION FOR DIRECTLY EXECUTING THE COMMAND
     let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
     " 额外按键绑定
@@ -1278,11 +1282,14 @@ if exists('g:plugs["fzf.vim"]')
     nnoremap <silent><LocalLeader>fr :Rg<CR>
     nnoremap <silent><LocalLeader>fa :Files<CR>
     nnoremap <silent><LocalLeader>ff :GFiles<CR>
+    nnoremap <silent><LocalLeader>fm :GFiles?<CR>
+    nnoremap <silent><LocalLeader>fc :Commits<CR>
     nnoremap <silent><LocalLeader>fl :BLines<CR>
     nnoremap <silent><LocalLeader>fo :Colors<CR>
     nnoremap <silent><LocalLeader>fh :History<CR>
     nnoremap <silent><LocalLeader>fb :Buffers<CR>
 
+    " PROJECTS SETTINGS
     command! -bang Dot call fzf#vim#files('~/dotfiles', <bang>0)
 
 endif
@@ -1405,29 +1412,30 @@ endif
 
 if exists('g:plugs["vim-startify"]')
 
+    let g:startify_files_number = 10
+    let g:startify_update_oldfiles = 0
+    let g:startify_session_autoload = 0
     let g:startify_session_delete_buffers = 1
-    let g:startify_files_number = 20
     let g:startify_change_to_dir = 1
     let g:startify_enable_special = 1
     let g:startify_change_cmd = 'tcd'
 
     let g:startify_custom_header = [
-            \'                                         ',
-            \'                                         ',
-            \'  _____                 _____            ',
-            \' |_   _|_ _  ___       |_   _|_ _  ___   ',
-            \'   | |/ _` |/ _ \        | |/ _` |/ _ \  ',
-            \'   | | (_| | (_) |  _    | | (_| | (_) | ',
-            \'   |_|\__,_|\___/  (_)   |_|\__,_|\___/  ',
-            \'                                         ',
-            \'                                         ',
-            \ ]
+        \'  _____                 _____            ',
+        \' |_   _|_ _  ___       |_   _|_ _  ___   ',
+        \'   | |/ _` |/ _ \        | |/ _` |/ _ \  ',
+        \'   | | (_| | (_) |  _    | | (_| | (_) | ',
+        \'   |_|\__,_|\___/  (_)   |_|\__,_|\___/  ',
+        \'                                         ',
+        \ ]
 
-    let g:startify_list_order = [
-        \ ['   Files:'],
-        \ 'files',
-        \ ['   Bookmarks:'],
-        \ 'bookmarks',
+
+    let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': 'commands',  'header': ['   Commands']       },
         \ ]
 
     let g:startify_skiplist = [
@@ -1435,20 +1443,20 @@ if exists('g:plugs["vim-startify"]')
         \ ]
 
     let g:startify_bookmarks = [
-        \ { 'v': '$HOME/.vimrc' },
-        \ { 'i': '$HOME/.config/i3/config' },
+        \ { 'v': '$HOME/.vimrc'                          },
+        \ { 'i': '$HOME/.config/i3/config'               },
         \ { 'a': '$HOME/.config/alacritty/alacritty.yml' },
-        \ { 'b': '$HOME/.config/i3blocks/config' },
-        \ { 'p': '$HOME/.config/picom/picom.conf' },
-        \ { 's': '$HOME/.bashrc' },
-        \ { 't': '$HOME/.tmux.conf' },
-        \ { 'r': '$HOME/.config/rofi/config.rasi' },
+        \ { 'b': '$HOME/.config/i3blocks/config'         },
+        \ { 'p': '$HOME/.config/picom/picom.conf'        },
+        \ { 's': '$HOME/.bashrc'                         },
+        \ { 't': '$HOME/.tmux.conf'                      },
+        \ { 'r': '$HOME/.config/rofi/config.rasi'        },
         \ ]
 
     let g:startify_custom_footer = [
-        \ '    +------------------------------+',
-        \ '    |     Keep an open mind!       |',
-        \ '    +----------------+-------------+',
+        \'                                         ',
+        \'          - Keep an open mind -          ',
+        \'                                         ',
         \]
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
