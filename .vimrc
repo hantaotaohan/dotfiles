@@ -1421,42 +1421,45 @@ if exists('g:plugs["vim-startify"]')
     let g:startify_change_cmd = 'tcd'
 
     let g:startify_custom_header = [
-        \'  _____                 _____            ',
-        \' |_   _|_ _  ___       |_   _|_ _  ___   ',
-        \'   | |/ _` |/ _ \        | |/ _` |/ _ \  ',
-        \'   | | (_| | (_) |  _    | | (_| | (_) | ',
-        \'   |_|\__,_|\___/  (_)   |_|\__,_|\___/  ',
-        \'                                         ',
+        \'    _____                 _____                        ',
+        \'   |_   _|_ _  ___       |_   _|_ _  ___               ',
+        \'     | |/ _` |/ _ \        | |/ _` |/ _ \              ',
+        \'     | | (_| | (_) |  _    | | (_| | (_) |             ',
+        \'     |_|\__,_|\___/  (_)   |_|\__,_|\___/              ',
+        \'                                                       ',
         \ ]
 
 
     let g:startify_lists = [
         \ { 'type': 'files',     'header': ['   MRU']            },
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
         \ { 'type': 'sessions',  'header': ['   Sessions']       },
         \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
         \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+
+    let g:startify_commands = [
+        \ { 'p': ['Projects : Django', 'e ~/dotfiles']           },
+        \ ]
+
+    let g:startify_bookmarks = [
+        \ { 'v': '$HOME/.vimrc'                                  },
+        \ { 's': '$HOME/.bashrc'                                 },
+        \ { 't': '$HOME/.tmux.conf'                              },
+        \ { 'i': '$HOME/.config/i3/config'                       },
+        \ { 'b': '$HOME/.config/i3blocks/config'                 },
+        \ { 'c': '$HOME/.config/picom/picom.conf'                },
+        \ { 'r': '$HOME/.config/rofi/config.rasi'                },
+        \ { 'a': '$HOME/.config/alacritty/alacritty.yml'         },
         \ ]
 
     let g:startify_skiplist = [
         \ 'COMMIT_EDITMSG',
         \ ]
 
-    let g:startify_bookmarks = [
-        \ { 'v': '$HOME/.vimrc'                          },
-        \ { 'i': '$HOME/.config/i3/config'               },
-        \ { 'a': '$HOME/.config/alacritty/alacritty.yml' },
-        \ { 'b': '$HOME/.config/i3blocks/config'         },
-        \ { 'p': '$HOME/.config/picom/picom.conf'        },
-        \ { 's': '$HOME/.bashrc'                         },
-        \ { 't': '$HOME/.tmux.conf'                      },
-        \ { 'r': '$HOME/.config/rofi/config.rasi'        },
-        \ ]
-
     let g:startify_custom_footer = [
-        \'                                         ',
-        \'          - Keep an open mind -          ',
-        \'                                         ',
+        \'                                                       ',
+        \'   - KEEP AN OPEN MIND -                               ',
+        \'                                                       ',
         \]
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -1554,7 +1557,7 @@ if exists('g:plugs["vim-floaterm"]')
         return printf(' %s/%s', idx, cnt)
     endfunction
 
-    autocmd FileType floaterm tnoremap <silent><Esc> <C-\><C-n>
+    autocmd FileType floaterm tnoremap <expr> <ESC> (&filetype == "fzf") ? "<Esc>" : "<C-\><C-n>"
 
     autocmd ExitPre * FloatermKill!
 
@@ -1782,4 +1785,5 @@ if exists('g:plugs["vimwiki"]')
     " autocmd filetype vimwiki nnoremap <buffer> <leader>wd :call VimwikiDeleteClean()<CR>
 
 endif
+
 
