@@ -31,8 +31,8 @@ APT_INSTALL="sudo apt install -qq -y"
 # -- Github --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-# GIT_CLONE="git clone -q https://github.com"
-# GIT_DOWNLOAD="https://github.com"
+GIT_CLONE="git clone -q https://github.com"
+GIT_DOWNLOAD="https://github.com"
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # -- Fastgit --
@@ -52,8 +52,8 @@ APT_INSTALL="sudo apt install -qq -y"
 # -- Nuaa --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-GIT_CLONE="git clone -q https://hub.nuaa.cf"
-GIT_DOWNLOAD="https://hub.nuaa.cf"
+# GIT_CLONE="git clone -q https://hub.nuaa.cf"
+# GIT_DOWNLOAD="https://hub.nuaa.cf"
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
@@ -75,9 +75,16 @@ MAGENTA=$(tput setaf 5)
 # ANSI Draw Lines Functions
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-ROW() {
+function ROW() {
 
     seq -s '─' 0 "$(tput cols)" | tr -d '[:digit:]'
+
+}
+
+function BOX () {
+
+    COLS=$(tput cols)
+    figlet -f standard -w $COLS -c "$1"
 
 }
 
@@ -176,6 +183,7 @@ Vim () {
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
     ROW
+    BOX 'vim'
     echo -e ""
     echo -e "${YELLOW}VIM Is Being Installed${RESET}"
     echo -e ""
@@ -234,7 +242,7 @@ Vim () {
         --with-x \
         --enable-xim \
         --enable-fontset \
-        --prefix=/usr/local) > /dev/null 2>&1 && \
+        --prefix=/usr/local) > /dev/null 2>&1
 
     sudo make > /dev/null 2>&1 && \
     sudo make install > /dev/null 2>&1

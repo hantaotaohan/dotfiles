@@ -472,6 +472,7 @@ Apt_Install() {
         xclip \
         wmctrl \
         ranger \
+        figlet \
         xdotool \
         ripgrep \
         arc-theme

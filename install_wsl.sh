@@ -394,6 +394,7 @@ Apt_Install() {
         ncdu \
         unzip \
         ranger \
+        figlet \
         ripgrep \
         newsboat \
         tty-clock \
