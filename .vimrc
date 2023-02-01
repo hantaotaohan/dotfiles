@@ -49,15 +49,15 @@ endif
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
 if has("syntax")
-    syntax on        " 开启颜色高亮
-    syntax enable    " 开启语法高亮
+    syntax on         " 开启颜色高亮
+    syntax enable     " 开启语法高亮
 endif
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                        History Settings
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-set history=2000 " 保存历史记录行数
+set history=2000      " 保存历史记录行数
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                        Timeing Settings
@@ -73,26 +73,26 @@ set redrawtime=20000  " 重画屏幕以毫秒计的时间
 "                                                       Searching Settings
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-set ignorecase " 搜索模式里忽略大小写
-set smartcase  " 如果搜索模式包含大写字符，不使用 'ignorecase' 选项
-set infercase  " 补全模式忽略大小写
-set incsearch  " 查找输入时动态增量显示查找结果
-set wrapscan   " 开启循环搜索
+set ignorecase        " 搜索模式里忽略大小写
+set smartcase         " 如果搜索模式包含大写字符，不使用 'ignorecase' 选项
+set infercase         " 补全模式忽略大小写
+set incsearch         " 查找输入时动态增量显示查找结果
+set wrapscan          " 开启循环搜索
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                   Auto BreakIndent Settings
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-set textwidth=80    " 插入文本的最大宽度
-set tabstop=4       " 设置制表符键的宽度
-set expandtab       " 将制表符转换为空格
-set shiftwidth=4    " 换行时自动缩进宽度,可更改(宽度同tabstop)
-set softtabstop=-1  " 自动与shiftwidth保持同步
-set autoindent      " 换行时候代码自动缩进
-set smartindent     " 启用智能对齐方式
-set smarttab        " 指定按一次backspace就删除shiftwidth宽度
-set shiftround      " 将缩进舍入为shiftwidth的倍数
-set breakindent     " 回绕行保持视觉上的缩进
+set textwidth=80      " 插入文本的最大宽度
+set tabstop=4         " 设置制表符键的宽度
+set expandtab         " 将制表符转换为空格
+set shiftwidth=4      " 换行时自动缩进宽度,可更改(宽度同tabstop)
+set softtabstop=-1    " 自动与shiftwidth保持同步
+set autoindent        " 换行时候代码自动缩进
+set nosmartindent     " 启用智能对齐方式
+set smarttab          " 指定按一次backspace就删除shiftwidth宽度
+set shiftround        " 将缩进舍入为shiftwidth的倍数
+set breakindent       " 回绕行保持视觉上的缩进
 
 " Breakindent的扩展设定, min:保留最小的文本宽度, shift:回绕行的开始出右移指定数目的字符
 if exists('&breakindent')
@@ -110,49 +110,11 @@ endif
 xnoremap p "_dP
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
-"                                                          WSL Settings
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-" -- Determine WSL --
-
-let uname = substitute(system('uname'),'\n','','')
-
-if uname == 'Linux'
-    let lines = readfile("/proc/version")
-    if lines[0] =~ "Microsoft"
-
-        let s:clip = '/mnt/c/Windows/System32/clip.exe'
-
-        " -- Copy --
-
-        if executable(s:clip)
-            augroup WSLYank
-                autocmd!
-                autocmd TextYankPost * if v:event.operator ==# 'y' | call system(s:clip, @0) | endif
-            augroup END
-        endif
-
-        " -- Paste --
-
-        function! GetClip() abort
-            silent let clipboard = system('powershell.exe -NonInteractive -NoLogo -NoProfile -Command Get-Clipboard')
-            let clipboard = substitute(clipboard, '\r\n', '\n', 'g')
-            call setreg('9', clipboard)
-        endfunction
-
-        nnoremap <silent><expr> ;p ':<c-u>call GetClip()<cr>' . v:count . '"9p:<c-u>silent! call repeat#set("p",' . v:count . ')<cr>'
-        nnoremap <silent><expr> ;P ':<c-u>call GetClip()<cr>' . v:count . '"9P:<c-u>silent! call repeat#set("P",' . v:count . ')<cr>'
-
-    endif
-endif
-
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                       Complete Settings
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-set complete=.,w,b,k                           " 补全设置
-set completeopt=menuone,menu,longest,preview   " 自动补全
+set complete=.,w,b,k                                                       " 补全设置
+set completeopt=menuone,menu,longest,preview                               " 自动补全
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                     Vim Behavior Settings
@@ -185,9 +147,11 @@ set ttyfast                                                                " 刷
 set modeline                                                               " 设置行模式用于在文件末尾添加特定字符检测vim文件类型
 set autoread                                                               " 当文件在外部被修改，自动更新该文件
 set writebackup                                                            " 保存文件前建立备份，保存成功后删除该备份
+set winaltkeys=no                                                          " Windows 禁用 ALT 操作菜单（使得 ALT 可以用到 Vim里）
 set regexpengine=1                                                         " 匹配模式 0:默认, 1:老版本, 2:新版本
-" set lazyredraw                                                             " 延迟绘制（提升性能）
-" set ttyscroll=3                                                            " 鼠标滚轮速度
+" set lazyredraw                                                           " 延迟绘制（提升性能）
+" set ttyscroll=3                                                          " 鼠标滚轮速度
+
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                       Editor UI Settings
@@ -241,34 +205,10 @@ if has('folding') && has('vim_starting')
     set foldmethod=manual                                                  " 启用手动折叠
     set foldcolumn=2                                                       " 侧边栏宽度
     set foldlevel=0                                                        " 设置折层所有内容
+    set foldnestmax=1                                                      " 设置 indent 和 syntax 方法的最大折叠嵌套层数
+    set foldtext=fold#NeatFoldText()
     " set foldclose=all                                                      " 设置为折叠自动关闭
     " set foldopen=all                                                       " 设置为折叠自动打开
-    set foldnestmax=1                                                      " 设置 indent 和 syntax 方法的最大折叠嵌套层数
-    set foldtext=<SID>NeatFoldText()
-
-    " 自定义折叠样式1
-    function! s:NeatFoldText() 
-        let line = ' █    ' . substitute(getline(v:foldstart), '\s* \{2,}s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-        let lines_count = v:foldend - v:foldstart + 1
-        let lines_count_text = '  █  ' . printf("%12s", lines_count . ' LINES') . '     █ '
-        let foldchar = matchstr(&fillchars, 'fold:\zs.')
-        let foldtextstart = strpart(' ⭕  INFORMATION  ⭕  █ ' . repeat(foldchar, v:foldlevel*6) . line, 0, (winwidth(0)*2)/3)
-        let foldtextend = lines_count_text . repeat(foldchar, 0)
-        let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-        return foldtextend . foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength)
-    endfunction
-
-    " 自定义折叠样式2
-    " function! s:NeatFoldText() 
-    "     let line = ' ' . substitute(getline(v:foldstart), '\s* \{2,}s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-    "     let lines_count = v:foldend - v:foldstart + 1
-    "     let lines_count_text = '  █  ' . printf("%10s", lines_count . ' LINES') . '     █ '
-    "     let foldchar = matchstr(&fillchars, 'fold:\zs.')
-    "     let foldtextstart = strpart(' INFORMATION  █ ' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-    "     let foldtextend = lines_count_text . repeat(foldchar, 20)
-    "     let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-    "     return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-    " endfunction
 endif
 
 " 空格打开关闭折叠视图(在光标自动打开关闭折叠的情况下)
@@ -391,17 +331,13 @@ let maplocalleader = ";"
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
 nnoremap q <nop>
-vnoremap q <nop>
-
-nnoremap <C-f> <nop>
-nnoremap <C-b> <nop>
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 映射补全 Keymap
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-inoremap <expr> <Up> pumvisible() ?"\<C-p>":"\<Up>"
-inoremap <expr> <Down> pumvisible() ?"\<C-n>":"\<Down>"
+" inoremap <expr> <Up> pumvisible() ?"\<C-p>":"\<Up>"
+" inoremap <expr> <Down> pumvisible() ?"\<C-n>":"\<Down>"
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " Keep Cursor Center Of The Screen.
@@ -441,7 +377,7 @@ nnoremap Y y$
 " SuperF/f-T/t
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-noremap ;; ;
+nnoremap ;; ;
 " nnoremap <CR> ;
 " nnoremap <BS> ,
 
@@ -449,8 +385,8 @@ noremap ;; ;
 " Scroll Step Sideways
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-nnoremap zl z4l
-nnoremap zh z4h
+nnoremap zl z20l
+nnoremap zh z20h
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " Yank Buffer's Relative/Absolute Path To Clipboard
@@ -479,7 +415,7 @@ nnoremap < <<_
 " Smart wrap toggle (breakindent and colorcolumn toggle as-well)
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-nmap <Leader>tw :execute('setlocal wrap! breakindent!')<CR>
+nnoremap <Leader>tw :execute('setlocal wrap! breakindent!')<CR>
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 跨终端粘贴 
@@ -488,8 +424,8 @@ nmap <Leader>tw :execute('setlocal wrap! breakindent!')<CR>
 " nnoremap <silent><localleader>y "+yy
 " vnoremap <silent><localleader>y "+y
 
-" nnoremap <silent><localleader>p "+p
-" vnoremap <silent><localleader>p "+p
+nnoremap <silent><localleader>p "+p
+xnoremap <silent><localleader>p "+p
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 切换窗口快捷键设置  
@@ -617,6 +553,15 @@ augroup END
 "     autocmd Syntax * syn sync clear | syntax sync minlines=10 | syntax sync maxlines=10
 " augroup END
 
+" --------------------------------------------------------------o----------------------------------------------------------------o
+" 自定义VIM本身及其他插件颜色
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+augroup SystemColors
+    autocmd!
+    autocmd ColorScheme one call highlights#SystemHighlights()
+augroup END
+
 " ================================================================================================================================
 "                                                       GENERAL - Fuctions
 " ================================================================================================================================
@@ -625,86 +570,17 @@ augroup END
 " 快速保存当前窗口内容
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-if exists('*MySave')
-     finish
- endif
- 
-function! s:MySave()
-    let cantSave = "redraw | echohl ErrorMsg | echo \"Can't save the file: \" . v:exception | return | echohl None"
-    let notSaved = "redraw | echohl ErrorMsg | echo 'This buffer was NOT saved!' | return | echohl None"
-    let time = strftime("%T")
-    let file = expand('%:P')
-    let permissions = getfperm(file)
-        try
-            silent w
-        catch /:E45:\|:E505:\|:E212:/
-            if (confirm("This Buffer is read only! Wanna save it anyway?", "&Yes\n&No", 2)==1)
-                redraw
-                try | silent w! | catch /:E212:/ |
-                    if (confirm("Can't open the file, do you want to save it as Root?", "&Yes\n&No", 2)==1)
-                        try | execute 'silent! write !sudo tee % >/dev/null' | edit! | catch | exe cantSave | endtry
-                    else
-                        exe notSaved
-                    endif
-                catch
-                    exe cantSave
-                endtry
-            else
-                exe notSaved
-            endif
-        endtry
-    redraw
-    echom '"' . file . '"' . " Save Done" . ' ' . time
-    redraw
-    echohl None
-endfunction
-
-nnoremap <silent><localleader>w :call <SID>MySave()<CR>
-vnoremap <silent><localleader>w <ESC>:call <SID>MySave()<CR>
-inoremap <silent><localleader>w <ESC>:call <SID>MySave()<CR>
+nnoremap <silent><localleader>w :call save#Save()<CR>
+vnoremap <silent><localleader>w <ESC>:call save#Save()<CR>
+inoremap <silent><localleader>w <ESC>:call save#Save()<CR>
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " Quickly Rename current Files
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-function! s:ReName()
-    let old_name = expand('%')
-    let new_name = input('Rename files name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        try
-            execute 'saveas ' . new_name
-            call delete(expand('#'))
-            execute "bdelete#"
-            redraw!
-        catch /:E13:/
-            echohl ErrorMsg | echo " The file name already exists" | echohl None| redraw
-        endtry
-    else
-        echohl ErrorMsg | echo " Not Changed Filename!" | echohl None| redraw
-    endif
-endfunction
-
-nnoremap <Localleader>rn :call <SID>ReName()<CR>
-vnoremap <Localleader>rn <ESC>:call <SID>ReName()<CR>
-inoremap <Localleader>rn <ESC>:call <SID>ReName()<CR>
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" Simple zoom toggle
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-function! s:Zoom()
-    if exists('t:zoomed')
-        unlet t:zoomed
-        wincmd =
-    else
-        let t:zoomed = { 'nr': bufnr('%') }
-        vertical resize
-        resize
-        normal! ze
-    endif
-endfunction
-
-nnoremap <silent><LocalLeader>z :call <SID>Zoom()<CR>
+nnoremap <Localleader>rn :call rename#Rename()<CR>
+vnoremap <Localleader>rn <ESC>:call rename#Rename()<CR>
+inoremap <Localleader>rn <ESC>:call rename#Rename()<CR>
 
 " ================================================================================================================================
 "                                                            Termianl
@@ -722,23 +598,23 @@ endif
 "                                                        内部终端颜色设置
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-let g:terminal_ansi_colors = repeat([0], 16)
-let g:terminal_ansi_colors[0]  = "#282C34" " black
-let g:terminal_ansi_colors[8]  = "#3E4452" " black bright
-let g:terminal_ansi_colors[1]  = "#E06C75" " red
-let g:terminal_ansi_colors[9]  = "#BE5046" " red bright
-let g:terminal_ansi_colors[2]  = "#98C379" " green
-let g:terminal_ansi_colors[10] = "#98C379" " green bright
-let g:terminal_ansi_colors[3]  = "#E5C07B" " yellow
-let g:terminal_ansi_colors[11] = "#D19A66" " yellow bright
-let g:terminal_ansi_colors[4]  = "#61AFEF" " blue
-let g:terminal_ansi_colors[12] = "#61AFEF" " blue bright
-let g:terminal_ansi_colors[5]  = "#C678DD" " magenta
-let g:terminal_ansi_colors[13] = "#C678DD" " magenta bright
-let g:terminal_ansi_colors[6]  = "#56B6C2" " cyan
-let g:terminal_ansi_colors[14] = "#56B6C2" " cyan bright
-let g:terminal_ansi_colors[7]  = "#5C6370" " white
-let g:terminal_ansi_colors[15] = "#ABB2BF" " white bright
+let g:terminal_ansi_colors     = repeat([0], 16)
+let g:terminal_ansi_colors[0]  = "#282C34" " BLACK
+let g:terminal_ansi_colors[8]  = "#3E4452" " BLACK BRIGHT
+let g:terminal_ansi_colors[1]  = "#E06C75" " RED
+let g:terminal_ansi_colors[9]  = "#BE5046" " RED BRIGHT
+let g:terminal_ansi_colors[2]  = "#98C379" " GREEN
+let g:terminal_ansi_colors[10] = "#98C379" " GREEN BRIGHT
+let g:terminal_ansi_colors[3]  = "#E5C07B" " YELLOW
+let g:terminal_ansi_colors[11] = "#D19A66" " YELLOW BRIGHT
+let g:terminal_ansi_colors[4]  = "#61AFEF" " BLUE
+let g:terminal_ansi_colors[12] = "#61AFEF" " BLUE BRIGHT
+let g:terminal_ansi_colors[5]  = "#C678DD" " MAGENTA
+let g:terminal_ansi_colors[13] = "#C678DD" " MAGENTA BRIGHt
+let g:terminal_ansi_colors[6]  = "#56B6C2" " CYAN
+let g:terminal_ansi_colors[14] = "#56B6C2" " CYAN BRIGHT
+let g:terminal_ansi_colors[7]  = "#5C6370" " WHITE
+let g:terminal_ansi_colors[15] = "#ABB2BF" " WHITE BRIGHT
 
 " ================================================================================================================================
 "                                                            插件管理器
@@ -766,70 +642,428 @@ let g:plug_window = 'enew'
 
 call plug#begin('$HOME/.vim/plugged')
 
-    Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                       " 主题文件
-    Plug 'vim-airline/vim-airline'                                           " 状态栏
-    Plug 'tpope/vim-fugitive'                                                " GIT插件
-    Plug 'tpope/vim-commentary'                                              " 快速注释插件
-    Plug 'tpope/vim-surround'                                                " 成对更改删除括号等
-    Plug 'junegunn/fzf.vim'                                                  " 为VIM安装FZF插件
-    Plug 'junegunn/fzf' , { 'dir': '~/.fzf', 'do': './install --all' }       " 为系统安装FZF工具
-    Plug 'mhinz/vim-startify'                                                " 定制VIM开始页面
-    Plug 'mhinz/vim-sayonara'                                                " 代替QUIT插件
-    Plug 'skywind3000/asyncrun.vim'                                          " 配合调测PYTHON插件
-    Plug 'skywind3000/vim-auto-popmenu'                                      " 自动弹出补全插件
-    Plug 'scrooloose/nerdtree'                                               " 文件树插件
-    Plug 'airblade/vim-gitgutter'                                            " GIT插件
-    Plug 'Xuyuanp/nerdtree-git-plugin'                                       " 文件数GIT显示插件
-    Plug 'majutsushi/tagbar'                                                 " TAG浏览
-    Plug 'christoomey/vim-tmux-navigator'                                    " 同步VIM与TMUX快捷键
-    Plug 'Yggdroot/indentLine'                                               " 缩进线显示插件
-    Plug 'kshenoy/vim-signature'                                             " 书签插件
-    Plug 'voldikss/vim-floaterm'                                             " 终端插件
-    Plug 'rlue/vim-barbaric'                                                 " 输入法切换插件
-    Plug 'mg979/vim-visual-multi', {'branch': 'master'}                      " 多光标输入
-    Plug 'brooth/far.vim'                                                    " 代码重构
-    Plug 'vimwiki/vimwiki' , {'branch': 'dev' }                              " VIMWIKI插件
-    Plug 'michal-h21/vim-zettel'                                             " 配合VIMWIKI的功能插件
-    Plug 'cespare/vim-toml'                                                  " TOML支持
-    " Plug 'TaDaa/vimade'                                                      " 非聚焦窗口颜色变浅
-    " Plug 'preservim/vimux'                                                   " 配合Tmux运行程序的插件
+    Plug 'dstein64/vim-startuptime'                                                                     " 启动时间
+    Plug 'rakr/vim-one'                                                                                 " 类似ONEDARK
+    Plug 'itchyny/lightline.vim'                                                                        " STATUSLINE
+    Plug 'albertomontesg/lightline-asyncrun'                                                            " LIGHTLINE-ASYNC
+    Plug 'mengelbrecht/lightline-bufferline'                                                            " BUFFER
+    Plug 'tpope/vim-fugitive'                                                                           " GIT插件
+    Plug 'tpope/vim-commentary'                                                                         " 快速注释插件
+    Plug 'tpope/vim-surround'                                                                           " 成对更改删除括号等
+    Plug 'junegunn/fzf.vim'                                                                             " 为VIM安装FZF插件
+    Plug 'junegunn/fzf',                       { 'dir': '~/.fzf', 'do': './install --all' }             " 为系统安装FZF工具
+    Plug 'mhinz/vim-startify'                                                                           " 定制VIM开始页面
+    Plug 'mhinz/vim-sayonara'                                                                           " 代替QUIT插件
+    Plug 'skywind3000/asyncrun.vim'                                                                     " 配合调测PYTHON插件
+    Plug 'skywind3000/vim-auto-popmenu'                                                                 " 自动弹出补全插件
+    Plug 'scrooloose/nerdtree',                { 'on': 'NERDTreeToggle' }                               " 文件树插件
+    Plug 'Xuyuanp/nerdtree-git-plugin',        { 'on': 'NERDTreeToggle' }                               " 文件数GIT显示插件
+    Plug 'airblade/vim-gitgutter'                                                                       " GIT插件
+    Plug 'majutsushi/tagbar',                  { 'on': 'TagbarToggle' }                                 " TAG浏览
+    Plug 'christoomey/vim-tmux-navigator'                                                               " 同步VIM与TMUX快捷键
+    Plug 'Yggdroot/indentLine'                                                                          " 缩进线显示插件
+    Plug 'kshenoy/vim-signature'                                                                        " 书签插件
+    Plug 'voldikss/vim-floaterm'                                                                        " 终端插件
+    Plug 'brooth/far.vim',                     { 'on': 'Far' }                                          " 代码重构
+    Plug 'vimwiki/vimwiki',                    { 'branch': 'dev', 'on': 'VimwikiIndex' }                " VIMWIKI插件
+    Plug 'michal-h21/vim-zettel',              { 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] }      " 配合VIMWIKI的功能插件
+    Plug 'cespare/vim-toml',                   { 'for': ['yaml', 'yml'] }                               " TOML支持
+    " Plug 'vim-airline/vim-airline'                                                                      " 状态栏
+    " Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                                                  " 主题文件
+    " Plug 'mg979/vim-visual-multi', {'branch': 'master'}                                                 " 多光标输入
+    " Plug 'TaDaa/vimade'                                                                                 " 非聚焦窗口颜色变浅
+    " Plug 'preservim/vimux'                                                                              " 配合Tmux运行程序的插件
 
 call plug#end()
 
 " ================================================================================================================================
-"                                                         主题及颜色配置
+"                                                            主题配置
 " ================================================================================================================================
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " Themes Settings
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-if !empty(glob('$HOME/.vim/plugged/onedark.vim/'))
-    let g:onedark_color_overrides = { "blue": { "gui": "#6cb6eb", "cterm": "0", "cterm16": "0" } }
-    colorscheme onedark                                                      " 终端配色方案
-    set background=dark                                                      " 开启深色模式
+if has#colorscheme('one')
+    colorscheme one
+    set background=dark
+else
+    colorscheme desert
+    set background=dark
 endif
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" Vim System HighLighting Settings
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-hi Search            term=standout  cterm=bold  ctermfg=0    ctermbg=1    guifg=#282C34    guibg=#E06C75    " 搜索高亮自定义
-hi IncSearch         term=standout  cterm=bold  ctermfg=0    ctermbg=1    guifg=#282C34    guibg=#E06C75    " 搜索行高亮自定义 
-hi Folded            term=standout  cterm=bold  ctermfg=0    ctermbg=8    guifg=#282c34    guibg=NONE       " 折叠提示颜色
-hi QuickFixLine      term=standout  cterm=bold  ctermfg=7    ctermbg=0    guifg=#ABB2BF    guibg=NONE       " 快速栏颜色
-hi SignColumn        term=standout  cterm=bold  ctermfg=1    ctermbg=0    guifg=#E06C75    guibg=NONE       " 标签栏颜色
-hi DiffDelete        term=standout  cterm=bold  ctermfg=1    ctermbg=1    guifg=#E06C75    guibg=NONE       " 差异删除颜色
-hi CursorLineNr      term=standout  cterm=bold  ctermfg=4    ctermbg=0    guifg=#61AFEF    guibg=NONE       " 当前光标行序号栏颜色
-hi Cursor            term=standout  cterm=bold  ctermfg=0    ctermbg=7    guifg=#282C34    guibg=NONE       " 当前光标颜色
-hi FoldColumn        term=standout  cterm=bold  ctermfg=7    ctermbg=0    guifg=#ABB2BF    guibg=NONE       " 折叠边栏提示颜色
-hi NonText                          cterm=bold  ctermfg=0    ctermbg=0    guifg=#282C34    guibg=NONE       " 隐藏波浪线
-hi Normal                                                                                  guibg=NONE
-hi LineNr                                                                                  guibg=NONE
 
 " ================================================================================================================================
 "                                                         各类插件设置
 " ================================================================================================================================
+
+" ================================================================================================================================
+"							    LightLine
+" ================================================================================================================================
+
+if exists('g:plugs["lightline.vim"]')
+
+    let g:lightline = {}
+    let g:lightline.colorscheme = 'one'
+
+    let g:lightline#asyncrun#indicator_none = ''
+    let g:lightline#asyncrun#indicator_run = 'Running...'
+
+    let g:lightline.active = {
+                \ 'left':  [ 
+                \          [ 'mode', 'paste'                   ],
+                \          [ 'readonly'                        ],  
+                \          [ 'filename'                        ], 
+                \          [ 'absolutepath'                    ],
+                \          ],
+                \ 'right': [ 
+                \          [ 'lineinfo'                        ],
+                \          [ 'percentwin'                      ], 
+                \          [ 'filetype'                        ], 
+                \          [ 'fileformat'                      ],
+                \          [ 'asyncrun', 'asyncrun_status'     ], 
+                \          [ 'hunks'                           ], 
+                \          ] 
+                \ }
+
+    let g:lightline.inactive = {
+                \ 'left':  [ 
+                \          [ 'mode', 'paste'                   ],
+                \          [ 'readonly'                        ],  
+                \          [ 'filename'                        ], 
+                \          [ 'absolutepath'                    ],
+                \          ],
+                \ 'right': [ 
+                \          [ 'filetype'                        ], 
+                \          [ 'fileformat'                      ],
+                \          ]
+                \ }
+
+    let g:lightline.tabline = {
+                \ 'left' : [
+                \          [ 'explorer_pad'                    ], 
+                \          [ 'buffers'                         ],
+                \          ],
+                \ 'right': [
+                \          [ 'close'                           ],
+                \          [ 'gitbranch'                       ],
+                \          ]
+                \ }
+
+    let g:lightline.component_function = {
+                \ 'explorer_pad': 'LightlinePad',
+                \ 'gitbranch': 'LightlineFugitive',
+                \ 'hunks': 'LightLineGitGutter',
+                \ 'readonly': 'LightLineReadonly',
+                \ 'mode': 'LightLineMode',
+                \ 'fileformat': 'LightLineFileformat',
+                \ 'filetype': 'LightLineFiletype',
+                \ 'lineinfo': 'LightlineLineInfo',
+                \ 'percentwin': 'LightlinePercent',
+                \ 'absolutepath': 'LightLineabsolutepath',
+                \ 'filename': 'LightLineFilename',
+                \ 'modified;': 'LightLineModified',
+                \ }
+
+    let g:lightline.component_expand = {
+                \ 'linter_checking': 'lightline#ale#checking',
+                \ 'linter_warnings': 'lightline#ale#warnings',
+                \ 'linter_errors': 'lightline#ale#errors',
+                \ 'linter_ok': 'lightline#ale#ok',
+                \ 'asyncrun_status': 'lightline#asyncrun#status',
+                \ 'buffers': 'lightline#bufferline#buffers',
+                \ 'gitdiff': 'lightline#gitdiff#get',
+                \ '&statusline': 'lightline#update()'
+                \ }
+
+    let g:lightline.component_type = {
+                \ 'linter_warnings': 'warning',
+                \ 'linter_errors': 'error',
+                \ 'buffers': 'tabsel',
+                \ }
+
+    let g:lightline.component_raw        = { 'buffers': 1 }
+    let g:lightline.separator            = { 'left': '', 'right': '' }
+    let g:lightline.subseparator         = { 'left': '╲', 'right': '╲' }
+    " let g:lightline.tabline_separator    = { 'left': '', 'right': '' } 
+    let g:lightline.tabline_separator    = { 'left': '', 'right': '' } 
+    let g:lightline.tabline_subseparator = { 'left': ' ', 'right': ' ' } 
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+" 自定义颜色
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    let s:p = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+    let s:p.tabline.left   = [ [ '#282C34', '#61AFEF' ] ]
+    let s:p.tabline.tabsel = [ [ '#E4EBFF', '#3e4452' ] ]
+    let s:p.tabline.middle = [ [ '#959ca9', '#2c323d' ] ]
+    let s:p.tabline.right  = [ [ '#282C34', '#98c379' ], [ '#ABB2BF', '#3E4452', 'bold' ] ]
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+    let s:p.normal.left   = [ 
+                \ [ '#282C34', '#98C379' ],
+                \ [ '#282c34', '#5a6378' ],
+                \ [ '#abb2bf', '#3E4452' ],
+                \ [ '#7d828c', '#2c323c' ],
+                \ ]
+
+    let s:p.normal.middle = [ 
+                \ [ '#abb2bf', '#2c323c' ],
+                \ ]
+
+    let s:p.normal.right  = [ 
+                \ [ '#282C34', '#98C379' ],
+                \ [ '#abb2bf', '#3E4452' ],
+                \ [ '#7d828c', '#2f3541' ],
+                \ [ '#7d828c', '#2c323c' ],
+                \ [ '#c678dd', '#2c323c' ],
+                \ [ '#abb2bf', '#2c323c' ], 
+                \ ]
+" --------------------------------------------------------------o----------------------------------------------------------------o
+    let s:p.insert.left   = [ 
+                \ [ '#282c34', '#61AFEF' ],
+                \ [ '#282c34', '#5a6378' ],
+                \ [ '#abb2bf', '#3E4452' ],
+                \ [ '#7ebcef', '#2c323c' ], 
+                \ ]
+
+    let s:p.insert.right  = [ 
+                \ [ '#282C34', '#61AFEF' ],
+                \ [ '#abb2bf', '#3E4452' ],
+                \ [ '#7d828c', '#2f3541' ],
+                \ [ '#7d828c', '#2c323c' ],
+                \ [ '#c678dd', '#2c323c' ],
+                \ [ '#7d828c', '#2c323c' ], 
+                \ ]
+" --------------------------------------------------------------o----------------------------------------------------------------o
+    let s:p.inactive.left   = [ 
+                \ [ '#25282c', '#3E4452' ],
+                \ [ '#536C70', '#2C323D' ],
+                \ [ '#536C70', '#2C323D' ],
+                \ [ '#536C70', '#2C323D' ],
+                \ [ '#536C70', '#2C323D' ], 
+                \ ]
+
+    let s:p.inactive.middle = [ 
+                \ [ '#2C323D', '#2C323D' ],
+                \ ]
+
+    let s:p.inactive.right  = [ 
+                \ [ '#25282c', '#3E4452' ],
+                \ [ '#536C70', '#2C323D' ],
+                \ [ '#536C70', '#2C323D' ],
+                \ [ '#536C70', '#2C323D' ],
+                \ [ '#536C70', '#2C323D' ],
+                \ [ '#3E4452', '#3E4452' ], 
+                \ ]
+
+    let g:lightline#colorscheme#one#palette = lightline#colorscheme#fill(s:p)
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+" 自定义函数
+" --------------------------------------------------------------o----------------------------------------------------------------o
+"
+    function! s:trim(maxlen, str) abort
+        let trimed = len(a:str) > a:maxlen ? a:str[0:a:maxlen] . '..' : a:str
+        return trimed
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+"
+    function! LightlinePad() abort
+        let nr = get(filter(range(winnr()), 'getbufvar(winbufnr(v:val), "&filetype") =~# "nerdtree"'), 0, -1)
+        return nr < 0 ? 'BUFFERS' : 'EXPLOER ' . repeat(' ', 21)
+        " return 'BUFFERS'
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightLineFileformat() abort
+        return winwidth(0) > 70 ? '⭕ ' .  &fileformat : ''
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightLineFiletype() abort
+        return winwidth(0) > 70 ? (&filetype !=# '' ? '⭕ '  . &filetype . ' ' : 'no ft') : ''
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightLineReadonly() abort
+        let ftmap = {
+                    \ 'nerdtree': '',
+                    \ 'tagbar': '',
+                    \ 'qf': '',
+                    \ 'floaterm': '',
+                    \ 'fugitive': '',
+                    \ 'vista': ''
+                    \ }
+        let l:char = get(ftmap, &filetype, '')
+        return &readonly ? l:char : ''
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightLineModified() abort
+        return &ft =~# 'help\|nerdtree' ? '' : &modified ? '+' : &modifiable ? '' : ''
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+"
+    function! LightLineFilename() abort
+        let l:prefix = expand('%:p') =~? "fugitive://" ? '(fugitive) ' : ''
+        let l:maxlen = winwidth(0) - winwidth(0) / 2
+        let l:relative = expand('%:.')
+        let l:tail = expand('%:t')
+        let l:noname = 'No Name'
+
+        if winwidth(0) < 50
+            return ''
+        endif
+
+        if winwidth(0) < 86
+            return l:tail ==# '' ? l:noname : l:prefix . s:trim(l:maxlen, l:tail)
+        endif
+
+        return l:relative ==# '' ? l:noname : l:prefix . s:trim(l:maxlen, l:relative)
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+"
+    function! LightlineFugitive() abort
+    if exists('*FugitiveHead')
+        let maxlen = 20
+        let branch = FugitiveHead()
+        return branch !=# '' ? ' '. s:trim(maxlen, branch) : ''
+    endif
+    return FugitiveHead()
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+"
+    function! LightLineMode() abort
+            let ftmap = {
+                \ 'nerdtree': 'NERDTREE',
+                \ 'tagbar': 'TAGBAR',
+                \ 'qf': 'QUICKFIX',
+                \ 'floaterm': 'FLOATERM',
+                \ 'fugitive': 'FUGITIVE',
+                \ 'vista': 'OUTLINE'
+                \ }
+            return get(ftmap, &filetype, lightline#mode())
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightLineGitGutter() abort
+        if ! exists('*GitGutterGetHunkSummary')
+                    \ || ! get(g:, 'gitgutter_enabled', 0)
+                    \ || winwidth('.') <= 90
+            return ''
+        endif
+        let symbols = [ '+ ', '~ ', '- ' ]
+        let hunks = GitGutterGetHunkSummary()
+        let ret = []
+        for i in [0, 1, 2]
+            if hunks[i] > 0
+                call add(ret, symbols[i] . hunks[i])
+            endif
+        endfor
+        return join(ret, ' ')
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightlineLineInfo() abort
+        " if winwidth(0) < 86
+        "     return ''
+        " endif
+        let l:current_line = printf('%-2s', line('.'))
+        " let l:current_line = s:trim(line('$'), line('.'))
+        let l:column_col = printf('%-2d', col('.'))
+        " let l:column_col = s:trim(col('$'), col('.'))
+        let l:lineinfo = l:current_line .  ' : ' . l:column_col
+        return &ft =~# 'tagbar\|nerdtree' ? 'N' : l:lineinfo
+
+    endfunction
+    
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightlinePercent() abort
+        if winwidth(0) < 60
+            return ''
+        endif
+        let l:percent = line('.') * 100 / line('$') . '%'
+        let l:percent = s:trim(5, l:percent)
+        return printf('%-4s', l:percent)
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+"
+    function! LightLineabsolutepath() abort
+        if winwidth(0) < 60
+            return ''
+        endif
+        return expand('%:p:h') 
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightlineCocSpaces() abort
+        let nr = get(filter(range(winnr()), 'getbufvar(winbufnr(v:val), "&filetype") =~# "nerdtree"'), 0, -1)
+        return nr < 0 ? 'BUFFERS' : repeat(' ', winwidth(nr)+1)
+    endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightlineReload() abort
+        call lightline#init()
+        call lightline#colorscheme()
+        call lightline#update()
+    endfunction
+
+    autocmd filetype nerdtree call LightlineReload()
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+" 自定义TAGBAR
+" --------------------------------------------------------------o----------------------------------------------------------------o
+    let g:tagbar_status_func = 'TagbarStatusFunc'
+        function! TagbarStatusFunc(current, sort, fname, ...) abort
+            return lightline#statusline(1)
+        endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+" LightLine- Buffers
+" --------------------------------------------------------------o----------------------------------------------------------------o
+"
+    let g:lightline#bufferline#unnamed      = '[No Name]'
+    let g:lightline#bufferline#show_number  = 2
+    let g:lightline#bufferline#shorten_path = 0
+    let g:lightline#bufferline#margin_left  = 1
+    let g:lightline#bufferline#margin_right = 1
+    let g:lightline#bufferline#modified     = ' +'
+
+    let g:lightline#bufferline#composed_ordinal_number_map = {
+        \ 1:  '1 · ', 2:  '2 · ', 3:  '3 · ', 4:  '4 · ', 5:  '5 · ',
+        \ 6:  '6 · ', 7:  '7 · ', 8:  '8 · ', 9:  '9 · ', 10: '10 · ',
+        \ }
+
+    nmap <silent><LocalLeader>1       <Plug>lightline#bufferline#go(1)
+    nmap <silent><LocalLeader>2       <Plug>lightline#bufferline#go(2)
+    nmap <silent><LocalLeader>3       <Plug>lightline#bufferline#go(3)
+    nmap <silent><LocalLeader>4       <Plug>lightline#bufferline#go(4)
+    nmap <silent><LocalLeader>5       <Plug>lightline#bufferline#go(5)
+    nmap <silent><LocalLeader>6       <Plug>lightline#bufferline#go(6)
+    nmap <silent><LocalLeader>7       <Plug>lightline#bufferline#go(7)
+    nmap <silent><LocalLeader>8       <Plug>lightline#bufferline#go(8)
+    nmap <silent><LocalLeader>9       <Plug>lightline#bufferline#go(9)
+    nmap <silent><LocalLeader>0       <Plug>lightline#bufferline#go(10)
+    nmap <silent><LocalLeader><Tab>   <Plug>lightline#bufferline#go_next()
+    nmap <silent><LocalLeader><S-Tab> <Plug>lightline#bufferline#go_previous()
+
+endif
 
 " ================================================================================================================================
 "                                                            Airline
@@ -1317,71 +1551,15 @@ if exists('g:plugs["asyncrun.vim"]')
     function! s:RunCode()
         exec "w"
         let fm = expand('%:p:h')
-        if exists('$TMUX')
-            if &filetype == 'python'
-                exec 'AsyncRun -mode=term -pos=tmux -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"'
-            elseif &filetype == 'sh'
-                exec "AsyncRun -mode=term -pos=tmux -focus=0 time bash %"
-            elseif &filetype == 'java'
-                execute 'AsyncRun -mode=term -pos=tmux -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
-            elseif &filetype == 'javascript'
-                exec "AsyncRun -mode=term -pos=tmux -rows=10 -focus=0 time node %"
-            endif
-        else
-            if &filetype == 'python'
-                exec 'AsyncRun -cwd=$(VIM_FILEDIR) -mode=term -pos=bottom -rows=16 python3 "$(VIM_FILEPATH)"'
-                exec "wincmd p"
-            elseif &filetype == 'sh'
-                exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time bash %"
-            elseif &filetype == 'java'
-                execute 'AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
-            elseif &filetype == 'javascript'
-                exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time node %"
-            endif
-        endif
-    endfunction
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 运行Django
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    nnoremap <silent><localleader>dj :call <SID>Django()<cr>
-    inoremap <silent><localleader>dj <esc>:call <SID>Django()<cr>
-    vnoremap <silent><localleader>dj <esc>:call <SID>Django()<cr>
-
-    function! s:Django()
-        exec "w"
-        if exists('$TMUX')
-            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
-                exec 'AsyncRun -cwd=<root> -mode=term -pos=tmux python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver'
-            endif
-        else
-            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
-                exec 'AsyncRun -cwd=<root> -mode=term -pos=bottom python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver'
-                exec "wincmd p"
-            endif
-        endif
-    endfunction
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 运行Django - Dev
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    nnoremap <silent><localleader>dd :call <SID>Django_Dev()<cr>
-    inoremap <silent><localleader>dd <esc>:call <SID>Django_Dev()<cr>
-    vnoremap <silent><localleader>dd <esc>:call <SID>Django_Dev()<cr>
-
-    function! s:Django_Dev()
-        exec "w"
-        if exists('$TMUX')
-            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
-                exec 'AsyncRun -cwd=<root> -mode=term -pos=tmux python3 manage.py makemigrations --settings=Database.settings-dev && python3 manage.py migrate --settings=Database.settings-dev  && python3 manage.py runserver --settings=Database.settings-dev'
-            endif
-        else
-            if &filetype == 'python' && filereadable(globpath(asyncrun#get_root('%'),'manage.py'))
-                exec 'AsyncRun -cwd=<root> -mode=term -pos=floaterm python3 manage.py makemigrations --settings=Database.settings-dev && python3 manage.py migrate --settings=Database.settings-dev  && python3 manage.py runserver --settings=Database.settings-dev'
-                exec "wincmd p"
-            endif
+        if &filetype == 'python'
+            exec 'AsyncRun -cwd=$(VIM_FILEDIR) -mode=term -pos=bottom -rows=16 python3 "$(VIM_FILEPATH)"'
+            exec "wincmd p"
+        elseif &filetype == 'sh'
+            exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time bash %"
+        elseif &filetype == 'java'
+            execute 'AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 -cwd=<root> javac "$(VIM_RELNAME)" ; java $(VIM_FILENOEXT)'
+        elseif &filetype == 'javascript'
+            exec "AsyncRun -mode=term -pos=bottom -rows=10 -focus=0 time node %"
         endif
     endfunction
 
@@ -1461,6 +1639,12 @@ if exists('g:plugs["vim-startify"]')
         \'   - KEEP AN OPEN MIND -                               ',
         \'                                                       ',
         \]
+
+    augroup Startify
+        autocmd!
+        autocmd User Startified setlocal laststatus=0 showtabline=0 statusline=\ startify
+        autocmd BufLeave * set laststatus=2 showtabline=2
+    augroup END
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 快捷键
@@ -1715,7 +1899,7 @@ if exists('g:plugs["vimwiki"]')
 " 设置Vimwiki搜索模式
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-    function! VWS()
+    function! VWS() abort
         execute ":VimwikiSearch " . input("VimwikiSearch:")
         :lopen
     endfunction
@@ -1775,7 +1959,7 @@ if exists('g:plugs["vimwiki"]')
 " 使用wd删除markdown时自动删除相对应不使用的HTML文件
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-    " function! VimwikiDeleteClean()
+    " function! VimwikiDeleteClean() abort
     "     let htmlfile = expand('%:r') . '.html'
     "     lcd ${HOME}/vimwiki/docs/
     "     call delete(htmlfile)
