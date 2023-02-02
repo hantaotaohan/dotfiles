@@ -158,7 +158,7 @@ set regexpengine=1                                                         " 匹
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
 set notitle                                                                " 无标题模式
-set shortmess=aoOTI                                                        " 避免文字信息提示
+set shortmess=aoOTIF                                                       " 避免文字信息提示
 
 set showcmd                                                                " 显示命令
 set cmdheight=1                                                            " 设置命令行的高度为2，默认为1
@@ -529,10 +529,10 @@ augroup END
 " 打开文件时恢复上一次光标所在位置
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-augroup ReadCursor
-    autocmd!
-	autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-augroup END
+" augroup ReadCursor
+"     autocmd!
+" 	autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+" augroup END
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 自动保存及读取view设置
@@ -656,10 +656,10 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'mhinz/vim-sayonara'                                                                           " 代替QUIT插件
     Plug 'skywind3000/asyncrun.vim'                                                                     " 配合调测PYTHON插件
     Plug 'skywind3000/vim-auto-popmenu'                                                                 " 自动弹出补全插件
-    Plug 'scrooloose/nerdtree',                { 'on': 'NERDTreeToggle' }                               " 文件树插件
+    Plug 'scrooloose/nerdtree',                { 'on': [] }                                             " 文件树插件
     Plug 'Xuyuanp/nerdtree-git-plugin',        { 'on': 'NERDTreeToggle' }                               " 文件数GIT显示插件
     Plug 'airblade/vim-gitgutter'                                                                       " GIT插件
-    Plug 'majutsushi/tagbar',                  { 'on': 'TagbarToggle' }                                 " TAG浏览
+    Plug 'majutsushi/tagbar',                  { 'on': [] }                                             " TAG浏览
     Plug 'christoomey/vim-tmux-navigator'                                                               " 同步VIM与TMUX快捷键
     Plug 'Yggdroot/indentLine'                                                                          " 缩进线显示插件
     Plug 'kshenoy/vim-signature'                                                                        " 书签插件
@@ -733,8 +733,7 @@ if exists('g:plugs["lightline.vim"]')
                 \          [ 'absolutepath'                    ],
                 \          ],
                 \ 'right': [ 
-                \          [ 'filetype'                        ], 
-                \          [ 'fileformat'                      ],
+                \          [ 'lineinfo'                        ], 
                 \          ]
                 \ }
 
@@ -747,6 +746,10 @@ if exists('g:plugs["lightline.vim"]')
                 \          [ 'close'                           ],
                 \          [ 'gitbranch'                       ],
                 \          ]
+                \ }
+
+    let g:lightline.component = {
+                \ 'asyncrun': '%{g:asyncrun_status}',
                 \ }
 
     let g:lightline.component_function = {
@@ -795,50 +798,84 @@ if exists('g:plugs["lightline.vim"]')
     let s:p = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
-    let s:p.tabline.left   = [ [ '#282C34', '#61AFEF' ] ]
-    let s:p.tabline.tabsel = [ [ '#E4EBFF', '#3e4452' ] ]
-    let s:p.tabline.middle = [ [ '#959ca9', '#2c323d' ] ]
-    let s:p.tabline.right  = [ [ '#282C34', '#98c379' ], [ '#ABB2BF', '#3E4452', 'bold' ] ]
+    " let s:p.tabline.left   = [ [ '#282C34', '#61AFEF' ] ]
+    let s:p.tabline.left   = [ [ '#ABB2BF', '#5A6378' ] ]
+    let s:p.tabline.tabsel = [ [ '#E4EBFF', '#3E4452' ] ]
+    let s:p.tabline.middle = [ [ '#959CA9', '#2C323D' ] ]
+    let s:p.tabline.right  = [ [ '#ABB2BF', '#5A6378' ], [ '#ABB2BF', '#3E4452', 'bold' ] ]
+    " let s:p.tabline.right  = [ [ '#282C34', '#98c379' ], [ '#ABB2BF', '#3E4452', 'bold' ] ]
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
     let s:p.normal.left   = [ 
                 \ [ '#282C34', '#98C379' ],
-                \ [ '#282c34', '#5a6378' ],
-                \ [ '#abb2bf', '#3E4452' ],
-                \ [ '#7d828c', '#2c323c' ],
+                \ [ '#282C34', '#5A6378' ],
+                \ [ '#ABB2BF', '#3E4452' ],
+                \ [ '#7D828C', '#2C323C' ],
                 \ ]
 
     let s:p.normal.middle = [ 
-                \ [ '#abb2bf', '#2c323c' ],
+                \ [ '#ABB2BF', '#2C323C' ],
                 \ ]
 
     let s:p.normal.right  = [ 
                 \ [ '#282C34', '#98C379' ],
-                \ [ '#abb2bf', '#3E4452' ],
-                \ [ '#7d828c', '#2f3541' ],
-                \ [ '#7d828c', '#2c323c' ],
-                \ [ '#c678dd', '#2c323c' ],
-                \ [ '#abb2bf', '#2c323c' ], 
+                \ [ '#ABB2BF', '#3E4452' ],
+                \ [ '#7D828C', '#2F3541' ],
+                \ [ '#7D828C', '#2C323C' ],
+                \ [ '#C678DD', '#2C323C' ],
+                \ [ '#E5C07B', '#2C323C' ], 
                 \ ]
 " --------------------------------------------------------------o----------------------------------------------------------------o
     let s:p.insert.left   = [ 
-                \ [ '#282c34', '#61AFEF' ],
-                \ [ '#282c34', '#5a6378' ],
-                \ [ '#abb2bf', '#3E4452' ],
-                \ [ '#7ebcef', '#2c323c' ], 
+                \ [ '#282C34', '#61AFEF' ],
+                \ [ '#282C34', '#5A6378' ],
+                \ [ '#ABB2BF', '#3E4452' ],
+                \ [ '#7EBCEF', '#2C323C' ], 
                 \ ]
 
     let s:p.insert.right  = [ 
                 \ [ '#282C34', '#61AFEF' ],
-                \ [ '#abb2bf', '#3E4452' ],
-                \ [ '#7d828c', '#2f3541' ],
-                \ [ '#7d828c', '#2c323c' ],
-                \ [ '#c678dd', '#2c323c' ],
-                \ [ '#7d828c', '#2c323c' ], 
+                \ [ '#ABB2BF', '#3E4452' ],
+                \ [ '#7D828C', '#2F3541' ],
+                \ [ '#7D828C', '#2C323C' ],
+                \ [ '#C678DD', '#2C323C' ],
+                \ [ '#7D828C', '#2C323C' ], 
+                \ ]
+" --------------------------------------------------------------o----------------------------------------------------------------o
+    let s:p.visual.left   = [ 
+                \ [ '#282C34', '#C678DD' ],
+                \ [ '#282C34', '#5A6378' ],
+                \ [ '#ABB2BF', '#3E4452' ],
+                \ [ '#7EBCEF', '#2C323C' ], 
+                \ ]
+
+    let s:p.visual.right  = [ 
+                \ [ '#282C34', '#C678DD' ],
+                \ [ '#ABB2BF', '#3E4452' ],
+                \ [ '#7D828C', '#2F3541' ],
+                \ [ '#7D828C', '#2C323C' ],
+                \ [ '#C678DD', '#2C323C' ],
+                \ [ '#7D828C', '#2C323C' ], 
+                \ ]
+" --------------------------------------------------------------o----------------------------------------------------------------o
+    let s:p.replace.left   = [ 
+                \ [ '#282C34', '#E06C75' ],
+                \ [ '#282C34', '#5A6378' ],
+                \ [ '#ABB2BF', '#3E4452' ],
+                \ [ '#E06C75', '#2C323C' ], 
+                \ ]
+
+    let s:p.replace.right  = [ 
+                \ [ '#282C34', '#E06C75' ],
+                \ [ '#ABB2BF', '#3E4452' ],
+                \ [ '#7D828C', '#2F3541' ],
+                \ [ '#7D828C', '#2C323C' ],
+                \ [ '#C678DD', '#2C323C' ],
+                \ [ '#7D828C', '#2C323C' ], 
                 \ ]
 " --------------------------------------------------------------o----------------------------------------------------------------o
     let s:p.inactive.left   = [ 
-                \ [ '#25282c', '#3E4452' ],
+                \ [ '#25282C', '#3E4452' ],
                 \ [ '#536C70', '#2C323D' ],
                 \ [ '#536C70', '#2C323D' ],
                 \ [ '#536C70', '#2C323D' ],
@@ -850,7 +887,7 @@ if exists('g:plugs["lightline.vim"]')
                 \ ]
 
     let s:p.inactive.right  = [ 
-                \ [ '#25282c', '#3E4452' ],
+                \ [ '#25282C', '#3E4452' ],
                 \ [ '#536C70', '#2C323D' ],
                 \ [ '#536C70', '#2C323D' ],
                 \ [ '#536C70', '#2C323D' ],
@@ -872,9 +909,9 @@ if exists('g:plugs["lightline.vim"]')
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "
     function! LightlinePad() abort
-        let nr = get(filter(range(winnr()), 'getbufvar(winbufnr(v:val), "&filetype") =~# "nerdtree"'), 0, -1)
-        return nr < 0 ? 'BUFFERS' : 'EXPLOER ' . repeat(' ', 21)
-        " return 'BUFFERS'
+        " let nr = get(filter(range(winnr()), 'getbufvar(winbufnr(v:val), "&filetype") =~# "nerdtree"'), 0, -1)
+        " return nr < 0 ? 'BUFFERS' : 'EXPLOER ' . repeat(' ', 21)
+        return 'BUFFERS'
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -1024,15 +1061,18 @@ if exists('g:plugs["lightline.vim"]')
         call lightline#update()
     endfunction
 
-    autocmd filetype nerdtree call LightlineReload()
+    augroup Lightline_Nerdtree
+        autocmd!
+        autocmd filetype nerdtree call LightlineReload()
+    augroup END
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 自定义TAGBAR
 " --------------------------------------------------------------o----------------------------------------------------------------o
     let g:tagbar_status_func = 'TagbarStatusFunc'
-        function! TagbarStatusFunc(current, sort, fname, ...) abort
-            return lightline#statusline(1)
-        endfunction
+    function! TagbarStatusFunc(current, sort, fname, ...) abort
+        return lightline#statusline(1)
+    endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " LightLine- Buffers
@@ -1062,200 +1102,6 @@ if exists('g:plugs["lightline.vim"]')
     nmap <silent><LocalLeader>0       <Plug>lightline#bufferline#go(10)
     nmap <silent><LocalLeader><Tab>   <Plug>lightline#bufferline#go_next()
     nmap <silent><LocalLeader><S-Tab> <Plug>lightline#bufferline#go_previous()
-
-endif
-
-" ================================================================================================================================
-"                                                            Airline
-" ================================================================================================================================
-
-if exists('g:plugs["vim-airline"]')
-    let g:airline_theme='onedark'                                            " 设置状态栏主题默认powerlineish
-    let g:airline_experimental = 1
-    let g:airline_detect_modified=0
-    let g:airline_inactive_alt_sep=0                                         " 对非活动窗口的状态行使用替代分隔符
-    let g:airline_powerline_fonts= 1                                         " 使用powerline打过补丁的字体
-    let g:airline_inactive_collapse=0                                        " 确定不活动的窗口是否应将左侧部分折叠到该缓冲区的文件名
-    let g:airline_highlighting_cache = 1                                     " 将更改缓存到突出显示组中，因此应更快。如果遇到缓慢的Vim，请将其设置为1
-    let g:airline_focuslost_inactive = 0                                     " 使用FocusLost自动命令禁用航空公
-    let g:airline_stl_path_style = 'full'                                    " 在状态栏显示短路经
-    let g:airline_skip_empty_sections = 0
-    let g:airline_section_c_only_filename = 1                                " 仅仅显示文件名
-    let g:airline#extensions#wordcount#enabled = 0                           " 开启字数统计
-    let g:airline#extensions#wordcount#filetypes = ['all']                   " 开启字数统计文件类型
-    let g:airline#extensions#wordcount#formatter#default#fmt = '%s words'    " 自定义字数统计格式
-    let g:airline#extensions#whitespace#enabled = 0                          " 取消计数
-    let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'             " 配置快速修复缓冲区的标题文本
-    let g:airline#extensions#quickfix#location_text = 'Location'             " 配置位置列表缓冲区的标题文本
-    let g:airline#extensions#term#enabled = 0
-    let g:airline#extensions#fzf#enabled = 1                                 " 启用FZF集成
-    let g:airline#extensions#hunks#enabled = 1
-    let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
-    let g:airline#extensions#hunks#non_zero_only = 1
-    let g:airline#extensions#default#section_use_groupitems = 0
-    let g:airline#extensions#searchcount#enabled = 0
-    let g:airline#extensions#tagbar#enabled = 1
-    let g:airline#extensions#tagbar#flags = ''
-    let g:airline#extensions#tagbar#searchmethod = 'nearest-stl'
-    let g:airline#extensions#branch#enabled = 1
-    let g:airline#extensions#branch#empty_message = ''
-    let g:airline#extensions#branch#vcs_checks = ['untracked', 'dirty']
-    let g:airline#extensions#tabline#enabled= 1                              " 开启tabline
-    let g:airline#extensions#tabline#show_tabs = 0                           " 显示Tabls文字
-    let g:airline#extensions#tabline#buffer_nr_show = 0                      " tabline中buffer显示编号
-    let g:airline#extensions#tabline#fnamemod = ':t'                         " 只显示文件名称
-    let g:airline#extensions#tabline#buf_label_first = 1                     " 在第一个位置显示缓冲区标签
-    let g:airline#extensions#tabline#buffers_label = 'BUFFERS '              " airline右上角定制
-    let g:airline#extensions#tabline#tabs_label = 'Tabs'                     " Tabs定制
-    let g:airline#extensions#tabline#buffer_nr_format = '%s:'                " Buffer 格式
-    let g:airline#extensions#tabline#show_close_button = 1                   " 是否显示关闭按钮
-    let g:airline#extensions#tabline#close_symbol = 'X'                      " 关闭按钮的符号
-    let g:airline#extensions#tabline#disable_refresh = 1                     " 在| BufAdd |上启用Tabline缓冲区的刷新自动命令
-    let g:airline#extensions#tabline#show_splits = 1                         " 启用/禁用显示每个选项卡的打开拆分（仅在打开选项卡时）
-    let g:airline#extensions#tabline#exclude_preview = 0                     " 在选项行中启用/禁用显示预览窗口缓冲区。
-    let g:airline#extensions#tabline#alt_sep = 0
-    let g:airline#extensions#tabline#tab_nr_type = 1                         " tab number
-    let g:airline#extensions#tabline#tabnr_formatter = 'tabnr'
-    let g:airline#extensions#tabline#show_tab_nr = 0
-    let g:airline#extensions#tabline#show_tab_type = 1
-    let g:airline#extensions#tabline#buffer_idx_mode = 1
-    let g:airline#extensions#tabline#formatter = 'unique_tail'
-    let g:airline#extensions#tabline#middle_click_preserves_windows = 0      " 从缓冲区关闭时保留窗口
-    let g:airline#extensions#tabline#ignore_bufadd_pat = '!|defx|gundo|nerd_tree|startify|tagbar|term://|undotree|vimfiler'
-    let g:airline_extensions = ['branch', 'tabline', 'hunks']
-    let g:airline#extensions#tabline#buffer_idx_format = {
-        \ '0': '0 ',
-        \ '1': '1 ',
-        \ '2': '2 ',
-        \ '3': '3 ',
-        \ '4': '4 ',
-        \ '5': '5 ',
-        \ '6': '6 ',
-        \ '7': '7 ',
-        \ '8': '8 ',
-        \ '9': '9 '
-        \ }
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 定义要显示的名称集，而不是特定的文件类型
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    let g:airline_filetype_overrides = {
-        \ 'fugitive': ['Fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
-        \ 'help':  [ 'Help', '%f' ],
-        \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
-        \ 'startify': [ 'Startify', '' ],
-        \ 'vim-plug': [ 'Plugins', '' ],
-        \ 'tagbar': [ 'Tagbar', ''],
-        \ 'floaterm': [ 'Floaterm', '%{Airline_FloatermInfo()}' ],
-        \ 'terminal': [ 'TERMINAL', '' ],
-        \ }
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 自定义Airline区域的各项功能
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    function! s:AirlineInit()
-        let g:airline_section_b = airline#section#create_left(['branch'])
-        let g:airline_section_c = airline#section#create(['readonly', '  ', 'path'])
-        let g:airline_section_x = airline#section#create(['  ', 'hunks'])
-        let g:airline_section_y = airline#section#create([' ⭕ ', '%t', ' ', ' ⭕ ', 'filetype', ' '])
-        let g:airline_section_z = airline#section#create(['%3P %', ' ', '%4l', ':%3v'])
-    endfunction
-
-    augroup AleRedrawStatus
-        autocmd!
-        autocmd User AirlineAfterInit call <SID>AirlineInit()
-        autocmd WinEnter * AirlineRefresh
-    augroup END
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" Path Terminal Fix Colors
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    let s:saved_theme = []
-    let g:airline_theme_patch_func = 'AirlineThemePatch'
-    function! AirlineThemePatch(palette)
-        for colors in values(a:palette)
-            if has_key(colors, 'airline_c') 
-                let s:saved_theme = colors.airline_c
-            endif
-            if has_key(colors, 'airline_term')
-                let colors.airline_term = s:saved_theme
-            endif
-        endfor
-    endfunction
-
-
-    " let g:airline_theme_patch_func = 'AirlineThemePatch'
-    " function! AirlineThemePatch(palette)
-        " let a:palette.normal.airline_tabsel = [ '#282c34', '#6cb6eb', 255, 33 ]
-        " let a:palette.insert.airline_tabsel = [ '#282c34', '#6cb6eb', 255, 33 ]
-
-        " let a:palette.normal.airline_a = [ '#282c34', '#6cb6eb', 255, 33 ]
-        " let a:palette.normal.airline_c = [ '#6cb6eb', '#282c34', 255, 33 ]
-        " let a:palette.normal.airline_z = [ '#282c34', '#6cb6eb', 255, 33 ]
-        " let a:palette.insert.airline_a = [ '#282c34', '#98C379', 255, 33 ]
-        " let a:palette.insert.airline_c = [ '#98C379', '#282c34', 255, 33 ]
-        " let a:palette.insert.airline_z = [ '#282c34', '#98C379', 255, 33 ]
-    " endfunction
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" Highlighted
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    " function! s:update_highlights()
-        " hi CursorLine ctermbg=none guibg=NONE
-        " hi VertSplit ctermbg=none guibg=NONE
-        " hi airline_tabmod_unsel  ctermfg=7 ctermbg=0 guifg=#abb2bf guibg=#282C34
-        " hi airline_tab_right  ctermfg=7 ctermbg=0 guifg=#abb2bf guibg=#212524
-        " hi airline_tabhid  ctermfg=7 ctermbg=0 guifg=#abb2bf guibg=#282C34
-        " hi airline_tabhid_right  ctermfg=7 ctermbg=0 guifg=#abb2bf guibg=#282C34
-    " endfunction
-    " autocmd User AirlineAfterTheme call s:update_highlights()
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" Symbols
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    let g:airline_symbols = {}
-    let g:airline_left_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_left_alt_sep = ''
-    let g:airline_right_alt_sep = ''
-    let g:airline_symbols.branch = ''
-    let g:airline_symbols.readonly = ''
-    let g:airline_symbols.linenr = ''
-    let g:airline_symbols.maxlinenr = ''
-    let g:airline_symbols.dirty = ' ⚡'
-    let g:airline_symbols.modified = ' +'
-    let g:airline#extensions#tabline#left_sep = ''
-    let g:airline#extensions#tabline#left_alt_sep = ' '
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 快捷键
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    nmap <silent><LocalLeader>1        <Plug>AirlineSelectTab1
-    nmap <silent><LocalLeader>2        <Plug>AirlineSelectTab2
-    nmap <silent><LocalLeader>3        <Plug>AirlineSelectTab3
-    nmap <silent><LocalLeader>4        <Plug>AirlineSelectTab4
-    nmap <silent><LocalLeader>5        <Plug>AirlineSelectTab5
-    nmap <silent><LocalLeader>6        <Plug>AirlineSelectTab6
-    nmap <silent><LocalLeader>7        <Plug>AirlineSelectTab7
-    nmap <silent><LocalLeader>8        <Plug>AirlineSelectTab8
-    nmap <silent><LocalLeader>9        <Plug>AirlineSelectTab9
-
-    nmap <silent><S-H>                 <Plug>AirlineSelectPrevTab
-    nmap <silent><S-L>                 <Plug>AirlineSelectNextTab
-    vmap <silent><S-H>                 <Esc><Plug>AirlineSelectPrevTab
-    vmap <silent><S-L>                 <Esc><Plug>AirlineSelectNextTab
-
-    nmap <silent><LocalLeader><tab>    <Plug>AirlineSelectNextTab
-    nmap <silent><LocalLeader><S-tab>  <Plug>AirlineSelectPrevTab
-    imap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
-    imap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
-    vmap <silent><Localleader><tab>    <Esc><Plug>AirlineSelectNextTab
-    vmap <silent><Localleader><S-tab>  <Esc><Plug>AirlineSelectPrevTab
 
 endif
 
@@ -1302,24 +1148,29 @@ if exists('g:plugs["nerdtree"]')
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 当NERDTree为剩下的唯一窗口时自动关闭 , 屏蔽;s ;c
 " --------------------------------------------------------------o----------------------------------------------------------------o
-
-    autocmd Bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>s <Esc>| endif
-    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>c <Esc>| endif
-    autocmd BufEnter * if bufname('%') =~# "^NERD_tree_" | map <buffer><Localleader>w <Esc>| endif
+    augroup NERDTree
+        autocmd!
+        autocmd Bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 禁止其他缓冲区替换NERDTree
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-    autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-                \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+        autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+                    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+    augroup END
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+" 延迟加载
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    call timer_start(500, { -> plug#load('nerdtree') })
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 快捷键
 " --------------------------------------------------------------o----------------------------------------------------------------o
     
-    function! s:NERDTreetoggle()                                    
+    function! s:NERDTreetoggle() abort
         if &filetype == 'nerdtree'                                  
             NERDTreeToggle %p:h                                     
         else                                                        
@@ -1379,7 +1230,6 @@ if exists('g:plugs["tagbar"]')
     let g:tagbar_show_visibility = 1
     let g:tagbar_expand = 1
     let g:tagbar_autoshowtag = 2
-    let g:no_status_line = 0
     let g:tagbar_silent = 1
     let g:tagbar_scrolloff = 10
     let g:tagbar_hide_nonpublic = 1
@@ -1444,17 +1294,23 @@ if exists('g:plugs["tagbar"]')
 " 当Tagbar为剩下的唯一窗口时自动关闭 , 屏蔽;s ;c
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-    autocmd BufEnter * if (winnr("$") == 1 && bufname('#') =~# "^__Tagbar__") | q | endif
-    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>s <Esc>| endif
-    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>c <Esc>| endif
-    autocmd BufEnter * if bufname('%') =~# "^__Tagbar__" | map <buffer><Localleader>w <Esc>| endif
+    augroup Tagbar
+        autocmd!
+        autocmd BufEnter * if (winnr("$") == 1 && bufname('#') =~# "^__Tagbar__") | q | endif
+    augroup END
     
+" --------------------------------------------------------------o----------------------------------------------------------------o
+" 延迟加载
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    call timer_start(500, { -> plug#load('tagbar') })
+
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 快捷键
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-    nnoremap <silent><localleader>t :TagbarToggle<CR>:AirlineRefresh<CR>
-    inoremap <silent><localleader>t <Esc>:TagbarToggle<CR>:AirlineRefresh<CR>
+    nnoremap <silent><localleader>t :TagbarToggle<CR>
+    inoremap <silent><localleader>t <Esc>:TagbarToggle<CR>
 
 endif
 
@@ -1464,21 +1320,14 @@ endif
 
 if exists('g:plugs["fzf.vim"]')
 
-    " 启用浮动窗口
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-
     " 禁用浮动窗口
     " let g:fzf_layout = { 'down':'40%' }
 
+    " 启用浮动窗口
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
     " 预览窗口设置
     let g:fzf_preview_window = ['hidden,right,50%,<70(up,40%)', 'ctrl-/']
-
-    " SEE `MAN FZF-TMUX` FOR AVAILABLE OPTIONS
-    if exists('$TMUX')
-        let g:fzf_layout = { 'tmux': '-p90%,60%' }
-    else
-        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-    endif
 
     " [BUFFERS] JUMP TO THE EXISTING WINDOW IF POSSIBLE
     let g:fzf_buffers_jump = 1
@@ -1491,6 +1340,13 @@ if exists('g:plugs["fzf.vim"]')
 
     " [COMMANDS] --EXPECT EXPRESSION FOR DIRECTLY EXECUTING THE COMMAND
     let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+    " SEE `MAN FZF-TMUX` FOR AVAILABLE OPTIONS
+    if exists('$TMUX')
+        let g:fzf_layout = { 'tmux': '-p90%,60%' }
+    else
+        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+    endif
 
     " 额外按键绑定
     let g:fzf_action = {
@@ -1535,6 +1391,7 @@ endif
 if exists('g:plugs["asyncrun.vim"]')
 
     let g:asyncrun_open = 6
+    let $PYTHONUNBUFFERED=1
 
     nnoremap <silent><F7> :silent call asyncrun#quickfix_toggle(8)<cr>
     inoremap <silent><F7> <esc> :silent call asyncrun#quickfix_toggle(8)<cr>
@@ -1741,9 +1598,11 @@ if exists('g:plugs["vim-floaterm"]')
         return printf(' %s/%s', idx, cnt)
     endfunction
 
-    autocmd FileType floaterm tnoremap <expr> <ESC> (&filetype == "fzf") ? "<Esc>" : "<C-\><C-n>"
-
-    autocmd ExitPre * FloatermKill!
+    augroup Floaterm
+        autocmd!
+        autocmd FileType floaterm tnoremap <expr> <ESC> (&filetype == "fzf") ? "<Esc>" : "<C-\><C-n>"
+        autocmd ExitPre * FloatermKill!
+    augroup END
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 快捷键
@@ -1926,34 +1785,28 @@ if exists('g:plugs["vimwiki"]')
         autocmd FileType vimwiki let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1']
         " 改变Vimwiki Diary的路径
         autocmd FileType vimwiki call vimwiki#path#mkdir(vimwiki#vars#get_wikilocal('diary_rel_path'))
-
+        " 改变Shift+Enter映射
+        autocmd FileType vimwiki inoremap <silent><buffer> <localleader><CR> <Esc>:VimwikiReturn 2 2<CR>
     augroup end
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 改变Shift+Enter映射
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    autocmd FileType vimwiki inoremap <silent><buffer> <localleader><CR> <Esc>:VimwikiReturn 2 2<CR>
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " HighLighting
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-    hi VimwikiLink guifg=#61afef
-    hi VimwikiLink guifg=#61afef
-    hi VimwikiHeader1 guifg=#e5c07b
-    hi VimwikiHeader2 guifg=#98c379
-    hi VimwikiHeader3 guifg=#c678dd
-    hi VimwikiHeader4 guifg=#8096BF
-    hi VimwikiHeader5 guifg=#8096BF
-    hi VimwikiHeader6 guifg=#8096BF
-    hi VimwikiH1Folding guifg=#e5c07b
-    hi VimwikiH2Folding guifg=#98c379
-    hi VimwikiH3Folding guifg=#c678dd
-    hi VimwikiH4Folding guifg=#8096BF
-    hi VimwikiH5Folding guifg=#8096BF
-    hi VimwikiH6Folding guifg=#8096BF
-    hi VimwikiBold term=reverse cterm=underline ctermfg=204 gui=underline guifg=#E06C75
+    hi VimwikiLink       guifg=#61afef
+    hi VimwikiHeader1    guifg=#e5c07b
+    hi VimwikiHeader2    guifg=#98c379
+    hi VimwikiHeader3    guifg=#c678dd
+    hi VimwikiHeader4    guifg=#8096BF
+    hi VimwikiHeader5    guifg=#8096BF
+    hi VimwikiHeader6    guifg=#8096BF
+    hi VimwikiH1Folding  guifg=#e5c07b
+    hi VimwikiH2Folding  guifg=#98c379
+    hi VimwikiH3Folding  guifg=#c678dd
+    hi VimwikiH4Folding  guifg=#8096BF
+    hi VimwikiH5Folding  guifg=#8096BF
+    hi VimwikiH6Folding  guifg=#8096BF
+    hi VimwikiBold       guifg=#E06C75
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 使用wd删除markdown时自动删除相对应不使用的HTML文件
