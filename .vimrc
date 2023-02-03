@@ -679,10 +679,10 @@ call plug#end()
 "                                                            延迟加载
 " ================================================================================================================================
 
-call timer_start(100, { -> plug#load('lightline.vim') })
-call timer_start(100, { -> plug#load('asyncrun.vim') })
-call timer_start(100, { -> plug#load('vim-fugitive') })
-call timer_start(500, { -> plug#load('lightline-bufferline') })
+call timer_start(10,  { -> plug#load('lightline.vim') })
+call timer_start(10,  { -> plug#load('vim-fugitive') })
+call timer_start(10,  { -> plug#load('asyncrun.vim') })
+call timer_start(50,  { -> plug#load('lightline-bufferline') })
 call timer_start(500, { -> plug#load('nerdtree') })
 call timer_start(500, { -> plug#load('tagbar') })
 call timer_start(500, { -> plug#load('lightline-asyncrun') })
