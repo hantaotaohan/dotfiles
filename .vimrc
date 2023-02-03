@@ -149,8 +149,8 @@ set autoread                                                               " 当
 set writebackup                                                            " 保存文件前建立备份，保存成功后删除该备份
 set winaltkeys=no                                                          " Windows 禁用 ALT 操作菜单（使得 ALT 可以用到 Vim里）
 set regexpengine=1                                                         " 匹配模式 0:默认, 1:老版本, 2:新版本
-" set lazyredraw                                                           " 延迟绘制（提升性能）
-" set ttyscroll=3                                                          " 鼠标滚轮速度
+set lazyredraw                                                             " 延迟绘制（提升性能）
+set ttyscroll=3                                                            " 鼠标滚轮速度
 
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -642,39 +642,57 @@ let g:plug_window = 'enew'
 
 call plug#begin('$HOME/.vim/plugged')
 
-    Plug 'dstein64/vim-startuptime'                                                                     " 启动时间
-    Plug 'rakr/vim-one'                                                                                 " 类似ONEDARK
-    Plug 'itchyny/lightline.vim'                                                                        " STATUSLINE
-    Plug 'albertomontesg/lightline-asyncrun'                                                            " LIGHTLINE-ASYNC
-    Plug 'mengelbrecht/lightline-bufferline'                                                            " BUFFER
-    Plug 'tpope/vim-fugitive'                                                                           " GIT插件
-    Plug 'tpope/vim-commentary'                                                                         " 快速注释插件
-    Plug 'tpope/vim-surround'                                                                           " 成对更改删除括号等
-    Plug 'junegunn/fzf.vim'                                                                             " 为VIM安装FZF插件
-    Plug 'junegunn/fzf',                       { 'dir': '~/.fzf', 'do': './install --all' }             " 为系统安装FZF工具
-    Plug 'mhinz/vim-startify'                                                                           " 定制VIM开始页面
-    Plug 'mhinz/vim-sayonara'                                                                           " 代替QUIT插件
-    Plug 'skywind3000/asyncrun.vim'                                                                     " 配合调测PYTHON插件
-    Plug 'skywind3000/vim-auto-popmenu'                                                                 " 自动弹出补全插件
-    Plug 'scrooloose/nerdtree',                { 'on': [] }                                             " 文件树插件
-    Plug 'Xuyuanp/nerdtree-git-plugin',        { 'on': 'NERDTreeToggle' }                               " 文件数GIT显示插件
-    Plug 'airblade/vim-gitgutter'                                                                       " GIT插件
-    Plug 'majutsushi/tagbar',                  { 'on': [] }                                             " TAG浏览
-    Plug 'christoomey/vim-tmux-navigator'                                                               " 同步VIM与TMUX快捷键
-    Plug 'Yggdroot/indentLine'                                                                          " 缩进线显示插件
-    Plug 'kshenoy/vim-signature'                                                                        " 书签插件
-    Plug 'voldikss/vim-floaterm'                                                                        " 终端插件
-    Plug 'brooth/far.vim',                     { 'on': 'Far' }                                          " 代码重构
-    Plug 'vimwiki/vimwiki',                    { 'branch': 'dev', 'on': 'VimwikiIndex' }                " VIMWIKI插件
-    Plug 'michal-h21/vim-zettel',              { 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] }      " 配合VIMWIKI的功能插件
-    Plug 'cespare/vim-toml',                   { 'for': ['yaml', 'yml'] }                               " TOML支持
-    " Plug 'vim-airline/vim-airline'                                                                      " 状态栏
-    " Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                                                  " 主题文件
-    " Plug 'mg979/vim-visual-multi', {'branch': 'master'}                                                 " 多光标输入
-    " Plug 'TaDaa/vimade'                                                                                 " 非聚焦窗口颜色变浅
-    " Plug 'preservim/vimux'                                                                              " 配合Tmux运行程序的插件
+    Plug 'dstein64/vim-startuptime'                                                                                 " 启动时间
+    Plug 'itchyny/lightline.vim',              { 'on': [] }                                                         " STATUSLINE
+    Plug 'albertomontesg/lightline-asyncrun',  { 'on': [] }                                                         " LIGHTLINE-ASYNC
+    Plug 'mengelbrecht/lightline-bufferline',  { 'on': [] }                                                         " BUFFER
+    Plug 'tpope/vim-fugitive',                 { 'on': [] }                                                         " GIT插件
+    Plug 'tpope/vim-commentary',               { 'on': [] }                                                         " 快速注释插件
+    Plug 'tpope/vim-surround',                 { 'on': [] }                                                         " 成对更改删除括号等
+    Plug 'junegunn/fzf.vim',                   { 'on': [] }                                                         " 为VIM安装FZF插件
+    Plug 'junegunn/fzf',                       { 'dir': '~/.fzf', 'do': './install --all' }                         " 为系统安装FZF工具
+    Plug 'mhinz/vim-startify'                                                                                       " 定制VIM开始页面
+    Plug 'mhinz/vim-sayonara',                 { 'on': 'Sayonara' }                                                 " 代替QUIT插件
+    Plug 'skywind3000/asyncrun.vim',           { 'on': [] }                                                         " 配合调测PYTHON插件
+    Plug 'skywind3000/vim-auto-popmenu',       { 'on': [] }                                                         " 自动弹出补全插件
+    Plug 'scrooloose/nerdtree',                { 'on': [] }                                                         " 文件树插件
+    Plug 'Xuyuanp/nerdtree-git-plugin',        { 'on': 'NERDTreeToggle' }                                           " 文件数GIT显示插件
+    Plug 'airblade/vim-gitgutter',             { 'on': [] }                                                         " GIT插件
+    Plug 'majutsushi/tagbar',                  { 'on': [] }                                                         " TAG浏览
+    Plug 'christoomey/vim-tmux-navigator',     { 'on': [] }                                                         " 同步VIM与TMUX快捷键
+    Plug 'Yggdroot/indentLine',                { 'on': 'IndentLinesToggle' }                                        " 缩进线显示插件
+    Plug 'kshenoy/vim-signature',              { 'on': [] }                                                         " 书签插件
+    Plug 'voldikss/vim-floaterm',              { 'on': [ 'FloatermToggle', 'FloatermNew', 'FloatermKill' ] }        " 终端插件
+    Plug 'brooth/far.vim',                     { 'on': 'Far' }                                                      " 代码重构
+    Plug 'vimwiki/vimwiki',                    { 'branch': 'dev', 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] } " VIMWIKI插件
+    Plug 'michal-h21/vim-zettel',              { 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] }                  " 配合VIMWIKI的功能插件
+    Plug 'cespare/vim-toml',                   { 'for': ['yaml', 'yml'] }                                           " TOML支持
+    " Plug 'vim-airline/vim-airline'                                                                                  " 状态栏
+    " Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                                                              " 主题文件
+    " Plug 'mg979/vim-visual-multi', {'branch': 'master'}                                                             " 多光标输入
+    " Plug 'TaDaa/vimade'                                                                                             " 非聚焦窗口颜色变浅
+    " Plug 'preservim/vimux'                                                                                          " 配合Tmux运行程序的插件
 
 call plug#end()
+
+" ================================================================================================================================
+"                                                            延迟加载
+" ================================================================================================================================
+
+call timer_start(100, { -> plug#load('lightline.vim') })
+call timer_start(100, { -> plug#load('asyncrun.vim') })
+call timer_start(100, { -> plug#load('vim-fugitive') })
+call timer_start(500, { -> plug#load('lightline-bufferline') })
+call timer_start(500, { -> plug#load('nerdtree') })
+call timer_start(500, { -> plug#load('tagbar') })
+call timer_start(500, { -> plug#load('lightline-asyncrun') })
+call timer_start(500, { -> plug#load('vim-commentary') })
+call timer_start(500, { -> plug#load('vim-surround') })
+call timer_start(500, { -> plug#load('fzf.vim') })
+call timer_start(500, { -> plug#load('vim-auto-popmenu') })
+call timer_start(500, { -> plug#load('vim-gitgutter') })
+call timer_start(500, { -> plug#load('vim-tmux-navigator') })
+call timer_start(500, { -> plug#load('vim-signature') })
 
 " ================================================================================================================================
 "                                                            主题配置
@@ -790,112 +808,6 @@ if exists('g:plugs["lightline.vim"]')
     " let g:lightline.tabline_separator    = { 'left': '', 'right': '' } 
     let g:lightline.tabline_separator    = { 'left': '', 'right': '' } 
     let g:lightline.tabline_subseparator = { 'left': ' ', 'right': ' ' } 
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 自定义颜色
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    let s:p = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-    " let s:p.tabline.left   = [ [ '#282C34', '#61AFEF' ] ]
-    let s:p.tabline.left   = [ [ '#ABB2BF', '#5A6378' ] ]
-    let s:p.tabline.tabsel = [ [ '#E4EBFF', '#3E4452' ] ]
-    let s:p.tabline.middle = [ [ '#959CA9', '#2C323D' ] ]
-    let s:p.tabline.right  = [ [ '#ABB2BF', '#5A6378' ], [ '#ABB2BF', '#3E4452', 'bold' ] ]
-    " let s:p.tabline.right  = [ [ '#282C34', '#98c379' ], [ '#ABB2BF', '#3E4452', 'bold' ] ]
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-    let s:p.normal.left   = [ 
-                \ [ '#282C34', '#98C379' ],
-                \ [ '#282C34', '#5A6378' ],
-                \ [ '#ABB2BF', '#3E4452' ],
-                \ [ '#7D828C', '#2C323C' ],
-                \ ]
-
-    let s:p.normal.middle = [ 
-                \ [ '#ABB2BF', '#2C323C' ],
-                \ ]
-
-    let s:p.normal.right  = [ 
-                \ [ '#282C34', '#98C379' ],
-                \ [ '#ABB2BF', '#3E4452' ],
-                \ [ '#7D828C', '#2F3541' ],
-                \ [ '#7D828C', '#2C323C' ],
-                \ [ '#C678DD', '#2C323C' ],
-                \ [ '#E5C07B', '#2C323C' ], 
-                \ ]
-" --------------------------------------------------------------o----------------------------------------------------------------o
-    let s:p.insert.left   = [ 
-                \ [ '#282C34', '#61AFEF' ],
-                \ [ '#282C34', '#5A6378' ],
-                \ [ '#ABB2BF', '#3E4452' ],
-                \ [ '#7EBCEF', '#2C323C' ], 
-                \ ]
-
-    let s:p.insert.right  = [ 
-                \ [ '#282C34', '#61AFEF' ],
-                \ [ '#ABB2BF', '#3E4452' ],
-                \ [ '#7D828C', '#2F3541' ],
-                \ [ '#7D828C', '#2C323C' ],
-                \ [ '#C678DD', '#2C323C' ],
-                \ [ '#7D828C', '#2C323C' ], 
-                \ ]
-" --------------------------------------------------------------o----------------------------------------------------------------o
-    let s:p.visual.left   = [ 
-                \ [ '#282C34', '#C678DD' ],
-                \ [ '#282C34', '#5A6378' ],
-                \ [ '#ABB2BF', '#3E4452' ],
-                \ [ '#7EBCEF', '#2C323C' ], 
-                \ ]
-
-    let s:p.visual.right  = [ 
-                \ [ '#282C34', '#C678DD' ],
-                \ [ '#ABB2BF', '#3E4452' ],
-                \ [ '#7D828C', '#2F3541' ],
-                \ [ '#7D828C', '#2C323C' ],
-                \ [ '#C678DD', '#2C323C' ],
-                \ [ '#7D828C', '#2C323C' ], 
-                \ ]
-" --------------------------------------------------------------o----------------------------------------------------------------o
-    let s:p.replace.left   = [ 
-                \ [ '#282C34', '#E06C75' ],
-                \ [ '#282C34', '#5A6378' ],
-                \ [ '#ABB2BF', '#3E4452' ],
-                \ [ '#E06C75', '#2C323C' ], 
-                \ ]
-
-    let s:p.replace.right  = [ 
-                \ [ '#282C34', '#E06C75' ],
-                \ [ '#ABB2BF', '#3E4452' ],
-                \ [ '#7D828C', '#2F3541' ],
-                \ [ '#7D828C', '#2C323C' ],
-                \ [ '#C678DD', '#2C323C' ],
-                \ [ '#7D828C', '#2C323C' ], 
-                \ ]
-" --------------------------------------------------------------o----------------------------------------------------------------o
-    let s:p.inactive.left   = [ 
-                \ [ '#25282C', '#3E4452' ],
-                \ [ '#536C70', '#2C323D' ],
-                \ [ '#536C70', '#2C323D' ],
-                \ [ '#536C70', '#2C323D' ],
-                \ [ '#536C70', '#2C323D' ], 
-                \ ]
-
-    let s:p.inactive.middle = [ 
-                \ [ '#2C323D', '#2C323D' ],
-                \ ]
-
-    let s:p.inactive.right  = [ 
-                \ [ '#25282C', '#3E4452' ],
-                \ [ '#536C70', '#2C323D' ],
-                \ [ '#536C70', '#2C323D' ],
-                \ [ '#536C70', '#2C323D' ],
-                \ [ '#536C70', '#2C323D' ],
-                \ [ '#3E4452', '#3E4452' ], 
-                \ ]
-
-    let g:lightline#colorscheme#one#palette = lightline#colorscheme#fill(s:p)
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 自定义函数
@@ -1161,12 +1073,6 @@ if exists('g:plugs["nerdtree"]')
     augroup END
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
-" 延迟加载
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    call timer_start(500, { -> plug#load('nerdtree') })
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
 " 快捷键
 " --------------------------------------------------------------o----------------------------------------------------------------o
     
@@ -1300,12 +1206,6 @@ if exists('g:plugs["tagbar"]')
     augroup END
     
 " --------------------------------------------------------------o----------------------------------------------------------------o
-" 延迟加载
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    call timer_start(500, { -> plug#load('tagbar') })
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
 " 快捷键
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
@@ -1428,6 +1328,7 @@ endif
 
 if exists('g:plugs["indentLine"]')
 
+    let g:indentLine_char = '│'
     let g:indentLine_enabled = 0
     let g:indentLine_conceallevel = 1
     let g:indentLine_defaultGroup = 'SpecialKey'
@@ -1722,6 +1623,7 @@ endif
 if exists('g:plugs["vimwiki"]')
 
     nnoremap <Leader>ww :VimwikiIndex<cr>
+    nnoremap <Leader>w<Leader>w :VimwikiMakeDiaryNote<cr>
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " Vimwiki Setting
