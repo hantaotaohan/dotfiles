@@ -34,6 +34,24 @@ let g:loaded_netrwFileHandlers = 1
 let g:loaded_rrhelper          = 1
 let g:no_mail_maps             = 1
 let g:no_status_line           = 1
+let g:loaded_synload           = 1
+let g:loaded_synsyncolor       = 1
+let g:loaded_syntax            = 1
+let g:loaded_filetype          = 1
+let g:loaded_default           = 1
+let g:loaded_scripts           = 1
+let g:loaded_nosyntax          = 1
+let g:loaded_ftplugin          = 1
+let g:loaded_indent            = 1
+let g:loaded_unimpaired        = 1
+let g:loaded_asyncrun          = 1
+let g:loaded_manpager          = 1
+let g:loaded_matchparen        = 1
+let g:loaded_spellfile         = 1
+let g:loaded_tagPlugin         = 1
+let g:loaded_tagPlugin         = 1
+let g:loaded_tohtml            = 1
+let g:loaded_vimballPlugin     = 1
 " let g:loaded_matchparen        = 1
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -171,6 +189,7 @@ set showtabline=2                                                          " 永
 set splitbelow                                                             " 如果水平拆分, 默认在下面
 set splitright                                                             " 如果垂直拆分, 默认在右边
 
+set nostartofline                                                          " 将光标保持在同一列上
 set cursorline                                                             " 突出显示当前行
 set scrolloff=6                                                            " 光标上下两侧最少保留的屏幕行数
 set sidescrolloff=6                                                        " 光标左右两侧最少保留的屏幕行数
@@ -647,8 +666,10 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'albertomontesg/lightline-asyncrun',  { 'on': [] }                                                         " LIGHTLINE-ASYNC
     Plug 'mengelbrecht/lightline-bufferline',  { 'on': [] }                                                         " BUFFER
     Plug 'tpope/vim-fugitive',                 { 'on': [] }                                                         " GIT插件
+    Plug 'tpope/vim-unimpaired',               { 'on': [] }                                                         " 括号映射
     Plug 'tpope/vim-commentary',               { 'on': [] }                                                         " 快速注释插件
     Plug 'tpope/vim-surround',                 { 'on': [] }                                                         " 成对更改删除括号等
+    Plug 'tpope/vim-rsi'                                                                                            " INSERT ESACS 模式
     Plug 'junegunn/fzf.vim',                   { 'on': [] }                                                         " 为VIM安装FZF插件
     Plug 'junegunn/fzf',                       { 'dir': '~/.fzf', 'do': './install --all' }                         " 为系统安装FZF工具
     Plug 'mhinz/vim-startify'                                                                                       " 定制VIM开始页面
@@ -680,15 +701,18 @@ call plug#end()
 " ================================================================================================================================
 
 call timer_start(10,  { -> plug#load('lightline.vim') })
+call timer_start(200, { -> execute('call lightline#update()') })
 call timer_start(10,  { -> plug#load('vim-fugitive') })
 call timer_start(10,  { -> plug#load('asyncrun.vim') })
-call timer_start(50,  { -> plug#load('lightline-bufferline') })
-call timer_start(500, { -> plug#load('nerdtree') })
-call timer_start(500, { -> plug#load('tagbar') })
-call timer_start(500, { -> plug#load('lightline-asyncrun') })
+call timer_start(10,  { -> plug#load('lightline-bufferline') })
+" call timer_start(500, { -> plug#load('vim-rsi') })
+call timer_start(500, { -> plug#load('vim-unimpaired') })
 call timer_start(500, { -> plug#load('vim-commentary') })
 call timer_start(500, { -> plug#load('vim-surround') })
+call timer_start(500, { -> plug#load('nerdtree') })
+call timer_start(500, { -> plug#load('tagbar') })
 call timer_start(500, { -> plug#load('fzf.vim') })
+call timer_start(500, { -> plug#load('lightline-asyncrun') })
 call timer_start(500, { -> plug#load('vim-auto-popmenu') })
 call timer_start(500, { -> plug#load('vim-gitgutter') })
 call timer_start(500, { -> plug#load('vim-tmux-navigator') })
@@ -960,16 +984,9 @@ if exists('g:plugs["lightline.vim"]')
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-    function! LightlineCocSpaces() abort
-        let nr = get(filter(range(winnr()), 'getbufvar(winbufnr(v:val), "&filetype") =~# "nerdtree"'), 0, -1)
-        return nr < 0 ? 'BUFFERS' : repeat(' ', winwidth(nr)+1)
-    endfunction
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
     function! LightlineReload() abort
-        call lightline#init()
-        call lightline#colorscheme()
+        " call lightline#init()
+        " call lightline#colorscheme()
         call lightline#update()
     endfunction
 
