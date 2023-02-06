@@ -687,7 +687,7 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'brooth/far.vim',                     { 'on': 'Far' }                                                      " 代码重构
     Plug 'vimwiki/vimwiki',                    { 'branch': 'dev', 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] } " VIMWIKI插件
     Plug 'michal-h21/vim-zettel',              { 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] }                  " 配合VIMWIKI的功能插件
-    Plug 'cespare/vim-toml',                   { 'for': ['yaml', 'yml'] }                                           " TOML支持
+    Plug 'cespare/vim-toml',                   { 'branch': 'main', 'for': ['yaml', 'yml'] }                         " TOML支持
     " Plug 'vim-airline/vim-airline'                                                                                  " 状态栏
     " Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                                                              " 主题文件
     " Plug 'mg979/vim-visual-multi', {'branch': 'master'}                                                             " 多光标输入
@@ -696,27 +696,37 @@ call plug#begin('$HOME/.vim/plugged')
 
 call plug#end()
 
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+augroup Plug
+    autocmd!
+    autocmd FileType vim-plug setlocal laststatus=0 showtabline=0 statusline=\ Plug
+    autocmd BufLeave * set laststatus=2 showtabline=2
+augroup END
+
 " ================================================================================================================================
 "                                                            延迟加载
 " ================================================================================================================================
 
-call timer_start(10,  { -> plug#load('lightline.vim') })
-call timer_start(200, { -> execute('call lightline#update()') })
-call timer_start(10,  { -> plug#load('vim-fugitive') })
-call timer_start(10,  { -> plug#load('asyncrun.vim') })
-call timer_start(10,  { -> plug#load('lightline-bufferline') })
-" call timer_start(500, { -> plug#load('vim-rsi') })
-call timer_start(500, { -> plug#load('vim-unimpaired') })
-call timer_start(500, { -> plug#load('vim-commentary') })
-call timer_start(500, { -> plug#load('vim-surround') })
-call timer_start(500, { -> plug#load('nerdtree') })
-call timer_start(500, { -> plug#load('tagbar') })
-call timer_start(500, { -> plug#load('fzf.vim') })
-call timer_start(500, { -> plug#load('lightline-asyncrun') })
-call timer_start(500, { -> plug#load('vim-auto-popmenu') })
-call timer_start(500, { -> plug#load('vim-gitgutter') })
-call timer_start(500, { -> plug#load('vim-tmux-navigator') })
-call timer_start(500, { -> plug#load('vim-signature') })
+if isdirectory(g:plugs['lightline.vim'].dir)
+    call timer_start(10,  { -> plug#load('lightline.vim') })
+    call timer_start(200, { -> execute('call lightline#update()') })
+    call timer_start(10,  { -> plug#load('vim-fugitive') })
+    call timer_start(10,  { -> plug#load('asyncrun.vim') })
+    call timer_start(10,  { -> plug#load('lightline-bufferline') })
+    " call timer_start(500, { -> plug#load('vim-rsi') })
+    call timer_start(500, { -> plug#load('vim-unimpaired') })
+    call timer_start(500, { -> plug#load('vim-commentary') })
+    call timer_start(500, { -> plug#load('vim-surround') })
+    call timer_start(500, { -> plug#load('nerdtree') })
+    call timer_start(500, { -> plug#load('tagbar') })
+    call timer_start(500, { -> plug#load('fzf.vim') })
+    call timer_start(500, { -> plug#load('lightline-asyncrun') })
+    call timer_start(500, { -> plug#load('vim-auto-popmenu') })
+    call timer_start(500, { -> plug#load('vim-gitgutter') })
+    call timer_start(500, { -> plug#load('vim-tmux-navigator') })
+    call timer_start(500, { -> plug#load('vim-signature') })
+endif
 
 " ================================================================================================================================
 "                                                            主题配置
