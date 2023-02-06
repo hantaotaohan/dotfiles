@@ -43,8 +43,6 @@ let g:loaded_scripts           = 1
 let g:loaded_nosyntax          = 1
 let g:loaded_ftplugin          = 1
 let g:loaded_indent            = 1
-let g:loaded_unimpaired        = 1
-let g:loaded_asyncrun          = 1
 let g:loaded_manpager          = 1
 let g:loaded_matchparen        = 1
 let g:loaded_spellfile         = 1
@@ -467,12 +465,12 @@ tnoremap <C-l> <C-w><C-l>
 " 快速移动整行  
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-nnoremap <silent><S-Up>   :m-2<CR>==
-nnoremap <silent><S-Down> :m+<CR>==
-vnoremap <silent><S-Up>   :m-2<CR>gv=gv
-vnoremap <silent><S-Down> :m'>+<CR>gv=gv
-inoremap <silent><S-Up>   <Esc>:m-2<CR>==gi
-inoremap <silent><S-Down> <Esc>:m+<CR>==gi
+" nnoremap <silent><S-Up>   :m-2<CR>==
+" nnoremap <silent><S-Down> :m+<CR>==
+" vnoremap <silent><S-Up>   :m-2<CR>gv=gv
+" vnoremap <silent><S-Down> :m'>+<CR>gv=gv
+" inoremap <silent><S-Up>   <Esc>:m-2<CR>==gi
+" inoremap <silent><S-Down> <Esc>:m+<CR>==gi
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 快速复制行
@@ -700,7 +698,7 @@ call plug#end()
 
 augroup Plug
     autocmd!
-    autocmd FileType vim-plug setlocal laststatus=0 showtabline=0 statusline=\ Plug
+    autocmd FileType vim-plug setlocal nonumber norelativenumber laststatus=0 showtabline=0 statusline=\ Plug
     autocmd BufLeave * set laststatus=2 showtabline=2
 augroup END
 
@@ -817,6 +815,7 @@ if exists('g:plugs["lightline.vim"]')
                 \ 'absolutepath': 'LightLineabsolutepath',
                 \ 'filename': 'LightLineFilename',
                 \ 'modified;': 'LightLineModified',
+                \ 'terminfo': 'LightLineTerminfo',
                 \ }
 
     let g:lightline.component_expand = {
@@ -846,14 +845,14 @@ if exists('g:plugs["lightline.vim"]')
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 自定义函数
 " --------------------------------------------------------------o----------------------------------------------------------------o
-"
+
     function! s:trim(maxlen, str) abort
         let trimed = len(a:str) > a:maxlen ? a:str[0:a:maxlen] . '..' : a:str
         return trimed
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
-"
+
     function! LightlinePad() abort
         " let nr = get(filter(range(winnr()), 'getbufvar(winbufnr(v:val), "&filetype") =~# "nerdtree"'), 0, -1)
         " return nr < 0 ? 'BUFFERS' : 'EXPLOER ' . repeat(' ', 21)
@@ -863,12 +862,22 @@ if exists('g:plugs["lightline.vim"]')
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
     function! LightLineFileformat() abort
+
+        if &ft == 'floaterm'
+            return ''
+        endif
+
         return winwidth(0) > 70 ? '⭕ ' .  &fileformat : ''
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
     function! LightLineFiletype() abort
+
+        if &ft == 'floaterm'
+            return ''
+        endif
+
         return winwidth(0) > 70 ? (&filetype !=# '' ? '⭕ '  . &filetype . ' ' : 'no ft') : ''
     endfunction
 
@@ -894,7 +903,7 @@ if exists('g:plugs["lightline.vim"]')
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
-"
+
     function! LightLineFilename() abort
         let l:prefix = expand('%:p') =~? "fugitive://" ? '(fugitive) ' : ''
         let l:maxlen = winwidth(0) - winwidth(0) / 2
@@ -910,11 +919,15 @@ if exists('g:plugs["lightline.vim"]')
             return l:tail ==# '' ? l:noname : l:prefix . s:trim(l:maxlen, l:tail)
         endif
 
+        if &ft == 'floaterm'
+            return LightLineTerminfo()
+        endif
+
         return l:relative ==# '' ? l:noname : l:prefix . s:trim(l:maxlen, l:relative)
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
-"
+
     function! LightlineFugitive() abort
     if exists('*FugitiveHead')
         let maxlen = 20
@@ -925,7 +938,7 @@ if exists('g:plugs["lightline.vim"]')
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
-"
+
     function! LightLineMode() abort
             let ftmap = {
                 \ 'nerdtree': 'NERDTREE',
@@ -968,6 +981,7 @@ if exists('g:plugs["lightline.vim"]')
         let l:column_col = printf('%-2d', col('.'))
         " let l:column_col = s:trim(col('$'), col('.'))
         let l:lineinfo = l:current_line .  ' : ' . l:column_col
+
         return &ft =~# 'tagbar\|nerdtree' ? 'N' : l:lineinfo
 
     endfunction
@@ -980,17 +994,38 @@ if exists('g:plugs["lightline.vim"]')
         endif
         let l:percent = line('.') * 100 / line('$') . '%'
         let l:percent = s:trim(5, l:percent)
+
+        if &ft == 'floaterm'
+            return ''
+        endif
+
         return printf('%-4s', l:percent)
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
-"
+
     function! LightLineabsolutepath() abort
         if winwidth(0) < 60
             return ''
         endif
+
+        if &ft == 'floaterm'
+            return ''
+        endif
+
         return expand('%:p:h') 
     endfunction
+
+" --------------------------------------------------------------o----------------------------------------------------------------o
+
+    function! LightLineTerminfo() abort
+        let buffers = floaterm#buflist#gather()
+        let cnt = len(buffers)
+        let cur = floaterm#buflist#curr()
+        let idx = index(buffers, cur) + 1
+        return printf(' %s/%s', idx, cnt)
+    endfunction
+
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
@@ -1510,25 +1545,20 @@ endif
 
 if exists('g:plugs["vim-floaterm"]')
 
-    let g:floaterm_wintype = 'split'
-    let g:floaterm_position = 'bottom'
+    let g:floaterm_wintype = 'float'
+    let g:floaterm_position = 'center'
     let g:floaterm_title = 'TERMINAL: $1/$2'
-    let g:floaterm_height = 0.3
+    let g:floaterm_width = 0.9
+    let g:floaterm_height = 0.7
     let g:floaterm_autoclose = 2
     let g:floaterm_autohide = 0
     let g:floaterm_borderchars = '─│─│┌┐┘└'
 
-    function! Airline_FloatermInfo() abort
-        let buffers = floaterm#buflist#gather()
-        let cnt = len(buffers)
-        let cur = floaterm#buflist#curr()
-        let idx = index(buffers, cur) + 1
-        return printf(' %s/%s', idx, cnt)
-    endfunction
-
     augroup Floaterm
         autocmd!
-        autocmd FileType floaterm tnoremap <expr> <ESC> (&filetype == "fzf") ? "<Esc>" : "<C-\><C-n>"
+        autocmd FileType floaterm tnoremap jk <C-\><C-n>
+        autocmd FileType floaterm setlocal nonumber norelativenumber signcolumn=no
+        autocmd FileType floaterm hi Floaterm guibg=#24282f | hi FloatermBorder guibg=#282c34 guifg=#797E88
         autocmd ExitPre * FloatermKill!
     augroup END
 
