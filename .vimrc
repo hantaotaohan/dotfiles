@@ -14,7 +14,6 @@
 "                                                Disable Vim Distribution Plugins
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-let g:did_load_ftplugin        = 1
 let g:did_load_filetypes       = 1
 let g:skip_defaults_vim        = 1
 let g:loaded_gzip              = 1
@@ -55,6 +54,7 @@ let g:LoadFTPlugin             = 1
 let g:no_mail_maps             = 1
 let g:no_status_line           = 1
 " let g:loaded_matchparen        = 1
+" let g:did_load_ftplugin        = 1
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 "                                                     Vim Disable Compatible
@@ -215,6 +215,12 @@ set listchars=tab:\|\ ,trail:.,extends:>,precedes:<                        " 设
 
 set fillchars=fold:\─
 set fillchars+=vert:\│
+set fillchars+=diff:\ 
+if version >= 900
+    set fillchars+=eob:\ 
+    set fillchars+=foldsep:\│
+endif
+
 set diffopt=filler,internal,algorithm:histogram,indent-heuristic,vertical  " 更新diff配置
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -1437,11 +1443,11 @@ if exists('g:plugs["vim-startify"]')
         \ { 'type': 'files',     'header': ['   MRU']            },
         \ { 'type': 'sessions',  'header': ['   Sessions']       },
         \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ { 'type': 'commands',  'header': ['   Projects']       },
         \ ]
 
     let g:startify_commands = [
-        \ { 'p': ['Projects : Django', 'e ~/dotfiles']           },
+        \ { 'pd': ['Dotfiles', 'e ~/dotfiles']                   },
         \ ]
 
     let g:startify_bookmarks = [
