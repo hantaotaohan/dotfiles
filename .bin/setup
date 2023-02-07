@@ -211,7 +211,7 @@ Vim () {
 
     echo -e "${MAGENTA}Git Clone Or Update VIM${RESET}"
     if [ -d "${SOURCE_DIR}/vim" ]; then 
-        cd ${SOURCE_DIR}/vim || return && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1
+        cd ${SOURCE_DIR}/vim || return && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1 && sudo make distclean > /dev/null 2>&1
     else
         $GIT_CLONE/vim/vim.git ${SOURCE_DIR}/vim 
         cd ${SOURCE_DIR}/vim || return
@@ -224,25 +224,15 @@ Vim () {
 
     echo -e "${MAGENTA}Start Build${RESET}"
 
-    (sudo ./configure --with-features=huge \
+    ( sudo ./configure --with-features=huge \
         --enable-multibyte \
-        --enable-fontset \
-        --enable-rubyinterp \
-        --enable-pythoninterp \
-        --enable-python3interp \
-        --enable-luainterp \
         --enable-cscope \
-        --enable-gui=auto \
-        --enable-perlinterp \
-        --enable-fontset \
-        # --with-python-config-dir=$(python2-config --configdir) \
-        --with-python3-config-dir=$(python3-config --configdir) \
-        --with-compiledby="TaoTao" \
+        --enable-rubyinterp=yes \
+        --enable-perlinterp=yes \
+        --enable-python3interp=yes \
         --enable-largefile \
-        --with-x \
-        --enable-xim \
-        --enable-fontset \
-        --prefix=/usr/local) > /dev/null 2>&1
+        --enable-luainterp=yes \
+        --with-luajit ) > /dev/null 2>&1 && \
 
     sudo make > /dev/null 2>&1 && \
     sudo make install > /dev/null 2>&1
@@ -261,12 +251,10 @@ Vim () {
     # --with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/ 指定 python3路径
     # --prefix=/usr/local/vim：指定将要安装到的路径
 
-    echo -e "${BLUE}VIM Install Is Complete :: Version ${RESET} ${RED}$(vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]")${RESET} ";
-
-# --------------------------------------------------------------o----------------------------------------------------------------o
-    
 # >>> OUTPUT
 
+    ROW
+    echo -e "${BLUE}VIM Install Is Complete :: Version ${RESET} ${RED}$(vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]")${RESET} ";
     ROW
 }
 

@@ -14,6 +14,9 @@
 "                                                Disable Vim Distribution Plugins
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
+let g:did_load_ftplugin        = 1
+let g:did_load_filetypes       = 1
+let g:skip_defaults_vim        = 1
 let g:loaded_gzip              = 1
 let g:loaded_tar               = 1
 let g:loaded_tarPlugin         = 1
@@ -32,8 +35,6 @@ let g:loaded_netrwPlugin       = 1
 let g:loaded_netrwSettings     = 1
 let g:loaded_netrwFileHandlers = 1
 let g:loaded_rrhelper          = 1
-let g:no_mail_maps             = 1
-let g:no_status_line           = 1
 let g:loaded_synload           = 1
 let g:loaded_synsyncolor       = 1
 let g:loaded_syntax            = 1
@@ -50,6 +51,9 @@ let g:loaded_tagPlugin         = 1
 let g:loaded_tagPlugin         = 1
 let g:loaded_tohtml            = 1
 let g:loaded_vimballPlugin     = 1
+let g:LoadFTPlugin             = 1
+let g:no_mail_maps             = 1
+let g:no_status_line           = 1
 " let g:loaded_matchparen        = 1
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -441,8 +445,8 @@ nnoremap <Leader>tw :execute('setlocal wrap! breakindent!')<CR>
 " nnoremap <silent><localleader>y "+yy
 " vnoremap <silent><localleader>y "+y
 
-nnoremap <silent><localleader>p "+p
-xnoremap <silent><localleader>p "+p
+nnoremap <silent><localleader>p "+p :set ff=unix<cr>
+xnoremap <silent><localleader>p "+p :set ff=unix<cr>
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 切换窗口快捷键设置  
@@ -664,7 +668,6 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'albertomontesg/lightline-asyncrun',  { 'on': [] }                                                         " LIGHTLINE-ASYNC
     Plug 'mengelbrecht/lightline-bufferline',  { 'on': [] }                                                         " BUFFER
     Plug 'tpope/vim-fugitive',                 { 'on': [] }                                                         " GIT插件
-    Plug 'tpope/vim-unimpaired',               { 'on': [] }                                                         " 括号映射
     Plug 'tpope/vim-commentary',               { 'on': [] }                                                         " 快速注释插件
     Plug 'tpope/vim-surround',                 { 'on': [] }                                                         " 成对更改删除括号等
     Plug 'tpope/vim-rsi'                                                                                            " INSERT ESACS 模式
@@ -686,6 +689,7 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'vimwiki/vimwiki',                    { 'branch': 'dev', 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] } " VIMWIKI插件
     Plug 'michal-h21/vim-zettel',              { 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] }                  " 配合VIMWIKI的功能插件
     Plug 'cespare/vim-toml',                   { 'branch': 'main', 'for': ['yaml', 'yml'] }                         " TOML支持
+    " Plug 'tpope/vim-unimpaired',               { 'on': [] }                                                         " 括号映射
     " Plug 'vim-airline/vim-airline'                                                                                  " 状态栏
     " Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                                                              " 主题文件
     " Plug 'mg979/vim-visual-multi', {'branch': 'master'}                                                             " 多光标输入
@@ -713,7 +717,7 @@ if isdirectory(g:plugs['lightline.vim'].dir)
     call timer_start(10,  { -> plug#load('asyncrun.vim') })
     call timer_start(10,  { -> plug#load('lightline-bufferline') })
     " call timer_start(500, { -> plug#load('vim-rsi') })
-    call timer_start(500, { -> plug#load('vim-unimpaired') })
+    " call timer_start(500, { -> plug#load('vim-unimpaired') })
     call timer_start(500, { -> plug#load('vim-commentary') })
     call timer_start(500, { -> plug#load('vim-surround') })
     call timer_start(500, { -> plug#load('nerdtree') })
