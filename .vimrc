@@ -684,10 +684,11 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'mhinz/vim-sayonara',                 { 'on': 'Sayonara' }                                                 " 代替QUIT插件
     Plug 'skywind3000/asyncrun.vim',           { 'on': [] }                                                         " 配合调测PYTHON插件
     Plug 'skywind3000/vim-auto-popmenu',       { 'on': [] }                                                         " 自动弹出补全插件
-    Plug 'scrooloose/nerdtree',                { 'on': [] }                                                         " 文件树插件
-    Plug 'Xuyuanp/nerdtree-git-plugin',        { 'on': 'NERDTreeToggle' }                                           " 文件数GIT显示插件
+    Plug 'lambdalisue/fern.vim',               { 'branch': 'main', 'on': 'Fern' }                                   " 文件树插件
+    Plug 'lambdalisue/fern-git-status.vim',    { 'on': 'Fern' }                                                     " 文件树插件-GIT
+    Plug 'lambdalisue/fern-hijack.vim',        { 'on': 'Fern' }                                                     " 文件树插件-HIJACK
     Plug 'airblade/vim-gitgutter',             { 'on': [] }                                                         " GIT插件
-    Plug 'majutsushi/tagbar',                  { 'on': [] }                                                         " TAG浏览
+    Plug 'liuchengxu/vista.vim',               { 'on': 'Vista' }                                                    " TAG浏览
     Plug 'christoomey/vim-tmux-navigator',     { 'on': [] }                                                         " 同步VIM与TMUX快捷键
     Plug 'Yggdroot/indentLine',                { 'on': 'IndentLinesToggle' }                                        " 缩进线显示插件
     Plug 'kshenoy/vim-signature',              { 'on': [] }                                                         " 书签插件
@@ -696,6 +697,7 @@ call plug#begin('$HOME/.vim/plugged')
     Plug 'vimwiki/vimwiki',                    { 'branch': 'dev', 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] } " VIMWIKI插件
     Plug 'michal-h21/vim-zettel',              { 'on': [ 'VimwikiIndex', 'VimwikiMakeDiaryNote'] }                  " 配合VIMWIKI的功能插件
     Plug 'cespare/vim-toml',                   { 'branch': 'main', 'for': ['yaml', 'yml'] }                         " TOML支持
+    Plug 'machakann/vim-highlightedyank',      { 'on': [] }                                                         " YANK高亮
     " Plug 'tpope/vim-unimpaired',               { 'on': [] }                                                         " 括号映射
     " Plug 'vim-airline/vim-airline'                                                                                  " 状态栏
     " Plug 'joshdick/onedark.vim', { 'branch': 'main'  }                                                              " 主题文件
@@ -719,22 +721,18 @@ augroup END
 
 if isdirectory(g:plugs['lightline.vim'].dir)
     call timer_start(10,  { -> plug#load('lightline.vim') })
-    call timer_start(200, { -> execute('call lightline#update()') })
     call timer_start(10,  { -> plug#load('vim-fugitive') })
     call timer_start(10,  { -> plug#load('asyncrun.vim') })
     call timer_start(10,  { -> plug#load('lightline-bufferline') })
-    " call timer_start(500, { -> plug#load('vim-rsi') })
-    " call timer_start(500, { -> plug#load('vim-unimpaired') })
     call timer_start(500, { -> plug#load('vim-commentary') })
     call timer_start(500, { -> plug#load('vim-surround') })
-    call timer_start(500, { -> plug#load('nerdtree') })
-    call timer_start(500, { -> plug#load('tagbar') })
     call timer_start(500, { -> plug#load('fzf.vim') })
     call timer_start(500, { -> plug#load('lightline-asyncrun') })
     call timer_start(500, { -> plug#load('vim-auto-popmenu') })
     call timer_start(500, { -> plug#load('vim-gitgutter') })
     call timer_start(500, { -> plug#load('vim-tmux-navigator') })
     call timer_start(500, { -> plug#load('vim-signature') })
+    call timer_start(900, { -> plug#load('vim-highlightedyank') })
 endif
 
 " ================================================================================================================================
@@ -837,7 +835,6 @@ if exists('g:plugs["lightline.vim"]')
                 \ 'asyncrun_status': 'lightline#asyncrun#status',
                 \ 'buffers': 'lightline#bufferline#buffers',
                 \ 'gitdiff': 'lightline#gitdiff#get',
-                \ '&statusline': 'lightline#update()'
                 \ }
 
     let g:lightline.component_type = {
@@ -865,7 +862,7 @@ if exists('g:plugs["lightline.vim"]')
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
     function! LightlinePad() abort
-        " let nr = get(filter(range(winnr()), 'getbufvar(winbufnr(v:val), "&filetype") =~# "nerdtree"'), 0, -1)
+        " let nr = get(filter(range(winnr()), 'getbufvar(winbufnr(v:val), "&filetype") =~# "fern"'), 0, -1)
         " return nr < 0 ? 'BUFFERS' : 'EXPLOER ' . repeat(' ', 21)
         return 'BUFFERS'
     endfunction
@@ -896,8 +893,7 @@ if exists('g:plugs["lightline.vim"]')
 
     function! LightLineReadonly() abort
         let ftmap = {
-                    \ 'nerdtree': '',
-                    \ 'tagbar': '',
+                    \ 'fern': '',
                     \ 'qf': '',
                     \ 'floaterm': '',
                     \ 'fugitive': '',
@@ -910,7 +906,7 @@ if exists('g:plugs["lightline.vim"]')
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
     function! LightLineModified() abort
-        return &ft =~# 'help\|nerdtree' ? '' : &modified ? '+' : &modifiable ? '' : ''
+        return &ft =~# 'help\|fern' ? '' : &modified ? '+' : &modifiable ? '' : ''
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -952,8 +948,7 @@ if exists('g:plugs["lightline.vim"]')
 
     function! LightLineMode() abort
             let ftmap = {
-                \ 'nerdtree': 'NERDTREE',
-                \ 'tagbar': 'TAGBAR',
+                \ 'fern': 'FERN',
                 \ 'qf': 'QUICKFIX',
                 \ 'floaterm': 'FLOATERM',
                 \ 'fugitive': 'FUGITIVE',
@@ -993,7 +988,7 @@ if exists('g:plugs["lightline.vim"]')
         " let l:column_col = s:trim(col('$'), col('.'))
         let l:lineinfo = l:current_line .  ' : ' . l:column_col
 
-        return &ft =~# 'tagbar\|nerdtree' ? 'N' : l:lineinfo
+        return &ft =~# 'vista\|fern' ? 'N' : l:lineinfo
 
     endfunction
     
@@ -1037,28 +1032,6 @@ if exists('g:plugs["lightline.vim"]')
         return printf(' %s/%s', idx, cnt)
     endfunction
 
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    function! LightlineReload() abort
-        " call lightline#init()
-        " call lightline#colorscheme()
-        call lightline#update()
-    endfunction
-
-    augroup Lightline_Nerdtree
-        autocmd!
-        autocmd filetype nerdtree call LightlineReload()
-    augroup END
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 自定义TAGBAR
-" --------------------------------------------------------------o----------------------------------------------------------------o
-    let g:tagbar_status_func = 'TagbarStatusFunc'
-    function! TagbarStatusFunc(current, sort, fname, ...) abort
-        return lightline#statusline(1)
-    endfunction
-
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " LightLine- Buffers
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -1091,199 +1064,116 @@ if exists('g:plugs["lightline.vim"]')
 endif
 
 " ================================================================================================================================
-"                                                            NERDTree
+"                                                              FERN
 " ================================================================================================================================
 
-if exists('g:plugs["nerdtree"]')
+if exists('g:plugs["fern.vim"]')
 
-    let g:NERDTreeAutoCenter = 0                                              " 光标居中
-    let g:NERDTreeAutoCenterThreshold = 0                                     " 控制自动居中灵敏度
-    let g:NERDTreeSortHiddenFirst = 1                                         " 隐藏文件排序往上
-    let g:NERDTreeNaturalSort = 0                                             " 自然序号排序
-    let g:NERDTreeUseTCD = 1                                                  " 打开Tcd模式
-    let g:NERDTreeChDirMode = 2                                               " 是否改变PWD目录路径
-    let g:NERDTreeHighlightCursorline = 1                                     " 突出显示光标所在的行
-    let g:NERDTreeHijackNetrw = 1                                             " 劫持Netrw
-    let g:NERDTreeIgnore = ['\.pyc','\~$','\.swp','_gsdata_']                 " 屏蔽过滤所有指定的文件和文件夹
-    let g:NERDTreeRespectWildIgnore = 1                                       " 设置为1的话遵循widignore设置
-    let g:NERDTreeBookmarksFile = expand('~/.vim/NERDTreeBookmarks')          " 书签存放路径
-    let g:NERDTreeMarkBookmarks = 0                                           " 当书签文件夹出现时禁用提示
-    let g:NERDTreeQuitOnOpen = 3                                              " 打开后是否关闭NT窗口
-    let g:NERDTreeShowBookmarks = 1                                           " 显示书签
-    let g:NERDTreeShowHidden = 1                                              " 是否显示隐藏文件
-    let g:NERDTreeShowLineNumbers = 0                                         " 是否显示行号
-    let g:NERDTreeWinPos = 'left'                                             " NERDTree显示位置
-    let g:NERDTreeWinSize = 30                                                " 窗口宽度
-    let g:NERDTreeMinimalUI = 1                                               " 不显示帮助面板
-    let g:NERDTreeMinimalMenu = 1                                             " Mini功能窗口
-    let g:NERDTreeAutoDeleteBuffer=1                                          " 自动删除重命名的缓冲区
-    let g:NERDTreeDirArrowExpandable = '+'                                    " 设置树的显示图标
-    let g:NERDTreeDirArrowCollapsible = '-'                                   " 设置树的显示图标
-    " let NERDTreeSortOrder=[1]                                               " 排序设置0 or 1
-    " let NERDTreeCreatePrefix='silent keepalt keepjumps readonly'
+    let g:fern#keepjumps_on_edit = 1
+    let g:fern#keepalt_on_edit = 1
+    let g:fern#disable_default_mappings = 1
+    let g:fern#default_hidden = 1
+    let g:fern#keepalt_on_edit = 1
+    let g:fern#keepjumps_on_edit = 1
+    let g:fern#renderer#default#leading = "  "
+    let g:fern#renderer#default#root_symbol = ""
+    let g:fern#renderer#default#leaf_symbol = "· "
+    let g:fern#renderer#default#collapsed_symbol = "+ "
+    let g:fern#renderer#default#expanded_symbol = "- "
+    let g:fern#hide_cursor = 1
+    let g:fern#disable_drawer_hover_popup = 1
+    let g:fern#scheme#file#show_absolute_path_on_root_label = 0
 
-    hi NERDTreeDirSlash           term=bold  ctermfg=0 
-    hi NERDTreeExecFile           term=bold  ctermfg=250
-    hi NERDTreeLinkTarget         term=bold  ctermfg=8
-    hi NERDTreeLinkFile           term=bold  ctermfg=5
-    hi NERDTreeBookmarksLeader    term=bold  ctermfg=8
-    hi NERDTreeBookmark           term=bold  ctermfg=0
-    hi NERDTreeOpenable           term=bold  ctermfg=8
+    let g:fern_git_status#disable_ignored = 1
+    let g:fern_git_status#disable_untracked = 1
+    let g:fern_git_status#disable_submodules = 1
+    let g:fern_git_status#disable_directories = 1
 
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 当NERDTree为剩下的唯一窗口时自动关闭 , 屏蔽;s ;c
-" --------------------------------------------------------------o----------------------------------------------------------------o
-    augroup NERDTree
-        autocmd!
-        autocmd Bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    function! s:init_fern() abort
+        nmap <buffer> <CR> <Plug>(fern-action-open-and-close) 
+        nmap <buffer> C <Plug>(fern-action-enter)
+        nmap <buffer> u <Plug>(fern-action-leave)
+        nmap <buffer> r <Plug>(fern-action-reload)
+        nmap <buffer> <localleader>q :<C-u>quit<CR>
 
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 禁止其他缓冲区替换NERDTree
-" --------------------------------------------------------------o----------------------------------------------------------------o
+        nmap <buffer><silent> <Plug>(fern-action-open-and-close)
+            \ <Plug>(fern-action-open:edit)
+            \ <Plug>(fern-close-drawer)
 
-        autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-                    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+        nmap <buffer><expr>
+            \ <Plug>(fern-my-expand-or-collapse)
+            \ fern#smart#leaf(
+            \   "\<Plug>(fern-action-collapse)",
+            \   "\<Plug>(fern-action-expand)",
+            \   "\<Plug>(fern-action-collapse)",
+            \ )
+
+        nmap <buffer><expr>
+            \ <Plug>(fern-my-collapse-or-leave)
+            \ fern#smart#drawer(
+            \   "\<Plug>(fern-action-collapse)",
+            \   "\<Plug>(fern-action-leave)",
+            \ )
+
+        nmap <buffer><nowait> l <Plug>(fern-my-expand-or-collapse)
+        nmap <buffer><nowait> o <Plug>(fern-my-expand-or-collapse)
+        nmap <buffer><nowait> h <Plug>(fern-my-collapse-or-leave)
+    endfunction
+
+    function! Fernhlights() abort
+        highlight FernRootSymbol     cterm=NONE ctermbg=0  ctermfg=4  gui=NONE guibg=#282C34 guifg=#C678DD
+        highlight FernRootText       cterm=NONE ctermbg=0  ctermfg=4  gui=NONE guibg=#282C34 guifg=#C678DD
+        highlight FernBranchSymbol   cterm=NONE ctermbg=0  ctermfg=8  gui=NONE guibg=#282C34 guifg=#5a6378
+        highlight FernLeafText       cterm=NONE ctermbg=0  ctermfg=7  gui=NONE guibg=#282C34 guifg=#ABB2BF
+    endfunction
+
+    augroup fern-custom
+        autocmd! *
+        autocmd FileType fern setlocal foldcolumn=0 |  setlocal norelativenumber | setlocal nonumber | call s:init_fern() 
+        autocmd FileType fern call Fernhlights()
+        autocmd FileType fern call fern_git_status#init()
     augroup END
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
 " 快捷键
 " --------------------------------------------------------------o----------------------------------------------------------------o
-    
-    function! s:NERDTreetoggle() abort
-        if &filetype == 'nerdtree'                                  
-            NERDTreeToggle %p:h                                     
-        else                                                        
-            silent! NERDTreeFind                                            
-        endif                                                       
-    endfunction                                                     
 
-    nnoremap <silent><localleader>e :call <SID>NERDTreetoggle()<CR> 
-    inoremap <silent><localleader>e <Esc> :call <SID>NERDTreetoggle()<CR> 
+    nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>
+    nnoremap <silent><localleader>e :Fern . -drawer -width=30 -toggle<CR> 
 
 endif
 
 " ================================================================================================================================
-"                                                         NERDTree - Git
+"                                                           VISTA
 " ================================================================================================================================
 
-if exists('g:plugs["nerdtree-git-plugin"]')
+if exists('g:plugs["vista.vim"]')
 
-    let g:NERDTreeGitStatusShowClean = 0
-    let g:NERDTreeGitStatusUseNerdFonts = 1
-    let g:NERDTreeGitStatusConcealBrackets = 0
-    let g:NERDTreeGitStatusUntrackedFilesMode = 'normal' 
-    let g:NERDTreeGitStatusIndicatorMapCustom = {
-        \ 'Modified'  :'M',
-        \ 'Staged'    :'A',
-        \ 'Untracked' :'U',
-        \ 'Renamed'   :'R',
-        \ 'Unmerged'  :'UU',
-        \ 'Deleted'   :'D',
-        \ 'Dirty'     :'M',
-        \ 'Ignored'   :'.',
-        \ 'Clean'     :'C',
-        \ 'Unknown'   :'?',
+    let g:vista_sidebar_position = 'vertical botright'
+    let g:vista_sidebar_width = 30
+    let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+    let g:vista_fold_toggle_icons= ["- ", "+ "]
+    let g:vista_icon_indent = ['+ ', '│ ']
+    let g:vista_disable_statusline = 1
+    let g:vista_highlight_whole_line = 0
+    let g:vista#renderer#enable_kind = 0
+    let g:vista_stay_on_open = 1
+    let g:vista_fzf_preview = ['right:150%']
+    let g:vista_echo_cursor = 0
+    let g:vista_close_on_jump = 1
+    let g:vista_default_executive = 'ctags'
+    let g:vista_ctags_executable = '/usr/bin/ctags-universal'
+    let g:vista_echo_cursor_strategy = 'echo'
+    let g:vista_vimwiki_executive = 'markdown'
+    let g:vista_executive_for = {
+        \ 'vimwiki': 'markdown',
+        \ 'pandoc': 'markdown',
+        \ 'markdown': 'toc',
         \ }
 
-endif
+    autocmd BufEnter * if winnr("$") == 1  && bufname('$') =~# "__vista__" | execute "normal! :q!\<CR>" | endif
 
-" ================================================================================================================================
-"                                                            Tagbar
-" ================================================================================================================================
-
-if exists('g:plugs["tagbar"]')
-
-    let g:tagbar_autofocus = 1                                                " 焦点自动聚焦到Tagbar
-    let g:tagbar_autoclose = 1
-    let g:tagbar_autopreview = 0
-    let g:tagbar_no_autocmds = 0
-    let g:tagbar_autoclose_netrw = 1
-    let g:tagbar_jump_lazy_scroll = 1
-    let g:tagbar_use_cache = 1
-    let g:tagbar_sort = 0
-    let g:tagbar_indent = 0
-    let g:tagbar_case_insensitive = 1
-    let g:tagbar_compact = 1
-    let g:tagbar_show_balloon = 0
-    let g:tagbar_show_data_type = 0
-    let g:tagbar_show_visibility = 1
-    let g:tagbar_expand = 1
-    let g:tagbar_autoshowtag = 2
-    let g:tagbar_silent = 1
-    let g:tagbar_scrolloff = 10
-    let g:tagbar_hide_nonpublic = 1
-    let g:tagbar_width = 25
-    let g:tagbar_map_preview = '<SPACE>'
-    let g:tagbar_map_showproto = "d"
-    let g:tagbar_map_togglesort = 'r'
-    let g:tagbar_iconchars = ['+', '-']
-    let g:tagbar_previewwin_pos = "aboveleft"
-
-    " VIMWIKI CTAGS
-    let g:tagbar_type_vimwiki = {
-        \ 'ctagsbin': 'ctags',
-        \ 'ctagstype'	: 'vimwiki',
-        \ 'kinds'		: [
-            \ 'c:Heading1:0:1',
-            \ 's:Heading2:0:1',
-            \ 'S:Heading3:0:1',
-            \ 't:Heading4:0:1',
-            \ 'T:Heading5:0:1',
-            \ 'u:Heading6:0:1',
-        \ ],
-        \ 'sro'			: '""',
-        \ 'kind2scope'	: {
-            \ 'c' : 'Heading1',
-            \ 's' : 'Heading2',
-            \ 'S' : 'Heading3',
-            \ 't' : 'Heading4',
-            \ 'T' : 'Heading5',
-            \},
-        \ 'scope2kind'	: {
-            \ 'Heading1' : 'c',
-            \ 'Heading2' : 's',
-            \ 'Heading3' : 'S',
-            \ 'Heading4' : 't',
-            \ 'Heading5' : 'T',
-        \ },
-    \ }
-
-    " YAML CTAGS
-    let g:tagbar_type_yaml = {
-        \ 'ctagsbin': 'ctags-universal',
-        \ 'ctagstype' : 'yaml',
-        \ 'kinds' : [
-            \ 'a:anchors',
-            \ 's:section',
-            \ 'e:entry'
-        \ ],
-        \ 'sro' : '.',
-        \ 'scope2kind': {
-            \ 'section': 's',
-            \ 'entry': 'e'
-        \ },
-        \ 'kind2scope': {
-            \ 's': 'section',
-            \ 'e': 'entry'
-        \ },
-        \ 'sort' : 0
-        \ }
-
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 当Tagbar为剩下的唯一窗口时自动关闭 , 屏蔽;s ;c
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    augroup Tagbar
-        autocmd!
-        autocmd BufEnter * if (winnr("$") == 1 && bufname('#') =~# "^__Tagbar__") | q | endif
-    augroup END
-    
-" --------------------------------------------------------------o----------------------------------------------------------------o
-" 快捷键
-" --------------------------------------------------------------o----------------------------------------------------------------o
-
-    nnoremap <silent><localleader>t :TagbarToggle<CR>
-    inoremap <silent><localleader>t <Esc>:TagbarToggle<CR>
+    nnoremap <silent><localleader>t :Vista!!<CR> 
 
 endif
 
@@ -1793,4 +1683,18 @@ if exists('g:plugs["vimwiki"]')
 
 endif
 
+" ================================================================================================================================
+"                                                        HIGHLIGHTEDYANK 
+" ================================================================================================================================
 
+if exists('g:plugs["vim-highlightedyank"]')
+
+    let g:highlightedyank_highlight_duration = 80
+
+    if !exists('##TextYankPost')
+        map y <Plug>(highlightedyank)
+    endif
+
+    " highlight HighlightedyankRegion cterm=reverse gui=reverse
+
+endif
