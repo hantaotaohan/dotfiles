@@ -587,7 +587,7 @@ augroup END
 
 augroup SystemColors
     autocmd!
-    autocmd ColorScheme one call highlights#SystemHighlights()
+    autocmd ColorScheme * call highlights#SystemHighlights()
 augroup END
 
 " ================================================================================================================================
@@ -1172,10 +1172,10 @@ if exists('g:plugs["vista.vim"]')
         \ 'markdown': 'toc',
         \ }
 
-    autocmd BufEnter * if winnr("$") == 1  && bufname('$') =~# "__vista__" | execute "normal! :q!\<CR>" | endif
-    autocmd FileType vista,vista_kind nnoremap <buffer> <silent> \
-             / :<c-u>call vista#finder#fzf#Run()<CR>
-
+    augroup Vista
+        autocmd!
+        autocmd BufEnter * if winnr("$") == 1  && bufname('$') =~# "__vista__" | execute "normal! :q!\<CR>" | endif
+    augroup END
 
     nnoremap <silent><localleader>t :Vista!!<CR> 
 
