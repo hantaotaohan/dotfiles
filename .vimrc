@@ -1165,6 +1165,7 @@ if exists('g:plugs["vista.vim"]')
     let g:vista_ctags_executable = '/usr/bin/ctags-universal'
     let g:vista_echo_cursor_strategy = 'echo'
     let g:vista_vimwiki_executive = 'markdown'
+    let g:vista#renderer#enable_icon = 0
     let g:vista_executive_for = {
         \ 'vimwiki': 'markdown',
         \ 'pandoc': 'markdown',
@@ -1172,6 +1173,9 @@ if exists('g:plugs["vista.vim"]')
         \ }
 
     autocmd BufEnter * if winnr("$") == 1  && bufname('$') =~# "__vista__" | execute "normal! :q!\<CR>" | endif
+    autocmd FileType vista,vista_kind nnoremap <buffer> <silent> \
+             / :<c-u>call vista#finder#fzf#Run()<CR>
+
 
     nnoremap <silent><localleader>t :Vista!!<CR> 
 
