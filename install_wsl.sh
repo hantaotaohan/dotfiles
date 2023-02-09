@@ -385,6 +385,7 @@ Apt_Install() {
         lua5.2 \
         openssh-server \
         openssh-client \
+        trash-cli \
         jq \
         w3m \
         zip \

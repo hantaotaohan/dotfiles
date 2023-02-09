@@ -495,6 +495,7 @@ Apt_Install() {
         offlineimap \
         # peek \
         yank \
+        trash-cli \
         imwheel
         # pv \
         # rar \

@@ -1081,7 +1081,7 @@ if exists('g:plugs["fern.vim"]')
     let g:fern#renderer#default#collapsed_symbol = "+ "
     let g:fern#renderer#default#expanded_symbol = "- "
     let g:fern#hide_cursor = 1
-    let g:fern#disable_drawer_hover_popup = 1
+    let g:fern#disable_drawer_hover_popup = 0
     let g:fern#scheme#file#show_absolute_path_on_root_label = 0
 
     let g:fern_git_status#disable_ignored = 1
@@ -1093,8 +1093,15 @@ if exists('g:plugs["fern.vim"]')
         nmap <buffer> <CR> <Plug>(fern-action-open-and-close) 
         nmap <buffer> C <Plug>(fern-action-enter)
         nmap <buffer> u <Plug>(fern-action-leave)
-        nmap <buffer> r <Plug>(fern-action-reload)
+        nmap <buffer> R <Plug>(fern-action-reload)
+        nmap <buffer> n <Plug>(fern-action-new-file)
+        nmap <buffer> N <Plug>(fern-action-new-path)
+        nmap <nowait><buffer> dd <Plug>(fern-action-remove=)y<CR>
+        nmap <buffer> m <Plug>(fern-action-move)
+        nmap <buffer> v <Plug>(fern-action-mark:toggle)
+        nmap <buffer> r <Plug>(fern-action-rename)
         nmap <buffer> <localleader>q :<C-u>quit<CR>
+        nmap <buffer> s <Plug>(fern-action-include)
 
         nmap <buffer><silent> <Plug>(fern-action-open-and-close)
             \ <Plug>(fern-action-open:edit)
@@ -1139,7 +1146,7 @@ if exists('g:plugs["fern.vim"]')
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
     nnoremap <Plug>(fern-close-drawer) :<C-u>FernDo close -drawer -stay<CR>
-    nnoremap <silent><localleader>e :Fern . -drawer -width=30 -toggle<CR> 
+    nnoremap <silent><localleader>e :Fern . -reveal=%:p -drawer -width=30 -toggle<CR> 
 
 endif
 
