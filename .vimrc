@@ -661,10 +661,7 @@ au VimEnter *
 " Vim-Plug-Config   
 " --------------------------------------------------------------o----------------------------------------------------------------o
 
-let g:plug_url_format = 'https://hub.nuaa.cf/%s.git'
-" let g:plug_url_format = 'https://hub.fastgit.xyz/%s.git'
-" let g:plug_url_format = 'https://github.com/%s.git'
-" let g:plug_url_format = 'https://github.com.cnpmjs.org/%s.git'
+let g:plug_url_format = $GITHUB . '%s.git'
 
 let g:plug_window = 'enew'
 
