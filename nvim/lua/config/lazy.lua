@@ -8,11 +8,12 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)                          -- 加载
 
 require("lazy").setup({
     defaults = {
-        lazy = false,                                                  -- 此插件是否启用懒加载
+        lazy = true,                                                  -- 此插件是否启用懒加载
         version = false,                                               -- 启用此功能后,尝试安装最新最稳定版本
     },
     spec = {
         { import = "plugins" },                                        -- 导入 plugins 文件夹
+        { import = "options" },
     },
     lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json",          -- 运行更新后的生成的 lock 文件的位置
     concurrency = nil,                                                 -- 安装插件的并行数量
@@ -76,13 +77,33 @@ require("lazy").setup({
             -- 禁用插件列表
             disabled_plugins = {
                 "gzip",
+                -- "tarPlugin",
+                -- "tohtml",
+                -- "tutor",
+                -- "zipPlugin",
+                -- "2html_plugin",
+                -- "getscript",
+                -- "getscriptPlugin",
+                -- "logipat",
+                -- "netrw",
+                -- "netrwSettings",
+                -- "netrwFileHandlers",
+                -- "tar",
+                -- "rrhelper",
+                -- "spellfile_plugin",
+                -- "vimball",
+                -- "vimballPlugin",
+                -- "zip",
+                -- "rplugin",
+                -- "syntax",
+                -- "synmenu",
+                -- "optwin",
+                -- "compiler",
+                -- "bugreport",
+                -- "ftplugin",
                 -- "matchit",
                 -- "matchparen",
                 -- "netrwPlugin",
-                "tarPlugin",
-                "tohtml",
-                "tutor",
-                "zipPlugin",
             },
         },
     },

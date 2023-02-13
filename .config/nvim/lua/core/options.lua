@@ -106,7 +106,7 @@ o.splitbelow = true
 o.splitright = true
 o.startofline = true
 o.breakindent = true
-o.showbreak = '↳  '
+o.showbreak = '↳  '            -- 要放在已换行行的开头的字符串
 o.jumpoptions = 'view'         -- jumpoptions = "stack",
 o.conceallevel = 2             -- so that `` is visible in markdown files
 o.iskeyword:append "_"
@@ -114,9 +114,10 @@ o.iskeyword:append "$"
 o.iskeyword:append "@"
 o.iskeyword:append "%"
 o.iskeyword:append "#"
+
+o.shortmess:append 'I'
 o.shortmess:append "c"
 o.shortmess:append 'A'
-o.shortmess:append 'I'
 o.shortmess:append 'O'
 o.shortmess:append 'T'
 o.shortmess:append 'a'
