@@ -6,12 +6,12 @@ vim.g.maplocalleader = ";"                                                     -
 -- VARIABLE --
 
 local opt = vim.opt
-local vim_data_path = vim.fn.stdpath("data")
+local VIM_DATA_PATH = vim.fn.stdpath("data")
 
 -- DISPLAY --
 
--- g.python_host_skip_check = 1
--- g.python3_host_skip_check = 1
+vim.g.python_host_skip_check = 1
+vim.g.python3_host_skip_check = 1
 
 
 opt.display = "lastline"                                                       -- 更改文本的显示方式
@@ -39,16 +39,16 @@ opt.pumblend = 10                                                              -
 opt.previewheight = 12                                                         -- 预览窗口的默认高
 
 opt.wrap = false                                                               -- 是否开启自动换行
-opt.list = true                                                                -- 是否显示不可见或者隐藏字符
+opt.list = false                                                                -- 是否显示不可见或者隐藏字符
 opt.showbreak = '↳  '                                                          -- 要放在已换行行的开头的字符串
--- opt.listchars:append("tab:·")                                                  -- 用于显示选项卡的两个或三个字符. 第三个字符是可选的
--- opt.listchars:append("nbsp:␣")                                                 -- 不可断空格字符要显示的字符
--- opt.listchars:append("eol:↲" )                                                 -- 设置隐藏字符串: 要显示在每行末尾的字符
--- opt.listchars:append("space:⋅")                                                -- 空格中显示的字符
--- opt.listchars:append("trail:•")                                                -- 尾随空格显示的字符
--- opt.listchars:append("extends:▸")                                              -- 当"换行"为关闭时, 如果超出屏幕所显示的字符
--- opt.listchars:append("conceal:┊")                                              -- 在隐藏文本中显示的字符"conceallevel"设置为1. 省略时的空格
--- opt.listchars:append("precedes:◂")                                             -- 显示在物理行, 当在第一列中可见的字符
+opt.listchars:append("tab:>⋅")                                                  -- 用于显示选项卡的两个或三个字符. 第三个字符是可选的
+opt.listchars:append("nbsp:␣")                                                 -- 不可断空格字符要显示的字符
+opt.listchars:append("eol:↲" )                                                 -- 设置隐藏字符串: 要显示在每行末尾的字符
+opt.listchars:append("space:⋅")                                                -- 空格中显示的字符
+opt.listchars:append("trail:•")                                                -- 尾随空格显示的字符
+opt.listchars:append("extends:▸")                                              -- 当"换行"为关闭时, 如果超出屏幕所显示的字符
+opt.listchars:append("conceal:┊")                                              -- 在隐藏文本中显示的字符"conceallevel"设置为1. 省略时的空格
+opt.listchars:append("precedes:◂")                                             -- 显示在物理行, 当在第一列中可见的字符
 
 opt.fillchars:append("stl: ")                                                  -- 当前窗口的状态线
 opt.fillchars:append("stlnc: ")                                                -- 非当前窗口的状态线
@@ -56,7 +56,7 @@ opt.fillchars:append("wbr: ")                                                  -
 opt.fillchars:append("horiz:─")                                                -- 水平分隔符
 opt.fillchars:append("horizup:┴")                                              -- 向上水平分隔符 
 opt.fillchars:append("horizdown:┬")                                            -- 向下水平分隔符 
-opt.fillchars:append("vert:|")                                                 -- 垂直分隔符: vsplit
+opt.fillchars:append("vert:│")                                                 -- 垂直分隔符: vsplit
 opt.fillchars:append("vertleft:┤")                                             -- 垂直分隔符:向左
 opt.fillchars:append("vertright:├")                                            -- 垂直分隔符: 向右
 opt.fillchars:append("verthoriz:┼")                                            -- 垂直和水平重合
@@ -95,7 +95,7 @@ opt.shortmess:append("S")                                                      -
 -- opt.shortmess:append("r")                                                      -- 使用 "[RO]" instead of "[readonly]"
 -- opt.shortmess:append("w")                                                      -- 使用 "[w]" 而不是 "writed"
 -- opt.shortmess:append("x")                                                      -- 使用 "[dos]" 代替 "[dos format]"
--- opt.shortmess:append("a")                                                      -- 启用全部缩写功能
+opt.shortmess:append("a")                                                      -- 启用全部缩写功能
 -- opt.shortmess:append("o")                                                      -- 屏蔽自动写入时读取文件的信息
 -- opt.shortmess:append("O")                                                      -- 用于读取文件的消息将覆盖以前的消息也适用于快速修复消息
 -- opt.shortmess:append("s")                                                      -- 不要给出搜索命中底部, 在顶部继续的信息
@@ -114,7 +114,7 @@ opt.swapfile = false                                                           -
 opt.undofile = true                                                            -- 是否开启持久性撤销功能
 opt.undolevels = 10000                                                         -- 可撤消的最大更改数
 opt.writebackup = false                                                        -- 是否开启在覆盖文件之前进行备份. 备份将在之后删除
-opt.undodir = vim_data_path .. "/undo"                                         -- 设置撤销文件目录
+opt.undodir = VIM_DATA_PATH .. "/undo"                                         -- 设置撤销文件目录
 
 opt.viewoptions:append "cursor"                                                -- 更改MKVIEW命令的效果: 光标在文件和窗口中的位置
 opt.viewoptions:append "curdir"                                                -- 更改MKVIEW命令的效果: 本地当前目录

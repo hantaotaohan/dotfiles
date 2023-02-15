@@ -1,23 +1,16 @@
-return {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function(plugin)
+return{
 
-        local function fg(name)
-            return function()
-                local hl = vim.api.nvim_get_hl_by_name(name, true)
-                return hl and hl.foreground and { fg = string.format("#%06x", hl.foreground) }
-            end
-        end
+    "nvim-lualine/lualine.nvim",
+    event = 'VeryLazy',
+    config = function()
 
         local colors = {
-            black = '#282C34',
-            black_1 = '#30363f',
-            black_2 = '#3E4452',
-            red = '#E06c75',
+            BLACK_0 = '#282C34',
+            BLACK_1 = '#30363f',
+            BLACK_2 = '#3E4452',
+            RED_001 = '#E06c75',
         }
 
-        local vim = vim
         local AsyncRunStatus = require('lualine.component'):extend()
 
         function AsyncRunStatus:init(options)
@@ -25,13 +18,14 @@ return {
         end
 
         function AsyncRunStatus:update_status()
+            cond = vim.g.async_status
             local async_status = vim.g.asyncrun_status
             local async_status_old = ""
 
             if async_status == "running" then
-                async_status = "   "
+                async_status = "  RUNNING "
             elseif async_status == "success" then
-                async_status = "   "
+                async_status = "  SUCCESS"
             elseif async_status == "failure" then
                 async_status = "  "
             elseif async_status == "stopped" then
@@ -41,8 +35,11 @@ return {
             if  (async_status ~= async_status_old) then
                 async_status_old = async_status
             end
+
             return async_status
         end
+
+        ---------------------------------------------------------------------------------
 
         local empty = require('lualine.component'):extend()
 
@@ -59,7 +56,7 @@ return {
             for name, section in pairs(sections) do
                 local left = name:sub(9, 10) < 'x'
                 for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
-                    table.insert(section, pos * 2, { empty, color = { fg = colors.black, bg = colors.black } })
+                    table.insert(section, pos * 2, { empty, color = { fg = colors.BLACK_0, bg = colors.BLACK_0 } })
                 end
                 for id, comp in ipairs(section) do
                     if type(comp) ~= 'table' then
@@ -69,9 +66,7 @@ return {
                     comp.separator = left and { right = '' } or { left = '' }
                 end
             end
-
             return sections
-
         end
 
         local function toggleterm_statusline()
@@ -86,175 +81,188 @@ return {
                 filetypes = { 'toggleterm' }
             }
 
+        local options = {
 
-            return {
-                options = {
-                    icons_enabled = false,
-                    theme = 'auto',
-                    show_filename_only = true,
-                    hide_filename_extension = false,
-                    show_modified_status = true,
-                    -- component_separators = { left = '', right = ''},
-                    -- section_separators = { left = '', right = ''},
-                    component_separators = {},
-                    section_separators = { left = '', right = '' },
-                    disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+            options = {
 
-                    buffers_color = {
-                        -- Same values as the general color option can be used here.
-                        active = 'lualine_{section}_normal',     -- Color for active buffer.
-                        inactive = 'lualine_{section}_inactive', -- Color for inactive buffer.
-                    },
+                icons_enabled = false,
+                theme = 'auto',
+                show_filename_only = true,
+                hide_filename_extension = false,
+                show_modified_status = true,
 
-                    ignore_focus = {},
-                    always_divide_middle = true,
-                    globalstatus = false,
+                -- component_separators = { left = '', right = ''},
+                -- section_separators = { left = '', right = ''},
 
-                    refresh = {
-                        statusline = 1000,
-                        tabline = 1000,
-                        winbar = 1000,
-                    }
+                component_separators = {},
+                section_separators = { left = '', right = '' },
+
+                disabled_filetypes = {
+                    statusline = {},
+                    winbar = {},
                 },
 
-                sections = process_sections {
-                    lualine_a = {'mode'},
-                    -- lualine_b = {'branch', 'diff', 'diagnostics'},
-                    -- lualine_c = {'filename', '%r'},
-                    lualine_x = {'encoding', 'fileformat', 'filetype'},
-                    -- lualine_y = {'progress'},
-                    lualine_z = {'location'},
+                buffers_color = {
+                    -- Same values as the general color option can be used here.
+                    active = 'lualine_{section}_normal',     -- Color for active buffer.
+                    inactive = 'lualine_{section}_inactive', -- Color for inactive buffer.
+                },
 
-                    lualine_b = {
+                ignore_focus = {},
+                always_divide_middle = true,
+                globalstatus = false,
 
-                        {
-                            'branch',
-                            icons_enabled = true,
-                            icon = '   '
-                        },
+                refresh = {
+                    statusline = 1000,
+                    tabline = 1000,
+                    winbar = 1000,
+                }
 
-                        {
-                            'diff',
-                            colored = true, -- Displays a colored diff status if set to true
-                            symbols = {added = '   ', modified = '   ', removed = '   '}, -- Changes the symbols used by the diff.
-                            source = nil, -- A function that works as a data source for diff.
-                            -- It must return a table as such:
-                            --   { added = add_count, modified = modified_count, removed = removed_count }
-                            -- or nil on failure. count <= 0 won't be displayed.
-                            color = { fg = colors.black_1, bg = colors.black_1 }
-                        },
+            },
 
-                        {
-                            '%R',
-                            cond = function()
-                                return vim.o.readonly
-                            end,
-                            color = { fg = colors.red, bg = colors.black_1 }
-                        },
+            sections = process_sections {
+                lualine_a = {'mode'},
+                -- lualine_b = {'branch', 'diff', 'diagnostics'},
+                -- lualine_c = {'filename', '%r'},
+                lualine_x = {'encoding', 'fileformat', 'filetype'},
+                -- lualine_y = {'progress'},
+                lualine_z = {'location'},
 
-                        {
-                            AsyncRunStatus,
-                            color = { fg = colors.red, bg = colors.black_1 },
-                        },
-                        -- "diagnostics"
+                lualine_b = {
+
+                    {
+                        'branch',
+                        icons_enabled = true,
+                        icon = '   '
                     },
 
-                    lualine_c = {
-
-                        {
-                            'filename',
-                            file_status = true,      -- Displays file status (readonly status, modified status)
-                            newfile_status = false,   -- Display new file status (new file means no write after created)
-                            path = 3,                -- 0: Just the filename
-                            -- 1: Relative path
-                            -- 2: Absolute path
-                            -- 3: Absolute path, with tilde as the home directory
-
-                            shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
-                            -- for other components. (terrible name, any suggestions?)
-                            symbols = {
-                                modified = '  [+]',      -- Text to show when the buffer is modified
-                                alternate_file = '#', -- Text to show to identify the alternate file
-                                directory =  'DIRECTORY',     -- Text to show when the buffer is a directory
-                                readonly = 'ReadOnly',      -- Text to show when the file is non-modifiable or readonly.
-                                unnamed = '[No Name]', -- Text to show for unnamed buffers.
-                                newfile = '[New]'     -- Text to show for new created file before first writting
-                            },
-                        },
+                    {
+                        'diff',
+                        colored = true, -- Displays a colored diff status if set to true
+                        symbols = {added = '   ', modified = '   ', removed = '   '}, -- Changes the symbols used by the diff.
+                        source = nil, -- A function that works as a data source for diff.
+                        -- It must return a table as such:
+                        --   { added = add_count, modified = modified_count, removed = removed_count }
+                        -- or nil on failure. count <= 0 won't be displayed.
+                        color = { fg = colors.BLACK_1, bg = colors.BLACK_1 }
                     },
 
-                    lualine_y = {
-                        {
-                            "diagnostics",
-                            sources = nil,
-                            -- sections = { "error", "warn" }, -- info hint
-                            icons_enabled = true,
+                    {
+                        '%R',
+                        cond = function()
+                            return vim.o.readonly
+                        end,
+                        color = { fg = colors.RED_001, bg = colors.BLACK_1 }
+                    },
 
-                            symbols = { error = "  ", warn = "   ", hint = "  ", info = "  " },
-                            -- symbols = { error = " ", warn = "ﴞ ", info = " ", hint = "ﯧ " },
-                            color = { fg = colors.black_2, bg = colors.black_2 },
-                            colored = true, -- Displays diagnostics status in color if set to true.
-                            update_in_insert = false, -- Update diagnostics in insert mode.
-                            always_visible = false, -- Show diagnostics even if there are none.
+                    {
+                        AsyncRunStatus,
+                        color = { fg = colors.RED_001, bg = colors.BLACK_1 },
+                    },
+                    -- "diagnostics"
+                },
+
+                lualine_c = {
+
+                    {
+                        'filename',
+                        file_status = true,      -- Displays file status (readonly status, modified status)
+                        newfile_status = false,   -- Display new file status (new file means no write after created)
+                        path = 3,                -- 0: Just the filename
+                        -- 1: Relative path
+                        -- 2: Absolute path
+                        -- 3: Absolute path, with tilde as the home directory
+
+                        shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+                        -- for other components. (terrible name, any suggestions?)
+                        symbols = {
+                            modified = '  [+]',      -- Text to show when the buffer is modified
+                            alternate_file = '#', -- Text to show to identify the alternate file
+                            directory =  'DIRECTORY',     -- Text to show when the buffer is a directory
+                            readonly = 'ReadOnly',      -- Text to show when the file is non-modifiable or readonly.
+                            unnamed = '[No Name]', -- Text to show for unnamed buffers.
+                            newfile = '[New]'     -- Text to show for new created file before first writting
                         },
-                        'progress'
                     },
                 },
 
-                inactive_sections = process_sections {
+                lualine_y = {
+                    {
+                        "diagnostics",
+                        sources = nil,
+                        -- sections = { "error", "warn" }, -- info hint
+                        icons_enabled = true,
 
-                    -- lualine_a = {},
-                    -- lualine_b = {'branch'},
-                    lualine_c = {'filename'},
-                    lualine_x = {'location'},
-                    lualine_y = {},
-                    lualine_z = {},
-
-                    lualine_a = {
-
-                        {
-                            'mode',
-                            colored = true,
-                            -- source = nil,
-                            color = { fg = "#606B70", bg = colors.black_1 }
-                            -- color = { fg = colors.black_1, bg = colors.red }
-                        },
+                        symbols = { error = "  ", warn = "   ", hint = "  ", info = "  " },
+                        -- symbols = { error = " ", warn = "ﴞ ", info = " ", hint = "ﯧ " },
+                        color = { fg = colors.BLACK_2, bg = colors.BLACK_2 },
+                        colored = true, -- Displays diagnostics status in color if set to true.
+                        update_in_insert = false, -- Update diagnostics in insert mode.
+                        always_visible = false, -- Show diagnostics even if there are none.
                     },
-                    lualine_b = {
-
-                        {
-                            'branch',
-                            icons_enabled = true,
-                            icon = '   ',
-                            colored = true,
-                            -- source = nil,
-                            color = { fg = "#606B70", bg = colors.black_1 }
-                            -- color = { fg = colors.black_1, bg = colors.red }
-                        },
-                    },
-
-                    tabline = {},
-
-                    winbar = {
-                        lualine_a = {},
-                        lualine_b = {},
-                        lualine_c = {},
-                        lualine_x = {},
-                        lualine_y = {},
-                        lualine_z = {}
-                    },
-
-                    inactive_winbar = {
-                        lualine_a = {},
-                        lualine_b = {},
-                        lualine_c = {},
-                        lualine_x = {},
-                        lualine_y = {},
-                        lualine_z = {}
-                    },
-
+                    'progress'
                 },
-                extensions = { "quickfix", "neo-tree", "fugitive", "symbols-outline", toggleterm },
-            }
-        end,
-    }
+            },
+
+            inactive_sections = process_sections {
+
+                -- lualine_a = {},
+                -- lualine_b = {'branch'},
+                lualine_c = {'filename'},
+                lualine_x = {'location'},
+                lualine_y = {},
+                lualine_z = {},
+
+                lualine_a = {
+
+                    {
+                        'mode',
+                        colored = true,
+                        -- source = nil,
+                        color = { fg = "#606B70", bg = colors.BLACK_1 }
+                        -- color = { fg = colors.BLACK_1, bg = colors.RED_001 }
+                    },
+                },
+                lualine_b = {
+
+                    {
+                        'branch',
+                        icons_enabled = true,
+                        icon = '   ',
+                        colored = true,
+                        -- source = nil,
+                        color = { fg = "#606B70", bg = colors.BLACK_1 }
+                        -- color = { fg = colors.BLACK_1, bg = colors.RED_001 }
+                    },
+                },
+            },
+
+            tabline = {},
+
+            winbar = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = {},
+                lualine_x = {},
+                lualine_y = {},
+                lualine_z = {}
+            },
+
+            inactive_winbar = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = {},
+                lualine_x = {},
+                lualine_y = {},
+                lualine_z = {}
+            },
+
+            extensions = { 'quickfix', 'nvim-tree', 'fugitive', 'symbols-outline', toggleterm },
+
+        }
+
+        require "lualine".setup(options)
+
+    end
+
+}
