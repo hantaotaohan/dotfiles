@@ -1,39 +1,41 @@
--- LEADER --
-
-vim.g.mapleader = "\\"                                                         -- 设置Leader
-vim.g.maplocalleader = ";"                                                     -- 设置LocalLeader
-
 -- VARIABLE --
 
 local opt = vim.opt
 local VIM_DATA_PATH = vim.fn.stdpath("data")
 
--- DISPLAY --
+-- LEADER --
+
+vim.g.mapleader = "\\"                                                         -- 设置Leader
+vim.g.maplocalleader = ";"                                                     -- 设置LocalLeader
+
+-- DISABLE -- 
 
 vim.g.python_host_skip_check = 1
 vim.g.python3_host_skip_check = 1
 
-
-opt.display = "lastline"                                                       -- 更改文本的显示方式
+-- DISPLAY --
 
 opt.hidden = true                                                              -- 是否隐藏缓冲区, 用于切换BUFFER
 opt.showtabline = 2                                                            -- 如何显示标签栏
-
-opt.conceallevel = 3                                                           -- 隐藏粗体和斜体的 * 标记
+opt.laststatus = 2                                                             -- 是否开启最后一个窗口何时有状态行 | 0: 永不 | 1: 只有在两个窗口时 | 2: 总是显示 |
+opt.display = "lastline"                                                       -- 更改文本的显示方式
 opt.cursorline = true                                                          -- 是否高亮当前行
-opt.laststatus = 0                                                             -- 是否开启最后一个窗口何时有状态行 | 0: 永不 | 1: 只有在两个窗口时 | 2: 总是显示 |
+opt.colorcolumn = ""                                                           -- 是否高亮指定的列
+opt.termguicolors = true                                                       -- 开启终端真色彩支持
+
 opt.number = true                                                              -- 是否开启左边栏的绝对行号
-opt.winblend = 20                                                              -- 浮动窗口的伪透明度
-opt.scrolloff = 4                                                              -- 要保留在上方和下方的最小屏幕行数 
-opt.sidescrolloff = 8                                                          -- 要保留在左侧和右侧的最小屏幕列数
 opt.numberwidth = 3                                                            -- 显示行号的最小列数 
 opt.relativenumber = true                                                      -- 是否显示左边栏的相对行号
 opt.signcolumn = "yes"                                                         -- 是否显示符号列
-opt.termguicolors = true                                                       -- 开启终端真色彩支持
+opt.conceallevel = 3                                                           -- 隐藏粗体和斜体的 * 标记
+
+opt.scrolloff = 4                                                              -- 要保留在上方和下方的最小屏幕行数 
+opt.sidescrolloff = 8                                                          -- 要保留在左侧和右侧的最小屏幕列数
+
 opt.wildmode = "longest:full,full"                                             -- 命令行补全完成模式
 opt.winminwidth = 5                                                            -- 当不是当前窗口时, 窗口的最小宽度
-opt.colorcolumn = ""                                                           -- 是否高亮指定的列
 
+opt.winblend = 20                                                              -- 浮动窗口的伪透明度
 opt.pumheight = 10                                                             -- 弹出菜单中显示的最大项目数
 opt.pumblend = 10                                                              -- 启用弹出菜单的伪透明度
 opt.previewheight = 12                                                         -- 预览窗口的默认高
@@ -45,10 +47,10 @@ opt.listchars:append("tab:>⋅")                                                
 opt.listchars:append("nbsp:␣")                                                 -- 不可断空格字符要显示的字符
 opt.listchars:append("eol:↲" )                                                 -- 设置隐藏字符串: 要显示在每行末尾的字符
 opt.listchars:append("space:⋅")                                                -- 空格中显示的字符
-opt.listchars:append("trail:•")                                                -- 尾随空格显示的字符
-opt.listchars:append("extends:▸")                                              -- 当"换行"为关闭时, 如果超出屏幕所显示的字符
+opt.listchars:append("trail:⣿")                                                -- 尾随空格显示的字符
+opt.listchars:append("extends:→")                                              -- 当"换行"为关闭时, 如果超出屏幕所显示的字符
 opt.listchars:append("conceal:┊")                                              -- 在隐藏文本中显示的字符"conceallevel"设置为1. 省略时的空格
-opt.listchars:append("precedes:◂")                                             -- 显示在物理行, 当在第一列中可见的字符
+opt.listchars:append("precedes:←")                                             -- 显示在物理行, 当在第一列中可见的字符
 
 opt.fillchars:append("stl: ")                                                  -- 当前窗口的状态线
 opt.fillchars:append("stlnc: ")                                                -- 非当前窗口的状态线
@@ -83,10 +85,10 @@ opt.iskeyword:append ("@")                                                     -
 opt.iskeyword:append ("%")                                                     -- 关键字用于搜索和识别许多命令
 opt.iskeyword:append ("#")                                                     -- 关键字用于搜索和识别许多命令
 
-opt.shortmess:append("W")                                                      -- 写文件时不要给出"已写"或"[w]"
 opt.shortmess:append("I")                                                      -- 启动Vim时, 不要给出介绍信息
 opt.shortmess:append("c")                                                      -- 不要给出完成菜单消息, 例如 "--XXX完成(YYY)", "匹配1/2"
 opt.shortmess:append("S")                                                      -- 搜索时不显示搜索计数消息
+-- opt.shortmess:append("W")                                                      -- 写文件时不要给出"已写"或"[w]"
 -- opt.shortmess:append("f")                                                      -- 使用 "(第3页, 共5页)" 代替 "(文件3页, 第5页)
 -- opt.shortmess:append("i")                                                      -- 使用 "[noeol]" 代替 "[最后一行不完整]"
 -- opt.shortmess:append("l")                                                      -- 使用 "999L, 888B" 代替 "999行, 888字节"
@@ -95,7 +97,7 @@ opt.shortmess:append("S")                                                      -
 -- opt.shortmess:append("r")                                                      -- 使用 "[RO]" instead of "[readonly]"
 -- opt.shortmess:append("w")                                                      -- 使用 "[w]" 而不是 "writed"
 -- opt.shortmess:append("x")                                                      -- 使用 "[dos]" 代替 "[dos format]"
-opt.shortmess:append("a")                                                      -- 启用全部缩写功能
+-- opt.shortmess:append("a")                                                      -- 启用全部缩写功能
 -- opt.shortmess:append("o")                                                      -- 屏蔽自动写入时读取文件的信息
 -- opt.shortmess:append("O")                                                      -- 用于读取文件的消息将覆盖以前的消息也适用于快速修复消息
 -- opt.shortmess:append("s")                                                      -- 不要给出搜索命中底部, 在顶部继续的信息
@@ -139,7 +141,7 @@ opt.wildignore:append("*.zip", "**/tmp/**")                                    -
 opt.wildignore:append("*.DS_Store,**/node_modules/**,**/bower_modules/**")     -- 文件模式列表。与其中一个匹配的文件 展开通配符、完成文件或 目录名
 
 opt.shada = "!,'300,<50,@100,s10,h"                                            -- SHADA 文件设置
-opt.shadafile = vim.fn.stdpath("data") .. "/shada/main.shada"                  -- SHADA 文件存放位置
+opt.shadafile = VIM_DATA_PATH .. "/shada/main.shada"                  -- SHADA 文件存放位置
 
 opt.timeout = true                                                             -- 此选项和 "timeoutlen" 决定已接收映射的密钥序
 opt.ttimeout = true                                                            -- 此选项和 "ttimeoutlen" 决定TUI已接收到密钥码序列
@@ -148,7 +150,6 @@ opt.ttimeoutlen = 0                                                            -
 opt.updatetime = 200                                                           -- 如果这几毫秒内没有键入任何内容自动保存
 opt.updatecount = 0                                                            -- 键入多字符后, 交换文件将被写入磁盘如果为零, 则根本不会创建交换文件
 opt.redrawtime = 1500                                                          -- 重新绘制显示的时间 (毫秒)
-
 
 opt.textwidth=80                                                               -- 单行文本的最大宽度
 opt.history = 9000                                                             -- 命令的历史记录
