@@ -1,6 +1,42 @@
 -- This file is automatically loaded by lazyvim.plugins.config
 
-local Util = require("util")
+---@param plugin string
+function Has(plugin)
+  return require("lazy.core.config").plugins[plugin] ~= nil
+end
+
+---@param silent boolean?
+function Toggle(option, silent, values)
+  if values then
+    if vim.opt_local[option]:get() == values[1] then
+      vim.opt_local[option] = values[2]
+    else
+      vim.opt_local[option] = values[1]
+    end
+    return Util.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
+  end
+  vim.opt_local[option] = not vim.opt_local[option]:get()
+  if not silent then
+    if vim.opt_local[option]:get() then
+      Util.info("Enabled " .. option, { title = "Option" })
+    else
+      Util.warn("Disabled " .. option, { title = "Option" })
+    end
+  end
+end
+
+local enabled = true
+function Toggle_diagnostics()
+  enabled = not enabled
+  if enabled then
+    vim.diagnostic.enable()
+    Util.info("Enabled diagnostics", { title = "Diagnostics" })
+  else
+    vim.diagnostic.disable()
+    Util.warn("Disabled diagnostics", { title = "Diagnostics" })
+  end
+end
+-- local Util = require("util")
 
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
@@ -8,7 +44,7 @@ local function map(mode, lhs, rhs, opts)
   -- do not create the keymap if a lazy keys handler exists
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
-    opts.silent = opts.silent ~= false
+    opts.silent = opts.silent ~= true
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
@@ -38,22 +74,16 @@ map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- buffers
-if Util.has("bufferline.nvim") then
-  map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
-  map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
-  map("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
-  map("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+if Has("bufferline.nvim") then
+  map("n", "<LocalLeader><S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+  map("n", "<LocalLeader><Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
 else
-  map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-  map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
-  map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-  map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
+  map("n", "<LocalLeader><S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+  map("n", "<LocalLeader><Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 end
-map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 -- Clear search with <esc>
-map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+map({ "i", "n" }, "<esc><esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
@@ -81,7 +111,7 @@ map("i", ".", ".<c-g>u")
 map("i", ";", ";<c-g>u")
 
 -- save file
-map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+map({ "i", "v", "n", "s" }, "<LocalLeader>w", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- better indenting
 map("v", "<", "<gv")
@@ -99,16 +129,12 @@ map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 -- stylua: ignore start
 
 -- toggle options
-map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>ul", function() Util.toggle("relativenumber", true) Util.toggle("number") end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>ud", Util.toggle_diagnostics, { desc = "Toggle Diagnostics" })
+map("n", "<leader>us", function() Toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>uw", function() Toggle("wrap") end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>ul", function() Toggle("relativenumber", true) toggle("number") end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ud", Toggle_diagnostics, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
-
--- lazygit
-map("n", "<leader>gg", function() Util.float_term({ "lazygit" }, { cwd = Util.get_root() }) end, { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function() Util.float_term({ "lazygit" }) end, { desc = "Lazygit (cwd)" })
+map("n", "<leader>uc", function() Toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
@@ -119,8 +145,8 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 -- floating terminal
-map("n", "<leader>ft", function() Util.float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
-map("n", "<leader>fT", function() Util.float_term() end, { desc = "Terminal (cwd)" })
+map("n", "<leader>ft", function() float_term(nil, { cwd = Util.get_root() }) end, { desc = "Terminal (root dir)" })
+map("n", "<leader>fT", function() float_term() end, { desc = "Terminal (cwd)" })
 map("t", "<esc><esc>", "<c-\\><c-n>", {desc = "Enter Normal Mode"})
 
 -- windows
