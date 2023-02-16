@@ -157,6 +157,7 @@ opt.mouse = "a"                                                                -
 opt.title = true                                                               -- 是否启用窗口的标题
 opt.modeline = true                                                            -- 是否开启MODELINE模式
 opt.lazyredraw = true                                                          -- 是否开启懒惰重画屏幕
+opt.ttyfast = true
 
 opt.visualbell = false                                                         -- 是否开启警告声音
 opt.errorbells = false                                                         -- 是否开启错误警报
@@ -200,7 +201,7 @@ opt.whichwrap = ""                                                             -
 opt.startofline = true                                                         -- 是否开启光标移动到第一个非空白行
 opt.encoding = "utf-8"                                                         -- 设置字符串的编码
 opt.fileencoding = "utf-8"                                                     -- 设置当前缓冲区的文件内容编码
-opt.clipboard = "unnamedplus"                                                  -- 同步系统剪贴板
+-- opt.clipboard = "unnamedplus"                                                  -- 同步系统剪贴板
 opt.confirm = true                                                             -- 是否在在退出修改后的缓冲区之前确认保存更改
 opt.formatoptions = "jcroqlnt"                                                 -- 文档格式化设置
 opt.joinspaces = false                                                         -- 合并上下两行时不加入空格
