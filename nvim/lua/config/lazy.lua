@@ -74,6 +74,7 @@ require("lazy").setup({
         notify = true,                                                         -- 发现更改时获取通知
     },
     performance = {
+        reset_packpath = true,                                                 -- reset the package path to improve startup time
         rtp = {
             -- 禁用插件列表
             disabled_plugins = {
@@ -118,3 +119,6 @@ vim.g.loaded_python3_provider = 0                                              -
 vim.g.loaded_ruby_provider = 0                                                 -- 屏蔽 RUBY
 vim.g.loaded_perl_provider = 0                                                 -- 屏蔽 PERL
 vim.g.loaded_node_provider = 0                                                 -- 屏蔽 NODE
+
+require("config.keymaps")
+require("config.autocmds")
