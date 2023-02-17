@@ -68,3 +68,38 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                               Quickfix                               │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("QuickDisplay"),
+    pattern = "qf",
+    callback = function()
+        vim.opt_local.buflisted = false
+    end,
+})
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                                Alpha                                 │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("Alpha"),
+	pattern = "alpha",
+    command = "set showtabline=0 laststatus=0 cmdheight=0 | autocmd BufUnload <buffer> set showtabline=2 laststatus=2 cmdheight=1"
+})
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                                Lazy                                  │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd({ "FileType","FocusLost" }, {
+    group = augroup("LazyStartup"),
+	pattern = {"lazy"},
+    command = "set showtabline=0 laststatus=0 cmdheight=0 nonumber norelativenumber | autocmd BufUnload <buffer> set showtabline=2 laststatus=2 cmdheight=1"
+})
+
