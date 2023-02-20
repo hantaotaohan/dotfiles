@@ -63,12 +63,9 @@ return {
             fill                  = { fg = '#21252B', bg = '#21252B' },
             -- background            = { fg = '#61afef', bg = '#61afef'},
 
-
             -- close_button          = { fg = '#606B70', bg = '#1E2227' },
             -- close_button_visible  = { fg = '#606B70', bg = '#1E2227' },
             -- close_button_selected = { fg = '#DCDCDC', bg = '#23272E' },
-
-
 
             buffer_visible        = { fg = '#ABB2BF', bg = '#21252B' },
             buffer_selected       = { fg = '#DCDCDC', bg = '#282C34', bold = true, italic = false },
@@ -84,7 +81,6 @@ return {
             separator_visible     = { fg = '#181A1F', bg = '#21252B' },
             separator_selected    = { fg = '#181A1F', bg = '#282C34' },
 
-            -- indicator_visible     = { fg = '#61AFEF', bg = '#1E2227' },
             indicator_selected    = { fg = '#61AFEF', bg = '#23272E', sp = "#61afef" },
 
         },

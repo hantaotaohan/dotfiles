@@ -257,7 +257,7 @@ return{
                 lualine_z = {}
             },
 
-            extensions = { 'quickfix', 'nvim-tree', 'fugitive', 'symbols-outline', toggleterm },
+            extensions = { 'quickfix', 'neo-tree', 'fugitive', 'symbols-outline', toggleterm },
 
         }
 
