@@ -14,7 +14,7 @@ return {
                 icon = '▋',                                                    -- 图标指示器
                 style = 'icon',                                                -- | 'icon'    | 'underline' | 'none' |
             },
-            buffer_close_icon = '' ,
+            buffer_close_icon = '',
             modified_icon = '·',
             close_icon = '',
             left_trunc_marker = '',
@@ -61,27 +61,30 @@ return {
         highlights = {
 
             fill                  = { fg = '#21252B', bg = '#21252B' },
-            -- background            = { fg = '#61afef', bg = '#61afef'},
+            background            = { fg = '#ABB2BF', bg = '#21252B' },
 
-            -- close_button          = { fg = '#606B70', bg = '#1E2227' },
-            -- close_button_visible  = { fg = '#606B70', bg = '#1E2227' },
-            -- close_button_selected = { fg = '#DCDCDC', bg = '#23272E' },
+            close_button          = { fg = '#ABB2BF', bg = '#21252B' },
+            close_button_visible  = { fg = '#ABB2BF', bg = '#21252B' },
+            close_button_selected = { fg = '#DCDCDC', bg = '#282C34' },
+
 
             buffer_visible        = { fg = '#ABB2BF', bg = '#21252B' },
             buffer_selected       = { fg = '#DCDCDC', bg = '#282C34', bold = true, italic = false },
 
-            -- numbers_visible       = { fg = '#606B70', bg = '#1E2227' },
-            -- numbers_selected      = { fg = '#DCDCDC', bg = '#23272E', bold = true, italic = false },
+            numbers_visible       = { fg = '#ABB2BF', bg = '#21252B' },
+            numbers_selected      = { fg = '#DCDCDC', bg = '#282C34', bold = true, italic = false },
 
-            modified              = { fg = '#E2B86B'},
+            -- modified              = { fg = '#E2B86B'},
             modified_visible      = { fg = '#E2B86B', bg = '#21252B' },
             modified_selected     = { fg = '#E2B86B', bg = '#282C34' },
 
-            separator             = { fg = '#181A1F' },
-            separator_visible     = { fg = '#181A1F', bg = '#21252B' },
-            separator_selected    = { fg = '#181A1F', bg = '#282C34' },
+            separator             = { fg = '#181A1F', bg = '#21252B', sp = "#181A1F" },
+            separator_visible     = { fg = '#181A1F', bg = '#21252B', sp = "#181A1F" },
+            separator_selected    = { fg = '#181A1F', bg = '#282C34', sp = "#181A1F" },
 
-            indicator_selected    = { fg = '#61AFEF', bg = '#23272E', sp = "#61afef" },
+            indicator_selected    = { fg = '#61AFEF', bg = '#23272E', sp = "#61AFEF" },
+
+            offset_separator      = { fg = '#ABB2BF', bg = '#ABB2BF', sp = "#ABB2BF" },
 
         },
     },

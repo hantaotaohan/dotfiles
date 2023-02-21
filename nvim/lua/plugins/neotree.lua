@@ -40,7 +40,7 @@ return {
                 max_lines = 10000, -- How many lines of git status results to process. Anything after this will be dropped.
                 -- Anything before this will be used. The last items to be processed are the untracked files.
             },
-            hide_root_node = false, -- Hide the root node.
+            hide_root_node = true, -- Hide the root node.
             retain_hidden_root_indent = false, -- IF the root node is hidden, keep the indentation anyhow. 
             -- This is needed if you use expanders because they render in the indent.
             log_level = "info", -- "trace", "debug", "info", "warn", "error", "fatal"
@@ -202,16 +202,16 @@ return {
                 highlight = "NeoTreeIndentMarker",
                 -- expander config, needed for nesting files
                 with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
-                expander_collapsed = "+",
-                expander_expanded = "-",
+                expander_collapsed = "+ ",
+                expander_expanded = "- ",
                 expander_highlight = "NeoTreeExpander",
             },
             icon = {
                 -- folder_closed = "",
                 -- folder_open = "",
-                folder_closed = "",
-                folder_open = "",
-                folder_empty = "ﰊ",
+                folder_closed = " ",
+                folder_open = " ",
+                folder_empty = "ﰊ ",
                 -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
                 -- then these will never be used.
                 default = "·",
@@ -248,7 +248,7 @@ return {
 
             directory = {
                 { "indent" },
-                { "icon" },
+                { "icon", },
                 { "current_filter" },
                 { "container",
                     content = {
