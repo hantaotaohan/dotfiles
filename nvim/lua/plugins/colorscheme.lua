@@ -4,6 +4,7 @@ return {
 
     "navarasu/onedark.nvim",
     priority = 1000,
+
     opts = {
 
         -- Main options --
@@ -35,6 +36,7 @@ return {
 
         -- Custom Highlights --
         colors = {}, -- Override default colors
+
         highlights = {
 
             CursorLine                 = { fg = nil       , bg = "#2C313C" },
@@ -47,10 +49,13 @@ return {
             FoldColumn                 = { fg = "#515E6F" , bg = "#282C34" },
             VertSplit                  = { fg = "#3E4452" , bg = "#282C34" }, 
 
+            BufferLineIndicatorVisible = { fg = "#21252B" , bg = "#21252B" }, 
+            BufferLineOffsetSeparator  = { fg = "#21252B" , bg = "#21252B" },
+
             NeoTreeNormal              = { fg = nil       , bg = "#21252B" },
             NeoTreeNormalNC            = { fg = nil       , bg = "#21252B" },
             NeoTreeRootName            = { fg = "#E06C75" , bg = nil       },
-            NeoTreeDotfile             = { fg = "#414f4d" , bg = nil       },
+            NeoTreeDotfile             = { fg = "#515f65" , bg = nil       },
             NeoTreeVertSplit           = { fg = "#21252B" , bg = "#21252B" },
             NeoTreeStatusLin           = { fg = "#21252B" , bg = "#21252B" },
             NeoTreeStatusLine          = { fg = nil       , bg = "#21252B" },
@@ -58,8 +63,8 @@ return {
             NeoTreeEndOfBuffer         = { fg = "#21252B" , bg = "#21252B" },
             NeoTreeStatusLineNC        = { fg = "#21252B" , bg = "#21252B" }, 
             NeoTreeWinSeparator        = { fg = "#21252B" , bg = "#21252B" },
-            BufferLineOffsetSeparator  = { fg = "#21252B" , bg = "#21252B" },
-            NeoTreeExpander            = { fg = "#5C6370" , bg = nil       },
+            NeoTreeExpander            = { fg = "#4D5A5E" , bg = nil       },
+            NeoTreeIndentMarker        = { fg = "#3a4646" , bg = nil       },
             NeoTreeDirectoryName       = { fg = "#ABB2BF" , bg = nil       },
             -- NeoTreeGitAdded            = { fg = "#5C6370" , bg = nil       },
             -- NeoTreeGitConflict         = { fg = "#5C6370" , bg = nil       },

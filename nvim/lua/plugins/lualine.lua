@@ -86,7 +86,7 @@ return{
             options = {
 
                 icons_enabled = false,
-                theme = 'auto',
+                theme = 'onedark',
                 show_filename_only = true,
                 hide_filename_extension = false,
                 show_modified_status = true,
@@ -173,6 +173,7 @@ return{
                         -- 2: Absolute path
                         -- 3: Absolute path, with tilde as the home directory
 
+
                         shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
                         -- for other components. (terrible name, any suggestions?)
                         symbols = {
@@ -223,6 +224,7 @@ return{
                         -- color = { fg = colors.BLACK_1, bg = colors.RED_001 }
                     },
                 },
+
                 lualine_b = {
 
                     {

@@ -240,7 +240,7 @@ return {
                 filtered_items = {
                     visible = true, -- when true, they will just be displayed differently than normal items
                     show_hidden_count = false, -- when true, the number of hidden items in each folder will be shown as the last entry
-                    hide_dotfiles = false,
+                    hide_dotfiles = true,
                     hide_gitignored = false,
                     hide_hidden = false, -- only works on Windows for hidden files/directories
                     hide_by_name = {

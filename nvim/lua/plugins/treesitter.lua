@@ -1,11 +1,14 @@
 return {
 
     "nvim-treesitter/nvim-treesitter",
-    version = false,
+    dependencies = {
+        "HiPhish/nvim-ts-rainbow2",
+    },
+    -- version = false,
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     keys = {
-        { "<c-space>", desc = "Increment selection" },
+        { "<Enter>", desc = "Increment selection" },
         { "<bs>", desc = "Schrink selection", mode = "x" },
     },
 
@@ -27,21 +30,35 @@ return {
             "vim",
             "yaml",
         },
+
         highlight = { 
             enable = true, 
             additional_vim_regex_highlighting = false,
         },
-        indent = { enable = true },
-        context_commentstring = { enable = true, enable_autocmd = false },
+
+        indent = { 
+            enable = true 
+        },
+
+        context_commentstring = { 
+            enable = true, 
+            enable_autocmd = false 
+        },
+
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = "<C-space>",
-                node_incremental = "<C-space>",
+                init_selection = "<Enter>",
+                node_incremental = "<Enter>",
                 scope_incremental = "<nop>",
                 node_decremental = "<bs>",
             },
         },
+
+        rainbow = {
+            enable = true,
+            extended_mode = true,
+        }
     },
 
     config = function(_, opts)
@@ -49,7 +66,9 @@ return {
             -- config.install_info.url = config.install_info.url:gsub("https://github.com/", "https://hub.nuaa.cf/")
             config.install_info.url = config.install_info.url:gsub("https://github.com/", os.getenv("GITHUB"))
         end
+
         require("nvim-treesitter.configs").setup(opts)
+
     end,
 
 }
