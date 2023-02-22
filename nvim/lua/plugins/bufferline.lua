@@ -86,6 +86,8 @@ return {
 
             offset_separator      = { fg = '#ABB2BF', bg = '#ABB2BF', sp = "#ABB2BF" },
 
+            buffer    = { fg = '#ABB2BF', bg = '#ABB2BF', sp = "#ABB2BF" },
+
         },
     },
 
