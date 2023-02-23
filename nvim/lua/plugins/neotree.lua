@@ -67,7 +67,7 @@ return {
             log_level = "info", -- "trace", "debug", "info", "warn", "error", "fatal"
             log_to_file = false, -- true, false, "/path/to/file.log", use :NeoTreeLogs to show the file
             open_files_in_last_window = true, -- false = open files in top left window
-            popup_border_style = "NC", -- "double", "none", "rounded", "shadow", "single" or "solid"
+            popup_border_style = "rounded", -- "double", "none", "rounded", "shadow", "single" or "solid"
             resize_timer_interval = 500, -- in ms, needed for containers to redraw right aligned and faded content
 
             sort_case_insensitive = false, -- used when sorting files and directories in the tree
@@ -180,7 +180,7 @@ return {
                 },
 
                 mappings = {
-                    ["<esc>"] = "revert_preview",
+                    -- ["<esc>"] = "revert_preview",
                     ["P"] = { "toggle_preview", config = { use_float = true } },
                     ["S"] = "open_split",
                     ["s"] = "open_vsplit",
@@ -189,6 +189,7 @@ return {
                     ["C"] = "close_node",
                     ["z"] = "close_all_nodes",
                     ["R"] = "refresh",
+                    -- ["/"] = "filter_as_you_type",
                     ["a"] = {
                         "add",
                         config = {

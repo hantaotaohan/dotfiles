@@ -4,6 +4,11 @@ return{
     event = 'VeryLazy',
     config = function()
 
+        local custom_onedark = require'lualine.themes.onedark'
+        custom_onedark.inactive.c.bg = '#21252B'
+        custom_onedark.normal.c.bg = '#21252B'
+        custom_onedark.normal.c.fg = '#6F737B'
+
         local colors = {
             BLACK_0 = '#282C34',
             BLACK_1 = '#30363f',
@@ -85,27 +90,17 @@ return{
 
             options = {
 
-                icons_enabled = false,
-                theme = 'onedark',
-                show_filename_only = true,
-                hide_filename_extension = false,
-                show_modified_status = true,
-
-                -- component_separators = { left = '', right = ''},
-                -- section_separators = { left = '', right = ''},
+                icons_enabled = true,
+                theme  = custom_onedark,
 
                 component_separators = {},
                 section_separators = { left = '', right = '' },
+                -- component_separators = { left = '', right = ''},
+                -- section_separators = { left = '', right = ''},
 
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},
-                },
-
-                buffers_color = {
-                    -- Same values as the general color option can be used here.
-                    active = 'lualine_{section}_normal',     -- Color for active buffer.
-                    inactive = 'lualine_{section}_inactive', -- Color for inactive buffer.
                 },
 
                 ignore_focus = {},
@@ -121,29 +116,74 @@ return{
             },
 
             sections = process_sections {
-                lualine_a = {'mode'},
-                -- lualine_b = {'branch', 'diff', 'diagnostics'},
-                -- lualine_c = {'filename', '%r'},
-                lualine_x = {'encoding', 'fileformat', 'filetype'},
-                -- lualine_y = {'progress'},
-                lualine_z = {'location'},
 
+                lualine_a = {
+
+                    {
+                        'mode',
+                        icon = nil,
+                        separator = nil,
+                        cond = nil,
+                        color = { fg = '#282C34', bg = nil, gui='bold' },
+                        padding = 2,
+                        fmt = nil,
+                        on_click = nil,
+                    },
+
+                    -- {
+                    --     'buffers',
+                    --     show_filename_only = true,   -- Shows shortened relative path when set to false.
+                    --     hide_filename_extension = false,   -- Hide filename extension when set to true.
+                    --     show_modified_status = true, -- Shows indicator when the buffer is modified.
+
+                    --     mode = 0, -- 0: Shows buffer name
+                    --     -- 1: Shows buffer index
+                    --     -- 2: Shows buffer name + buffer index
+                    --     -- 3: Shows buffer number
+                    --     -- 4: Shows buffer name + buffer number
+
+                    --     max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+                    --     -- it can also be a function that returns
+                    --     -- the value of `max_length` dynamically.
+                    --     filetype_names = {
+                    --         TelescopePrompt = 'Telescope',
+                    --         dashboard = 'Dashboard',
+                    --         packer = 'Packer',
+                    --         fzf = 'FZF',
+                    --         alpha = 'Alpha'
+                    --     }, -- Shows specific buffer name for that filetype ( { `filetype` = `buffer_name`, ... } )
+
+                    --     buffers_color = {
+                    --         -- Same values as the general color option can be used here.
+                    --         -- active = 'lualine_{section}_normal',     -- Color for active buffer.
+                    --         -- inactive = 'lualine_{section}_inactive', -- Color for inactive buffer.
+                    --     },
+
+                    --     symbols = {
+                    --         modified = ' ●',      -- Text to show when the buffer is modified
+                    --         alternate_file = '#', -- Text to show to identify the alternate file
+                    --         directory =  '',     -- Text to show when the buffer is a directory
+                    --     }
+                    -- }
+                },
+                
                 lualine_b = {
 
                     {
                         'branch',
-                        icons_enabled = true,
                         icon = '   '
                     },
 
                     {
                         'diff',
-                        colored = true, -- Displays a colored diff status if set to true
-                        symbols = {added = '   ', modified = '   ', removed = '   '}, -- Changes the symbols used by the diff.
-                        source = nil, -- A function that works as a data source for diff.
-                        -- It must return a table as such:
-                        --   { added = add_count, modified = modified_count, removed = removed_count }
-                        -- or nil on failure. count <= 0 won't be displayed.
+                        colored = true,
+                        diff_color = {
+                            added    = 'DiffAdd',
+                            modified = 'DiffChange',
+                            removed  = 'DiffDelete',
+                        },
+                        symbols = {added = '   ', modified = '   ', removed = '   '},
+                        source = nil,
                         color = { fg = colors.BLACK_1, bg = colors.BLACK_1 }
                     },
 
@@ -166,59 +206,78 @@ return{
 
                     {
                         'filename',
-                        file_status = true,      -- Displays file status (readonly status, modified status)
-                        newfile_status = false,   -- Display new file status (new file means no write after created)
-                        path = 3,                -- 0: Just the filename
-                        -- 1: Relative path
-                        -- 2: Absolute path
-                        -- 3: Absolute path, with tilde as the home directory
-
-
-                        shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
-                        -- for other components. (terrible name, any suggestions?)
+                        file_status = true,
+                        newfile_status = false,
+                        path = 2,
+                        shorting_target = 40,
                         symbols = {
-                            modified = '  [+]',      -- Text to show when the buffer is modified
-                            alternate_file = '#', -- Text to show to identify the alternate file
-                            directory =  'DIRECTORY',     -- Text to show when the buffer is a directory
-                            readonly = 'ReadOnly',      -- Text to show when the file is non-modifiable or readonly.
-                            unnamed = '[No Name]', -- Text to show for unnamed buffers.
-                            newfile = '[New]'     -- Text to show for new created file before first writting
+                            modified = '  [+]',
+                            readonly = 'READONLY',
+                            unnamed = '[No Name]',
+                            newfile = '[New]'
                         },
                     },
                 },
 
+                lualine_x = {
+
+                    {
+                        'encoding',
+                    },
+
+                    {
+                        'fileformat', 
+                        padding = 2,
+                        symbols = {
+                            unix = '', -- e712
+                            dos = '',  -- e70f
+                            mac = '',  -- e711
+                        }
+                    },
+
+                    {
+                        'filetype',
+                        colored = false,
+                        padding = 2,
+                        icon_only = false,
+                        icon = { align = 'left' },
+                    }
+                },
+
+                lualine_z = {'location'},
+
                 lualine_y = {
+                    
                     {
                         "diagnostics",
-                        sources = nil,
-                        -- sections = { "error", "warn" }, -- info hint
-                        icons_enabled = true,
-
+                        sources = { 'nvim_diagnostic', 'coc' },
+                        sections = { 'error', 'warn', 'info', 'hint' },
+                        diagnostics_color = {
+                            -- Same values as the general color option can be used here.
+                            error = 'DiagnosticError', -- Changes diagnostics' error color.
+                            warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
+                            info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
+                            hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
+                        },
                         symbols = { error = "  ", warn = "   ", hint = "  ", info = "  " },
-                        -- symbols = { error = " ", warn = "ﴞ ", info = " ", hint = "ﯧ " },
-                        color = { fg = colors.BLACK_2, bg = colors.BLACK_2 },
                         colored = true, -- Displays diagnostics status in color if set to true.
                         update_in_insert = false, -- Update diagnostics in insert mode.
                         always_visible = false, -- Show diagnostics even if there are none.
+                        color = { fg = colors.BLACK_2, bg = colors.BLACK_2 },
                     },
+
                     'progress'
                 },
             },
 
             inactive_sections = process_sections {
 
-                -- lualine_a = {},
-                -- lualine_b = {'branch'},
-                lualine_c = {'filename'},
-                lualine_x = {'location'},
-                lualine_y = {},
-                lualine_z = {},
-
                 lualine_a = {
 
                     {
                         'mode',
                         colored = true,
+                        padding = 2,
                         -- source = nil,
                         color = { fg = "#606B70", bg = colors.BLACK_1 }
                         -- color = { fg = colors.BLACK_1, bg = colors.RED_001 }
@@ -229,7 +288,6 @@ return{
 
                     {
                         'branch',
-                        icons_enabled = true,
                         icon = '   ',
                         colored = true,
                         -- source = nil,
@@ -237,6 +295,12 @@ return{
                         -- color = { fg = colors.BLACK_1, bg = colors.RED_001 }
                     },
                 },
+
+                lualine_c = {'filename'},
+                lualine_x = {},
+                lualine_y = {},
+                lualine_z = {'location'},
+
             },
 
             tabline = {},

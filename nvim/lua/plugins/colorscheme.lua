@@ -55,7 +55,7 @@ return {
             NeoTreeNormal              = { fg = nil       , bg = "#21252B" },
             NeoTreeNormalNC            = { fg = nil       , bg = "#21252B" },
             NeoTreeRootName            = { fg = "#E06C75" , bg = nil       },
-            NeoTreeDotfile             = { fg = "#515f65" , bg = nil       },
+            NeoTreeDotfile             = { fg = "#5A5E64" , bg = nil       },
             NeoTreeVertSplit           = { fg = "#21252B" , bg = "#21252B" },
             NeoTreeStatusLin           = { fg = "#21252B" , bg = "#21252B" },
             NeoTreeStatusLine          = { fg = nil       , bg = "#21252B" },
@@ -74,7 +74,6 @@ return {
             -- NeoTreeGitRenamed          = { fg = "#5C6370" , bg = nil       },
             -- NeoTreeGitStaged           = { fg = "#5C6370" , bg = nil       },
             -- NeoTreeGitUntracked        = { fg = "#E86671" , bg = nil       },
-            -- NeoTreeGitUnstaged         = { fg = "#5C6370" , bg = nil       },
 
         },
 

@@ -39,7 +39,7 @@ require("lazy").setup({
             init = " ",
             import = " ",
             keys = " ",
-            lazy = "鈴 ",
+            lazy = "󰂠 ",
             loaded = "●",
             not_loaded = "○",
             plugin = " ",
@@ -49,7 +49,7 @@ require("lazy").setup({
             task = "✔ ",
             list = {
                 "●",
-                "➜",
+                "",
                 "★",
                 "‒",
             },
