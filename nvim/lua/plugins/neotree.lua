@@ -13,7 +13,7 @@ return {
 
     keys = {
         { '<leader>|', ':Neotree reveal filesystem float toggle=true<cr>', desc = 'Toggle file tree (float)' },
-        { '<localleader>e', ':Neotree toggle<cr>', desc = 'Toggle file tree (sidebar)' },
+        { '<LocalLeader>e', ':Neotree toggle<cr>', desc = 'Toggle file tree (sidebar)' },
     },
 
     config = function()
@@ -66,7 +66,7 @@ return {
 
             log_level = "info", -- "trace", "debug", "info", "warn", "error", "fatal"
             log_to_file = false, -- true, false, "/path/to/file.log", use :NeoTreeLogs to show the file
-            open_files_in_last_window = true, -- false = open files in top left window
+            open_files_in_last_window = false, -- false = open files in top left window
             popup_border_style = "rounded", -- "double", "none", "rounded", "shadow", "single" or "solid"
             resize_timer_interval = 500, -- in ms, needed for containers to redraw right aligned and faded content
 
@@ -80,7 +80,33 @@ return {
             },
 
 
-            event_handlers = {},
+            event_handlers = {
+
+                {
+                    event = "file_opened",
+                    handler = function(file_path)
+                        --auto close
+                        require("neo-tree").close_all()
+                    end
+                },
+
+                {
+                    event = "neo_tree_buffer_enter",
+                    handler = function()
+                        -- This effectively hides the cursor
+                        vim.cmd 'highlight! Cursor blend=100'
+                    end
+                },
+
+                {
+                    event = "neo_tree_buffer_leave",
+                    handler = function()
+                        -- Make this whatever your current Cursor highlight group is.
+                        vim.cmd 'highlight! Cursor guibg=#5f87af blend=0'
+                    end
+                }
+
+            },
 
             default_component_configs = {
 
@@ -204,7 +230,7 @@ return {
                     ["p"] = "paste_from_clipboard",
                     ["c"] = "copy", -- takes text input for destination, also accepts the config.show_path option
                     ["m"] = "move", -- takes text input for destination, also accepts the config.show_path option
-                    ["q"] = "close_window",
+                    ["<LocalLeader>q"] = "close_window",
                     ["?"] = "show_help",
                     ["<"] = "prev_source",
                     [">"] = "next_source",
@@ -344,23 +370,6 @@ return {
                         ["gg"] = "git_commit_and_push",
                     }
                 }        
-            },
-
-            event_handlers = {
-                {
-                    event = "neo_tree_buffer_enter",
-                    handler = function()
-                        -- This effectively hides the cursor
-                        vim.cmd 'highlight! Cursor blend=100'
-                    end
-                },
-                {
-                    event = "neo_tree_buffer_leave",
-                    handler = function()
-                        -- Make this whatever your current Cursor highlight group is.
-                        vim.cmd 'highlight! Cursor guibg=#5f87af blend=0'
-                    end
-                }
             },
 
         })

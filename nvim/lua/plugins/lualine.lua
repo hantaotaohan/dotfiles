@@ -28,11 +28,11 @@ return{
             local async_status_old = ""
 
             if async_status == "running" then
-                async_status = "  RUNNING "
+                async_status = "   RUNNING "
             elseif async_status == "success" then
-                async_status = "  SUCCESS"
+                async_status = "   SUCCESS "
             elseif async_status == "failure" then
-                async_status = "  "
+                async_status = "  FAILURE "
             elseif async_status == "stopped" then
                 async_status = ""
             end
@@ -177,11 +177,11 @@ return{
                     {
                         'diff',
                         colored = true,
-                        diff_color = {
-                            added    = 'DiffAdd',
-                            modified = 'DiffChange',
-                            removed  = 'DiffDelete',
-                        },
+                        -- diff_color = {
+                        --     added    = 'DiffAdd',
+                        --     modified = 'DiffChange',
+                        --     removed  = 'DiffDelete',
+                        -- },
                         symbols = {added = '   ', modified = '   ', removed = '   '},
                         source = nil,
                         color = { fg = colors.BLACK_1, bg = colors.BLACK_1 }
@@ -206,15 +206,17 @@ return{
 
                     {
                         'filename',
+                        padding = 2,
                         file_status = true,
                         newfile_status = false,
+                        color = { fg = "#95a0b6", bg = "#3b3f4c" },
                         path = 2,
                         shorting_target = 40,
                         symbols = {
-                            modified = '  [+]',
-                            readonly = 'READONLY',
-                            unnamed = '[No Name]',
-                            newfile = '[New]'
+                            modified = '',
+                            readonly = '',
+                            unnamed = '󰑕',
+                            newfile = ''
                         },
                     },
                 },
@@ -239,7 +241,7 @@ return{
                         'filetype',
                         colored = false,
                         padding = 2,
-                        icon_only = false,
+                        icon_only = true,
                         icon = { align = 'left' },
                     }
                 },
@@ -266,7 +268,9 @@ return{
                         color = { fg = colors.BLACK_2, bg = colors.BLACK_2 },
                     },
 
-                    'progress'
+                    {
+                        'progress'
+                    },
                 },
             },
 
@@ -292,14 +296,21 @@ return{
                         colored = true,
                         -- source = nil,
                         color = { fg = "#606B70", bg = colors.BLACK_1 }
-                        -- color = { fg = colors.BLACK_1, bg = colors.RED_001 }
+                        -- color = { fg = colors.BLACK_1, bg = colors.RED_001 }30363f
                     },
                 },
 
                 lualine_c = {'filename'},
                 lualine_x = {},
                 lualine_y = {},
-                lualine_z = {'location'},
+                lualine_z = {
+
+                    {
+                    'location',
+                        colored = true,
+                        color = { fg = nil, bg = "#30363f" }
+                    },
+                },
 
             },
 

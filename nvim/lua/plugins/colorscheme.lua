@@ -22,11 +22,12 @@ return {
         -- Options are italic, bold, underline, none
         -- You can configure multiple style with comma seperated, For e.g., keywords = 'italic,bold'
         code_style = {
-            comments = 'italic',
+            comments = 'none',
             keywords = 'none',
             functions = 'none',
             strings = 'none',
             variables = 'none'
+            -- variables = 'italic'
         },
 
         -- Lualine options --
@@ -45,9 +46,11 @@ return {
             CursorLineFold             = { fg = nil       , bg = "#2C313C" },
             CursorLineFold             = { fg = "#E0AF68" , bg = "#2C313C" }, 
             Folded                     = { fg = "#282C34" , bg = "#E0AF68" },
-            SignColumn                 = { fg = nil       , bg = "#282C34" },
             FoldColumn                 = { fg = "#515E6F" , bg = "#282C34" },
+            SignColumn                 = { fg = nil       , bg = "#282C34" },
             VertSplit                  = { fg = "#3E4452" , bg = "#282C34" }, 
+            Search                     = { fg = "#21252B" , bg = "#C678DD" },
+            IncSearch                  = { fg = "#21252B" , bg = "#E06C75" },
 
             BufferLineIndicatorVisible = { fg = "#21252B" , bg = "#21252B" }, 
             BufferLineOffsetSeparator  = { fg = "#21252B" , bg = "#21252B" },
@@ -64,7 +67,7 @@ return {
             NeoTreeStatusLineNC        = { fg = "#21252B" , bg = "#21252B" }, 
             NeoTreeWinSeparator        = { fg = "#21252B" , bg = "#21252B" },
             NeoTreeExpander            = { fg = "#4D5A5E" , bg = nil       },
-            NeoTreeIndentMarker        = { fg = "#3a4646" , bg = nil       },
+            NeoTreeIndentMarker        = { fg = "#3A4646" , bg = nil       },
             NeoTreeDirectoryName       = { fg = "#ABB2BF" , bg = nil       },
             -- NeoTreeGitAdded            = { fg = "#5C6370" , bg = nil       },
             -- NeoTreeGitConflict         = { fg = "#5C6370" , bg = nil       },
@@ -74,6 +77,14 @@ return {
             -- NeoTreeGitRenamed          = { fg = "#5C6370" , bg = nil       },
             -- NeoTreeGitStaged           = { fg = "#5C6370" , bg = nil       },
             -- NeoTreeGitUntracked        = { fg = "#E86671" , bg = nil       },
+
+            TSRainbowRed               = { fg = "#E06C75" , bg = nil       },
+            TSRainbowYellow            = { fg = "#E5C07B" , bg = nil       },
+            TSRainbowBlue              = { fg = "#61AFEF" , bg = nil       },
+            TSRainbowOrange            = { fg = "#EBD09C" , bg = nil       },
+            TSRainbowGreen             = { fg = "#98C379" , bg = nil       },
+            TSRainbowViolet            = { fg = "#C678DD" , bg = nil       },
+            TSRainbowCyan              = { fg = "#56B6C2" , bg = nil       },
 
         },
 
