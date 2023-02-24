@@ -1,6 +1,6 @@
 -- This file is automatically loaded by lazyvim.plugins.config
 
-require("config.function")
+fun = require("config.function")
 
 ---@param plugin string
 function Has(plugin)
@@ -193,3 +193,18 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                         Toggle System Tools                          │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+map("n", "<F3>", "<CMD>lua fun.toggle_number()<CR>")
+map("n", "<F4>", "<CMD>lua fun.toggle_column()<CR>")
+map("n", "<F5>", "<CMD>lua fun.toggle_syntax()<CR>")
+map("n", "<F6>", "<CMD>ScrollbarToggle<CR>")
+map("n", "<F7>", "<CMD>lua fun.toggle_qf()<CR>")
+map("n", "<F8>", "<CMD>lua fun.toggle_colorcolumn()<CR>")
+map("n", "<F9>", "<CMD>lua fun.toggle_diagnostics()<CR>")
+map("n", "<F10>", "<CMD>ColorizerToggle<CR>" )
+

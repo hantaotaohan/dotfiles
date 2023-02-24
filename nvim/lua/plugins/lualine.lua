@@ -8,6 +8,7 @@ return{
         custom_onedark.inactive.c.bg = '#21252B'
         custom_onedark.normal.c.bg = '#21252B'
         custom_onedark.normal.c.fg = '#6F737B'
+        custom_onedark.terminal.a.bg = "#81A1C1"
 
         local colors = {
             BLACK_0 = '#282C34',
