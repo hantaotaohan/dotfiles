@@ -1,5 +1,7 @@
 -- This file is automatically loaded by lazyvim.plugins.config
 
+require("config.function")
+
 ---@param plugin string
 function Has(plugin)
   return require("lazy.core.config").plugins[plugin] ~= nil
@@ -49,15 +51,60 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                           Disable Keymaps                            │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+map({"n", "v"}, "q", "<Nop>")
+map({"n", "v"}, "Q", "<Nop>")
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                           Display Sceener                            │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+map("n", "<C-f>", "<C-f>zz")
+map("n", "<C-b>", "<C-b>zz")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "(", "(zz")
+map("n", ")", ")zz")
+map("n", "{", "{zz")
+map("n", "}", "}zz")
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                          Mapping for paste                           │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+map("x", "p", '"_dP')
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                          Move Selected Line                          │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+map("x", "J", ":move '>+1<CR>gv-gv", {silent = true})
+map("x", "K", ":move '<-2<CR>gv-gv", {silent = true})
+
 -- better up/down
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
+-- delete buffer
+map({"n", "i", "v", "t"}, "<LocalLeader>q", "<cmd>Sayonara<cr>", { desc = "Delete Buffer" })
+
+-- save file
+map({ "i", "v", "n", "s" }, "<LocalLeader>w", "<cmd>w<cr><esc>", { desc = "Save file" })
+
 -- Move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+map({"n", "i", "v"}, "<C-h>", "<Esc><C-w>h", { desc = "Go to left window" })
+map({"n", "i", "v"}, "<C-j>", "<Esc><C-w>j", { desc = "Go to lower window" })
+map({"n", "i", "v"}, "<C-k>", "<Esc><C-w>k", { desc = "Go to upper window" })
+map({"n", "i", "v"}, "<C-l>", "<Esc><C-w>l", { desc = "Go to right window" })
+
+map("t", "<C-h>", "<C-\\><C-n><C-w>h")
+map("t", "<C-j>", "<C-\\><C-n><C-w>j")
+map("t", "<C-k>", "<C-\\><C-n><C-w>k")
+map("t", "<C-l>", "<C-\\><C-n><C-w>l")
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -68,11 +115,11 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window w
 
 -- buffers
 if Has("bufferline.nvim") then
-  map("n", "<LocalLeader><S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
-  map("n", "<LocalLeader><Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+  map("n", "<LocalLeader><Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+  map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
 else
-  map("n", "<LocalLeader><S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-  map("n", "<LocalLeader><Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+  map("n", "<LocalLeader><Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+  map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 end
 
 -- Clear search with <esc>
@@ -87,9 +134,6 @@ map(
   { desc = "Redraw / clear hlsearch / diff update" }
 )
 
-map("n", "gw", "*N")
-map("x", "gw", "*N")
-
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
 map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
@@ -97,14 +141,6 @@ map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result
 map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-
--- Add undo break-points
-map("i", ",", ",<c-g>u")
-map("i", ".", ".<c-g>u")
-map("i", ";", ";<c-g>u")
-
--- save file
-map({ "i", "v", "n", "s" }, "<LocalLeader>w", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- better indenting
 map("v", "<", "<gv")
