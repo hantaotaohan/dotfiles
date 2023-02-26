@@ -1,7 +1,7 @@
 -- This file is automatically loaded by plugins.init
 
 local function augroup(name)
-  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+  return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
 -- Check if we need to reload the file when it changed
@@ -10,12 +10,25 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",
 })
 
--- Highlight on yank
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                            Yank highlight                            │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+    group = augroup("YankHeight"),
+    callback = function()
+        vim.highlight.on_yank({ higroup = 'lualine_a_visual', timeout = 100 })
+    end,
+})
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                               AsyncRun                               │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd("BufLeave", {
+    group = augroup("Asyncrun"),
+	pattern = "*",
+	command = "let g:asyncrun_status='stopped'"
 })
 
 -- resize splits if window got resized
@@ -109,16 +122,39 @@ vim.api.nvim_create_autocmd({ "FileType","FocusLost" }, {
 
 vim.api.nvim_create_autocmd("TermOpen", {
     group = augroup("Terminal"),
+    pattern = "*",
     command = "setlocal nonumber norelativenumber",
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {
-    group = "lazyvim_Terminal",
+    group = "Terminal",
+    pattern = "*",
     command = "startinsert",
 })
 
 vim.api.nvim_create_autocmd({ "WinEnter" , "BufWinEnter" }, {
-    group = "lazyvim_Terminal",
+    group = "Terminal",
 	pattern = "term://*",
     command = "startinsert"
 })
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                              Commenting                              │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = augroup("Format-Comment"),
+    pattern = "*",
+    callback = function()
+      vim.opt_local.formatoptions:remove("a")
+      vim.opt_local.formatoptions:remove("l")
+      vim.opt_local.formatoptions:remove("m")
+      vim.opt_local.formatoptions:remove("M")
+      vim.opt_local.formatoptions:remove("t")
+      vim.opt_local.formatoptions:remove("c")
+      vim.opt_local.formatoptions:remove("r")
+      vim.opt_local.formatoptions:remove("o")
+      vim.opt_local.wrap = false
+    end
+})
+

@@ -12,8 +12,8 @@ return {
     },
 
     keys = {
-        { '<leader>|', ':Neotree reveal filesystem float toggle=true<cr>', desc = 'Toggle file tree (float)' },
-        { '<LocalLeader>e', ':Neotree toggle<cr>', desc = 'Toggle file tree (sidebar)' },
+        { '<leader>|', ':Neotree reveal filesystem float toggle=true<cr>', desc = 'Toggle file tree (float)', silent = true },
+        { '<LocalLeader>e', ':Neotree toggle<cr>', desc = 'Toggle file tree (sidebar)', silent = true },
     },
 
     config = function()

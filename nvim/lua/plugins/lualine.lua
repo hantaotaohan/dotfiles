@@ -100,8 +100,8 @@ return{
                 -- section_separators = { left = '', right = ''},
 
                 disabled_filetypes = {
-                    statusline = {},
-                    winbar = {},
+                    statusline = {'lazy', 'dashboard'},
+                    winbar = {'lazy', 'dashboard'},
                 },
 
                 ignore_focus = {},

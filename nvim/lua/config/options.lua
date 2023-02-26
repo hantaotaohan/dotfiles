@@ -29,7 +29,7 @@ opt.relativenumber = true                                                      -
 opt.signcolumn = "yes"                                                         -- 是否显示符号列
 opt.conceallevel = 3                                                           -- 隐藏粗体和斜体的 * 标记
 
-opt.scrolloff = 4                                                              -- 要保留在上方和下方的最小屏幕行数 
+opt.scrolloff = 8                                                              -- 要保留在上方和下方的最小屏幕行数 
 opt.sidescrolloff = 8                                                          -- 要保留在左侧和右侧的最小屏幕列数
 
 opt.wildmode = "longest:full,full"                                             -- 命令行补全完成模式
@@ -187,7 +187,7 @@ opt.inccommand = "nosplit"                                                     -
 opt.grepformat = "%f:%l:%c:%m"                                                 -- GREP命令输出的格式
 opt.grepprg = "rg --hidden --vimgrep --smart-case --"                          -- 全局或本地到缓冲全局本地用于GREP命令的程序
 
-opt.ruler = true                                                               -- 是否显示光标位置的行号和列号
+opt.ruler = false                                                               -- 是否显示光标位置的行号和列号
 opt.cmdheight = 1                                                              -- 用于命令行的屏幕行数
 opt.showcmd = false                                                            -- 是否~在屏幕的最后一行显示(部分)命令
 opt.showmode = false                                                           -- 是否在左下角显示输入模式
