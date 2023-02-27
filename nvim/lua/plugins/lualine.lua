@@ -1,4 +1,4 @@
-return{
+return {
 
     "nvim-lualine/lualine.nvim",
     event = 'VeryLazy',

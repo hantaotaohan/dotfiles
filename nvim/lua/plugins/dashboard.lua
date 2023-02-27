@@ -3,17 +3,17 @@ return {
     "glepnir/dashboard-nvim",
     event = "User LazyVimStarted",
     dependencies = { 
-        {
             'nvim-tree/nvim-web-devicons',
             "akinsho/bufferline.nvim",
             "nvim-lualine/lualine.nvim",
-        }
     },
+
     config = function()
 
         local function banner()
             local version = " Driven By " .. vim.split(vim.api.nvim_command_output("version"), "\n")[2]
             local ret = {
+
                 "",
                 "████████╗        ██████╗   █████╗  ███████╗ ██╗  ██╗",
                 "╚══██╔══╝        ██╔══██╗ ██╔══██╗ ██╔════╝ ██║  ██║",
@@ -40,17 +40,18 @@ return {
         ----------------------------------------------------------------------
         --                       config a hyper theme                       --
         ----------------------------------------------------------------------
+
         local hyper = {
+
             theme = "hyper",
+            disable_move = true,   --  defualt is false disable move keymap for hyper
+            shortcut_type = "number",  --  shorcut type 'letter' or 'number'
 
             hide = {
                 statusline = true, -- hide statusline default is true
                 tabline = true, -- hide the tabline
                 winbar = true, -- hide winbar
             },
-
-            disable_move = true,   --  defualt is false disable move keymap for hyper
-            shortcut_type = "number",  --  shorcut type 'letter' or 'number'
 
             config = {
                 header = header,
@@ -66,7 +67,7 @@ return {
                     },
                     {
                         icon = '  ',
-                        desc = "Update",
+                        desc = "Update ",
                         key = "u",
                         action = "Lazy update",
                         group = "Whitespace",
@@ -75,34 +76,25 @@ return {
                     },
                     {
                         icon = '  ',
-                        desc = "Files",
-                        key = "f",
-                        action = "Telescope find_files",
+                        desc = "OldFiles ",
+                        key = "o",
+                        action = "lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false, winblend = 1 }))",
                         group = "Whitespace",
                         icon_hl = 'Normal',
                         desc_hl = 'Whitespace',
                     },
                     {
                         icon = '  ',
-                        desc = "Colors",
+                        desc = "Colors ",
                         key = "t",
-                        action = "Telescope colorscheme",
-                        group = "Whitespace",
-                        icon_hl = 'Normal',
-                        desc_hl = 'Whitespace',
-                    },
-                    {
-                        icon = '  ',
-                        desc = "Apps",
-                        key = "a",
-                        action = "Telescope app",
+                        action = "lua require'telescope.builtin'.colorscheme(require('telescope.themes').get_dropdown({ previewer = false }))",
                         group = "Whitespace",
                         icon_hl = 'Normal',
                         desc_hl = 'Whitespace',
                     },
                     {
                         icon = '  ',
-                        desc = "Settings",
+                        desc = "Settings ",
                         key = "v",
                         action = ":e $MYVIMRC | cd %:p:h",
                         group = "Whitespace",
@@ -111,7 +103,7 @@ return {
                     },
                     {
                         icon = '  ',
-                        desc = "Quit",
+                        desc = "Quit ",
                         key = "q",
                         action = "q!",
                         group = "Whitespace",
@@ -138,8 +130,8 @@ return {
                     limit = 6,
                     label = "",
                     -- label = "Recently Projects",
-                    -- action = "Telescope find_files cwd=",
-                    action = "Telescope projects",
+                    action = "Telescope find_files cwd=",
+                    -- action = "Telescope projects",
                 },
 
                 footer = footer,
@@ -151,5 +143,6 @@ return {
         if vim.fn.argc() == 0 and vim.fn.line2byte("$") == -1 then
             require("dashboard"):instance()
         end
-    end,
+
+    end
 }

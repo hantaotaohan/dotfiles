@@ -4,7 +4,7 @@ return {
     dependencies = {
         "HiPhish/nvim-ts-rainbow2",
     },
-    -- version = false,
+    version = false,
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     keys = {
@@ -23,10 +23,10 @@ return {
             "markdown",
             "markdown_inline",
             "python",
-            "query",
-            "regex",
-            "tsx",
-            "typescript",
+            -- "query",
+            -- "regex",
+            -- "tsx",
+            -- "typescript",
             "vim",
             "yaml",
         },

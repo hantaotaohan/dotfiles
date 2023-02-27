@@ -110,12 +110,17 @@ vim.api.nvim_create_autocmd("FileType", {
 --   │                                Lazy                                  │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-vim.api.nvim_create_autocmd({ "FileType","FocusLost" }, {
+vim.api.nvim_create_autocmd("FileType", {
     group = augroup("LazyStartup"),
 	pattern = "lazy",
-    command = "set showtabline=0 laststatus=0 cmdheight=0 nonumber norelativenumber | autocmd BufUnload <buffer> set showtabline=2 laststatus=2 cmdheight=1"
+    command = "set showtabline=0 laststatus=0 cmdheight=0 nonumber norelativenumber"
 })
 
+vim.api.nvim_create_autocmd("BufUnload", {
+    group = augroup("LazyStartup"),
+	pattern = "lazy",
+    command = "set showtabline=2 laststatus=2 cmdheight=1"
+})
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                                Term                                  │
 --   ╰──────────────────────────────────────────────────────────────────────╯

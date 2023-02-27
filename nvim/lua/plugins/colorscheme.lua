@@ -86,6 +86,33 @@ return {
             TSRainbowViolet            = { fg = "#C678DD" , bg = nil       },
             TSRainbowCyan              = { fg = "#56B6C2" , bg = nil       },
 
+            -- General
+            DashboardHeader            = { fg = "#81A1C1" , bg = nil       },
+            DashboardFooter            = { fg = "#5E768E" , bg = nil , fmt = ("bold") },
+            -- Hyper theme
+            DashboardProjectTitle      = { fg = "#56B6C2" , bg = nil       },
+            DashboardProjectTitleIcon  = { fg = "#56B6C2" , bg = nil       },
+            DashboardProjectIcon       = { fg = "#61AFEF" , bg = nil       },
+            DashboardMruTitle          = { fg = "#56B6C2" , bg = nil       },
+            DashboardMruIcon           = { fg = "#61AFEF" , bg = nil       },
+            DashboardFiles             = { fg = "#ABB2BF" , bg = nil       },
+            DashboardShotCutIcon       = { fg = "#56B6C2" , bg = nil       },
+
+
+            -- 设置选择器中选定项目的突出显示
+            TelescopeSelection         = { fg = nil       , bg = "#3E4552" },
+            TelescopeSelectionCaret    = { fg = "#61AFEF" , bg = nil       },
+            TelescopeMultiSelection    = { fg = "#E06C75" , bg = nil       },
+            TelescopeMultiIcon         = { fg = "#E06C75" , bg = nil       },
+
+            -- 边框高亮组
+            TelescopeBorder            = { fg = "#646870" , bg = nil       },
+            TelescopePromptBorder      = { fg = "#646870" , bg = nil       },
+            TelescopeResultsBorder     = { fg = "#646870" , bg = nil       },
+            TelescopePreviewBorder     = { fg = "#646870" , bg = nil       },
+            -- 用于突出显示您匹配的字符。
+            TelescopeMatching          = { fg = "#E06C75" , bg = nil       },
+
         },
 
         -- Plugins Config --
