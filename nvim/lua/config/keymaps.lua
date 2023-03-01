@@ -4,60 +4,59 @@ fun = require("config.function")
 
 ---@param plugin string
 function Has(plugin)
-  return require("lazy.core.config").plugins[plugin] ~= nil
+	return require("lazy.core.config").plugins[plugin] ~= nil
 end
 
 ---@param silent boolean?
 function Toggle(option, silent, values)
-  if values then
-    if vim.opt_local[option]:get() == values[1] then
-      vim.opt_local[option] = values[2]
-    else
-      vim.opt_local[option] = values[1]
-    end
-    return Util.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
-  end
-  vim.opt_local[option] = not vim.opt_local[option]:get()
-  if not silent then
-    if vim.opt_local[option]:get() then
-      Util.info("Enabled " .. option, { title = "Option" })
-    else
-      Util.warn("Disabled " .. option, { title = "Option" })
-    end
-  end
+	if values then
+		if vim.opt_local[option]:get() == values[1] then
+			vim.opt_local[option] = values[2]
+		else
+			vim.opt_local[option] = values[1]
+		end
+		return Util.info("Set " .. option .. " to " .. vim.opt_local[option]:get(), { title = "Option" })
+	end
+	vim.opt_local[option] = not vim.opt_local[option]:get()
+	if not silent then
+		if vim.opt_local[option]:get() then
+			Util.info("Enabled " .. option, { title = "Option" })
+		else
+			Util.warn("Disabled " .. option, { title = "Option" })
+		end
+	end
 end
 
 local enabled = true
 function Toggle_diagnostics()
-  enabled = not enabled
-  if enabled then
-    vim.diagnostic.enable()
-    Util.info("Enabled diagnostics", { title = "Diagnostics" })
-  else
-    vim.diagnostic.disable()
-    Util.warn("Disabled diagnostics", { title = "Diagnostics" })
-  end
+	enabled = not enabled
+	if enabled then
+		vim.diagnostic.enable()
+		Util.info("Enabled diagnostics", { title = "Diagnostics" })
+	else
+		vim.diagnostic.disable()
+		Util.warn("Disabled diagnostics", { title = "Diagnostics" })
+	end
 end
 -- local Util = require("util")
 
 local function map(mode, lhs, rhs, opts)
-  local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
-  -- do not create the keymap if a lazy keys handler exists
-  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = opts or {}
-    opts.silent = opts.silent ~= true
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
+	local keys = require("lazy.core.handler").handlers.keys
+	---@cast keys LazyKeysHandler
+	-- do not create the keymap if a lazy keys handler exists
+	if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+		opts = opts or {}
+		opts.silent = opts.silent ~= true
+		vim.keymap.set(mode, lhs, rhs, opts)
+	end
 end
-
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                           Disable Keymaps                            │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map({"n", "v"}, "q", "<Nop>")
-map({"n", "v"}, "Q", "<Nop>")
+map({ "n", "v" }, "q", "<Nop>")
+map({ "n", "v" }, "Q", "<Nop>")
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                           Display Sceener                            │
@@ -82,24 +81,24 @@ map("x", "p", '"_dP')
 --   │                          Move Selected Line                          │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("x", "J", ":move '>+1<CR>gv-gv", {silent = true})
-map("x", "K", ":move '<-2<CR>gv-gv", {silent = true})
+map("x", "J", ":move '>+1<CR>gv-gv", { silent = true })
+map("x", "K", ":move '<-2<CR>gv-gv", { silent = true })
 
 -- better up/down
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- delete buffer
-map({"n", "i", "v", "t"}, "<LocalLeader>q", "<cmd>Sayonara<cr>", { desc = "Delete Buffer" })
+map({ "n", "i", "v", "t" }, "<LocalLeader>q", "<cmd>Sayonara<cr>", { desc = "Delete Buffer" })
 
 -- save file
 map({ "i", "v", "n", "s" }, "<LocalLeader>w", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 -- Move to window using the <ctrl> hjkl keys
-map({"n", "i", "v"}, "<C-h>", "<Esc><C-w>h", { desc = "Go to left window" })
-map({"n", "i", "v"}, "<C-j>", "<Esc><C-w>j", { desc = "Go to lower window" })
-map({"n", "i", "v"}, "<C-k>", "<Esc><C-w>k", { desc = "Go to upper window" })
-map({"n", "i", "v"}, "<C-l>", "<Esc><C-w>l", { desc = "Go to right window" })
+map({ "n", "i", "v" }, "<C-h>", "<Esc><C-w>h", { desc = "Go to left window" })
+map({ "n", "i", "v" }, "<C-j>", "<Esc><C-w>j", { desc = "Go to lower window" })
+map({ "n", "i", "v" }, "<C-k>", "<Esc><C-w>k", { desc = "Go to upper window" })
+map({ "n", "i", "v" }, "<C-l>", "<Esc><C-w>l", { desc = "Go to right window" })
 
 map("t", "<C-h>", "<C-\\><C-n><C-w>h")
 map("t", "<C-j>", "<C-\\><C-n><C-w>j")
@@ -112,26 +111,27 @@ map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
-
 -- buffers
 if Has("bufferline.nvim") then
-  map("n", "<LocalLeader><Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
-  map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+	map("n", "<LocalLeader><Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
+	map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
 else
-  map("n", "<LocalLeader><Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-  map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+	map("n", "<LocalLeader><Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+	map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 end
 
 -- Clear search with <esc>
--- map({ "i", "n" }, "<esc><esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+map("n", "<Esc><Esc>", "<cmd>nohlsearch<cr>", { desc = "Escape and clear hlsearch" })
+map("n", ";;", ";", { desc = "Escape and clear hlsearch" })
 
+map({ "n", "i", "v" }, "<LocalLeader>s", "<cmd>Dashboard<cr>", { desc = "Return DashBoard" })
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / clear hlsearch / diff update" }
+	"n",
+	"<leader>ur",
+	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
+	{ desc = "Redraw / clear hlsearch / diff update" }
 )
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
@@ -207,4 +207,3 @@ map("n", "<F7>", "<CMD>lua fun.toggle_qf()<CR>")
 map("n", "<F8>", "<CMD>lua fun.toggle_colorcolumn()<CR>")
 map("n", "<F9>", "<CMD>lua fun.toggle_diagnostics()<CR>")
 map("n", "<F10>", "<CMD>ColorizerToggle<CR>" )
-
