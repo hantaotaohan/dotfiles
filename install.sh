@@ -481,6 +481,7 @@ Apt_Install() {
         tty-clock \
         qutebrowser \
         python3-pip \
+        python3-venv \
         inotify-tools \
         libgl1-mesa-* \
         bash-completion \
