@@ -11,7 +11,7 @@ return {
     config = function()
 
         local function banner()
-            local version = " Driven By " .. vim.split(vim.api.nvim_command_output("version"), "\n")[2]
+            local version = " Driven By " .. vim.split(vim.api.nvim_command_output("version"), "\n" )[2]
             local ret = {
 
                 "",
@@ -22,8 +22,11 @@ return {
                 "   ██║           ██████╔╝ ██║  ██║ ███████║ ██║  ██║",
                 "   ╚═╝           ╚═════╝  ╚═╝  ╚═╝ ╚══════╝ ╚═╝  ╚═╝",
                 "",
+                "",
+                "",
             }
             table.insert(ret, version)
+            table.insert(ret, "")
             table.insert(ret, "")
             return ret
         end
@@ -32,6 +35,8 @@ return {
         -- generate footer info
         local lazy_stats = require("lazy").stats()
         local footer = {
+            "",
+            "",
             "",
             string.format("- Started in %.2fms", lazy_stats.startuptime)
                 .. string.format(", With %s of %s Plugins loaded", lazy_stats.loaded, lazy_stats.count) .. string.format(" -"),
@@ -126,6 +131,7 @@ return {
                 },
 
                 project = {
+                    enable = false,
                     icon = "",
                     limit = 6,
                     label = "",

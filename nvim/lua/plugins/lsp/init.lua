@@ -1,3 +1,34 @@
+vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guifg=#6f737b guibg=#2f333c]]
+vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=#6f737b guibg=#282C34]]
+
+local border = {
+    {"┌", "FloatBorder"},
+    {"─", "FloatBorder"},
+    {"┐", "FloatBorder"},
+    {"│", "FloatBorder"},
+    {"┘", "FloatBorder"},
+    {"─", "FloatBorder"},
+    {"└", "FloatBorder"},
+    {"│", "FloatBorder"},
+}
+
+-- local border = {
+--   { "╔", "FloatBorder" },
+--   { "═", "FloatBorder" },
+--   { "╗", "FloatBorder" },
+--   { "║", "FloatBorder" },
+--   { "╝", "FloatBorder" },
+--   { "═", "FloatBorder" },
+--   { "╚", "FloatBorder" },
+--   { "║", "FloatBorder" },
+-- }
+
+-- LSP settings (for overriding per client)
+local handlers =  {
+    ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+    ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+}
+
 return {
     -- lspconfig
     {
@@ -13,7 +44,7 @@ return {
             {
                 "hrsh7th/cmp-nvim-lsp",
                 cond = function()
-                    return require("config.util").has("nvim-cmp")
+                    return require("config.utility").has("nvim-cmp")
                 end,
             },
         },
@@ -24,7 +55,8 @@ return {
             diagnostics = {
                 underline = true,
                 update_in_insert = false,
-                virtual_text = { spacing = 4, prefix = "●" },
+                virtual_text = { spacing = 8, prefix = "▊ " },
+                float = { source = "always" },
                 severity_sort = true,
             },
             -- Automatically format on save
@@ -54,10 +86,9 @@ return {
                     },
                 },
             },
-            -- you can do any additional lsp server setup here
-            -- return true if you don't want this server to be setup with lspconfig
-            ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+
             setup = {
+
                 -- example to setup with typescript.nvim
                 -- tsserver = function(_, opts)
                 --   require("typescript").setup({ server = opts })
@@ -72,13 +103,13 @@ return {
             -- setup autoformat
             require("plugins.lsp.format").autoformat = opts.autoformat
             -- setup formatting and keymaps
-            require("config.util").on_attach(function(client, buffer)
+            require("config.utility").on_attach(function(client, buffer)
                 require("plugins.lsp.format").on_attach(client, buffer)
                 require("plugins.lsp.keymaps").on_attach(client, buffer)
             end)
 
             -- diagnostics
-            for name, icon in pairs(require("config.util").icons.diagnostics) do
+            for name, icon in pairs(require("config.utility").icons.diagnostics) do
                 name = "DiagnosticSign" .. name
                 vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
             end
@@ -128,6 +159,18 @@ return {
                 end
             end
 
+            --自定义诊断浮窗边框
+            -- Do not forget to use the on_attach function
+            -- require 'lspconfig'.lua_ls.setup { handlers=handlers }
+
+            -- To instead override globally
+            local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+            function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+                opts = opts or {}
+                opts.border = opts.border or border
+                return orig_util_open_floating_preview(contents, syntax, opts, ...)
+            end
+
             require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
             require("mason-lspconfig").setup_handlers({ setup })
         end,
@@ -162,9 +205,21 @@ return {
                 "shellcheck",
                 "shfmt",
                 "flake8",
+                "lua-language-server",
+                "bash-language-server",
+                "pyright",
+                "djlint",
+                "json-lsp",
             },
             github = {
                 download_url_template = os.getenv("GITHUB") .. "%s/releases/download/%s/%s"
+            },
+            pip = {
+                upgrade_pip = true,
+                install_args = { 
+                    "--index-url", "https://pypi.tuna.tsinghua.edu.cn/simple",
+                    "--trusted-host", "pypi.tuna.tsinghua.edu.cn",
+                },
             },
         },
         ---@param opts MasonSettings | {ensure_installed: string[]}

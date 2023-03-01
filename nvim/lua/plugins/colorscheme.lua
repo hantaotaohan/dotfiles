@@ -113,6 +113,44 @@ return {
             -- 用于突出显示您匹配的字符。
             TelescopeMatching          = { fg = "#E06C75" , bg = nil       },
 
+
+            DiagnosticVirtualTextHint  = { fg = "#C678DD" , bg = "#3B3F4C" },
+            DiagnosticVirtualTextInfo  = { fg = "#56B6C2" , bg = "#3B3F4C" },
+            DiagnosticVirtualTextWarn  = { fg = "#E0AF68" , bg = "#3B3F4C" },
+            DiagnosticVirtualTextError = { fg = "#E06C6A" , bg = "#3B3F4C" },
+
+            CmPmenu                  =   { fg = nil       , bg = "#1b1f27" },
+            CMPPmenu                 =   { fg = "#1b1f27" , bg = "#1b1f27" },
+            CmpBorder                =   { fg = "#e06c75" , bg = "#e06c75"       },
+            CmpDocBorder             =   { fg = "#e06c75" , bg = "#e06c75"       },
+            CmpItemAbbr              =   { fg = "#ABB2BF" , bg = nil       },
+            CmpItemAbbrMatch         =   { fg = "#61AFEF" , bg = nil       },
+            CmpItemKindConstant      =   { fg = "#d19a66" , bg = nil       },
+            CmpItemKindFunction      =   { fg = "#61afef" , bg = nil       },
+            CmpItemKindIdentifier    =   { fg = "#e06c75" , bg = nil       },
+            CmpItemKindField         =   { fg = "#e06c75" , bg = nil       },
+            CmpItemKindVariable      =   { fg = "#c678dd" , bg = nil       },
+            CmpItemKindSnippet       =   { fg = "#e06c75" , bg = nil       },
+            CmpItemKindText          =   { fg = "#98c379" , bg = nil       },
+            CmpItemKindStructure     =   { fg = "#c678dd" , bg = nil       },
+            CmpItemKindType          =   { fg = "#e5c07b" , bg = nil       },
+            CmpItemKindKeyword       =   { fg = "#c8ccd4" , bg = nil       },
+            CmpItemKindMethod        =   { fg = "#61afef" , bg = nil       },
+            CmpItemKindConstructor   =   { fg = "#61afef" , bg = nil       },
+            CmpItemKindFolder        =   { fg = "#c8ccd4" , bg = nil       },
+            CmpItemKindModule        =   { fg = "#e5c07b" , bg = nil       },
+            CmpItemKindProperty      =   { fg = "#e06c75" , bg = nil       },
+            CmpItemKindUnit          =   { fg = "#c678dd" , bg = nil       },
+            CmpItemKindFile          =   { fg = "#c8ccd4" , bg = nil       },
+            CmpItemKindColor         =   { fg = "#e06c75" , bg = nil       },
+            CmpItemKindReference     =   { fg = "#abb2bf" , bg = nil       },
+            CmpItemKindStruct        =   { fg = "#c678dd" , bg = nil       },
+            CmpItemKindOperator      =   { fg = "#abb2bf" , bg = nil       },
+            CmpItemKindTypeParameter =   { fg = "#e06c75" , bg = nil       },
+
+            CMPPmenuSel              =   { fg = "#282C34" , bg = "#61AFEF" },
+            CmpItemAbbrDeprecated    =   { fg = "#282C34" , bg = nil       },
+
         },
 
         -- Plugins Config --
