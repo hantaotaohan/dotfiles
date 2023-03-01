@@ -400,6 +400,7 @@ Apt_Install() {
         newsboat \
         tty-clock \
         python3-pip \
+	python3-venv \
         inotify-tools \
         bash-completion \
         universal-ctags \
