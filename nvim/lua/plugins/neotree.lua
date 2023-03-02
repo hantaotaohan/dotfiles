@@ -179,7 +179,7 @@ return {
 						-- Status type
 						untracked = "",
 						ignored = "",
-						unstaged = "",
+						unstaged = "",
 						staged = "",
 						conflict = "",
 					},
@@ -256,7 +256,7 @@ return {
 			filesystem = {
 				async_directory_scan = "auto", -- "auto"   means refreshes are async, but it's synchronous when called from the Neotree commands.
 				follow_current_file = true, -- This will find and focus the file in the active buffer every time the current file is changed while the tree is open.
-				hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree in whatever position is specified in window.position
+				hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree in whatever position is specified in window.position
 				force_visible_in_empty_folder = false, -- when true, hidden files will be shown if the root folder is otherwise empty
 				bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
 

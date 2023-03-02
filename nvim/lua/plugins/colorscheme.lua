@@ -70,13 +70,13 @@ return {
 			NeoTreeIndentMarker = { fg = "#3A4646", bg = nil },
 			NeoTreeDirectoryName = { fg = "#ABB2BF", bg = nil },
 			-- NeoTreeGitAdded            = { fg = "#5C6370" , bg = nil       },
-			-- NeoTreeGitConflict         = { fg = "#5C6370" , bg = nil       },
+			NeoTreeGitConflict         = { fg = "#21252B" , bg = "#E86671"       },
 			-- NeoTreeGitDeleted          = { fg = "#5C6370" , bg = nil       },
 			-- NeoTreeGitIgnored          = { fg = "#5C6370" , bg = nil       },
 			-- NeoTreeGitModified         = { fg = "#5C6370" , bg = nil       },
 			-- NeoTreeGitRenamed          = { fg = "#5C6370" , bg = nil       },
 			-- NeoTreeGitStaged           = { fg = "#5C6370" , bg = nil       },
-			-- NeoTreeGitUntracked        = { fg = "#E86671" , bg = nil       },
+			NeoTreeGitUntracked        = { fg = "#21252B" , bg = "#E86671"       },
 
 			TSRainbowRed = { fg = "#E06C75", bg = nil },
 			TSRainbowYellow = { fg = "#E5C07B", bg = nil },
@@ -151,6 +151,11 @@ return {
 			CmpItemKindStruct = { fg = "#c678dd", bg = nil },
 			CmpItemKindOperator = { fg = "#abb2bf", bg = nil },
 			CmpItemKindTypeParameter = { fg = "#e06c75", bg = nil },
+
+
+            IndentBlanklineContextStart = {fg = nil, bg="#3E4452" },
+
+
 		},
 
 		-- Plugins Config --
