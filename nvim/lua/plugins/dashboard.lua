@@ -109,8 +109,8 @@ return {
 					{
 						icon = "  ",
 						desc = "Quit ",
-						key = "q",
-						action = "q!",
+						key = "<LocalLeader>q",
+						action = "bw",
 						group = "Whitespace",
 						icon_hl = "Normal",
 						desc_hl = "Whitespace",

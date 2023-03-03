@@ -59,10 +59,16 @@ vim.api.nvim_create_autocmd("FileType", {
     "help",
     "man",
     "notify",
+    "prompt",
+    "nofile",
     "lspinfo",
-    "spectre_panel",
+    "neo-tree",
+    "terminal",
+    "dashboard",
+    "toggleterm",
     "startuptime",
     "tsplayground",
+    "spectre_panel",
     "PlenaryTestPopup",
   },
   callback = function(event)
@@ -163,3 +169,4 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9", })

@@ -2,7 +2,7 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		event = "VeryLazy",
-		build = "make install_jsregexp",
+        build = (not jit.os:find("Windows")) and "make install_jsregexp" or nil,
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			config = function()
@@ -365,4 +365,14 @@ return {
 			})
 		end,
 	},
+
+    {
+  "echasnovski/mini.pairs",
+  event = "VeryLazy",
+  config = function(_, opts)
+    require("mini.pairs").setup(opts)
+  end,
+},
+
+{ 'echasnovski/mini.align', version = false },
 }

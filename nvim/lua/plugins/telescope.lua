@@ -241,7 +241,10 @@ return {
 	{
 
 		"ahmedkhalf/project.nvim",
+		lazy = true,
 		event = "VeryLazy",
+		cmd = "Telescope",
+		keys = { { "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 		},
