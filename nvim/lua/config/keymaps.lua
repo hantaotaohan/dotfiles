@@ -207,3 +207,14 @@ map("n", "<F7>", "<CMD>lua fun.toggle_qf()<CR>")
 map("n", "<F8>", "<CMD>lua fun.toggle_colorcolumn()<CR>")
 map("n", "<F9>", "<CMD>lua fun.toggle_diagnostics()<CR>")
 map("n", "<F10>", "<CMD>ColorizerToggle<CR>" )
+
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                            Commant - Box                             │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+map( {"n", "v"}, "gbb", "<CMD>CBccbox<CR>" , opts)
+map( {"n", "v"}, "gbv", "<CMD>CBccbox21<CR>" , opts)
+map( {"n", "v"}, "gbh", "<CMD>CBline5<CR>" , opts)
+map( {"n", "v"}, "gbj", "<CMD>CBline6<CR>" , opts)
+

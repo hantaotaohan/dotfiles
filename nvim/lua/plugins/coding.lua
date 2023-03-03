@@ -1,8 +1,17 @@
 return {
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                               LuaSnip                                │
+	--   │                                                                      │
+	--   │                 https://github.com/L3MON4D3/LuaSnip                  │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
 	{
 		"L3MON4D3/LuaSnip",
 		event = "VeryLazy",
-        build = (not jit.os:find("Windows")) and "make install_jsregexp" or nil,
+		build = (not jit.os:find("Windows")) and "make install_jsregexp" or nil,
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			config = function()
@@ -27,6 +36,14 @@ return {
         },
 	},
 
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                          friendly-snippets                           │
+	--   │                                                                      │
+	--   │           https://github.com/rafamadriz/friendly-snippets            │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
 	{
 		"rafamadriz/friendly-snippets",
 		event = "VeryLazy",
@@ -34,6 +51,14 @@ return {
 			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                               Nvim-Cmp                               │
+	--   │                                                                      │
+	--   │                 https://github.com/hrsh7th/nvim-cmp                  │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	{
 		"hrsh7th/nvim-cmp",
@@ -231,6 +256,12 @@ return {
 		end,
 	},
 
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                               Comment                                │
+	--   │                                                                      │
+	--   │               https://github.com/numToStr/Comment.nvim               │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
 	{
 		"numToStr/Comment.nvim",
 		lazy = true,
@@ -273,6 +304,14 @@ return {
 		end,
 	},
 
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                               Surround                               │
+	--   │                                                                      │
+	--   │             https://github.com/echasnovski/mini.surround             │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
 	{
 		"echasnovski/mini.surround",
 		keys = function(_, keys)
@@ -310,6 +349,14 @@ return {
 		end,
 	},
 
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                            Nvim-Colorizer                            │
+	--   │                                                                      │
+	--   │            https://github.com/norcalli/nvim-colorizer.lua            │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
 	{
 		"norcalli/nvim-colorizer.lua",
 		event = "VeryLazy",
@@ -332,6 +379,14 @@ return {
 			},
 		},
 	},
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                             Comment-Box                              │
+	--   │                                                                      │
+	--   │           https://github.com/LudoPinelli/comment-box.nvim            │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	{
 		"LudoPinelli/comment-box.nvim",
@@ -366,13 +421,29 @@ return {
 		end,
 	},
 
-    {
-  "echasnovski/mini.pairs",
-  event = "VeryLazy",
-  config = function(_, opts)
-    require("mini.pairs").setup(opts)
-  end,
-},
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                              Mini.pair                               │
+	--   │                                                                      │
+	--   │              https://github.com/echasnovski/mini.pairs               │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
 
-{ 'echasnovski/mini.align', version = false },
+	{
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
+		config = function(_, opts)
+			require("mini.pairs").setup(opts)
+		end,
+	},
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                              mini.align                              │
+	--   │                                                                      │
+	--   │              https://github.com/echasnovski/mini.align               │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
+	{ "echasnovski/mini.align", version = false },
 }
