@@ -155,7 +155,7 @@ opt.history = 9000 -- 命令的历史记录
 opt.mouse = "a" -- 是否开启鼠标模式
 opt.title = true -- 是否启用窗口的标题
 opt.modeline = true -- 是否开启MODELINE模式
-opt.lazyredraw = true -- 是否开启懒惰重画屏幕
+opt.lazyredraw = false -- 是否开启懒惰重画屏幕
 opt.ttyfast = true
 
 opt.visualbell = false -- 是否开启警告声音

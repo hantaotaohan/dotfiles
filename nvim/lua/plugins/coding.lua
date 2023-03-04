@@ -1,3 +1,18 @@
+--  ══════════════════════════════════════════════════════════════════════════
+--  DIRECTORY
+--  ══════════════════════════════════════════════════════════════════════════
+
+--  * LuaSnip
+--  * Friendly_Snippets
+--  * Nvim_Cmp
+--  * Pair
+--  * Align
+--  * Surround
+--  * Comment
+--  * Comment_Box
+
+--  ╾────────────────────────────────────────────────────────────────────────╼
+
 return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
@@ -38,7 +53,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                          friendly-snippets                           │
+	--   │                          Friendly_Snippets                           │
 	--   │                                                                      │
 	--   │           https://github.com/rafamadriz/friendly-snippets            │
 	--   │                                                                      │
@@ -54,7 +69,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Nvim-Cmp                               │
+	--   │                               Nvim_Cmp                               │
 	--   │                                                                      │
 	--   │                 https://github.com/hrsh7th/nvim-cmp                  │
 	--   │                                                                      │
@@ -257,6 +272,77 @@ return {
 	},
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                                Pair                                  │
+	--   │                                                                      │
+	--   │              https://github.com/echasnovski/mini.pairs               │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
+	{
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
+		config = function(_, opts)
+			require("mini.pairs").setup(opts)
+		end,
+	},
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                                Align                                 │
+	--   │                                                                      │
+	--   │              https://github.com/echasnovski/mini.align               │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
+	{ "echasnovski/mini.align", version = false },
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                               Surround                               │
+	--   │                                                                      │
+	--   │             https://github.com/echasnovski/mini.surround             │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
+	{
+		"echasnovski/mini.surround",
+		keys = function(_, keys)
+			-- Populate the keys based on the user's options
+			local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
+			local opts = require("lazy.core.plugin").values(plugin, "opts", false)
+			local mappings = {
+				{ opts.mappings.add, desc = "Add surrounding", mode = { "n", "v" } },
+				{ opts.mappings.delete, desc = "Delete surrounding" },
+				{ opts.mappings.find, desc = "Find right surrounding" },
+				{ opts.mappings.find_left, desc = "Find left surrounding" },
+				{ opts.mappings.highlight, desc = "Highlight surrounding" },
+				{ opts.mappings.replace, desc = "Replace surrounding" },
+				{ opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
+			}
+			mappings = vim.tbl_filter(function(m)
+				return m[1] and #m[1] > 0
+			end, mappings)
+			return vim.list_extend(mappings, keys)
+		end,
+		opts = {
+			mappings = {
+				add = "as", -- Add surrounding in Normal and Visual modes
+				delete = "ds", -- Delete surrounding
+				find = "gzf", -- Find surrounding (to the right)
+				find_left = "gzF", -- Find surrounding (to the left)
+				highlight = "gzh", -- Highlight surrounding
+				replace = "cs", -- Replace surrounding
+				update_n_lines = "gzn", -- Update `n_lines`
+			},
+		},
+		config = function(_, opts)
+			-- use gz mappings instead of s to prevent conflict with leap
+			require("mini.surround").setup(opts)
+		end,
+	},
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                               Comment                                │
 	--   │                                                                      │
 	--   │               https://github.com/numToStr/Comment.nvim               │
@@ -306,83 +392,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Surround                               │
-	--   │                                                                      │
-	--   │             https://github.com/echasnovski/mini.surround             │
-	--   │                                                                      │
-	--   ╰──────────────────────────────────────────────────────────────────────╯
-
-	{
-		"echasnovski/mini.surround",
-		keys = function(_, keys)
-			-- Populate the keys based on the user's options
-			local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
-			local opts = require("lazy.core.plugin").values(plugin, "opts", false)
-			local mappings = {
-				{ opts.mappings.add, desc = "Add surrounding", mode = { "n", "v" } },
-				{ opts.mappings.delete, desc = "Delete surrounding" },
-				{ opts.mappings.find, desc = "Find right surrounding" },
-				{ opts.mappings.find_left, desc = "Find left surrounding" },
-				{ opts.mappings.highlight, desc = "Highlight surrounding" },
-				{ opts.mappings.replace, desc = "Replace surrounding" },
-				{ opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
-			}
-			mappings = vim.tbl_filter(function(m)
-				return m[1] and #m[1] > 0
-			end, mappings)
-			return vim.list_extend(mappings, keys)
-		end,
-		opts = {
-			mappings = {
-				add = "as", -- Add surrounding in Normal and Visual modes
-				delete = "ds", -- Delete surrounding
-				find = "gzf", -- Find surrounding (to the right)
-				find_left = "gzF", -- Find surrounding (to the left)
-				highlight = "gzh", -- Highlight surrounding
-				replace = "cs", -- Replace surrounding
-				update_n_lines = "gzn", -- Update `n_lines`
-			},
-		},
-		config = function(_, opts)
-			-- use gz mappings instead of s to prevent conflict with leap
-			require("mini.surround").setup(opts)
-		end,
-	},
-
-	--   ╭──────────────────────────────────────────────────────────────────────╮
-	--   │                                                                      │
-	--   │                            Nvim-Colorizer                            │
-	--   │                                                                      │
-	--   │            https://github.com/norcalli/nvim-colorizer.lua            │
-	--   │                                                                      │
-	--   ╰──────────────────────────────────────────────────────────────────────╯
-
-	{
-		"norcalli/nvim-colorizer.lua",
-		event = "VeryLazy",
-		opts = {
-
-			filetypes = {
-				"*",
-			},
-
-			user_default_options = {
-				RGB = true, -- #RGB hex codes
-				RRGGBB = true, -- #RRGGBB hex codes
-				names = false, -- "Name" codes like Blue
-				RRGGBBAA = false, -- #RRGGBBAA hex codes
-				rgb_fn = false, -- CSS rgb() and rgba() functions
-				hsl_fn = false, -- CSS hsl() and hsla() functions
-				css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-				css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
-				mode = "background", -- Set the display mode.
-			},
-		},
-	},
-
-	--   ╭──────────────────────────────────────────────────────────────────────╮
-	--   │                                                                      │
-	--   │                             Comment-Box                              │
+	--   │                             Comment_Box                              │
 	--   │                                                                      │
 	--   │           https://github.com/LudoPinelli/comment-box.nvim            │
 	--   │                                                                      │
@@ -420,30 +430,4 @@ return {
 			})
 		end,
 	},
-
-	--   ╭──────────────────────────────────────────────────────────────────────╮
-	--   │                                                                      │
-	--   │                              Mini.pair                               │
-	--   │                                                                      │
-	--   │              https://github.com/echasnovski/mini.pairs               │
-	--   │                                                                      │
-	--   ╰──────────────────────────────────────────────────────────────────────╯
-
-	{
-		"echasnovski/mini.pairs",
-		event = "VeryLazy",
-		config = function(_, opts)
-			require("mini.pairs").setup(opts)
-		end,
-	},
-
-	--   ╭──────────────────────────────────────────────────────────────────────╮
-	--   │                                                                      │
-	--   │                              mini.align                              │
-	--   │                                                                      │
-	--   │              https://github.com/echasnovski/mini.align               │
-	--   │                                                                      │
-	--   ╰──────────────────────────────────────────────────────────────────────╯
-
-	{ "echasnovski/mini.align", version = false },
 }

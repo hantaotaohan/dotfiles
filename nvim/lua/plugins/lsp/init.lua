@@ -23,14 +23,16 @@ local border = {
 --   { "║", "FloatBorder" },
 -- }
 
--- LSP settings (for overriding per client)
---local handlers = {
---	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
---	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
--- }
-
 return {
-	-- lspconfig
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                              LspConfig                               │
+	--   │                                                                      │
+	--   │               https://github.com/neovim/nvim-lspconfig               │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
 	{
 		"neovim/nvim-lspconfig",
 
@@ -172,7 +174,14 @@ return {
 		end,
 	},
 
-	-- formatters
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                               Null_Ls                                │
+	--   │                                                                      │
+	--   │          https://github.com/jose-elias-alvarez/null-ls.nvim          │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		event = { "BufReadPre", "BufNewFile" },
@@ -189,7 +198,14 @@ return {
 		end,
 	},
 
-	-- cmdline tools and lsp servers
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                                Mason                                 │
+	--   │                                                                      │
+	--   │              https://github.com/williamboman/mason.nvim              │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
 	{
 
 		"williamboman/mason.nvim",
