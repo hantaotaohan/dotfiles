@@ -242,10 +242,10 @@ return {
 			TSInclude = { fg = "#c678dd", bg = nil, nil },
 			TSConditional = { fg = "#c678dd", bg = nil, nil },
 
-			IndentBlanklineChar = { fg = "#42464e", bg = nil },
-			IndentBlanklineSpaceChar = { fg = "#42464e", bg = nil },
-			IndentBlanklineContextChar = { fg = "#31353d", bg = nil },
-			IndentBlanklineContextStart = { fg = nil, bg = "#353b45" },
+			IndentBlanklineChar = { fg = "#3A4646", bg = nil },
+			IndentBlanklineSpaceChar = { fg = "#24acf2", bg = nil },
+			IndentBlanklineContextChar = { fg = "#337bd4", bg = nil },
+			IndentBlanklineContextStart = { fg = nil, bg = "#21252b", fmt = "bold,italic" },
 		},
 
 		-- Plugins Config --

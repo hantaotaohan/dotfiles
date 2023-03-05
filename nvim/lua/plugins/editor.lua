@@ -50,11 +50,15 @@ return {
 				desc = "Toggle file tree (float)",
 				silent = true,
 			},
-			{ "<LocalLeader>e", ":Neotree toggle<cr>", desc = "Toggle file tree (sidebar)", silent = true },
+			{
+				"<LocalLeader>e",
+				":Neotree toggle reveal_force_cwd<cr>",
+				desc = "Toggle file tree (sidebar)",
+				silent = true,
+			},
 		},
 
 		config = function()
-			local tree = require("neo-tree")
 			local highlights = require("neo-tree.ui.highlights")
 			local renderer = require("neo-tree.ui.renderer")
 
@@ -97,7 +101,7 @@ return {
 				enable_refresh_on_write = true, -- Refresh the tree when a file is written. Only used if `use_libuv_file_watcher` is false.
 				git_status_async = true,
 
-				hide_root_node = false, -- Hide the root node.
+				hide_root_node = true, -- Hide the root node.
 				retain_hidden_root_indent = false, -- IF the root node is hidden, keep the indentation anyhow.
 
 				log_level = "info", -- "trace", "debug", "info", "warn", "error", "fatal"
@@ -166,7 +170,7 @@ return {
 					},
 
 					indent = {
-						indent_size = 2,
+						indent_size = 3,
 						padding = 2,
 						with_markers = true,
 						indent_marker = "│",
@@ -240,29 +244,23 @@ return {
 
 					mappings = {
 						-- ["<esc>"] = "revert_preview",
-						["P"] = { "toggle_preview", config = { use_float = true } },
+						-- ["w"] = "open_with_window_picker",
+						-- ["/"] = "filter_as_you_type",
+						["P"] = { "toggle_preview", config = { use_float = false } },
 						["S"] = "open_split",
 						["s"] = "open_vsplit",
 						["t"] = "open_tabnew",
-						["w"] = "open_with_window_picker",
-						["C"] = "close_node",
 						["z"] = "close_all_nodes",
 						["R"] = "refresh",
-						-- ["/"] = "filter_as_you_type",
-						["a"] = {
-							"add",
-							config = {
-								show_path = "none", -- "none", "relative", "absolute"
-							},
-						},
+						["a"] = { "add", config = { show_path = "none" } }, -- "none", "relative", "absolute"
 						["A"] = "add_directory", -- also accepts the config.show_path option.
 						["dd"] = "delete",
 						["r"] = "rename",
 						["yy"] = "copy_to_clipboard",
 						["x"] = "cut_to_clipboard",
 						["p"] = "paste_from_clipboard",
-						["c"] = "copy", -- takes text input for destination, also accepts the config.show_path option
-						["m"] = "move", -- takes text input for destination, also accepts the config.show_path option
+						["c"] = "copy",
+						["m"] = "move",
 						["<LocalLeader>q"] = "close_window",
 						["?"] = "show_help",
 						["<"] = "prev_source",
@@ -271,12 +269,12 @@ return {
 						["o"] = "smart_open",
 						["/"] = "fuzzy_finder",
 						["<Esc>"] = "clear_filter",
+						["h"] = float,
+						["l"] = dive,
 						["u"] = "navigate_up",
 						["C"] = "set_root",
 						["[c"] = "prev_git_modified",
 						["]c"] = "next_git_modified",
-						["h"] = float,
-						["l"] = dive,
 					},
 				},
 

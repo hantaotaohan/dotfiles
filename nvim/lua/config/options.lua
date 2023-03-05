@@ -1,5 +1,6 @@
 -- VARIABLE --
 
+local o = vim.o
 local opt = vim.opt
 local VIM_DATA_PATH = vim.fn.stdpath("data")
 
@@ -115,7 +116,7 @@ opt.swapfile = false -- 是否开启交换文件功能
 opt.undofile = true -- 是否开启持久性撤销功能
 opt.undolevels = 10000 -- 可撤消的最大更改数
 opt.writebackup = false -- 是否开启在覆盖文件之前进行备份. 备份将在之后删除
-opt.undodir = VIM_DATA_PATH .. "/undo" -- 设置撤销文件目录
+o.undodir = VIM_DATA_PATH .. "/undo" -- 设置撤销文件目录
 
 opt.viewoptions:append("cursor") -- 更改MKVIEW命令的效果: 光标在文件和窗口中的位置
 opt.viewoptions:append("curdir") -- 更改MKVIEW命令的效果: 本地当前目录
@@ -131,16 +132,30 @@ opt.sessionoptions:append("tabpages") -- Mksession命令的效果: 所有标签�
 opt.sessionoptions:append("winsize") -- Mksession命令的效果: 窗口大小
 
 opt.wildignorecase = true -- 当完成文件名和目录时
-opt.wildignore:append("*.jpg", "*.jpeg", "*.bmp", "*.gif", "*.png") -- 文件模式列表。与其中一个匹配的文件 展开通配符、完成文件或 目录名
-opt.wildignore:append("*.o", "*.obj", "*.exe", "*.dll", "*.so", "*.out") -- 文件模式列表。与其中一个匹配的文件 展开通配符、完成文件或 目录名
-opt.wildignore:append("*.swp", "*.swo", "*.swn") -- 文件模式列表。与其中一个匹配的文件 展开通配符、完成文件或 目录名
-opt.wildignore:append("*/.git", "*/.hg", "*/.svn") -- 文件模式列表。与其中一个匹配的文件 展开通配符、完成文件或 目录名
-opt.wildignore:append("tags", "*.tags") -- 文件模式列表。与其中一个匹配的文件 展开通配符、完成文件或 目录名
-opt.wildignore:append("*.zip", "**/tmp/**") -- 文件模式列表。与其中一个匹配的文件 展开通配符、完成文件或 目录名
-opt.wildignore:append("*.DS_Store,**/node_modules/**,**/bower_modules/**") -- 文件模式列表。与其中一个匹配的文件 展开通配符、完成文件或 目录名
+opt.wildignore = { ".git", ".hg", ".svn", ".stversions", "*.pyc", "*.spl", "*.o", "*.out", "*~", "%*" }
+opt.wildignore = opt.wildignore + { "*.jpg", "*.jpeg", "*.png", "*.gif", "*.zip", "**/tmp/**", "*.DS_Store" }
+opt.wildignore = opt.wildignore + { "**/node_modules/**", "**/bower_modules/**", "*/.sass-cache/*" }
+opt.wildignore = opt.wildignore + { "__pycache__", "*.egg-info", ".pytest_cache", ".mypy_cache/**" }
+opt.wildignore = opt.wildignore + { "*.o", "*.obj", "*~", "*.exe", "*.a", "*.pdb", "*.lib" }
+opt.wildignore = opt.wildignore + { "*.so", "*.dll", "*.swp", "*.egg", "*.jar", "*.class" }
+opt.wildignore = opt.wildignore + { "*.pyc", "*.pyo", "*.bin", "*.dex" }
+opt.wildignore = opt.wildignore + { "*.zip", "*.7z", "*.rar", "*.gz", "*.tar", "*.gzip", "*.bz2", "*.tgz", "*.xz" }
+opt.wildignore = opt.wildignore + { "*DS_Store*", "*.ipch" }
+opt.wildignore = opt.wildignore + { "*.gem" }
+opt.wildignore = opt.wildignore + { "*.png", "*.jpg", "*.gif", "*.bmp", "*.tga", "*.pcx", "*.ppm", "*.img", "*.iso" }
+opt.wildignore = opt.wildignore + { "*.so", "*.swp", "*.zip", "*/.Trash/**", "*.pdf", "*.dmg", "*/.rbenv/**" }
+opt.wildignore = opt.wildignore + { "*/.nx/**", "*.app", "*.git", ".git" }
+opt.wildignore = opt.wildignore + { "*.wav", "*.mp3", "*.ogg", "*.pcm" }
+opt.wildignore = opt.wildignore + { "*.mht", "*.suo", "*.sdf", "*.jnlp" }
+opt.wildignore = opt.wildignore + { "*.chm", "*.epub", "*.pdf", "*.mobi", "*.ttf" }
+opt.wildignore = opt.wildignore + { "*.mp4", "*.avi", "*.flv", "*.mov", "*.mkv", "*.swf", "*.swc" }
+opt.wildignore = opt.wildignore + { "*.ppt", "*.pptx", "*.docx", "*.xlt", "*.xls", "*.xlsx", "*.odt", "*.wps" }
+opt.wildignore = opt.wildignore + { "*.msi", "*.crx", "*.deb", "*.vfd", "*.apk", "*.ipa", "*.bin", "*.msu" }
+opt.wildignore = opt.wildignore + { "*.gba", "*.sfc", "*.078", "*.nds", "*.smd", "*.smc" }
+opt.wildignore = opt.wildignore + { "*.linux2", "*.win32", "*.darwin", "*.freebsd", "*.linux", "*.android" }
 
 opt.shada = "!,'300,<50,@100,s10,h" -- SHADA 文件设置
-opt.shadafile = VIM_DATA_PATH .. "/shada/main.shada" -- SHADA 文件存放位置
+o.shadafile = VIM_DATA_PATH .. "/shada/main.shada"
 
 opt.timeout = true -- 此选项和 "timeoutlen" 决定已接收映射的密钥序
 opt.ttimeout = true -- 此选项和 "ttimeoutlen" 决定TUI已接收到密钥码序列
@@ -152,7 +167,7 @@ opt.redrawtime = 1500 -- 重新绘制显示的时间 (毫秒)
 
 opt.textwidth = 80 -- 单行文本的最大宽度
 opt.history = 9000 -- 命令的历史记录
-opt.mouse = "a" -- 是否开启鼠标模式
+opt.mouse = "" -- 是否开启鼠标模式
 opt.title = true -- 是否启用窗口的标题
 opt.modeline = true -- 是否开启MODELINE模式
 opt.lazyredraw = false -- 是否开启懒惰重画屏幕
@@ -195,7 +210,7 @@ opt.showmatch = true -- 是否开启插入括号后，短暂跳转到匹配的�
 opt.regexpengine = 0 -- REGEXP 引擎
 
 opt.jumpoptions = "view" -- 更改JumpList行为
-opt.virtualedit = "all" -- 可视化编辑模式加强
+opt.virtualedit = "block" -- 可视化编辑模式加强
 opt.whichwrap = "" -- 设置光标是否可以跨行
 opt.startofline = true -- 是否开启光标移动到第一个非空白行
 opt.encoding = "utf-8" -- 设置字符串的编码

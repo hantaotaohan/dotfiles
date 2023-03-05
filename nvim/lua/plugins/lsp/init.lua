@@ -214,8 +214,8 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
-				"shellcheck",
-				"shfmt",
+				-- "shellcheck",
+				-- "shfmt",
 				"flake8",
 				"lua-language-server",
 				"bash-language-server",
