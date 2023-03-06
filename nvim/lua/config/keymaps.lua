@@ -218,3 +218,6 @@ map( {"n", "v"}, "gbv", "<CMD>CBccbox21<CR>" , opts)
 map( {"n", "v"}, "gbh", "<CMD>CBline5<CR>" , opts)
 map( {"n", "v"}, "gbj", "<CMD>CBline6<CR>" , opts)
 
+
+
+map("t", "<LocalLeader>c", "<cmd>ToggleTerm<cr>", { desc = "Previous Tab" })

@@ -1,28 +1,6 @@
 vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guifg=#6f737b guibg=#2f333c]])
 vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=#6f737b guibg=#282C34]])
 
-local border = {
-	{ "┌", "FloatBorder" },
-	{ "─", "FloatBorder" },
-	{ "┐", "FloatBorder" },
-	{ "│", "FloatBorder" },
-	{ "┘", "FloatBorder" },
-	{ "─", "FloatBorder" },
-	{ "└", "FloatBorder" },
-	{ "│", "FloatBorder" },
-}
-
--- local border = {
---   { "╔", "FloatBorder" },
---   { "═", "FloatBorder" },
---   { "╗", "FloatBorder" },
---   { "║", "FloatBorder" },
---   { "╝", "FloatBorder" },
---   { "═", "FloatBorder" },
---   { "╚", "FloatBorder" },
---   { "║", "FloatBorder" },
--- }
-
 return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
@@ -39,8 +17,8 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 
 		dependencies = {
-			{ "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-			{ "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
+			-- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+			-- { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			{
@@ -57,8 +35,16 @@ return {
 			diagnostics = {
 				underline = true,
 				update_in_insert = false,
-				virtual_text = { spacing = 8, prefix = "▊ " },
-				float = { source = "always" },
+				virtual_text = {
+					spacing = 8,
+					prefix = "▊ ",
+					source = "always",
+				},
+				float = {
+					header = "",
+					border = "rounded",
+					source = "always",
+				},
 				severity_sort = true,
 			},
 			-- Automatically format on save
@@ -72,16 +58,25 @@ return {
 			},
 			-- LSP Server Settings
 			servers = {
-				jsonls = {},
 				lua_ls = {
 					-- mason = false, -- set to false if you don't want this server to be installed with mason
 					settings = {
 						Lua = {
+							runtime = {
+								version = "LuaJIT",
+							},
+							diagnostics = {
+								-- Get the language server to recognize the `vim` global
+								globals = { "vim" },
+							},
 							workspace = {
 								checkThirdParty = false,
 							},
 							completion = {
 								callSnippet = "Replace",
+							},
+							telemetry = {
+								enable = false,
 							},
 						},
 					},
@@ -100,7 +95,7 @@ return {
 			},
 		},
 		---@param opts PluginLspOpts
-		config = function(plugin, opts)
+		config = function(_, opts)
 			-- setup autoformat
 			require("plugins.lsp.format").autoformat = opts.autoformat
 			-- setup formatting and keymaps
@@ -161,14 +156,6 @@ return {
 				end
 			end
 
-			-- To instead override globally
-			local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-			function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-				opts = opts or {}
-				opts.border = opts.border or border
-				return orig_util_open_floating_preview(contents, syntax, opts, ...)
-			end
-
 			require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 			require("mason-lspconfig").setup_handlers({ setup })
 		end,
@@ -190,8 +177,8 @@ return {
 			local nls = require("null-ls")
 			return {
 				sources = {
-					-- nls.builtins.formatting.prettierd,
 					nls.builtins.formatting.stylua,
+					nls.builtins.formatting.shfmt,
 					nls.builtins.diagnostics.flake8,
 				},
 			}
@@ -214,8 +201,6 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
-				-- "shellcheck",
-				-- "shfmt",
 				"flake8",
 				"lua-language-server",
 				"bash-language-server",
@@ -227,7 +212,7 @@ return {
 				download_url_template = os.getenv("GITHUB") .. "%s/releases/download/%s/%s",
 			},
 			pip = {
-				upgrade_pip = true,
+				upgrade_pip = false,
 				install_args = {
 					"--index-url",
 					"https://pypi.tuna.tsinghua.edu.cn/simple",
@@ -236,8 +221,8 @@ return {
 				},
 			},
 		},
-		---@param opts MasonSettings | {ensure_installed: string[]}
-		config = function(plugin, opts)
+
+		config = function(_, opts)
 			require("mason").setup(opts)
 			local mr = require("mason-registry")
 			for _, tool in ipairs(opts.ensure_installed) do

@@ -33,8 +33,6 @@ return {
 
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		lazy = true,
-		version = "v2.x",
 		cmd = "Neotree",
 
 		dependencies = {
@@ -414,7 +412,17 @@ return {
 
 	{
 		"simrat39/symbols-outline.nvim",
-		event = "VeryLazy",
+
+		cmd = "SymbolsOutline",
+		keys = {
+			{
+				"<LocalLeader>t",
+				":SymbolsOutline<cr>",
+				desc = "Toggle Outline",
+				silent = true,
+			},
+		},
+
 		opts = {
 
 			highlight_hovered_item = true,
@@ -464,8 +472,15 @@ return {
 
 	{
 		"akinsho/toggleterm.nvim",
-		event = "VeryLazy",
-		version = "*",
+		cmd = "ToggleTerm",
+		keys = {
+			{
+				"<LocalLeader>c",
+				":ToggleTerm<cr>",
+				desc = "Toggle Terminal",
+				silent = true,
+			},
+		},
 		opts = {
 			shade_terminals = false,
 			shading_factor = 1,
@@ -485,7 +500,7 @@ return {
 		"windwp/nvim-spectre",
         -- stylua: ignore
         keys = {
-            { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+            { "<LocalLeader>gs", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
         },
 		opts = {
 			color_devicons = true,
@@ -736,8 +751,6 @@ return {
 		},
 
 		config = function()
-			local putils = require("telescope.previewers.utils")
-
 			require("telescope").setup({
 
 				defaults = {
@@ -827,8 +840,6 @@ return {
 						n = {
 							["?"] = require("telescope.actions.layout").toggle_preview,
 							["q"] = require("telescope.actions").close,
-							["<C-[>"] = require("telescope.actions").close,
-							["<Esc>"] = require("telescope.actions").close,
 							["<LocalLeader>q"] = require("telescope.actions").close,
 							["<LocalLeader>n"] = require("telescope.actions.layout").cycle_layout_next,
 						},
@@ -911,8 +922,6 @@ return {
 	{
 
 		"ahmedkhalf/project.nvim",
-		lazy = true,
-		event = "VeryLazy",
 		cmd = "Telescope",
 		keys = { { "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
 		dependencies = {
@@ -970,7 +979,6 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		cmd = "WhichKey",
 		opts = {
 			plugins = { spelling = true },
 			icons = {
@@ -997,37 +1005,11 @@ return {
 
 			triggers_blacklist = {
 				-- list of mode / prefixes that should never be hooked by WhichKey
-				i = { "j", "k" },
+				i = { "j", "k", "a" },
 				v = { "j", "k" },
-				n = { "<", ">", ";" },
+				n = { "<", ">", ";", "a" },
 			},
 		},
-		config = function(_, opts)
-			local wk = require("which-key")
-			wk.setup(opts)
-			local keymaps = {
-				mode = { "n", "v" },
-				["g"] = { name = "+goto" },
-				["gz"] = { name = "+surround" },
-				["]"] = { name = "+next" },
-				["["] = { name = "+prev" },
-				["<leader><tab>"] = { name = "+tabs" },
-				["<leader>b"] = { name = "+buffer" },
-				["<leader>c"] = { name = "+code" },
-				["<leader>f"] = { name = "+file/find" },
-				["<leader>g"] = { name = "+git" },
-				["<leader>gh"] = { name = "+hunks" },
-				["<leader>q"] = { name = "+quit/session" },
-				["<leader>s"] = { name = "+search" },
-				["<leader>u"] = { name = "+ui" },
-				["<leader>w"] = { name = "+windows" },
-				["<leader>x"] = { name = "+diagnostics/quickfix" },
-			}
-			if Util.has("noice.nvim") then
-				keymaps["<leader>sn"] = { name = "+noice" }
-			end
-			wk.register(keymaps)
-		end,
 	},
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
@@ -1349,7 +1331,6 @@ return {
 				cursor = true,
 				gitsigns = true, -- Requires gitsigns
 				handle = true,
-				search = false, -- Requires hlslens
 				ale = false, -- Requires ALE
 			},
 		},
@@ -1420,7 +1401,7 @@ return {
 	{
 
 		"skywind3000/asyncrun.vim",
-		event = "VeryLazy",
+		cmd = "Asyncrun",
 		config = function()
 			vim.g.asyncrun_open = 6
 			-- vim.g.asyncrun_status = "stopped"
@@ -1452,7 +1433,7 @@ return {
 
 	{
 		"norcalli/nvim-colorizer.lua",
-		event = "VeryLazy",
+		cmd = "ColorizerToggle",
 		opts = {
 
 			filetypes = {
