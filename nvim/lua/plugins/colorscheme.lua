@@ -242,10 +242,10 @@ return {
 			TSInclude = { fg = "#c678dd", bg = nil, nil },
 			TSConditional = { fg = "#c678dd", bg = nil, nil },
 
-			IndentBlanklineChar = { fg = "#3A4646", bg = nil },
-			IndentBlanklineSpaceChar = { fg = "#24acf2", bg = nil },
-			IndentBlanklineContextChar = { fg = "#337bd4", bg = nil },
-			IndentBlanklineContextStart = { fg = nil, bg = "#21252b", fmt = "bold,italic" },
+			IndentBlanklineChar = { fg = "#3A4646", bg = nil }, -- 缩进字符的突出显示
+			IndentBlanklineSpaceChar = { fg = "#24acf2", bg = nil }, -- 空格字符的突出显示
+			IndentBlanklineContextChar = { fg = "#757d98", bg = nil }, -- 空行上空格字符的突出显示
+			IndentBlanklineContextStart = { fg = nil, bg = "#193f6d", fmt = "bold" }, -- 当前上下文第一行的高亮显示
 		},
 
 		-- Plugins Config --

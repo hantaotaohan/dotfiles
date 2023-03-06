@@ -79,16 +79,5 @@ return {
 	-- { "williamboman/mason.nvim", enabled = false },
 	-- { "williamboman/mason-lspconfig.nvim", enabled = false },
 	-- { "jose-elias-alvarez/null-ls.nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
+
 }

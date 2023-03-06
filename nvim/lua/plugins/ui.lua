@@ -742,6 +742,13 @@ return {
 					.. string.format(" -"),
 			}
 
+			local function bufnumber()
+				if vim.fn.bufloaded(0) == 1 then
+					vim.api.nvim_command("bw")
+				elseif vim.fn.bufloaded(0) < 1 then
+					vim.api.nvim_command("quit")
+				end
+			end
 			----------------------------------------------------------------------
 			--                       config a hyper theme                       --
 			----------------------------------------------------------------------
@@ -810,7 +817,7 @@ return {
 							icon = "  ",
 							desc = "Quit ",
 							key = "<LocalLeader>q",
-							action = "bw",
+							action = bufnumber,
 							group = "Whitespace",
 							icon_hl = "Normal",
 							desc_hl = "Whitespace",
