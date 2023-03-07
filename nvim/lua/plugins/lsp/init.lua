@@ -17,8 +17,6 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 
 		dependencies = {
-			-- { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
-			-- { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
 			"mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			{
@@ -58,19 +56,81 @@ return {
 			},
 			-- LSP Server Settings
 			servers = {
+
+				jsonls = {
+					cmd = { "vscode-json-language-server", "--stdio" },
+					filetypes = { "json", "jsonc" },
+					init_options = {
+						provideFormatter = true,
+					},
+					single_file_support = true,
+				},
+
+				pyright = {
+					cmd = { "pyright-langserver", "--stdio" },
+					filetypes = { "python" },
+					settings = {
+						python = {
+							analysis = {
+								autoSearchPaths = true,
+								diagnosticMode = "workspace",
+								useLibraryCodeForTypes = true,
+							},
+						},
+					},
+					single_file_support = true,
+				},
+
+				vimls = {
+					cmd = { "vim-language-server", "--stdio" },
+					filetypes = { "vim" },
+					init_options = {
+						diagnostic = {
+							enable = true,
+						},
+						indexes = {
+							count = 3,
+							gap = 100,
+							projectRootPatterns = { "runtime", "nvim", ".git", "autoload", "plugin" },
+							runtimepath = true,
+						},
+						isNeovim = true,
+						iskeyword = "@,48-57,_,192-255,-#",
+						runtimepath = "",
+						suggest = {
+							fromRuntimepath = true,
+							fromVimruntime = true,
+						},
+						vimruntime = "",
+					},
+					single_file_support = true,
+				},
+
+				bashls = {
+					cmd = { "bash-language-server", "start" },
+					cmd_env = {
+						GLOB_PATTERN = "*@(.sh|.inc|.bash|.command)",
+					},
+					filetypes = { "sh" },
+					single_file_support = true,
+				},
+
 				lua_ls = {
 					-- mason = false, -- set to false if you don't want this server to be installed with mason
 					settings = {
 						Lua = {
+							cmd = { "lua-language-server" },
+							filetypes = { "lua" },
+							single_file_support = true,
 							runtime = {
 								version = "LuaJIT",
 							},
 							diagnostics = {
-								-- Get the language server to recognize the `vim` global
 								globals = { "vim" },
 							},
 							workspace = {
 								checkThirdParty = false,
+								library = vim.api.nvim_get_runtime_file("", true),
 							},
 							completion = {
 								callSnippet = "Replace",
@@ -204,6 +264,7 @@ return {
 				"flake8",
 				"lua-language-server",
 				"bash-language-server",
+				"vim-language-server",
 				"pyright",
 				"djlint",
 				"json-lsp",

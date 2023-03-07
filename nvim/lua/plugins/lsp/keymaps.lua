@@ -3,7 +3,6 @@ local M = {}
 ---@type PluginLspKeys
 M._keys = nil
 
----@return (LazyKeys|{has?:string})[]
 function M.get()
 	local format = require("plugins.lsp.format").format
 	if not M._keys then
@@ -30,27 +29,27 @@ function M.get()
       { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
       { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
     }
-		if require("config.utility").has("inc-rename.nvim") then
-			M._keys[#M._keys + 1] = {
-				"<leader>cr",
-				function()
-					require("inc_rename")
-					return ":IncRename " .. vim.fn.expand("<cword>")
-				end,
-				expr = true,
-				desc = "Rename",
-				has = "rename",
-			}
-		else
-			M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
-		end
+		-- if require("config.utility").has("inc-rename.nvim") then
+		-- 	M._keys[#M._keys + 1] = {
+		-- 		"<leader>cr",
+		-- 		function()
+		-- 			require("inc_rename")
+		-- 			return ":IncRename " .. vim.fn.expand("<cword>")
+		-- 		end,
+		-- 		expr = true,
+		-- 		desc = "Rename",
+		-- 		has = "rename",
+		-- 	}
+		-- else
+		M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
+		-- end
 	end
 	return M._keys
 end
 
 function M.on_attach(client, buffer)
 	local Keys = require("lazy.core.handler.keys")
-	local keymaps = {} ---@type table<string,LazyKeys|{has?:string}>
+	local keymaps = {}
 
 	for _, value in ipairs(M.get()) do
 		local keys = Keys.parse(value)

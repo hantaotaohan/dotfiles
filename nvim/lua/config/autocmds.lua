@@ -105,11 +105,11 @@ vim.api.nvim_create_autocmd("FileType", {
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
 -- wrap and check for spell in text filetypes
-vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("Alpha"),
-	pattern = "alpha",
-	command = "set showtabline=0 laststatus=0 cmdheight=0 | autocmd BufUnload <buffer> set showtabline=2 laststatus=2 cmdheight=1",
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	group = augroup("Alpha"),
+-- 	pattern = "alpha",
+-- 	command = "set showtabline=0 laststatus=0 cmdheight=0 | autocmd BufUnload <buffer> set showtabline=2 laststatus=2 cmdheight=1",
+-- })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                                Lazy                                  │

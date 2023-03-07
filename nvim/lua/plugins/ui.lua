@@ -53,7 +53,7 @@ return {
 					tab_size = 18,
 					diagnostics = false, -- 诊断指示器 | false | "nvim_lsp" | "coc" |
 					diagnostics_update_in_insert = false,
-					diagnostics_indicator = function(count, level, diagnostics_dict, context)
+					diagnostics_indicator = function(count)
 						return "(" .. count .. ")"
 					end,
 					offsets = {
@@ -756,8 +756,8 @@ return {
 			local hyper = {
 
 				theme = "hyper",
-				disable_move = true, --  defualt is false disable move keymap for hyper
 				shortcut_type = "number", --  shorcut type 'letter' or 'number'
+				change_to_vcs_root = true,
 
 				hide = {
 					statusline = true, -- hide statusline default is true
@@ -766,6 +766,7 @@ return {
 				},
 
 				config = {
+					disable_move = false,
 					header = header,
 					shortcut = {
 						{
@@ -831,7 +832,7 @@ return {
 					packages = { enable = false }, -- show how many plugins neovim loaded
 
 					mru = {
-						icon = "",
+						icon = "MRU",
 						limit = 9,
 						label = "",
 						-- label = "Recently Files"

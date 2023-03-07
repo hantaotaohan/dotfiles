@@ -25,8 +25,9 @@ return {
 
 	{
 		"L3MON4D3/LuaSnip",
-		event = "VeryLazy",
-		build = (not jit.os:find("Windows")) and "make install_jsregexp" or nil,
+		build = (not jit.os:find("Windows"))
+				and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
+			or nil,
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			config = function()
@@ -59,13 +60,13 @@ return {
 	--   │                                                                      │
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
-	{
-		"rafamadriz/friendly-snippets",
-		event = "VeryLazy",
-		config = function()
-			require("luasnip.loaders.from_vscode").lazy_load()
-		end,
-	},
+	-- {
+	-- 	"rafamadriz/friendly-snippets",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("luasnip.loaders.from_vscode").lazy_load()
+	-- 	end,
+	-- },
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
@@ -90,7 +91,6 @@ return {
 		},
 		opts = function()
 			local has_words_before = function()
-				unpack = unpack or table.unpack
 				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 				return col ~= 0
 					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -403,7 +403,7 @@ return {
 		event = "VeryLazy",
 
 		config = function()
-			require("comment-box.impl").setup({
+			require("comment-box").setup({
 
 				doc_width = 80, -- width of the document
 				box_width = 72, -- width of the boxes

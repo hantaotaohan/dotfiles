@@ -978,7 +978,8 @@ return {
 
 	{
 		"folke/which-key.nvim",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		keys = "?",
 		opts = {
 			plugins = { spelling = true },
 			icons = {
@@ -1301,7 +1302,8 @@ return {
 				"TelescopePrompt",
 				"neo-tree",
 				"dashboard",
-				"lazzy",
+				"mason",
+				"lazy",
 			},
 
 			autocmd = {
