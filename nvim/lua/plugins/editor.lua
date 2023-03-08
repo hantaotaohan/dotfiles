@@ -1784,4 +1784,47 @@ return {
 			},
 		},
 	},
+
+	{
+		"vimwiki/vimwiki",
+		branch = "dev",
+		ft = "vimwiki",
+		keys = {
+			{ "<leader>ww", "<plug>VimwikiIndex", desc = "Open Vimwiki" },
+			{ "<leader>w<leader>w", "<plug>VimwikiDiaryIndex", desc = "Open Vimwiki diary" },
+		},
+		init = function()
+			vim.g.vimwiki_hl_headers = 1
+			vim.g.vimwiki_auto_chdir = 1
+			vim.g.vimwiki_name = "<Logseq>"
+			vim.g.vimwiki_path = "$HOME/vimwiki/pages/"
+			vim.g.vimwiki_index = "index"
+			vim.g.vimwiki_ext = ".md"
+			vim.g.vimwiki_syntax = "markdown"
+			vim.g.vimwiki_auto_chdir = 1
+			vim.g.vimwiki_vimwiki_auto_chdir = 1
+			vim.g.vimwiki_diary_rel_path = "diary/"
+			vim.g.vimwiki_diary_index = "diary"
+			vim.g.vimwiki_vimwiki_ext2syntax = { [".md"] = "markdown", [".wiki"] = "media" }
+			vim.g.vimwiki_CJK_length = 1
+			vim.g.vimwiki_hl_cb_checked = 2
+			vim.g.vimwiki_global_ext = 1
+			vim.g.vimwiki_use_mouse = 0
+			vim.g.vimwiki_conceallevel = 1
+			vim.g.vimwiki_markdown_link_ext = 1
+			vim.g.list_margin = 0
+			vim.g.auto_diary_index = 1
+			vim.g.auto_generate_links = 1
+		end,
+	},
+	{
+		"michal-h21/vim-zettel",
+		cmd = { "VimwikiIndex", "VimwikiMakeDiaryNote" },
+		config = function()
+			vim.g.zettel_format = "%title"
+			vim.g.zettel_link_format = "[[%title]]"
+			vim.g.zettel_fzf_command = "rg --column --ignore-case --no-heading --color=always"
+			vim.g.zettel_options = { disable_front_matter = 1 }
+		end,
+	},
 }
