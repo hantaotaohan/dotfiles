@@ -37,7 +37,8 @@ return {
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	-- { "nvim-neo-tree/neo-tree.nvim", enabled = false },
-	-- { "simrat39/symbols-outline.nvim", enabled = false },
+	-- { "stevearc/aerial.nvim", enabled = false },
+	{ "simrat39/symbols-outline.nvim", enabled = false },
 	-- { "akinsho/toggleterm.nvim", enabled = false },
 	-- { "windwp/nvim-spectre", enabled = false },
 	-- { "nvim-telescope/telescope.nvim", enabled = false },
@@ -79,5 +80,4 @@ return {
 	-- { "williamboman/mason.nvim", enabled = false },
 	-- { "williamboman/mason-lspconfig.nvim", enabled = false },
 	-- { "jose-elias-alvarez/null-ls.nvim", enabled = false },
-
 }

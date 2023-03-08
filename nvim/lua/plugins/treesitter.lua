@@ -23,12 +23,12 @@ return {
 			"markdown",
 			"markdown_inline",
 			"python",
-			-- "query",
-			-- "regex",
-			-- "tsx",
-			-- "typescript",
+			"query",
+			"regex",
 			"vim",
 			"yaml",
+			-- "tsx",
+			-- "typescript",
 		},
 
 		highlight = {

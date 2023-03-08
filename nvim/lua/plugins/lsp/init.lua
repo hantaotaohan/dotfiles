@@ -260,6 +260,7 @@ return {
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 		opts = {
 			ensure_installed = {
+				"shfmt",
 				"stylua",
 				"flake8",
 				"lua-language-server",

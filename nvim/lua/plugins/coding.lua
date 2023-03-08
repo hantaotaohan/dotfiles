@@ -87,6 +87,14 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/nvim-cmp",
+			{
+				"hjdivad/cmp-nvim-wikilinks",
+				opts = {
+					-- log_level = 'trace',
+					-- log_to_file = true,
+					glob_suffixes = { "*", "**/*" },
+				},
+			},
 			"saadparwaiz1/cmp_luasnip",
 		},
 		opts = function()
@@ -203,6 +211,7 @@ return {
 					{ name = "luasnip" },
 					{ name = "buffer" },
 					{ name = "path" },
+					{ name = "wikilinks" },
 				}),
 				formatting = {
 					-- fields = { "abbr" },
@@ -281,7 +290,7 @@ return {
 
 	{
 		"echasnovski/mini.pairs",
-		event = "VeryLazy",
+		event = "InsertEnter",
 		config = function(_, opts)
 			require("mini.pairs").setup(opts)
 		end,
@@ -329,10 +338,10 @@ return {
 			mappings = {
 				add = "as", -- Add surrounding in Normal and Visual modes
 				delete = "ds", -- Delete surrounding
+				replace = "cs", -- Replace surrounding
 				find = "gzf", -- Find surrounding (to the right)
 				find_left = "gzF", -- Find surrounding (to the left)
 				highlight = "gzh", -- Highlight surrounding
-				replace = "cs", -- Replace surrounding
 				update_n_lines = "gzn", -- Update `n_lines`
 			},
 		},

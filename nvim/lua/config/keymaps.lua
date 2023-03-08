@@ -221,3 +221,5 @@ map( {"n", "v"}, "gbj", "<CMD>CBline6<CR>" , opts)
 
 
 map("t", "<LocalLeader>c", "<cmd>ToggleTerm<cr>", { desc = "Previous Tab" })
+
+map("n", "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", {desc = "Recent projects" } )

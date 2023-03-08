@@ -168,4 +168,58 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "aerial",
+	group = augroup("Aerial"),
+	callback = function()
+		vim.cmd([[ set signcolumn=yes ]])
+	end,
+})
+-- vim.cmd([[set guicursor+=a:Cursor/lCursor]])
+--
+-- vim.api.nvim_create_autocmd({ "FileType" }, {
+-- 	pattern = "neo-tree",
+-- 	callback = function()
+-- 		vim.api.nvim_set_hl(0, "Cursor", { blend = 100, nocombine = true })
+-- 		-- vim.cmd("set cursorlineopt=both")
+-- 		-- vim.cmd("hi Cursor blend=100")
+-- 	end,
+-- })
+-- vim.api.nvim_create_autocmd({ "BufLeave" }, {
+-- 	pattern = "^Outline$",
+-- 	callback = function()
+-- 		vim.api.nvim_set_hl(0, "Cursor", { blend = 0, nocombine = true })
+-- 		-- vim.cmd("hi Cursor blend=0")
+-- 		-- vim.cmd("set cursorlineopt=number")
+-- 	end,
+-- })
+
+vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "BufHidden", "BufUnload" }, {
+	group = augroup("Neotree"),
+	pattern = "*",
+	callback = function()
+		if vim.api.nvim_buf_get_option(0, "buftype") == "nofile" then
+			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
+			vim.opt.guicursor = "a:Cursor/lCursor"
+		else
+			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
+			vim.opt.guicursor = "a:Cursor/lCursor"
+			-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+		end
+	end,
+})
+
+-- vim.api.nvim_create_autocmd({ "BufLeave", "WinClosed" }, {
+-- 	group = augroup("Neotree"),
+-- 	pattern = "*",
+-- 	callback = function()
+-- 		local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+-- 		vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
+-- 		-- vim.opt.guicursor = "a:Cursor/lCursor"
+-- 		vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+-- 	end,
+-- })
+-- 删除bookmark
 vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9" })

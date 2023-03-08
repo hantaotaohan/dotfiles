@@ -109,6 +109,7 @@ return {
 			TelescopeSelectionCaret = { fg = "#61AFEF", bg = nil },
 			TelescopeMultiSelection = { fg = "#E06C75", bg = nil },
 			TelescopeMultiIcon = { fg = "#E06C75", bg = nil },
+			TelescopePromptPrefix = { fg = "#61afef", bg = nil },
 
 			-- 边框高亮组
 			TelescopeBorder = { fg = "#646870", bg = nil },

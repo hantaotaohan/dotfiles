@@ -479,7 +479,7 @@ return {
 					lualine_z = {},
 				},
 
-				extensions = { "quickfix", "neo-tree", "fugitive", "symbols-outline", toggleterm },
+				extensions = { "quickfix", "neo-tree", "fugitive", "symbols-outline", "aerial", toggleterm },
 			}
 
 			require("lualine").setup(options)
@@ -670,8 +670,9 @@ return {
 				"lazy",
 				"alpha",
 				"noice",
-				"notify",
 				"mason",
+				"aerial",
+				"notify",
 				"lspinfo",
 				"terminal",
 				"neo-tree",
