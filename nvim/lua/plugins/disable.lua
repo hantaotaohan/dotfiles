@@ -63,7 +63,7 @@ return {
 	-- { "folke/noice.nvim", enabled = false },
 	-- { "rcarriga/nvim-notify", enabled = false },
 	-- { "lukas-reineke/indent-blankline.nvim", enabled = false },
-	-- { "glepnir/dashboard-nvim", enabled = false },
+	{ "glepnir/dashboard-nvim", enabled = false },
 	-- { "nvim-tree/nvim-web-devicons", enabled = false },
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮

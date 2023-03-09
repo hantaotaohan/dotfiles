@@ -76,7 +76,7 @@ return {
 					persist_buffer_sort = true, -- 自定义排序缓冲区是否应持久
 					separator_style = "thin", -- | "slant" | "thick" | "thin" | { 'any', 'any' } |
 					enforce_regular_tabs = true,
-					always_show_bufferline = true,
+					always_show_bufferline = false,
 					hover = {
 						enabled = false,
 						delay = 200,
@@ -235,8 +235,8 @@ return {
 					-- section_separators = { left = '', right = ''},
 
 					disabled_filetypes = {
-						statusline = { "lazy", "dashboard" },
-						winbar = { "lazy", "dashboard" },
+						statusline = { "lazy", "dashboard", "alpha" },
+						winbar = { "lazy", "dashboard", "alpha" },
 					},
 
 					ignore_focus = {},

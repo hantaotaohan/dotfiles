@@ -83,7 +83,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "gitcommit", "markdown" },
 	callback = function()
 		vim.opt_local.wrap = true
-		vim.opt_local.spell = true
+		vim.opt_local.spell = false
 	end,
 })
 
@@ -103,13 +103,6 @@ vim.api.nvim_create_autocmd("FileType", {
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                                Alpha                                 │
 --   ╰──────────────────────────────────────────────────────────────────────╯
-
--- wrap and check for spell in text filetypes
--- vim.api.nvim_create_autocmd("FileType", {
--- 	group = augroup("Alpha"),
--- 	pattern = "alpha",
--- 	command = "set showtabline=0 laststatus=0 cmdheight=0 | autocmd BufUnload <buffer> set showtabline=2 laststatus=2 cmdheight=1",
--- })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                                Lazy                                  │
@@ -221,5 +214,17 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "BufHidden", "BufUnload
 -- 		vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 -- 	end,
 -- })
+
 -- 删除bookmark
 vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9" })
+
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	group = augroup("VimWiki"),
+-- 	pattern = "vimwiki",
+-- 	callback = function()
+-- 		vim.cmd(
+-- 			[[ let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1'] ]]
+-- 		)
+-- 		vim.cmd([[ call vimwiki#path#mkdir(vimwiki#vars#get_wikilocal('diary_rel_path')) ]])
+-- 	end,
+-- })

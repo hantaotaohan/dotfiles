@@ -34,13 +34,11 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		cmd = "Neotree",
-
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
 			"MunifTanjim/nui.nvim",
 		},
-
 		keys = {
 			{
 				"<leader>|",
@@ -55,7 +53,6 @@ return {
 				silent = true,
 			},
 		},
-
 		config = function()
 			local highlights = require("neo-tree.ui.highlights")
 			local renderer = require("neo-tree.ui.renderer")
@@ -87,7 +84,6 @@ return {
 			end
 
 			require("neo-tree").setup({
-
 				add_blank_line_at_top = true, -- Add a blank line at the top of the tree.
 				close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 				close_floats_on_escape_key = true,
@@ -98,25 +94,20 @@ return {
 				enable_modified_markers = true, -- Show markers for files with unsaved changes.
 				enable_refresh_on_write = true, -- Refresh the tree when a file is written. Only used if `use_libuv_file_watcher` is false.
 				git_status_async = true,
-
 				hide_root_node = true, -- Hide the root node.
 				retain_hidden_root_indent = false, -- IF the root node is hidden, keep the indentation anyhow.
-
 				log_level = "info", -- "trace", "debug", "info", "warn", "error", "fatal"
 				log_to_file = false, -- true, false, "/path/to/file.log", use :NeoTreeLogs to show the file
 				open_files_in_last_window = false, -- false = open files in top left window
 				popup_border_style = "rounded", -- "double", "none", "rounded", "shadow", "single" or "solid"
 				resize_timer_interval = 500, -- in ms, needed for containers to redraw right aligned and faded content
-
 				sort_case_insensitive = false, -- used when sorting files and directories in the tree
 				sort_function = nil, -- uses a custom function for sorting files and directories in the tree
 				use_popups_for_input = true, -- If false, inputs will use vim.ui.input() instead of custom floats.
 				use_default_mappings = false,
-
 				source_selector = {
 					winbar = false,
 				},
-
 				event_handlers = {
 
 					{
@@ -143,15 +134,12 @@ return {
 					-- 	end,
 					-- },
 				},
-
 				default_component_configs = {
-
 					container = {
 						enable_character_fade = true,
 						width = "100%",
 						right_padding = 0,
 					},
-
 					diagnostics = {
 						symbols = {
 							hint = "H",
@@ -166,7 +154,6 @@ return {
 							error = "DiagnosticSignError",
 						},
 					},
-
 					indent = {
 						indent_size = 3,
 						padding = 2,
@@ -179,7 +166,6 @@ return {
 						expander_expanded = "-",
 						expander_highlight = "NeoTreeExpander",
 					},
-
 					icon = {
 						-- folder_closed = "",
 						-- folder_open = "",
@@ -189,27 +175,22 @@ return {
 						default = "·",
 						-- highlight = "NeoTreeFileIcon"
 					},
-
 					modified = {
 						symbol = "[+] ",
 						highlight = "NeoTreeModified",
 					},
-
 					name = {
 						trailing_slash = false,
 						use_git_status_colors = true,
 						-- highlight = "NeoTreeFileName",
 					},
-
 					git_status = {
 						symbols = {
-
 							-- Change type
 							added = "✚",
 							deleted = "✖",
 							modified = "",
 							renamed = "",
-
 							-- Status type
 							untracked = "",
 							ignored = "",
@@ -220,13 +201,10 @@ return {
 						align = "right",
 					},
 				},
-
 				window = {
-
 					position = "left", -- left, right, top, bottom, float, current
 					width = 35,
 					height = 15,
-
 					popup = {
 						size = {
 							height = "80%",
@@ -234,12 +212,10 @@ return {
 						},
 						position = "50%", -- 50% means center it
 					},
-
 					mapping_options = {
 						noremap = true,
 						nowait = true,
 					},
-
 					mappings = {
 						-- ["<esc>"] = "revert_preview",
 						-- ["w"] = "open_with_window_picker",
@@ -275,24 +251,20 @@ return {
 						["]c"] = "next_git_modified",
 					},
 				},
-
 				nesting_rules = {
 					ts = { "js", "js.map", "d.ts" },
 					scss = { "css", "min.css", "css.map", "min.css.map" },
 				},
-
 				filesystem = {
 					async_directory_scan = "auto", -- "auto"   means refreshes are async, but it's synchronous when called from the Neotree commands.
 					follow_current_file = true, -- This will find and focus the file in the active buffer every time the current file is changed while the tree is open.
 					hijack_netrw_behavior = "open_current", -- netrw disabled, opening a directory opens neo-tree in whatever position is specified in window.position
 					force_visible_in_empty_folder = false, -- when true, hidden files will be shown if the root folder is otherwise empty
 					bind_to_cwd = true, -- true creates a 2-way binding between vim's cwd and neo-tree's root
-
 					cwd_target = {
 						sidebar = "tab", -- sidebar is when position = left or right
 						current = "window", -- current is when position = current
 					},
-
 					filtered_items = {
 						visible = true, -- when true, they will just be displayed differently than normal items
 						show_hidden_count = false, -- when true, the number of hidden items in each folder will be shown as the last entry
@@ -319,9 +291,7 @@ return {
 							--".null-ls_*",
 						},
 					},
-
 					components = {
-
 						icon = function(config, node)
 							local icon = config.default or " "
 							local padding = config.padding or "  "
@@ -355,7 +325,6 @@ return {
 							}
 						end,
 					},
-
 					commands = {
 						smart_open = function(state)
 							local node = state.tree:get_node()
@@ -368,7 +337,6 @@ return {
 						end, -- instead of relying on nvim autocmd events.
 					},
 				},
-
 				buffers = {
 					bind_to_cwd = true,
 					show_unloaded = true,
@@ -383,7 +351,6 @@ return {
 						},
 					},
 				},
-
 				git_status = {
 					window = {
 						position = "float",
@@ -427,7 +394,6 @@ return {
 		config = function()
 			require("aerial").setup({
 				backends = { "treesitter", "lsp", "markdown", "man" },
-
 				layout = {
 					-- These control the width of the aerial window.
 					-- They can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
@@ -436,36 +402,29 @@ return {
 					max_width = { 30, 0.2 },
 					width = nil,
 					min_width = 35,
-
 					-- key-value pairs of window-local options for aerial window (e.g. winhl)
 					win_opts = {},
-
 					-- Determines the default direction to open the aerial window. The 'prefer'
 					-- options will open the window in the other direction *if* there is a
 					-- different buffer in the way of the preferred direction
 					-- Enum: prefer_right, prefer_left, right, left, float
 					default_direction = "right",
-
 					-- Determines where the aerial window will be opened
 					--   edge   - open aerial at the far right/left of the editor
 					--   window - open aerial to the right/left of the current window
 					placement = "window",
-
 					-- Preserve window size equality with (:help CTRL-W_=)
 					preserve_equality = false,
 				},
-
 				-- Determines how the aerial window decides which buffer to display symbols for
 				--   window - aerial window will display symbols for the buffer in the window from which it was opened
 				--   global - aerial window will display symbols for the current window
 				attach_mode = "global",
-
 				-- List of enum values that configure when to auto-close the aerial window
 				--   unfocus       - close aerial when you leave the original source window
 				--   switch_buffer - close aerial when you change buffers in the source window
 				--   unsupported   - close aerial when attaching to a buffer that has no symbol source
 				close_automatic_events = { "unfocus", "switch_buffer" },
-
 				-- Keymaps in aerial window. Can be any value that `vim.keymap.set` accepts OR a table of keymap
 				-- options with a `callback` (e.g. { callback = function() ... end, desc = "", nowait = true })
 				-- Additionally, if it is a string that matches "actions.<name>",
@@ -506,17 +465,13 @@ return {
 					["zx"] = "actions.tree_sync_folds",
 					["zX"] = "actions.tree_sync_folds",
 				},
-
 				-- When true, don't load aerial until a command or function is called
 				-- Defaults to true, unless `on_attach` is provided, then it defaults to false
 				lazy_load = true,
-
 				-- Disable aerial on files with this many lines
 				disable_max_lines = 10000,
-
 				-- Disable aerial on files this size or larger (in bytes)
 				disable_max_size = 2000000, -- Default 2MB
-
 				-- A list of all symbols to display. Set to false to display all symbols.
 				-- This can be a filetype map (see :help aerial-filetype-map)
 				-- To see all available values, see :help SymbolKind
@@ -530,7 +485,6 @@ return {
 					"Method",
 					"Struct",
 				},
-
 				-- Determines line highlighting mode when multiple splits are visible.
 				-- split_width   Each open window will have its cursor location marked in the
 				--               aerial buffer. Each line will only be partially highlighted
@@ -541,17 +495,13 @@ return {
 				--               marked in the aerial buffer.
 				-- none          Do not show the cursor locations in the aerial window.
 				highlight_mode = "split_width",
-
 				-- Highlight the closest symbol if the cursor is not exactly on one.
 				highlight_closest = true,
-
 				-- Highlight the symbol in the source buffer when cursor is in the aerial win
 				highlight_on_hover = false,
-
 				-- When jumping to a symbol, highlight the line for this many ms.
 				-- Set to false to disable
 				highlight_on_jump = 300,
-
 				-- Define symbol icons. You can also specify "<Symbol>Collapsed" to change the
 				-- icon when the tree is collapsed at that symbol, or "Collapsed" to specify a
 				-- default collapsed icon. The default icon set is determined by the
@@ -559,16 +509,13 @@ return {
 				-- If you have lspkind-nvim installed, it will be the default icon set.
 				-- This can be a filetype map (see :help aerial-filetype-map)
 				icons = {},
-
 				-- Control which windows and buffers aerial should ignore.
 				-- Aerial will not open when these are focused, and existing aerial windows will not be updated
 				ignore = {
 					-- Ignore unlisted buffers. See :help buflisted
 					unlisted_buffers = false,
-
 					-- List of filetypes to ignore.
 					filetypes = {},
-
 					-- Ignored buftypes.
 					-- Can be one of the following:
 					-- false or nil - No buftypes are ignored.
@@ -579,7 +526,6 @@ return {
 					--                ignored or false if it should not be ignored.
 					--                Takes two arguments, `bufnr` and `buftype`.
 					buftypes = "special",
-
 					-- Ignored wintypes.
 					-- Can be one of the following:
 					-- false or nil - No wintypes are ignored.
@@ -591,31 +537,24 @@ return {
 					--                Takes two arguments, `winid` and `wintype`.
 					wintypes = "special",
 				},
-
 				-- Use symbol tree for folding. Set to true or false to enable/disable
 				-- Set to "auto" to manage folds if your previous foldmethod was 'manual'
 				-- This can be a filetype map (see :help aerial-filetype-map)
 				manage_folds = false,
-
 				-- When you fold code with za, zo, or zc, update the aerial tree as well.
 				-- Only works when manage_folds = true
 				link_folds_to_tree = false,
-
 				-- Fold code when you open/collapse symbols in the tree.
 				-- Only works when manage_folds = true
 				link_tree_to_folds = true,
-
 				-- Set default symbol icons to use patched font icons (see https://www.nerdfonts.com/)
 				-- "auto" will set it to true if nvim-web-devicons or lspkind-nvim is installed.
 				nerd_font = "auto",
-
 				-- Automatically open aerial when entering supported buffers.
 				-- This can be a function (see :help aerial-open-automatic)
 				open_automatic = false,
-
 				-- Run this command after jumping to a symbol (false will disable)
 				post_jump_cmd = "normal! zz",
-
 				-- Invoked after each symbol is parsed, can be used to modify the parsed item,
 				-- or to filter it by returning false.
 				--
@@ -643,13 +582,10 @@ return {
 
 				-- When true, aerial will automatically close after jumping to a symbol
 				close_on_select = true,
-
 				-- The autocmds that trigger symbols update (not used for LSP backend)
 				update_events = "TextChanged,InsertLeave",
-
 				-- Show box drawing characters for the tree hierarchy
 				show_guides = false,
-
 				-- Customize the characters used when show_guides = true
 				guides = {
 					-- When the child item has a sibling below it
@@ -661,18 +597,15 @@ return {
 					-- Raw indentation
 					whitespace = "  ",
 				},
-
 				-- Options for opening aerial in a floating win
 				float = {
 					-- Controls border appearance. Passed to nvim_open_win
 					border = "rounded",
-
 					-- Determines location of floating window
 					--   cursor - Opens float on top of the cursor
 					--   editor - Opens float centered in the editor
 					--   win    - Opens float centered in the window
 					relative = "cursor",
-
 					-- These control the height of the floating window.
 					-- They can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
 					-- min_height and max_height can be a list of mixed types.
@@ -680,26 +613,21 @@ return {
 					max_height = 0.9,
 					height = nil,
 					min_height = { 8, 0.1 },
-
 					override = function(conf, source_winid)
 						-- This is the config that will be passed to nvim_open_win.
 						-- Change values here to customize the layout
 						return conf
 					end,
 				},
-
 				lsp = {
 					-- Fetch document symbols when LSP diagnostics update.
 					-- If false, will update on buffer changes.
 					diagnostics_trigger_update = true,
-
 					-- Set to false to not update the symbols when there are LSP errors
 					update_when_errors = true,
-
 					-- How long to wait (in ms) after a buffer change before updating
 					-- Only used when diagnostics_trigger_update = false
 					update_delay = 300,
-
 					-- Map of LSP client name to priority. Default value is 10.
 					-- Clients with higher (larger) priority will be used before those with lower priority.
 					-- Set to -1 to never use the client.
@@ -707,17 +635,14 @@ return {
 						-- pyright = 10,
 					},
 				},
-
 				treesitter = {
 					-- How long to wait (in ms) after a buffer change before updating
 					update_delay = 300,
 				},
-
 				markdown = {
 					-- How long to wait (in ms) after a buffer change before updating
 					update_delay = 300,
 				},
-
 				man = {
 					-- How long to wait (in ms) after a buffer change before updating
 					update_delay = 300,
@@ -735,7 +660,6 @@ return {
 
 	{
 		"simrat39/symbols-outline.nvim",
-
 		cmd = "SymbolsOutline",
 		keys = {
 			{
@@ -745,9 +669,7 @@ return {
 				silent = true,
 			},
 		},
-
 		opts = {
-
 			highlight_hovered_item = true,
 			show_guides = true,
 			auto_preview = false,
@@ -764,8 +686,8 @@ return {
 			auto_unfold_hover = true,
 			fold_markers = { "", "" },
 			wrap = false,
-
-			keymaps = { -- These keymaps can be a string or a table for multiple keys
+			keymaps = {
+				-- These keymaps can be a string or a table for multiple keys
 				close = { "<Esc>", "<LoaclLeader>q" },
 				goto_location = "<Cr>",
 				focus_location = "o",
@@ -779,7 +701,6 @@ return {
 				unfold_all = "L",
 				fold_reset = "R",
 			},
-
 			lsp_blacklist = {},
 			symbol_blacklist = {},
 		},
@@ -827,69 +748,57 @@ return {
         },
 		opts = {
 			color_devicons = true,
-
 			open_cmd = "leftabove vnew",
 			live_update = false, -- auto excute search again when you write any file in vim
 			line_sep_start = "┌─────────────────────────────────────────────",
 			result_padding = "│ ",
 			line_sep = "└─────────────────────────────────────────────",
-
 			highlight = {
 				ui = "String",
 				search = "DiffChange",
 				replace = "DiffDelete",
 			},
-
 			mapping = {
-
 				["toggle_line"] = {
 					map = "t",
 					cmd = "<cmd>lua require('spectre').toggle_line()<CR>",
 					desc = "toggle current item",
 				},
-
 				["enter_file"] = {
 					map = "<cr>",
 					cmd = "<cmd>lua require('spectre.actions').select_entry()<CR>",
 					desc = "goto current file",
 				},
-
 				["send_to_qf"] = {
 					map = "Q",
 					cmd = "<cmd>lua require('spectre.actions').send_to_qf()<CR>",
 					desc = "send all item to quickfix",
 				},
-
 				["replace_cmd"] = {
 					map = "c",
 					cmd = "<cmd>lua require('spectre.actions').replace_cmd()<CR>",
 					desc = "input replace vim command",
 				},
-
 				["show_option_menu"] = {
 					map = "o",
 					cmd = "<cmd>lua require('spectre').show_options()<CR>",
 					desc = "show option",
 				},
-
 				["run_replace"] = {
 					map = "R",
 					cmd = "<cmd>lua require('spectre.actions').run_replace()<CR>",
 					desc = "replace all",
 				},
-
 				["change_view_mode"] = {
 					map = "m",
 					cmd = "<cmd>lua require('spectre').change_view()<CR>",
 					desc = "change result view mode",
 				},
-
 				["toggle_ignore_case"] = {
 					map = "I",
 					cmd = "<cmd>lua require('spectre').change_options('ignore-case')<CR>",
 					desc = "toggle ignore case",
 				},
-
 				["toggle_ignore_hidden"] = {
 					map = "H",
 					cmd = "<cmd>lua require('spectre').change_options('hidden')<CR>",
@@ -897,7 +806,6 @@ return {
 				},
 				-- you can put your mapping here it only use normal mode
 			},
-
 			find_engine = {
 				-- rg is map with finder_cmd
 				["rg"] = {
@@ -913,24 +821,20 @@ return {
 					},
 
 					options = {
-
 						["ignore-case"] = {
 							value = "--ignore-case",
 							icon = "[I]",
 							desc = "ignore case",
 						},
-
 						["hidden"] = {
 							value = "--hidden",
 							desc = "hidden file",
 							icon = "[H]",
 						},
-
 						-- you can put any option you want here it can toggle with
 						-- show_option function
 					},
 				},
-
 				["ag"] = {
 					cmd = "ag",
 
@@ -940,13 +844,11 @@ return {
 					},
 
 					options = {
-
 						["ignore-case"] = {
 							value = "-i",
 							icon = "[I]",
 							desc = "ignore case",
 						},
-
 						["hidden"] = {
 							value = "--hidden",
 							desc = "hidden file",
@@ -955,14 +857,11 @@ return {
 					},
 				},
 			},
-
 			replace_engine = {
-
 				["sed"] = {
 					cmd = "sed",
 					args = nil,
 				},
-
 				options = {
 					["ignore-case"] = {
 						value = "--ignore-case",
@@ -971,21 +870,17 @@ return {
 					},
 				},
 			},
-
 			default = {
-
 				find = {
 					--pick one of item in find_engine
 					cmd = "rg",
 					options = { "ignore-case" },
 				},
-
 				replace = {
 					--pick one of item in replace_engine
 					cmd = "sed",
 				},
 			},
-
 			replace_vim_cmd = "cdo",
 			is_open_target_win = true, --open file on opener window
 			is_insert_mode = true, -- start open panel on is_insert_mode
@@ -1004,6 +899,10 @@ return {
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		-- version = false, -- telescope did only one release, so use HEAD for now
+		dependencies = {
+			"ElPiloto/telescope-vimwiki.nvim",
+			"kiyoon/telescope-insert-path.nvim",
+		},
 		keys = {
 			{
 				"<LocalLeader>ff",
@@ -1011,85 +910,29 @@ return {
 				{ initial_mode = "normal" },
 				desc = "Switch Buffer",
 			},
-			--     -- { "<leader>/", Util.telescope("live_grep"), desc = "Find in Files (Grep)" },
-			--     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-			--     -- { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
-			--     -- find
-			--     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-			--     -- { "<leader>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
-			--     -- { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
-			-- { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-			--     -- git
-			--     { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-			--     { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
-			--     -- search
-			--     { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
-			--     { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
-			--     { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-			--     { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-			--     { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
-			--     -- { "<leader>sg", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-			--     -- { "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
-			--     { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-			--     { "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
-			--     { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-			--     { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-			--     { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-			--     { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-			--     { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-			--     -- { "<leader>sw", Util.telescope("grep_string"), desc = "Word (root dir)" },
-			--     -- { "<leader>sW", Util.telescope("grep_string", { cwd = false }), desc = "Word (cwd)" },
-			--     -- { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
-			--     -- {
-			--     --     "<leader>ss",
-			--     --     Util.telescope("lsp_document_symbols", {
-			--     --         symbols = {
-			--     --             "Class",
-			--     --             "Function",
-			--     --             "Method",
-			--     --             "Constructor",
-			--     --             "Interface",
-			--     --             "Module",
-			--     --             "Struct",
-			--     --             "Trait",
-			--     --             "Field",
-			--     --             "Property",
-			--     --         },
-			--     --     }),
-			--     --     desc = "Goto Symbol",
-			--     -- },
-			--     -- {
-			--     --     "<leader>sS",
-			--     --     Util.telescope("lsp_workspace_symbols", {
-			--     --         symbols = {
-			--     --             "Class",
-			--     --             "Function",
-			--     --             "Method",
-			--     --             "Constructor",
-			--     --             "Interface",
-			--     --             "Module",
-			--     --             "Struct",
-			--     --             "Trait",
-			--     --             "Field",
-			--     --             "Property",
-			--     --         },
-			--     --     }),
-			--     --     desc = "Goto Symbol (Workspace)",
-			--     -- },
+			{
+				"<LocalLeader>vw",
+				"<cmd>lua require('telescope').extensions.vimwiki.vimwiki()<cr>",
+				{ initial_mode = "normal" },
+				desc = "Seach vimwiki page filenames",
+			},
+			{
+				"<LocalLeader>vg",
+				"<cmd>lua require('telescope').extensions.vw.live_grep()<cr>",
+				{ initial_mode = "normal" },
+				desc = "Live grep vimwiki file",
+			},
 		},
-
 		config = function()
 			local actions = require("telescope.actions")
+			local path_actions = require("telescope_insert_path")
 			require("telescope").setup({
-
 				defaults = {
-
 					-- path_display = { 'smart'},
 					sorting_strategy = "ascending", -- 结果的排序方向                    | scending (default) | ascending
 					selection_strategy = "reset", -- 确定每次排序迭代后光标的操作方式。| reset (default) | follow | row | closest | none
 					scroll_strategy = "cycle", -- 确定如果尝试滚动经过选择器        | cycle (default) | limit
 					layout_strategy = "horizontal", -- 默认布局                          | horizontal (default) | vertical | center | cursor
-
 					layout_config = {
 						bottom_pane = {
 							height = 25,
@@ -1120,7 +963,6 @@ return {
 							width = 0.8,
 						},
 					},
-
 					cycle_layout_list = { "horizontal", "vertical" }, -- 布局循环列表
 					winblend = 15, -- 浮动窗口配置
 					wrap_results = false, -- 自动换行搜索结果
@@ -1133,9 +975,7 @@ return {
 					path_display = {
 						shorten = 2, -- 缩短显示的路径名称
 					},
-
 					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-
 					-- borderchars = {
 					--     prompt = {'▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' };
 					--     results = {' ', '▐', '▄', '▌', '▌', '▐', '▟', '▙' };
@@ -1159,24 +999,20 @@ return {
 					dynamic_preview_title = true, -- 动态更改预览窗口的标题
 					results_title = "Results", -- 定义结果窗口的默认标题, 错误的值, 可以用于完全隐藏标题
 					prompt_title = "Prompt", -- 定义提示窗口的默认标题, 错误的值, 可以用于完全隐藏标题
-
 					mappings = {
-
 						i = {
 							["<LocalLeader>q"] = { "<esc>", type = "command" },
 						},
-
 						n = {
 							["?"] = require("telescope.actions.layout").toggle_preview,
 							["q"] = require("telescope.actions").close,
 							["<LocalLeader>q"] = require("telescope.actions").close,
 							["<esc>"] = { actions.close, type = "action", opts = { silent = true, nowait = true } },
 							["<LocalLeader>n"] = require("telescope.actions.layout").cycle_layout_next,
+							["<Cr>"] = path_actions.insert_relpath_i_normal,
 						},
 					},
-
 					default_mappings = nil, -- 将允许您完全删除望远镜的所有默认热键并使用自己的热键
-
 					history = {
 						mappings = {
 							i = {
@@ -1185,16 +1021,13 @@ return {
 							},
 						},
 					},
-
 					preview = {
 						treesitter = false, -- 确定预览器是否执行 Treesitter 突出显示
 						msg_bg_fillchar = "/", -- 用于填充不可见区域的字符
 						hide_on_startup = true, -- 选择器启动时隐藏预览器。可以切换预览器使用 actions.layout.toggle_preview
 					},
-
 					vimgrep_arguments = {
 						"rg",
-						"L",
 						"--color=never",
 						"--no-heading",
 						"--with-filename",
@@ -1202,7 +1035,6 @@ return {
 						"--column",
 						"--smart-case",
 					},
-
 					set_env = { ["COLORTERM"] = "truecolor" }, -- 为term_preview设置环境. default = nil
 					color_devicons = false, -- 图标颜色
 					-- file_sorter = require("telescope.sorters").get_fuzzy_file,                             --Default: require("telescope.sorters").get_fzy_sorter
@@ -1213,7 +1045,6 @@ return {
 					grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new, -- Default: require("telescope.previewers").vim_buffer_vimgrep.new
 					qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new, -- Default: require("telescope.previewers").vim_buffer_qflist.new
 					buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker, -- Default: require("telescope.previewers").buffer_previewer_maker
-
 					-- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 					-- path_display = { "truncate" },
 
@@ -1224,7 +1055,6 @@ return {
 							sort_lastused = true,
 						},
 					},
-
 					extensions = {
 						-- projects = {},
 						-- Your extension configuration goes here:
@@ -1234,7 +1064,7 @@ return {
 						-- please take a look at the readme of the extension you want to configure
 					},
 					require("telescope").load_extension("projects"),
-					-- require('telescope').load_extension('vimwiki'),
+					require("telescope").load_extension("vimwiki"),
 					-- require('telescope').load_extension('fzf')
 				},
 			})
@@ -1250,7 +1080,6 @@ return {
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	{
-
 		"ahmedkhalf/project.nvim",
 		-- cmd = "Telescope",
 		keys = { { "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
@@ -1265,32 +1094,25 @@ return {
 				-- Manual mode doesn't automatically change your root directory, so you have
 				-- the option to manually do so using `:ProjectRoot` command.
 				manual_mode = false,
-
 				-- Methods of detecting the root directory. **"lsp"** uses the native neovim
 				-- lsp, while **"pattern"** uses vim-rooter like glob pattern matching. Here
 				-- order matters: if one is not detected, the other is used as fallback. You
 				-- can also delete or rearangne the detection methods.
 				detection_methods = { "lsp", "pattern" },
-
 				-- All the patterns used to detect root dir, when **"pattern"** is in
 				-- detection_methods
 				patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
-
 				-- Table of lsp clients to ignore by name
 				-- eg: { "efm", ... }
 				ignore_lsp = {},
-
 				-- Don't calculate root dir on specific directories
 				-- Ex: { "~/.cargo/*", ... }
 				exclude_dirs = {},
-
 				-- Show hidden files in telescope
 				show_hidden = false,
-
 				-- When set to false, you will get a message when project.nvim changes your
 				-- directory.
 				silent_chdir = true,
-
 				-- Path where project.nvim will store the project history for use in
 				-- telescope
 				datapath = vim.fn.stdpath("data"),
@@ -1317,23 +1139,18 @@ return {
 				separator = "  ", -- symbol used between a key and it's label
 				group = "+", -- symbol prepended to a group
 			},
-
 			popup_mappings = {
 				scroll_down = "<c-d>", -- binding to scroll down inside the popup
 				scroll_up = "<c-u>", -- binding to scroll up inside the popup
 			},
-
 			window = {
 				border = "single", -- none/single/double/shadow
 			},
-
 			layout = {
 				spacing = 6, -- spacing between columns
 				align = "center",
 			},
-
 			hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " },
-
 			triggers_blacklist = {
 				-- list of mode / prefixes that should never be hooked by WhichKey
 				i = { "j", "k", "a" },
@@ -1388,33 +1205,27 @@ return {
 					linehl = "GitSignsChangeLn",
 				},
 			},
-
 			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
 			numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
 			linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 			word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-
 			watch_gitdir = {
 				interval = 1000,
 				follow_files = true,
 			},
-
 			attach_to_untracked = true,
 			current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-
 			current_line_blame_opts = {
 				virt_text = true,
 				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
 				delay = 1000,
 				ignore_whitespace = false,
 			},
-
 			current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
 			sign_priority = 6,
 			update_debounce = 100,
 			status_formatter = nil, -- Use default
 			max_file_length = 40000, -- Disable if file is longer than this (in lines)
-
 			preview_config = {
 				-- Options passed to nvim_open_win
 				border = "single",
@@ -1423,11 +1234,9 @@ return {
 				row = 0,
 				col = 1,
 			},
-
 			yadm = {
 				enable = false,
 			},
-
 			on_attach = function(buffer)
 				local gs = package.loaded.gitsigns
 
@@ -1464,14 +1273,11 @@ return {
 		"anuvyklack/pretty-fold.nvim",
 		event = "VeryLazy",
 		opts = {
-
 			keep_indentation = false,
 			remove_fold_markers = true,
 			process_comment_signs = false,
 			fill_char = "━",
-
 			sections = {
-
 				left = {
 					"",
 					function()
@@ -1481,7 +1287,6 @@ return {
 					"content",
 					"██  ",
 				},
-
 				right = {
 					"  ██  ",
 					"number_of_folded_lines",
@@ -1490,7 +1295,6 @@ return {
 					"   ",
 				},
 			},
-
 			matchup_patterns = {
 
 				{ "^%s*do$", "end" }, -- do ... end blocks
@@ -1519,7 +1323,6 @@ return {
 			"lewis6991/gitsigns.nvim",
 		},
 		opts = {
-
 			show = true,
 			show_in_active_only = false,
 			set_highlights = true,
@@ -1527,16 +1330,13 @@ return {
 			max_lines = false, -- disables if no. of lines in buffer exceeds this
 			hide_if_all_visible = true, -- Hides handle if all lines are visible
 			throttle_ms = 100,
-
 			handle = {
 				text = " ",
 				color = "#414855",
 				cterm = nil,
 				highlight = "CursorColumn",
 			},
-
 			marks = {
-
 				Cursor = {
 					text = "─",
 					priority = 0,
@@ -1553,7 +1353,6 @@ return {
 					cterm = nil,
 					highlight = "Search",
 				},
-
 				Error = {
 					text = { "█" },
 					priority = 1,
@@ -1561,7 +1360,6 @@ return {
 					cterm = nil,
 					highlight = "DiagnosticVirtualTextError",
 				},
-
 				Warn = {
 					text = { "█" },
 					priority = 2,
@@ -1569,7 +1367,6 @@ return {
 					cterm = nil,
 					highlight = "DiagnosticVirtualTextWarn",
 				},
-
 				Info = {
 					text = { "█" },
 					priority = 3,
@@ -1577,7 +1374,6 @@ return {
 					cterm = nil,
 					highlight = "DiagnosticVirtualTextInfo",
 				},
-
 				Hint = {
 					text = { "█" },
 					priority = 4,
@@ -1585,7 +1381,6 @@ return {
 					cterm = nil,
 					highlight = "DiagnosticVirtualTextHint",
 				},
-
 				Misc = {
 					text = { "█" },
 					priority = 5,
@@ -1593,7 +1388,6 @@ return {
 					cterm = nil,
 					highlight = "Normal",
 				},
-
 				GitAdd = {
 					text = "█",
 					priority = 7,
@@ -1622,11 +1416,9 @@ return {
 					highlight = "GitSignsDelete",
 				},
 			},
-
 			excluded_buftypes = {
 				"terminal",
 			},
-
 			excluded_filetypes = {
 				"prompt",
 				"TelescopePrompt",
@@ -1635,9 +1427,7 @@ return {
 				"mason",
 				"lazy",
 			},
-
 			autocmd = {
-
 				render = {
 					"BufWinEnter",
 					"TabEnter",
@@ -1648,7 +1438,6 @@ return {
 					"VimResized",
 					"WinScrolled",
 				},
-
 				clear = {
 					"BufWinLeave",
 					"TabLeave",
@@ -1656,7 +1445,6 @@ return {
 					"WinLeave",
 				},
 			},
-
 			handlers = {
 				diagnostic = false,
 				search = false, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
@@ -1680,7 +1468,6 @@ return {
 		"chentoast/marks.nvim",
 		event = "VeryLazy",
 		opts = {
-
 			-- whether to map keybinds or not. default true
 			default_mappings = true,
 			-- which builtin marks to show. default {}
@@ -1717,7 +1504,6 @@ return {
 				-- defaults to false.
 				annotate = false,
 			},
-
 			mappings = {},
 		},
 	},
@@ -1731,7 +1517,6 @@ return {
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	{
-
 		"skywind3000/asyncrun.vim",
 		config = function()
 			vim.g.asyncrun_open = 6
@@ -1766,11 +1551,9 @@ return {
 		"norcalli/nvim-colorizer.lua",
 		cmd = "ColorizerToggle",
 		opts = {
-
 			filetypes = {
 				"*",
 			},
-
 			user_default_options = {
 				RGB = true, -- #RGB hex codes
 				RRGGBB = true, -- #RRGGBB hex codes
@@ -1794,27 +1577,84 @@ return {
 			{ "<leader>w<leader>w", "<plug>VimwikiDiaryIndex", desc = "Open Vimwiki diary" },
 		},
 		init = function()
-			vim.g.vimwiki_hl_headers = 1
+			vim.g.vimwiki_list = {
+				{
+					path = "$HOME/vimwiki/",
+					syntax = "markdown",
+					ext = ".md",
+					name = "wiki",
+					index = "index",
+					diary_rel_path = "Diary/",
+					diary_index = "Diary",
+					maxhi = 1,
+					auto_toc = 1,
+					auto_tags = 1,
+					auto_generate_links = 1,
+					auto_generate_tags = 1,
+					nested_syntaxes = {
+						["python"] = "python",
+						["c++"] = "cpp",
+					},
+				},
+			}
+
+			vim.g.vimwiki_ext2syntax = {
+				[".md"] = "markdown",
+				[".markdown"] = "markdown",
+				[".mdown"] = "markdown",
+			}
+
+			vim.g.vimwiki_global_ext = 1
 			vim.g.vimwiki_auto_chdir = 1
-			vim.g.vimwiki_name = "<Logseq>"
-			vim.g.vimwiki_path = "$HOME/vimwiki/pages/"
-			vim.g.vimwiki_index = "index"
-			vim.g.vimwiki_ext = ".md"
-			vim.g.vimwiki_syntax = "markdown"
-			vim.g.vimwiki_auto_chdir = 1
-			vim.g.vimwiki_vimwiki_auto_chdir = 1
-			vim.g.vimwiki_diary_rel_path = "diary/"
-			vim.g.vimwiki_diary_index = "diary"
-			vim.g.vimwiki_vimwiki_ext2syntax = { [".md"] = "markdown", [".wiki"] = "media" }
+			vim.g.vimwiki_conceal_pre = 1
+			vim.g.vimwiki_conceallevel = 2
+			vim.g.vimwiki_folding = "custom"
+			vim.g.vimwiki_filetypes = { "markdown" }
 			vim.g.vimwiki_CJK_length = 1
 			vim.g.vimwiki_hl_cb_checked = 2
-			vim.g.vimwiki_global_ext = 1
 			vim.g.vimwiki_use_mouse = 0
-			vim.g.vimwiki_conceallevel = 1
 			vim.g.vimwiki_markdown_link_ext = 1
-			vim.g.list_margin = 0
-			vim.g.auto_diary_index = 1
-			vim.g.auto_generate_links = 1
+			vim.g.vimwiki_list_margin = 0
+			vim.g.vimwiki_auto_diary_index = 1
+			vim.g.vimwiki_auto_generate_links = 1
+			vim.g.vimwiki_toc_header_level = 2
+			vim.g.vimwiki_links_header_level = 2
+			vim.g.vimwiki_diary_header = "Diary"
+			vim.g.vimwiki_tags_header_level = 2
+			vim.g.vimwiki_tag_format = {
+				["pre"] = "tags:.*",
+				["pre_mark"] = "[",
+				["post_mark"] = "]",
+				["sep"] = ",",
+			}
+			vim.g.vimwiki_valid_html_tags =
+				"b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1,nav,body,aside,p,blockquote,ul,ol,li"
+		end,
+		config = function()
+			vim.cmd([[
+                augroup VimWikiSettings
+                    autocmd!
+                    let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1']
+                    autocmd FileType vimwiki.markdown highlight MarkdownTrailingSpaces ctermbg=green guibg=green
+                    autocmd FileType vimwiki.markdown syntax match MarkdownTrailingSpaces "\s\{4}.*$"
+                    autocmd FileType vimwiki.markdown syntax region VimwikiBlockquote start=/^\s*>/ end="$"
+                    autocmd FileType vimwiki.markdown highlight VimwikiBlockquote guifg=#545965 guibg=#23272E
+                    autocmd BufEnter *.md if &ft == "vimwiki.markdown" | setlocal filetype=vimwiki.markdown | endif
+                    autocmd FileType vimwiki.markdown highlight VimwikiLink       guifg=#61afef
+                    autocmd FileType vimwiki.markdown highlight VimwikiHeader1    guifg=#e5c07b
+                    autocmd FileType vimwiki.markdown highlight VimwikiHeader2    guifg=#98c379
+                    autocmd FileType vimwiki.markdown highlight VimwikiHeader3    guifg=#c678dd
+                    autocmd FileType vimwiki.markdown highlight VimwikiHeader4    guifg=#8096BF
+                    autocmd FileType vimwiki.markdown highlight VimwikiHeader5    guifg=#8096BF
+                    autocmd FileType vimwiki.markdown highlight VimwikiHeader6    guifg=#8096BF
+                    autocmd FileType vimwiki.markdown highlight VimwikiH1Folding  guifg=#e5c07b
+                    autocmd FileType vimwiki.markdown highlight VimwikiH2Folding  guifg=#98c379
+                    autocmd FileType vimwiki.markdown highlight VimwikiH3Folding  guifg=#c678dd
+                    autocmd FileType vimwiki.markdown highlight VimwikiH4Folding  guifg=#8096BF
+                    autocmd FileType vimwiki.markdown highlight VimwikiH5Folding  guifg=#8096BF
+                    autocmd FileType vimwiki.markdown highlight VimwikiH6Folding  guifg=#8096BF
+                    autocmd FileType vimwiki.markdown highlight VimwikiBold       guifg=#E06C75
+            ]])
 		end,
 	},
 	{

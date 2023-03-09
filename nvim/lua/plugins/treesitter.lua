@@ -46,7 +46,7 @@ return {
 		},
 
 		incremental_selection = {
-			enable = true,
+			enable = false,
 			keymaps = {
 				init_selection = "<Enter>",
 				node_incremental = "<Enter>",
