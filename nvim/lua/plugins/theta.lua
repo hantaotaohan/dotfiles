@@ -1,75 +1,49 @@
-return {
-	"goolord/alpha-nvim",
-	event = "VimEnter",
-	opts = function()
-		local dashboard = require("alpha.themes.dashboard")
-		local logo = [[
-    ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-    ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
-    ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
-    ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         
-    ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-    ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
-    ]]
+  return{
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      local alpha = require("alpha")
+      local theme = require("alpha.themes.theta")
+      local dashboard = require("alpha.themes.dashboard")
 
-		dashboard.section.header.val = vim.split(logo, "\n")
-		dashboard.section.buttons.val = {
-			dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
-			dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
-			dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
-			dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
-			dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-			dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
-			dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
-			dashboard.button("q", " " .. " Quit", ":qa<CR>"),
-		}
-		for _, button in ipairs(dashboard.section.buttons.val) do
-			button.opts.hl = "AlphaButtons"
-			button.opts.hl_shortcut = "AlphaShortcut"
-		end
-		dashboard.section.footer.opts.hl = "Type"
-		dashboard.section.header.opts.hl = "AlphaHeader"
-		dashboard.section.buttons.opts.hl = "AlphaButtons"
-		dashboard.opts.layout[1].val = 8
-		return dashboard
-	end,
-	config = function(_, dashboard)
-		-- close Lazy and re-open when the dashboard is ready
-		if vim.o.filetype == "lazy" then
-			vim.cmd.close()
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "AlphaReady",
-				callback = function()
-					require("lazy").show()
-				end,
-			})
-		end
-
-		require("alpha").setup(dashboard.opts)
-
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "LazyVimStarted",
-			callback = function()
-				local stats = require("lazy").stats()
-				local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-				dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-				pcall(vim.cmd.AlphaRedraw)
-			end,
-		})
-
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "AlphaReady",
-			desc = "disable tabline for alpha",
-			callback = function()
-				vim.opt.showtabline = 0
-			end,
-		})
-		vim.api.nvim_create_autocmd("BufUnload", {
-			buffer = 0,
-			desc = "enable tabline after alpha",
-			callback = function()
-				vim.opt.showtabline = 2
-			end,
-		})
-	end,
-}
+      -- Set header
+      local header = {
+        type = "text",
+        val = {
+          [[                                                     ]],
+          [[  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ]],
+          [[  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ]],
+          [[  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ]],
+          [[  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
+          [[  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
+          [[  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
+          [[                                                     ]],
+        },
+        opts = {
+          position = "center",
+          hl = "Type",
+        },
+      }
+      local buttons = {
+        type = "group",
+        val = {
+          { type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
+          { type = "padding", val = 1 },
+          dashboard.button("e", "  New file", "<cmd>ene<CR>"),
+          dashboard.button("SPC s f f", "  Find file"),
+          dashboard.button("SPC s g g", "  Live grep"),
+          dashboard.button("U", "  Update plugins", "<cmd>Lazy sync<CR>"),
+          dashboard.button("q", "  Quit", "<cmd>qa<CR>"),
+        },
+        position = "center",
+      }
+      theme.header.val = header.val
+      theme.header.opts = header.opts
+      theme.buttons.val = buttons.val
+      alpha.setup(theme.config)
+      vim.cmd([[
+            autocmd FileType alpha setlocal nofoldenable
+        ]])
+    end,
+  }
