@@ -17,7 +17,7 @@ vim.g.python3_host_skip_check = 1
 -- DISPLAY --
 
 opt.hidden = true -- 是否隐藏缓冲区, 用于切换BUFFER
-opt.showtabline = 2 -- 如何显示标签栏
+opt.showtabline = 0 -- 如何显示标签栏
 opt.laststatus = 2 -- 是否开启最后一个窗口何时有状态行 | 0: 永不 | 1: 只有在两个窗口时 | 2: 总是显示 |
 opt.display = "lastline" -- 更改文本的显示方式
 opt.cursorline = true -- 是否高亮当前行

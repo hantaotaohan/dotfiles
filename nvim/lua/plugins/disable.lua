@@ -80,4 +80,6 @@ return {
 	-- { "williamboman/mason.nvim", enabled = false },
 	-- { "williamboman/mason-lspconfig.nvim", enabled = false },
 	-- { "jose-elias-alvarez/null-ls.nvim", enabled = false },
+	-- { "michal-h21/vim-zettel", enabled = false },
+	-- { "vimwiki/vimwiki", enabled = false },
 }

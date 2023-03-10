@@ -1,6 +1,6 @@
 -- This file is automatically loaded by lazyvim.plugins.config
 
-fun = require("config.function")
+local fun = require("config.function")
 
 ---@param plugin string
 function Has(plugin)
@@ -89,7 +89,7 @@ map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- delete buffer
-map({ "n", "i", "v", "t" }, "<LocalLeader>q", "<cmd>Sayonara<cr>", { desc = "Delete Buffer" })
+map({ "n", "i", "v", "t" }, "<LocalLeader>q", "<cmd>Sayonara<cr>", { silent = true }, { desc = "Delete Buffer" })
 
 -- save file
 map({ "i", "v", "n", "s" }, "<LocalLeader>w", "<cmd>w<cr><esc>", { desc = "Save file" })
@@ -124,7 +124,7 @@ end
 map("n", "<Esc><Esc>", "<cmd>nohlsearch<cr>", { desc = "Escape and clear hlsearch" })
 map("n", ";;", ";", { desc = "Escape and clear hlsearch" })
 
-map({ "n", "i", "v" }, "<LocalLeader>s", "<cmd>Dashboard<cr>", { desc = "Return DashBoard" })
+map({ "n", "i", "v" }, "<LocalLeader>s", "<cmd>Alpha<cr>", { desc = "Return DashBoard" })
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
 map(

@@ -104,6 +104,12 @@ vim.api.nvim_create_autocmd("FileType", {
 --   │                                Alpha                                 │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
+vim.api.nvim_create_autocmd("User", {
+	group = augroup("Alpha"),
+	pattern = "AlphaReady",
+	command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2",
+})
+
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                                Lazy                                  │
 --   ╰──────────────────────────────────────────────────────────────────────╯

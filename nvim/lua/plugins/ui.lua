@@ -13,6 +13,8 @@
 
 --  ╾────────────────────────────────────────────────────────────────────────╼
 
+fun = require("config.function")
+
 return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
@@ -76,7 +78,7 @@ return {
 					persist_buffer_sort = true, -- 自定义排序缓冲区是否应持久
 					separator_style = "thin", -- | "slant" | "thick" | "thin" | { 'any', 'any' } |
 					enforce_regular_tabs = true,
-					always_show_bufferline = false,
+					always_show_bufferline = true,
 					hover = {
 						enabled = false,
 						delay = 200,
@@ -621,7 +623,6 @@ return {
 
 	{
 		"rcarriga/nvim-notify",
-		event = "VeryLazy",
 		keys = {
 			{
 				"<leader>un",
@@ -647,6 +648,31 @@ return {
 				Util.on_very_lazy(function()
 					vim.notify = require("notify")
 				end)
+			end
+		end,
+	},
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                               Dressing                               │
+	--   │                                                                      │
+	--   │              https://github.com/stevearc/dressing.nvim               │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
+	{
+		"stevearc/dressing.nvim",
+		lazy = true,
+		init = function()
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.select = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.select(...)
+			end
+			---@diagnostic disable-next-line: duplicate-set-field
+			vim.ui.input = function(...)
+				require("lazy").load({ plugins = { "dressing.nvim" } })
+				return vim.ui.input(...)
 			end
 		end,
 	},
@@ -691,6 +717,131 @@ return {
 		},
 	},
 
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                                Alpha                                 │
+	--   │                                                                      │
+	--   │                https://github.com/goolord/alpha-nvim                 │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
+	{
+		"goolord/alpha-nvim",
+		branch = "main",
+		event = "VimEnter",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = function()
+			-- local alpha = require("alpha")
+			local theme = require("alpha.themes.theta")
+			local dashboard = require("alpha.themes.dashboard")
+			theme.mru_opts.autocd = true
+			-- theme.config.opts.noautocmd = true
+
+			-- Set header
+			theme.header = {
+				type = "text",
+				val = {
+					[[                                                     ]],
+					[[  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ]],
+					[[  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ]],
+					[[  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ]],
+					[[  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
+					[[  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
+					[[  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
+					[[                                                     ]],
+				},
+				opts = {
+					position = "center",
+					hl = "Type",
+				},
+			}
+
+			theme.files = {
+				type = "group",
+				val = {
+					{ type = "text", val = "recent files", opts = { hl = "@constructor", position = "center" } },
+					{ type = "padding", val = 1 },
+					theme.mru(1, vim.fn.getcwd(), 9),
+				},
+			}
+
+			theme.buttons = {
+				type = "group",
+				val = {
+					{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
+					{ type = "padding", val = 1 },
+					dashboard.button("e", "  New file", "<cmd>ene<CR>"),
+					dashboard.button("SPC s f f", "  Find file"),
+					dashboard.button("SPC s g g", "  Live grep"),
+					dashboard.button("U", "  Update plugins", "<cmd>Lazy sync<CR>"),
+					dashboard.button("<LocalLeader>q", "  Quit", "<cmd>Upper<cr>"),
+				},
+				opts = {
+					position = "center",
+					hl = "Type",
+				},
+			}
+
+			theme.footer = {
+				type = "text",
+				val = "",
+				opts = {
+					position = "center",
+					hl = "Type",
+				},
+			}
+
+			theme.config = {
+				layout = {
+					{ type = "padding", val = 10 },
+					theme.header,
+					{ type = "padding", val = 3 },
+					theme.files,
+					{ type = "padding", val = 2 },
+					theme.buttons,
+					{ type = "padding", val = 2 },
+					theme.footer,
+				},
+			}
+
+			return theme
+		end,
+
+		config = function(_, theme)
+			vim.api.nvim_create_user_command("Upper", function()
+				if vim.fn.bufloaded(0) == 1 then
+					vim.api.nvim_command("bw")
+				elseif vim.fn.bufloaded(0) < 1 then
+					vim.api.nvim_command("quit")
+				end
+			end, { nargs = 0 })
+
+			-- close Lazy and re-open when the dashboard is ready
+			if vim.o.filetype == "lazy" then
+				vim.cmd.close()
+				vim.api.nvim_create_autocmd("User", {
+					pattern = "AlphaReady",
+					callback = function()
+						require("lazy").show()
+					end,
+				})
+			end
+
+			require("alpha").setup(theme.config)
+
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "LazyVimStarted",
+				callback = function()
+					local stats = require("lazy").stats()
+					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+					theme.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+					pcall(vim.cmd.AlphaRedraw)
+				end,
+			})
+
+			vim.cmd("setlocal buflisted")
+		end,
+	},
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
 	--   │                             Dashboard                                │
@@ -2393,4 +2544,5 @@ return {
 			})
 		end,
 	},
+	{ "MunifTanjim/nui.nvim", lazy = true },
 }

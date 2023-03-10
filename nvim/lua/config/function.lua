@@ -132,4 +132,15 @@ M.toggle_syntax = function()
 end
 
 -------------------------------------------------------------------------------
+-- Alpha Dashboard Smart Close Buffers
+-------------------------------------------------------------------------------
+
+vim.api.nvim_create_user_command("Upper", function()
+	if vim.fn.bufloaded(0) == 1 then
+		vim.api.nvim_command("bw")
+	elseif vim.fn.bufloaded(0) < 1 then
+		vim.api.nvim_command("quit")
+	end
+end, { nargs = 1 })
+-------------------------------------------------------------------------------
 return M
