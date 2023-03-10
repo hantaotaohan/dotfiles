@@ -110,6 +110,12 @@ vim.api.nvim_create_autocmd("User", {
 	command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2",
 })
 
+-- vim.api.nvim_create_autocmd("UIEnter", {
+-- 	group = augroup("Alpha"),
+-- 	pattern = "AlphaReady",
+-- 	command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2",
+-- })
+
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                                Lazy                                  │
 --   ╰──────────────────────────────────────────────────────────────────────╯

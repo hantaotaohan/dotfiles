@@ -1424,6 +1424,7 @@ return {
 				"TelescopePrompt",
 				"neo-tree",
 				"dashboard",
+				"alpha",
 				"mason",
 				"lazy",
 			},

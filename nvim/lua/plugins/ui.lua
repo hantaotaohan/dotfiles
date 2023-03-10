@@ -555,6 +555,15 @@ return {
 					},
 				},
 			},
+			-- routes = {
+			-- 	{
+			-- 		filter = {
+			-- 			event = "msg_show",
+			-- 			kind = "confirm",
+			-- 		},
+			-- 		opts = { skip = true },
+			-- 	},
+			-- },
 		},
 		keys = {
 			{
@@ -741,14 +750,14 @@ return {
 			theme.header = {
 				type = "text",
 				val = {
-					[[                                                     ]],
-					[[  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ]],
-					[[  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ]],
-					[[  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ]],
-					[[  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
-					[[  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
-					[[  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
-					[[                                                     ]],
+					[[                                                                                  ]],
+					[[  ███████╗ █████╗ ██████╗ ███████╗██████╗       ██████╗  █████╗ ███████╗██╗  ██╗  ]],
+					[[  ██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗      ██╔══██╗██╔══██╗██╔════╝██║  ██║  ]],
+					[[  ███████╗███████║██████╔╝█████╗  ██████╔╝█████╗██║  ██║███████║███████╗███████║  ]],
+					[[  ╚════██║██╔══██║██╔══██╗██╔══╝  ██╔══██╗╚════╝██║  ██║██╔══██║╚════██║██╔══██║  ]],
+					[[  ███████║██║  ██║██████╔╝███████╗██║  ██║      ██████╔╝██║  ██║███████║██║  ██║  ]],
+					[[  ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝      ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝  ]],
+					[[                                                                                  ]],
 				},
 				opts = {
 					position = "center",
@@ -759,9 +768,18 @@ return {
 			theme.files = {
 				type = "group",
 				val = {
-					{ type = "text", val = "recent files", opts = { hl = "@constructor", position = "center" } },
+					{ type = "text", val = "Local Recent Files", opts = { hl = "@constructor", position = "center" } },
 					{ type = "padding", val = 1 },
-					theme.mru(1, vim.fn.getcwd(), 9),
+					theme.mru(11, vim.fn.getcwd(), 5),
+				},
+			}
+
+			theme.filess = {
+				type = "group",
+				val = {
+					{ type = "text", val = "Recent Files", opts = { hl = "@constructor", position = "center" } },
+					{ type = "padding", val = 1 },
+					theme.mru(1),
 				},
 			}
 
@@ -793,9 +811,11 @@ return {
 
 			theme.config = {
 				layout = {
-					{ type = "padding", val = 10 },
+					{ type = "padding", val = 1 },
 					theme.header,
 					{ type = "padding", val = 3 },
+					theme.filess,
+					{ type = "padding", val = 2 },
 					theme.files,
 					{ type = "padding", val = 2 },
 					theme.buttons,

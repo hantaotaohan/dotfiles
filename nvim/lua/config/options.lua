@@ -101,9 +101,9 @@ opt.shortmess:append("S") -- 搜索时不显示搜索计数消息
 -- opt.shortmess:append("a")                                                      -- 启用全部缩写功能
 -- opt.shortmess:append("o")                                                      -- 屏蔽自动写入时读取文件的信息
 -- opt.shortmess:append("O")                                                      -- 用于读取文件的消息将覆盖以前的消息也适用于快速修复消息
--- opt.shortmess:append("s")                                                      -- 不要给出搜索命中底部, 在顶部继续的信息
--- opt.shortmess:append("t")                                                      -- 如果信息太长, 请在开头截断文件消息为了适应命令行
--- opt.shortmess:append("T")                                                      -- 如果中间的其他消息太长, 则截断它们为了适合命令行
+opt.shortmess:append("s") -- 不要给出搜索命中底部, 在顶部继续的信息
+opt.shortmess:append("t") -- 如果信息太长, 请在开头截断文件消息为了适应命令行
+opt.shortmess:append("T") -- 如果中间的其他消息太长, 则截断它们为了适合命令行
 -- opt.shortmess:append("A")                                                      -- 当现有[ATTENTION]出现时, 找到交换文件
 -- opt.shortmess:append("C")                                                      -- 扫描ins完成时不要发送消息项目, 例如"扫描标签"
 -- opt.shortmess:append("q")                                                      -- 使用"录制"而不是"录制@a"
