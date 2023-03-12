@@ -58,6 +58,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		"qf",
 		"help",
 		"man",
+		"query",
 		"notify",
 		"prompt",
 		"nofile",
@@ -108,13 +109,8 @@ vim.api.nvim_create_autocmd("User", {
 	group = augroup("Alpha"),
 	pattern = "AlphaReady",
 	command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2",
+	-- command = "set showtabline=0 cursorline | autocmd BufUnload <buffer> set showtabline=2",
 })
-
--- vim.api.nvim_create_autocmd("UIEnter", {
--- 	group = augroup("Alpha"),
--- 	pattern = "AlphaReady",
--- 	command = "set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2",
--- })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                                Lazy                                  │
@@ -199,18 +195,20 @@ vim.api.nvim_create_autocmd("FileType", {
 -- 	end,
 -- })
 
-vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "BufHidden", "BufUnload" }, {
-	group = augroup("Neotree"),
+vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter", "BufHidden", "BufUnload" }, {
+	group = augroup("Sidebar"),
 	pattern = "*",
 	callback = function()
 		if vim.api.nvim_buf_get_option(0, "buftype") == "nofile" then
 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
 			vim.opt.guicursor = "a:Cursor/lCursor"
+			vim.api.nvim_command("highlight CursorLine guifg=#FFFFFF guibg=#323842")
 		else
 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
 			vim.opt.guicursor = "a:Cursor/lCursor"
+			vim.api.nvim_command("highlight CursorLine guifg=none guibg=#2C313C")
 			-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 		end
 	end,

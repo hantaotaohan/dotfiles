@@ -46,6 +46,8 @@ return {
 
 		highlights = {
 
+			-- CursorLine = { fg = "#FFFFFF", bg = "#323842" },
+
 			CursorLine = { fg = nil, bg = "#2C313C" },
 			CursorLineNr = { fg = "#61AFEF", bg = "#2C313C" },
 			CursorLineSign = { fg = nil, bg = "#2C313C" },

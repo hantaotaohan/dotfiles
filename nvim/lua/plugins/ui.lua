@@ -13,8 +13,6 @@
 
 --  ╾────────────────────────────────────────────────────────────────────────╼
 
-fun = require("config.function")
-
 return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
@@ -27,7 +25,9 @@ return {
 
 	{
 		"akinsho/bufferline.nvim",
-		event = "VeryLazy",
+		-- lazy = true,
+		-- event = "VeryLazy",
+		event = "VimEnter",
 		version = "v3.*",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 
@@ -736,9 +736,9 @@ return {
 
 	{
 		"goolord/alpha-nvim",
-		branch = "main",
+		-- branch = "main",
 		event = "VimEnter",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
 			-- local alpha = require("alpha")
 			local theme = require("alpha.themes.theta")
@@ -788,15 +788,19 @@ return {
 				val = {
 					{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
 					{ type = "padding", val = 1 },
-					dashboard.button("e", "  New file", "<cmd>ene<CR>"),
-					dashboard.button("SPC s f f", "  Find file"),
-					dashboard.button("SPC s g g", "  Live grep"),
+					dashboard.button("e", "  New file", "<cmd>ene<CR>"),
+					dashboard.button("f", "  Find file"),
+					dashboard.button(
+						"o",
+						"  Recent file",
+						"<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false, winblend = 1 }))<cr>"
+					),
 					dashboard.button("U", "  Update plugins", "<cmd>Lazy sync<CR>"),
-					dashboard.button("<LocalLeader>q", "  Quit", "<cmd>Upper<cr>"),
+					dashboard.button("<LocalLeader>q", "  Quit", "<cmd>Smartq<cr>"),
 				},
 				opts = {
 					position = "center",
-					hl = "Type",
+					hl = "@constructor",
 				},
 			}
 
@@ -805,7 +809,7 @@ return {
 				val = "",
 				opts = {
 					position = "center",
-					hl = "Type",
+					hl = "@constructor",
 				},
 			}
 
@@ -828,7 +832,7 @@ return {
 		end,
 
 		config = function(_, theme)
-			vim.api.nvim_create_user_command("Upper", function()
+			vim.api.nvim_create_user_command("Smartq", function()
 				if vim.fn.bufloaded(0) == 1 then
 					vim.api.nvim_command("bw")
 				elseif vim.fn.bufloaded(0) < 1 then
@@ -858,8 +862,6 @@ return {
 					pcall(vim.cmd.AlphaRedraw)
 				end,
 			})
-
-			vim.cmd("setlocal buflisted")
 		end,
 	},
 	--   ╭──────────────────────────────────────────────────────────────────────╮

@@ -1536,7 +1536,7 @@ return {
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	{
-		"mhinz/vim-sayonara",
+		"hantaotaohan/vim-sayonara",
 		cmd = "Sayonara",
 	},
 
