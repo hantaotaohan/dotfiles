@@ -743,8 +743,15 @@ return {
 			-- local alpha = require("alpha")
 			local theme = require("alpha.themes.theta")
 			local dashboard = require("alpha.themes.dashboard")
-			theme.mru_opts.autocd = true
+			-- theme.mru_opts.autocd = true
 			-- theme.config.opts.noautocmd = true
+
+			local function button(sc, txt, keybind, keybind_opts)
+				local b = dashboard.button(sc, txt, keybind, keybind_opts)
+				b.opts.hl = "Function"
+				b.opts.hl_shortcut = "Type"
+				return b
+			end
 
 			-- Set header
 			theme.header = {
@@ -764,6 +771,9 @@ return {
 					hl = "Type",
 				},
 			}
+			theme.nvim_web_devicons.enabled = true
+			theme.nvim_web_devicons.highlight = true
+			theme.nvim_web_devicons.highlight = "@function"
 
 			theme.files = {
 				type = "group",
@@ -786,21 +796,23 @@ return {
 			theme.buttons = {
 				type = "group",
 				val = {
-					{ type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
+					{ type = "text", val = "Quick links", opts = { hl = "@define", position = "center" } },
 					{ type = "padding", val = 1 },
-					dashboard.button("e", "  New file", "<cmd>ene<CR>"),
-					dashboard.button("f", "  Find file"),
-					dashboard.button(
+					button("e", "  New file", "<cmd>ene<CR>"),
+					button("f", "  Find file"),
+					button(
 						"o",
 						"  Recent file",
 						"<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false, winblend = 1 }))<cr>"
 					),
-					dashboard.button("U", "  Update plugins", "<cmd>Lazy sync<CR>"),
-					dashboard.button("<LocalLeader>q", "  Quit", "<cmd>Smartq<cr>"),
+					button("U", "  Update plugins", "<cmd>Lazy sync<CR>"),
+					button("q", "  Quit", "<cmd>Smartq<cr>"),
 				},
 				opts = {
+					spacing = 0,
 					position = "center",
-					hl = "@constructor",
+					hl = "AlphaHeader",
+					hl_shortcut = "Search",
 				},
 			}
 
@@ -825,6 +837,20 @@ return {
 					theme.buttons,
 					{ type = "padding", val = 2 },
 					theme.footer,
+				},
+				opts = {
+					margin = 3,
+					width = 6,
+					redraw_on_resize = false,
+					align_shortcut = "left",
+					setup = function()
+						vim.api.nvim_create_autocmd("DirChanged", {
+							pattern = "*",
+							callback = function()
+								require("alpha").redraw()
+							end,
+						})
+					end,
 				},
 			}
 
