@@ -799,13 +799,25 @@ return {
 					{ type = "text", val = "Quick links", opts = { hl = "@define", position = "center" } },
 					{ type = "padding", val = 1 },
 					button("e", "  New file", "<cmd>ene<CR>"),
-					button("f", "  Find file"),
+					button("t", "  Find text", "<cmd>Telescope live_grep initial_mode=insert previewer=true<CR>"),
+					-- "<cmd>lua require'telescope.builtin'.find_files(({ previewer = true, winblend = 1 }))<cr>"
+					button(
+						"f",
+						"  Find file",
+						"<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>"
+					),
+					button(
+						"p",
+						"  Find project",
+						"<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({}))<cr>"
+					),
 					button(
 						"o",
 						"  Recent file",
 						"<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false, winblend = 1 }))<cr>"
 					),
-					button("U", "  Update plugins", "<cmd>Lazy sync<CR>"),
+					button("m", "  Mason plugins", "<cmd>Mason<CR>"),
+					button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
 					button("q", "  Quit", "<cmd>Smartq<cr>"),
 				},
 				opts = {

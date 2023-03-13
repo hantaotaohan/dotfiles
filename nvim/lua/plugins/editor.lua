@@ -1009,7 +1009,7 @@ return {
 							["<LocalLeader>q"] = require("telescope.actions").close,
 							["<esc>"] = { actions.close, type = "action", opts = { silent = true, nowait = true } },
 							["<LocalLeader>n"] = require("telescope.actions.layout").cycle_layout_next,
-							["<Cr>"] = path_actions.insert_relpath_i_normal,
+							["<LocalLeader><Cr>"] = path_actions.insert_relpath_i_normal,
 						},
 					},
 					default_mappings = nil, -- 将允许您完全删除望远镜的所有默认热键并使用自己的热键
