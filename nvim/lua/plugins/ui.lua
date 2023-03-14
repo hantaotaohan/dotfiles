@@ -736,21 +736,129 @@ return {
 
 	{
 		"goolord/alpha-nvim",
-		-- branch = "main",
+		branch = "main",
 		event = "VimEnter",
-		-- dependencies = { "nvim-tree/nvim-web-devicons" },
+		-- dependencies = { "nvim-lua/plenary.nvim" },
 		opts = function()
+			vim.api.nvim_set_hl(0, "alphatitle", { fg = "#81a1c1", bg = "#282c34" })
 			-- local alpha = require("alpha")
+			local plenary_path = require("plenary.path")
+
 			local theme = require("alpha.themes.theta")
 			local dashboard = require("alpha.themes.dashboard")
-			-- theme.mru_opts.autocd = true
-			-- theme.config.opts.noautocmd = true
+			local if_nil = vim.F.if_nil
 
-			local function button(sc, txt, keybind, keybind_opts)
-				local b = dashboard.button(sc, txt, keybind, keybind_opts)
-				b.opts.hl = "Function"
-				b.opts.hl_shortcut = "Type"
-				return b
+			local nvim_web_devicons = {
+				enabled = true,
+				highlight = false,
+			}
+
+			local function get_extension(fn)
+				local match = fn:match("^.+(%..+)$")
+				local ext = ""
+				if match ~= nil then
+					ext = match:sub(2)
+				end
+				return ext
+			end
+
+			local function icon(fn)
+				local nwd = require("nvim-web-devicons")
+				local ext = get_extension(fn)
+				return nwd.get_icon(fn, ext, { default = true })
+			end
+
+			local function file_button(fn, sc, short_fn, autocd)
+				short_fn = short_fn or fn
+				local ico_txt
+				local fb_hl = {}
+
+				if nvim_web_devicons.enabled then
+					local ico, hl = icon(fn)
+					local hl_option_type = type(nvim_web_devicons.highlight)
+					if hl_option_type == "boolean" then
+						if hl and nvim_web_devicons.highlight then
+							table.insert(fb_hl, { hl, 0, #ico })
+						end
+					end
+					if hl_option_type == "string" then
+						table.insert(fb_hl, { nvim_web_devicons.highlight, 0, #ico })
+					end
+					ico_txt = ico .. "  "
+				else
+					ico_txt = ""
+				end
+				local cd_cmd = (autocd and " | cd %:p:h" or "")
+				local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. cd_cmd .. " <CR>")
+				local fn_start = short_fn:match(".*[/\\]")
+				if fn_start ~= nil then
+					table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt })
+				end
+				file_button_el.opts.hl = fb_hl
+				file_button_el.opts.hl_shortcut = "alphatitle"
+				return file_button_el
+			end
+
+			local default_mru_ignore = { "gitcommit" }
+
+			local mru_opts = {
+				ignore = function(path, ext)
+					return (string.find(path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
+				end,
+				autocd = true,
+			}
+
+			--- @param start number
+			--- @param cwd string? optional
+			--- @param items_number number? optional number of items to generate, default = 10
+			local function mru(start, cwd, items_number, opts)
+				opts = opts or mru_opts
+				items_number = if_nil(items_number, 9)
+
+				local oldfiles = {}
+				for _, v in pairs(vim.v.oldfiles) do
+					if #oldfiles == items_number then
+						break
+					end
+					local cwd_cond
+					if not cwd then
+						cwd_cond = true
+					else
+						cwd_cond = vim.startswith(v, cwd)
+					end
+					local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
+					if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
+						oldfiles[#oldfiles + 1] = v
+					end
+				end
+				local target_width = 35
+
+				local tbl = {}
+				for i, fn in ipairs(oldfiles) do
+					local short_fn
+					if cwd then
+						short_fn = vim.fn.fnamemodify(fn, ":.")
+					else
+						short_fn = vim.fn.fnamemodify(fn, ":~")
+					end
+
+					if #short_fn > target_width then
+						short_fn = plenary_path.new(short_fn):shorten(1, { -2, -1 })
+						if #short_fn > target_width then
+							short_fn = plenary_path.new(short_fn):shorten(1, { -1 })
+						end
+					end
+
+					local shortcut = tostring(i + start - 1)
+
+					local file_button_el = file_button(fn, shortcut, short_fn, opts.autocd)
+					tbl[i] = file_button_el
+				end
+				return {
+					type = "group",
+					val = tbl,
+					opts = { spacing = 1 },
+				}
 			end
 
 			-- Set header
@@ -768,63 +876,56 @@ return {
 				},
 				opts = {
 					position = "center",
-					hl = "Type",
+					hl = "alphatitle",
 				},
 			}
 			theme.nvim_web_devicons.enabled = true
 			theme.nvim_web_devicons.highlight = true
 			theme.nvim_web_devicons.highlight = "@function"
 
-			theme.files = {
+			theme.mru = {
 				type = "group",
 				val = {
-					{ type = "text", val = "Local Recent Files", opts = { hl = "@constructor", position = "center" } },
-					{ type = "padding", val = 1 },
-					theme.mru(11, vim.fn.getcwd(), 5),
-				},
-			}
-
-			theme.filess = {
-				type = "group",
-				val = {
-					{ type = "text", val = "Recent Files", opts = { hl = "@constructor", position = "center" } },
-					{ type = "padding", val = 1 },
-					theme.mru(1),
+					{ type = "text", val = "Recent Files", opts = { hl = "Comment", position = "center" } },
+					{ type = "padding", val = 3 },
+					mru(1),
 				},
 			}
 
 			theme.buttons = {
 				type = "group",
 				val = {
-					{ type = "text", val = "Quick links", opts = { hl = "@define", position = "center" } },
+					{ type = "text", val = "Quick links", opts = { hl = "Comment", position = "center" } },
 					{ type = "padding", val = 1 },
-					button("e", "  New file", "<cmd>ene<CR>"),
-					button("t", "  Find text", "<cmd>Telescope live_grep initial_mode=insert previewer=true<CR>"),
+					dashboard.button("e", "  New File", "<cmd>ene<CR>"),
+					dashboard.button(
+						"t",
+						"  Find Text",
+						"<cmd>Telescope live_grep initial_mode=insert previewer=true<CR>"
+					),
 					-- "<cmd>lua require'telescope.builtin'.find_files(({ previewer = true, winblend = 1 }))<cr>"
-					button(
+					dashboard.button(
 						"f",
-						"  Find file",
+						"  Find File",
 						"<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>"
 					),
-					button(
+					dashboard.button(
 						"p",
-						"  Find project",
+						"  Find Project",
 						"<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({}))<cr>"
 					),
-					button(
+					dashboard.button(
 						"o",
-						"  Recent file",
-						"<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false, winblend = 1 }))<cr>"
+						"  Recent File",
+						"<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
 					),
-					button("m", "  Mason plugins", "<cmd>Mason<CR>"),
-					button("u", "  Update plugins", "<cmd>Lazy sync<CR>"),
-					button("q", "  Quit", "<cmd>Smartq<cr>"),
+					dashboard.button("m", "  Mason Plugins", "<cmd>Mason<CR>"),
+					dashboard.button("u", "  Update Plugins", "<cmd>Lazy sync<CR>"),
+					dashboard.button("q", "  Quit", "<cmd>Smartq<cr>"),
 				},
 				opts = {
-					spacing = 0,
+					spacing = 1,
 					position = "center",
-					hl = "AlphaHeader",
-					hl_shortcut = "Search",
 				},
 			}
 
@@ -833,26 +934,23 @@ return {
 				val = "",
 				opts = {
 					position = "center",
-					hl = "@constructor",
+					hl = "alphatitle",
 				},
 			}
 
 			theme.config = {
 				layout = {
-					{ type = "padding", val = 1 },
-					theme.header,
 					{ type = "padding", val = 3 },
-					theme.filess,
-					{ type = "padding", val = 2 },
-					theme.files,
+					theme.header,
 					{ type = "padding", val = 2 },
 					theme.buttons,
 					{ type = "padding", val = 2 },
+					theme.mru,
+					{ type = "padding", val = 3 },
 					theme.footer,
 				},
 				opts = {
 					margin = 3,
-					width = 6,
 					redraw_on_resize = false,
 					align_shortcut = "left",
 					setup = function()

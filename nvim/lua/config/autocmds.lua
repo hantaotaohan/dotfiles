@@ -238,3 +238,5 @@ vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9" })
 -- 		vim.cmd([[ call vimwiki#path#mkdir(vimwiki#vars#get_wikilocal('diary_rel_path')) ]])
 -- 	end,
 -- })
+
+-- set winbar=ﾠ

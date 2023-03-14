@@ -213,10 +213,10 @@ map("n", "<F10>", "<CMD>ColorizerToggle<CR>" )
 --   │                            Commant - Box                             │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map( {"n", "v"}, "gbb", "<CMD>CBccbox<CR>" , opts)
-map( {"n", "v"}, "gbv", "<CMD>CBccbox21<CR>" , opts)
-map( {"n", "v"}, "gbh", "<CMD>CBline5<CR>" , opts)
-map( {"n", "v"}, "gbj", "<CMD>CBline6<CR>" , opts)
+map( {"n", "v"}, "gbb", "<CMD>CBccbox<CR>" )
+map( {"n", "v"}, "gbv", "<CMD>CBccbox21<CR>")
+map( {"n", "v"}, "gbh", "<CMD>CBline5<CR>" )
+map( {"n", "v"}, "gbj", "<CMD>CBline6<CR>" )
 
 
 
