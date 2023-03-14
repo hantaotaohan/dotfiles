@@ -747,6 +747,37 @@ return {
 			local theme = require("alpha.themes.theta")
 			local dashboard = require("alpha.themes.dashboard")
 			local if_nil = vim.F.if_nil
+			local leader = "SPC"
+
+			local function button(sc, txt, keybind, keybind_opts)
+				local sc_ = sc:gsub("%s", ""):gsub(leader, "<leader>")
+				local opts = {
+					position = "center",
+					shortcut = "[" .. sc .. "]",
+					cursor = 5,
+					width = 50,
+					align_shortcut = "right",
+					-- hl_shortcut = { { "Operator", 0, 1 }, { "Number", 1, #sc + 1 }, { "Operator", #sc + 1, #sc + 2 } },
+					hl_shortcut = "alphatitle",
+					shrink_margin = true,
+				}
+				if keybind then
+					keybind_opts = if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+					opts.keymap = { "n", sc_, keybind, keybind_opts }
+				end
+
+				local function on_press()
+					local key = vim.api.nvim_replace_termcodes(keybind .. "<Ignore>", true, false, true)
+					vim.api.nvim_feedkeys(key, "t", false)
+				end
+
+				return {
+					type = "button",
+					val = txt,
+					on_press = on_press,
+					opts = opts,
+				}
+			end
 
 			local nvim_web_devicons = {
 				enabled = true,
@@ -831,6 +862,7 @@ return {
 						oldfiles[#oldfiles + 1] = v
 					end
 				end
+
 				local target_width = 35
 
 				local tbl = {}
@@ -857,7 +889,7 @@ return {
 				return {
 					type = "group",
 					val = tbl,
-					opts = { spacing = 1 },
+					opts = { spacing = 1, hl = "alphatitle" },
 				}
 			end
 
@@ -897,31 +929,27 @@ return {
 				val = {
 					{ type = "text", val = "Quick links", opts = { hl = "Comment", position = "center" } },
 					{ type = "padding", val = 1 },
-					dashboard.button("e", "  New File", "<cmd>ene<CR>"),
-					dashboard.button(
-						"t",
-						"  Find Text",
-						"<cmd>Telescope live_grep initial_mode=insert previewer=true<CR>"
-					),
+					button("e", "  New File", "<cmd>ene<CR>"),
+					button("t", "  Find Text", "<cmd>Telescope live_grep initial_mode=insert previewer=true<CR>"),
 					-- "<cmd>lua require'telescope.builtin'.find_files(({ previewer = true, winblend = 1 }))<cr>"
-					dashboard.button(
+					button(
 						"f",
 						"  Find File",
 						"<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>"
 					),
-					dashboard.button(
+					button(
 						"p",
 						"  Find Project",
 						"<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({}))<cr>"
 					),
-					dashboard.button(
+					button(
 						"o",
 						"  Recent File",
 						"<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
 					),
-					dashboard.button("m", "  Mason Plugins", "<cmd>Mason<CR>"),
-					dashboard.button("u", "  Update Plugins", "<cmd>Lazy sync<CR>"),
-					dashboard.button("q", "  Quit", "<cmd>Smartq<cr>"),
+					button("m", "  Mason Plugins", "<cmd>Mason<CR>"),
+					button("u", "  Update Plugins", "<cmd>Lazy sync<CR>"),
+					button("q", "  Quit", "<cmd>Smartq<cr>"),
 				},
 				opts = {
 					spacing = 1,
