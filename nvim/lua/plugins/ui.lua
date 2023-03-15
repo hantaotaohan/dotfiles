@@ -741,6 +741,8 @@ return {
 		-- dependencies = { "nvim-lua/plenary.nvim" },
 		opts = function()
 			vim.api.nvim_set_hl(0, "alphatitle", { fg = "#81a1c1", bg = "#282c34" })
+			vim.api.nvim_set_hl(0, "alphatitle_1", { fg = "#73b8f1", bg = "#282c34" })
+			vim.api.nvim_set_hl(0, "alphatitle_2", { fg = "#282c34", bg = "#73b8f1" })
 			local theme = require("alpha.themes.startify")
 			local if_nil = vim.F.if_nil
 			local fnamemodify = vim.fn.fnamemodify
@@ -915,7 +917,20 @@ return {
 			theme.mru = {
 				type = "group",
 				val = {
-					{ type = "text", val = "Recent Files", opts = { hl = "Comment", position = "center" } },
+					{
+						type = "text",
+						val = " Recent Files ",
+						opts = {
+							-- hl = "Comment",
+							position = "center",
+							-- hl_shortcut = { { "Operator", 0, 1 }, { "Number", 1, #sc + 1 }, { "Operator", #sc + 1, #sc + 2 } },
+							hl = {
+								{ "alphatitle_1", 1, -1 },
+								{ "alphatitle_2", 3, 17 },
+								{ "alphatitle_1", 1, 1 },
+							},
+						},
+					},
 					{ type = "padding", val = 1 },
 					mru(1),
 				},
@@ -929,7 +944,18 @@ return {
 			theme.buttons = {
 				type = "group",
 				val = {
-					{ type = "text", val = "Quick links", opts = { hl = "Comment", position = "center" } },
+					{
+						type = "text",
+						val = " Quick Links ",
+						opts = {
+							hl = {
+								{ "alphatitle_1", 1, -1 },
+								{ "alphatitle_2", 3, 17 },
+								{ "alphatitle_1", 1, 1 },
+							},
+							position = "center",
+						},
+					},
 					{ type = "padding", val = 1 },
 					button("e", "  New File", "<cmd>ene<CR>"),
 					button("t", "  Find Text", "<cmd>Telescope live_grep initial_mode=insert previewer=true<CR>"),

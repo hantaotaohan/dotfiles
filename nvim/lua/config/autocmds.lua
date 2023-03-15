@@ -200,3 +200,19 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9" })
 
 -- set winbar=ﾠ
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+	group = augroup("Sidebar"),
+	pattern = "*",
+	callback = function()
+		local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+		vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
+		vim.api.nvim_set_hl(0, "Cursor", { fg = "#282c34" })
+		vim.opt.guicursor = "a:Cursor/lCursor"
+		-- vim.opt.guicursor = "n-v-c-sm:block-WindowsTerminalCursorBg"
+		-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+	end,
+})
+
+-- vim.cmd([[
+-- set guicursor+=n-v-c-sm:block-WindowsTerminalCursorBg
+-- ]])
