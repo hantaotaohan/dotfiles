@@ -147,10 +147,10 @@ return {
 				BLACK_1 = "#30363f",
 				BLACK_2 = "#3E4452",
 				BLACK_3 = "#21252B",
-				RED_001 = "#E06C75",
-				YEL_001 = "#E5C07B",
-				CYN_001 = "#56B6C2",
-				BLU_001 = "#61AFEF",
+				RED_001 = "#C14520",
+				YEL_001 = "#B49C79",
+				CYN_001 = "#46964C",
+				BLU_001 = "#3E8ED0",
 			}
 
 			local AsyncRunStatus = require("lualine.component"):extend()
@@ -383,8 +383,11 @@ return {
 						{
 							"filetype",
 							colored = false,
+							fmt = function(str)
+								return " " .. str
+							end,
 							padding = 2,
-							icon_only = true,
+							icon_only = false,
 							icon = { align = "left" },
 						},
 					},
@@ -407,10 +410,10 @@ return {
 								hint = { fg = colors.BLU_001, bg = colors.BLACK_3 }, -- Changes diagnostics' hint color.
 							},
 							symbols = {
-								error = icons.diagnostics.Error .. " ",
-								warn = icons.diagnostics.Warn .. " ",
-								info = icons.diagnostics.Info .. " ",
-								hint = icons.diagnostics.Hint .. " ",
+								error = " " .. icons.diagnostics.Error .. " ",
+								warn = " " .. icons.diagnostics.Warn .. " ",
+								info = " " .. icons.diagnostics.Info .. " ",
+								hint = " " .. icons.diagnostics.Hint .. " ",
 							},
 							-- symbols = { error = "   ", warn = "   ", hint = "  ", info = "   " },
 							colored = true, -- Displays diagnostics status in color if set to true.

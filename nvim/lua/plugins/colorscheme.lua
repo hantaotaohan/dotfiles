@@ -121,10 +121,10 @@ return {
 			-- 用于突出显示您匹配的字符。
 			TelescopeMatching = { fg = "#E06C75", bg = nil },
 
-			DiagnosticVirtualTextHint = { fg = "#C678DD", bg = "#3B3F4C" },
-			DiagnosticVirtualTextInfo = { fg = "#56B6C2", bg = "#3B3F4C" },
-			DiagnosticVirtualTextWarn = { fg = "#E0AF68", bg = "#3B3F4C" },
-			DiagnosticVirtualTextError = { fg = "#E06C6A", bg = "#3B3F4C" },
+			DiagnosticVirtualTextHint = { fg = "#3B83BD", bg = "#3B3F4C" },
+			DiagnosticVirtualTextInfo = { fg = "#46964C", bg = "#3B3F4C" },
+			DiagnosticVirtualTextWarn = { fg = "#B49C79", bg = "#3B3F4C" },
+			DiagnosticVirtualTextError = { fg = "#C14520", bg = "#3B3F4C" },
 
 			CmPmenu = { fg = nil, bg = "#20242D" },
 			CMPPmenu = { fg = nil, bg = "#20242D" },

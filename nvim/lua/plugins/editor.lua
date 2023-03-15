@@ -1004,6 +1004,7 @@ return {
 							["<LocalLeader>q"] = { "<esc>", type = "command" },
 						},
 						n = {
+							["w"] = nil,
 							["?"] = require("telescope.actions.layout").toggle_preview,
 							["q"] = require("telescope.actions").close,
 							["<LocalLeader>q"] = require("telescope.actions").close,
@@ -1082,10 +1083,10 @@ return {
 	{
 		"ahmedkhalf/project.nvim",
 		-- cmd = "Telescope",
-		keys = { { "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-		},
+		-- keys = { { "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
+		-- dependencies = {
+		-- 	"nvim-telescope/telescope.nvim",
+		-- },
 		config = function()
 			require("project_nvim").setup({
 				-- your configuration comes here

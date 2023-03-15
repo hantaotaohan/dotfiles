@@ -222,4 +222,4 @@ map( {"n", "v"}, "gbj", "<CMD>CBline6<CR>" )
 
 map("t", "<LocalLeader>c", "<cmd>ToggleTerm<cr>", { desc = "Previous Tab" })
 
-map("n", "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", {desc = "Recent projects" } )
+map("n", "<LocalLeader>fp",  "<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({hidden=true}))<cr>", {desc = "Recent projects" }) -- find projects
