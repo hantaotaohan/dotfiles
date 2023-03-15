@@ -176,67 +176,27 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.cmd([[ set signcolumn=yes ]])
 	end,
 })
--- vim.cmd([[set guicursor+=a:Cursor/lCursor]])
---
--- vim.api.nvim_create_autocmd({ "FileType" }, {
--- 	pattern = "neo-tree",
--- 	callback = function()
--- 		vim.api.nvim_set_hl(0, "Cursor", { blend = 100, nocombine = true })
--- 		-- vim.cmd("set cursorlineopt=both")
--- 		-- vim.cmd("hi Cursor blend=100")
--- 	end,
--- })
--- vim.api.nvim_create_autocmd({ "BufLeave" }, {
--- 	pattern = "^Outline$",
--- 	callback = function()
--- 		vim.api.nvim_set_hl(0, "Cursor", { blend = 0, nocombine = true })
--- 		-- vim.cmd("hi Cursor blend=0")
--- 		-- vim.cmd("set cursorlineopt=number")
--- 	end,
--- })
 
-vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter", "BufHidden", "BufUnload" }, {
-	group = augroup("Sidebar"),
-	pattern = "*",
-	callback = function()
-		if vim.api.nvim_buf_get_option(0, "buftype") == "nofile" then
-			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
-			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
-			vim.opt.guicursor = "a:Cursor/lCursor"
-			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#2c313a")
-		else
-			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
-			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
-			vim.opt.guicursor = "a:Cursor/lCursor"
-			vim.api.nvim_command("highlight CursorLine guifg=none guibg=#2C313C")
-			-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-		end
-	end,
-})
-
--- vim.api.nvim_create_autocmd({ "BufLeave", "WinClosed" }, {
--- 	group = augroup("Neotree"),
+-- vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter", "BufHidden", "BufUnload" }, {
+-- 	group = augroup("Sidebar"),
 -- 	pattern = "*",
 -- 	callback = function()
--- 		local def = vim.api.nvim_get_hl_by_name("Cursor", true)
--- 		vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
--- 		-- vim.opt.guicursor = "a:Cursor/lCursor"
--- 		vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+-- 		if vim.api.nvim_buf_get_option(0, "buftype") == "nofile" then
+-- 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+-- 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
+-- 			vim.opt.guicursor = "a:Cursor/lCursor"
+-- 			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#2c313a")
+-- 		else
+-- 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+-- 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
+-- 			vim.opt.guicursor = "a:Cursor/lCursor"
+-- 			vim.api.nvim_command("highlight CursorLine guifg=none guibg=#2C313C")
+-- 			-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+-- 		end
 -- 	end,
 -- })
 
 -- 删除bookmark
 vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9" })
-
--- vim.api.nvim_create_autocmd("FileType", {
--- 	group = augroup("VimWiki"),
--- 	pattern = "vimwiki",
--- 	callback = function()
--- 		vim.cmd(
--- 			[[ let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1'] ]]
--- 		)
--- 		vim.cmd([[ call vimwiki#path#mkdir(vimwiki#vars#get_wikilocal('diary_rel_path')) ]])
--- 	end,
--- })
 
 -- set winbar=ﾠ

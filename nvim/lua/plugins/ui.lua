@@ -741,20 +741,20 @@ return {
 		-- dependencies = { "nvim-lua/plenary.nvim" },
 		opts = function()
 			vim.api.nvim_set_hl(0, "alphatitle", { fg = "#81a1c1", bg = "#282c34" })
-			-- local alpha = require("alpha")
+			local theme = require("alpha.themes.startify")
+			local if_nil = vim.F.if_nil
+			local fnamemodify = vim.fn.fnamemodify
+			local filereadable = vim.fn.filereadable
 			local plenary_path = require("plenary.path")
 
-			local theme = require("alpha.themes.theta")
-			local dashboard = require("alpha.themes.dashboard")
-			local if_nil = vim.F.if_nil
 			local leader = "SPC"
-
 			local function button(sc, txt, keybind, keybind_opts)
 				local sc_ = sc:gsub("%s", ""):gsub(leader, "<leader>")
+
 				local opts = {
 					position = "center",
 					shortcut = "[" .. sc .. "]",
-					cursor = 5,
+					cursor = 50,
 					width = 50,
 					align_shortcut = "right",
 					-- hl_shortcut = { { "Operator", 0, 1 }, { "Number", 1, #sc + 1 }, { "Operator", #sc + 1, #sc + 2 } },
@@ -781,7 +781,7 @@ return {
 
 			local nvim_web_devicons = {
 				enabled = true,
-				highlight = false,
+				highlight = true,
 			}
 
 			local function get_extension(fn)
@@ -800,10 +800,9 @@ return {
 			end
 
 			local function file_button(fn, sc, short_fn, autocd)
-				short_fn = short_fn or fn
+				short_fn = if_nil(short_fn, fn)
 				local ico_txt
 				local fb_hl = {}
-
 				if nvim_web_devicons.enabled then
 					local ico, hl = icon(fn)
 					local hl_option_type = type(nvim_web_devicons.highlight)
@@ -820,13 +819,12 @@ return {
 					ico_txt = ""
 				end
 				local cd_cmd = (autocd and " | cd %:p:h" or "")
-				local file_button_el = dashboard.button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. cd_cmd .. " <CR>")
+				local file_button_el = button(sc, ico_txt .. short_fn, "<cmd>e " .. fn .. cd_cmd .. " <CR>")
 				local fn_start = short_fn:match(".*[/\\]")
 				if fn_start ~= nil then
-					table.insert(fb_hl, { "Comment", #ico_txt - 2, #fn_start + #ico_txt })
+					table.insert(fb_hl, { "Comment", #ico_txt, #fn_start + #ico_txt })
 				end
 				file_button_el.opts.hl = fb_hl
-				file_button_el.opts.hl_shortcut = "alphatitle"
 				return file_button_el
 			end
 
@@ -836,16 +834,14 @@ return {
 				ignore = function(path, ext)
 					return (string.find(path, "COMMIT_EDITMSG")) or (vim.tbl_contains(default_mru_ignore, ext))
 				end,
-				autocd = true,
+				autocd = false,
 			}
-
 			--- @param start number
 			--- @param cwd string? optional
 			--- @param items_number number? optional number of items to generate, default = 10
 			local function mru(start, cwd, items_number, opts)
 				opts = opts or mru_opts
 				items_number = if_nil(items_number, 9)
-
 				local oldfiles = {}
 				for _, v in pairs(vim.v.oldfiles) do
 					if #oldfiles == items_number then
@@ -858,7 +854,7 @@ return {
 						cwd_cond = vim.startswith(v, cwd)
 					end
 					local ignore = (opts.ignore and opts.ignore(v, get_extension(v))) or false
-					if (vim.fn.filereadable(v) == 1) and cwd_cond and not ignore then
+					if (filereadable(v) == 1) and cwd_cond and not ignore then
 						oldfiles[#oldfiles + 1] = v
 					end
 				end
@@ -869,9 +865,9 @@ return {
 				for i, fn in ipairs(oldfiles) do
 					local short_fn
 					if cwd then
-						short_fn = vim.fn.fnamemodify(fn, ":.")
+						short_fn = fnamemodify(fn, ":.")
 					else
-						short_fn = vim.fn.fnamemodify(fn, ":~")
+						short_fn = fnamemodify(fn, ":~")
 					end
 
 					if #short_fn > target_width then
@@ -881,18 +877,19 @@ return {
 						end
 					end
 
-					local shortcut = tostring(i + start - 1)
-
-					local file_button_el = file_button(fn, shortcut, short_fn, opts.autocd)
+					local file_button_el = file_button(fn, tostring(i + start - 1), short_fn, opts.autocd)
 					tbl[i] = file_button_el
 				end
 				return {
 					type = "group",
 					val = tbl,
-					opts = { spacing = 1, hl = "alphatitle" },
+
+					opts = {
+						spacing = 1,
+						position = "center",
+					},
 				}
 			end
-
 			-- Set header
 			theme.header = {
 				type = "text",
@@ -919,8 +916,13 @@ return {
 				type = "group",
 				val = {
 					{ type = "text", val = "Recent Files", opts = { hl = "Comment", position = "center" } },
-					{ type = "padding", val = 3 },
+					{ type = "padding", val = 1 },
 					mru(1),
+				},
+				opts = {
+					spacing = 1,
+					width = 50,
+					position = "center",
 				},
 			}
 
@@ -970,7 +972,7 @@ return {
 				layout = {
 					{ type = "padding", val = 3 },
 					theme.header,
-					{ type = "padding", val = 2 },
+					{ type = "padding", val = 3 },
 					theme.buttons,
 					{ type = "padding", val = 2 },
 					theme.mru,
