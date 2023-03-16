@@ -52,7 +52,7 @@ return {
 					max_name_length = 15,
 					max_prefix_length = 15, -- 缓冲区重复数据消除时使用的前缀
 					truncate_names = true, -- 是否应截断选项卡名称
-					tab_size = 18,
+					tab_size = 30,
 					diagnostics = false, -- 诊断指示器 | false | "nvim_lsp" | "coc" |
 					diagnostics_update_in_insert = false,
 					diagnostics_indicator = function(count)
@@ -137,20 +137,22 @@ return {
 			local icons = require("config.utility").icons
 
 			local custom_onedark = require("lualine.themes.onedark")
-			custom_onedark.inactive.c.bg = "#21252B"
-			custom_onedark.normal.c.bg = "#21252B"
-			custom_onedark.normal.c.fg = "#6F737B"
-			custom_onedark.terminal.a.bg = "#81A1C1"
+			custom_onedark.inactive.c.bg = "#22262e"
+			custom_onedark.normal.c.bg = "#22262e"
+			-- custom_onedark.normal.c.fg = "#6B7078"
+			custom_onedark.terminal.a.bg = "#22262e"
 
 			local colors = {
-				BLACK_0 = "#282C34",
-				BLACK_1 = "#30363f",
-				BLACK_2 = "#3E4452",
-				BLACK_3 = "#21252B",
-				RED_001 = "#C14520",
-				YEL_001 = "#B49C79",
-				CYN_001 = "#46964C",
-				BLU_001 = "#3E8ED0",
+				BACK_GROUND = "#1E222A",
+				FONT_GROUND = "#ABB2BF",
+				BLOCK_BG = "#22262e",
+				BLOCK_FG = "#6f737b",
+				BLOCK_BG_1 = "#2D3139",
+
+				RED_001 = "#E06C75",
+				YEL_001 = "#E7C787",
+				CYN_001 = "#98C379",
+				BLU_001 = "#61AFEF",
 			}
 
 			local AsyncRunStatus = require("lualine.component"):extend()
@@ -198,7 +200,11 @@ return {
 				for name, section in pairs(sections) do
 					local left = name:sub(9, 10) < "x"
 					for pos = 1, name ~= "lualine_z" and #section or #section - 1 do
-						table.insert(section, pos * 2, { empty, color = { fg = colors.BLACK_0, bg = colors.BLACK_0 } })
+						table.insert(
+							section,
+							pos * 2,
+							{ empty, color = { fg = colors.BACK_GROUND, bg = colors.BACK_GROUND } }
+						)
 					end
 					for id, comp in ipairs(section) do
 						if type(comp) ~= "table" then
@@ -258,11 +264,11 @@ return {
 
 						{
 							"mode",
-							icon = nil,
+							icon = " ",
 							separator = nil,
 							cond = nil,
-							color = { fg = "#282C34", bg = nil, gui = "bold" },
-							padding = 2,
+							color = { fg = colors.BACK_GROUND, bg = nil, gui = "bold" },
+							padding = { left = 1, right = 2 },
 							fmt = nil,
 							on_click = nil,
 						},
@@ -307,13 +313,43 @@ return {
 					lualine_b = {
 
 						{
+							"filename",
+							padding = 2,
+							file_status = true,
+							newfile_status = false,
+							color = { fg = colors.FONT_GROUND, bg = colors.BLOCK_BG_1 },
+							path = 4,
+							shorting_target = 40,
+							symbols = {
+								readonly = " 󰌾 ",
+								modified = " · ",
+								-- unnamed = " 󰑕 ",
+								-- newfile = "  ",
+							},
+							fmt = function(str)
+								if str == "" then
+									return nil
+								end
+								local ft = vim.bo.filetype
+								local nwd = require("nvim-web-devicons")
+								local icon = nwd.get_icon_by_filetype(ft) or ""
+								return icon .. "  " .. str
+							end,
+						},
+					},
+
+					lualine_c = {
+
+						{
 							"branch",
 							icon = "   ",
+							colored = true,
+							color = { fg = colors.BLOCK_FG, bg = colors.BLOCK_BG },
 						},
 
 						{
 							"diff",
-							colored = true,
+							colored = false,
 							-- diff_color = {
 							--     added    = 'DiffAdd',
 							--     modified = 'DiffChange',
@@ -327,7 +363,7 @@ return {
 								removed = icons.git.removed,
 							},
 							source = nil,
-							color = { fg = colors.BLACK_1, bg = colors.BLACK_1 },
+							color = { fg = colors.BLOCK_FG, bg = colors.BLOCK_BG },
 						},
 
 						{
@@ -335,66 +371,17 @@ return {
 							cond = function()
 								return vim.o.readonly
 							end,
-							color = { fg = colors.RED_001, bg = colors.BLACK_1 },
+							color = { fg = colors.RED_001, bg = colors.BLOCK_BG_1 },
 						},
 
 						{
 							AsyncRunStatus,
-							color = { fg = colors.RED_001, bg = colors.BLACK_1 },
+							color = { fg = colors.RED_001, bg = colors.BLOCK_BG_1 },
 						},
 						-- "diagnostics"
 					},
 
-					lualine_c = {
-
-						{
-							"filename",
-							padding = 2,
-							file_status = true,
-							newfile_status = false,
-							color = { fg = "#95a0b6", bg = "#3b3f4c" },
-							path = 2,
-							shorting_target = 40,
-							symbols = {
-								modified = "",
-								readonly = "",
-								unnamed = "󰑕",
-								newfile = "",
-							},
-						},
-					},
-
 					lualine_x = {
-
-						{
-							"encoding",
-						},
-
-						{
-							"fileformat",
-							padding = 2,
-							symbols = {
-								unix = "", -- e712
-								dos = "", -- e70f
-								mac = "", -- e711
-							},
-						},
-
-						{
-							"filetype",
-							colored = false,
-							fmt = function(str)
-								return " " .. str
-							end,
-							padding = 2,
-							icon_only = false,
-							icon = { align = "left" },
-						},
-					},
-
-					lualine_z = { "location" },
-
-					lualine_y = {
 
 						{
 							"diagnostics",
@@ -404,10 +391,10 @@ return {
 							sections = { "error", "warn", "info", "hint" },
 							diagnostics_color = {
 								-- Same values as the general color option can be used here.
-								error = { fg = colors.RED_001, bg = colors.BLACK_3 }, -- Changes diagnostics' error color.
-								warn = { fg = colors.YEL_001, bg = colors.BLACK_3 }, -- Changes diagnostics' warn color.
-								info = { fg = colors.CYN_001, bg = colors.BLACK_3 }, -- Changes diagnostics' info color.
-								hint = { fg = colors.BLU_001, bg = colors.BLACK_3 }, -- Changes diagnostics' hint color.
+								error = { fg = colors.RED_001, bg = colors.BLOCK_BG }, -- Changes diagnostics' error color.
+								warn = { fg = colors.YEL_001, bg = colors.BLOCK_BG }, -- Changes diagnostics' warn color.
+								info = { fg = colors.CYN_001, bg = colors.BLOCK_BG }, -- Changes diagnostics' info color.
+								hint = { fg = colors.BLU_001, bg = colors.BLOCK_BG }, -- Changes diagnostics' hint color.
 							},
 							symbols = {
 								error = " " .. icons.diagnostics.Error .. " ",
@@ -419,9 +406,47 @@ return {
 							colored = true, -- Displays diagnostics status in color if set to true.
 							update_in_insert = false, -- Update diagnostics in insert mode.
 							always_visible = false, -- Show diagnostics even if there are none.
-							color = { fg = colors.BLACK_2, bg = colors.BLACK_2 },
+							color = { fg = colors.BLOCK_BG, bg = colors.BLOCK_BG },
+						},
+					},
+
+					lualine_y = {
+
+						{
+							"fileformat",
+							padding = 2,
+							symbols = {
+								unix = "", -- e712
+								dos = "", -- e70f
+								mac = "", -- e711
+							},
+							colored = true, -- Displays diagnostics status in color if set to true.
+							color = { fg = colors.FONT_GROUND, bg = colors.BLOCK_BG_1 },
 						},
 
+						{
+							"filetype",
+							colored = false,
+							fmt = function(str)
+								return "" .. str
+							end,
+							icons_enabled = false,
+							padding = 2,
+							icon_only = false,
+							icon = { align = "left" },
+							color = { fg = colors.FONT_GROUND, bg = colors.BLOCK_BG_1 },
+						},
+						{
+							"encoding",
+							colored = true, -- Displays diagnostics status in color if set to true.
+							color = { fg = colors.FONT_GROUND, bg = colors.BLOCK_BG_1 },
+						},
+					},
+
+					lualine_z = {
+						{
+							"location",
+						},
 						{
 							"progress",
 						},
@@ -436,7 +461,7 @@ return {
 							colored = true,
 							padding = 2,
 							-- source = nil,
-							color = { fg = "#606B70", bg = colors.BLACK_1 },
+							color = { fg = "#606B70", bg = colors.BLOCK_BG_1 },
 						},
 					},
 
@@ -446,8 +471,8 @@ return {
 							icon = "   ",
 							colored = true,
 							-- source = nil,
-							color = { fg = "#606B70", bg = colors.BLACK_1 },
-							-- color = { fg = colors.BLACK_1, bg = colors.RED_001 }30363f
+							color = { fg = "#606B70", bg = colors.BLOCK_BG_1 },
+							-- color = { fg = colors.BLOCK_BG_1, bg = colors.RED_001 }30363f
 						},
 					},
 

@@ -33,15 +33,17 @@ return {
 			diagnostics = {
 				underline = true,
 				update_in_insert = false,
-				virtual_text = {
-					spacing = 8,
-					prefix = "▊ ",
-					source = "always",
-				},
+				virtual_text = false,
+				-- virtual_text = {
+				-- 	spacing = 8,
+				-- 	prefix = "▊ ",
+				-- 	source = "always",
+				-- },
 				float = {
 					header = "",
 					border = "rounded",
 					source = "always",
+					focusable = false,
 				},
 				severity_sort = true,
 			},

@@ -36,7 +36,7 @@ opt.sidescrolloff = 8 -- 要保留在左侧和右侧的最小屏幕列数
 opt.wildmode = "longest:full,full" -- 命令行补全完成模式
 opt.winminwidth = 5 -- 当不是当前窗口时, 窗口的最小宽度
 
-opt.winblend = 20 -- 浮动窗口的伪透明度
+opt.winblend = 10 -- 浮动窗口的伪透明度
 opt.pumheight = 10 -- 弹出菜单中显示的最大项目数
 opt.pumblend = 8 -- 启用弹出菜单的伪透明度
 opt.previewheight = 12 -- 预览窗口的默认高
