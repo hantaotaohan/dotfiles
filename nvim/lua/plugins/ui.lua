@@ -52,7 +52,7 @@ return {
 					max_name_length = 15,
 					max_prefix_length = 15, -- 缓冲区重复数据消除时使用的前缀
 					truncate_names = true, -- 是否应截断选项卡名称
-					tab_size = 30,
+					tab_size = 25,
 					diagnostics = false, -- 诊断指示器 | false | "nvim_lsp" | "coc" |
 					diagnostics_update_in_insert = false,
 					diagnostics_indicator = function(count)
@@ -1027,9 +1027,9 @@ return {
 					{ type = "padding", val = 3 },
 					theme.header,
 					{ type = "padding", val = 3 },
-					theme.buttons,
-					{ type = "padding", val = 2 },
 					theme.mru,
+					{ type = "padding", val = 3 },
+					theme.buttons,
 					{ type = "padding", val = 3 },
 					theme.footer,
 				},
