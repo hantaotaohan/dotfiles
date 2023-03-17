@@ -1467,6 +1467,8 @@ return {
 				"aerial",
 				"mason",
 				"lazy",
+				"noice",
+				"Notify",
 			},
 			autocmd = {
 				render = {

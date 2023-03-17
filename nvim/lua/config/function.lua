@@ -1,5 +1,6 @@
 local cmd = vim.cmd
 local fn = vim.fn
+local Util = require("lazy.core.util")
 
 local M = {}
 
@@ -13,7 +14,7 @@ end
 -- Toggle QuickFix
 -------------------------------------------------------------------------------
 
-M.toggle_qf = function()
+M.toggle_quickfix = function()
 	local windows = fn.getwininfo()
 	local qf_exists = false
 	for _, win in pairs(windows) do
@@ -52,19 +53,11 @@ M.toggle_diagnostics = function()
 	DIAGNOSTICS_ACTIVE = not DIAGNOSTICS_ACTIVE
 	if DIAGNOSTICS_ACTIVE then
 		vim.diagnostic.show()
+		Util.info("Enabled diagnostics", { title = "Diagnostics" })
 	else
 		vim.diagnostic.hide()
+		Util.warn("Disabled diagnostics", { title = "Diagnostics" })
 	end
-end
-
--------------------------------------------------------------------------------
--- Toggle Null-ls
--------------------------------------------------------------------------------
-
-AUTOFORMAT_ACTIVE = true
-M.toggle_autoformat = function()
-	M.notify("Toggling autoformatting", "info", "functions.lua")
-	AUTOFORMAT_ACTIVE = not AUTOFORMAT_ACTIVE
 end
 
 -------------------------------------------------------------------------------
@@ -97,7 +90,7 @@ end
 -------------------------------------------------------------------------------
 
 M.toggle_column = function()
-	if vim.api.nvim_win_get_option(0, "relativenumber") == "yes" then
+	if vim.api.nvim_win_get_option(0, "signcolumn") == "yes" then
 		vim.opt.signcolumn = "no"
 	else
 		vim.opt.signcolumn = "yes"
@@ -131,16 +124,5 @@ M.toggle_syntax = function()
 	end
 end
 
--------------------------------------------------------------------------------
--- Alpha Dashboard Smart Close Buffers
--------------------------------------------------------------------------------
-
-vim.api.nvim_create_user_command("Upper", function()
-	if vim.fn.bufloaded(0) == 1 then
-		vim.api.nvim_command("bw")
-	elseif vim.fn.bufloaded(0) < 1 then
-		vim.api.nvim_command("quit")
-	end
-end, { nargs = 1 })
 -------------------------------------------------------------------------------
 return M

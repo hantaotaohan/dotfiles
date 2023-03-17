@@ -1003,7 +1003,7 @@ return {
 							},
 						},
 					},
-					{ type = "padding", val = 1 },
+					{ type = "padding", val = 0 },
 					mru(1),
 				},
 				opts = {
@@ -1028,7 +1028,7 @@ return {
 							position = "center",
 						},
 					},
-					{ type = "padding", val = 1 },
+					{ type = "padding", val = 0 },
 					button("e", "  New File", "<cmd>ene<CR>"),
 					button("t", "  Find Text", "<cmd>Telescope live_grep initial_mode=insert previewer=true<CR>"),
 					-- "<cmd>lua require'telescope.builtin'.find_files(({ previewer = true, winblend = 1 }))<cr>"
@@ -1068,11 +1068,11 @@ return {
 
 			theme.config = {
 				layout = {
-					{ type = "padding", val = 3 },
+					{ type = "padding", val = 2 },
 					theme.header,
 					{ type = "padding", val = 3 },
 					theme.mru,
-					{ type = "padding", val = 3 },
+					{ type = "padding", val = 2 },
 					theme.buttons,
 					{ type = "padding", val = 3 },
 					theme.footer,
