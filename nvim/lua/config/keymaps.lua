@@ -49,22 +49,6 @@ function Toggle(option, silent, values)
 end
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
---   │                          Toggle_diagnostics                          │
---   ╰──────────────────────────────────────────────────────────────────────╯
-
-local enabled = true
-function Toggle_diagnostics()
-	enabled = not enabled
-	if enabled then
-		vim.diagnostic.enable()
-		Util.info("Enabled diagnostics", { title = "Diagnostics" })
-	else
-		vim.diagnostic.disable()
-		Util.warn("Disabled diagnostics", { title = "Diagnostics" })
-	end
-end
-
---   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                             Toggle Alpha                             │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
@@ -229,7 +213,7 @@ map("x", ">", ">gv")
 map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 -- quit
-map("n", "<LocalLeader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<LocalLeader>Q", "<cmd>qa<cr>", { desc = "Quit all" })
 
 -- Terminal Normal Mode
 map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
