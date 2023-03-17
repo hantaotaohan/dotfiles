@@ -162,7 +162,6 @@ return {
 			end
 
 			function AsyncRunStatus:update_status()
-				cond = vim.g.async_status
 				local async_status = vim.g.asyncrun_status
 				local async_status_old = ""
 

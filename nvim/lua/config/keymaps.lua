@@ -1,6 +1,7 @@
 -- This file is automatically loaded by lazyvim.plugins.config
 
 local fun = require("config.function")
+local Util = require("config.utility")
 
 ---@param plugin string
 function Has(plugin)

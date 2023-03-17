@@ -176,7 +176,7 @@ return {
 						-- highlight = "NeoTreeFileIcon"
 					},
 					modified = {
-						symbol = "[+] ",
+						symbol = " · ",
 						highlight = "NeoTreeModified",
 					},
 					name = {
@@ -726,9 +726,46 @@ return {
 			},
 		},
 		opts = {
+			function(term)
+				if term.direction == "horizontal" then
+					return 15
+				elseif term.direction == "vertical" then
+					return vim.o.columns * 0.4
+				end
+			end,
+			highlights = {
+				-- highlights which map to a highlight group name and a table of it's values
+				-- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
+				Normal = {
+					-- guibg = "<VALUE-HERE>",
+				},
+				NormalFloat = {
+					-- link = "Normal",
+				},
+				FloatBorder = {
+					guifg = "#80a0c1",
+					guibg = "#282C34",
+				},
+			},
+			autochdir = true,
 			shade_terminals = false,
 			shading_factor = 1,
 			start_in_insert = true,
+			hide_numbers = true,
+			direction = "horizontal", -- 'vertical' | 'horizontal' | 'tab' | 'float',
+			close_on_exit = true,
+			auto_scroll = true,
+			float_opts = {
+				-- The border key is *almost* the same as 'nvim_open_win'
+				-- see :h nvim_open_win for details on borders however
+				-- the 'curved' border is a custom border type
+				-- not natively supported but implemented in this plugin.
+				border = "single", -- | 'double' | 'shadow' | 'curved' | ... other options supported by win open
+				-- like `size`, width and height can be a number or function which is passed the current terminal
+				width = 230,
+				height = 40,
+				winblend = 3,
+			},
 		},
 	},
 
@@ -1325,9 +1362,9 @@ return {
 		},
 		opts = {
 			show = true,
-			show_in_active_only = false,
+			show_in_active_only = true,
 			set_highlights = true,
-			folds = 1000, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
+			folds = false, -- handle folds, set to number to disable folds if no. of lines in buffer exceeds this
 			max_lines = false, -- disables if no. of lines in buffer exceeds this
 			hide_if_all_visible = true, -- Hides handle if all lines are visible
 			throttle_ms = 100,
@@ -1336,6 +1373,7 @@ return {
 				color = "#414855",
 				cterm = nil,
 				highlight = "CursorColumn",
+				hide_if_all_visible = true,
 			},
 			marks = {
 				Cursor = {
@@ -1426,6 +1464,7 @@ return {
 				"neo-tree",
 				"dashboard",
 				"alpha",
+				"aerial",
 				"mason",
 				"lazy",
 			},
@@ -1450,8 +1489,8 @@ return {
 			handlers = {
 				diagnostic = false,
 				search = false, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
-				cursor = true,
-				gitsigns = true, -- Requires gitsigns
+				cursor = false,
+				gitsigns = false, -- Requires gitsigns
 				handle = true,
 				ale = false, -- Requires ALE
 			},

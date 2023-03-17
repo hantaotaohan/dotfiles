@@ -95,6 +95,7 @@ return {
 			-- NeoTreeGitModified         = { fg = "#5C6370" , bg = nil       },
 			-- NeoTreeGitRenamed          = { fg = "#5C6370" , bg = nil       },
 			-- NeoTreeGitStaged           = { fg = "#5C6370" , bg = nil       },
+			NeoTreeGitUnstaged = { fg = "#E86671", bg = "#21252B" },
 			NeoTreeGitUntracked = { fg = "#E86671", bg = "#21252B" },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
