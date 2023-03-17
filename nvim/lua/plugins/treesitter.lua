@@ -38,6 +38,7 @@ return {
 
 		indent = {
 			enable = true,
+			disable = { "python" },
 		},
 
 		context_commentstring = {
@@ -46,10 +47,10 @@ return {
 		},
 
 		incremental_selection = {
-			enable = false,
+			enable = true,
 			keymaps = {
-				init_selection = "<Enter>",
-				node_incremental = "<Enter>",
+				init_selection = "<C-space>",
+				node_incremental = "<C-space>",
 				scope_incremental = "<nop>",
 				node_decremental = "<bs>",
 			},

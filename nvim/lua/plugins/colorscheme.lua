@@ -46,24 +46,33 @@ return {
 
 		highlights = {
 
-			-- CursorLine = { fg = "#FFFFFF", bg = "#323842" },
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                                SYSTEM                                │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
 
+			-- CursorLine = { fg = "#FFFFFF", bg = "#323842" },
+			-- CursorLineFold = { fg = "#E0AF68", bg = "#2C313C" },
 			CursorLine = { fg = nil, bg = "#2C313C" },
 			CursorLineNr = { fg = "#61AFEF", bg = "#2C313C" },
 			CursorLineSign = { fg = nil, bg = "#2C313C" },
 			CursorLineFold = { fg = nil, bg = "#2C313C" },
-			-- CursorLineFold = { fg = "#E0AF68", bg = "#2C313C" },
 			Folded = { fg = "#282C34", bg = "#E0AF68" },
 			FoldColumn = { fg = "#515E6F", bg = "#282C34" },
 			SignColumn = { fg = nil, bg = "#282C34" },
 			VertSplit = { fg = "#3E4452", bg = "#282C34" },
 			Search = { fg = "#21252B", bg = "#C678DD" },
 			IncSearch = { fg = "#21252B", bg = "#E06C75" },
-
 			NormalFloat = { fg = nil, bg = "#20242D" },
-
 			BufferLineIndicatorVisible = { fg = "#21252B", bg = "#21252B" },
 			BufferLineOffsetSeparator = { fg = "#21252B", bg = "#21252B" },
+			DiagnosticHint = { fg = "#61AFEF", bg = "#282C34" },
+			DiagnosticInfo = { fg = "#98C379", bg = "#282C34" },
+			DiagnosticWarn = { fg = "#E7C787", bg = "#282C34" },
+			DiagnosticError = { fg = "#E06C75", bg = "#282C34" },
+
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                               NEOTREE                                │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
 
 			NeoTreeNormal = { fg = nil, bg = "#21252B" },
 			NeoTreeNormalNC = { fg = nil, bg = "#21252B" },
@@ -88,18 +97,12 @@ return {
 			-- NeoTreeGitStaged           = { fg = "#5C6370" , bg = nil       },
 			NeoTreeGitUntracked = { fg = "#E86671", bg = "#21252B" },
 
-			TSRainbowRed = { fg = "#E06C75", bg = nil },
-			TSRainbowYellow = { fg = "#E5C07B", bg = nil },
-			TSRainbowBlue = { fg = "#61AFEF", bg = nil },
-			TSRainbowOrange = { fg = "#EBD09C", bg = nil },
-			TSRainbowGreen = { fg = "#98C379", bg = nil },
-			TSRainbowViolet = { fg = "#C678DD", bg = nil },
-			TSRainbowCyan = { fg = "#56B6C2", bg = nil },
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                              DASHBOARD                               │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
 
-			-- General
 			DashboardHeader = { fg = "#81A1C1", bg = nil },
 			DashboardFooter = { fg = "#5E768E", bg = nil, fmt = "bold" },
-			-- Hyper theme
 			DashboardProjectTitle = { fg = "#56B6C2", bg = nil },
 			DashboardProjectTitleIcon = { fg = "#56B6C2", bg = nil },
 			DashboardProjectIcon = { fg = "#61AFEF", bg = nil },
@@ -107,6 +110,10 @@ return {
 			DashboardMruIcon = { fg = "#61AFEF", bg = nil },
 			DashboardFiles = { fg = "#ABB2BF", bg = nil },
 			DashboardShotCutIcon = { fg = "#56B6C2", bg = nil },
+
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                              TELESCOPE                               │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
 
 			-- 设置选择器中选定项目的突出显示
 			TelescopeSelection = { fg = nil, bg = "#3E4552" },
@@ -123,28 +130,39 @@ return {
 			-- 用于突出显示您匹配的字符。
 			TelescopeMatching = { fg = "#E06C75", bg = nil },
 
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                          TELESCOPE-RAINBOW                           │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
+
+			TSRainbowRed = { fg = "#E06C75", bg = nil },
+			TSRainbowYellow = { fg = "#E5C07B", bg = nil },
+			TSRainbowBlue = { fg = "#61AFEF", bg = nil },
+			TSRainbowOrange = { fg = "#EBD09C", bg = nil },
+			TSRainbowGreen = { fg = "#98C379", bg = nil },
+			TSRainbowViolet = { fg = "#C678DD", bg = nil },
+			TSRainbowCyan = { fg = "#56B6C2", bg = nil },
+
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                              NEOVIM-LSP                              │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
+
 			DiagnosticVirtualTextHint = { fg = "#61AFEF", bg = "#3B3F4C" },
 			DiagnosticVirtualTextInfo = { fg = "#98C379", bg = "#3B3F4C" },
 			DiagnosticVirtualTextWarn = { fg = "#E7C787", bg = "#3B3F4C" },
 			DiagnosticVirtualTextError = { fg = "#E06C75", bg = "#3B3F4C" },
 
-			DiagnosticHint = { fg = "#61AFEF", bg = "#282C34" },
-			DiagnosticInfo = { fg = "#98C379", bg = "#282C34" },
-			DiagnosticWarn = { fg = "#E7C787", bg = "#282C34" },
-			DiagnosticError = { fg = "#E06C75", bg = "#282C34" },
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                                 CMP                                  │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
 
 			CmPmenu = { fg = nil, bg = "#20242D" },
 			CMPPmenu = { fg = nil, bg = "#20242D" },
-
 			CmpBorder = { fg = "#20242D", bg = "#20242D" },
 			CmpDocBorder = { fg = "#20242D", bg = "#20242D" },
-
 			CMPPmenuSel = { fg = "#FFFFFF", bg = "#61AFEF" },
 			CmpItemAbbrDeprecated = { fg = "#61AFEF", bg = nil },
-
 			CmpItemAbbr = { fg = "#ABB2BF", bg = nil },
 			CmpItemAbbrMatch = { fg = "#C678DD", bg = nil },
-
 			CmpItemKindConstant = { fg = "#d19a66", bg = nil },
 			CmpItemKindFunction = { fg = "#61afef", bg = nil },
 			CmpItemKindIdentifier = { fg = "#e06c75", bg = nil },
@@ -168,9 +186,9 @@ return {
 			CmpItemKindOperator = { fg = "#abb2bf", bg = nil },
 			CmpItemKindTypeParameter = { fg = "#e06c75", bg = nil },
 
-			-------------------------------------------------------------------------------
-			-- Devicons
-			-------------------------------------------------------------------------------
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                               DEVICONS                               │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
 
 			-- DevIconDefault = { fg = "#E06C75", bg = nil },
 			DevIconc = { fg = "#61AFEF", bg = nil },
@@ -201,76 +219,9 @@ return {
 			DevIconzip = { fg = "#E0AF68", bg = nil },
 			DevIconZig = { fg = "#E0AF68", bg = nil },
 
-			-------------------------------------------------------------------------------
-			-- TreeSitter
-			-------------------------------------------------------------------------------
-			--
-			-- TSAnnotation = { fg = "#be5046", bg = nil, nil },
-			-- TSAttribute = { fg = "#e5c07b", bg = nil, nil },
-			-- TSTagAttribute = { fg = "#e06c75", bg = nil, nil },
-			-- TSCharacter = { fg = "#e06c75", bg = nil, nil },
-			-- TSConstructor = { fg = "#56b6c2", bg = nil, nil },
-			-- TSConstBuiltin = { fg = "#d19a66", bg = nil, nil },
-			-- TSConstMacro = { fg = "#e06c75", bg = nil, nil },
-			-- TSError = { fg = "#e06c75", bg = nil, nil },
-			-- TSException = { fg = "#e06c75", bg = nil, nil },
-			-- TSFloat = { fg = "#d19a66", bg = nil, nil },
-			-- TSKeyword = { fg = "#c678dd", bg = nil, nil },
-			-- TSKeywordFunction = { fg = "#c678dd", bg = nil, nil },
-			-- TSKeywordReturn = { fg = "#c678dd", bg = nil, nil },
-			-- TSFunction = { fg = "#61afef", bg = nil, nil },
-			-- TSFuncBuiltin = { fg = "#61afef", bg = nil, nil },
-			-- TSFuncMacro = { fg = "#e06c75", bg = nil, nil },
-			-- TSKeywordOperator = { fg = "#c678dd", bg = nil, nil },
-			-- TSMethod = { fg = "#61afef", bg = nil, nil },
-			-- TSNamespace = { fg = "#e06c75", bg = nil, nil },
-			-- TSNone = { fg = "#abb2bf", bg = nil, nil },
-			-- TSParameter = { fg = "#e06c75", bg = nil, nil },
-			-- TSParameterReference = { fg = "#abb2bf", bg = nil, nil },
-			-- TSPunctBracket = { fg = "#be5046", bg = nil, nil },
-			-- TSPunctDelimiter = { fg = "#be5046", bg = nil, nil },
-			-- TSPunctSpecial = { fg = "#e06c75", bg = nil, nil },
-			-- TSStringRegex = { fg = "#56b6c2", bg = nil, nil },
-			-- TSStringEscape = { fg = "#56b6c2", bg = nil, nil },
-			-- TSSymbol = { fg = "#98c379", bg = nil, nil },
-			-- TSTagDelimiter = { fg = "#be5046", bg = nil, nil },
-			-- TSText = { fg = "#abb2bf", bg = nil, nil },
-			-- TSStrong = { fg = nil, bg = nil, fmt = "bold" },
-			-- TSEmphasis = { fg = "#d19a66", bg = nil, nil },
-			-- TSStrike = { fg = "base00", bg = nil, fmt = "strikethrough" },
-			-- TSLiteral = { fg = "#d19a66", bg = nil, nil },
-			-- TSURI = { fg = "#d19a66", bg = nil, fmt = "underline" },
-			-- TSTypeBuiltin = { fg = "#e5c07b", bg = nil, nil },
-			-- TSVariableBuiltin = { fg = "#d19a66", bg = nil, nil },
-			-- TSVariable = { fg = "#abb2bf", bg = nil, nil },
-			-- TSDefinition = { fg = nil, bg = nil, fmt = "underline" },
-			-- TSCurrentScope = { fg = nil, bg = nil, fmt = "bold" },
-			-- luaTSField = { fg = "#61afef", bg = nil, nil },
-			-- TSFieldKey = { fg = "#e06c75", bg = nil, nil },
-			-- TSProperty = { fg = "#e06c75", bg = nil, nil },
-			-- TSInclude = { fg = "#c678dd", bg = nil, nil },
-			-- TSConditional = { fg = "#c678dd", bg = nil, nil },
-
-			IndentBlanklineChar = { fg = "#3A4646", bg = nil }, -- 缩进字符的突出显示
-			IndentBlanklineSpaceChar = { fg = "#24acf2", bg = nil }, -- 空格字符的突出显示
-			IndentBlanklineContextChar = { fg = "#757d98", bg = nil }, -- 空行上空格字符的突出显示
-			IndentBlanklineContextStart = { fg = nil, bg = "#193f6d", fmt = "bold" }, -- 当前上下文第一行的高亮显示
-
-			NotifyERRORBorder = { fg = "#e06c75" },
-			NotifyERRORIcon = { fg = "#e06c75" },
-			NotifyERRORTitle = { fg = "#e06c75" },
-			NotifyWARNBorder = { fg = "#fca2aa" },
-			NotifyWARNIcon = { fg = "#fca2aa" },
-			NotifyWARNTitle = { fg = "#fca2aa" },
-			NotifyINFOBorder = { fg = "#98c379" },
-			NotifyINFOIcon = { fg = "#98c379" },
-			NotifyINFOTitle = { fg = "#98c379" },
-			NotifyDEBUGBorder = { fg = "#42464e" },
-			NotifyDEBUGIcon = { fg = "#42464e" },
-			NotifyDEBUGTitle = { fg = "#42464e" },
-			NotifyTRACEBorder = { fg = "#de98fd" },
-			NotifyTRACEIcon = { fg = "#de98fd" },
-			NotifyTRACETitle = { fg = "#de98fd" },
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                              TREESITTER                              │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
 
 			["@annotation"] = { fg = "#be5046" },
 			["@attribute"] = { fg = "#e5c07b" },
@@ -320,6 +271,85 @@ return {
 			["@property"] = { fg = "#98c379" },
 			["@include"] = { fg = "#c678dd" },
 			["@conditional"] = { fg = "#c678dd" },
+
+			-- TSAnnotation = { fg = "#be5046", bg = nil, nil },
+			-- TSAttribute = { fg = "#e5c07b", bg = nil, nil },
+			-- TSTagAttribute = { fg = "#e06c75", bg = nil, nil },
+			-- TSCharacter = { fg = "#e06c75", bg = nil, nil },
+			-- TSConstructor = { fg = "#56b6c2", bg = nil, nil },
+			-- TSConstBuiltin = { fg = "#d19a66", bg = nil, nil },
+			-- TSConstMacro = { fg = "#e06c75", bg = nil, nil },
+			-- TSError = { fg = "#e06c75", bg = nil, nil },
+			-- TSException = { fg = "#e06c75", bg = nil, nil },
+			-- TSFloat = { fg = "#d19a66", bg = nil, nil },
+			-- TSKeyword = { fg = "#c678dd", bg = nil, nil },
+			-- TSKeywordFunction = { fg = "#c678dd", bg = nil, nil },
+			-- TSKeywordReturn = { fg = "#c678dd", bg = nil, nil },
+			-- TSFunction = { fg = "#61afef", bg = nil, nil },
+			-- TSFuncBuiltin = { fg = "#61afef", bg = nil, nil },
+			-- TSFuncMacro = { fg = "#e06c75", bg = nil, nil },
+			-- TSKeywordOperator = { fg = "#c678dd", bg = nil, nil },
+			-- TSMethod = { fg = "#61afef", bg = nil, nil },
+			-- TSNamespace = { fg = "#e06c75", bg = nil, nil },
+			-- TSNone = { fg = "#abb2bf", bg = nil, nil },
+			-- TSParameter = { fg = "#e06c75", bg = nil, nil },
+			-- TSParameterReference = { fg = "#abb2bf", bg = nil, nil },
+			-- TSPunctBracket = { fg = "#be5046", bg = nil, nil },
+			-- TSPunctDelimiter = { fg = "#be5046", bg = nil, nil },
+			-- TSPunctSpecial = { fg = "#e06c75", bg = nil, nil },
+			-- TSStringRegex = { fg = "#56b6c2", bg = nil, nil },
+			-- TSStringEscape = { fg = "#56b6c2", bg = nil, nil },
+			-- TSSymbol = { fg = "#98c379", bg = nil, nil },
+			-- TSTagDelimiter = { fg = "#be5046", bg = nil, nil },
+			-- TSText = { fg = "#abb2bf", bg = nil, nil },
+			-- TSStrong = { fg = nil, bg = nil, fmt = "bold" },
+			-- TSEmphasis = { fg = "#d19a66", bg = nil, nil },
+			-- TSStrike = { fg = "base00", bg = nil, fmt = "strikethrough" },
+			-- TSLiteral = { fg = "#d19a66", bg = nil, nil },
+			-- TSURI = { fg = "#d19a66", bg = nil, fmt = "underline" },
+			-- TSTypeBuiltin = { fg = "#e5c07b", bg = nil, nil },
+			-- TSVariableBuiltin = { fg = "#d19a66", bg = nil, nil },
+			-- TSVariable = { fg = "#abb2bf", bg = nil, nil },
+			-- TSDefinition = { fg = nil, bg = nil, fmt = "underline" },
+			-- TSCurrentScope = { fg = nil, bg = nil, fmt = "bold" },
+			-- luaTSField = { fg = "#61afef", bg = nil, nil },
+			-- TSFieldKey = { fg = "#e06c75", bg = nil, nil },
+			-- TSProperty = { fg = "#e06c75", bg = nil, nil },
+			-- TSInclude = { fg = "#c678dd", bg = nil, nil },
+			-- TSConditional = { fg = "#c678dd", bg = nil, nil },
+
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                             INDENTBLANK                              │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
+
+			IndentBlanklineChar = { fg = "#3A4646", bg = nil }, -- 缩进字符的突出显示
+			IndentBlanklineSpaceChar = { fg = "#24acf2", bg = nil }, -- 空格字符的突出显示
+			IndentBlanklineContextChar = { fg = "#757d98", bg = nil }, -- 空行上空格字符的突出显示
+			IndentBlanklineContextStart = { fg = nil, bg = "#193f6d", fmt = "bold" }, -- 当前上下文第一行的高亮显示
+
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                                NOTIFY                                │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
+
+			NotifyERRORBorder = { fg = "#e06c75" },
+			NotifyERRORIcon = { fg = "#e06c75" },
+			NotifyERRORTitle = { fg = "#e06c75" },
+			NotifyWARNBorder = { fg = "#fca2aa" },
+			NotifyWARNIcon = { fg = "#fca2aa" },
+			NotifyWARNTitle = { fg = "#fca2aa" },
+			NotifyINFOBorder = { fg = "#98c379" },
+			NotifyINFOIcon = { fg = "#98c379" },
+			NotifyINFOTitle = { fg = "#98c379" },
+			NotifyDEBUGBorder = { fg = "#42464e" },
+			NotifyDEBUGIcon = { fg = "#42464e" },
+			NotifyDEBUGTitle = { fg = "#42464e" },
+			NotifyTRACEBorder = { fg = "#de98fd" },
+			NotifyTRACEIcon = { fg = "#de98fd" },
+			NotifyTRACETitle = { fg = "#de98fd" },
+
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                                NOICE                                 │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
 
 			NoiceCursor = { bg = "#abb2bf" },
 			-- NoiceCmdlinePopupBorder = { fg = "#000000" },

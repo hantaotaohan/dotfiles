@@ -31,6 +31,10 @@ vim.api.nvim_create_autocmd("BufLeave", {
 	command = "let g:asyncrun_status='stopped'",
 })
 
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                                Resize                                │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
 	group = augroup("resize_splits"),
@@ -38,6 +42,10 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 		vim.cmd("tabdo wincmd =")
 	end,
 })
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                           Last open Buffer                           │
+--   ╰──────────────────────────────────────────────────────────────────────╯
 
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -50,6 +58,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 		end
 	end,
 })
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                              Smart Quit                              │
+--   ╰──────────────────────────────────────────────────────────────────────╯
 
 -- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
@@ -77,6 +89,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<LocalLeader>q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
 	end,
 })
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                                Format                                │
+--   ╰──────────────────────────────────────────────────────────────────────╯
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
@@ -169,11 +185,50 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                                Aerial                                │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "aerial",
 	group = augroup("Aerial"),
 	callback = function()
 		vim.cmd([[ set signcolumn=yes ]])
+	end,
+})
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                               Bookmark                               │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+-- 删除bookmark
+vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9" })
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                             Hide Cursor                              │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter", "BufHidden", "BufUnload" }, {
+	group = augroup("Hide_Cursor"),
+	pattern = "*",
+	callback = function()
+		if vim.api.nvim_buf_get_option(0, "filetype") == "neo-tree" then
+			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
+			vim.opt.guicursor = "a:Cursor/lCursor"
+			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#2c313a")
+		elseif vim.api.nvim_buf_get_option(0, "filetype") == "aerial" then
+			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
+			vim.opt.guicursor = "a:Cursor/lCursor"
+			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#2c313a")
+		else
+			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
+			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
+			vim.opt.guicursor = "a:Cursor/lCursor"
+			vim.api.nvim_command("highlight CursorLine guifg=none guibg=#2C313C")
+			-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+		end
 	end,
 })
 
@@ -195,25 +250,3 @@ vim.api.nvim_create_autocmd("FileType", {
 -- 		end
 -- 	end,
 -- })
-
--- 删除bookmark
-vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9" })
-
-vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter", "BufHidden", "BufUnload" }, {
-	group = augroup("Sidebar"),
-	pattern = "*",
-	callback = function()
-		if vim.api.nvim_buf_get_option(0, "filetype") == "neo-tree" then
-			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
-			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
-			vim.opt.guicursor = "a:Cursor/lCursor"
-			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#2c313a")
-		else
-			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
-			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
-			vim.opt.guicursor = "a:Cursor/lCursor"
-			vim.api.nvim_command("highlight CursorLine guifg=none guibg=#2C313C")
-			-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-		end
-	end,
-})

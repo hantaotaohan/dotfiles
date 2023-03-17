@@ -140,7 +140,7 @@ return {
 			custom_onedark.inactive.c.bg = "#22262e"
 			custom_onedark.normal.c.bg = "#22262e"
 			-- custom_onedark.normal.c.fg = "#6B7078"
-			custom_onedark.terminal.a.bg = "#22262e"
+			custom_onedark.terminal.a.bg = "#81A1C1"
 
 			local colors = {
 				BACK_GROUND = "#1E222A",
@@ -224,7 +224,12 @@ return {
 
 			local toggleterm = {
 				sections = {
-					lualine_a = { toggleterm_statusline },
+					lualine_a = {
+						{
+							toggleterm_statusline,
+							color = { fg = colors.BACK_GROUND, bg = nil, gui = "bold" },
+						},
+					},
 					lualine_b = { { "FugitiveHead", icons_enabled = true, icon = "   " } },
 				},
 				filetypes = { "toggleterm" },
@@ -440,6 +445,9 @@ return {
 							"encoding",
 							colored = true, -- Displays diagnostics status in color if set to true.
 							color = { fg = colors.FONT_GROUND, bg = colors.BLOCK_BG_1 },
+							fmt = function(str)
+								return "" .. string.upper(str)
+							end,
 						},
 					},
 
@@ -449,6 +457,16 @@ return {
 						},
 						{
 							"progress",
+							icons_enabled = true,
+							fmt = function()
+								local cur = vim.fn.line(".")
+								local total = vim.fn.line("$")
+								local text = string.format("%2d%%%%", math.floor(cur / total * 100))
+								text = (cur == 1 and "Top") or text
+								text = (cur == total and "Bot") or text
+								return text
+							end,
+							icon = "",
 						},
 					},
 				}),
@@ -459,13 +477,41 @@ return {
 						{
 							"mode",
 							colored = true,
-							padding = 2,
+							padding = { left = 1, right = 2 },
+							icon = " ",
 							-- source = nil,
-							color = { fg = "#606B70", bg = colors.BLOCK_BG_1 },
+							color = { fg = "#606B70", bg = "#2d3139" },
 						},
 					},
 
 					lualine_b = {
+						{
+							"filename",
+							padding = 2,
+							file_status = true,
+							newfile_status = false,
+							-- color = { fg = colors.FONT_GROUND, bg = colors.BLOCK_BG_1 },
+							path = 4,
+							shorting_target = 40,
+							symbols = {
+								readonly = " 󰌾 ",
+								modified = " · ",
+								-- unnamed = " 󰑕 ",
+								-- newfile = "  ",
+							},
+							fmt = function(str)
+								if str == "" then
+									return nil
+								end
+								local ft = vim.bo.filetype
+								local nwd = require("nvim-web-devicons")
+								local icon = nwd.get_icon_by_filetype(ft) or ""
+								return icon .. "  " .. str
+							end,
+						},
+					},
+
+					lualine_c = {
 						{
 							"branch",
 							icon = "   ",
@@ -476,7 +522,6 @@ return {
 						},
 					},
 
-					lualine_c = { "filename" },
 					lualine_x = {},
 					lualine_y = {},
 					lualine_z = {
