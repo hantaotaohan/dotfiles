@@ -241,7 +241,6 @@ return {
 				sources = {
 					nls.builtins.formatting.stylua,
 					nls.builtins.formatting.shfmt,
-					nls.builtins.formatting.prettierd,
 					nls.builtins.diagnostics.flake8,
 				},
 			}
@@ -272,7 +271,6 @@ return {
 				"pyright",
 				"djlint",
 				"json-lsp",
-				"prettierd",
 			},
 			github = {
 				download_url_template = os.getenv("GITHUB") .. "%s/releases/download/%s/%s",
