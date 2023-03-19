@@ -383,7 +383,7 @@ return {
 		keys = {
 			{
 				"<LocalLeader>t",
-				":AerialToggle<cr>",
+				"<cmd>AerialToggle<cr>",
 				desc = "Toggle Outline",
 				silent = true,
 			},
@@ -664,7 +664,7 @@ return {
 		keys = {
 			{
 				"<LocalLeader>t",
-				":SymbolsOutline<cr>",
+				"<cmdSymbolsOutline<cr>",
 				desc = "Toggle Outline",
 				silent = true,
 			},

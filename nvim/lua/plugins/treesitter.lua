@@ -49,16 +49,16 @@ return {
 		incremental_selection = {
 			enable = true,
 			keymaps = {
-				init_selection = "<C-space>",
-				node_incremental = "<C-space>",
-				scope_incremental = "<nop>",
-				node_decremental = "<bs>",
+				init_selection = "<c-space>",
+				node_incremental = "<c-space>",
+				scope_incremental = "<c-s>",
+				node_decremental = "<c-backspace>",
 			},
 		},
 
 		rainbow = {
 			enable = true,
-			extended_mode = true,
+			extended_mode = false,
 		},
 	},
 
