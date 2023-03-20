@@ -211,9 +211,15 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{ name = "buffer" },
+					-- { name = "buffer" },
 					{ name = "path" },
 					{ name = "wikilinks" },
+					{
+						name = "buffer",
+						option = {
+							keyword_pattern = [[\%(#[\0-9a-fA-F]\{6}\>\|-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(\%(-\|::\)\h\w*\)*\)]],
+						},
+					},
 				}),
 				formatting = {
 					-- fields = { "abbr" },
