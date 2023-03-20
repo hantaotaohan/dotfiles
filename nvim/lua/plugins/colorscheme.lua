@@ -130,6 +130,8 @@ return {
 			TelescopePreviewBorder = { fg = "#646870", bg = nil },
 			-- 用于突出显示您匹配的字符。
 			TelescopeMatching = { fg = "#E06C75", bg = nil },
+			-- 用于突出显示Tiele
+			TelescopeTitle = { fg = "#E9FBFE", bg = nil },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                          TELESCOPE-RAINBOW                           │
@@ -360,6 +362,9 @@ return {
 			NoiceCmdlineIcon = { fg = "#81A1C1" },
 			NoicePopupmenuBorder = { fg = "#81A1C1" },
 			NoicePopupBorder = { fg = "#81A1C1" },
+
+			NoiceCmdlineIconIncRename = { fg = "#E06C75" },
+			NoiceCmdlinePopupBorderIncRename = { fg = "#E06C75" },
 
 			Noice_DiagnosticInfo = { fg = "#81A1C1" },
 			Noice_Normal = { bg = "#282c34" },
