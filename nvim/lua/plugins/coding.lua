@@ -232,7 +232,7 @@ return {
 						end
 
 						if entry.source.name == "nvim_lsp" then
-							item.abbr = " •" .. item.abbr
+							item.abbr = " " .. item.abbr
 						else
 							item.abbr = " " .. item.abbr
 						end

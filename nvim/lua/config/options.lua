@@ -38,7 +38,7 @@ opt.winminwidth = 5 -- 当不是当前窗口时, 窗口的最小宽度
 
 opt.winblend = 10 -- 浮动窗口的伪透明度
 opt.pumheight = 10 -- 弹出菜单中显示的最大项目数
-opt.pumblend = 8 -- 启用弹出菜单的伪透明度
+opt.pumblend = 10 -- 启用弹出菜单的伪透明度
 opt.previewheight = 12 -- 预览窗口的默认高
 
 opt.wrap = false -- 是否开启自动换行
@@ -212,7 +212,7 @@ opt.regexpengine = 0 -- REGEXP 引擎
 opt.jumpoptions = "view" -- 更改JumpList行为
 opt.virtualedit = "block" -- 可视化编辑模式加强
 opt.whichwrap = "" -- 设置光标是否可以跨行
-opt.startofline = true -- 是否开启光标移动到第一个非空白行
+opt.startofline = false -- 是否开启光标移动到第一个非空白行
 opt.encoding = "utf-8" -- 设置字符串的编码
 opt.fileencoding = "utf-8" -- 设置当前缓冲区的文件内容编码
 -- opt.clipboard = "unnamedplus"                                                  -- 同步系统剪贴板

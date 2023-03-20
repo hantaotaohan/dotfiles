@@ -50,8 +50,8 @@ return {
 			--   │                                SYSTEM                                │
 			--   ╰──────────────────────────────────────────────────────────────────────╯
 
-			-- CursorLine = { fg = "#FFFFFF", bg = "#323842" },
-			-- CursorLineFold = { fg = "#E0AF68", bg = "#2C313C" },
+			Visual = { fg = nil, bg = "#404859" },
+			Substitute = { fg = "#FFFFFF", bg = "#404859" },
 			CursorLine = { fg = nil, bg = "#2C313C" },
 			CursorLineNr = { fg = "#61AFEF", bg = "#2C313C" },
 			CursorLineSign = { fg = nil, bg = "#2C313C" },
@@ -60,8 +60,9 @@ return {
 			FoldColumn = { fg = "#515E6F", bg = "#282C34" },
 			SignColumn = { fg = nil, bg = "#282C34" },
 			VertSplit = { fg = "#3E4452", bg = "#282C34" },
-			Search = { fg = "#21252B", bg = "#C678DD" },
-			IncSearch = { fg = "#21252B", bg = "#E06C75" },
+			Search = { fg = "#FFFFFF", bg = "#895c9d" },
+			IncSearch = { fg = "#FFFFFF", bg = "#61AFEF" },
+			CurSearch = { fg = "#FFFFFF", bg = "#61AFEF" },
 			NormalFloat = { fg = nil, bg = "#20242D" },
 			BufferLineIndicatorVisible = { fg = "#21252B", bg = "#21252B" },
 			BufferLineOffsetSeparator = { fg = "#21252B", bg = "#21252B" },
@@ -76,8 +77,8 @@ return {
 
 			NeoTreeNormal = { fg = nil, bg = "#21252B" },
 			NeoTreeNormalNC = { fg = nil, bg = "#21252B" },
-			NeoTreeRootName = { fg = "#E06C75", bg = nil },
-			NeoTreeDotfile = { fg = "#5A5E64", bg = nil },
+			NeoTreeRootName = { fg = "#E06C75", bg = "#21252B" },
+			NeoTreeDotfile = { fg = "#5A5E64", bg = "#21252B" },
 			NeoTreeVertSplit = { fg = "#21252B", bg = "#21252B" },
 			NeoTreeStatusLin = { fg = "#21252B", bg = "#21252B" },
 			NeoTreeStatusLine = { fg = nil, bg = "#21252B" },
@@ -85,9 +86,9 @@ return {
 			NeoTreeEndOfBuffer = { fg = "#21252B", bg = "#21252B" },
 			NeoTreeStatusLineNC = { fg = "#21252B", bg = "#21252B" },
 			NeoTreeWinSeparator = { fg = "#21252B", bg = "#21252B" },
-			NeoTreeExpander = { fg = "#4D5A5E", bg = nil },
-			NeoTreeIndentMarker = { fg = "#3A4646", bg = nil },
-			NeoTreeDirectoryName = { fg = "#ABB2BF", bg = nil },
+			NeoTreeExpander = { fg = "#4D5A5E", bg = "#21252B" },
+			NeoTreeIndentMarker = { fg = "#3A4646", bg = "#21252B" },
+			NeoTreeDirectoryName = { fg = "#ABB2BF", bg = "#21252B" },
 			-- NeoTreeGitAdded            = { fg = "#5C6370" , bg = nil       },
 			NeoTreeGitConflict = { fg = "#E86671", bg = "#21252B" },
 			-- NeoTreeGitDeleted          = { fg = "#5C6370" , bg = nil       },
@@ -97,6 +98,11 @@ return {
 			-- NeoTreeGitStaged           = { fg = "#5C6370" , bg = nil       },
 			NeoTreeGitUnstaged = { fg = "#E86671", bg = "#21252B" },
 			NeoTreeGitUntracked = { fg = "#E86671", bg = "#21252B" },
+			NeoTreeFloatBorder = { fg = "#61afef", bg = "#21252B" },
+			NeoTreeFloatNormal = { fg = "#61afef", bg = "#21252B" },
+			NeoTreeCursorLine = { fg = "#CCDAD6", bg = "#323842" },
+			NeoTreeTabActive = { fg = "#CCDAD6", bg = "#323842" },
+			NeoTreeTabInactive = { fg = "#CCDAD6", bg = "#323842" },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                              DASHBOARD                               │
@@ -116,22 +122,25 @@ return {
 			--   │                              TELESCOPE                               │
 			--   ╰──────────────────────────────────────────────────────────────────────╯
 
+			TelescopePromptPrefix = { fg = "#61AFEF", bg = nil },
 			-- 设置选择器中选定项目的突出显示
-			TelescopeSelection = { fg = nil, bg = "#3E4552" },
+			TelescopeSelection = { fg = "#c2c5cc", bg = "#323842" },
 			TelescopeSelectionCaret = { fg = "#61AFEF", bg = nil },
 			TelescopeMultiSelection = { fg = "#E06C75", bg = nil },
 			TelescopeMultiIcon = { fg = "#E06C75", bg = nil },
-			TelescopePromptPrefix = { fg = "#61afef", bg = nil },
-
 			-- 边框高亮组
-			TelescopeBorder = { fg = "#646870", bg = nil },
-			TelescopePromptBorder = { fg = "#646870", bg = nil },
-			TelescopeResultsBorder = { fg = "#646870", bg = nil },
-			TelescopePreviewBorder = { fg = "#646870", bg = nil },
+			TelescopeBorder = { fg = "#3A4646", bg = nil },
+			TelescopePromptBorder = { fg = "#3A4646", bg = nil },
+			TelescopeResultsBorder = { fg = "#3A4646", bg = nil },
+			TelescopePreviewBorder = { fg = "#3A4646", bg = nil },
 			-- 用于突出显示您匹配的字符。
-			TelescopeMatching = { fg = "#E06C75", bg = nil },
+			TelescopeMatching = { fg = "#ECEBE0", bg = nil },
 			-- 用于突出显示Tiele
-			TelescopeTitle = { fg = "#E9FBFE", bg = nil },
+			TelescopeTitle = { fg = "#ABB2BF", bg = nil },
+			TelescopeNormal = { fg = "#ABB2BF", bg = nil },
+			TelescopeResultsTitle = { fg = "#ABB2BF", bg = nil },
+
+			-- TelescopePromptNormal = { fg = nil, bg = "#282C34" },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                          TELESCOPE-RAINBOW                           │
@@ -328,7 +337,7 @@ return {
 			IndentBlanklineChar = { fg = "#3A4646", bg = nil }, -- 缩进字符的突出显示
 			IndentBlanklineSpaceChar = { fg = "#24acf2", bg = nil }, -- 空格字符的突出显示
 			IndentBlanklineContextChar = { fg = "#757d98", bg = nil }, -- 空行上空格字符的突出显示
-			IndentBlanklineContextStart = { fg = nil, bg = "#353b45", fmt = "bold" }, -- 当前上下文第一行的高亮显示
+			IndentBlanklineContextStart = { fg = nil, bg = "#515A6B", fmt = "bold" }, -- 当前上下文第一行的高亮显示
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                                NOTIFY                                │

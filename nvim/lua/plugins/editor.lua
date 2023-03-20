@@ -84,7 +84,7 @@ return {
 			end
 
 			require("neo-tree").setup({
-				add_blank_line_at_top = true, -- Add a blank line at the top of the tree.
+				add_blank_line_at_top = false, -- Add a blank line at the top of the tree.
 				close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 				close_floats_on_escape_key = true,
 				use_libuv_filewatcher = true,
@@ -99,10 +99,11 @@ return {
 				log_level = "info", -- "trace", "debug", "info", "warn", "error", "fatal"
 				log_to_file = false, -- true, false, "/path/to/file.log", use :NeoTreeLogs to show the file
 				open_files_in_last_window = false, -- false = open files in top left window
-				popup_border_style = "rounded", -- "double", "none", "rounded", "shadow", "single" or "solid"
+				popup_border_style = "rounded", -- "NC","double", "none", "rounded", "shadow", "single" or "solid"
 				resize_timer_interval = 500, -- in ms, needed for containers to redraw right aligned and faded content
 				sort_case_insensitive = false, -- used when sorting files and directories in the tree
 				sort_function = nil, -- uses a custom function for sorting files and directories in the tree
+				-- use_popups_for_input = true, -- If false, inputs will use vim.ui.input() instead of custom floats.
 				use_popups_for_input = true, -- If false, inputs will use vim.ui.input() instead of custom floats.
 				use_default_mappings = false,
 				source_selector = {
@@ -1001,10 +1002,10 @@ return {
 						},
 					},
 					cycle_layout_list = { "horizontal", "vertical" }, -- 布局循环列表
-					winblend = 15, -- 浮动窗口配置
+					winblend = 0, -- 浮动窗口配置
 					wrap_results = false, -- 自动换行搜索结果
 					prompt_prefix = "    ", -- 搜索栏的搜索关键字前的字符
-					selection_caret = "  ", -- 选定内容前的字符
+					selection_caret = " ·ﾠ", -- 选定内容前的字符
 					entry_prefix = "   ", -- 每个结果条目前面的前缀,不包括当前选择
 					multi_icon = " + ", -- 多选图标
 					initial_mode = "normal", -- Telescope 启动模式 | insert | normal
@@ -1033,7 +1034,7 @@ return {
 					-- },
 
 					hl_result_eol = true, -- 如果结果中所选项目的突出显示, 则更改 window始终是窗口的全宽
-					dynamic_preview_title = true, -- 动态更改预览窗口的标题
+					dynamic_preview_title = false, -- 动态更改预览窗口的标题
 					results_title = "Results", -- 定义结果窗口的默认标题, 错误的值, 可以用于完全隐藏标题
 					prompt_title = "Prompt", -- 定义提示窗口的默认标题, 错误的值, 可以用于完全隐藏标题
 					mappings = {
