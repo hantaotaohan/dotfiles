@@ -154,15 +154,21 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {
-	group = "Terminal",
+	group = augroup("Terminal"),
 	pattern = "*",
 	command = "startinsert",
 })
 
 vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
-	group = "Terminal",
+	group = augroup("Terminal"),
 	pattern = "term://*",
 	command = "startinsert",
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+	group = augroup("Terminal"),
+	pattern = "*",
+	command = "autocmd BufEnter * if &buftype ==# 'terminal' | startinsert! | endif",
 })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
@@ -202,7 +208,11 @@ vim.api.nvim_create_autocmd("FileType", {
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
 -- 删除bookmark
-vim.api.nvim_create_autocmd({ "BufRead" }, { command = ":delm a-zA-Z0-9" })
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+	pattern = "*",
+	group = augroup("Bookmakr"),
+	command = ":delm a-zA-Z0-9",
+})
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                             Hide Cursor                              │
@@ -232,21 +242,19 @@ vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter", "BufHidden"
 	end,
 })
 
--- vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter", "BufHidden", "BufUnload" }, {
--- 	group = augroup("Sidebar"),
--- 	pattern = "*",
--- 	callback = function()
--- 		if vim.api.nvim_buf_get_option(0, "buftype") == "nofile" then
--- 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
--- 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
--- 			vim.opt.guicursor = "a:Cursor/lCursor"
--- 			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#2c313a")
--- 		else
--- 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
--- 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))
--- 			vim.opt.guicursor = "a:Cursor/lCursor"
--- 			vim.api.nvim_command("highlight CursorLine guifg=none guibg=#2C313C")
--- 			-- vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
--- 		end
--- 	end,
--- })
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                        help in vertical split                        │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = augroup("Help"),
+	pattern = "*",
+	callback = function()
+		vim.cmd([[ 
+            if &buftype == 'help'
+                wincmd L"
+            end
+        ]])
+	end,
+	once = false,
+})

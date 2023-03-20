@@ -1,3 +1,7 @@
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                          Settings Variable                           │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
 local functions = require("config.function")
 local Util = require("lazy.core.util")
 
@@ -48,11 +52,15 @@ function Toggle(option, silent, values)
 	end
 end
 
+--  ══════════════════════════════════════════════════════════════════════════
+
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                             Toggle Alpha                             │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map({ "n", "i", "v" }, "<LocalLeader>s", "<cmd>Alpha<cr>", { desc = "Alpha" })
+if Has("comment-box.nvim") then
+	map({ "n", "i", "v" }, "<LocalLeader>s", "<cmd>Alpha<cr>", { desc = "Alpha" })
+end
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                             Toggle Lazy                              │
@@ -158,10 +166,10 @@ map({ "n", "i", "v" }, "<C-j>", "<Esc><C-w>j", { desc = "Go to lower window" })
 map({ "n", "i", "v" }, "<C-k>", "<Esc><C-w>k", { desc = "Go to upper window" })
 map({ "n", "i", "v" }, "<C-l>", "<Esc><C-w>l", { desc = "Go to right window" })
 
-map("t", "<C-h>", "<C-\\><C-n><C-w>h")
-map("t", "<C-j>", "<C-\\><C-n><C-w>j")
-map("t", "<C-k>", "<C-\\><C-n><C-w>k")
-map("t", "<C-l>", "<C-\\><C-n><C-w>l")
+map({ "i", "t" }, "<C-h>", "<C-\\><C-N><C-w>h")
+map({ "i", "t" }, "<C-j>", "<C-\\><C-N><C-w>j")
+map({ "i", "t" }, "<C-k>", "<C-\\><C-N><C-w>k")
+map({ "i", "t" }, "<C-l>", "<C-\\><C-N><C-w>l")
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                            Resize Window                             │
@@ -222,10 +230,12 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 --   │                            Commant - Box                             │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map({ "n", "v" }, "gbb", "<CMD>CBccbox<CR>")
-map({ "n", "v" }, "gbv", "<CMD>CBccbox21<CR>")
-map({ "n", "v" }, "gbh", "<CMD>CBline5<CR>")
-map({ "n", "v" }, "gbj", "<CMD>CBline6<CR>")
+if Has("comment-box.nvim") then
+	map({ "n", "v" }, "gbb", "<CMD>CBccbox<CR>")
+	map({ "n", "v" }, "gbv", "<CMD>CBccbox21<CR>")
+	map({ "n", "v" }, "gbh", "<CMD>CBline5<CR>")
+	map({ "n", "v" }, "gbj", "<CMD>CBline6<CR>")
+end
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                              ToggleTerm                              │
@@ -234,12 +244,14 @@ map({ "n", "v" }, "gbj", "<CMD>CBline6<CR>")
 map("t", "<LocalLeader>c", "<cmd>ToggleTerm<cr>", { desc = "Previous Tab" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
---   │                          telescope-Projects                          │
+--   │                         Telescope - Projects                         │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map(
-	"n",
-	"<LocalLeader>fp",
-	"<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({hidden=true}))<cr>",
-	{ desc = "Recent projects" }
-)
+if Has("telescope.nvim") then
+	map(
+		"n",
+		"<LocalLeader>fp",
+		"<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({hidden=true}))<cr>",
+		{ desc = "Recent projects" }
+	)
+end

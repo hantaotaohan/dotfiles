@@ -128,7 +128,7 @@ return {
 
 			return {
 				completion = {
-					completeopt = "menu,menuone,noinsert,noselect",
+					completeopt = "menu,menuone,noinsert",
 				},
 				snippet = {
 					expand = function(args)
@@ -336,7 +336,7 @@ return {
 		end,
 		opts = {
 			mappings = {
-				add = "s", -- Add surrounding in Normal and Visual modes
+				add = "S", -- Add surrounding in Normal and Visual modes
 				delete = "ds", -- Delete surrounding
 				replace = "cs", -- Replace surrounding
 				-- find = "gzf", -- Find surrounding (to the right)
