@@ -158,8 +158,8 @@ return {
 
 			CmPmenu = { fg = nil, bg = "#20242D" },
 			CMPPmenu = { fg = nil, bg = "#20242D" },
-			CmpBorder = { fg = "#20242D", bg = "#20242D" },
-			CmpDocBorder = { fg = "#20242D", bg = "#20242D" },
+			CmpBorder = { fg = "#181a1f", bg = "#20242D" },
+			CmpDocBorder = { fg = "#181a1f", bg = "#20242D" },
 			CMPPmenuSel = { fg = "#FFFFFF", bg = "#61AFEF" },
 			CmpItemAbbrDeprecated = { fg = "#61AFEF", bg = nil },
 			CmpItemAbbr = { fg = "#ABB2BF", bg = nil },
@@ -352,8 +352,22 @@ return {
 			--   │                                NOICE                                 │
 			--   ╰──────────────────────────────────────────────────────────────────────╯
 
-			NoiceCursor = { bg = "#abb2bf" },
-			-- NoiceCmdlinePopupBorder = { fg = "#000000" },
+			NoiceCursor = { bg = "#ABB2BF" },
+
+			NoiceCmdlinePopupBorder = { fg = "#81A1C1" },
+			NoiceCmdlinePopupBorderCmdline = { fg = "#81A1C1" },
+			NoiceCmdlinePopupBorderInput = { fg = "#81A1C1" },
+			NoiceCmdlineIcon = { fg = "#81A1C1" },
+			NoicePopupmenuBorder = { fg = "#81A1C1" },
+			NoicePopupBorder = { fg = "#81A1C1" },
+
+			Noice_DiagnosticInfo = { fg = "#81A1C1" },
+			Noice_Normal = { bg = "#282c34" },
+			NoicePopupmenuSelected = { fg = "#E9FBFE", bg = "#5CA4E0" },
+
+			NoiceScrollbar = { bg = "#282C34" },
+
+			NoiceSplit = { bg = "#282C34" },
 		},
 
 		-- Plugins Config --

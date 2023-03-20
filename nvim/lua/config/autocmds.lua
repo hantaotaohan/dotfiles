@@ -226,12 +226,12 @@ vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter", "BufHidden"
 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
 			vim.opt.guicursor = "a:Cursor/lCursor"
-			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#2c313a")
+			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#323842")
 		elseif vim.api.nvim_buf_get_option(0, "filetype") == "aerial" then
 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 100 }))
 			vim.opt.guicursor = "a:Cursor/lCursor"
-			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#2c313a")
+			vim.api.nvim_command("highlight CursorLine guifg=#ccdad6 guibg=#323842")
 		else
 			local def = vim.api.nvim_get_hl_by_name("Cursor", true)
 			vim.api.nvim_set_hl(0, "Cursor", vim.tbl_extend("force", def, { blend = 0 }))

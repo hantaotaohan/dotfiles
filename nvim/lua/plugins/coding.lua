@@ -96,6 +96,7 @@ return {
 				},
 			},
 			"saadparwaiz1/cmp_luasnip",
+			"smjonas/inc-rename.nvim",
 		},
 		opts = function()
 			local has_words_before = function()
@@ -128,7 +129,7 @@ return {
 
 			return {
 				completion = {
-					completeopt = "menu,menuone,noinsert",
+					completeopt = "menu,menuone",
 				},
 				snippet = {
 					expand = function(args)
@@ -148,7 +149,8 @@ return {
 						-- border = "rounded",
 						winhighlight = "Normal:CmpPmenu,CursorLine:CmpPmenuSel,Search:None",
 						border = border("CmpDocBorder"),
-						max_width = 60,
+						max_width = 100,
+						min_width = 100,
 						scrollbar = false,
 					},
 				},
@@ -178,7 +180,7 @@ return {
 						end
 					end, { "i", "s" }),
 
-					["<C-k>"] = cmp.mapping({
+					["<Up>"] = cmp.mapping({
 						c = function(fallback)
 							if cmp.visible() then
 								return cmp.select_prev_item()
@@ -188,7 +190,7 @@ return {
 						end,
 					}),
 
-					["<C-j>"] = cmp.mapping({
+					["<Down>"] = cmp.mapping({
 						c = function(fallback)
 							if cmp.visible() then
 								return cmp.select_next_item()
@@ -215,7 +217,7 @@ return {
 				}),
 				formatting = {
 					-- fields = { "abbr" },
-					format = function(_, item)
+					format = function(entry, item)
 						local content = item.abbr
 						local icons = require("config.utility").icons.kinds
 
@@ -228,6 +230,20 @@ return {
 						if icons[item.kind] then
 							item.kind = icons[item.kind] .. " " .. item.kind
 						end
+
+						if entry.source.name == "nvim_lsp" then
+							item.abbr = " •" .. item.abbr
+						else
+							item.abbr = " " .. item.abbr
+						end
+						-- Source
+						item.menu = ({
+							buffer = "[BUF]",
+							nvim_lsp = "[LSP]",
+							luasnip = "[SNI]",
+							latex_symbols = "[LTX]",
+							wikilinks = "[WIK]",
+						})[entry.source.name]
 						return item
 					end,
 				},
