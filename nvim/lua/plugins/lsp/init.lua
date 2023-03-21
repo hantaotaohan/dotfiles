@@ -1,5 +1,5 @@
-vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guifg=#6f737b guibg=#2f333c]])
-vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=#6f737b guibg=#282C34]])
+vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guifg=#000000 guibg=#20242D]])
+vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=#000000 guibg=#20242D]])
 
 return {
 
@@ -194,17 +194,38 @@ return {
 				require("lspconfig")[server].setup(server_opts)
 			end
 
+			local border = {
+				{ "🭽", "FloatBorder" },
+				{ "▔", "FloatBorder" },
+				{ "🭾", "FloatBorder" },
+				{ "▕", "FloatBorder" },
+				{ "🭿", "FloatBorder" },
+				{ "▁", "FloatBorder" },
+				{ "🭼", "FloatBorder" },
+				{ "▏", "FloatBorder" },
+			}
+			-- To instead override globally
+			local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+			function vim.lsp.util.open_floating_preview(contents, syntax, opts)
+				opts = opts or {}
+				opts.border = border
+				return orig_util_open_floating_preview(contents, syntax, opts)
+			end
+
 			-- temp fix for lspconfig rename
 			-- https://github.com/neovim/nvim-lspconfig/pull/2439
 			local have_mason, mlsp = pcall(require, "mason-lspconfig")
-			local available = have_mason and mlsp.get_available_servers() or {}
+			local all_mslp_servers = {}
+			if have_mason then
+				all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+			end
 
 			local ensure_installed = {} ---@type string[]
 			for server, server_opts in pairs(servers) do
 				if server_opts then
 					server_opts = server_opts == true and {} or server_opts
 					-- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-					if server_opts.mason == false or not vim.tbl_contains(available, server) then
+					if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
 						setup(server)
 					else
 						ensure_installed[#ensure_installed + 1] = server
@@ -285,11 +306,18 @@ return {
 		config = function(_, opts)
 			require("mason").setup(opts)
 			local mr = require("mason-registry")
-			for _, tool in ipairs(opts.ensure_installed) do
-				local p = mr.get_package(tool)
-				if not p:is_installed() then
-					p:install()
+			local function ensure_installed()
+				for _, tool in ipairs(opts.ensure_installed) do
+					local p = mr.get_package(tool)
+					if not p:is_installed() then
+						p:install()
+					end
 				end
+			end
+			if mr.refresh then
+				mr.refresh(ensure_installed)
+			else
+				ensure_installed()
 			end
 		end,
 	},

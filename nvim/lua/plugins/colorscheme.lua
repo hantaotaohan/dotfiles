@@ -63,7 +63,7 @@ return {
 			Search = { fg = "#FFFFFF", bg = "#895c9d" },
 			IncSearch = { fg = "#FFFFFF", bg = "#61AFEF" },
 			CurSearch = { fg = "#FFFFFF", bg = "#61AFEF" },
-			NormalFloat = { fg = nil, bg = "#20242D" },
+			-- NormalFloat = { fg = nil, bg = "#20242D" },
 			BufferLineIndicatorVisible = { fg = "#21252B", bg = "#21252B" },
 			BufferLineOffsetSeparator = { fg = "#21252B", bg = "#21252B" },
 			DiagnosticHint = { fg = "#61AFEF", bg = "#282C34" },
