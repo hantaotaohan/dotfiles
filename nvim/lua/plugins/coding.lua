@@ -106,18 +106,18 @@ return {
 			end
 
 			local luasnip = require("luasnip")
-			local function border(hl_name)
-				return {
-					{ "╭", hl_name },
-					{ "─", hl_name },
-					{ "╮", hl_name },
-					{ "│", hl_name },
-					{ "╯", hl_name },
-					{ "─", hl_name },
-					{ "╰", hl_name },
-					{ "│", hl_name },
-				}
-			end
+
+			local border = {
+				{ "🭽", "FloatBorder" },
+				{ "▔", "FloatBorder" },
+				{ "🭾", "FloatBorder" },
+				{ "▕", "FloatBorder" },
+				{ "🭿", "FloatBorder" },
+				{ "▁", "FloatBorder" },
+				{ "🭼", "FloatBorder" },
+				{ "▏", "FloatBorder" },
+			}
+
 			local cmp = require("cmp")
 
 			local ELLIPSIS_CHAR = "…"
@@ -129,7 +129,7 @@ return {
 
 			return {
 				completion = {
-					completeopt = "menu,menuone",
+					completeopt = "menu,menuone,noselect",
 				},
 				snippet = {
 					expand = function(args)
@@ -140,15 +140,15 @@ return {
 					completion = {
 						-- border = "rounded",
 						winhighlight = "Normal:CmpPmenu,CursorLine:CmpPmenuSel,Search:None",
-						border = border("CmpBorder"),
-						col_offset = -3,
+						border = border,
+						col_offset = 0,
 						side_padding = 0,
 						scrollbar = false,
 					},
 					documentation = {
 						-- border = "rounded",
 						winhighlight = "Normal:CmpPmenu,CursorLine:CmpPmenuSel,Search:None",
-						border = border("CmpDocBorder"),
+						border = border,
 						max_width = 100,
 						min_width = 100,
 						scrollbar = false,
@@ -180,26 +180,29 @@ return {
 						end
 					end, { "i", "s" }),
 
-					["<Up>"] = cmp.mapping({
-						c = function(fallback)
-							if cmp.visible() then
-								return cmp.select_prev_item()
-							end
+					-- ["<Up>"] = cmp.mapping({
+					-- 	c = function(fallback)
+					-- 		if cmp.visible() then
+					-- 			return cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+					-- 		end
+					--
+					-- 		fallback()
+					-- 	end,
+					-- }),
+					--
+					-- ["<Down>"] = cmp.mapping({
+					-- 	c = function(fallback)
+					-- 		if cmp.visible() then
+					-- 			return cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+					-- 		end
+					--
+					-- 		fallback()
+					-- 	end,
+					-- }),
 
-							fallback()
-						end,
-					}),
-
-					["<Down>"] = cmp.mapping({
-						c = function(fallback)
-							if cmp.visible() then
-								return cmp.select_next_item()
-							end
-
-							fallback()
-						end,
-					}),
-
+					-- ["<Down>"] = cmp.mapping.select_next_item(),
+					-- ["<Up>"] = cmp.mapping.select_prev_item(),
+					["<C-s>"] = cmp.config.disable,
 					["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),

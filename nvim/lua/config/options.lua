@@ -227,7 +227,7 @@ opt.undolevels = 10000 -- 可撤消的最大更改数
 
 opt.wildmenu = true -- 当 "wildmenu" 打开时, 命令行完成以增强的模式
 opt.complete = ".,w,b,k" -- 补全文档库模式
-opt.completeopt = "menu,menuone" -- 插入模式时的补全范围设置
+opt.completeopt = "menu,menuone,noselect" -- 插入模式时的补全范围设置
 
 opt.foldenable = true -- 是否开启折叠功能
 opt.foldlevel = 0 -- 设置折叠级别: 具有较高级别的折叠将被关闭
