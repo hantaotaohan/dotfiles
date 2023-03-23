@@ -217,8 +217,8 @@ return {
 			end
 
 			local function toggleterm_statusline()
-				-- return "TERMINAL [" .. vim.b.toggle_number .. "]"
-				return "TERMINAL"
+				return "TERMINAL [" .. vim.b.toggle_number .. "]"
+				-- return "TERMINAL"
 			end
 
 			local toggleterm = {
@@ -236,7 +236,7 @@ return {
 					lualine_a = {
 						{
 							toggleterm_statusline,
-							color = { fg = colors.BACK_GROUND, bg = "#ABB2BF", gui = "bold" },
+							color = { fg = colors.BLOCK_FG, bg = colors.BLOCK_BG_1, gui = "bold" },
 						},
 					},
 					lualine_b = { { "FugitiveHead", icons_enabled = true, icon = "   " } },

@@ -756,8 +756,15 @@ return {
 				start_in_insert = true,
 				hide_numbers = true,
 				direction = "horizontal", -- 'vertical' | 'horizontal' | 'tab' | 'float',
+				terminal_mappings = false,
 				close_on_exit = true,
 				auto_scroll = true,
+				shade_filetypes = {},
+				insert_mappings = true, -- whether or not the open mapping applies in insert mode
+				persist_size = true,
+				persist_mode = true, -- if set to true (default) the previous terminal mode will be remembered
+				shell = vim.o.shell, -- change the default shell
+
 				float_opts = {
 					-- The border key is *almost* the same as 'nvim_open_win'
 					-- see :h nvim_open_win for details on borders however
