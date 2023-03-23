@@ -255,3 +255,6 @@ if Has("telescope.nvim") then
 		{ desc = "Recent projects" }
 	)
 end
+
+map("n", "qj", ":cnext<CR>", { silent = true })
+map("n", "qk", ":cprev<CR>", { silent = true })

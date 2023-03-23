@@ -114,6 +114,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "qf",
 	callback = function()
 		vim.opt_local.buflisted = false
+		vim.wo.number = false
+		vim.wo.signcolumn = "no"
+		vim.wo.relativenumber = false
+		vim.wo.cursorline = true
 	end,
 })
 

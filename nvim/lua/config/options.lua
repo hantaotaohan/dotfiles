@@ -159,7 +159,7 @@ o.shadafile = VIM_DATA_PATH .. "/shada/main.shada"
 
 opt.timeout = true -- 此选项和 "timeoutlen" 决定已接收映射的密钥序
 opt.ttimeout = true -- 此选项和 "ttimeoutlen" 决定TUI已接收到密钥码序列
-opt.timeoutlen = 300 -- 等待映射序列完成的时间 (毫秒)
+opt.timeoutlen = 500 -- 等待映射序列完成的时间 (毫秒)
 opt.ttimeoutlen = 0 -- 等待键代码序列完成的时间 (毫秒)
 opt.updatetime = 200 -- 如果这几毫秒内没有键入任何内容自动保存
 opt.updatecount = 0 -- 键入多字符后, 交换文件将被写入磁盘如果为零, 则根本不会创建交换文件

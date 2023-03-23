@@ -726,48 +726,51 @@ return {
 				silent = true,
 			},
 		},
-		opts = {
-			function(term)
-				if term.direction == "horizontal" then
-					return 15
-				elseif term.direction == "vertical" then
-					return vim.o.columns * 0.4
-				end
-			end,
-			highlights = {
-				-- highlights which map to a highlight group name and a table of it's values
-				-- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
-				Normal = {
-					-- guibg = "<VALUE-HERE>",
+		config = function()
+			require("toggleterm").setup({
+				function(term)
+					if term.direction == "horizontal" then
+						return 15
+					elseif term.direction == "vertical" then
+						return vim.o.columns * 0.4
+					end
+				end,
+				highlights = {
+					-- highlights which map to a highlight group name and a table of it's values
+					-- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
+					Normal = {
+						-- guibg = "<VALUE-HERE>",
+					},
+					NormalFloat = {
+						-- link = "Normal",
+					},
+					FloatBorder = {
+						guifg = "#80a0c1",
+						guibg = "#282C34",
+					},
 				},
-				NormalFloat = {
-					-- link = "Normal",
+				open_mapping = [[<c-\>]],
+				autochdir = true,
+				shade_terminals = false,
+				shading_factor = 1,
+				start_in_insert = true,
+				hide_numbers = true,
+				direction = "horizontal", -- 'vertical' | 'horizontal' | 'tab' | 'float',
+				close_on_exit = true,
+				auto_scroll = true,
+				float_opts = {
+					-- The border key is *almost* the same as 'nvim_open_win'
+					-- see :h nvim_open_win for details on borders however
+					-- the 'curved' border is a custom border type
+					-- not natively supported but implemented in this plugin.
+					border = "single", -- | 'double' | 'shadow' | 'curved' | ... other options supported by win open
+					-- like `size`, width and height can be a number or function which is passed the current terminal
+					width = 230,
+					height = 40,
+					winblend = 3,
 				},
-				FloatBorder = {
-					guifg = "#80a0c1",
-					guibg = "#282C34",
-				},
-			},
-			autochdir = true,
-			shade_terminals = false,
-			shading_factor = 1,
-			start_in_insert = true,
-			hide_numbers = true,
-			direction = "horizontal", -- 'vertical' | 'horizontal' | 'tab' | 'float',
-			close_on_exit = true,
-			auto_scroll = true,
-			float_opts = {
-				-- The border key is *almost* the same as 'nvim_open_win'
-				-- see :h nvim_open_win for details on borders however
-				-- the 'curved' border is a custom border type
-				-- not natively supported but implemented in this plugin.
-				border = "single", -- | 'double' | 'shadow' | 'curved' | ... other options supported by win open
-				-- like `size`, width and height can be a number or function which is passed the current terminal
-				width = 230,
-				height = 40,
-				winblend = 3,
-			},
-		},
+			})
+		end,
 	},
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
@@ -1564,9 +1567,41 @@ return {
 		"skywind3000/asyncrun.vim",
 		config = function()
 			vim.g.asyncrun_open = 6
+			vim.g.asyncrun_trim = 0
+			vim.g.asyncrun_save = 1
 			-- vim.g.asyncrun_status = "stopped"
 			vim.g.asyncrun_status = ""
 			vim.g.asyncrun_rootmarks = { "pom.xml", ".git", ".svn", ".root", ".project", ".hg" }
+
+			function RunCode_Quick()
+				local filetype = vim.o.filetype
+				if filetype == "lua" then
+					vim.cmd([[ AsyncRun -mode=1 -strip -cwd=$(VIM_FILEDIR) lua "$(VIM_FILEPATH)" ]])
+					vim.cmd([[wincmd p]])
+				elseif filetype == "sh" then
+					vim.cmd([[ AsyncRun -mode=1 -strip -cwd=$(VIM_FILEDIR) bash "$(VIM_FILEPATH)" ]])
+					vim.cmd([[wincmd p]])
+				elseif filetype == "python" then
+					vim.api.nvim_command('AsyncRun -mode=1 -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"')
+					vim.cmd([[wincmd p]])
+				end
+			end
+
+			function RunCode_Term()
+				local filetype = vim.o.filetype
+				if filetype == "lua" then
+					vim.cmd([[ AsyncRun -mode=term -strip -listed=0 -cwd=$(VIM_FILEDIR) lua "$(VIM_FILEPATH)" ]])
+				elseif filetype == "sh" then
+					vim.cmd([[ AsyncRun -mode=term -strip -listed=0 -cwd=$(VIM_FILEDIR) bash "$(VIM_FILEPATH)" ]])
+				elseif filetype == "python" then
+					vim.api.nvim_command(
+						'AsyncRun -mode=term -strip -listed=0 -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"'
+					)
+				end
+			end
+
+			vim.keymap.set("n", "<LocalLeader>rr", RunCode_Quick, { noremap = true, silent = true })
+			vim.keymap.set("n", "<LocalLeader>re", RunCode_Term, { noremap = true, silent = true })
 		end,
 	},
 
