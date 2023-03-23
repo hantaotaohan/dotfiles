@@ -222,7 +222,7 @@ return {
 			end
 
 			local toggleterm = {
-				sections = {
+				sections = process_sections({
 					lualine_a = {
 						{
 							toggleterm_statusline,
@@ -230,7 +230,17 @@ return {
 						},
 					},
 					lualine_b = { { "FugitiveHead", icons_enabled = true, icon = "   " } },
-				},
+				}),
+
+				inactive_sections = process_sections({
+					lualine_a = {
+						{
+							toggleterm_statusline,
+							color = { fg = colors.BACK_GROUND, bg = "#ABB2BF", gui = "bold" },
+						},
+					},
+					lualine_b = { { "FugitiveHead", icons_enabled = true, icon = "   " } },
+				}),
 				filetypes = { "toggleterm" },
 			}
 

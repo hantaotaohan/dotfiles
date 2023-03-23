@@ -1590,12 +1590,16 @@ return {
 			function RunCode_Term()
 				local filetype = vim.o.filetype
 				if filetype == "lua" then
-					vim.cmd([[ AsyncRun -mode=term -strip -listed=0 -cwd=$(VIM_FILEDIR) lua "$(VIM_FILEPATH)" ]])
+					vim.cmd(
+						[[ AsyncRun -mode=term -strip -listed=0 -rows=20 -cwd=$(VIM_FILEDIR) lua "$(VIM_FILEPATH)" ]]
+					)
 				elseif filetype == "sh" then
-					vim.cmd([[ AsyncRun -mode=term -strip -listed=0 -cwd=$(VIM_FILEDIR) bash "$(VIM_FILEPATH)" ]])
+					vim.cmd(
+						[[ AsyncRun -mode=term -strip -listed=0 -rows=20 -cwd=$(VIM_FILEDIR) bash "$(VIM_FILEPATH)" ]]
+					)
 				elseif filetype == "python" then
 					vim.api.nvim_command(
-						'AsyncRun -mode=term -strip -listed=0 -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"'
+						'AsyncRun -mode=term -strip -listed=0 -rows=20 -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"'
 					)
 				end
 			end
