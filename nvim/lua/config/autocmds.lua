@@ -67,10 +67,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("close_with_q"),
 	pattern = {
-		"qf",
-		"help",
+		-- "qf",
+		-- "help",
 		"man",
-		"query",
+		-- "query",
 		"notify",
 		"prompt",
 		"nofile",
@@ -119,6 +119,44 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.wo.relativenumber = false
 		vim.wo.cursorline = true
 	end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	group = augroup("QuickDispla_Colory"),
+	pattern = "*",
+	callback = function()
+		if vim.bo.filetype == "qf" then
+			vim.api.nvim_set_hl(0, "QuickFixLine", { fg = "#FFFFFF", bg = "#61AFEF" })
+		else
+			vim.api.nvim_set_hl(0, "QuickFixLine", { fg = "#Abb2bf", bg = "#282C34" })
+		end
+	end,
+})
+
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	group = augroup("AutoCloseWindow"),
+-- 	pattern = { "lspinfo", "lsp-installer", "null-ls-info", "help", "qf" },
+-- 	callback = function()
+-- 		local opts = { buffer = true, silent = true, desc = "close lspinfo popup and help,qf buffers" }
+-- 		vim.keymap.set("n", "<LocalLeaderrq", function()
+-- 			local ok = pcall(vim.cmd.close)
+-- 			if not ok then
+-- 				vim.cmd.bdelete()
+-- 			end
+-- 		end, opts)
+-- 	end,
+-- 	desc = "close lspinfo popup and help,qf buffers with q",
+-- })
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("AutoCloseLastWindow"),
+	pattern = { "lspinfo", "lsp-installer", "null-ls-info", "help", "qf" },
+	callback = function()
+		if vim.fn.winnr("$") == 1 then
+			vim.cmd([[qa!]])
+		end
+	end,
+	desc = "close lspinfo popup and help,qf buffers with q",
 })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮

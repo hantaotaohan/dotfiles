@@ -19,10 +19,22 @@
 
 --  ╾────────────────────────────────────────────────────────────────────────╼
 
+--- TODO: 123
 local Util = require("config.utility")
 
 return {
 
+	{
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("todo-comments").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	},
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
 	--   │                               NeoTree                                │
@@ -1755,6 +1767,13 @@ return {
 			vim.g.zettel_link_format = "[[%title]]"
 			vim.g.zettel_fzf_command = "rg --column --ignore-case --no-heading --color=always"
 			vim.g.zettel_options = { disable_front_matter = 1 }
+		end,
+	},
+
+	{
+		"iamcco/markdown-preview.nvim",
+		config = function()
+			vim.cmd(":call mkdp#util#install()")
 		end,
 	},
 }
