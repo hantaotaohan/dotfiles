@@ -148,12 +148,23 @@ vim.api.nvim_create_autocmd("BufEnter", {
 -- 	desc = "close lspinfo popup and help,qf buffers with q",
 -- })
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("BufEnter", {
 	group = augroup("AutoCloseLastWindow"),
-	pattern = { "lspinfo", "lsp-installer", "null-ls-info", "help", "qf" },
+	pattern = { "*" },
 	callback = function()
-		if vim.fn.winnr("$") == 1 then
-			vim.cmd([[qa!]])
+		local wins = vim.api.nvim_list_wins()
+		local target_wins = {}
+
+		for _, win in ipairs(wins) do
+			local buf = vim.api.nvim_win_get_buf(win)
+			local ft = vim.api.nvim_buf_get_option(buf, "filetype")
+			if ft == "qf" or ft == "help" then
+				table.insert(target_wins, win)
+			end
+		end
+
+		if #target_wins == #wins then
+			vim.cmd([[ qa!]])
 		end
 	end,
 	desc = "close lspinfo popup and help,qf buffers with q",
