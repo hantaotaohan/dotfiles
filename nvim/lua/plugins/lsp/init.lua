@@ -132,7 +132,7 @@ return {
 							},
 							workspace = {
 								checkThirdParty = false,
-								library = vim.api.nvim_get_runtime_file("", true),
+								-- library = vim.api.nvim_get_runtime_file("", true),
 							},
 							completion = {
 								callSnippet = "Replace",
@@ -256,6 +256,12 @@ return {
 			local nls = require("null-ls")
 			return {
 				sources = {
+					root_dir = require("null-ls.utils").root_pattern(
+						".null-ls-root",
+						".neoconf.json",
+						"Makefile",
+						".git"
+					),
 					nls.builtins.formatting.stylua,
 					nls.builtins.formatting.shfmt,
 					nls.builtins.diagnostics.flake8,
