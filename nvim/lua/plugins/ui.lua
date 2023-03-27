@@ -389,6 +389,7 @@ return {
 						},
 
 						{
+							cond = AsyncRunStatus,
 							AsyncRunStatus,
 							color = { fg = colors.RED_001, bg = colors.BLOCK_BG_1 },
 						},

@@ -114,4 +114,21 @@ return {
 			vim.g.zettel_options = { disable_front_matter = 1 }
 		end,
 	},
+
+	--   ╭──────────────────────────────────────────────────────────────────────╮
+	--   │                                                                      │
+	--   │                           Markdown_Preview                           │
+	--   │                                                                      │
+	--   │                                                                      │
+	--   │           https://github.com/iamcco/markdown-preview.nvim            │
+	--   │                                                                      │
+	--   ╰──────────────────────────────────────────────────────────────────────╯
+
+	{
+		"iamcco/markdown-preview.nvim",
+		ft = { "markdown", "vimwiki.makrdown", "md" },
+		config = function()
+			vim.cmd(":call mkdp#util#install()")
+		end,
+	},
 }
