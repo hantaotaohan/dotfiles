@@ -70,8 +70,8 @@ require("lazy").setup({
 	},
 	checker = { enabled = false }, -- 自动检查插件更新
 	change_detection = {
-		enabled = true, -- 自动检查配置文件更改并重新加载ui
-		notify = true, -- 发现更改时获取通知
+		enabled = false, -- 自动检查配置文件更改并重新加载ui
+		notify = false, -- 发现更改时获取通知
 	},
 	performance = {
 		reset_packpath = true, -- reset the package path to improve startup time

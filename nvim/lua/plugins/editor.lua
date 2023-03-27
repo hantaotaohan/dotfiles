@@ -1130,7 +1130,8 @@ return {
 
 	{
 		"ahmedkhalf/project.nvim",
-		-- cmd = "Telescope",
+		lazy = true,
+		cmd = "Telescope",
 		-- keys = { { "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
 		-- dependencies = {
 		-- 	"nvim-telescope/telescope.nvim",
@@ -1520,7 +1521,8 @@ return {
 
 	{
 		"chentoast/marks.nvim",
-		event = "VeryLazy",
+		lazy = true,
+		keys = { "m", "<Plug>(Marks-set)", "<Plug>(Marks-toggle)" },
 		opts = {
 			-- whether to map keybinds or not. default true
 			default_mappings = true,
@@ -1572,6 +1574,11 @@ return {
 
 	{
 		"skywind3000/asyncrun.vim",
+		lazy = true,
+		keys = {
+			{ "<LocalLeader>rr", "RunCode_Quick", "RunCode_Quick" },
+			{ "<LocalLeader>re", "RunCode_Term", "RunCode_Term" },
+		},
 		config = function()
 			vim.g.asyncrun_open = 6
 			vim.g.asyncrun_trim = 0
@@ -1660,7 +1667,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                           Todo_Comments                              │
+	--   │                    PLUGINS:   Todo_Comments                          │
 	--   │                                                                      │
 	--   │             https://github.com/folke/todo-comments.nvim              │
 	--   │                                                                      │
@@ -1668,6 +1675,7 @@ return {
 
 	{
 		"folke/todo-comments.nvim",
+		-- lazy = true,
 		cmd = { "TodoTrouble", "TodoTelescope" },
 		event = { "BufReadPost", "BufNewFile" },
 		keys = {
@@ -1694,7 +1702,7 @@ return {
 				opts = opts or {}
 				vim.api.nvim_create_user_command(name, rhs, opts)
 			end
-			command("TodoDots", ("TodoTrouble cwd=%s keywords=TODO,FIXME"):format(vim.fn.expand("%:p:h")))
+			command("TodoDots", ("TodoTrouble cwd=%s keywords=TODO,PLUGINS"):format(vim.fn.expand("%:p:h")))
 			require("todo-comments").setup({
 				signs = false,
 				keywords = {
@@ -1722,7 +1730,7 @@ return {
 					multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
 					before = "", -- "fg" or "bg" or empty
 					keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
-					after = "fg", -- "fg" or "bg" or empty
+					after = "", -- "fg" or "bg" or empty
 					pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
 					comments_only = true, -- uses treesitter to match keywords in comments only
 					max_line_len = 400, -- ignore lines longer than this
@@ -1764,7 +1772,8 @@ return {
 
 	{
 		"folke/trouble.nvim",
-		event = "VeryLazy",
+		lazy = true,
+		-- event = "VeryLazy",
 		cmd = { "TroubleToggle", "Trouble" },
 		opts = {
 			use_diagnostic_signs = true,
