@@ -250,8 +250,7 @@ return {
 
 	{
 		"jose-elias-alvarez/null-ls.nvim",
-		lazy = true,
-		-- event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "mason.nvim" },
 		opts = function()
 			local nls = require("null-ls")
@@ -286,7 +285,6 @@ return {
 	{
 
 		"williamboman/mason.nvim",
-		lazy = true,
 		cmd = "Mason",
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 		opts = {

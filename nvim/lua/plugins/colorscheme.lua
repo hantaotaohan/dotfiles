@@ -1,6 +1,6 @@
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                                                                      │
---   │                               ONEDARK                                │
+--   │                           PLUGINS: ONEDARK                           │
 --   │                                                                      │
 --   │               https://github.com/navarasu/onedark.nvim               │
 --   │                                                                      │
@@ -71,7 +71,6 @@ return {
 			DiagnosticInfo = { fg = "#98C379", bg = "#282C34" },
 			DiagnosticWarn = { fg = "#E7C787", bg = "#282C34" },
 			DiagnosticError = { fg = "#E06C75", bg = "#282C34" },
-
 			QuickFixLine = { fg = "#FFFFFF", bg = "#61AFEF", fmt = "bold" },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
@@ -106,6 +105,16 @@ return {
 			NeoTreeCursorLine = { fg = "#CCDAD6", bg = "#323842" },
 			NeoTreeTabActive = { fg = "#CCDAD6", bg = "#323842" },
 			NeoTreeTabInactive = { fg = "#CCDAD6", bg = "#323842" },
+
+			--   ╭──────────────────────────────────────────────────────────────────────╮
+			--   │                                Aerial                                │
+			--   ╰──────────────────────────────────────────────────────────────────────╯
+
+			AerialEndOfBuffer = { fg = "#21252B", bg = "#21252B" },
+			AerialNormal = { fg = nil, bg = "#21252B" },
+			AerialSignColumn = { fg = "#21252B", bg = "#21252B" },
+			AerialWinSeparator = { fg = "#21252B", bg = "#21252B" },
+			AerialVertSplit = { fg = "#21252B", bg = "#21252B", fmt = "bold" },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                              DASHBOARD                               │

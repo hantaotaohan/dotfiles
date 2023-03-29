@@ -17,7 +17,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                              Bufferline                              │
+	--   │                         PLUGINS: Bufferline                          │
 	--   │                                                                      │
 	--   │              https://github.com/akinsho/bufferline.nvim              │
 	--   │                                                                      │
@@ -123,7 +123,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Lualine                                │
+	--   │                           PLUGINS: Lualine                           │
 	--   │                                                                      │
 	--   │             https://github.com/nvim-lualine/lualine.nvim             │
 	--   │                                                                      │
@@ -573,7 +573,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                                Noice                                 │
+	--   │                            PLUGINS: Noice                            │
 	--   │                                                                      │
 	--   │                 https://github.com/folke/noice.nvim                  │
 	--   │                                                                      │
@@ -875,7 +875,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                                Notify                                │
+	--   │                           PLUGINS: Notify                            │
 	--   │                                                                      │
 	--   │               https://github.com/rcarriga/nvim-notify                │
 	--   │                                                                      │
@@ -914,7 +914,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Dressing                               │
+	--   │                          PLUGINS: Dressing                           │
 	--   │                                                                      │
 	--   │              https://github.com/stevearc/dressing.nvim               │
 	--   │                                                                      │
@@ -939,7 +939,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                           Indent_Blankline                           │
+	--   │                      PLUGINS: Indent_Blankline                       │
 	--   │                                                                      │
 	--   │        https://github.com/lukas-reineke/indent-blankline.nvim        │
 	--   │                                                                      │
@@ -979,7 +979,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                                Alpha                                 │
+	--   │                            PLUGINS: Alpha                            │
 	--   │                                                                      │
 	--   │                https://github.com/goolord/alpha-nvim                 │
 	--   │                                                                      │
@@ -1299,7 +1299,7 @@ return {
 			vim.api.nvim_create_autocmd("User", {
 				pattern = "LazyVimStarted",
 				callback = function()
-                    -- vim.cmd([[set laststatus=0 showtabline=0]])
+					-- vim.cmd([[set laststatus=0 showtabline=0]])
 					vim.cmd([[set laststatus=0]])
 					local stats = require("lazy").stats()
 					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
@@ -1309,9 +1309,10 @@ return {
 			})
 		end,
 	},
+
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                             Dashboard                                │
+	--   │                          PLUGINS: Dashboard                          │
 	--   │                                                                      │
 	--   │              https://github.com/glepnir/dashboard-nvim               │
 	--   │                                                                      │
@@ -1481,7 +1482,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                              Devicons                                │
+	--   │                          PLUGINS: Devicons                           │
 	--   │                                                                      │
 	--   │            https://github.com/nvim-tree/nvim-web-devicons            │
 	--   │                                                                      │
@@ -3013,13 +3014,21 @@ return {
 	},
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
-	--   │                                 Nui                                  │
+	--   │                                                                      │
+	--   │                             PLUGINS: Nui                             │
+	--   │                                                                      │
+	--   │               https://github.com/MunifTanjim/nui.nvim                │
+	--   │                                                                      │
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	{ "MunifTanjim/nui.nvim", lazy = true },
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
-	--   │                              inc_rename                              │
+	--   │                                                                      │
+	--   │                         PLUGINS: Inc_Rename                          │
+	--   │                                                                      │
+	--   │              https://github.com/smjonas/inc-rename.nvim              │
+	--   │                                                                      │
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	{
@@ -3029,7 +3038,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Zen_Mode                               │
+	--   │                          PLUGINS: Zen_Mode                           │
 	--   │                                                                      │
 	--   │                https://github.com/folke/zen-mode.nvim                │
 	--   │                                                                      │

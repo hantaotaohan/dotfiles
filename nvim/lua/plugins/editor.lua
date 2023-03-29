@@ -25,7 +25,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               NeoTree                                │
+	--   │                           PLUGINS: NeoTree                           │
 	--   │                                                                      │
 	--   │            https://github.com/nvim-neo-tree/neo-tree.nvim            │
 	--   │                                                                      │
@@ -372,7 +372,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                                Aerial                                │
+	--   │                           PLUGINS: Aerial                            │
 	--   │                                                                      │
 	--   │               https://github.com/stevearc/aerial.nvim                │
 	--   │                                                                      │
@@ -404,7 +404,9 @@ return {
 					width = nil,
 					min_width = 35,
 					-- key-value pairs of window-local options for aerial window (e.g. winhl)
-					win_opts = {},
+					win_opts = {
+						winhighlight = "EndOfBuffer:AerialEndOfBuffer,Normal:AerialNormal,SignColumn:AerialSignColumn,WinSeparator:AerialWinSeparator,VertSplit:AerialVertSplit",
+					},
 					-- Determines the default direction to open the aerial window. The 'prefer'
 					-- options will open the window in the other direction *if* there is a
 					-- different buffer in the way of the preferred direction
@@ -476,16 +478,17 @@ return {
 				-- A list of all symbols to display. Set to false to display all symbols.
 				-- This can be a filetype map (see :help aerial-filetype-map)
 				-- To see all available values, see :help SymbolKind
-				filter_kind = {
-					"Class",
-					"Constructor",
-					"Enum",
-					"Function",
-					"Interface",
-					"Module",
-					"Method",
-					"Struct",
-				},
+				filter_kind = false,
+				-- filter_kind = {
+				-- 	"Class",
+				-- 	"Constructor",
+				-- 	"Enum",
+				-- 	"Function",
+				-- 	"Interface",
+				-- 	"Module",
+				-- 	"Method",
+				-- 	"Struct",
+				-- },
 				-- Determines line highlighting mode when multiple splits are visible.
 				-- split_width   Each open window will have its cursor location marked in the
 				--               aerial buffer. Each line will only be partially highlighted
@@ -509,7 +512,37 @@ return {
 				-- "nerd_font" option below.
 				-- If you have lspkind-nvim installed, it will be the default icon set.
 				-- This can be a filetype map (see :help aerial-filetype-map)
-				icons = {},
+				icons = {
+					Array = "󱡠 ",
+					Boolean = "󰨙 ",
+					Class = "󰆧 ",
+					Constant = "󰏿 ",
+					Constructor = " ",
+					Enum = " ",
+					EnumMember = " ",
+					Event = " ",
+					Field = " ",
+					File = "󰈙 ",
+					Function = " ",
+					-- Function      = "󰊕 ",
+					-- Interface = " ",
+					Interface = " ",
+					Key = "󰌋 ",
+					Method = "󰊕 ",
+					Module = " ",
+					Namespace = "󰦮 ",
+					Null = "󰟢 ",
+					Number = "󰎠 ",
+					Object = " ",
+					Operator = "󰆕 ",
+					Package = " ",
+					Property = " ",
+					String = " ",
+					Struct = "󰆼 ",
+					TypeParameter = "󰗴 ",
+					Variable = "󰀫 ",
+					Collapsed = "+ ",
+				},
 				-- Control which windows and buffers aerial should ignore.
 				-- Aerial will not open when these are focused, and existing aerial windows will not be updated
 				ignore = {
@@ -544,7 +577,7 @@ return {
 				manage_folds = false,
 				-- When you fold code with za, zo, or zc, update the aerial tree as well.
 				-- Only works when manage_folds = true
-				link_folds_to_tree = false,
+				link_folds_to_tree = true,
 				-- Fold code when you open/collapse symbols in the tree.
 				-- Only works when manage_folds = true
 				link_tree_to_folds = true,
@@ -586,13 +619,13 @@ return {
 				-- The autocmds that trigger symbols update (not used for LSP backend)
 				update_events = "TextChanged,InsertLeave",
 				-- Show box drawing characters for the tree hierarchy
-				show_guides = false,
+				show_guides = true,
 				-- Customize the characters used when show_guides = true
 				guides = {
 					-- When the child item has a sibling below it
-					mid_item = "├─",
+					mid_item = "│ ",
 					-- When the child item is the last in the list
-					last_item = "└─",
+					last_item = "└ ",
 					-- When there are nested child guides to the right
 					nested_top = "│ ",
 					-- Raw indentation
@@ -651,9 +684,10 @@ return {
 			})
 		end,
 	},
+
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Outline                                │
+	--   │                           PLUGINS: Outline                           │
 	--   │                                                                      │
 	--   │           https://github.com/simrat39/symbols-outline.nvim           │
 	--   │                                                                      │
@@ -709,7 +743,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                              ToggleTerm                              │
+	--   │                         PLUGINS: ToggleTerm                          │
 	--   │                                                                      │
 	--   │              https://github.com/akinsho/toggleterm.nvim              │
 	--   │                                                                      │
@@ -737,7 +771,6 @@ return {
 				end,
 				highlights = {
 					-- highlights which map to a highlight group name and a table of it's values
-					-- NOTE: this is only a subset of values, any group placed here will be set for the terminal window split
 					Normal = {
 						-- guibg = "<VALUE-HERE>",
 					},
@@ -782,7 +815,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Spectre                                │
+	--   │                          PLUGINS: Spectre                            │
 	--   │                                                                      │
 	--   │              https://github.com/nvim-pack/nvim-spectre               │
 	--   │                                                                      │
@@ -937,7 +970,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                              Telescope                               │
+	--   │                          PLUGINS: Telescope                          │
 	--   │                                                                      │
 	--   │           https://github.com/nvim-telescope/telescope.nvim           │
 	--   │                                                                      │
@@ -1122,7 +1155,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Project                                │
+	--   │                           PLUGINS: Project                           │
 	--   │                                                                      │
 	--   │              https://github.com/ahmedkhalf/project.nvim              │
 	--   │                                                                      │
@@ -1130,8 +1163,7 @@ return {
 
 	{
 		"ahmedkhalf/project.nvim",
-		lazy = true,
-		cmd = "Telescope",
+		-- cmd = "Telescope",
 		-- keys = { { "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
 		-- dependencies = {
 		-- 	"nvim-telescope/telescope.nvim",
@@ -1172,7 +1204,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                              Which_Key                               │
+	--   │                          PLUGINS: Which_Key                          │
 	--   │                                                                      │
 	--   │               https://github.com/folke/which-key.nvim                │
 	--   │                                                                      │
@@ -1212,7 +1244,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Gitsigns                               │
+	--   │                          PLUGINS: Gitsigns                           │
 	--   │                                                                      │
 	--   │              https://github.com/lewis6991/gitsigns.nvim              │
 	--   │                                                                      │
@@ -1313,7 +1345,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                             Pretty_Fold                              │
+	--   │                         PLUGINS: Pretty_Fold                         │
 	--   │                                                                      │
 	--   │            https://github.com/anuvyklack/pretty-fold.nvim            │
 	--   │                                                                      │
@@ -1360,7 +1392,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                              Scrollbar                               │
+	--   │                          PLUGINS: Scrollbar                          │
 	--   │                                                                      │
 	--   │             https://github.com/petertriho/nvim-scrollbar             │
 	--   │                                                                      │
@@ -1513,7 +1545,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                                Marks                                 │
+	--   │                            PLUGINS: Marks                            │
 	--   │                                                                      │
 	--   │               https://github.com/chentoast/marks.nvim                │
 	--   │                                                                      │
@@ -1566,7 +1598,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Asyncrun                               │
+	--   │                          PLUGINS: Asyncrun                           │
 	--   │                                                                      │
 	--   │             https://github.com/skywind3000/asyncrun.vim              │
 	--   │                                                                      │
@@ -1625,7 +1657,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Sayonara                               │
+	--   │                          PLUGINS: Sayonara                           │
 	--   │                                                                      │
 	--   │                https://github.com/mhinz/vim-sayonara                 │
 	--   │                                                                      │
@@ -1638,7 +1670,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                              Colorizer                               │
+	--   │                          PLUGINS: Colorizer                          │
 	--   │                                                                      │
 	--   │            https://github.com/norcalli/nvim-colorizer.lua            │
 	--   │                                                                      │
@@ -1667,7 +1699,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                    PLUGINS:   Todo_Comments                          │
+	--   │                        PLUGINS: Todo_Comments                        │
 	--   │                                                                      │
 	--   │             https://github.com/folke/todo-comments.nvim              │
 	--   │                                                                      │
@@ -1712,12 +1744,12 @@ return {
 						alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
 						-- signs = false, -- configure signs for some keywords individually
 					},
-					TODO = { icon = " ", color = "info" },
-					HACK = { icon = " ", color = "warning" },
-					WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
-					PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+					-- TODO = { icon = " ", color = "info" },
+					-- HACK = { icon = " ", color = "warning" },
+					-- WARN = { icon = " ", color = "warning", alt = { "WARNING", "XXX" } },
+					-- PERF = { icon = " ", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
 					NOTE = { icon = " ", color = "hint", alt = { "INFO", "PLUGINS" } },
-					TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+					-- TEST = { icon = "⏲ ", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
 				},
 				gui_style = {
 					fg = "NONE", -- The gui style to use for the fg highlight group.
@@ -1730,7 +1762,7 @@ return {
 					multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
 					before = "", -- "fg" or "bg" or empty
 					keyword = "wide", -- "fg", "bg", "wide", "wide_bg", "wide_fg" or empty. (wide and wide_bg is the same as bg, but will also highlight surrounding characters, wide_fg acts accordingly but with fg)
-					after = "", -- "fg" or "bg" or empty
+					after = "fg", -- "fg" or "bg" or empty
 					pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
 					comments_only = true, -- uses treesitter to match keywords in comments only
 					max_line_len = 400, -- ignore lines longer than this
@@ -1764,7 +1796,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                                Troble                                │
+	--   │                           PLUGINS: Troble                            │
 	--   │                                                                      │
 	--   │                https://github.com/folke/trouble.nvim                 │
 	--   │                                                                      │
@@ -1793,26 +1825,26 @@ return {
 				close = "<LocalLeader>q", -- close the list
 				cancel = "<esc>", -- cancel the preview and get back to your last window / buffer / cursor
 				refresh = "r", -- manually refresh
-				jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
+				jump = { "<space>", "<tab>" }, -- jump to the diagnostic or open / close folds
 				open_split = { "<c-x>" }, -- open buffer in new split
 				open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
 				open_tab = { "<c-t>" }, -- open buffer in new tab
-				jump_close = { "o" }, -- jump to the diagnostic and close the list
+				jump_close = { "<cr>" }, -- jump to the diagnostic and close the list
 				toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
 				toggle_preview = "P", -- toggle auto_preview
 				hover = "K", -- opens a small popup with the full multiline message
 				preview = "p", -- preview the diagnostic location
 				close_folds = { "zM", "zm" }, -- close all folds
 				open_folds = { "zR", "zr" }, -- open all folds
-				toggle_fold = { "zA", "za" }, -- toggle fold of current file
+				toggle_fold = { "zA", "za", "o" }, -- toggle fold of current file
 				previous = "k", -- previous item
 				next = "j", -- next item
 			},
 			indent_lines = true, -- add an indent guide below the fold icons
 			auto_open = false, -- automatically open the list when you have diagnostics
-			auto_close = false, -- automatically close the list when you have no diagnostics
+			auto_close = true, -- automatically close the list when you have no diagnostics
 			auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-			auto_fold = false, -- automatically fold a file trouble list at creation
+			auto_fold = true, -- automatically fold a file trouble list at creation
 			auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
 			signs = {
 				-- icons / text used for a diagnostic

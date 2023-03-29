@@ -17,7 +17,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               LuaSnip                                │
+	--   │                           PLUGINS: LuaSnip                           │
 	--   │                                                                      │
 	--   │                 https://github.com/L3MON4D3/LuaSnip                  │
 	--   │                                                                      │
@@ -54,7 +54,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                          Friendly_Snippets                           │
+	--   │                      PLUGINS: Friendly_Snippets                      │
 	--   │                                                                      │
 	--   │           https://github.com/rafamadriz/friendly-snippets            │
 	--   │                                                                      │
@@ -70,7 +70,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Nvim_Cmp                               │
+	--   │                          PLUGINS: Nvim_Cmp                           │
 	--   │                                                                      │
 	--   │                 https://github.com/hrsh7th/nvim-cmp                  │
 	--   │                                                                      │
@@ -307,7 +307,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                                Pair                                  │
+	--   │                            PLUGINS: Pair                             │
 	--   │                                                                      │
 	--   │              https://github.com/echasnovski/mini.pairs               │
 	--   │                                                                      │
@@ -323,7 +323,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                                Align                                 │
+	--   │                            PLUGINS: Align                            │
 	--   │                                                                      │
 	--   │              https://github.com/echasnovski/mini.align               │
 	--   │                                                                      │
@@ -333,7 +333,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Surround                               │
+	--   │                          PLUGINS: Surround                           │
 	--   │                                                                      │
 	--   │             https://github.com/echasnovski/mini.surround             │
 	--   │                                                                      │
@@ -377,9 +377,11 @@ return {
 	},
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
-	--   │                               Comment                                │
+	--   │                                                                      │
+	--   │                           PLUGINS: Comment                           │
 	--   │                                                                      │
 	--   │               https://github.com/numToStr/Comment.nvim               │
+	--   │                                                                      │
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
 	{
@@ -426,7 +428,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                             Comment_Box                              │
+	--   │                         PLUGINS: Comment_Box                         │
 	--   │                                                                      │
 	--   │           https://github.com/LudoPinelli/comment-box.nvim            │
 	--   │                                                                      │
