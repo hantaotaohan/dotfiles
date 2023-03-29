@@ -405,7 +405,7 @@ return {
 					min_width = 35,
 					-- key-value pairs of window-local options for aerial window (e.g. winhl)
 					win_opts = {
-						winhighlight = "EndOfBuffer:AerialEndOfBuffer,Normal:AerialNormal,SignColumn:AerialSignColumn,WinSeparator:AerialWinSeparator,VertSplit:AerialVertSplit",
+						winhighlight = "EndOfBuffer:AerialEndOfBuffer,Normal:AerialNormal,SignColumn:AerialSignColumn,WinSeparator:AerialWinSeparator,VertSplit:NeoTreeVertSplit,CursorLineNr:AerialCursorLineNr",
 					},
 					-- Determines the default direction to open the aerial window. The 'prefer'
 					-- options will open the window in the other direction *if* there is a

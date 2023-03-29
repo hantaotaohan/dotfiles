@@ -60,7 +60,8 @@ return {
 			Folded = { fg = "#282C34", bg = "#E0AF68" },
 			FoldColumn = { fg = "#515E6F", bg = "#282C34" },
 			SignColumn = { fg = nil, bg = "#282C34" },
-			VertSplit = { fg = "#3E4452", bg = "#282C34" },
+			-- VertSplit = { fg = "#3E4452", bg = "#282C34" },
+			VertSplit = { fg = "#21252B", bg = "#21252B" },
 			Search = { fg = "#FFFFFF", bg = "#895c9d" },
 			IncSearch = { fg = "#FFFFFF", bg = "#61AFEF" },
 			CurSearch = { fg = "#FFFFFF", bg = "#61AFEF" },
@@ -114,7 +115,7 @@ return {
 			AerialNormal = { fg = nil, bg = "#21252B" },
 			AerialSignColumn = { fg = "#21252B", bg = "#21252B" },
 			AerialWinSeparator = { fg = "#21252B", bg = "#21252B" },
-			AerialVertSplit = { fg = "#21252B", bg = "#21252B", fmt = "bold" },
+			AerialVertSplit = { fg = "#21252B", bg = "#21252B" },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                              DASHBOARD                               │
