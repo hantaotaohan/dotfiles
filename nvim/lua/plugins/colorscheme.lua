@@ -112,10 +112,11 @@ return {
 			--   ╰──────────────────────────────────────────────────────────────────────╯
 
 			AerialEndOfBuffer = { fg = "#21252B", bg = "#21252B" },
-			AerialNormal = { fg = nil, bg = "#21252B" },
+			AerialNormal = { fg = "#ABB2BF", bg = "#21252B" },
 			AerialSignColumn = { fg = "#21252B", bg = "#21252B" },
 			AerialWinSeparator = { fg = "#21252B", bg = "#21252B" },
 			AerialVertSplit = { fg = "#21252B", bg = "#21252B" },
+			AerialGuid2 = { fg = "#3a4646", bg = "#3a4646" },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                              DASHBOARD                               │

@@ -405,7 +405,7 @@ return {
 					min_width = 35,
 					-- key-value pairs of window-local options for aerial window (e.g. winhl)
 					win_opts = {
-						winhighlight = "EndOfBuffer:AerialEndOfBuffer,Normal:AerialNormal,SignColumn:AerialSignColumn,WinSeparator:AerialWinSeparator,VertSplit:NeoTreeVertSplit,CursorLineNr:AerialCursorLineNr",
+						winhighlight = "EndOfBuffer:AerialEndOfBuffer,Normal:AerialNormal,SignColumn:AerialSignColumn,WinSeparator:AerialWinSeparator,VertSplit:NeoTreeVertSplit,CursorLineNr:AerialCursorLineNr,AerialGuide:NeoTreeIndentMarker",
 					},
 					-- Determines the default direction to open the aerial window. The 'prefer'
 					-- options will open the window in the other direction *if* there is a
@@ -498,7 +498,7 @@ return {
 				-- last          Only the most-recently focused window will have its location
 				--               marked in the aerial buffer.
 				-- none          Do not show the cursor locations in the aerial window.
-				highlight_mode = "split_width",
+				highlight_mode = "none",
 				-- Highlight the closest symbol if the cursor is not exactly on one.
 				highlight_closest = true,
 				-- Highlight the symbol in the source buffer when cursor is in the aerial win
@@ -1553,7 +1553,6 @@ return {
 
 	{
 		"chentoast/marks.nvim",
-		lazy = true,
 		keys = { "m", "<Plug>(Marks-set)", "<Plug>(Marks-toggle)" },
 		opts = {
 			-- whether to map keybinds or not. default true
