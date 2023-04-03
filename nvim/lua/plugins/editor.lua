@@ -549,7 +549,46 @@ return {
 					-- Ignore unlisted buffers. See :help buflisted
 					unlisted_buffers = false,
 					-- List of filetypes to ignore.
-					filetypes = {},
+					filetypes = {
+						"TelescopeResults",
+						"query",
+						"tsplayground",
+						"lazy",
+						"lsp-installer",
+						"markdown",
+						"mason",
+						"txt",
+						"dashboard",
+						"alpha",
+						"NvimTree",
+						"undotree",
+						"diff",
+						"fugitive",
+						"fugitiveblame",
+						"Outline",
+						"SidebarNvim",
+						"packer",
+						"lsp-installer",
+						"TelescopePrompt",
+						"help",
+						"telescope",
+						"lspinfo",
+						"Trouble",
+						"null-ls-info",
+						"quickfix",
+						"chadtree",
+						"fzf",
+						"NeogitStatus",
+						"terminal",
+						"console",
+						"term://*",
+						"Term://*",
+						"toggleterm",
+						"qf",
+						"prompt",
+						"noice",
+						"",
+					},
 					-- Ignored buftypes.
 					-- Can be one of the following:
 					-- false or nil - No buftypes are ignored.
@@ -559,7 +598,11 @@ return {
 					-- function     - A function that returns true if the buffer should be
 					--                ignored or false if it should not be ignored.
 					--                Takes two arguments, `bufnr` and `buftype`.
-					buftypes = "special",
+					buftypes = {
+						"special",
+						"terminal",
+						"nofile",
+					},
 					-- Ignored wintypes.
 					-- Can be one of the following:
 					-- false or nil - No wintypes are ignored.
@@ -1327,17 +1370,17 @@ return {
 				end
 
                 -- stylua: ignore start
-                map("n", "]h", gs.next_hunk, "Next Hunk")
-                map("n", "[h", gs.prev_hunk, "Prev Hunk")
-                map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-                map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-                map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
-                map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-                map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-                map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
-                map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
-                map("n", "<leader>ghd", gs.diffthis, "Diff This")
-                map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+                map("n", "]c", gs.next_hunk, "Next Hunk")
+                map("n", "[c", gs.prev_hunk, "Prev Hunk")
+                map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
+                map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+                map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
+                map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
+                map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
+                map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")
+                map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
+                map("n", "<leader>hd", gs.diffthis, "Diff This")
+                map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff This ~")
                 map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
 			end,
 		},
@@ -1400,7 +1443,8 @@ return {
 
 	{
 		"petertriho/nvim-scrollbar",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		event = { "InsertEnter", "CursorMoved" },
 		dependencies = {
 			"lewis6991/gitsigns.nvim",
 		},
@@ -1501,8 +1545,48 @@ return {
 			},
 			excluded_buftypes = {
 				"terminal",
+				"TelescopeResults",
+				"query",
+				"tsplayground",
+				"lazy",
+				"lsp-installer",
+				-- "markdown",
+				"mason",
+				"txt",
+				"dashboard",
+				"alpha",
+				"NvimTree",
+				"undotree",
+				"diff",
+				"fugitive",
+				"fugitiveblame",
+				"Outline",
+				"SidebarNvim",
+				"packer",
+				"lsp-installer",
+				"TelescopePrompt",
+				"help",
+				"telescope",
+				"lspinfo",
+				"Trouble",
+				"null-ls-info",
+				"quickfix",
+				"chadtree",
+				"fzf",
+				"NeogitStatus",
+				"terminal",
+				"console",
+				"term://*",
+				"Term://*",
+				"toggleterm",
+				"qf",
+				"prompt",
+				"noice",
+				-- "",
 			},
 			excluded_filetypes = {
+				"terminal",
+				"nofile",
 				"prompt",
 				"TelescopePrompt",
 				"neo-tree",
@@ -1765,7 +1849,46 @@ return {
 					pattern = [[.*<(KEYWORDS)\s*:]], -- pattern or table of patterns, used for highlighting (vim regex)
 					comments_only = true, -- uses treesitter to match keywords in comments only
 					max_line_len = 400, -- ignore lines longer than this
-					exclude = {}, -- list of file types to exclude highlighting
+					exclude = {
+						"TelescopeResults",
+						"query",
+						"tsplayground",
+						"lazy",
+						"lsp-installer",
+						"markdown",
+						"mason",
+						"txt",
+						"dashboard",
+						"alpha",
+						"NvimTree",
+						"undotree",
+						"diff",
+						"fugitive",
+						"fugitiveblame",
+						"Outline",
+						"SidebarNvim",
+						"packer",
+						"lsp-installer",
+						"TelescopePrompt",
+						"help",
+						"telescope",
+						"lspinfo",
+						"Trouble",
+						"null-ls-info",
+						"quickfix",
+						"chadtree",
+						"fzf",
+						"NeogitStatus",
+						"terminal",
+						"console",
+						"term://*",
+						"Term://*",
+						"toggleterm",
+						"qf",
+						"prompt",
+						"noice",
+						"",
+					},
 				},
 				colors = {
 					error = { "DiagnosticError", "ErrorMsg", "#DC2626" },

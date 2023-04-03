@@ -33,7 +33,6 @@ return {
 			functions = "none",
 			strings = "none",
 			variables = "none",
-			CmpBorder,
 			-- variables = 'italic'
 		},
 

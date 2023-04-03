@@ -669,7 +669,7 @@ return {
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
-	--   │                               Diffview                               │
+	--   │                          PLUGINS: Diffview                           │
 	--   │                                                                      │
 	--   │               https://github.comsindrets/diffview.nvim               │
 	--   │                                                                      │
@@ -678,7 +678,8 @@ return {
 	{
 		"sindrets/diffview.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
-		event = "CmdlineEnter",
+		lazy = true,
+		-- event = "CmdlineEnter",
 		config = function()
 			local actions = require("diffview.actions")
 			require("diffview").setup({
