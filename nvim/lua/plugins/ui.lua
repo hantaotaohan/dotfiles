@@ -257,8 +257,8 @@ return {
 					-- section_separators = { left = '', right = ''},
 
 					disabled_filetypes = {
-						statusline = { "lazy", "alpha" },
-						winbar = { "lazy", "alpha" },
+						statusline = { "alpha" },
+						winbar = { "alpha" },
 					},
 
 					ignore_focus = {},
@@ -893,7 +893,23 @@ return {
 			},
 		},
 		opts = {
-			timeout = 3000,
+			stages = "fade_in_slide_out",
+			on_open = nil,
+			on_close = nil,
+			render = "default",
+			-- timeout = 3500,
+			-- max_width = 150,
+			-- max_height = 25,
+			background_colour = "TabLine",
+			minimum_width = 50,
+			icons = {
+				ERROR = " ",
+				WARN = " ",
+				INFO = " ",
+				DEBUG = " ",
+				TRACE = " ",
+			},
+			timeout = 3500,
 			max_height = function()
 				return math.floor(vim.o.lines * 0.75)
 			end,

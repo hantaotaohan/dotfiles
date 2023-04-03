@@ -67,7 +67,7 @@ opt.fillchars:append("fold:─") -- 填充折叠文本的分隔符
 opt.fillchars:append("foldopen:⯆") -- 标记折叠打开
 opt.fillchars:append("foldsep:│") -- 展开后的折叠标记
 opt.fillchars:append("foldclose:⯈") -- 标记折叠关闭
-opt.fillchars:append("diff: ") -- DIFF 已删除的行标记
+opt.fillchars:append("diff:") -- DIFF 已删除的行标记
 opt.fillchars:append("msgsep:‾") -- 消息分隔符
 opt.fillchars:append("eob: ") -- 缓冲区末尾的空行
 -- opt.fillchars:append("lastline: ")                                             -- 包含最后一行/截断
