@@ -56,7 +56,7 @@ return {
 			CursorLineNr = { fg = "#61AFEF", bg = "#2C313C" },
 			CursorLineSign = { fg = nil, bg = "#2C313C" },
 			CursorLineFold = { fg = nil, bg = "#2C313C" },
-			Folded = { fg = "#282C34", bg = "#E0AF68" },
+			Folded = { fg = "#282C34", bg = "#95E3D6" },
 			FoldColumn = { fg = "#515E6F", bg = "#282C34" },
 			SignColumn = { fg = nil, bg = "#282C34" },
 			-- VertSplit = { fg = "#3E4452", bg = "#282C34" },

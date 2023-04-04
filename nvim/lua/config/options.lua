@@ -4,6 +4,8 @@ local o = vim.o
 local opt = vim.opt
 local VIM_DATA_PATH = vim.fn.stdpath("data")
 
+vim.o.guifont = "SarasaMonoSlabSC_Nerd_Font:h12"
+
 -- LEADER --
 
 vim.g.mapleader = "\\" -- 设置Leader

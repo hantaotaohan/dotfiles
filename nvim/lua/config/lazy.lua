@@ -124,10 +124,6 @@ vim.g.loaded_perl_provider = 0 -- 屏蔽 PERL
 vim.g.loaded_node_provider = 0 -- 屏蔽 NODE
 
 if vim.g.neovide then
-	vim.api.nvim_command("set guifont=Sarasa\\ Mono\\ Slab\\ SC\\ Nerd\\ Font:h22")
-	-- vim.g.guifont = "Sarasa_Mono_Slab_SC_Nerd_Font:h9"
-	-- vim.o.guifont = "Sarasa_Mono_SC_Nerd:h32"
-
 	vim.g.neovide_refresh_rate = 60
 	vim.g.neovide_transparency = 1.0
 

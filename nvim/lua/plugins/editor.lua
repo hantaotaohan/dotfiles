@@ -1401,7 +1401,7 @@ return {
 			keep_indentation = false,
 			remove_fold_markers = true,
 			process_comment_signs = false,
-			fill_char = "━",
+			fill_char = "─",
 			sections = {
 				left = {
 					"",
@@ -1410,10 +1410,13 @@ return {
 					end,
 					" ██ ",
 					"content",
-					"██  ",
+					-- function()
+					-- 	return string.format("%30s", content)
+					-- end,
+					" ██ ",
 				},
 				right = {
-					"  ██  ",
+					" ██ ",
 					"number_of_folded_lines",
 					": ",
 					"percentage",
