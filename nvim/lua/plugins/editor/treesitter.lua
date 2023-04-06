@@ -9,8 +9,12 @@
 return {
 
 	"nvim-treesitter/nvim-treesitter",
+	lazy = true,
+	module = false,
 	dependencies = {
 		"HiPhish/nvim-ts-rainbow2",
+		lazy = true,
+		module = false,
 	},
 	version = false,
 	build = ":TSUpdate",
@@ -23,7 +27,6 @@ return {
 	opts = {
 		ensure_installed = {
 			"bash",
-			"help",
 			"html",
 			"javascript",
 			"json",
