@@ -61,8 +61,8 @@ return {
 
 	-- { "akinsho/bufferline.nvim", enabled = false },
 	-- { "nvim-lualine/lualine.nvim", enabled = false },
-	-- { "folke/noice.nvim", enabled = false },
-	-- { "rcarriga/nvim-notify", enabled = false },
+	{ "folke/noice.nvim", enabled = false },
+	{ "rcarriga/nvim-notify", enabled = false },
 	-- { "lukas-reineke/indent-blankline.nvim", enabled = false },
 	{ "glepnir/dashboard-nvim", enabled = false },
 	-- { "nvim-tree/nvim-web-devicons", enabled = false },

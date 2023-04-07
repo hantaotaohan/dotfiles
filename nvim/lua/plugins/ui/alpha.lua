@@ -248,7 +248,8 @@ return {
 					"  Recent File",
 					"<cmd>lua require'telescope.builtin'.oldfiles(require('telescope.themes').get_dropdown({ previewer = false }))<cr>"
 				),
-				button("m", "  Mason Plugins", "<cmd>Mason<CR>"),
+				button("v", "  Neovim RC", "<cmd>Neotree position=float dir=$HOME/.config/nvim<cr>"),
+				button("P", "  Enter Projects", "<cmd>Neotree position=float dir=$HOME/desktop<CR>"),
 				button("u", "  Update Plugins", "<cmd>Lazy sync<CR>"),
 				button("q", "  Quit", "<cmd>Smartq<cr>"),
 			},

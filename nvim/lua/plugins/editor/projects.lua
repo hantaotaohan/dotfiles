@@ -8,7 +8,7 @@
 
 return {
 	"ahmedkhalf/project.nvim",
-	even = "VeryLazy",
+	event = "VeryLazy",
 	-- cmd = "Telescope",
 	-- keys = { { "<LocalLeader>fp", "<Cmd>Telescope projects<CR>", desc = "Recent projects" } },
 	-- dependencies = {
