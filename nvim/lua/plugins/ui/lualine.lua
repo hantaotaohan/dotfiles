@@ -9,8 +9,8 @@
 return {
 
 	"nvim-lualine/lualine.nvim",
-	-- event = "VeryLazy",
-	lazy = true,
+	event = "VeryLazy",
+	-- lazy = true,
 	config = function()
 		local icons = require("config.utility").icons
 

@@ -14,6 +14,7 @@ return {
 	--   │                                                                      │
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
+	-- { "echasnovski/mini.align", enabled = false },
 	-- { "L3MON4D3/LuaSnip", enabled = false },
 	-- { "rafamadriz/friendly-snippets", enabled = false },
 	-- { "hrsh7th/nvim-cmp", enabled = false },
@@ -75,8 +76,8 @@ return {
 	-- { "nvim-treesitter/nvim-treesitter", enabled = false },
 
 	-- { "neovim/nvim-lspconfig", enabled = false },
-	-- { "folke/neoconf.nvim", enabled = false },
-	-- { "folke/neodev.nvim", enabled = false },
+	{ "folke/neoconf.nvim", enabled = false },
+	{ "folke/neodev.nvim", enabled = false },
 	-- { "williamboman/mason.nvim", enabled = false },
 	-- { "williamboman/mason-lspconfig.nvim", enabled = false },
 	-- { "jose-elias-alvarez/null-ls.nvim", enabled = false },
