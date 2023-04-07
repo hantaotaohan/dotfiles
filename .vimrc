@@ -872,7 +872,7 @@ if exists('g:plugs["lightline.vim"]')
             return ''
         endif
 
-        return winwidth(0) > 70 ? '⭕ ' .  &fileformat : ''
+        return winwidth(0) > 70 ? '╲  ' . &fileformat : ''
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
@@ -883,7 +883,7 @@ if exists('g:plugs["lightline.vim"]')
             return ''
         endif
 
-        return winwidth(0) > 70 ? (&filetype !=# '' ? '⭕ '  . &filetype . ' ' : 'no ft') : ''
+        return winwidth(0) > 70 ? (&filetype !=# '' ? '╲  '  . &filetype . ' ' : 'no ft') : ''
     endfunction
 
 " --------------------------------------------------------------o----------------------------------------------------------------o
