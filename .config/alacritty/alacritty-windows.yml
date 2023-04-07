@@ -32,16 +32,16 @@ window:
   # least `2`, while using a value of `0` for columns and lines will fall back
   # to the window manager's recommended size
   dimensions:
-   columns: 210
-   lines: 310
+   columns: 200
+   lines: 30
 
   # Window position (changes require restart)
   #
   # Specified in number of pixels.
   # If the position is not set, the window manager will handle the placement.
   position:
-   x: 0
-   y: 0
+   x: 250
+   y: 250
 
   # Window padding (changes require restart)
   #
@@ -52,7 +52,7 @@ window:
    y: 10
 
   # Spread additional padding evenly around the terminal content.
-  dynamic_padding: false
+  dynamic_padding: true
 
   # Window decorations
   #
@@ -135,7 +135,8 @@ font:
     family: 等距更纱黑体 SC Nerd Font
 
     # The `style` can be specified to pick a specific face.
-    style: Semibold
+    # style: Semibold
+    style: Bold
 
   # Bold font face
   bold:
@@ -171,7 +172,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 11.0
+  size: 11.5
 
   # Offset is the extra space around each character. `offset.y` can be thought
   # of as modifying the line spacing, and `offset.x` as modifying the letter
@@ -210,8 +211,8 @@ colors:
     # present. If the bright foreground color is not set, or
     # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
     # color will be used.
-    # dim_foreground: '#828482'
-    # bright_foreground: '#eaeaea'
+  dim_foreground: '#828482'
+  bright_foreground: '#eaeaea'
 
   # Cursor colors
   #
@@ -220,8 +221,10 @@ colors:
   # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   cursor:
-   text: CellBackground
-   cursor: CellForeground
+  #  text: CellBackground
+  #  cursor: CellForeground
+   text: "#282C34"
+   cursor: "#ABB2BF"
 
   # Vi mode cursor colors
   #
@@ -451,7 +454,8 @@ live_config_reload: true
 # Default:
 #   - (Linux/BSD/macOS) `$SHELL` or the user's login shell, if `$SHELL` is unset
 #   - (Windows) powershell
-# shell:
+shell:
+  program: "C:\\Windows\\System32\\wsl.exe ~"
 #  program: powershell
 #  args:
 #    - --Nologin
