@@ -105,7 +105,7 @@ window:
   # Resize increments
   #
   # Prefer resizing window by discrete steps equal to cell dimensions.
-  resize_increments: false
+  resize_increments: true
 
   # Make `Option` key behave as `Alt` (macOS only):
   #   - OnlyLeft
@@ -132,7 +132,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: 等距更纱黑体 SC Nerd Font
+    family: Sarasa Mono Slab SC Nerd Font
 
     # The `style` can be specified to pick a specific face.
     # style: Semibold
@@ -144,7 +144,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: 等距更纱黑体 SC Nerd Font
+    family: Sarasa Mono Slab SC Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -155,7 +155,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: 等距更纱黑体 SC Nerd Font
+    family: Sarasa Mono Slab SC Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -166,7 +166,7 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: 等距更纱黑体 SC Nerd Font
+    family: Sarasa Mono Slab SC Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
@@ -372,7 +372,7 @@ colors:
 
   # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
   # disable the visual bell animation.
-  #duration: 0
+  # duration: 0
 
   # Visual bell animation color.
   #color: '#ffffff'
