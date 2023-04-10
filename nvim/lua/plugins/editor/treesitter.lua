@@ -14,12 +14,12 @@ return {
 		{
 			"HiPhish/nvim-ts-rainbow2",
 			lazy = true,
-			enbaled = true,
+			enabled = true,
 		},
 		{
 			"windwp/nvim-ts-autotag",
 			lazy = true,
-			enbaled = true,
+			enabled = true,
 		},
 		{
 			"JoosepAlviste/nvim-ts-context-commentstring",
@@ -29,7 +29,7 @@ return {
 		{
 			"nvim-treesitter/nvim-treesitter-context",
 			lazy = true,
-			enbaled = true,
+			enabled = true,
 			config = function()
 				require("treesitter-context").setup({
 					enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
@@ -49,8 +49,8 @@ return {
 	build = ":TSUpdate",
 	event = { "BufReadPost", "BufNewFile" },
 	keys = {
-		{ "<Enter>", desc = "Increment selection" },
-		{ "<bs>", desc = "Schrink selection", mode = "x" },
+		{ "<space><space>", desc = "Increment selection" },
+		{ "<space><bs>", desc = "Schrink selection", mode = "x" },
 	},
 
 	opts = {

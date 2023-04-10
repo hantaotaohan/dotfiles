@@ -217,17 +217,37 @@ opt.whichwrap = "" -- 设置光标是否可以跨行
 opt.startofline = false -- 是否开启光标移动到第一个非空白行
 opt.encoding = "utf-8" -- 设置字符串的编码
 opt.fileencoding = "utf-8" -- 设置当前缓冲区的文件内容编码
--- opt.clipboard = "unnamedplus" -- 同步系统剪贴板
 
-local clipboard_config = function()
+-- if vim.fn.has("wsl") == 1 then
+-- 	vim.o.clipboard = "unnamedplus" -- 同步系统剪贴板
+-- 	vim.g.clipboard = {
+-- 		name = "WslClipboard",
+-- 		copy = {
+-- 			["+"] = "clip.exe",
+-- 			["*"] = "clip.exe",
+-- 		},
+-- 		paste = {
+-- 			["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+-- 			["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+-- 		},
+-- 		cache_enabled = 0,
+-- 	}
+-- end
+if vim.fn.has("wsl") == 1 then
+	vim.o.clipboard = "unnamedplus" -- 同步系统剪贴板
 	vim.g.clipboard = {
-		name = "macOS-clipboard",
-		copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
-		paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
+		name = "Clipboard-Wsl",
+		copy = {
+			["+"] = "win32yank.exe -i --crlf",
+			["*"] = "win32yank.exe -i --crlf",
+		},
+		paste = {
+			["+"] = "win32yank.exe -o --lf",
+			["*"] = "win32yank.exe -o --lf",
+		},
 		cache_enabled = 0,
 	}
 end
-clipboard_config()
 
 opt.confirm = true -- 是否在在退出修改后的缓冲区之前确认保存更改
 opt.formatoptions = "jcroqlnt" -- 文档格式化设置
