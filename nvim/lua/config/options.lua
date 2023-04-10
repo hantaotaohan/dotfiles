@@ -217,7 +217,18 @@ opt.whichwrap = "" -- 设置光标是否可以跨行
 opt.startofline = false -- 是否开启光标移动到第一个非空白行
 opt.encoding = "utf-8" -- 设置字符串的编码
 opt.fileencoding = "utf-8" -- 设置当前缓冲区的文件内容编码
--- opt.clipboard = "unnamedplus"                                                  -- 同步系统剪贴板
+-- opt.clipboard = "unnamedplus" -- 同步系统剪贴板
+
+local clipboard_config = function()
+	vim.g.clipboard = {
+		name = "macOS-clipboard",
+		copy = { ["+"] = "pbcopy", ["*"] = "pbcopy" },
+		paste = { ["+"] = "pbpaste", ["*"] = "pbpaste" },
+		cache_enabled = 0,
+	}
+end
+clipboard_config()
+
 opt.confirm = true -- 是否在在退出修改后的缓冲区之前确认保存更改
 opt.formatoptions = "jcroqlnt" -- 文档格式化设置
 opt.joinspaces = false -- 合并上下两行时不加入空格
