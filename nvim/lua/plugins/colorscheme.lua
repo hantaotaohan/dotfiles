@@ -346,6 +346,8 @@ return {
 			-- TSInclude = { fg = "#c678dd", bg = nil, nil },
 			-- TSConditional = { fg = "#c678dd", bg = nil, nil },
 
+			TreesitterContextBottom = { fg = nil, bg = nil, fmt = "bold" },
+
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                             INDENTBLANK                              │
 			--   ╰──────────────────────────────────────────────────────────────────────╯

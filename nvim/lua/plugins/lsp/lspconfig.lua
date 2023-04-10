@@ -27,7 +27,7 @@ return {
 		-- options for vim.diagnostic.config()
 		diagnostics = {
 			underline = true,
-			update_in_insert = false,
+			update_in_insert = true,
 			virtual_text = false,
 			-- virtual_text = {
 			-- 	spacing = 8,
