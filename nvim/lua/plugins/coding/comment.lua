@@ -33,8 +33,8 @@ return {
 				extra = false,
 				extended = false,
 			},
-			-- pre_hook = nil,
-			pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+			pre_hook = nil,
+			-- pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
 			post_hook = nil,
 		})
 	end,

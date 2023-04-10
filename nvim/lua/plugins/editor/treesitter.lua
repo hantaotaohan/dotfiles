@@ -24,7 +24,7 @@ return {
 		{
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			lazy = true,
-			enabled = true,
+			enabled = false,
 		},
 		{
 			"nvim-treesitter/nvim-treesitter-context",
@@ -82,7 +82,7 @@ return {
 		},
 
 		context_commentstring = {
-			enable = true,
+			enable = false,
 			enable_autocmd = false,
 		},
 
