@@ -31,7 +31,8 @@ return {
 		},
 		{
 			"<LocalLeader>e",
-			":Neotree toggle reveal_force_cwd<cr>",
+			-- ":Neotree toggle reveal_force_cwd<cr>",
+			":NeoTreeFocusToggle<cr>",
 			desc = "Toggle file tree (sidebar)",
 			silent = true,
 		},
