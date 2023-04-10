@@ -95,7 +95,8 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 # --------------------------------------------------------------------------------------------------------------------------------
 
 alias pbcopy='clip.exe'
-alias pbpaste="powershell.exe -command 'Get-Clipboard' | tr -d '\r' | head -n -1"
+# alias pbpaste="powershell.exe -command 'Get-Clipboard' | tr -d '\r' | head -n -1"
+alias pbpaste="powershell.exe -command Get-Clipboard | sed '$d' | tr -d '\r'"
 
 # --------------------------------------------------------------------------------------------------------------------------------
 # OTHER
