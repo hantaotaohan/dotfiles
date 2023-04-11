@@ -57,7 +57,7 @@ end
 --   │                             Toggle Alpha                             │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-if Has("comment-box.nvim") then
+if Has("alpha-nvim") then
 	map({ "n", "i", "v" }, "<LocalLeader>s", "<cmd>Alpha<cr>", { desc = "Alpha" })
 end
 
@@ -65,7 +65,9 @@ end
 --   │                             Toggle Lazy                              │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("n", "<leader>tl", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+if Has("lazy.nvim") then
+	map("n", "<leader>tl", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+end
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                            Toggle Options                            │
@@ -101,32 +103,32 @@ map({ "n", "v" }, "Q", "<Nop>")
 --   │                        Display Center Sceener                        │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("n", "(", "(zz")
-map("n", ")", ")zz")
-map("n", "{", "{zz")
-map("n", "}", "}zz")
-map("n", "[[", "[[zz", { noremap = true })
-map("n", "]]", "]]zz", { noremap = true })
-map("n", "n", "nzz")
-map("n", "N", "Nzz")
-map("n", "g;", "g;zz")
-map("n", "g,", "g,zz")
-map("n", "<C-f>", "<C-f>zz")
-map("n", "<C-b>", "<C-b>zz")
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
+map("n", "(", "(zz", { desc = "Sentences Prev" })
+map("n", ")", ")zz", { desc = "Sentences Next" })
+map("n", "{", "{zz", { desc = "Paragraph Prev" })
+map("n", "}", "}zz", { desc = "Paragraph Next" })
+map("n", "[[", "[[zz", { noremap = true, desc = "Sections Prev" })
+map("n", "]]", "]]zz", { noremap = true, desc = "Sections Next" })
+map("n", "n", "nzz", { desc = "Search Next" })
+map("n", "N", "Nzz", { desc = "Search Prev" })
+map("n", "g;", "g;zz", { desc = "Changelist Prev" })
+map("n", "g,", "g,zz", { desc = "Changelist Next" })
+map("n", "<C-f>", "<C-f>zz", { desc = "Scroll Half Down" })
+map("n", "<C-b>", "<C-b>zz", { desc = "Scroll Half Up" })
+map("n", "<C-d>", "<C-d>zz", { desc = "Scroll Full Down" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Scroll Full Up" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                          Mapping For Paste                           │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("x", "p", '"_dP', { silent = true, desc = "dont copy replaced text" })
+map("x", "p", '"_dP', { silent = true, desc = "Dont Copy Replaced Text" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                          Move Selected Line                          │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("x", "J", ":move '>+1<CR>gv-gv", { silent = true })
+map("x", "J", ":move '>+1<CR>gv-gv", { silent = true, desc = "11111111111111111111111111111111" })
 map("x", "K", ":move '<-2<CR>gv-gv", { silent = true })
 
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -229,10 +231,10 @@ map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
 if Has("comment-box.nvim") then
-	map({ "n", "v" }, "gbb", "<CMD>CBccbox<CR>")
-	map({ "n", "v" }, "gbv", "<CMD>CBccbox21<CR>")
-	map({ "n", "v" }, "gbh", "<CMD>CBline5<CR>")
-	map({ "n", "v" }, "gbj", "<CMD>CBline6<CR>")
+	map({ "n", "v" }, "gco", "<CMD>CBccbox<CR>")
+	map({ "n", "v" }, "gcO", "<CMD>CBccbox21<CR>")
+	map({ "n", "v" }, "gcl", "<CMD>CBline5<CR>")
+	map({ "n", "v" }, "gcL", "<CMD>CBline6<CR>")
 end
 
 --   ╭──────────────────────────────────────────────────────────────────────╮

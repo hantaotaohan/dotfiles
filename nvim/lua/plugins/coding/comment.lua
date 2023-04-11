@@ -17,7 +17,7 @@ return {
 			ignore = nil,
 			toggler = {
 				line = "gcc",
-				block = "gbc",
+				block = "gcb",
 			},
 			opleader = {
 				line = "gc",
