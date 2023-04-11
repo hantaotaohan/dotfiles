@@ -19,7 +19,6 @@ end
 
 local function map(mode, lhs, rhs, opts)
 	local keys = require("lazy.core.handler").handlers.keys
-	---@cast keys LazyKeysHandler
 	-- do not create the keymap if a lazy keys handler exists
 	if not keys.active[keys.parse({ lhs, mode = mode }).id] then
 		opts = opts or {}
@@ -206,7 +205,7 @@ end
 --   │                          Enhanced semicolon                          │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("n", ";;", ";", { desc = "Escape and clear hlsearch" })
+map("n", ";;", ";", { desc = "Next Word" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                           Better Indenting                           │
@@ -218,8 +217,6 @@ map("x", ">", ">gv")
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                               New File                               │
 --   ╰──────────────────────────────────────────────────────────────────────╯
-
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
 
 -- quit
 map("n", "<LocalLeader>Q", "<cmd>qa<cr>", { desc = "Quit all" })

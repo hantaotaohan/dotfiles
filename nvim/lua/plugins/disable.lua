@@ -50,10 +50,10 @@ return {
 	-- { "petertriho/nvim-scrollbar", enabled = false },
 	-- { "windwp/nvim-spectre", enabled = false },
 	-- { "nvim-telescope/telescope.nvim", enabled = false },
-	-- { "folke/todo-comments.nvim", enabled = false },
+	{ "folke/todo-comments.nvim", enabled = false },
 	-- { "akinsho/toggleterm.nvim", enabled = false },
 	-- { "nvim-treesitter/nvim-treesitter", enabled = false },
-	-- { "folke/trouble.nvim", enabled = false },
+	{ "folke/trouble.nvim", enabled = false },
 	-- { "folke/which-key.nvim", enabled = false },
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮

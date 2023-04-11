@@ -24,6 +24,7 @@ return {
 		vim.o.timeout = true
 		vim.o.timeoutlen = 300
 		local wk = require("which-key")
+		local functions = require("config.function")
 		require("which-key").setup({
 			plugins = {
 				marks = false, -- shows a list of your marks on ' and `
@@ -121,21 +122,38 @@ return {
 					r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
 					n = { "<cmd>enew<cr>", "New File" },
 				},
+				s = { "Display Alpha" },
+				t = { "Display Outline" },
+				q = { "Sayonara" },
+				Q = { "Quit All" },
+				w = { "Save" },
+				["<Tab>"] = { "Next Buffer" },
+				["<S-Tab>"] = { "Prev Buffer" },
 			},
 		})
 
 		-- method 3
 		wk.register({
-			["<leader>f"] = {
-				name = "+file",
-				f = { "<cmd>Telescope find_files<cr>", "Find File" },
-				r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-				n = { "<cmd>enew<cr>", "New File" },
+			["<leader>t"] = {
+				name = "+Toggle",
+				l = { "Toggle Lazy" },
+				s = { "Toggle Spell" },
+				w = { "Toggle Wrap" },
+				n = { functions.toggle_number, "Toggle Number" },
+				t = { functions.toggle_syntax, "Toggle Syntax" },
+				q = { functions.toggle_quickfix, "Toggle QuickFix" },
+				c = { functions.toggle_colorcolumn, "Toggle Colorcolumn" },
+				d = { functions.toggle_diagnostics, "Toggle Diagnostics" },
+				o = { "Toggle Colorizer" },
 			},
 		})
 
 		-- method 4
 		wk.register({
+			g = {
+				name = "+Comment",
+				bb = { "Comment" },
+			},
 			["<leader>f"] = { name = "+file" },
 			["<leader>ff"] = { "<cmd>Telescope find_files<cr>", "Find File" },
 			["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
