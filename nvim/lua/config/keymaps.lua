@@ -122,13 +122,13 @@ map("n", "<C-u>", "<C-u>zz", { desc = "Scroll Full Up" })
 --   │                          Mapping For Paste                           │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("x", "p", '"_dP', { silent = true, desc = "Dont Copy Replaced Text" })
+map("x", "p", '"_dP', { silent = true, desc = "Paste Dont Copy Replaced Text" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                          Move Selected Line                          │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("x", "J", ":move '>+1<CR>gv-gv", { silent = true, desc = "11111111111111111111111111111111" })
+map("x", "J", ":move '>+1<CR>gv-gv", { silent = true })
 map("x", "K", ":move '<-2<CR>gv-gv", { silent = true })
 
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -150,7 +150,7 @@ map({ "i", "v", "n", "s" }, "<LocalLeader>w", "<cmd>w<cr><esc>", { desc = "Save 
 --   │                             Clear Search                             │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("n", "<Esc><Esc>", "<cmd>nohlsearch<cr>", { desc = "Escape and clear hlsearch" })
+map("n", "<Esc><Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear hlsearch" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                 Clear Search, Diff Update And Redraw                 │
@@ -177,18 +177,18 @@ map({ "i", "t" }, "<C-w>", "<C-\\><C-n><C-w>")
 --   │                            Resize Window                             │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
-map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })
-map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
+map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase Height" })
+map("n", "<C-Down>", "<cmd>resize -2<cr>", { desc = "Decrease Height" })
+map("n", "<C-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Width" })
+map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Width" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                           Buffers Changes                            │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
 if Has("bufferline.nvim") then
-	map("n", "<LocalLeader><S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
-	map("n", "<LocalLeader><Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+	map("n", "<LocalLeader><S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
+	map("n", "<LocalLeader><Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
 	map("n", "<LocalLeader>1", "<cmd>BufferLineGoToBuffer 1<cr>", { desc = "Buffer To 1" })
 	map("n", "<LocalLeader>2", "<cmd>BufferLineGoToBuffer 2<cr>", { desc = "Buffer To 2" })
 	map("n", "<LocalLeader>3", "<cmd>BufferLineGoToBuffer 3<cr>", { desc = "Buffer To 3" })
@@ -199,8 +199,8 @@ if Has("bufferline.nvim") then
 	map("n", "<LocalLeader>8", "<cmd>BufferLineGoToBuffer 8<cr>", { desc = "Buffer To 8" })
 	map("n", "<LocalLeader>9", "<cmd>BufferLineGoToBuffer 9<cr>", { desc = "Buffer To 9" })
 else
-	map("n", "<LocalLeader><S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
-	map("n", "<LocalLeader><Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+	map("n", "<LocalLeader><S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+	map("n", "<LocalLeader><Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 end
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
@@ -221,10 +221,10 @@ map("x", ">", ">gv")
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
 -- quit
-map("n", "<LocalLeader>Q", "<cmd>qa<cr>", { desc = "Quit all" })
+map("n", "<LocalLeader>Q", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- Terminal Normal Mode
-map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Normal Mode" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                            Commant - Box                             │
@@ -241,7 +241,7 @@ end
 --   │                              ToggleTerm                              │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map("t", "<LocalLeader>c", "<cmd>ToggleTerm<cr>", { desc = "Previous Tab" })
+map("t", "<LocalLeader>c", "<cmd>ToggleTerm<cr>", { desc = "Toggle Terminal" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                         Telescope - Projects                         │
@@ -252,7 +252,7 @@ if Has("telescope.nvim") then
 		"n",
 		"<LocalLeader>fp",
 		"<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({hidden=true}))<cr>",
-		{ desc = "Recent projects" }
+		{ desc = "Projects" }
 	)
 end
 

@@ -56,7 +56,7 @@ return {
 			CursorLineNr = { fg = "#61AFEF", bg = "#2C313C" },
 			CursorLineSign = { fg = nil, bg = "#2C313C" },
 			CursorLineFold = { fg = nil, bg = "#2C313C" },
-			Folded = { fg = "#282C34", bg = "#95E3D6" },
+			Folded = { fg = "#282C34", bg = "#E7C787" },
 			FoldColumn = { fg = "#515E6F", bg = "#282C34" },
 			SignColumn = { fg = nil, bg = "#282C34" },
 			-- VertSplit = { fg = "#3E4452", bg = "#282C34" },
@@ -347,6 +347,9 @@ return {
 			-- TSConditional = { fg = "#c678dd", bg = nil, nil },
 
 			TreesitterContextBottom = { fg = nil, bg = nil, fmt = "bold" },
+			TreesitterContext = { fg = nil, bg = nil, fmt = "bold" },
+			TreesitterContextLineNumbe = { fg = "#5c6370", bg = nil, fmt = "bold" },
+			TreesitterContextLineNumber = { fg = "#5c6370", bg = nil, fmt = "bold" },
 
 			--   ╭──────────────────────────────────────────────────────────────────────╮
 			--   │                             INDENTBLANK                              │

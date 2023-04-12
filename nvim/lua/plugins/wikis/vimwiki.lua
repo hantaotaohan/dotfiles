@@ -72,10 +72,10 @@ return {
                 augroup VimWikiSettings
                     autocmd!
                     let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1']
-                    autocmd FileType vimwiki.markdown highlight MarkdownTrailingSpaces ctermbg=green guibg=green
                     autocmd FileType vimwiki.markdown syntax match MarkdownTrailingSpaces "\s\{4}.*$"
                     autocmd FileType vimwiki.markdown syntax region VimwikiBlockquote start=/^\s*>/ end="$"
-                    autocmd FileType vimwiki.markdown highlight VimwikiBlockquote guifg=#545965 guibg=#23272E
+                    autocmd FileType vimwiki.markdown highlight VimwikiBlockquote guifg=#6d7179 guibg=#21252B
+                    autocmd FileType vimwiki.markdown highlight MarkdownTrailingSpaces guifg=#abb2bf guibg=#393b40 
                     autocmd BufEnter *.md if &ft == "vimwiki.markdown" | setlocal filetype=vimwiki.markdown | endif
                     autocmd FileType vimwiki.markdown highlight VimwikiLink       guifg=#61afef
                     autocmd FileType vimwiki.markdown highlight VimwikiHeader1    guifg=#e5c07b
@@ -91,6 +91,7 @@ return {
                     autocmd FileType vimwiki.markdown highlight VimwikiH5Folding  guifg=#8096BF
                     autocmd FileType vimwiki.markdown highlight VimwikiH6Folding  guifg=#8096BF
                     autocmd FileType vimwiki.markdown highlight VimwikiBold       guifg=#E06C75
+                    autocmd FileType vimwiki.markdown highlight VimwikiItalic     guifg=#e5c07b  cterm=bold,italic gui=bold,italic
             ]])
 	end,
 }

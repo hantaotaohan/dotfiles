@@ -16,23 +16,23 @@ return {
 		fill_char = "─",
 		sections = {
 			left = {
-				"",
+				"  ┃",
 				function()
 					return string.rep(" FOLDED ", vim.v.foldlevel)
 				end,
-				" ██ ",
+				"┃   ",
 				"content",
 				-- function()
 				-- 	return string.format("%30s", content)
 				-- end,
-				" ██ ",
+				"┣",
 			},
 			right = {
-				" ██ ",
+				"┫  ",
 				"number_of_folded_lines",
 				": ",
 				"percentage",
-				"   ",
+				"  ┃  ",
 			},
 		},
 		matchup_patterns = {

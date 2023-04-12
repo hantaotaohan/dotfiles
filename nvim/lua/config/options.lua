@@ -263,12 +263,13 @@ opt.complete = ".,w,b,k" -- 补全文档库模式
 opt.completeopt = "menu,menuone,noselect" -- 插入模式时的补全范围设置
 
 opt.foldenable = true -- 是否开启折叠功能
-opt.foldlevel = 0 -- 设置折叠级别: 具有较高级别的折叠将被关闭
+opt.foldlevel = 1 -- 设置折叠级别: 具有较高级别的折叠将被关闭
 opt.foldnestmax = 1 -- 设置 "缩进" 和 "语法" 的最大折叠嵌套方法. 这样可以避免创建过多的折叠
 opt.foldcolumn = "1" -- 何时以及如何绘制折叠列.
-opt.foldmethod = "manual" -- 用于当前窗口的折叠类型
+opt.foldmethod = "marker" -- 用于当前窗口的折叠类型
 opt.foldlevelstart = 99 -- 打开文件时, 始终关闭所有折叠
-opt.foldopen:remove("hor") -- 自动打开折叠的行为
+opt.foldopen:remove("all") -- 自动打开折叠的行为
+opt.foldclose:append("all")
 
 -- OTHER --
 
@@ -276,3 +277,5 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 	opt.splitkeep = "screen" -- 该选项的值决定了打开时的滚动行为
 	opt.shortmess:append({ C = true }) -- 扫描ins完成shm-C时不要发送消息项目, 例如"扫描标签"
 end
+
+vim.g.markdown_recommended_style = 0
