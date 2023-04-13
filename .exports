@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # ================================================================================================================================
-#                                                                                                                                 
-#                                                             Exports                                                            
-#                                                                                                                                                                                                 
-#                                                       Update: 2023.01.09                                                      
-#                                                                                                                                 
+#
+#                                                             Exports
+#
+#                                                       Update: 2023.01.09
+#
 # ================================================================================================================================
 
 # ================================================================================================================================
@@ -12,11 +12,17 @@
 # ================================================================================================================================
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
-# DEFINE NVIM  VARIABLES 
+# DEFINE PROXY
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
-export GITHUB="https://hub.nuaa.cf/"
-# export GITHUB="https://www.github.com/"
+# export ALL_PROXY="http://127.0.0.1:38457"
+
+# --------------------------------------------------------------o----------------------------------------------------------------o
+# DEFINE NVIM  VARIABLES
+# --------------------------------------------------------------o----------------------------------------------------------------o
+
+export GITHUB="https://www.github.com/"
+# export GITHUB="https://hub.nuaa.cf/"
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 # SYSTEM PATH
@@ -30,13 +36,13 @@ export PATH="$HOME/.local/bin:$PATH"
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
 if [ -f "/usr/bin/i3" ]; then
-    export LANG="zh_CN.UTF-8"
-    export LANGUAGE="zh_CN.UTF-8"
-    export LC_CTYPE="zh_CN.UTF-8"
+	export LANG="zh_CN.UTF-8"
+	export LANGUAGE="zh_CN.UTF-8"
+	export LC_CTYPE="zh_CN.UTF-8"
 else
-    export LC_ALL="en_US.UTF-8"
-    export LANG="en_US.UTF-8"
-    export LANGUAGE="en_US.UTF-8"
+	export LC_ALL="en_US.UTF-8"
+	export LANG="en_US.UTF-8"
+	export LANGUAGE="en_US.UTF-8"
 fi
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
@@ -61,7 +67,7 @@ export EDITOR="vim"
 export PAGER="less"
 
 # 多用户历史记录保存及读取
-export PROMPT_COMMAND="history -a; history -r;  $PROMPT_COMMAND"    
+export PROMPT_COMMAND="history -a; history -r;  $PROMPT_COMMAND"
 
 # TERMINAL 颜色设定
 # export TERM="st-256color"
@@ -75,7 +81,6 @@ export GET_TERMINAL_NAME=$(ps -o comm= -p "$(($(ps -o ppid= -p "$(($(ps -o sid= 
 # export XMODIFIERS="@im=fcitx"
 # export GTK_IM_MODULE=fcitx
 # export QT_IM_MODULE=fcitx
-
 
 # ================================================================================================================================
 #                                                         FZF - Settings
@@ -155,7 +160,7 @@ export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
 # CTRL+R 搜索历史命令
 # --------------------------------------------------------------o----------------------------------------------------------------o
 
-export FZF_CTRL_R_OPTS="--sort --exact --preview 'echo {}' --height=50% --preview-window down:3:hidden:wrap --bind '?:toggle-preview,Ctrl-j:down,Ctrl-k:up,J:preview-down,K:preview-up'" 
+export FZF_CTRL_R_OPTS="--sort --exact --preview 'echo {}' --height=50% --preview-window down:3:hidden:wrap --bind '?:toggle-preview,Ctrl-j:down,Ctrl-k:up,J:preview-down,K:preview-up'"
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 # ALT+C 搜索文件夹并cd进入
@@ -194,13 +199,13 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 # ================================================================================================================================
 
 export LESS="--RAW-CONTROL-CHARS"
-export LESS_TERMCAP_mb=$'\e[1;31m' # Start blinking
-export LESS_TERMCAP_md=$'\e[1;34m' # Start bold mode
-export LESS_TERMCAP_me=$'\e[0m' # End all mode
+export LESS_TERMCAP_mb=$'\e[1;31m'     # Start blinking
+export LESS_TERMCAP_md=$'\e[1;34m'     # Start bold mode
+export LESS_TERMCAP_me=$'\e[0m'        # End all mode
 export LESS_TERMCAP_so=$'\e[38;5;215m' # Start standout mode
-export LESS_TERMCAP_se=$'\e[0m' # End standout mode
-export LESS_TERMCAP_us=$'\e[4;35m' # Start underline
-export LESS_TERMCAP_ue=$'\e[0m' # End underline
+export LESS_TERMCAP_se=$'\e[0m'        # End standout mode
+export LESS_TERMCAP_us=$'\e[4;35m'     # Start underline
+export LESS_TERMCAP_ue=$'\e[0m'        # End underline
 
 # ================================================================================================================================
 #                                                        TLDR - Settings
