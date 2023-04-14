@@ -26,19 +26,6 @@ SOURCE_DIR="$HOME/.local/src"
 # EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}) pwd)
 # EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")/.extras/
 
-APT_INSTALL() {
-	sudo apt install -qq -y $(echo $*) >/dev/null 2>&1
-	ret="$?"
-	STATUS "$1"
-}
-
-APT_REMOVE() {
-	# sudo apt remove -y --purge "$*" >/dev/null 2>&1
-	sudo apt remove --purge -y $(echo $*) >/dev/null 2>&1
-	ret="$?"
-	STATUS "$1"
-}
-
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # -- Github --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -61,39 +48,6 @@ YELLOW=$(tput setaf 3)
 MAGENTA=$(tput setaf 5)
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# -- Github Release --
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-GET_LATEST_RELEASE() {
-	local regex_to_remove_url='sed -re ''s#(http://|https://|git@|git://)github.com(/|:)##'' -e ''s#(/|.git)$##'''
-	local username_and_repo
-	username_and_repo=$(git config --get remote.origin.url | $regex_to_remove_url)
-	CHECK_LATEST_RELEASE() {
-		curl -s "https://api.github.com/repos/$username_and_repo/releases/latest" | awk -F '"' '/tag_name/{print $4}'
-	}
-	if [ -n "$(CHECK_LATEST_RELEASE)" ]; then
-		CHECK_LATEST_RELEASE
-	else
-		curl -s "https://api.github.com/repos/$username_and_repo/tags" | jq -r '.[] | select(.name|test("^(|v)[0-9]")) | .name' | head -n 1
-	fi
-}
-
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-USE_LATEST_RELEASE() {
-	local get_version
-	get_version=$(GET_LATEST_RELEASE)
-	if [ -n "$get_version" ]; then
-		git clean -fd
-		git fetch origin tag "$get_version" --no-tags || return 1
-		git checkout "$get_version"
-	else
-		echo -e "${red}[!] Error: There is an internet connection issue.${white}"
-		return 1
-	fi
-}
-
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # -- ANSI Draw Lines Functions --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
@@ -108,19 +62,6 @@ ROWS() {
 FONT() {
 	COLS=$(tput cols)
 	figlet -f standard -w $COLS -c "$1"
-}
-
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# -- Status - Functions --
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-STATUS() {
-	if [[ "$ret" -eq '0' ]]; then
-		echo -e $GREEN [✔] ${1} - ${2} $MAGENTA Success $RESET
-	else
-		echo -e $RED [✔] ${1} - ${2} $YELLOW Error $RESET
-		exit 1
-	fi
 }
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -140,6 +81,14 @@ OUTPUT_TITLE() {
 	echo -e ""
 }
 
+OUTPUT_FOOT() {
+	ROWS
+	echo -e ""
+	echo -e "${YELLOW}$1${RESET}"
+	echo -e ""
+	ROWS
+	echo -e ""
+}
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # -- Program Exists --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -153,6 +102,92 @@ PROGRAM_EXISTS() {
 	fi
 
 	return 0
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Status - Functions --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+STATUS() {
+	if [[ "$ret" -eq '0' ]]; then
+		echo -e $GREEN [√] ${1} - ${2} $MAGENTA Success $RESET
+		echo ""
+	else
+		echo -e $RED [X] ${1} - ${2} $YELLOW Error $RESET
+		echo ""
+		exit 1
+	fi
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Execution --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+APT_INSTALL() {
+	sudo apt install -qq -y $(echo $*) >/dev/null 2>&1
+	ret="$?"
+	STATUS "$1"
+}
+
+APT_REMOVE() {
+	sudo apt remove --purge -y $(echo $*) >/dev/null 2>&1
+	ret="$?"
+	STATUS "$1"
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Github Release --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+GET_LATEST_RELEASE() {
+	local REGEX_TO_REMOVE_URL='sed -re ''s#(http://|https://|git@|git://)github.com(/|:)##'' -e ''s#(/|.git)$##'''
+	local USERNAME_AND_REPO
+	USERNAME_AND_REPO=$(git config --get remote.origin.url | $REGEX_TO_REMOVE_URL)
+	CHECK_LATEST_RELEASE() {
+		curl -s "https://api.github.com/repos/$USERNAME_AND_REPO/releases/latest" | awk -F '"' '/tag_name/{print $4}'
+	}
+	if [ -n "$(CHECK_LATEST_RELEASE)" ]; then
+		CHECK_LATEST_RELEASE
+	else
+		curl -s "https://api.github.com/repos/$USERNAME_AND_REPO/tags" | jq -r '.[] | select(.name|test("^(|v)[0-9]")) | .name' | head -n 1
+	fi
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+USE_LATEST_RELEASE() {
+	local GET_VERSION
+	GET_VERSION=$(GET_LATEST_RELEASE)
+	if [ -n "$GET_VERSION" ]; then
+		git clean -fd
+		git fetch origin tag "$GET_VERSION" --no-tags || return 1
+		git checkout "$GET_VERSION" >/dev/null 2>&1
+	else
+		echo -e "${RED} [!] Error: There is an internet connection issue.${RESET}"
+		return 1
+	fi
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+UPGRADE_REPO() {
+	echo -e "${MAGENTA} [!] Trying To Update Repo $1 ${RESET}"
+	cd "$SOURCE_DIR/$1" || return
+	USE_LATEST_RELEASE || return 1
+	# git pull >/dev/null 2>&1
+	ret="$?"
+	STATUS "$2"
+}
+
+CLONE_REPO() {
+	SOURCE_DIR_APPS="$SOURCE_DIR/$1"
+	if [ ! -d "$SOURCE_DIR_APPS" ]; then
+		$GIT_CLONE/$2 $SOURCE_DIR_APPS
+		ret="$?"
+		STATUS "$1" "Clone Repo Success"
+	else
+		UPGRADE_REPO "$1" "Successfully Updated $1"
+	fi
 }
 
 # ================================================================================================================================
@@ -233,66 +268,68 @@ EOF
 
 Vim() {
 
-	OUTPUT_TITLE 'vim' ' VIM Is Being Installed '
+	OUTPUT_TITLE 'vim' ' Vim Is Being Installed '
 	if PROGRAM_EXISTS 'vim'; then
-		echo -e "${BLUE} REMOVE VIM ... ${RESET}"
+		echo -e "${BLUE} [·] REMOVE VIM ... ${RESET}"
 		APT_REMOVE "vim vim-runtime vim-common vim-gui-common vim-nox"
 	fi
 
-	echo -e "${BLUE}INSTALL DEPENDENCIES${RESET}"
-	APT_INSTALL "libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libgtk-3-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev"
+	echo -e "${BLUE} [·] INSTALL DEPENDENCIES ... ${RESET}"
+	APT_INSTALL "libncurses5-dev python-dev python3-dev libgtk-3-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev"
 
-	echo -e "${BLUE}START BUILD{RESET}"
+	echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
+	CLONE_REPO "vim" "vim/vim"
 
-	#     echo -e "${MAGENTA}Git Clone Or Update VIM${RESET}"
-	#     if [ -d "${SOURCE_DIR}/vim" ]; then
-	#         cd ${SOURCE_DIR}/vim || return && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1 && sudo make distclean > /dev/null 2>&1
-	#     else
-	#         $GIT_CLONE/vim/vim.git ${SOURCE_DIR}/vim
-	#         cd ${SOURCE_DIR}/vim || return
-	#     fi
-	#     if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
+	echo -e "${BLUE} [·] START BUILD{RESET} ... ${RESET}"
+	(sudo ./configure --with-features=huge \
+		--enable-multibyte \
+		--enable-cscope \
+		--enable-rubyinterp=yes \
+		--enable-perlinterp=yes \
+		--enable-python3interp=yes \
+		--enable-largefile \
+		--enable-luainterp=yes \
+		--with-luajit) >/dev/null 2>&1 &&
+		sudo make >/dev/null 2>&1 &&
+		sudo make install >/dev/null 2>&1
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
 
-	# # --------------------------------------------------------------o----------------------------------------------------------------o
-
-	# # >>> START BUILD
-
-	#     echo -e "${MAGENTA}Start Build${RESET}"
-
-	#     ( sudo ./configure --with-features=huge \
-	#         --enable-multibyte \
-	#         --enable-cscope \
-	#         --enable-rubyinterp=yes \
-	#         --enable-perlinterp=yes \
-	#         --enable-python3interp=yes \
-	#         --enable-largefile \
-	#         --enable-luainterp=yes \
-	#         --with-luajit ) > /dev/null 2>&1 && \
-
-	#     sudo make > /dev/null 2>&1 && \
-	#     sudo make install > /dev/null 2>&1
-	#     if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
-
-	#     # --with-features=huge：支持最大特性
-	#     # --enable-rubyinterp：打开对 ruby 编写的插件的支持
-	#     # --enable-pythoninterp：打开对 python 编写的插件的支持
-	#     # --enable-python3interp：打开对 python3 编写的插件的支持
-	#     # --enable-luainterp：打开对 lua 编写的插件的支持
-	#     # --enable-perlinterp：打开对 perl 编写的插件的支持
-	#     # --enable-multibyte：打开多字节支持，可以在 Vim 中输入中文
-	#     # --enable-cscope：打开对cscope的支持
-	#     # --enable-gui=gtk3 表示生成采用 GNOME3 风格的 gvim
-	#     # --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/ 指定 python 路径
-	#     # --with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/ 指定 python3路径
-	#     # --prefix=/usr/local/vim：指定将要安装到的路径
-
-	# # >>> OUTPUT
-
-	#     ROW
-	#     echo -e "${BLUE}VIM Install Is Complete :: Version ${RESET} ${RED}$(vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]")${RESET} ";
-	#     ROW
+	OUTPUT_FOOT "${BLUE} [·] Vim Version: ${RESET} ${RED}$(vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]")${RESET} "
 }
 
+# ================================================================================================================================
+#
+#                                                            NEO-VIM
+#
+# ================================================================================================================================
+
+Nvim() {
+
+	OUTPUT_TITLE 'nvim' ' Neo-Vim Is Being Installed '
+	if PROGRAM_EXISTS 'nvim'; then
+		echo -e "${BLUE} [·] REMOVE NEOVIM ... ${RESET}"
+		APT_REMOVE "neovim"
+		env rm -rf $HOME/.bin/neovim
+	fi
+
+	echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
+	CLONE_REPO "neovim" "neovim/neovim"
+
+	echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
+	(sudo ./configure --with-features=huge \
+		--enable-multibyte \
+		--enable-cscope \
+		--enable-rubyinterp=yes \
+		--enable-perlinterp=yes \
+		--enable-python3interp=yes \
+		--enable-largefile \
+		--enable-luainterp=yes \
+		--with-luajit) >/dev/null 2>&1 &&
+		sudo make >/dev/null 2>&1 &&
+		sudo make install >/dev/null 2>&1
+
+	OUTPUT_FOOT "${BLUE} [·] Vim Version: ${RESET} ${RED}$(vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]")${RESET} "
+}
 # ================================================================================================================================
 #
 #                                                              TMUX
