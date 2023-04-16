@@ -139,6 +139,12 @@ APT_REMOVE() {
 # -- Github Release --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
+GET_LATEST_RELEASE_VERSION() {
+	curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
+		grep '"tag_name":' |                                             # Get tag line
+		sed -E 's/.*"v*([^"]+)".*/\1/'
+}
+
 GET_LATEST_RELEASE() {
 	local REGEX_TO_REMOVE_URL='sed -re ''s#(http://|https://|git@|git://)github.com(/|:)##'' -e ''s#(/|.git)$##'''
 	local USERNAME_AND_REPO
@@ -275,17 +281,20 @@ Vim() {
 	fi
 
 	echo -e "${BLUE} [·] INSTALL DEPENDENCIES ... ${RESET}"
-	APT_INSTALL "libncurses5-dev python-dev python3-dev libgtk-3-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev"
+	APT_INSTALL "luajit libncurses5-dev python-dev python3-dev libgtk-3-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev"
 
 	echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
 	CLONE_REPO "vim" "vim/vim"
 
 	echo -e "${BLUE} [·] START BUILD{RESET} ... ${RESET}"
+	sudo make clean >/dev/null 2>&1
+	sudo make distclean >/dev/null 2>&1
 	(sudo ./configure --with-features=huge \
+		--enable-fail-if-missing \
 		--enable-multibyte \
 		--enable-cscope \
 		--enable-rubyinterp=yes \
-		--enable-perlinterp=yes \
+		--enable-perlinterp=no \
 		--enable-python3interp=yes \
 		--enable-largefile \
 		--enable-luainterp=yes \
@@ -294,7 +303,7 @@ Vim() {
 		sudo make install >/dev/null 2>&1
 	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
 
-	OUTPUT_FOOT "${BLUE} [·] Vim Version: ${RESET} ${RED}$(vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]")${RESET} "
+	OUTPUT_FOOT "${BLUE} [·] Vim Version: ${RESET} ${RED}$(vim --version | sed -n "1p" | egrep -o '([0-9]*)\.+[0-9]+')${RESET} "
 }
 
 # ================================================================================================================================
@@ -309,27 +318,20 @@ Nvim() {
 	if PROGRAM_EXISTS 'nvim'; then
 		echo -e "${BLUE} [·] REMOVE NEOVIM ... ${RESET}"
 		APT_REMOVE "neovim"
-		env rm -rf $HOME/.bin/neovim
+		rm -rf $HOME/.bin/neovim
 	fi
 
 	echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
-	CLONE_REPO "neovim" "neovim/neovim"
+	NVIM_VERSION=$(GET_LATEST_RELEASE_VERSION "neovim/neovim")
+	wget -P $HOME/.local/src "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz"
 
 	echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
-	(sudo ./configure --with-features=huge \
-		--enable-multibyte \
-		--enable-cscope \
-		--enable-rubyinterp=yes \
-		--enable-perlinterp=yes \
-		--enable-python3interp=yes \
-		--enable-largefile \
-		--enable-luainterp=yes \
-		--with-luajit) >/dev/null 2>&1 &&
-		sudo make >/dev/null 2>&1 &&
-		sudo make install >/dev/null 2>&1
+	tar xzvf nvim-linux64.tar.gz
+	cp -r nvim-linux64 $HOME/.bin/neovim
 
-	OUTPUT_FOOT "${BLUE} [·] Vim Version: ${RESET} ${RED}$(vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]")${RESET} "
+	OUTPUT_FOOT "${BLUE} [·] NeoVim Version: ${RESET} ${RED}$(nvim --version | sed -n "1p" | grep -o [0-9].[0-9].[0-9])${RESET} "
 }
+
 # ================================================================================================================================
 #
 #                                                              TMUX
@@ -1218,6 +1220,9 @@ main() {
 		;;
 	vim)
 		Vim
+		;;
+	nvim)
+		Nvim
 		;;
 	tmux)
 		Tmux
