@@ -266,7 +266,7 @@ opt.foldenable = true -- 是否开启折叠功能
 opt.foldlevel = 1 -- 设置折叠级别: 具有较高级别的折叠将被关闭
 opt.foldnestmax = 1 -- 设置 "缩进" 和 "语法" 的最大折叠嵌套方法. 这样可以避免创建过多的折叠
 opt.foldcolumn = "1" -- 何时以及如何绘制折叠列.
-opt.foldmethod = "marker" -- 用于当前窗口的折叠类型
+opt.foldmethod = "manual" -- 用于当前窗口的折叠类型
 opt.foldlevelstart = 99 -- 打开文件时, 始终关闭所有折叠
 opt.foldopen:remove("all") -- 自动打开折叠的行为
 opt.foldclose:append("all")
