@@ -263,23 +263,23 @@ opt.complete = ".,w,b,k" -- 补全文档库模式
 opt.completeopt = "menu,menuone,noselect" -- 插入模式时的补全范围设置
 
 opt.foldenable = true -- 是否开启折叠功能
-opt.foldlevel = 1 -- 设置折叠级别: 具有较高级别的折叠将被关闭
+opt.foldlevel = 0 -- 设置折叠级别: 具有较高级别的折叠将被关闭
 opt.foldnestmax = 1 -- 设置 "缩进" 和 "语法" 的最大折叠嵌套方法. 这样可以避免创建过多的折叠
 opt.foldcolumn = "1" -- 何时以及如何绘制折叠列.
 opt.foldmethod = "manual" -- 用于当前窗口的折叠类型
 opt.foldlevelstart = 99 -- 打开文件时, 始终关闭所有折叠
-opt.foldopen:remove("all") -- 自动打开折叠的行为
-opt.foldclose:append("all")
+-- opt.foldopen = "all" -- 自动打开折叠的行为
+-- opt.foldclose = "all"
 
 vim.cmd([[
-    augroup remember_folds
+    augroup Remember_Folds
         autocmd!
         autocmd BufWinLeave *.* mkview
-        autocmd BufWinEnter *.* silent! loadview
+        autocmd BufWinEnter *.* silent! loadview || normal zM 
     augroup END
 
-    vnoremap <Space> zf
-    nnoremap <silent> <Space> @=(foldlevel('.')?'za' : "\<Space>")<CR>
+    vnoremap <LocalLeader><Space> zf
+    nnoremap <silent> <LocalLeader><Space> @=(foldlevel('.')?'za' : "\<Space>")<CR>
 ]])
 
 -- OTHER --

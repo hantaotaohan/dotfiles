@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+clear
+
 # ================================================================================================================================
-#                                                                                                                                 
-#                                                             SETUP                                                            
 #
-#                                                       Update: 2023.01.13                                                      
-#                                                                                                                                 
+#                                                             SETUP
+#
+#                                                       Update: 2023.01.13
+#
 # ================================================================================================================================
 
 # ================================================================================================================================
@@ -13,19 +15,18 @@
 # ================================================================================================================================
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# Set E-Mail Password
+# -- Set E-Mail Password --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 # PASSWORD=""
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# Basis Define Path Variable
+# -- Basis Define Path Variable --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 SOURCE_DIR="$HOME/.local/src"
-EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}); pwd)
-EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")/.extras/
-APT_INSTALL="sudo apt install -qq -y"
+# EXTRAS_DIR=$(cd $(dirname ${BASH_SOURCE[0]}) pwd)
+# EXTRAS_UP_DIR=$(dirname "$EXTRAS_DIR")/.extras/
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # -- Github --
@@ -35,30 +36,7 @@ GIT_CLONE="git clone -q https://github.com"
 GIT_DOWNLOAD="https://github.com"
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# -- Fastgit --
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-# GIT_CLONE="git clone -q https://hub.fastgit.xyz"
-# GIT_DOWNLOAD="https://download.fastgit.org"
-
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# -- Cnpmjs --
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-# GIT_CLONE="git clone -q https://github.com.cnpmjs.org"
-# GIT_DOWNLOAD="https://github.com.cnpmjs.org"
-
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# -- Nuaa --
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-
-# GIT_CLONE="git clone -q https://hub.nuaa.cf"
-# GIT_DOWNLOAD="https://hub.nuaa.cf"
-
-# --------------------------------------------------------------o----------------------------------------------------------------o
-
-# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# Setting Bash Colors Variable
+# -- Define Colors Variable --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 RESET=$(tput sgr0)
@@ -70,68 +48,201 @@ WHITE=$(tput setaf 7)
 BLACK=$(tput setaf 0)
 YELLOW=$(tput setaf 3)
 MAGENTA=$(tput setaf 5)
+BLACKSS=$(tput setaf 8)
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# ANSI Draw Lines Functions
+# -- ANSI Draw Lines Functions --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-function ROW() {
-
-    seq -s '─' 0 "$(tput cols)" | tr -d '[:digit:]'
-
+ROWD() {
+	seq -s '═' 0 "$(tput cols)" | tr -d '[:digit:]'
 }
 
-function BOX () {
+ROWS() {
+	seq -s '─' 0 "$(tput cols)" | tr -d '[:digit:]'
+}
 
-    COLS=$(tput cols)
-    figlet -f standard -w $COLS -c "$1"
-
+FONT() {
+	COLS=$(tput cols)
+	figlet -f standard -w $COLS -c "$1"
 }
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-# Status - Box - Functions
+# -- Output Functions --
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-Install_Status() {
+OUTPUT_TITLE() {
+	echo -e "${BLACKSS}"
+	ROWD
+	echo -e ""
+	FONT "$1"
+	echo -e ""
+	ROWS
+	echo -e "${RESET}"
+	echo -e "${YELLOW}$2${RESET}"
+	echo -e "${BLACKSS}"
+	ROWS
+	echo -e ""
+	echo -e "${RESET}"
+}
 
-	if [ $1 -eq 0 ]; then
-        echo -e "\t\t${GREEN}[√] Installation Successful: $2${RESET}\n";
-	else
-        echo -e "\t\t${RED}[X] Install Failed: $2${RESET}\n";
+OUTPUT_FOOT() {
+	echo -e "${BLACKSS}"
+	ROWS
+	echo -e "${RESET}"
+	echo -e "${YELLOW}$1${RESET}"
+	echo -e "${BLACKSS}"
+	ROWS
+	echo -e ""
+	echo -e "${RESET}"
+}
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Program Exists --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+PROGRAM_EXISTS() {
+	local ret='0'
+	command -v $1 >/dev/null 2>&1 || { local ret='1'; }
+
+	if [ "$ret" -ne 0 ]; then
+		return 1
 	fi
-	
+
+	return 0
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Status - Functions --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+STATUS() {
+	if [[ "$ret" -eq '0' ]]; then
+		echo -e $GREEN [!] ${1} - ${2} $MAGENTA Success $RESET
+		echo ""
+	else
+		echo -e $RED [x] ${1} - ${2} $YELLOW Error $RESET
+		echo ""
+		exit 1
+	fi
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Execution --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+APT_INSTALL() {
+	sudo apt install -qq -y $(echo $*) >/dev/null 2>&1
+	ret="$?"
+	STATUS "$1"
+}
+
+APT_REMOVE() {
+	sudo apt remove --purge -y -qq $(echo $*) >/dev/null 2>&1
+	ret="$?"
+	STATUS "$1"
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+# -- Github Release --
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+GET_LATEST_RELEASE_VERSION() {
+	curl --silent "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/'
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+GET_LATEST_RELEASE() {
+	local REGEX_TO_REMOVE_URL='sed -re ''s#(http://|https://|git@|git://)github.com(/|:)##'' -e ''s#(/|.git)$##'''
+	local USERNAME_AND_REPO
+	USERNAME_AND_REPO=$(git config --get remote.origin.url | $REGEX_TO_REMOVE_URL)
+	CHECK_LATEST_RELEASE() {
+		curl -s "https://api.github.com/repos/$USERNAME_AND_REPO/releases/latest" | awk -F '"' '/tag_name/{print $4}'
+	}
+	if [ -n "$(CHECK_LATEST_RELEASE)" ]; then
+		CHECK_LATEST_RELEASE
+	else
+		curl -s "https://api.github.com/repos/$USERNAME_AND_REPO/tags" | jq -r '.[] | select(.name|test("^(|v)[0-9]")) | .name' | head -n 1
+	fi
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+USE_LATEST_RELEASE() {
+	local GET_VERSION
+	GET_VERSION=$(GET_LATEST_RELEASE)
+	if [ -n "$GET_VERSION" ]; then
+		git clean -fd
+		git fetch origin tag "$GET_VERSION" --no-tags || return 1
+		git checkout "$GET_VERSION" >/dev/null 2>&1
+	else
+		echo -e "${RED} [x] Error: There is an internet connection issue.${RESET}"
+		return 1
+	fi
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+UPGRADE_REPO() {
+	echo -e "${BLACKSS} [!] Trying To Update Repo $1 ${RESET}"
+	cd "$SOURCE_DIR/$1" || return
+	USE_LATEST_RELEASE || return 1
+	# git pull >/dev/null 2>&1
+	ret="$?"
+	STATUS "$2"
+}
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+CLONE_REPO() {
+	SOURCE_DIR_APPS="$SOURCE_DIR/$1"
+	if [ ! -d "$SOURCE_DIR_APPS" ]; then
+		$GIT_CLONE/$2 $SOURCE_DIR_APPS
+		ret="$?"
+		STATUS "$1" "Clone Repo Success"
+	else
+		UPGRADE_REPO "$1" "Successfully Updated $1"
+	fi
 }
 
 # ================================================================================================================================
-#                                                      PRINT USAGE MESSAGE 
+#                                                      PRINT USAGE MESSAGE
 # ================================================================================================================================
 
 usage() {
 
-    local program_name
-    program_name=${0##*/}
-    cat <<EOF
+	local program_name
+	program_name=${0##*/}
+	cat <<EOF
 
     Usage: $program_name [-option]
     Options:
     
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                                   
+
          -h --help          Print this message                                                  
          -a --all           Setup All                                                           
          -m --minimize      Setup All   
          -s --server        Setup Server All                                                    
-                                                                                   
+
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-         vim                 Install/Updatee VIM
-         tmux                Install/Updatee TMUX
+         vim                 Install/Update VIM
+         nvim                Install/Update NEO-VIM
+         tmux                Install/Update TMUX
+         node                Install/Update Program NODE.JS and YARN
+         ctags               Install/Update UNIVERSAL-CTAGS 
+         githubssh           Create/Yank Github For SSH Key
+         java                Install/Update JAVA JRE and JAVA JDK
+         clone               Git Clone Need SSH-KEY Is My Github Respones
+         sshbanner           Settings SSH Login Banner
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
          alttab              Install Program Alttab - Same Windows Alt Tab
          anki                Install Program Anki
          arcicons            Install Gtk Dark-themes Icons
          bashdb              Install Program Bashdb Bash Debug Tools
-         ctags               Install Program  News Version Universal-Ctags 
-         clone               Git Clone Need SSH-KEY Is My Github Respones
          calibre             Install Program Calibre And Settings Config
          dunst               Install Program Dunst - X11 Message Tools
          dragon              Install Ranger Plug Dragon - Ranger Drop Function
@@ -142,17 +253,14 @@ usage() {
          fixi3terminal       Fix I3wm Terminal Alacritty Suppose
          fixvmwareshare      Settings Vmware Share Folads
          githubhosts         Settings Config /etc/hosts/ Uses Fast View Github.com
-         githubssh           Settings Github.com SSH Key - Auto SSH_Ras Copy
          hugo                Install Program Hugo
          i3gaps              Install Program I3gaps
          i3blocks            Install Program I3blocks
          i3lockfancy         Install Program i3lock_fancy
          imagemagick         Fix Imagemagick - Convert Pdf Normally
-         java                Install Program Java
          jupyter             Install Program Jupyter Notebook And Settings Themes
          ly                  Install Program Ly Commandline Longin 
          navi                Install Program Navi - Cheatsheet Tools
-         nodejs              Install Program Node.js
          offlineimap         Install Program offlineimap -  Auto Setting Neomutt
          picom               Install Program Picom
          popupdict           Install Program Popupdict - Translate Tools
@@ -160,11 +268,9 @@ usage() {
          rofi                Install Program Rofi
          rdrview             Install Program Rdrview - HTML Render Tools
          st                  Install Program St - Terminal
-         sshbanner           Settings SSH Login Banner
          urxvt               Install Program URxvt - Terminal
          vifm                Install Program Vifm - Filebrowser
          weixin              Install Program Weixin - Linux Weixin
-         yarn                Install Program Yarn
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
     
@@ -174,169 +280,300 @@ EOF
 
 # ================================================================================================================================
 #
-#                                                              VIM 
+#                                                              VIM
 #
 # ================================================================================================================================
 
-Vim () {
+Vim() {
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
+	OUTPUT_TITLE 'vim' ' Vim Is Being Installed '
 
-    ROW
-    BOX 'vim'
-    echo -e ""
-    echo -e "${YELLOW}VIM Is Being Installed${RESET}"
-    echo -e ""
+	echo -e "${BLUE} [·] UNINSTALL VIM ... ${RESET}"
+	if PROGRAM_EXISTS 'vim'; then
+		APT_REMOVE "vim vim-runtime vim-common vim-gui-common vim-nox"
+		sudo rm -rf /usr/local/bin/vim
+	fi
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
+	echo -e "${BLUE} [·] INSTALL VIM DEPENDENCIES ... ${RESET}"
+	APT_INSTALL "libncurses5-dev python-dev python3-dev libgtk-3-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev"
 
-# >>> REMOVE ALREADY EXISTS
+	echo -e "${BLUE} [·] CLONE VIM REPO ... ${RESET}"
+	CLONE_REPO "vim" "vim/vim"
 
-    if command -v vim >/dev/null 2>&1; then 
-        sudo apt remove -y --purge vi vim-tiny vim vim-runtime gvim vim-common vim-gui-common vim-nox > /dev/null 2>&1
-    fi
+	echo -e "${BLUE} [·] START BUILD VIM ... ${RESET}"
+	(
+		./configure \
+			--quiet \
+			--with-features=huge \
+			--enable-fail-if-missing \
+			--enable-multibyte \
+			--enable-cscope \
+			--enable-rubyinterp=yes \
+			--enable-perlinterp=no \
+			--enable-python3interp=yes \
+			--enable-largefile \
+			--enable-luainterp=yes \
+			--with-luajit
+	) >/dev/null 2>&1
+	make -s >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
+	make clean >/dev/null 2>&1
+	make distclean >/dev/null 2>&1
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
+	OUTPUT_FOOT "${BLUE} [·] Vim Version: ${RESET} ${RED}$(vim --version | sed -n "1p" | egrep -o '([0-9]*)\.+[0-9]+')${RESET} "
 
-# >>> INSTALL DEPENDENCIES
-
-    echo -e "${MAGENTA}Install Dependencies${RESET}"
-    ${APT_INSTALL} libncurses5-dev python-dev python3-dev libwxgtk3.0-dev libgtk-3-dev > /dev/null 2>&1
-    ${APT_INSTALL} libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev > /dev/null 2>&1
-    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
-
-# --------------------------------------------------------------o----------------------------------------------------------------o
-    
-# >>> PRETO BUILD
-
-    echo -e "${MAGENTA}Git Clone Or Update VIM${RESET}"
-    if [ -d "${SOURCE_DIR}/vim" ]; then 
-        cd ${SOURCE_DIR}/vim || return && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1 && sudo make distclean > /dev/null 2>&1
-    else
-        $GIT_CLONE/vim/vim.git ${SOURCE_DIR}/vim 
-        cd ${SOURCE_DIR}/vim || return
-    fi
-    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
-
-# --------------------------------------------------------------o----------------------------------------------------------------o
-
-# >>> START BUILD
-
-    echo -e "${MAGENTA}Start Build${RESET}"
-
-    ( sudo ./configure --with-features=huge \
-        --enable-multibyte \
-        --enable-cscope \
-        --enable-rubyinterp=yes \
-        --enable-perlinterp=yes \
-        --enable-python3interp=yes \
-        --enable-largefile \
-        --enable-luainterp=yes \
-        --with-luajit ) > /dev/null 2>&1 && \
-
-    sudo make > /dev/null 2>&1 && \
-    sudo make install > /dev/null 2>&1
-    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
-
-    # --with-features=huge：支持最大特性
-    # --enable-rubyinterp：打开对 ruby 编写的插件的支持
-    # --enable-pythoninterp：打开对 python 编写的插件的支持
-    # --enable-python3interp：打开对 python3 编写的插件的支持
-    # --enable-luainterp：打开对 lua 编写的插件的支持
-    # --enable-perlinterp：打开对 perl 编写的插件的支持
-    # --enable-multibyte：打开多字节支持，可以在 Vim 中输入中文
-    # --enable-cscope：打开对cscope的支持
-    # --enable-gui=gtk3 表示生成采用 GNOME3 风格的 gvim
-    # --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/ 指定 python 路径
-    # --with-python3-config-dir=/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu/ 指定 python3路径
-    # --prefix=/usr/local/vim：指定将要安装到的路径
-
-# >>> OUTPUT
-
-    ROW
-    echo -e "${BLUE}VIM Install Is Complete :: Version ${RESET} ${RED}$(vim --version | grep -o "VIM - Vi IMproved [0-9].[0-9]")${RESET} ";
-    ROW
 }
 
 # ================================================================================================================================
 #
-#                                                              TMUX 
+#                                                            NEO-VIM
+#
+# ================================================================================================================================
+
+Nvim() {
+
+	OUTPUT_TITLE 'nvim' ' Neo-Vim Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL NEOVIM ... ${RESET}"
+	if PROGRAM_EXISTS 'nvim'; then
+		APT_REMOVE "neovim"
+		rm -rf $HOME/.bin/neovim $HOME/.local/src/nvim-linux64.tar.gz
+	fi
+
+	echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
+	NVIM_VERSION=$(GET_LATEST_RELEASE_VERSION "neovim/neovim")
+	wget -q -P $HOME/.local/src "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz"
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Clone Failed $2${RESET}\n"; fi
+
+	echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
+	APT_INSTALL "python3-neovim"
+	tar xzf nvim-linux64.tar.gz
+	cp -r nvim-linux64 $HOME/.bin/neovim
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Setup ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Setup Failed $2${RESET}\n"; fi
+
+	OUTPUT_FOOT "${BLUE} [·] NeoVim Version: ${RESET} ${RED}$(nvim --version | sed -n "1p" | grep -o [0-9].[0-9].[0-9])${RESET} "
+
+}
+
+# ================================================================================================================================
+#
+#                                                              TMUX
 #
 # ================================================================================================================================
 
 Tmux() {
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
+	OUTPUT_TITLE 'tmux' ' Tmux Is Being Installed '
 
-    ROW
-    echo -e ""
-    echo -e "${YELLOW}TMUX Is Being Installed${RESET}"
-    echo -e ""
+	echo -e "${BLUE} [·] UNINSTALL TMUX ... ${RESET}"
+	if PROGRAM_EXISTS 'tmux'; then
+		APT_REMOVE "tmux"
+		rm -rf /usr/bin/tmux /usr/share/man/man1/tmux.1.gz
+	fi
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
+	echo -e "${BLUE} [·] INSTALL TMUX DEPENDENCIES ... ${RESET}"
+	APT_INSTALL "libevent-dev ncurses-dev build-essential bison pkg-config automake"
 
-# >>> REMOVE ALREADY EXISTS
+	echo -e "${BLUE} [·] CLONE TMUX REPO ... ${RESET}"
+	CLONE_REPO "tmux" "tmux/tmux"
 
-    if command -v tmux >/dev/null 2>&1; then 
-        sudo apt remove tmux -y > /dev/null 2>&1
-    fi
+	echo -e "${BLUE} [·] START BUILD VIM ... ${RESET}"
+	bash ./autogen.sh >/dev/null 2>&1
+	./configure >/dev/null 2>&1
+	make -s >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
+	OUTPUT_FOOT "${BLUE} [·] Tmux Version: ${RESET} ${RED}$(tmux -V)${RESET} "
 
-# >>> INSTALL DEPENDENCIES
+}
 
-    echo -e "${MAGENTA}Install Dependencies${RESET}"
-    ${APT_INSTALL} libevent-dev ncurses-dev build-essential bison pkg-config > /dev/null 2>&1
-    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
+# ================================================================================================================================
+#
+#                                                              NODE
+#
+# ================================================================================================================================
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
-    
-# >>> PRETO BUILD
+Node() {
 
-    echo -e "${MAGENTA}Git Clone Or Update TMUX${RESET}"
-    if [ -d "${SOURCE_DIR}/tmux" ]; then 
-        cd ${SOURCE_DIR}/tmux || return && git reset --hard > /dev/null 2>&1 && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/tmux/tmux.git ${SOURCE_DIR}/tmux 
-        cd ${SOURCE_DIR}/tmux || return
-    fi
-    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
+	OUTPUT_TITLE 'node' ' Node Is Being Installed '
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
-    
-# >>> START BUILD
+	echo -e "${BLUE} [·] UNINSTALL NODE ... ${RESET}"
+	if PROGRAM_EXISTS 'node'; then
+		npm uninstall npm -g >/dev/null 2>&1
+		sudo rm -rf /.bin/node /.local/src/node /usr/bin/node /usr/share/man/man1/node.1.gz
+	fi
 
-    echo -e "${MAGENTA}Start Build${RESET}"
-    bash autogen.sh > /dev/null 2>&1
-    ./configure > /dev/null 2>&1
-    make > /dev/null 2>&1 && sudo make install > /dev/null 2>&1
-    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
+	echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
+	wget -q -P $HOME/.local/src "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz"
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Clone Failed $2${RESET}\n"; fi
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
-    
-# >>> INSTALL TPM PLUGINS
+	echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
+	if [ ! -d "$HOME/.local/src/node" ]; then mkdir -p "$HOME/.local/src/node"; fi
+	tar xf node-v18.16.0-linux-x64.tar.xz -C node --strip-components=1
+	cp -r node $HOME/.bin/node
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Setup ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Setup Failed $2${RESET}\n"; fi
 
-    echo -e "${MAGENTA}Install Tpm Plugins${RESET}"
-    if [ ! -d "$HOME/.tmux" ]; then
-        ${GIT_CLONE}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-    else
-        rm -rf $HOME/.tmux 
-        ${GIT_CLONE}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-    fi
+	OUTPUT_FOOT "${BLUE} [·] Node Version: ${RESET} ${RED}$(node --version)${RESET} "
 
-    tmux start-server
-    tmux new-session -d
-    $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh > /dev/null 2>&1
-    tmux kill-server
-    if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
+	OUTPUT_TITLE 'yarn' ' Yarn Is Being Installed '
 
-    echo -e "${BLUE}Tmux Install Is Complete :: Version ${RESET} ${RED}$(tmux -V)${RESET} ";
+	echo -e "${BLUE} [·] UNINSTALL NODE ... ${RESET}"
+	if PROGRAM_EXISTS 'yarn'; then
+		APT_REMOVE "yarn"
+	fi
 
-# --------------------------------------------------------------o----------------------------------------------------------------o
-    
-# >>> OUTPUT
+	(curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -) >/dev/null 2>&1
+	(echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list) >/dev/null 2>&1
 
-    ROW
+	sudo apt update -y -qq >/dev/null 2>&1
+	APT_INSTALL "yarn"
+
+	sudo rm -rf /etc/apt/sources.list.d/yarn.list
+
+	OUTPUT_FOOT "${BLUE} [·] Yarn Version: ${RESET} ${RED}$(yarn --version)${RESET} "
+
+}
+
+# ================================================================================================================================
+#
+#                                                             CTAGS
+#
+# ================================================================================================================================
+
+Ctags() {
+
+	OUTPUT_TITLE 'ctags' ' Ctags Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL CTAGS ... ${RESET}"
+	if PROGRAM_EXISTS 'ctags-universal'; then
+		sudo rm -rf /usr/bin/ctags-universal /usr/share/man/man1/ctags-universal.1.gz
+		APT_REMOVE "ctags-universal"
+	fi
+
+	if PROGRAM_EXISTS 'ctags'; then
+		sudo rm -rf /usr/bin/ctags /usr/share/man/man1/ctags.1.gz
+		APT_REMOVE "ctags"
+	fi
+
+	echo -e "${BLUE} [·] INSTALL CTAGS DEPENDENCIES ... ${RESET}"
+	APT_INSTALL "libjansson-dev autotools-dev autoconf"
+
+	echo -e "${BLUE} [·] CLONE TMUX REPO ... ${RESET}"
+	CLONE_REPO "ctags" "universal-ctags/ctags"
+
+	echo -e "${BLUE} [·] START BUILD VIM ... ${RESET}"
+	./autogen.sh >/dev/null 2>&1
+	./configure >/dev/null 2>&1
+	make -s >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
+
+	OUTPUT_FOOT "${BLUE} [·] Ctags-Universal Version: ${RESET} ${RED}$(ctags --version | sed -n "1p" | egrep -o '([0-9]*)\.+[0-9]\.+[0-9]\b')${RESET} "
+
+}
+
+# ================================================================================================================================
+#
+#                                                           GITHUB_SSH
+#
+# ================================================================================================================================
+
+Github_SSH() {
+
+	OUTPUT_TITLE 'github - ssh' ' Create SSH or Yank SSH '
+	if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
+		echo "Please Input Email Addrsses For SSH Key: ...... "
+		read -e ssh_email
+		ssh-keygen -t rsa -P "" -C "$ssh_email" -f ~/.ssh/id_rsa >/dev/null 2>&1
+	fi
+
+	echo -e "${BLUE} [·] Key Copied To Keyboard ... ${RESET}"
+
+	if [[ $(uname -a) == *"microsoft"* ]]; then
+		clip.exe <$HOME/.ssh/id_rsa.pub
+		/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe --new-window 'https://github.com/settings/keys' >/dev/null 2>&1
+	else
+		xclip -sel clip <$HOME/.ssh/id_rsa.pub
+		microsoft-edge --new-window 'https://github.com/settings/keys' >/dev/null 2>&1
+	fi
+
+	OUTPUT_FOOT "${BLUE} [·] Add Github For SSH Key: ${RESET} ${RED}DONE!${RESET} "
+
+}
+
+# ================================================================================================================================
+#
+#                                                              JAVA
+#
+# ================================================================================================================================
+
+Java() {
+
+	OUTPUT_TITLE 'java - jre' ' Java-JRE Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL JAVA JRE... ${RESET}"
+	if PROGRAM_EXISTS 'java'; then
+		APT_REMOVE "default-jre default-jre-headless"
+	fi
+
+	echo -e "${BLUE} [·] INSTALL JAVA JRE... ${RESET}"
+	APT_INSTALL "default-jre"
+
+	OUTPUT_FOOT "${BLUE} [·] JRE Version: ${RESET} ${RED}$(java --version | sed -n "1p" | egrep -o '([0-9]*)\.+[0-9]\.+[0-9].')${RESET} "
+
+	OUTPUT_TITLE 'java - jdk' ' Java-JDK Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL JAVA JDK... ${RESET}"
+	if PROGRAM_EXISTS 'javac'; then
+		APT_REMOVE "default-jdk default-jdk-headless"
+	fi
+
+	echo -e "${BLUE} [·] INSTALL JAVA JDK... ${RESET}"
+	APT_INSTALL "default-jdk"
+
+	OUTPUT_FOOT "${BLUE} [·] JDK Version: ${RESET} ${RED}$(java --version | sed -n "1p" | egrep -o '([0-9]*)\.+[0-9]\.+[0-9].')${RESET} "
+
+}
+
+# ================================================================================================================================
+#
+#                                                           GIT-CLONE
+#
+# ================================================================================================================================
+
+Clone() {
+
+	OUTPUT_TITLE 'Git-Clone' ' GitClone Being Book and Vimwiki '
+	git clone -q git@github.com:hantaotaohan/books.git $HOME/books
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Git Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Git Clone Failed $2${RESET}\n"; fi
+	git clone -q git@github.com:hantaotaohan/vimwiki.git $HOME/vimwiki
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Git Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Git Clone Failed $2${RESET}\n"; fi
+	#git clone git@github.com:hantaotaohan/hantaotaohan.github.io.git $HOME/blog
+
+	OUTPUT_FOOT "${BLUE} [·] Clone Complete: ${RESET} ${RED}BOOK VIMWIKI DONE!${RESET} "
+
+}
+
+# ================================================================================================================================
+#
+#                                                           SSH-BANNER
+#
+# ================================================================================================================================
+
+SSH_banner() {
+
+	OUTPUT_TITLE 'SSH - Banner' ' Custom SSH Login Bannner '
+
+	sudo sed -i '$a\Banner \/etc\/ssh\/banner' /etc/ssh/sshd_config
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Sed ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Sed Failed $2${RESET}\n"; fi
+	sudo cp $HOME/dotfiles/.extras/ssh-banner/banner /etc/ssh/
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Copy ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] copy Failed $2${RESET}\n"; fi
+
+	# systemctl restart sshd
+
+	OUTPUT_FOOT "${BLUE} [·] SSH Banner Replacement: ${RESET} ${RED}DONE!${RESET} "
 
 }
 
@@ -346,23 +583,23 @@ Tmux() {
 
 Alttab() {
 
-    ${APT_INSTALL} libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev libxpm-dev libxpm4 > /dev/null 2>&1
-    
-    cd ${SOURCE_DIR} || return
+	${APT_INSTALL} libx11-dev libxmu-dev libxft-dev libxrender-dev libxrandr-dev libpng-dev uthash-dev libxpm-dev libxpm4 >/dev/null 2>&1
 
-    if [ -d "alttab" ]; then 
-        cd alttab && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/sagb/alttab && cd alttab 
-    fi
+	cd ${SOURCE_DIR} || return
 
-    ./configure > /dev/null 2>&1 
-    make > /dev/null 2>&1 
-    sudo make install > /dev/null 2>&1
+	if [ -d "alttab" ]; then
+		cd alttab && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/sagb/alttab && cd alttab
+	fi
 
-    ROW
-    echo -e "Alttab Install Is Complete :: Version "  $(alttab -v 2>&1 | grep -i 'alttab' | head -n 1 | sed -e "s/\b\(.\)/\u\1/g" )
-    ROW
+	./configure >/dev/null 2>&1
+	make >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
+
+	ROW
+	echo -e "Alttab Install Is Complete :: Version " $(alttab -v 2>&1 | grep -i 'alttab' | head -n 1 | sed -e "s/\b\(.\)/\u\1/g")
+	ROW
 
 }
 
@@ -370,23 +607,23 @@ Alttab() {
 
 Arcicons() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    if [ -d "arc-icon-theme" ]; then 
-        cd arc-icon-theme && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/horst3180/arc-icon-theme && cd arc-icon-theme 
-    fi
+	if [ -d "arc-icon-theme" ]; then
+		cd arc-icon-theme && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/horst3180/arc-icon-theme && cd arc-icon-theme
+	fi
 
-    if [ ! -d "$HOME/.local/share/icons/" ]; then
-        mkdir -p $HOME/.local/share/icons/
-    fi
+	if [ ! -d "$HOME/.local/share/icons/" ]; then
+		mkdir -p $HOME/.local/share/icons/
+	fi
 
-    cp -rf Arc/ $HOME/.local/share/icons/
+	cp -rf Arc/ $HOME/.local/share/icons/
 
-    ROW
-    echo "The Arc Icons installation is complete"
-    ROW
+	ROW
+	echo "The Arc Icons installation is complete"
+	ROW
 
 }
 
@@ -394,15 +631,15 @@ Arcicons() {
 
 Imagemagick() {
 
-    ${APT_INSTALL} imagemagick > /dev/null 2>&1
+	${APT_INSTALL} imagemagick >/dev/null 2>&1
 
-    if [ -f /etc/ImageMagick-6/policy.xml ]; then
-        sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
-    fi
+	if [ -f /etc/ImageMagick-6/policy.xml ]; then
+		sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read|write" pattern="PDF" \/>/g' /etc/ImageMagick-6/policy.xml
+	fi
 
-    ROW
-    echo "Imagemagick Fix Completed"
-    ROW
+	ROW
+	echo "Imagemagick Fix Completed"
+	ROW
 
 }
 
@@ -410,23 +647,23 @@ Imagemagick() {
 
 Jupyter() {
 
-    pip3 install -q --timeout 1000 --retries 20 ipython notebook prompt-toolkit -i https://pypi.tuna.tsinghua.edu.cn/simple > /dev/null 2>&1
+	pip3 install -q --timeout 1000 --retries 20 ipython notebook prompt-toolkit -i https://pypi.tuna.tsinghua.edu.cn/simple >/dev/null 2>&1
 
-    if [ ! -d "$HOME/.jupyter/custom/" ]; then
-        mkdir -p $HOME/.jupyter/custom/
-    fi
+	if [ ! -d "$HOME/.jupyter/custom/" ]; then
+		mkdir -p $HOME/.jupyter/custom/
+	fi
 
-    cp $EXTRAS_UP_DIR/jupyter/custom.css $HOME/.jupyter/custom/custom.css
+	cp $EXTRAS_UP_DIR/jupyter/custom.css $HOME/.jupyter/custom/custom.css
 
-    if [ ! -d "$HOME/.ipython/profile_default/startup/" ]; then
-        mkdir -p $HOME/.ipython/profile_default/startup/
-    fi
+	if [ ! -d "$HOME/.ipython/profile_default/startup/" ]; then
+		mkdir -p $HOME/.ipython/profile_default/startup/
+	fi
 
-    cp $EXTRAS_UP_DIR/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
+	cp $EXTRAS_UP_DIR/jupyter/startup.py $HOME/.ipython/profile_default/startup/startup.py
 
-    ROW
-    echo -e "Jupyter Install Is Complete :: Version "  $( jupyter --version | grep -iE "ipython|notebook" | sed -e "s/\b\(.\)/\u\1/g" )
-    ROW
+	ROW
+	echo -e "Jupyter Install Is Complete :: Version " $(jupyter --version | grep -iE "ipython|notebook" | sed -e "s/\b\(.\)/\u\1/g")
+	ROW
 
 }
 
@@ -434,29 +671,29 @@ Jupyter() {
 
 Picom() {
 
-    ${APT_INSTALL} libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev > /dev/null 2>&1
-    ${APT_INSTALL} libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev  > /dev/null 2>&1
-    ${APT_INSTALL} libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev > /dev/null 2>&1
-    ${APT_INSTALL} libevdev-dev uthash-dev libev-dev libx11-xcb-dev  libxcb-present-dev > /dev/null 2>&1
-    ${APT_INSTALL} libxcb-xinerama0-dev libxcb-glx0-dev libxcb-render-util0-dev meson > /dev/null 2>&1
+	${APT_INSTALL} libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev >/dev/null 2>&1
+	${APT_INSTALL} libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev >/dev/null 2>&1
+	${APT_INSTALL} libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev >/dev/null 2>&1
+	${APT_INSTALL} libevdev-dev uthash-dev libev-dev libx11-xcb-dev libxcb-present-dev >/dev/null 2>&1
+	${APT_INSTALL} libxcb-xinerama0-dev libxcb-glx0-dev libxcb-render-util0-dev meson >/dev/null 2>&1
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    if [ -d "picom" ]; then 
-        cd picom && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/yshui/picom && cd picom 
-    fi
+	if [ -d "picom" ]; then
+		cd picom && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/yshui/picom && cd picom
+	fi
 
-    rm -rf build
-    git submodule update --init > /dev/null 2>&1
-    meson --buildtype=release . build -Dwith_docs=false > /dev/null 2>&1
-    ninja -C build > /dev/null 2>&1
-    sudo install -Dm755 --verbose build/src/picom /usr/local/bin/picom > /dev/null 2>&1
+	rm -rf build
+	git submodule update --init >/dev/null 2>&1
+	meson --buildtype=release . build -Dwith_docs=false >/dev/null 2>&1
+	ninja -C build >/dev/null 2>&1
+	sudo install -Dm755 --verbose build/src/picom /usr/local/bin/picom >/dev/null 2>&1
 
-    ROW
-    echo "Picom Install Is Complete :: Version: " $(picom --version | sed -e "s/\b\(.\)/\u\1/g")
-    ROW
+	ROW
+	echo "Picom Install Is Complete :: Version: " $(picom --version | sed -e "s/\b\(.\)/\u\1/g")
+	ROW
 
 }
 
@@ -464,23 +701,23 @@ Picom() {
 
 Dunst() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    ${APT_INSTALL} libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev > /dev/null 2>&1
-    ${APT_INSTALL} libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev > /dev/null 2>&1
+	${APT_INSTALL} libdbus-1-dev libx11-dev libxinerama-dev libxrandr-dev libxss-dev libglib2.0-dev >/dev/null 2>&1
+	${APT_INSTALL} libpango1.0-dev libgtk-3-dev libxdg-basedir-dev libnotify-dev >/dev/null 2>&1
 
-    if [ -d "dunst" ]; then 
-        cd dunst && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/dunst-project/dunst && cd dunst 
-    fi
+	if [ -d "dunst" ]; then
+		cd dunst && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/dunst-project/dunst && cd dunst
+	fi
 
-    make > /dev/null 2>&1
-    sudo make install > /dev/null 2>&1
+	make >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
 
-    ROW
-    echo "Dunst Install Is Complete :: Version: " $(dunst -v | sed -e "s/\b\(.\)/\u\1/g")
-    ROW
+	ROW
+	echo "Dunst Install Is Complete :: Version: " $(dunst -v | sed -e "s/\b\(.\)/\u\1/g")
+	ROW
 
 }
 
@@ -488,63 +725,38 @@ Dunst() {
 
 Offlineimap() {
 
-    # ROW
-    # echo "Please enter the password to extract the package: ......  "
-    # ROW
+	# ROW
+	# echo "Please enter the password to extract the package: ......  "
+	# ROW
 
-    # ROW
-    # unzip -o -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
-    # ROW
+	# ROW
+	# unzip -o -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
+	# ROW
 
-    read -p "Please Input Your GPG Password: " PASSWORD
-    cd $HOME/.config/neomutt/
-    gpg --quiet --batch --yes --passphrase=$PASSWORD --output alimail.pass --decrypt alimail.pass.gpg
-    gpg --quiet --batch --yes --passphrase=$PASSWORD --output hotmail.pass --decrypt hotmail.pass.gpg
+	read -p "Please Input Your GPG Password: " PASSWORD
+	cd $HOME/.config/neomutt/
+	gpg --quiet --batch --yes --passphrase=$PASSWORD --output alimail.pass --decrypt alimail.pass.gpg
+	gpg --quiet --batch --yes --passphrase=$PASSWORD --output hotmail.pass --decrypt hotmail.pass.gpg
 
-    if [ -f /etc/systemd/user/offlineimap.service ]; then
-        sudo rm -rf /etc/systemd/user/offlineimap.service
-    fi
+	if [ -f /etc/systemd/user/offlineimap.service ]; then
+		sudo rm -rf /etc/systemd/user/offlineimap.service
+	fi
 
-    sudo cp $EXTRAS_UP_DIR/offlineimap/offlineimap.service /etc/systemd/user
-    sudo chmod 664 /etc/systemd/user/offlineimap.service
-    systemctl --user daemon-reload
-    systemctl --user enable offlineimap
-    systemctl --user start offlineimap
+	sudo cp $EXTRAS_UP_DIR/offlineimap/offlineimap.service /etc/systemd/user
+	sudo chmod 664 /etc/systemd/user/offlineimap.service
+	systemctl --user daemon-reload
+	systemctl --user enable offlineimap
+	systemctl --user start offlineimap
 
-    sudo chmod 600 $HOME/.msmtprc
-    
-    if [ -d $HOME/mail/ ]; then
-        touch $HOME/mail/Postponed
-    fi
+	sudo chmod 600 $HOME/.msmtprc
 
-    ROW
-    echo "Neomutt Install Is Complete :: Version: " $(neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*...")
-    ROW
+	if [ -d $HOME/mail/ ]; then
+		touch $HOME/mail/Postponed
+	fi
 
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Github_SSH() {
-
-    if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
-        ROW
-        echo "Please Input Email Addrsses For SSH Key: ...... "
-        ROW
-        read -e ssh_email
-        ssh-keygen -t rsa -P "" -C "$ssh_email"  -f ~/.ssh/id_rsa  > /dev/null 2>&1
-    fi
-
-    ROW
-    echo 'Key Copied to keyboard'
-    ROW
-
-    xclip -sel clip < $HOME/.ssh/id_rsa.pub
-    microsoft-edge --new-window 'https://github.com/settings/keys' > /dev/null 2>&1
-
-    ROW
-    echo "Add Github For SSH Key Done!"
-    ROW
+	ROW
+	echo "Neomutt Install Is Complete :: Version: " $(neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*...")
+	ROW
 
 }
 
@@ -552,11 +764,11 @@ Github_SSH() {
 
 Github_Hosts() {
 
-    sudo sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl -s https://raw.hellogithub.com/hosts | sudo tee -a /etc/hosts > /dev/null 2>&1
+	sudo sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl -s https://raw.hellogithub.com/hosts | sudo tee -a /etc/hosts >/dev/null 2>&1
 
-    ROW
-    echo "Github Hosts Install Is Complete :: Update Time: " $(tail -n -4 /etc/hosts  | head -n 1)
-    ROW
+	ROW
+	echo "Github Hosts Install Is Complete :: Update Time: " $(tail -n -4 /etc/hosts | head -n 1)
+	ROW
 
 }
 
@@ -564,13 +776,13 @@ Github_Hosts() {
 
 Vmware_Share_Fix() {
 
-    if type vmhgfs-fuse >/dev/null 2>&1; then
-        sudo vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other,nonempty ;
-    fi
+	if type vmhgfs-fuse >/dev/null 2>&1; then
+		sudo vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other,nonempty
+	fi
 
-    ROW
-    echo "Vmware Share Tools is Enable"
-    ROW
+	ROW
+	echo "Vmware Share Tools is Enable"
+	ROW
 
 }
 
@@ -578,15 +790,15 @@ Vmware_Share_Fix() {
 
 Calibre() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    ${APT_INSTALL} calibre > /dev/null 2>&1
+	${APT_INSTALL} calibre >/dev/null 2>&1
 
-    $GIT_CLONE/hantaotaohan/books $HOME/books
+	$GIT_CLONE/hantaotaohan/books $HOME/books
 
-    ROW
-    echo "Calibre Install Is Complete  & Git Clone Book Done :: Version: " $(calibre --version | sed -e "s/\b\(.\)/\u\1/g")
-    ROW
+	ROW
+	echo "Calibre Install Is Complete  & Git Clone Book Done :: Version: " $(calibre --version | sed -e "s/\b\(.\)/\u\1/g")
+	ROW
 
 }
 
@@ -594,14 +806,14 @@ Calibre() {
 
 Foliate() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/foliate.deb
-    sudo dpkg -i foliate.deb > /dev/null 2>&1
+	wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/foliate.deb
+	sudo dpkg -i foliate.deb >/dev/null 2>&1
 
-    ROW
-    echo "Foliate Install Is Complete :: Version: " $(com.github.johnfactotum.Foliate -v)
-    ROW
+	ROW
+	echo "Foliate Install Is Complete :: Version: " $(com.github.johnfactotum.Foliate -v)
+	ROW
 
 }
 
@@ -609,158 +821,60 @@ Foliate() {
 
 Rdrview() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    ${APT_INSTALL} libxml2-dev libseccomp-dev libcurl4-gnutls-dev > /dev/null 2>&1
+	${APT_INSTALL} libxml2-dev libseccomp-dev libcurl4-gnutls-dev >/dev/null 2>&1
 
-    if [ -d "rdrview" ]; then 
-        cd rdrview && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/eafer/rdrview && cd rdrview 
-    fi
+	if [ -d "rdrview" ]; then
+		cd rdrview && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/eafer/rdrview && cd rdrview
+	fi
 
-    make > /dev/null 2>&1 
-    sudo make install > /dev/null 2>&1
+	make >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
 
-    ROW
-    echo -e "Rerview Install Is Complete :: Version "  $(rdrview -v | sed -e "s/\b\(.\)/\u\1/g" )
-    ROW
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-SSH_banner() {
-
-    sudo sed -i '$a\Banner \/etc\/ssh\/banner' /etc/ssh/sshd_config
-    sudo cp $EXTRAS_UP_DIR/ssh-banner/banner /etc/ssh/
-
-    # systemctl restart sshd
-
-    ROW
-    echo "SSH Banner Replacement Is Complete"
-    ROW
-
+	ROW
+	echo -e "Rerview Install Is Complete :: Version " $(rdrview -v | sed -e "s/\b\(.\)/\u\1/g")
+	ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Ly() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    ${APT_INSTALL} build-essential libpam0g-dev libxcb-xkb-dev > /dev/null 2>&1
+	${APT_INSTALL} build-essential libpam0g-dev libxcb-xkb-dev >/dev/null 2>&1
 
-    if [ -d "ly" ]; then 
-        cd ly && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/nullgemm/ly && cd ly 
-    fi
+	if [ -d "ly" ]; then
+		cd ly && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/nullgemm/ly && cd ly
+	fi
 
-    make > /dev/null 2>&1
-    sudo make install > /dev/null 2>&1
-    sudo systemctl enable ly.service
-    
-    ROW
-    echo "LY Install Is Complete "
-    ROW
-}
+	make >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
+	sudo systemctl enable ly.service
 
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Ctags() {
-
-    cd ${SOURCE_DIR} || return
-
-    sudo apt remove --purge ctags > /dev/null 2>&1
-    ${APT_INSTALL} libjansson-dev autotools-dev autoconf > /dev/null 2>&1
-
-    if [ -d "ctags" ]; then 
-        cd ctags && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/universal-ctags/ctags && cd ctags 
-    fi
-
-    ./autogen.sh > /dev/null 2>&1
-    ./configure > /dev/null 2>&1
-    make > /dev/null 2>&1
-    sudo make install > /dev/null 2>&1
-
-    ROW
-    ctags --version | grep "Universal Ctags"
-    ROW
-
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Nodejs() {
-
-    ( curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - ) > /dev/null 2>&1
-    ${APT_INSTALL} nodejs > /dev/null 2>&1
-
-    ROW
-    node --version
-    ROW
-
-    ( curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - ) > /dev/null 2>&1
-    ( echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list ) > /dev/null 2>&1
-
-    sudo apt update -y -qq > /dev/null 2>&1
-    ${APT_INSTALL} yarn > /dev/null 2>&1
-
-    sudo rm -rf /etc/apt/sources.list.d/yarn.list
-
-    ROW
-    yarn --version
-    ROW
-
+	ROW
+	echo "LY Install Is Complete "
+	ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Hugo() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    wget -q $GIT_DOWNLOAD/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $SOURCE_DIR/hugo.deb
+	wget -q $GIT_DOWNLOAD/gohugoio/hugo/releases/download/v0.79.1/hugo_extended_0.79.1_Linux-64bit.deb -O $SOURCE_DIR/hugo.deb
 
-    sudo dpkg -i hugo.deb > /dev/null 2>&1
+	sudo dpkg -i hugo.deb >/dev/null 2>&1
 
-    ROW
-    hugo version
-    ROW
-
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Java() {
-
-    ${APT_INSTALL} default-jre > /dev/null 2>&1
-    ${APT_INSTALL} default-jdk > /dev/null 2>&1
-
-    ROW
-    java -version
-    ROW
-
-    ROW
-    javac -version
-    ROW
-
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Clone() {
-
-    #git clone git@github.com:hantaotaohan/vimwiki.git $HOME/vimwiki
-    #git clone git@github.com:hantaotaohan/hantaotaohan.github.io.git $HOME/blog
-    git clone -q git@github.com:hantaotaohan/books.git $HOME/books
-    git clone -q git@github.com:hantaotaohan/wiki.git $HOME/wiki
-
-    ROW
-    echo "Git Clone Done!"
-    ROW
+	ROW
+	hugo version
+	ROW
 
 }
 
@@ -768,16 +882,16 @@ Clone() {
 
 Fixrofiicons() {
 
-    sudo sed -i '$a\Icon=/home/taotao/.extras/icons/pdf.png' /usr/share/applications/org.pwmt.zathura.desktop
-    sudo sed -i '$a\Icon=/home/taotao/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop 
-    sudo sed -i '$a\Icon=/home/taotao/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
-    sudo sed -i '$a\Icon=/home/taotao/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
-    # fix ranger open path
-    sudo sed -i '$a\Exec=/home/taotao/.config/ranger/ranger-oepn %U' /usr/share/applications/ranger.desktop
+	sudo sed -i '$a\Icon=/home/taotao/.extras/icons/pdf.png' /usr/share/applications/org.pwmt.zathura.desktop
+	sudo sed -i '$a\Icon=/home/taotao/.extras/icons/mail.png' /usr/share/applications/neomutt.desktop
+	sudo sed -i '$a\Icon=/home/taotao/.extras/icons/translate.png' /usr/share/applications/copytranslator.desktop
+	sudo sed -i '$a\Icon=/home/taotao/.extras/icons/browser.png' /usr/share/applications/ranger.desktop
+	# fix ranger open path
+	sudo sed -i '$a\Exec=/home/taotao/.config/ranger/ranger-oepn %U' /usr/share/applications/ranger.desktop
 
-    ROW
-    echo "Fix Rofi Icons Done!"
-    ROW
+	ROW
+	echo "Fix Rofi Icons Done!"
+	ROW
 
 }
 
@@ -785,17 +899,17 @@ Fixrofiicons() {
 
 Fixi3terminal() {
 
-    if [ -f /usr/bin/i3-sensible-terminal ]; then
-        sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/rofi-sensible-terminal
-    fi
+	if [ -f /usr/bin/i3-sensible-terminal ]; then
+		sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/rofi-sensible-terminal
+	fi
 
-    if [ -f /usr/bin/rofi-sensible-terminal ]; then
-        sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/i3-sensible-terminal
-    fi
+	if [ -f /usr/bin/rofi-sensible-terminal ]; then
+		sudo sed -i 's/konsole/konsole alacritty/g' /usr/bin/i3-sensible-terminal
+	fi
 
-    ROW
-    echo "I3wm Terminal for Alacritty Doen!"
-    ROW
+	ROW
+	echo "I3wm Terminal for Alacritty Doen!"
+	ROW
 
 }
 
@@ -803,40 +917,40 @@ Fixi3terminal() {
 
 Dragon() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    ${APT_INSTALL} libgtk-3-dev > /dev/null 2>&1
+	${APT_INSTALL} libgtk-3-dev >/dev/null 2>&1
 
-    if [ -d "dragon" ]; then 
-        cd dragon && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/mwh/dragon && cd dragon 
-    fi
+	if [ -d "dragon" ]; then
+		cd dragon && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/mwh/dragon && cd dragon
+	fi
 
-    make  > /dev/null 2>&1
-    make install  > /dev/null 2>&1
+	make >/dev/null 2>&1
+	make install >/dev/null 2>&1
 
-    ROW
-    dragon --version
-    ROW
+	ROW
+	dragon --version
+	ROW
 
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Fixnautilus() {
-    
-    gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
-    gsettings set org.gnome.nautilus.preferences show-image-thumbnails "'never'"
-    gsettings set org.gnome.nautilus.preferences show-directory-item-counts "'never'"
-    gsettings set org.gnome.nautilus.preferences recursive-search 'never'
-    gsettings set org.gtk.Settings.FileChooser sort-directories-first 'true'
-    gsettings set org.gtk.Settings.FileChooser show-hidden 'true'
-    gsettings set org.gnome.desktop.wm.preferences audible-bell 'false'
 
-    ROW
-    echo "fix Nautilus Done!"
-    ROW
+	gsettings set org.gnome.nautilus.preferences default-folder-viewer 'list-view'
+	gsettings set org.gnome.nautilus.preferences show-image-thumbnails "'never'"
+	gsettings set org.gnome.nautilus.preferences show-directory-item-counts "'never'"
+	gsettings set org.gnome.nautilus.preferences recursive-search 'never'
+	gsettings set org.gtk.Settings.FileChooser sort-directories-first 'true'
+	gsettings set org.gtk.Settings.FileChooser show-hidden 'true'
+	gsettings set org.gnome.desktop.wm.preferences audible-bell 'false'
+
+	ROW
+	echo "fix Nautilus Done!"
+	ROW
 
 }
 
@@ -844,22 +958,22 @@ Fixnautilus() {
 
 I3blocks() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    if [ -d "i3blocks" ]; then 
-        cd i3blocks && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/vivien/i3blocks && cd i3blocks 
-    fi
+	if [ -d "i3blocks" ]; then
+		cd i3blocks && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/vivien/i3blocks && cd i3blocks
+	fi
 
-    ./autogen.sh > /dev/null 2>&1
-    ./configure > /dev/null 2>&1
-    make > /dev/null 2>&1
-    sudo make install > /dev/null 2>&1
+	./autogen.sh >/dev/null 2>&1
+	./configure >/dev/null 2>&1
+	make >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
 
-    ROW
-    i3blocks -V
-    ROW
+	ROW
+	i3blocks -V
+	ROW
 
 }
 
@@ -867,16 +981,16 @@ I3blocks() {
 
 Yarn() {
 
-    sudo apt remove --purge yarn
+	sudo apt remove --purge yarn
 
-    (curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - ) > /dev/null 2>&1
-    (echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list) > /dev/null 2>&1
-    sudo apt update -y -qq > /dev/null 2>&1
-    ${APT_INSTALL} yarn
+	(curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -) >/dev/null 2>&1
+	(echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list) >/dev/null 2>&1
+	sudo apt update -y -qq >/dev/null 2>&1
+	${APT_INSTALL} yarn
 
-    ROW
-    yarn -v
-    ROW
+	ROW
+	yarn -v
+	ROW
 
 }
 
@@ -884,19 +998,19 @@ Yarn() {
 
 Bashdb() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    wget -q -P ${SOURCE_DIR} $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/bashdb.tar.gz
-    tar -zxvf bashdb.tar.gz  > /dev/null 2>&1
+	wget -q -P ${SOURCE_DIR} $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/bashdb.tar.gz
+	tar -zxvf bashdb.tar.gz >/dev/null 2>&1
 
-    cd bashdb-5.0-1.1.2
-    ./configure  > /dev/null 2>&1
-    make  > /dev/null 2>&1
-    sudo make install  > /dev/null 2>&1
+	cd bashdb-5.0-1.1.2
+	./configure >/dev/null 2>&1
+	make >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
 
-    ROW
-    echo "BASHDB Install Done!"
-    ROW
+	ROW
+	echo "BASHDB Install Done!"
+	ROW
 
 }
 
@@ -904,36 +1018,36 @@ Bashdb() {
 
 I3lockfancy() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    if [ -d "i3lock-fancy" ]; then 
-        cd i3lock-fancy && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/meskarune/i3lock-fancy && cd i3lock-fancy 
-    fi
+	if [ -d "i3lock-fancy" ]; then
+		cd i3lock-fancy && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/meskarune/i3lock-fancy && cd i3lock-fancy
+	fi
 
-    sudo make install
+	sudo make install
 
-    ROW
-    echo "I3lock-Fancy Install Done!"
-    ROW
+	ROW
+	echo "I3lock-Fancy Install Done!"
+	ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Qutebrowser() {
 
-    ${APT_INSTALL} qutebrowser > /dev/null 2>&1
+	${APT_INSTALL} qutebrowser >/dev/null 2>&1
 
-    if [ ! -d "$HOME/.local/share/qutebrowser/greasemonkey/" ]; then
-        mkdir -p $HOME/.local/share/qutebrowser/greasemonkey
-    fi
+	if [ ! -d "$HOME/.local/share/qutebrowser/greasemonkey/" ]; then
+		mkdir -p $HOME/.local/share/qutebrowser/greasemonkey
+	fi
 
-    cp $HOME/.config/qutebrowser/greasemonkey/* $HOME/.local/share/qutebrowser/greasemonkey/
+	cp $HOME/.config/qutebrowser/greasemonkey/* $HOME/.local/share/qutebrowser/greasemonkey/
 
-    ROW
-    qutebrowser -V | head -16 | grep qutebrowser
-    ROW
+	ROW
+	qutebrowser -V | head -16 | grep qutebrowser
+	ROW
 
 }
 
@@ -941,17 +1055,17 @@ Qutebrowser() {
 
 Weixin() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    wget -q -P ${SOURCE_DIR} http://archive.ubuntukylin.com/software/pool/partner/ukylin-wine_70.6.3.25_amd64.deb 
-    wget -q -P ${SOURCE_DIR} http://archive.ubuntukylin.com/software/pool/partner/ukylin-wechat_3.0.0_amd64.deb 
+	wget -q -P ${SOURCE_DIR} http://archive.ubuntukylin.com/software/pool/partner/ukylin-wine_70.6.3.25_amd64.deb
+	wget -q -P ${SOURCE_DIR} http://archive.ubuntukylin.com/software/pool/partner/ukylin-wechat_3.0.0_amd64.deb
 
-    sudo apt-get install -f -y -qq ./ukylin-wine_70.6.3.25_amd64.deb > /dev/null 2>&1
-    sudo apt-get install -f -y -qq ./ukylin-wechat_3.0.0_amd64.deb > /dev/null 2>&1
+	sudo apt-get install -f -y -qq ./ukylin-wine_70.6.3.25_amd64.deb >/dev/null 2>&1
+	sudo apt-get install -f -y -qq ./ukylin-wechat_3.0.0_amd64.deb >/dev/null 2>&1
 
-    ROW
-    echo "Weixin Install Done!"
-    ROW
+	ROW
+	echo "Weixin Install Done!"
+	ROW
 
 }
 
@@ -959,21 +1073,21 @@ Weixin() {
 
 Urxvt() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    ${APT_INSTALL} libperl-dev > /dev/null 2>&1
+	${APT_INSTALL} libperl-dev >/dev/null 2>&1
 
-    wget -q -P ${SOURCE_DIR} http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-9.26.tar.bz2  
+	wget -q -P ${SOURCE_DIR} http://dist.schmorp.de/rxvt-unicode/rxvt-unicode-9.26.tar.bz2
 
-    tar -xvf rxvt-unicode-9.26.tar.bz2 > /dev/null 2>&1
+	tar -xvf rxvt-unicode-9.26.tar.bz2 >/dev/null 2>&1
 
-    cd rxvt-unicode-9.26
+	cd rxvt-unicode-9.26
 
-    ./configure --enable-xft --enable-font-styles --enable-iso14755 --enable-unicode3 --enable-256-color --with-x > /dev/null 2>&1
+	./configure --enable-xft --enable-font-styles --enable-iso14755 --enable-unicode3 --enable-256-color --with-x >/dev/null 2>&1
 
-    ROW
-    urxvt --version 2>&1 | grep rxvt-unicode
-    ROW
+	ROW
+	urxvt --version 2>&1 | grep rxvt-unicode
+	ROW
 
 }
 
@@ -981,42 +1095,42 @@ Urxvt() {
 
 St() {
 
-    cd ${SOURCE_DIR} || return
+	cd ${SOURCE_DIR} || return
 
-    if [ -d "st" ]; then 
-        cd st && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/hantaotaohan/st && cd st 
-    fi
+	if [ -d "st" ]; then
+		cd st && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/hantaotaohan/st && cd st
+	fi
 
-    sudo make clean install > /dev/null 2>&1
-    
-    ROW
-    echo -e "ST Install Is Complete :: Version "  $(st -v | sed -e "s/\b\(.\)/\u\1/g" )
-    ROW
+	sudo make clean install >/dev/null 2>&1
+
+	ROW
+	echo -e "ST Install Is Complete :: Version " $(st -v | sed -e "s/\b\(.\)/\u\1/g")
+	ROW
 }
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
 Vifm() {
 
-    cd "$SOURCE_DIR" || return
+	cd "$SOURCE_DIR" || return
 
-    ${APT_INSTALL} vifm > /dev/null 2>&1
+	${APT_INSTALL} vifm >/dev/null 2>&1
 
-    pip3 install -q --timeout 1000 --retries 20 ueberzug -i https://pypi.tuna.tsinghua.edu.cn/simple
+	pip3 install -q --timeout 1000 --retries 20 ueberzug -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-    if [ -d "vifming" ]; then 
-        cd vifmimg && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/cirala/vifmimg && cd vifmimg 
-    fi
+	if [ -d "vifming" ]; then
+		cd vifmimg && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/cirala/vifmimg && cd vifmimg
+	fi
 
-    sudo make install > /dev/null 2>&1
+	sudo make install >/dev/null 2>&1
 
-    ROW
-    echo "Vifm - Vifmimg Install Done !"
-    ROW
+	ROW
+	echo "Vifm - Vifmimg Install Done !"
+	ROW
 
 }
 
@@ -1024,22 +1138,22 @@ Vifm() {
 
 Popupdict() {
 
-    cd "$SOURCE_DIR" || return
+	cd "$SOURCE_DIR" || return
 
-    ${APT_INSTALL} python3-gi python3-gi-cairo gir1.2-gtk-3.0 > /dev/null 2>&1
+	${APT_INSTALL} python3-gi python3-gi-cairo gir1.2-gtk-3.0 >/dev/null 2>&1
 
-    if [ -d "popup-dict" ]; then 
-        cd popup-dict && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/hantaotaohan/popup-dict && cd popup-dict 
-    fi
+	if [ -d "popup-dict" ]; then
+		cd popup-dict && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/hantaotaohan/popup-dict && cd popup-dict
+	fi
 
-    sudo pip3 install -r requirements.txt  > /dev/null 2>&1
-    sudo python3 setup.py develop  > /dev/null 2>&1
+	sudo pip3 install -r requirements.txt >/dev/null 2>&1
+	sudo python3 setup.py develop >/dev/null 2>&1
 
-    ROW
-    echo -e "Popup-Dict Install Is Complete"
-    ROW
+	ROW
+	echo -e "Popup-Dict Install Is Complete"
+	ROW
 
 }
 
@@ -1047,18 +1161,18 @@ Popupdict() {
 
 Anki() {
 
-    cd "$SOURCE_DIR" || return
-    
-    rm -rf anki.tar.bz2
+	cd "$SOURCE_DIR" || return
 
-    wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/anki.tar.bz2
-    tar xf anki.tar.bz2 > /dev/null 2>&1
-    cd anki-2.1.49-linux
-    sudo bash install.sh > /dev/null 2>&1  
+	rm -rf anki.tar.bz2
 
-    ROW
-    echo "Anki Install Is Complete :: Version: " $(anki -v | sed -e "s/\b\(.\)/\u\1/g")
-    ROW
+	wget -q $GIT_DOWNLOAD/hantaotaohan/dotfiles/releases/download/1.0.0/anki.tar.bz2
+	tar xf anki.tar.bz2 >/dev/null 2>&1
+	cd anki-2.1.49-linux
+	sudo bash install.sh >/dev/null 2>&1
+
+	ROW
+	echo "Anki Install Is Complete :: Version: " $(anki -v | sed -e "s/\b\(.\)/\u\1/g")
+	ROW
 
 }
 
@@ -1066,42 +1180,42 @@ Anki() {
 
 I3gaps() {
 
-    cd "$SOURCE_DIR" || return
+	cd "$SOURCE_DIR" || return
 
-    if [ -d "i3-gaps" ]; then 
-        cd i3-gaps && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/Airblader/i3 i3-gaps && cd i3-gaps 
-    fi
+	if [ -d "i3-gaps" ]; then
+		cd i3-gaps && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/Airblader/i3 i3-gaps && cd i3-gaps
+	fi
 
-    ${APT_INSTALL} meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev > /dev/null 2>&1
-    ${APT_INSTALL} libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev > /dev/null 2>&1
-    ${APT_INSTALL} libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev > /dev/null 2>&1
-    ${APT_INSTALL} libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev > /dev/null 2>&1
-    ${APT_INSTALL} libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev > /dev/null 2>&1
+	${APT_INSTALL} meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev >/dev/null 2>&1
+	${APT_INSTALL} libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev >/dev/null 2>&1
+	${APT_INSTALL} libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev >/dev/null 2>&1
+	${APT_INSTALL} libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev >/dev/null 2>&1
+	${APT_INSTALL} libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev >/dev/null 2>&1
 
-    rm -rf build
-    mkdir build
-    meson --buildtype=release . build
-    ninja -C build
+	rm -rf build
+	mkdir build
+	meson --buildtype=release . build
+	ninja -C build
 
-    sudo install -Dm755 --verbose build/i3 /usr/bin/i3
-    sudo install -Dm755 --verbose build/i3bar /usr/bin/i3bar
-    sudo install -Dm755 --verbose build/i3-config-wizard /usr/bin/i3-config-wizard
-    sudo install -Dm755 --verbose build/i3-dump-log /usr/bin/i3-dump-log
-    sudo install -Dm755 --verbose build/i3-input /usr/bin/i3-input
-    sudo install -Dm755 --verbose build/i3-msg /usr/bin/i3-msg
-    sudo install -Dm755 --verbose build/i3-nagbar /usr/bin/i3-nagbar
-    sudo install -Dm755 --verbose i3-dmenu-desktop /usr/bin/i3-dmenu-desktop
-    sudo install -Dm755 --verbose i3-migrate-config-to-v4 /usr/bin/i3-migrate-config-to-v4
-    sudo install -Dm755 --verbose i3-save-tree /usr/bin/i3-save-tree
-    sudo install -Dm755 --verbose i3-sensible-editor /usr/bin/i3-sensible-editor
-    sudo install -Dm755 --verbose i3-sensible-pager /usr/bin/i3-sensible-pager
-    sudo install -Dm755 --verbose i3-sensible-terminal /usr/bin/i3-sensible-terminal
+	sudo install -Dm755 --verbose build/i3 /usr/bin/i3
+	sudo install -Dm755 --verbose build/i3bar /usr/bin/i3bar
+	sudo install -Dm755 --verbose build/i3-config-wizard /usr/bin/i3-config-wizard
+	sudo install -Dm755 --verbose build/i3-dump-log /usr/bin/i3-dump-log
+	sudo install -Dm755 --verbose build/i3-input /usr/bin/i3-input
+	sudo install -Dm755 --verbose build/i3-msg /usr/bin/i3-msg
+	sudo install -Dm755 --verbose build/i3-nagbar /usr/bin/i3-nagbar
+	sudo install -Dm755 --verbose i3-dmenu-desktop /usr/bin/i3-dmenu-desktop
+	sudo install -Dm755 --verbose i3-migrate-config-to-v4 /usr/bin/i3-migrate-config-to-v4
+	sudo install -Dm755 --verbose i3-save-tree /usr/bin/i3-save-tree
+	sudo install -Dm755 --verbose i3-sensible-editor /usr/bin/i3-sensible-editor
+	sudo install -Dm755 --verbose i3-sensible-pager /usr/bin/i3-sensible-pager
+	sudo install -Dm755 --verbose i3-sensible-terminal /usr/bin/i3-sensible-terminal
 
-    ROW
-    i3 -v
-    ROW
+	ROW
+	i3 -v
+	ROW
 
 }
 
@@ -1109,29 +1223,29 @@ I3gaps() {
 
 Rofi() {
 
-    cd "$SOURCE_DIR" || return
+	cd "$SOURCE_DIR" || return
 
-    ${APT_INSTALL} bison flex libxcb-ewmh-dev autoconf libxcb-xkb-dev libxkbcommon-x11-dev libxcb-icccm4-dev > /dev/null 2>&1
-    ${APT_INSTALL} libxcb-cursor-dev libxcb-randr0-dev libxcb-xinerama0-dev libxcb-util-dev libstartup-notification0-dev > /dev/null 2>&1
+	${APT_INSTALL} bison flex libxcb-ewmh-dev autoconf libxcb-xkb-dev libxkbcommon-x11-dev libxcb-icccm4-dev >/dev/null 2>&1
+	${APT_INSTALL} libxcb-cursor-dev libxcb-randr0-dev libxcb-xinerama0-dev libxcb-util-dev libstartup-notification0-dev >/dev/null 2>&1
 
-    if [ -d "rofi" ]; then 
-        cd rofi && git pull > /dev/null 2>&1
-    else
-        $GIT_CLONE/davatorium/rofi && cd rofi 
-    fi
+	if [ -d "rofi" ]; then
+		cd rofi && git pull >/dev/null 2>&1
+	else
+		$GIT_CLONE/davatorium/rofi && cd rofi
+	fi
 
-    rm -rf build
-    git submodule update --init > /dev/null 2>&1
-    autoreconf -i > /dev/null 2>&1
-    mkdir build
-    cd build || return
-    ../configure --disable-check > /dev/null 2>&1
-    make > /dev/null 2>&1
-    sudo make install > /dev/null 2>&1
+	rm -rf build
+	git submodule update --init >/dev/null 2>&1
+	autoreconf -i >/dev/null 2>&1
+	mkdir build
+	cd build || return
+	../configure --disable-check >/dev/null 2>&1
+	make >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
 
-    ROW
-    rofi -v
-    ROW
+	ROW
+	rofi -v
+	ROW
 
 }
 
@@ -1139,181 +1253,182 @@ Rofi() {
 
 main() {
 
-    case "$1" in
-        ''|-h|--help)
-            usage
-            exit 0
-            ;;
-        vim)
-            Vim
-            ;;   
-        tmux)
-            Tmux
-            ;;   
-        alttab)
-            Alttab
-            ;;
-        arcicons)
-            Arcicons
-            ;;
-        imagemagick)
-            Imagemagick
-            ;;
-        jupyter)
-            Jupyter
-            ;;
-        navi)
-            Navi
-            ;;
-        picom)
-            Picom
-            ;;
-        dunst)
-            Dunst
-            ;;
-        offlineimap)
-            Offlineimap
-            ;;
-        githubssh)
-            Github_SSH
-            ;;
-        githubhosts)
-            Github_Hosts
-            ;;
-        fixvmwareshare)
-            Vmware_Share_Fix
-            ;;
-        calibre)
-            Calibre
-            ;;
-        foliate)
-            Foliate
-            ;;
-        rdrview)
-            Rdrview
-            ;;
-        sshbanner)
-            SSH_banner
-            ;;
-        ly)
-            Ly
-            ;;
-        ctags)
-            Ctags
-            ;;
-        nodejs)
-            Nodejs
-            ;;
-        hugo)
-            Hugo
-            ;; 
-        java)
-            Java
-            ;;
-        fixfzf)
-            Fix_FZF_history
-            ;;
-        clone)
-            Clone
-            ;;  
-        fixrofiicons)
-            Fixrofiicons
-            ;;
-        fixi3terminal)
-            Fixi3terminal
-            ;;
-        dragon)
-            Dragon
-            ;;   
-        fixnautilus)
-            Fixnautilus
-            ;;
-        fzfopen)
-            Fzfopen
-            ;;
-        i3blocks)
-            I3blocks
-            ;;
-        yarn)
-            Yarn
-            ;;
-        bashdb)
-            Bashdb
-            ;;
-        i3lockfancy)
-            I3lockfancy
-            ;;
-        qutebrowser)
-            Qutebrowser
-            ;;
-        weixin)
-            Weixin
-            ;;
-        urxvt)
-            Urxvt
-            ;;
-        st)
-            St
-            ;;
-        vifm)
-            Vifm
-            ;;   
-        popupdict)
-            Popupdict
-            ;;
-        anki)
-            Anki
-            ;;   
-        i3gaps)
-            I3gaps
-            ;;   
-        rofi)
-            Rofi
-            ;;   
-        tmux)
-            Tmux | pv
-            ;;   
-        -a|--all)
-            # Github_Hosts
-            Alttab
-            Arcicons
-            # Picom
-            # Dunst
-            Offlineimap
-            # Navi
-            # Ctags
-            Rdrview
-            # Fixrofiicons
-            # Fix_FZF_history
-            # Fixi3terminal
-            # Imagemagick
-            # Jupyter
-            # Nodejs
-            # Calibre
-            Foliate
-            # Hugo
-            # Java
-            # Github_SSH
-            Clone
-            Dragon
-            # Ly
-            # Vmware_Share_Fix
-            SSH_banner
-            Fixnautilus
-            # Vim
-            # Vifm
-            # I3lockfancy
-            Popupdict
-            # Bashdb
-            # Qutebrowser
-            # I3blocks
-            # Yarn
-            # I3gaps
-            # Anki
-            ;;
-        *)
-            echo "Command not found" >&2
-    esac
+	case "$1" in
+	'' | -h | --help)
+		usage
+		exit 0
+		;;
+	vim)
+		Vim
+		;;
+	nvim)
+		Nvim
+		;;
+	tmux)
+		Tmux
+		;;
+	alttab)
+		Alttab
+		;;
+	arcicons)
+		Arcicons
+		;;
+	imagemagick)
+		Imagemagick
+		;;
+	jupyter)
+		Jupyter
+		;;
+	navi)
+		Navi
+		;;
+	picom)
+		Picom
+		;;
+	dunst)
+		Dunst
+		;;
+	offlineimap)
+		Offlineimap
+		;;
+	githubssh)
+		Github_SSH
+		;;
+	githubhosts)
+		Github_Hosts
+		;;
+	fixvmwareshare)
+		Vmware_Share_Fix
+		;;
+	calibre)
+		Calibre
+		;;
+	foliate)
+		Foliate
+		;;
+	rdrview)
+		Rdrview
+		;;
+	sshbanner)
+		SSH_banner
+		;;
+	ly)
+		Ly
+		;;
+	ctags)
+		Ctags
+		;;
+	node)
+		Node
+		;;
+	hugo)
+		Hugo
+		;;
+	java)
+		Java
+		;;
+	fixfzf)
+		Fix_FZF_history
+		;;
+	clone)
+		Clone
+		;;
+	fixrofiicons)
+		Fixrofiicons
+		;;
+	fixi3terminal)
+		Fixi3terminal
+		;;
+	dragon)
+		Dragon
+		;;
+	fixnautilus)
+		Fixnautilus
+		;;
+	fzfopen)
+		Fzfopen
+		;;
+	i3blocks)
+		I3blocks
+		;;
+	yarn)
+		Yarn
+		;;
+	bashdb)
+		Bashdb
+		;;
+	i3lockfancy)
+		I3lockfancy
+		;;
+	qutebrowser)
+		Qutebrowser
+		;;
+	weixin)
+		Weixin
+		;;
+	urxvt)
+		Urxvt
+		;;
+	st)
+		St
+		;;
+	vifm)
+		Vifm
+		;;
+	popupdict)
+		Popupdict
+		;;
+	anki)
+		Anki
+		;;
+	i3gaps)
+		I3gaps
+		;;
+	rofi)
+		Rofi
+		;;
+	-a | --all)
+		# Github_Hosts
+		Alttab
+		Arcicons
+		# Picom
+		# Dunst
+		Offlineimap
+		# Navi
+		# Ctags
+		Rdrview
+		# Fixrofiicons
+		# Fix_FZF_history
+		# Fixi3terminal
+		# Imagemagick
+		# Jupyter
+		# Node
+		# Calibre
+		Foliate
+		# Hugo
+		# Java
+		# Github_SSH
+		Clone
+		Dragon
+		# Ly
+		# Vmware_Share_Fix
+		SSH_banner
+		Fixnautilus
+		# Vim
+		# Vifm
+		# I3lockfancy
+		Popupdict
+		# Bashdb
+		# Qutebrowser
+		# I3blocks
+		# Yarn
+		# I3gaps
+		# Anki
+		;;
+	*)
+		echo "Command not found" >&2
+		;;
+	esac
 }
 
 main "$@"
