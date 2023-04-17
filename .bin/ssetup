@@ -225,9 +225,14 @@ usage() {
                                                                                    
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
-         vim                 Install/Updatee VIM
-         nvim                Install/Updatee NEO-VIM
-         tmux                Install/Updatee TMUX
+         vim                 Install/Update VIM
+         nvim                Install/Update NEO-VIM
+         tmux                Install/Update TMUX
+         node                Install/Update Program NODE.JS and YARN
+         githubssh           Create/Yank Github For SSH Key
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
          alttab              Install Program Alttab - Same Windows Alt Tab
          anki                Install Program Anki
          arcicons            Install Gtk Dark-themes Icons
@@ -244,7 +249,6 @@ usage() {
          fixi3terminal       Fix I3wm Terminal Alacritty Suppose
          fixvmwareshare      Settings Vmware Share Folads
          githubhosts         Settings Config /etc/hosts/ Uses Fast View Github.com
-         githubssh           Settings Github.com SSH Key - Auto SSH_Ras Copy
          hugo                Install Program Hugo
          i3gaps              Install Program I3gaps
          i3blocks            Install Program I3blocks
@@ -254,7 +258,6 @@ usage() {
          jupyter             Install Program Jupyter Notebook And Settings Themes
          ly                  Install Program Ly Commandline Longin 
          navi                Install Program Navi - Cheatsheet Tools
-         node                Install Program Node.js
          offlineimap         Install Program offlineimap -  Auto Setting Neomutt
          picom               Install Program Picom
          popupdict           Install Program Popupdict - Translate Tools
@@ -382,6 +385,74 @@ Tmux() {
 	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
 
 	OUTPUT_FOOT "${BLUE} [·] Tmux Version: ${RESET} ${RED}$(tmux -V)${RESET} "
+
+}
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+
+Node() {
+
+	OUTPUT_TITLE 'node' ' Node Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL NODE ... ${RESET}"
+	if PROGRAM_EXISTS 'node'; then
+        npm uninstall npm -g >/dev/null 2>&1
+		sudo rm -rf /.bin/node /.local/src/node /usr/bin/node /usr/share/man/man1/node.1.gz
+	fi
+
+    echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
+    wget -q -P $HOME/.local/src "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz"
+    if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Clone Failed $2${RESET}\n"; fi
+
+    echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
+    if [ ! -d "$HOME/.local/src/node" ]; then mkdir -p "$HOME/.local/src/node"; fi
+    tar xf node-v18.16.0-linux-x64.tar.xz -C node --strip-components=1
+    cp -r node $HOME/.bin/node
+    if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Setup ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Setup Failed $2${RESET}\n"; fi
+
+	OUTPUT_FOOT "${BLUE} [·] Node Version: ${RESET} ${RED}$(node --version)${RESET} "
+
+	OUTPUT_TITLE 'yarn' ' Yarn Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL NODE ... ${RESET}"
+	if PROGRAM_EXISTS 'yarn'; then
+		APT_REMOVE "yarn"
+	fi
+
+	(curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -) >/dev/null 2>&1
+	(echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list) >/dev/null 2>&1
+
+	sudo apt update -y -qq >/dev/null 2>&1
+	APT_INSTALL "yarn"
+
+	sudo rm -rf /etc/apt/sources.list.d/yarn.list
+
+	OUTPUT_FOOT "${BLUE} [·] Yarn Version: ${RESET} ${RED}$(yarn --version)${RESET} "
+
+}
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+
+Github_SSH() {
+
+	OUTPUT_TITLE 'github - ssh' ' Create SSH or Yank SSH '
+	if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
+		echo "Please Input Email Addrsses For SSH Key: ...... "
+		read -e ssh_email
+		ssh-keygen -t rsa -P "" -C "$ssh_email" -f ~/.ssh/id_rsa >/dev/null 2>&1
+	fi
+
+    echo -e "${BLUE} [·] Key Copied To Keyboard ... ${RESET}"
+
+    if [[ $(uname -a) == *"microsoft"* ]]; then
+        clip.exe <$HOME/.ssh/id_rsa.pub
+        /mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe --new-window  'https://github.com/settings/keys' >/dev/null 2>&1
+    else
+        xclip -sel clip <$HOME/.ssh/id_rsa.pub
+        microsoft-edge --new-window 'https://github.com/settings/keys' >/dev/null 2>&1
+    fi
+
+	OUTPUT_FOOT "${BLUE} [·] Add Github For SSH Key: ${RESET} ${RED}DONE!${RESET} "
 
 }
 
@@ -570,31 +641,6 @@ Offlineimap() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
-Github_SSH() {
-
-	if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
-		ROW
-		echo "Please Input Email Addrsses For SSH Key: ...... "
-		ROW
-		read -e ssh_email
-		ssh-keygen -t rsa -P "" -C "$ssh_email" -f ~/.ssh/id_rsa >/dev/null 2>&1
-	fi
-
-	ROW
-	echo 'Key Copied to keyboard'
-	ROW
-
-	xclip -sel clip <$HOME/.ssh/id_rsa.pub
-	microsoft-edge --new-window 'https://github.com/settings/keys' >/dev/null 2>&1
-
-	ROW
-	echo "Add Github For SSH Key Done!"
-	ROW
-
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
 Github_Hosts() {
 
 	sudo sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl -s https://raw.hellogithub.com/hosts | sudo tee -a /etc/hosts >/dev/null 2>&1
@@ -733,45 +779,6 @@ Ctags() {
 	ROW
 	ctags --version | grep "Universal Ctags"
 	ROW
-
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Node() {
-
-	OUTPUT_TITLE 'node' ' Node Is Being Installed '
-
-	echo -e "${BLUE} [·] UNINSTALL NODE ... ${RESET}"
-	if PROGRAM_EXISTS 'node'; then
-        npm uninstall npm -g >/dev/null 2>&1
-		sudo rm -rf /.bin/node /usr/bin/node /usr/share/man/man1/node.1.gz
-	fi
-
-    echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
-    wget -q -P $HOME/.local/src "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz"
-    if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Clone Failed $2${RESET}\n"; fi
-
-    echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
-    if [ ! -d "$HOME/.local/src/node" ]; then mkdir -p "$HOME/.local/src/node"; fi
-    tar xf node-v18.16.0-linux-x64.tar.xz -C node --strip-components=1
-    cp -r node $HOME/.bin/node
-    if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Setup ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Setup Failed $2${RESET}\n"; fi
-
-	OUTPUT_FOOT "${BLUE} [·] Node Version: ${RESET} ${RED}$(node --version)${RESET} "
-
-
-	OUTPUT_TITLE 'yarn' ' Yarn Is Being Installed '
-
-	(curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -) >/dev/null 2>&1
-	(echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list) >/dev/null 2>&1
-
-	sudo apt update -y -qq >/dev/null 2>&1
-	APT_INSTALL "yarn"
-
-	sudo rm -rf /etc/apt/sources.list.d/yarn.list
-
-	OUTPUT_FOOT "${BLUE} [·] Yarn Version: ${RESET} ${RED}$(yarn --version)${RESET} "
 
 }
 
