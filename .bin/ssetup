@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+clear
+
 # ================================================================================================================================
 #
 #                                                             SETUP
@@ -46,6 +48,7 @@ WHITE=$(tput setaf 7)
 BLACK=$(tput setaf 0)
 YELLOW=$(tput setaf 3)
 MAGENTA=$(tput setaf 5)
+BLACKSS=$(tput setaf 8)
 
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # -- ANSI Draw Lines Functions --
@@ -69,25 +72,29 @@ FONT() {
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 OUTPUT_TITLE() {
+    echo -e "${BLACKSS}"
 	ROWD
 	echo -e ""
 	FONT "$1"
 	echo -e ""
 	ROWS
-	echo -e ""
+    echo -e "${RESET}"
 	echo -e "${YELLOW}$2${RESET}"
-	echo -e ""
+    echo -e "${BLACKSS}"
 	ROWS
 	echo -e ""
+    echo -e "${RESET}"
 }
 
 OUTPUT_FOOT() {
+    echo -e "${BLACKSS}"
 	ROWS
-	echo -e ""
+    echo -e "${RESET}"
 	echo -e "${YELLOW}$1${RESET}"
-	echo -e ""
+    echo -e "${BLACKSS}"
 	ROWS
 	echo -e ""
+    echo -e "${RESET}"
 }
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 # -- Program Exists --
@@ -110,10 +117,10 @@ PROGRAM_EXISTS() {
 
 STATUS() {
 	if [[ "$ret" -eq '0' ]]; then
-		echo -e $GREEN [√] ${1} - ${2} $MAGENTA Success $RESET
+		echo -e $GREEN [!] ${1} - ${2} $MAGENTA Success $RESET
 		echo ""
 	else
-		echo -e $RED [X] ${1} - ${2} $YELLOW Error $RESET
+		echo -e $RED [x] ${1} - ${2} $YELLOW Error $RESET
 		echo ""
 		exit 1
 	fi
@@ -130,7 +137,7 @@ APT_INSTALL() {
 }
 
 APT_REMOVE() {
-	sudo apt remove --purge -y $(echo $*) >/dev/null 2>&1
+	sudo apt remove --purge -y -qq $(echo $*) >/dev/null 2>&1
 	ret="$?"
 	STATUS "$1"
 }
@@ -140,10 +147,10 @@ APT_REMOVE() {
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 GET_LATEST_RELEASE_VERSION() {
-	curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
-		grep '"tag_name":' |                                             # Get tag line
-		sed -E 's/.*"v*([^"]+)".*/\1/'
+	curl --silent "https://api.github.com/repos/$1/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v*([^"]+)".*/\1/'
 }
+
+# ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 GET_LATEST_RELEASE() {
 	local REGEX_TO_REMOVE_URL='sed -re ''s#(http://|https://|git@|git://)github.com(/|:)##'' -e ''s#(/|.git)$##'''
@@ -169,7 +176,7 @@ USE_LATEST_RELEASE() {
 		git fetch origin tag "$GET_VERSION" --no-tags || return 1
 		git checkout "$GET_VERSION" >/dev/null 2>&1
 	else
-		echo -e "${RED} [!] Error: There is an internet connection issue.${RESET}"
+		echo -e "${RED} [x] Error: There is an internet connection issue.${RESET}"
 		return 1
 	fi
 }
@@ -177,7 +184,7 @@ USE_LATEST_RELEASE() {
 # ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 UPGRADE_REPO() {
-	echo -e "${MAGENTA} [!] Trying To Update Repo $1 ${RESET}"
+	echo -e "${BLACKSS} [!] Trying To Update Repo $1 ${RESET}"
 	cd "$SOURCE_DIR/$1" || return
 	USE_LATEST_RELEASE || return 1
 	# git pull >/dev/null 2>&1
@@ -219,6 +226,7 @@ usage() {
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
          vim                 Install/Updatee VIM
+         nvim                Install/Updatee NEO-VIM
          tmux                Install/Updatee TMUX
          alttab              Install Program Alttab - Same Windows Alt Tab
          anki                Install Program Anki
@@ -246,7 +254,7 @@ usage() {
          jupyter             Install Program Jupyter Notebook And Settings Themes
          ly                  Install Program Ly Commandline Longin 
          navi                Install Program Navi - Cheatsheet Tools
-         nodejs              Install Program Node.js
+         node                Install Program Node.js
          offlineimap         Install Program offlineimap -  Auto Setting Neomutt
          picom               Install Program Picom
          popupdict           Install Program Popupdict - Translate Tools
@@ -275,35 +283,42 @@ EOF
 Vim() {
 
 	OUTPUT_TITLE 'vim' ' Vim Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL VIM ... ${RESET}"
 	if PROGRAM_EXISTS 'vim'; then
-		echo -e "${BLUE} [·] REMOVE VIM ... ${RESET}"
 		APT_REMOVE "vim vim-runtime vim-common vim-gui-common vim-nox"
+		sudo rm -rf /usr/local/bin/vim
 	fi
 
-	echo -e "${BLUE} [·] INSTALL DEPENDENCIES ... ${RESET}"
-	APT_INSTALL "luajit libncurses5-dev python-dev python3-dev libgtk-3-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev"
+	echo -e "${BLUE} [·] INSTALL VIM DEPENDENCIES ... ${RESET}"
+	APT_INSTALL "libncurses5-dev python-dev python3-dev libgtk-3-dev libatk1.0-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev"
 
-	echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
+	echo -e "${BLUE} [·] CLONE VIM REPO ... ${RESET}"
 	CLONE_REPO "vim" "vim/vim"
 
-	echo -e "${BLUE} [·] START BUILD{RESET} ... ${RESET}"
-	sudo make clean >/dev/null 2>&1
-	sudo make distclean >/dev/null 2>&1
-	(sudo ./configure --with-features=huge \
-		--enable-fail-if-missing \
-		--enable-multibyte \
-		--enable-cscope \
-		--enable-rubyinterp=yes \
-		--enable-perlinterp=no \
-		--enable-python3interp=yes \
-		--enable-largefile \
-		--enable-luainterp=yes \
-		--with-luajit) >/dev/null 2>&1 &&
-		sudo make >/dev/null 2>&1 &&
-		sudo make install >/dev/null 2>&1
-	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
+	echo -e "${BLUE} [·] START BUILD VIM ... ${RESET}"
+	(
+		./configure \
+			--quiet \
+			--with-features=huge \
+			--enable-fail-if-missing \
+			--enable-multibyte \
+			--enable-cscope \
+			--enable-rubyinterp=yes \
+			--enable-perlinterp=no \
+			--enable-python3interp=yes \
+			--enable-largefile \
+			--enable-luainterp=yes \
+			--with-luajit
+	) >/dev/null 2>&1
+	make -s >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
+	make clean >/dev/null 2>&1
+	make distclean >/dev/null 2>&1
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
 
 	OUTPUT_FOOT "${BLUE} [·] Vim Version: ${RESET} ${RED}$(vim --version | sed -n "1p" | egrep -o '([0-9]*)\.+[0-9]+')${RESET} "
+
 }
 
 # ================================================================================================================================
@@ -315,21 +330,26 @@ Vim() {
 Nvim() {
 
 	OUTPUT_TITLE 'nvim' ' Neo-Vim Is Being Installed '
-	if PROGRAM_EXISTS 'nvim'; then
-		echo -e "${BLUE} [·] REMOVE NEOVIM ... ${RESET}"
-		APT_REMOVE "neovim"
-		rm -rf $HOME/.bin/neovim
-	fi
 
-	echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
-	NVIM_VERSION=$(GET_LATEST_RELEASE_VERSION "neovim/neovim")
-	wget -P $HOME/.local/src "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz"
-
-	echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
-	tar xzvf nvim-linux64.tar.gz
-	cp -r nvim-linux64 $HOME/.bin/neovim
+	 echo -e "${BLUE} [·] UNINSTALL NEOVIM ... ${RESET}"
+	 if PROGRAM_EXISTS 'nvim'; then
+	 	APT_REMOVE "neovim"
+	 	rm -rf $HOME/.bin/neovim $HOME/.local/src/nvim-linux64.tar.gz
+	 fi
+	
+	 echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
+	 NVIM_VERSION=$(GET_LATEST_RELEASE_VERSION "neovim/neovim")
+	 wget -q -P $HOME/.local/src "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/nvim-linux64.tar.gz"
+	 if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Clone Failed $2${RESET}\n"; fi
+	
+	 echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
+	 APT_INSTALL "python3-neovim"
+	 tar xzf nvim-linux64.tar.gz
+	 cp -r nvim-linux64 $HOME/.bin/neovim
+	 if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Setup ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Setup Failed $2${RESET}\n"; fi
 
 	OUTPUT_FOOT "${BLUE} [·] NeoVim Version: ${RESET} ${RED}$(nvim --version | sed -n "1p" | grep -o [0-9].[0-9].[0-9])${RESET} "
+
 }
 
 # ================================================================================================================================
@@ -340,77 +360,28 @@ Nvim() {
 
 Tmux() {
 
-	# --------------------------------------------------------------o----------------------------------------------------------------o
+	OUTPUT_TITLE 'tmux' ' Tmux Is Being Installed '
 
-	ROW
-	echo -e ""
-	echo -e "${YELLOW}TMUX Is Being Installed${RESET}"
-	echo -e ""
-
-	# --------------------------------------------------------------o----------------------------------------------------------------o
-
-	# >>> REMOVE ALREADY EXISTS
-
-	if command -v tmux >/dev/null 2>&1; then
-		sudo apt remove tmux -y >/dev/null 2>&1
+	echo -e "${BLUE} [·] UNINSTALL TMUX ... ${RESET}"
+	if PROGRAM_EXISTS 'tmux'; then
+		APT_REMOVE "tmux"
+		rm -rf /usr/bin/tmux /usr/share/man/man1/tmux.1.gz
 	fi
 
-	# --------------------------------------------------------------o----------------------------------------------------------------o
+	echo -e "${BLUE} [·] INSTALL TMUX DEPENDENCIES ... ${RESET}"
+	APT_INSTALL "libevent-dev ncurses-dev build-essential bison pkg-config automake"
 
-	# >>> INSTALL DEPENDENCIES
+	echo -e "${BLUE} [·] CLONE TMUX REPO ... ${RESET}"
+	CLONE_REPO "tmux" "tmux/tmux"
 
-	echo -e "${MAGENTA}Install Dependencies${RESET}"
-	${APT_INSTALL} libevent-dev ncurses-dev build-essential bison pkg-config >/dev/null 2>&1
-	if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
-
-	# --------------------------------------------------------------o----------------------------------------------------------------o
-
-	# >>> PRETO BUILD
-
-	echo -e "${MAGENTA}Git Clone Or Update TMUX${RESET}"
-	if [ -d "${SOURCE_DIR}/tmux" ]; then
-		cd ${SOURCE_DIR}/tmux || return && git reset --hard >/dev/null 2>&1 && git pull >/dev/null 2>&1
-	else
-		$GIT_CLONE/tmux/tmux.git ${SOURCE_DIR}/tmux
-		cd ${SOURCE_DIR}/tmux || return
-	fi
-	if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
-
-	# --------------------------------------------------------------o----------------------------------------------------------------o
-
-	# >>> START BUILD
-
-	echo -e "${MAGENTA}Start Build${RESET}"
-	bash autogen.sh >/dev/null 2>&1
+	echo -e "${BLUE} [·] START BUILD VIM ... ${RESET}"
+	bash ./autogen.sh >/dev/null 2>&1
 	./configure >/dev/null 2>&1
-	make >/dev/null 2>&1 && sudo make install >/dev/null 2>&1
-	if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
+	make -s >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
 
-	# --------------------------------------------------------------o----------------------------------------------------------------o
-
-	# >>> INSTALL TPM PLUGINS
-
-	echo -e "${MAGENTA}Install Tpm Plugins${RESET}"
-	if [ ! -d "$HOME/.tmux" ]; then
-		${GIT_CLONE}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-	else
-		rm -rf $HOME/.tmux
-		${GIT_CLONE}/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-	fi
-
-	tmux start-server
-	tmux new-session -d
-	$HOME/.tmux/plugins/tpm/scripts/install_plugins.sh >/dev/null 2>&1
-	tmux kill-server
-	if [ $? -eq 0 ]; then echo -e "${GREEN}[√] Successful${RESET}\n"; else echo -e "${RED}[X] Failed$2${RESET}\n"; fi
-
-	echo -e "${BLUE}Tmux Install Is Complete :: Version ${RESET} ${RED}$(tmux -V)${RESET} "
-
-	# --------------------------------------------------------------o----------------------------------------------------------------o
-
-	# >>> OUTPUT
-
-	ROW
+	OUTPUT_FOOT "${BLUE} [·] Tmux Version: ${RESET} ${RED}$(tmux -V)${RESET} "
 
 }
 
@@ -767,26 +738,40 @@ Ctags() {
 
 #---------------------------------------------------------------------------------------------------------------------------------------
 
-Nodejs() {
+Node() {
 
-	(curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -) >/dev/null 2>&1
-	${APT_INSTALL} nodejs >/dev/null 2>&1
+	OUTPUT_TITLE 'node' ' Node Is Being Installed '
 
-	ROW
-	node --version
-	ROW
+	echo -e "${BLUE} [·] UNINSTALL NODE ... ${RESET}"
+	if PROGRAM_EXISTS 'node'; then
+        npm uninstall npm -g >/dev/null 2>&1
+		sudo rm -rf /.bin/node /usr/bin/node /usr/share/man/man1/node.1.gz
+	fi
+
+    echo -e "${BLUE} [·] CLONE REPO ... ${RESET}"
+    wget -q -P $HOME/.local/src "https://nodejs.org/dist/v18.16.0/node-v18.16.0-linux-x64.tar.xz"
+    if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Clone Failed $2${RESET}\n"; fi
+
+    echo -e "${BLUE} [·] START SETUP{RESET} ... ${RESET}"
+    if [ ! -d "$HOME/.local/src/node" ]; then mkdir -p "$HOME/.local/src/node"; fi
+    tar xf node-v18.16.0-linux-x64.tar.xz -C node --strip-components=1
+    cp -r node $HOME/.bin/node
+    if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Setup ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Setup Failed $2${RESET}\n"; fi
+
+	OUTPUT_FOOT "${BLUE} [·] Node Version: ${RESET} ${RED}$(node --version)${RESET} "
+
+
+	OUTPUT_TITLE 'yarn' ' Yarn Is Being Installed '
 
 	(curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -) >/dev/null 2>&1
 	(echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list) >/dev/null 2>&1
 
 	sudo apt update -y -qq >/dev/null 2>&1
-	${APT_INSTALL} yarn >/dev/null 2>&1
+	APT_INSTALL "yarn"
 
 	sudo rm -rf /etc/apt/sources.list.d/yarn.list
 
-	ROW
-	yarn --version
-	ROW
+	OUTPUT_FOOT "${BLUE} [·] Yarn Version: ${RESET} ${RED}$(yarn --version)${RESET} "
 
 }
 
@@ -1278,8 +1263,8 @@ main() {
 	ctags)
 		Ctags
 		;;
-	nodejs)
-		Nodejs
+	node)
+		Node
 		;;
 	hugo)
 		Hugo
@@ -1347,9 +1332,6 @@ main() {
 	rofi)
 		Rofi
 		;;
-	tmux)
-		Tmux | pv
-		;;
 	-a | --all)
 		# Github_Hosts
 		Alttab
@@ -1365,7 +1347,7 @@ main() {
 		# Fixi3terminal
 		# Imagemagick
 		# Jupyter
-		# Nodejs
+		# Node
 		# Calibre
 		Foliate
 		# Hugo
@@ -1395,3 +1377,4 @@ main() {
 }
 
 main "$@"
+
