@@ -23,6 +23,7 @@
 
 export GITHUB="https://www.github.com/"
 # export GITHUB="https://hub.nuaa.cf/"
+# export GITHUB="https://hub.fgit.ml/"
 
 # --------------------------------------------------------------o----------------------------------------------------------------o
 # SYSTEM PATH
