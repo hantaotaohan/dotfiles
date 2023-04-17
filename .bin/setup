@@ -419,11 +419,12 @@ Node() {
 
 	OUTPUT_TITLE 'yarn' ' Yarn Is Being Installed '
 
-	echo -e "${BLUE} [·] UNINSTALL NODE ... ${RESET}"
+	echo -e "${BLUE} [·] UNINSTALL YARN ... ${RESET}"
 	if PROGRAM_EXISTS 'yarn'; then
 		APT_REMOVE "yarn"
 	fi
 
+	echo -e "${BLUE} [·] INSTALL YARN ... ${RESET}"
 	(curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -) >/dev/null 2>&1
 	(echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list) >/dev/null 2>&1
 
