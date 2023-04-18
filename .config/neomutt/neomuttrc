@@ -45,7 +45,7 @@ set folder = ~/mail
 set spoolfile=+live/Inbox
 set postponed=~/mail/Postponed
 
-named-mailboxes "───────────   HOTMAIL ───────────" +live/Inbox
+named-mailboxes "收件箱"                              +live/Inbox
 named-mailboxes "已经归档"                           +live/Archive
 named-mailboxes "已经发送"                           +live/Sent
 named-mailboxes "草稿信箱"                           +live/Drafts
@@ -57,6 +57,7 @@ set message_cachedir    =       ~/mail/cache/bodies
 
 # ETC
 
+set abort_key           =       "<Esc>"
 set mailcap_path        =       "$HOME/.config/neomutt/mailcap"
 set alias_file          =       "$HOME/.config/neomutt/neomutt.alias"
 set mail_check          =       2 
@@ -78,6 +79,8 @@ unset wait_key
 
 # UI
 
+# set arrow_cursor        =       yes
+# set arrow_string        =       "-"
 set sort                =       threads
 set sort_aux            =       reverse-last-date-received
 set include             =       yes
@@ -217,7 +220,8 @@ bind browser,pager,index,attach \Ch help
 
 # SYNC-MAIBOX
 
-bind browser,index,pager <Esc><Esc> sync-mailbox
+# bind browser,index,pager <Esc><Esc> sync-mailbox
+bind browser,index,pager \;r sync-mailbox
 
 bind index                      \;n     toggle-new
 bind index,pager                \;<Tab> next-unread-mailbox
@@ -230,7 +234,6 @@ set header_color_partial= yes
 
 # UI ------------------------------------------------------------
 
-color normal        white       default
 color status        color5      default
 color indicator     color7      color8
 color tree          color1      default
@@ -274,7 +277,7 @@ color index         color3     default         "~F"          # 带标签的消�
 color index         color0     color1          "~D"          # 删除的消息
 color index         color2     color0          "~N"          # 新邮件
 color index         color2     color0          "~O"          # 旧消息
-color index         color2     color0          "~U"          # 未读邮件
+color index         color248   color0          "~U"          # 未读邮件
 color index         color2     color0          "~v~(~N)"     # Collapsed thread with some unread
 color index         color0     color1          "~N~(~D~N)"   # Collapsed thread with some unread & flagged
 # color index         color1     color1          "~v~(~F~N)"   # Collapsed thread with some unread & flagged
@@ -283,15 +286,15 @@ color index         color0     color1          "~N~(~D~N)"   # Collapsed thread 
 
 # CANCEL THEME COLORS
 
-color index         color3     color8          "~T"          # 标记的消息
+color index         color0     color3          "~T"          # 标记的消息
 # color index         color13    color8          "~Q"        # 已回复的邮件
 # color index         color13    color8          "~P"        # 来自我发的消息
-# color index         default    default         "~R"        # 已读消息
+color index         color8     default         "~R"          # 已读消息
 
 # NEW MESSAGE
 
-color index_subject color2     color0          "~N !~T !~D"
-color index_author  color2     color0          "~N !~T !~D"
+color index_subject color248     color0          "~N !~T !~D"
+color index_author  color248     color0          "~N !~T !~D"
 # color index         cyan       color8          "~N"
 
 # MESSAGE HEADERS -----------------------------------------------
@@ -326,23 +329,22 @@ color header            color4          black       '^Reply-to:'
 
 # SIDEBAR -------------------------------------------------------
 
-color sidebar_indicator     color7      color8
-color sidebar_divider       color8      color0
-color sidebar_ordinary      color4      color0
-color sidebar_new           color5      color0
-color sidebar_flagged       color4      color0
-color sidebar_highlight     color7      color8
-# color sidebar_divider       color15     color0
+color sidebar_background    default     color234  # 背景
+color sidebar_indicator     color4      color0    # 打开的邮箱
+color sidebar_divider       color0      color0    # 分割线
+color sidebar_ordinary      color248      color234  # 没有新邮件
+color sidebar_new           color248      color234  # 有新邮件
+color sidebar_flagged       color248      color0    # 已标记的
+color sidebar_highlight     color7      color0    # 光标选择的
 
 # CREDITS TO HTTPS://GITHUB.COM/SHEOAK/NEOMUTT-POWERLINE-NERDFONTS/
 
 # set index_format=" %T %{!%Y-%m-%d } %2M %-28.28L  %?X?&·? %s"
 set index_format=" %Gx %zs %zc %zt | %{!%Y-%m-%d · %H:%M } | %?M?+& ? %02M  | %-28.28L  %?X?&·? %s"
-set pager_format=" %n  %t · %s%*  ·    %{!%Y-%m-%d · %H:%M} %?X?  %X ? %P  "
-set status_format = " %f%?r? %r?   %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %> %?p?   %p ?"
+set pager_format=" %n  %t · %s%*  ·    %{!%Y-%m-%d · %H:%M} ·   %P  "
+set status_format = " %f%?r? %r?     %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %>  %?p?   %p ?"
 set folder_format = " %N %?n?%3n&   ?  %8m  · %f"
 set attach_format = " %u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
-
 
 # NO ADDRESSED TO ME, TO ME, GROUP, CC, SENT BY ME, MAILING LIST
 
@@ -371,20 +373,20 @@ tag-formats "replied" "GR" \
 
 # POWERLINE STATUS BAR HACK
 
-color status white          color8
-color status green          color8   ' '
-color status yellow         color8   ' '
-color status red            color8   ' '
-color status color0         blue    '(.*)' 1 # bottom left
-color status blue           color8   '.*()' 1
-color status black          red    '\s* [0-9]+\s*' 1 # bottom right
-color status color8         color8   '().*$' 1
-color status yellow         color8   '()\s* \s*[0-9]+\s*' 1
-color status black          yellow  '\s* \s*[0-9]+\s*'
-color status blue           yellow  '() ([0-9]+%|all|end|结束|所有)  \s*' 1
-color status black          blue    '.([0-9]+%|all|end|结束|所有)  \s*'
-color status yellow         color8   '()\s*' 1
-color status color8         color8   ''
+color status white          color234 
+color status green          color234   ' '
+color status yellow         color234   ' '
+color status red            color234   ' '
+color status color0         blue       '(.*)' 1 # bottom left
+color status blue           color234   '.*()' 1
+color status black          red        '\s* [0-9]+\s*' 1 # bottom right
+color status blue           color234   '().*$' 1
+color status yellow         color234   '()\s* \s*[0-9]+\s*' 1
+color status black          yellow     '\s* \s*[0-9]+\s*'
+color status blue           yellow     '() ([0-9]+%|all|end|结束|所有)  \s*' 1
+color status black          blue       '.([0-9]+%|all|end|结束|所有)  \s*'
+color status yellow         color234   '()\s*' 1
+color status color234       color234   ''
 
 # OTHER ---------------------------------------------------------
 
