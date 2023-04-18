@@ -228,12 +228,13 @@ usage() {
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
          vim                 Install/Update VIM
-         nvim                Install/Update NEO-VIM
+         nvim                Install/Update NEOVIM
          tmux                Install/Update TMUX
-         node                Install/Update Program NODE.JS and YARN
+         node                Install/Update NODE.JS and YARN
          ctags               Install/Update UNIVERSAL-CTAGS 
-         githubssh           Create/Yank Github For SSH Key
          java                Install/Update JAVA JRE and JAVA JDK
+         neomutt             Install/Update NEOMUTT and OFFLINEIMAP
+         githubssh           Create/Yank Github For SSH Key
          clone               Git Clone Need SSH-KEY Is My Github Respones
          sshbanner           Settings SSH Login Banner
 
@@ -261,7 +262,6 @@ usage() {
          jupyter             Install Program Jupyter Notebook And Settings Themes
          ly                  Install Program Ly Commandline Longin 
          navi                Install Program Navi - Cheatsheet Tools
-         offlineimap         Install Program offlineimap -  Auto Setting Neomutt
          picom               Install Program Picom
          popupdict           Install Program Popupdict - Translate Tools
          qutebrowser         Install Program Qutebrowser - Web Browser
@@ -477,35 +477,6 @@ Ctags() {
 
 # ================================================================================================================================
 #
-#                                                           GITHUB_SSH
-#
-# ================================================================================================================================
-
-Github_SSH() {
-
-	OUTPUT_TITLE 'github - ssh' ' Create SSH or Yank SSH '
-	if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
-		echo "Please Input Email Addrsses For SSH Key: ...... "
-		read -e ssh_email
-		ssh-keygen -t rsa -P "" -C "$ssh_email" -f ~/.ssh/id_rsa >/dev/null 2>&1
-	fi
-
-	echo -e "${BLUE} [·] Key Copied To Keyboard ... ${RESET}"
-
-	if [[ $(uname -a) == *"microsoft"* ]]; then
-		clip.exe <$HOME/.ssh/id_rsa.pub
-		/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe --new-window 'https://github.com/settings/keys' >/dev/null 2>&1
-	else
-		xclip -sel clip <$HOME/.ssh/id_rsa.pub
-		microsoft-edge --new-window 'https://github.com/settings/keys' >/dev/null 2>&1
-	fi
-
-	OUTPUT_FOOT "${BLUE} [·] Add Github For SSH Key: ${RESET} ${RED}DONE!${RESET} "
-
-}
-
-# ================================================================================================================================
-#
 #                                                              JAVA
 #
 # ================================================================================================================================
@@ -535,6 +506,113 @@ Java() {
 	APT_INSTALL "default-jdk"
 
 	OUTPUT_FOOT "${BLUE} [·] JDK Version: ${RESET} ${RED}$(java --version | sed -n "1p" | egrep -o '([0-9]*)\.+[0-9]\.+[0-9].')${RESET} "
+
+}
+
+# ================================================================================================================================
+#
+#                                                            NEOMUTT
+#
+# ================================================================================================================================
+
+Neomutt() {
+
+	OUTPUT_TITLE 'neomutt' ' Neomutt Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL NEOMUTT ... ${RESET}"
+	if PROGRAM_EXISTS 'neomutt'; then
+		APT_REMOVE "neomutt"
+	fi
+
+	echo -e "${BLUE} [·] INSTALL NEOMUTT DEPENDENCIES ... ${RESET}"
+	APT_INSTALL "gettext libidn11-dev xsltproc libxml2-utils"
+
+	echo -e "${BLUE} [·] CLONE NEOMUTT REPO ... ${RESET}"
+	CLONE_REPO "neomutt" "neomutt/neomutt"
+
+	echo -e "${BLUE} [·] START BUILD NEOMUTT ... ${RESET}"
+	(
+		./configure \
+			--quiet \
+			--disable-doc
+	) >/dev/null 2>&1
+	make -s >/dev/null 2>&1
+	sudo make install >/dev/null 2>&1
+	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Build ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Build Failed $2${RESET}\n"; fi
+
+	OUTPUT_FOOT "${BLUE} [·] Neomutt Version: ${RESET} ${RED}$(neomutt -v | sed -n "1p" | egrep -o '([0-9]*)\.{0,8}')${RESET} "
+
+	# ============================================================================================================================
+
+	OUTPUT_TITLE 'offlineimap' ' Offlineimap Is Being Installed '
+
+	echo -e "${BLUE} [·] UNINSTALL OFFLINEIMAP ... ${RESET}"
+	if PROGRAM_EXISTS 'offlineimap'; then
+		APT_REMOVE "offlineimap offlineimap3"
+	fi
+
+	echo -e "${BLUE} [·] INSTALL OFFLINEIMAP ... ${RESET}"
+	APT_INSTALL "offlineimap3"
+
+	echo -e "${BLUE} [·] SETTINGS OFFLINEIMAP ... ${RESET}"
+	read -p "     Please Input Your GPG Password: " PASSWORD
+	cd $HOME/.config/neomutt/
+	gpg --quiet --batch --yes --passphrase=$PASSWORD --output alimail.pass --decrypt alimail.pass.gpg
+	gpg --quiet --batch --yes --passphrase=$PASSWORD --output hotmail.pass --decrypt hotmail.pass.gpg
+
+	if [ -f /etc/systemd/user/offlineimap.service ]; then
+		sudo rm -rf /etc/systemd/user/offlineimap.service
+	fi
+
+	if [[ $(uname -a) == *"microsoft"* ]]; then
+		if [ ! -f /etc/wsl.conf ]; then
+			sudo sh -c "echo [boot] > /etc/wsl.conf"
+			sudo sh -c "echo systemd=true >> /etc/wsl.conf"
+		fi
+	fi
+
+	sudo cp $HOME/dotfiles/.extras/offlineimap/offlineimap.service /etc/systemd/user
+	sudo chmod 664 /etc/systemd/user/offlineimap.service
+	systemctl --user daemon-reload
+	systemctl --user enable offlineimap
+	systemctl --user start offlineimap
+
+	sudo chmod 600 $HOME/.msmtprc
+
+	# if [ -d $HOME/mail/ ]; then
+	# 	touch $HOME/mail/Postponed
+	# fi
+
+	OUTPUT_FOOT "${BLUE} [·] Offlineimap Version: ${RESET} ${RED}$(offlineimap -V | sed -n "1p" | egrep -o '([0-9]*)\.+[0-9]\.+[0-9]\b' | head -n 1)${RESET} "
+
+}
+
+# ================================================================================================================================
+#
+#                                                           GITHUB_SSH
+#
+# ================================================================================================================================
+
+Github_SSH() {
+
+	OUTPUT_TITLE 'github - ssh' ' Create SSH or Yank SSH '
+	if ! [ -f $HOME/.ssh/id_rsa.pub ]; then
+		echo "Please Input Email Addrsses For SSH Key: ...... "
+		read -e ssh_email
+		ssh-keygen -t rsa -P "" -C "$ssh_email" -f ~/.ssh/id_rsa >/dev/null 2>&1
+	fi
+
+	echo -e "${BLUE} [·] Key Copied To Keyboard ... ${RESET}"
+
+	if [[ $(uname -a) == *"microsoft"* ]]; then
+		clip.exe <$HOME/.ssh/id_rsa.pub
+		/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe --new-window 'https://github.com/settings/keys' >/dev/null 2>&1
+	else
+		xclip -sel clip <$HOME/.ssh/id_rsa.pub
+		microsoft-edge --new-window 'https://github.com/settings/keys' >/dev/null 2>&1
+	fi
+
+	OUTPUT_FOOT "${BLUE} [·] Add Github For SSH Key: ${RESET} ${RED}DONE!${RESET} "
 
 }
 
@@ -718,45 +796,6 @@ Dunst() {
 
 	ROW
 	echo "Dunst Install Is Complete :: Version: " $(dunst -v | sed -e "s/\b\(.\)/\u\1/g")
-	ROW
-
-}
-
-#---------------------------------------------------------------------------------------------------------------------------------------
-
-Offlineimap() {
-
-	# ROW
-	# echo "Please enter the password to extract the package: ......  "
-	# ROW
-
-	# ROW
-	# unzip -o -q -d $HOME/.config/neomutt/ $HOME/.config/neomutt/user.pass
-	# ROW
-
-	read -p "Please Input Your GPG Password: " PASSWORD
-	cd $HOME/.config/neomutt/
-	gpg --quiet --batch --yes --passphrase=$PASSWORD --output alimail.pass --decrypt alimail.pass.gpg
-	gpg --quiet --batch --yes --passphrase=$PASSWORD --output hotmail.pass --decrypt hotmail.pass.gpg
-
-	if [ -f /etc/systemd/user/offlineimap.service ]; then
-		sudo rm -rf /etc/systemd/user/offlineimap.service
-	fi
-
-	sudo cp $EXTRAS_UP_DIR/offlineimap/offlineimap.service /etc/systemd/user
-	sudo chmod 664 /etc/systemd/user/offlineimap.service
-	systemctl --user daemon-reload
-	systemctl --user enable offlineimap
-	systemctl --user start offlineimap
-
-	sudo chmod 600 $HOME/.msmtprc
-
-	if [ -d $HOME/mail/ ]; then
-		touch $HOME/mail/Postponed
-	fi
-
-	ROW
-	echo "Neomutt Install Is Complete :: Version: " $(neomutt -v | grep -o -E "NeoMutt [1-9]\d*.\d*.\d*.\d*.\d*...")
 	ROW
 
 }
@@ -1289,8 +1328,8 @@ main() {
 	dunst)
 		Dunst
 		;;
-	offlineimap)
-		Offlineimap
+	neomutt)
+		Neomutt
 		;;
 	githubssh)
 		Github_SSH
@@ -1394,7 +1433,7 @@ main() {
 		Arcicons
 		# Picom
 		# Dunst
-		Offlineimap
+		Neomutt
 		# Navi
 		# Ctags
 		Rdrview
