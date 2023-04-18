@@ -8,7 +8,7 @@
 
 # ABOUT ME
 
-set from                =       "hantao@bteb.cn"
+set from                =       "hantaotaohan@hotmail.com"
 set realname            =       "Han Tao"
 
 # MSMTP
@@ -42,27 +42,18 @@ set use_envelope_from    =       yes       # 让 mutt 使用 msmtp 的 -f 选项
 
 set mbox_type="Maildir" 
 set folder = ~/mail
-set spoolfile=+bteb/INBOX
+set spoolfile=+live/Inbox
 set postponed=~/mail/Postponed
 
-named-mailboxes "────────────   BTEB ─────────────" +bteb/INBOX
-named-mailboxes "已经归档"                           +bteb/已归档
-named-mailboxes "已经发送"                           +bteb/已发送
-named-mailboxes "草稿信箱"                           +bteb/草稿
-named-mailboxes "垃圾邮件"                           +bteb/垃圾邮件
-named-mailboxes "已经删除"                           +bteb/已删除邮件
 named-mailboxes "───────────   HOTMAIL ───────────" +live/Inbox
 named-mailboxes "已经归档"                           +live/Archive
 named-mailboxes "已经发送"                           +live/Sent
 named-mailboxes "草稿信箱"                           +live/Drafts
 named-mailboxes "已经删除"                           +live/Deleted
-named-mailboxes "──────────   POSTPONED ──────────" +/Postponed
 
 # WHERE TO PUT THE STUFF
 
-set header_cache        =       ~/mail/cache/headers
 set message_cachedir    =       ~/mail/cache/bodies
-set certificate_file    =       ~/mail/certificates
 
 # ETC
 
@@ -92,7 +83,7 @@ set sort_aux            =       reverse-last-date-received
 set include             =       yes
 set pager_index_lines   =       10
 set pager_stop
-set folder_format       =       '%4C %t %f'
+# set folder_format       =       '%4C %t %f'
 set smart_wrap
 set tilde
 set menu_scroll
@@ -120,16 +111,6 @@ unignore organization organisation x-newsreader: x-mailing-list:
 unignore posted-to:
 hdr_order Subject: From: Date: To: CC: BCC: Reply-To: Pager: Newsgroups: Followup-to: X-Lable: Organization:
 set auto_subscribe=yes
-
-# CERTIFICATES
-
-set certificate_file               =       "~/.mutt/certificates"
-set ssl_starttls                   =       yes
-set ssl_force_tls                  =       yes
-
-# DISABLE GPGME
-
-set crypt_use_gpgme                =       no
 
 # CHARSET
 
@@ -214,7 +195,7 @@ bind index,pager                \Ck     sidebar-prev
 bind index,pager                <Down>  sidebar-next
 bind index,pager                \Cn     sidebar-next
 bind index,pager                \Cj     sidebar-next
-bind index,pager                <Right> sidebar-open
+bind index,pager                o       sidebar-open
 bind index,pager                \Cl     sidebar-open
 bind index,pager                \Co     sidebar-open
 bind index,pager                R       group-reply
@@ -346,12 +327,12 @@ color header            color4          black       '^Reply-to:'
 # SIDEBAR -------------------------------------------------------
 
 color sidebar_indicator     color7      color8
-color sidebar_divider       color0      color0
+color sidebar_divider       color8      color0
 color sidebar_ordinary      color4      color0
 color sidebar_new           color5      color0
 color sidebar_flagged       color4      color0
 color sidebar_highlight     color7      color8
-color sidebar_divider       color15     color0
+# color sidebar_divider       color15     color0
 
 # CREDITS TO HTTPS://GITHUB.COM/SHEOAK/NEOMUTT-POWERLINE-NERDFONTS/
 
@@ -359,7 +340,7 @@ color sidebar_divider       color15     color0
 set index_format=" %Gx %zs %zc %zt | %{!%Y-%m-%d · %H:%M } | %?M?+& ? %02M  | %-28.28L  %?X?&·? %s"
 set pager_format=" %n  %t · %s%*  ·    %{!%Y-%m-%d · %H:%M} %?X?  %X ? %P  "
 set status_format = " %f%?r? %r?   %m %?n?  %n ?  %?d?  %d ?%?t?  %t ?%?F?  %F? %> %?p?   %p ?"
-set vfolder_format = " %N %?n?%3n&   ?  %8m  · %f"
+set folder_format = " %N %?n?%3n&   ?  %8m  · %f"
 set attach_format = " %u%D  %T%-75.75d %?T?%&   ? %5s · %m/%M"
 
 
@@ -454,3 +435,4 @@ macro index,pager go "<change-folder>=live/Inbox<enter>"
 #shutdown-hook 'exec sync-mailbox'
 
 # vim: filetype=muttrc
+
