@@ -408,6 +408,8 @@ Apt_Install() {
 		neomutt
 		offlineimap
 		yank
+		rsync
+		sshfs
 	)
 
 	for app in "${APTAPPS[@]}"; do
