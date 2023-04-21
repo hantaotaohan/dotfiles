@@ -497,7 +497,9 @@ Apt_Install() {
         # peek \
         yank \
         trash-cli \
-        imwheel
+        imwheel \
+	rsync \
+	sshfs
         # pv \
         # rar \
         # vlc \
