@@ -141,13 +141,13 @@ Usage: $program_name [-option]
 Options:
 
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                              
+
    -h        Print this message                                               
-                                                                              
+
    -a        Install All                                                                     
-                                                                              
+
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                              
+
    -d        Install Dotfiles                                                 
    -D        Uninstall Dotfiles                                               
    -w        Install Workspace                                              
@@ -157,11 +157,11 @@ Options:
    -b        Install DEB Tools                                                
    -f        Install Fonts      
    -r        Remove Apps   
-                                                                        
+
    -q        Exit                                                             
-                                                                              
+
 ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-                                                                            
+
 EOF
 
 }
@@ -318,7 +318,7 @@ Workspace_Settings() {
 
 	# >>> Make Floder
 
-	if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace"; fi
+	if [ ! -d "$HOME/workspace" ]; then mkdir -p "$HOME/workspace/mnt"; fi
 	if [ ! -d "$HOME/desktop" ]; then mkdir -p "$HOME/desktop"; fi
 	if [ ! -d "$HOME/.bin" ]; then mkdir -p "$HOME/.bin"; fi
 
@@ -410,6 +410,7 @@ Apt_Install() {
 		yank
 		rsync
 		sshfs
+		net-tools
 	)
 
 	for app in "${APTAPPS[@]}"; do
