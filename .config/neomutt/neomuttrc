@@ -45,11 +45,12 @@ set folder = ~/mail
 set spoolfile=+live/Inbox
 set postponed=~/mail/Postponed
 
-named-mailboxes "收件箱"                              +live/Inbox
+named-mailboxes "收件箱"                             +live/Inbox
 named-mailboxes "已经归档"                           +live/Archive
 named-mailboxes "已经发送"                           +live/Sent
 named-mailboxes "草稿信箱"                           +live/Drafts
 named-mailboxes "已经删除"                           +live/Deleted
+named-mailboxes "垃圾邮件"                           +live/Junk
 
 # WHERE TO PUT THE STUFF
 
@@ -385,7 +386,7 @@ color status yellow         color234   '()\s* \s*[0-9]+\s*' 1
 color status black          yellow     '\s* \s*[0-9]+\s*'
 color status blue           yellow     '() ([0-9]+%|all|end|结束|所有)  \s*' 1
 color status black          blue       '.([0-9]+%|all|end|结束|所有)  \s*'
-color status yellow         color234   '()\s*' 1
+color status yellow         color234   '()\s*' 1
 color status color234       color234   ''
 
 # OTHER ---------------------------------------------------------
