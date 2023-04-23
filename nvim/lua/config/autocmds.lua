@@ -325,7 +325,7 @@ vim.api.nvim_create_autocmd("BufWinLeave", {
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	group = augroup("AutoLoadFolds"),
 	pattern = "*.*",
-	command = "silent! loadview || normal! zM",
+	command = "silent! loadview | normal! zM",
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
