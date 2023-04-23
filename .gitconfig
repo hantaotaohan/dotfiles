@@ -8,8 +8,11 @@
 
 [alias]
 
-    a         = add -A
+    a         = add --all
+    b         = branch
     s         = status -sb
+    ca        = commit --amend --message
+    cm        = commit --message
     d         = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
     l         = log --abbrev-commit --decorate --graph --date=format:'%A \t│%Y-%m-%d %H:%M:%S' --format=format:'%C(01)%>(1)%h%C(reset) │ %C(07)%ad%C(reset) │ %C(4)%<(13,trunc)%an%C(reset) │ %C(2)%<(20,trunc)%ar%C(reset) │ %C(1)%<(30,trunc)%d%C(reset) │ %C(bold 7)MESSAGE: %s%C(reset)' --all
     di        = difftool --tool=vimdiff -y
