@@ -275,7 +275,7 @@ vim.cmd([[
     augroup Remember_Folds
         autocmd!
         autocmd BufWinLeave *.* mkview
-        autocmd BufWinEnter *.* silent! loadview || normal zM 
+        autocmd BufWinEnter *.* silent! loadview
     augroup END
 
     vnoremap <LocalLeader><Space> zf
