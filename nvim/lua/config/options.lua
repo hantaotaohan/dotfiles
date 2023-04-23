@@ -271,17 +271,6 @@ opt.foldlevelstart = 99 -- 打开文件时, 始终关闭所有折叠
 -- opt.foldopen = "all" -- 自动打开折叠的行为
 -- opt.foldclose = "all"
 
-vim.cmd([[
-    augroup Remember_Folds
-        autocmd!
-        autocmd BufWinLeave *.* mkview
-        autocmd BufWinEnter *.* silent! loadview
-    augroup END
-
-    vnoremap <LocalLeader><Space> zf
-    nnoremap <silent> <LocalLeader><Space> @=(foldlevel('.')?'za' : "\<Space>")<CR>
-]])
-
 -- OTHER --
 
 if vim.fn.has("nvim-0.9.0") == 1 then

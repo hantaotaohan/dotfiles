@@ -258,3 +258,12 @@ end
 
 map("n", "qj", ":cnext<CR>", { silent = true })
 map("n", "qk", ":cprev<CR>", { silent = true })
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                             Fold Toggles                             │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.cmd([[
+    vnoremap <LocalLeader><Space> zf
+    nnoremap <silent> <LocalLeader><Space> @=(foldlevel('.')?'za' : "\<Space>")<CR>
+]])

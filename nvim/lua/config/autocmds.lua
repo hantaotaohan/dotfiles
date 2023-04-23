@@ -311,3 +311,30 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 	once = false,
 })
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                         Save Cursor Postion                          │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd("BufWinLeave", {
+	group = augroup("AutoSaveFolds"),
+	pattern = "*.*",
+	command = "mkview",
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = augroup("AutoLoadFolds"),
+	pattern = "*.*",
+	command = "silent! loadview || normal! zM",
+})
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+	group = augroup("Cursor_Postion"),
+	pattern = "*",
+	callback = function()
+		if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
+			vim.fn.setpos(".", vim.fn.getpos("'\""))
+			vim.cmd("silent! foldopen")
+		end
+	end,
+})
