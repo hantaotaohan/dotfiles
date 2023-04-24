@@ -32,6 +32,8 @@ return {
 			elseif filetype == "python" then
 				vim.api.nvim_command('AsyncRun -mode=1 -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"')
 				vim.cmd([[wincmd p]])
+			elseif filetype == "markdown" or filetype == "vimwiki.markdown" then
+				vim.api.nvim_command("MarkdownPreviewToggle")
 			end
 		end
 
@@ -45,6 +47,8 @@ return {
 				vim.api.nvim_command(
 					'AsyncRun -mode=term -strip -listed=0 -rows=20 -cwd=$(VIM_FILEDIR) python3 "$(VIM_FILEPATH)"'
 				)
+			elseif filetype == "markdown" or filetype == "vimwiki.markdown" then
+				vim.api.nvim_command("MarkdownPreviewToggle")
 			end
 		end
 
