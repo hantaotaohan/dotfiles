@@ -455,7 +455,7 @@ EXEC 31;31
 .swp 38;5;246
 .tmp 38;5;246
 *lockfile 38;5;246
-.bashrc 38;5;250
+.bashrc 90
 .aliases 38;5;250
 .bash_history 38;5;250
 .bash_logout 38;5;250
@@ -480,4 +480,4 @@ EXEC 31;31
 .viminfo 38;5;250
 .vimrc 38;5;250
 .wgetrc 38;5;250
-.wget-hsts 38;5;250
+.wget-hsts 90

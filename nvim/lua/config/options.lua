@@ -86,7 +86,7 @@ opt.iskeyword:append("_") -- 关键字用于搜索和识别许多命令
 opt.iskeyword:append("$") -- 关键字用于搜索和识别许多命令
 opt.iskeyword:append("@") -- 关键字用于搜索和识别许多命令
 opt.iskeyword:append("%") -- 关键字用于搜索和识别许多命令
-opt.iskeyword:append("#") -- 关键字用于搜索和识别许多命令
+-- opt.iskeyword:append("#") -- 关键字用于搜索和识别许多命令
 
 opt.shortmess:append("I") -- 启动Vim时, 不要给出介绍信息
 opt.shortmess:append("c") -- 不要给出完成菜单消息, 例如 "--XXX完成(YYY)", "匹配1/2"
