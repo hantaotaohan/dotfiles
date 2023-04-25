@@ -17,6 +17,8 @@ return {
 	init = function()
 		vim.g.vimwiki_list = {
 			{
+                path_html = "html",
+                custom_wiki2html = "$HOME/.bin/vimwiki2html",
 				path = "$HOME/vimwiki/",
 				syntax = "markdown",
 				ext = ".md",
