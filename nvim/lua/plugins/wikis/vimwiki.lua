@@ -23,7 +23,7 @@ return {
 				template_path = "$HOME/.vim/script/markdown-preview-style/onedark",
 				template_default = "template_dark",
 				template_ext = ".tpl",
-				path = "$HOME/vimwiki/",
+				path = "$HOME/wiki/",
 				syntax = "markdown",
 				ext = ".md",
 				name = "wiki",
