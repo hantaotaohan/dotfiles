@@ -184,7 +184,6 @@ return {
 					"tsplayground",
 					"lazy",
 					"lsp-installer",
-					"markdown",
 					"mason",
 					"txt",
 					"dashboard",

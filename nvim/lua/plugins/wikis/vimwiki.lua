@@ -12,20 +12,24 @@ return {
 	ft = "vimwiki",
 	keys = {
 		{ "<leader>ww", "<plug>VimwikiIndex", desc = "Open Vimwiki" },
-		{ "<leader>w<leader>w", "<plug>VimwikiDiaryIndex", desc = "Open Vimwiki diary" },
+		{ "<leader>w<leader>w", "<plug>VimwikiDiaryIndex", desc = "Open Vimwiki Diary" },
+		{ "<leader>w<leader>t", "<plug>VimwikiMakeDiaryNote", desc = "Open Vimwiki Diary For Today" },
 	},
 	init = function()
 		vim.g.vimwiki_list = {
 			{
-                path_html = "html",
-                custom_wiki2html = "$HOME/.bin/vimwiki2html",
+				path_html = "html",
+				custom_wiki2html = "/home/taotao/go/bin/vimwiki-godown",
+				template_path = "$HOME/.vim/script/markdown-preview-style/onedark",
+				template_default = "template_dark",
+				template_ext = ".tpl",
 				path = "$HOME/vimwiki/",
 				syntax = "markdown",
 				ext = ".md",
 				name = "wiki",
 				index = "index",
-				diary_rel_path = "Diary/",
-				diary_index = "Diary",
+				diary_rel_path = "diary/",
+				diary_index = "diary",
 				maxhi = 1,
 				auto_toc = 1,
 				auto_tags = 1,
@@ -67,7 +71,8 @@ return {
 			["post_mark"] = "]",
 			["sep"] = ",",
 		}
-		vim.g.vimwiki_valid_html_tags = "b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1,nav,body,aside,p,blockquote,ul,ol,li"
+		vim.g.vimwiki_valid_html_tags =
+			"b,i,s,u,sub,sup,kbd,del,br,hr,div,code,h1,nav,body,aside,p,blockquote,ul,ol,li,script,pre"
 	end,
 	config = function()
 		vim.cmd([[
