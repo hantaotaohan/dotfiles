@@ -624,14 +624,14 @@ Github_SSH() {
 
 Clone() {
 
-	OUTPUT_TITLE 'Git-Clone' ' GitClone Being Book and Vimwiki '
+	OUTPUT_TITLE 'Git-Clone' ' GitClone Being Book and Wiki '
 	git clone -q git@github.com:hantaotaohan/books.git $HOME/books
 	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Git Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Git Clone Failed $2${RESET}\n"; fi
-	git clone -q git@github.com:hantaotaohan/vimwiki.git $HOME/vimwiki
+	git clone -q git@github.com:hantaotaohan/wiki.git $HOME/vimwiki
 	if [ $? -eq 0 ]; then echo -e "${GREEN} [√] Git Clone ${MAGENTA}Successful ${RESET}\n"; else echo -e "${RED} [X] Git Clone Failed $2${RESET}\n"; fi
 	#git clone git@github.com:hantaotaohan/hantaotaohan.github.io.git $HOME/blog
 
-	OUTPUT_FOOT "${BLUE} [·] Clone Complete: ${RESET} ${RED}BOOK VIMWIKI DONE!${RESET} "
+	OUTPUT_FOOT "${BLUE} [·] Clone Complete: ${RESET} ${RED}BOOK WIKI DONE!${RESET} "
 
 }
 
