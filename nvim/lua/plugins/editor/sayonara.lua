@@ -7,7 +7,7 @@
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
 return {
-	"hantaotaohan/vim-sayonara",
+	"mhinz/vim-sayonara",
 	lazy = true,
 	cmd = "Sayonara",
 }
