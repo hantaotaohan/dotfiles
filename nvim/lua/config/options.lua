@@ -250,7 +250,8 @@ if vim.fn.has("wsl") == 1 then
 end
 
 opt.confirm = true -- 是否在在退出修改后的缓冲区之前确认保存更改
-opt.formatoptions = "jcroqlnt" -- 文档格式化设置
+opt.formatoptions = "" -- 文档格式化设置
+-- opt.formatoptions = "jcroqlnt" -- 文档格式化设置
 opt.joinspaces = false -- 合并上下两行时不加入空格
 
 opt.spelllang = { "en" } -- 是否开启拼写检查

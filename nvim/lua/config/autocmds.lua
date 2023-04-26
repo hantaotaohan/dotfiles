@@ -10,6 +10,12 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 	command = "checktime",
 })
 
+local filetypes = {
+	"makrdown",
+	"gitcommit",
+	"vimwiki.markdown",
+}
+
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                            Yank highlight                            │
 --   ╰──────────────────────────────────────────────────────────────────────╯
@@ -87,26 +93,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
 		vim.keymap.set("n", "<LocalLeader>q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
-	end,
-})
-
---   ╭──────────────────────────────────────────────────────────────────────╮
---   │                                Format                                │
---   ╰──────────────────────────────────────────────────────────────────────╯
-
--- wrap and check for spell in text filetypes
-vim.api.nvim_create_autocmd("FileType", {
-	group = augroup("wrap_spell"),
-	pattern = { "vimwiki.markdown", "gitcommit", "markdown" },
-	callback = function()
-		vim.opt_local.tabstop = 2
-		vim.opt_local.shiftwidth = 2
-		vim.opt_local.softtabstop = 2
-		vim.opt_local.expandtab = true
-		vim.opt_local.wrap = true
-		vim.opt_local.spell = false
-		vim.opt_local.wrap = true
-		vim.opt_local.spell = false
 	end,
 })
 
@@ -238,15 +224,28 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("Format-Comment"),
 	pattern = "*",
 	callback = function()
-		vim.opt_local.formatoptions:remove("a")
-		vim.opt_local.formatoptions:remove("l")
-		vim.opt_local.formatoptions:remove("m")
-		vim.opt_local.formatoptions:remove("M")
-		vim.opt_local.formatoptions:remove("t")
-		vim.opt_local.formatoptions:remove("c")
-		vim.opt_local.formatoptions:remove("r")
-		vim.opt_local.formatoptions:remove("o")
-		vim.opt_local.wrap = false
+		if vim.tbl_contains(filetypes, vim.bo.filetype) then
+			vim.opt_local.formatoptions:append("t")
+			vim.opt_local.formatoptions:append("c")
+			vim.opt_local.formatoptions:append("q")
+			vim.opt_local.formatoptions:append("a")
+			vim.opt_local.formatoptions:append("w")
+			vim.opt_local.formatoptions:append("m")
+			vim.opt_local.formatoptions:append("M")
+			vim.opt_local.wrap = true
+			vim.opt_local.spell = false
+		else
+			vim.opt_local.formatoptions:remove("a")
+			vim.opt_local.formatoptions:remove("l")
+			vim.opt_local.formatoptions:remove("m")
+			vim.opt_local.formatoptions:remove("M")
+			vim.opt_local.formatoptions:remove("t")
+			vim.opt_local.formatoptions:remove("c")
+			vim.opt_local.formatoptions:remove("r")
+			vim.opt_local.formatoptions:remove("o")
+			vim.opt_local.formatoptions:remove("q")
+			vim.opt_local.wrap = false
+		end
 	end,
 })
 
