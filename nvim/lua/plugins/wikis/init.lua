@@ -1,1 +1,0 @@
-return { import = "plugins.wikis" }
