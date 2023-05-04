@@ -8,6 +8,7 @@
 
 return {
 	"michal-h21/vim-zettel",
+	enabled = false,
 	cmd = { "VimwikiIndex", "VimwikiMakeDiaryNote" },
 	config = function()
 		vim.g.zettel_format = "%title"

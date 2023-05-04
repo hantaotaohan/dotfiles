@@ -9,6 +9,7 @@
 
 return {
 	"0x00-ketsu/markdown-preview.nvim",
+	enabled = false,
 	name = "mdp",
 	ft = { "md", "markdown", "mkd", "mkdn", "mdwn", "mdown", "mdtxt", "mdtext", "rmd", "wiki" },
 	config = function()
