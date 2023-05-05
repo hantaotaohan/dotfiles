@@ -130,6 +130,8 @@ return {
 			config.install_info.url = config.install_info.url:gsub("https://github.com/", os.getenv("GITHUB"))
 		end
 
+		vim.treesitter.language.register("markdown", "vimwiki") -- the someft filetype will use the python parser and queries.
+
 		require("nvim-treesitter.configs").setup(opts)
 	end,
 }

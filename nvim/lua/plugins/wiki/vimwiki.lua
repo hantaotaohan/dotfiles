@@ -53,7 +53,7 @@ return {
 		vim.g.vimwiki_conceal_pre = 1
 		vim.g.vimwiki_conceallevel = 2
 		vim.g.vimwiki_folding = "custom"
-		vim.g.vimwiki_filetypes = { "markdown" }
+		-- vim.g.vimwiki_filetypes = { "markdown" }
 		vim.g.vimwiki_CJK_length = 1
 		vim.g.vimwiki_hl_cb_checked = 2
 		vim.g.vimwiki_use_mouse = 0
@@ -83,7 +83,7 @@ return {
                     autocmd FileType vimwiki.markdown syntax region VimwikiBlockquote start=/^\s*>/ end="$"
                     autocmd FileType vimwiki.markdown highlight VimwikiBlockquote guifg=#6d7179 guibg=#21252B
                     autocmd FileType vimwiki.markdown highlight MarkdownTrailingSpaces guifg=#abb2bf guibg=#393b40 
-                    autocmd BufEnter *.md if &ft == "vimwiki.markdown" | setlocal filetype=vimwiki.markdown | endif
+                    " autocmd BufEnter *.md if &ft == "vimwiki.markdown" | setlocal filetype=vimwiki.markdown | endif
                     autocmd FileType vimwiki.markdown highlight VimwikiLink       guifg=#61afef
                     autocmd FileType vimwiki.markdown highlight VimwikiHeader1    guifg=#e5c07b
                     autocmd FileType vimwiki.markdown highlight VimwikiHeader2    guifg=#98c379
@@ -100,5 +100,24 @@ return {
                     autocmd FileType vimwiki.markdown highlight VimwikiBold       guifg=#E06C75
                     autocmd FileType vimwiki.markdown highlight VimwikiItalic     guifg=#e5c07b  cterm=bold,italic gui=bold,italic
             ]])
+
+		vim.api.nvim_set_hl(0, "@text.title.h1", { link = "markdownH1" })
+		vim.api.nvim_set_hl(0, "@text.title.h2", { link = "markdownH2" })
+		vim.api.nvim_set_hl(0, "@text.title.h3", { link = "markdownH3" })
+		vim.api.nvim_set_hl(0, "@text.title.h4", { link = "markdownH4" })
+		vim.api.nvim_set_hl(0, "@text.title.h5", { link = "markdownH5" })
+		vim.api.nvim_set_hl(0, "@text.title.h6", { link = "markdownH6" })
+		vim.api.nvim_set_hl(0, "@text.title.hh1", { link = "NonText" })
+		vim.api.nvim_set_hl(0, "@text.title.hh2", { link = "NonText" })
+		vim.api.nvim_set_hl(0, "@text.title.hh3", { link = "NonText" })
+		vim.api.nvim_set_hl(0, "@text.title.hh4", { link = "NonText" })
+		vim.api.nvim_set_hl(0, "@text.title.hh5", { link = "NonText" })
+		vim.api.nvim_set_hl(0, "@text.title.hh6", { link = "NonText" })
+
+		vim.api.nvim_set_hl(0, "@text.uri", { link = "Directory" })
+		vim.api.nvim_set_hl(0, "@text.literal", { link = "Directory" })
+		vim.api.nvim_set_hl(0, "@text.reference", { link = "Directory" })
+
+		vim.api.nvim_set_hl(0, "@none", { bg = "#31353f" })
 	end,
 }

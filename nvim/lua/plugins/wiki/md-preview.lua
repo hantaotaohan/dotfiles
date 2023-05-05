@@ -9,7 +9,7 @@
 
 return {
 	"iamcco/markdown-preview.nvim",
-	ft = { "markdown", "vimwiki.makrdown", "md" },
+	ft = { "markdown" },
 	config = function()
 		vim.cmd(":call mkdp#util#install()")
 
