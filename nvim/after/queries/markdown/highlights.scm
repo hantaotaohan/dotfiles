@@ -1,5 +1,9 @@
 ;; extends
 
+;    ╒══════════════════════════════════════════════════════════════════════╕
+;                                Header and Text
+;    ╘══════════════════════════════════════════════════════════════════════╛
+
 (atx_h1_marker) @text.title.hh1
 ((atx_h1_marker) heading_content: (_) @text.title.h1)
 
@@ -18,32 +22,90 @@
 (atx_h6_marker) @text.title.hh6
 ((atx_h6_marker) heading_content: (_) @text.title.h6)
 
+;    ╒══════════════════════════════════════════════════════════════════════╕
+;                                  Tables Style
+;    ╘══════════════════════════════════════════════════════════════════════╛
 
-[
-  (link_title)
-  (indented_code_block)
-  (fenced_code_block)
-] @text.literal
+(pipe_table_header (pipe_table_cell) @table.text.title)
 
-(pipe_table_header (pipe_table_cell) @text.title)
+; Use box drawing characters for tables
+(pipe_table_header ("|") @table.spe @conceal (#set! conceal "┃"))
+(pipe_table_delimiter_row ("|") @table.spe @conceal (#set! conceal "┃"))
+(pipe_table_delimiter_cell ("-") @table.spe @conceal (#set! conceal "━"))
+(pipe_table_row ("|") @table.spe @conceal (#set! conceal "┃"))
 
+; Use box drawing characters for tables
 ; (pipe_table_header "|" @punctuation.special)
 ; (pipe_table_row "|" @punctuation.special)
 ; (pipe_table_delimiter_row "|" @punctuation.special)
 ; (pipe_table_delimiter_cell) @punctuation.special
 
-; Use box drawing characters for tables
-(pipe_table_header ("|") @punctuation.special @conceal (#set! conceal "┃"))
-(pipe_table_delimiter_row ("|") @punctuation.special @conceal (#set! conceal "┃"))
-(pipe_table_delimiter_cell ("-") @punctuation.special @conceal (#set! conceal "━"))
-(pipe_table_row ("|") @punctuation.special @conceal (#set! conceal "┃"))
 
+;    ╒══════════════════════════════════════════════════════════════════════╕
+;                                   Block Code
+;    ╘══════════════════════════════════════════════════════════════════════╛
 
+; 代码块标识符
 [
   (fenced_code_block_delimiter)
-] @punctuation.delimiter
+] @code.delimiter 
 
+; 代码块的内容区域
 (code_fence_content) @none
+
+;    ╒══════════════════════════════════════════════════════════════════════╕
+;                                   List Style
+;    ╘══════════════════════════════════════════════════════════════════════╛
+
+[
+  (list_marker_plus)
+  (list_marker_minus)
+  (list_marker_star)
+  (list_marker_dot)
+  (list_marker_parenthesis)
+  (thematic_break)
+] @list.marks
+
+(([(list_marker_star) (list_marker_minus)] @list.marks @conceal_star (#offset! @conceal_star 0 0 0 -1)) (#set! conceal "·"))
+
+;    ╒══════════════════════════════════════════════════════════════════════╕
+;                                   Task Sytle
+;    ╘══════════════════════════════════════════════════════════════════════╛
+
+((task_list_marker_unchecked) @task.checked @conceal (#set! conceal ""))
+((task_list_marker_checked) @task.checked @conceal (#set! conceal ""))
+
+; (task_list_marker_unchecked) @text.todo.unchecked
+; (task_list_marker_checked) @text.todo.checked
+
+;    ╒══════════════════════════════════════════════════════════════════════╕
+;                                  Block Quote
+;    ╘══════════════════════════════════════════════════════════════════════╛
+
+; [
+;   (block_continuation)
+;   (block_quote_marker)
+; ] @punctuation.special
+
+(block_quote) @quote.quote
+
+((block_quote_marker) @conceal (#set! conceal "▍"))
+((block_quote
+  (paragraph (inline
+    (block_continuation) @conceal (#set! conceal "▍")
+  ))
+))
+
+;    ╒══════════════════════════════════════════════════════════════════════╕
+;                                    转义字符
+;    ╘══════════════════════════════════════════════════════════════════════╛
+
+(backslash_escape) @string.escape
+
+
+(link_title) @text.link.title
+(indented_code_block) @text.indented.code
+
 
 [
   (link_destination)
@@ -53,34 +115,7 @@
   (link_label)
 ] @text.reference
 
-[
-  (list_marker_plus)
-  (list_marker_minus)
-  (list_marker_star)
-  (list_marker_dot)
-  (list_marker_parenthesis)
-  (thematic_break)
-] @punctuation.special
 
-
-; (task_list_marker_unchecked) @text.todo.unchecked
-; (task_list_marker_checked) @text.todo.checked
-
-((task_list_marker_unchecked) @punctuation.special @conceal (#set! conceal ""))
-((task_list_marker_checked) @punctuation.special @conceal (#set! conceal ""))
-
-(block_quote) @text.quote
-
- (([(list_marker_star) (list_marker_minus)] @punctuation.special @conceal_star (#offset! @conceal_star 0 0 0 -1)) (#set! conceal "•"))
-
-; [
-;   (block_continuation)
-;   (block_quote_marker)
-; ] @punctuation.special
-
-[
-  (backslash_escape)
-] @string.escape
 
 ([
   (info_string)
@@ -91,24 +126,4 @@
 (inline) @spell
 
 
-
-((block_quote_marker) @conceal (#set! conceal "▍"))
-((block_quote
-  (paragraph (inline
-    (block_continuation) @conceal (#set! conceal "▍")
-  ))
-))
-
-
-
-; (list_item [
-;   (list_marker_plus)
-;   (list_marker_minus)
-;   (list_marker_star)
-;   (list_marker_dot)
-;   (list_marker_parenthesis)
-; ] @conceal [
-;     (task_list_marker_checked)
-;     (task_list_marker_unchecked)
-; ](#set! conceal ""))
 
