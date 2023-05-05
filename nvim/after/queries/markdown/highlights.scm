@@ -27,10 +27,17 @@
 
 (pipe_table_header (pipe_table_cell) @text.title)
 
-(pipe_table_header "|" @punctuation.special)
-(pipe_table_row "|" @punctuation.special)
-(pipe_table_delimiter_row "|" @punctuation.special)
-(pipe_table_delimiter_cell) @punctuation.special
+; (pipe_table_header "|" @punctuation.special)
+; (pipe_table_row "|" @punctuation.special)
+; (pipe_table_delimiter_row "|" @punctuation.special)
+; (pipe_table_delimiter_cell) @punctuation.special
+
+; Use box drawing characters for tables
+(pipe_table_header ("|") @punctuation.special @conceal (#set! conceal "┃"))
+(pipe_table_delimiter_row ("|") @punctuation.special @conceal (#set! conceal "┃"))
+(pipe_table_delimiter_cell ("-") @punctuation.special @conceal (#set! conceal "━"))
+(pipe_table_row ("|") @punctuation.special @conceal (#set! conceal "┃"))
+
 
 [
   (fenced_code_block_delimiter)
@@ -56,15 +63,20 @@
 ] @punctuation.special
 
 
-(task_list_marker_unchecked) @text.todo.unchecked
-(task_list_marker_checked) @text.todo.checked
+; (task_list_marker_unchecked) @text.todo.unchecked
+; (task_list_marker_checked) @text.todo.checked
+
+((task_list_marker_unchecked) @punctuation.special @conceal (#set! conceal ""))
+((task_list_marker_checked) @punctuation.special @conceal (#set! conceal ""))
 
 (block_quote) @text.quote
 
-[
-  (block_continuation)
-  (block_quote_marker)
-] @punctuation.special
+ (([(list_marker_star) (list_marker_minus)] @punctuation.special @conceal_star (#offset! @conceal_star 0 0 0 -1)) (#set! conceal "•"))
+
+; [
+;   (block_continuation)
+;   (block_quote_marker)
+; ] @punctuation.special
 
 [
   (backslash_escape)
@@ -80,6 +92,12 @@
 
 
 
+((block_quote_marker) @conceal (#set! conceal "▍"))
+((block_quote
+  (paragraph (inline
+    (block_continuation) @conceal (#set! conceal "▍")
+  ))
+))
 
 
 
@@ -93,3 +111,4 @@
 ;     (task_list_marker_checked)
 ;     (task_list_marker_unchecked)
 ; ](#set! conceal ""))
+

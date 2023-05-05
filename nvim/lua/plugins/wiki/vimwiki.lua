@@ -101,6 +101,12 @@ return {
                     autocmd FileType vimwiki.markdown highlight VimwikiItalic     guifg=#e5c07b  cterm=bold,italic gui=bold,italic
             ]])
 
+		vim.api.nvim_set_hl(0, "markdownH1", { fg = "#e86671" })
+		vim.api.nvim_set_hl(0, "markdownH2", { fg = "#e5c07b" })
+		vim.api.nvim_set_hl(0, "markdownH3", { fg = "#98c379" })
+		vim.api.nvim_set_hl(0, "markdownH4", { fg = "#c678dd" })
+		vim.api.nvim_set_hl(0, "markdownH5", { fg = "#8096BF" })
+		vim.api.nvim_set_hl(0, "markdownH6", { fg = "#8096BF" })
 		vim.api.nvim_set_hl(0, "@text.title.h1", { link = "markdownH1" })
 		vim.api.nvim_set_hl(0, "@text.title.h2", { link = "markdownH2" })
 		vim.api.nvim_set_hl(0, "@text.title.h3", { link = "markdownH3" })
@@ -118,6 +124,6 @@ return {
 		vim.api.nvim_set_hl(0, "@text.literal", { link = "Directory" })
 		vim.api.nvim_set_hl(0, "@text.reference", { link = "Directory" })
 
-		vim.api.nvim_set_hl(0, "@none", { bg = "#31353f" })
+		vim.api.nvim_set_hl(0, "@punctuation.special", { fg = "#c678dd" })
 	end,
 }
