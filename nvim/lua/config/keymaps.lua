@@ -138,7 +138,7 @@ map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 --   │                            Delete Buffer                             │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
-map({ "n", "i", "v", "t" }, "<LocalLeader>q", "<cmd>BufDel<cr>", { silent = true, desc = "Delete Buffer" })
+map({ "n", "i", "v" }, "<LocalLeader>q", "<cmd>BufDel<cr>", { silent = true, desc = "Delete Buffer" })
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                              Save File                               │
