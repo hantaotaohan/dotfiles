@@ -46,7 +46,7 @@ return {
 	{ "simrat39/symbols-outline.nvim", enabled = false },
 	-- { "anuvyklack/pretty-fold.nvim", enabled = false },
 	-- { "ahmedkhalf/project.nvim", enabled = false },
-	-- { "mhinz/vim-sayonara", enabled = false },
+	{ "mhinz/vim-sayonara", enabled = false },
 	-- { "petertriho/nvim-scrollbar", enabled = false },
 	-- { "windwp/nvim-spectre", enabled = false },
 	-- { "nvim-telescope/telescope.nvim", enabled = false },
