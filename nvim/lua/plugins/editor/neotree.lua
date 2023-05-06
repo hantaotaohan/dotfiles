@@ -31,8 +31,16 @@ return {
 		},
 		{
 			"<LocalLeader>e",
+			function()
+				require("neo-tree.command").execute({
+					toggle = true,
+					current = true,
+					reveal_force_cwd = true,
+					dir = vim.loop.cwd(),
+				})
+			end,
 			-- ":Neotree toggle reveal_force_cwd<cr>",
-			":NeoTreeFocusToggle<cr>",
+			-- ":NeoTreeFocusToggle<cr>",
 			desc = "Toggle file tree (sidebar)",
 			silent = true,
 		},
