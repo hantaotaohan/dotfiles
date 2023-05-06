@@ -8,7 +8,7 @@ return {
 				pattern = "markdown",
 				callback = function(ctx)
 					require("tsnode-marker").set_automark(ctx.buf, {
-						target = { "code_fence_content" }, -- list of target node types
+						target = { "fenced_code_block", "code_fence_content" }, -- list of target node types
 						hl_group = "CursorLine", -- highlight group
 					})
 				end,
