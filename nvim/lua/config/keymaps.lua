@@ -254,6 +254,7 @@ if Has("telescope.nvim") then
 		"<cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({hidden=true}))<cr>",
 		{ desc = "Projects" }
 	)
+	map("i", "[[", "<cmd>Telescope live_grep<cr>", { desc = "Live grep vimwiki file" })
 end
 
 map("n", "qj", ":cnext<CR>", { silent = true })
