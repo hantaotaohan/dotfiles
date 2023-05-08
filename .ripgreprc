@@ -48,9 +48,12 @@
 
 # 排除目录
 --glob=!.git
+--glob=!.github
 --glob=!.svn
 --glob=!node_modules
 --glob=!vendor
+--glob=!logseq
+--glob=!workflows
 
 # 排除文件类型
 --glob=!*.{lock}
@@ -59,6 +62,8 @@
 # 排除文件
 --glob=!{package-lock.json}
 --glob=!.bash_history
+--glob=!.vimwiki_tags
+--glob=!.gitignore
 
 # ================================================================================================================================
 #                                                       THEMES - SETTINGS

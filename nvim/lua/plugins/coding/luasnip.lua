@@ -159,13 +159,27 @@ return {
 		require("luasnip").add_snippets("all", {
 			-- https://github.com/L3MON4D3/LuaSnip/wiki/Cool-Snippets#box-comment-like-ultisnips
 			s(
+				"`",
+				fmt(
+					[[
+                        ```{insert1}
+                            {insert2}
+                        ```
+                    ]],
+					{
+						insert1 = i(1),
+						insert2 = i(2),
+					}
+				)
+			),
+			s(
 				"box",
 				fmt(
 					[[
-                            {comment_start}┌───{filler}───┐
-                            {comment_mid}│   {left_center}{insert}{right_center}   │
-                            {comment_stop}└───{filler}───┘
-                        ]],
+                        {comment_start}┌───{filler}───┐
+                        {comment_mid}│   {left_center}{insert}{right_center}   │
+                        {comment_stop}└───{filler}───┘
+                    ]],
 					{
 						comment_start = comment("start"),
 						comment_mid = comment("mid"),
@@ -181,12 +195,12 @@ return {
 				"bbox",
 				fmt(
 					[[
-                            {comment_start}┌───{filler}───┐
-                            {comment_mid}│   {space_filler}   │
-                            {comment_mid}│   {left_center}{insert}{right_center}   │
-                            {comment_mid}│   {space_filler}   │
-                            {comment_stop}└───{filler}───┘
-                        ]],
+                        {comment_start}┌───{filler}───┐
+                        {comment_mid}│   {space_filler}   │
+                        {comment_mid}│   {left_center}{insert}{right_center}   │
+                        {comment_mid}│   {space_filler}   │
+                        {comment_stop}└───{filler}───┘
+                    ]],
 					{
 						comment_start = comment("start"),
 						comment_mid = comment("mid"),
@@ -204,10 +218,10 @@ return {
 				"sbox",
 				fmt(
 					[[
-                            {3}┌───{2}───┐
-                            {4}│   {1}   │
-                            {5}└───{2}───┘
-                        ]],
+                        {3}┌───{2}───┐
+                        {4}│   {1}   │
+                        {5}└───{2}───┘
+                    ]],
 					{
 						i(1),
 						replace(1, "─"),
