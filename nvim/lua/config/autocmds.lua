@@ -4,17 +4,20 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
--- Check if we need to reload the file when it changed
-vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-	group = augroup("checktime"),
-	command = "checktime",
-})
-
 local filetypes = {
 	"makrdown",
 	"gitcommit",
 	"vimwiki.markdown",
 }
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                            Reload Changed                            │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+	group = augroup("checktime"),
+	command = "checktime",
+})
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
 --   │                            Yank highlight                            │
@@ -69,26 +72,19 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 --   │                              Smart Quit                              │
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
--- close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup("close_with_q"),
 	pattern = {
-		-- "qf",
-		-- "help",
-		"man",
-		-- "query",
-		"notify",
-		"prompt",
-		"nofile",
+		"PlenaryTestPopup",
+		"help",
 		"lspinfo",
-		"neo-tree",
-		"terminal",
-		-- "dashboard",
-		"toggleterm",
+		"man",
+		"notify",
+		"qf",
+		"spectre_panel",
 		"startuptime",
 		"tsplayground",
-		"spectre_panel",
-		"PlenaryTestPopup",
+		"checkhealth",
 	},
 	callback = function(event)
 		vim.bo[event.buf].buflisted = false
@@ -341,5 +337,20 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 			vim.fn.setpos(".", vim.fn.getpos("'\""))
 			vim.cmd("silent! foldopen")
 		end
+	end,
+})
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                          Auto Create Fload                           │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	group = augroup("Auto_Create_Dir"),
+	callback = function(event)
+		if event.match:match("^%w%w+://") then
+			return
+		end
+		local file = vim.loop.fs_realpath(event.match) or event.match
+		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })

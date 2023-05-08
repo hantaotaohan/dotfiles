@@ -20,6 +20,7 @@ return {
 			"mason",
 			"aerial",
 			"notify",
+			"Trouble",
 			"lspinfo",
 			"terminal",
 			"neo-tree",

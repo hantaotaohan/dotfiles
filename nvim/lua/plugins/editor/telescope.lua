@@ -115,6 +115,7 @@ return {
 				mappings = {
 					i = {
 						["<LocalLeader>q"] = { "<esc>", type = "command" },
+						["<C-i>"] = path_actions.insert_relpath_i_normal,
 					},
 					n = {
 						["w"] = nil,

@@ -7,7 +7,7 @@
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
 return {
-	"windwp/nvim-spectre",
+	"nvim-pack/nvim-spectre",
 	lazy = true,
 	keys = {
 		{
