@@ -66,7 +66,7 @@
   (thematic_break)
 ] @list.marks
 
-(([(list_marker_star) (list_marker_minus)] @list.marks @conceal_star (#offset! @conceal_star 0 0 0 -1)) (#set! conceal "·"))
+; (([(list_marker_star) (list_marker_minus)] @list.marks @conceal_star (#offset! @conceal_star 0 0 0 -1)) (#set! conceal "·"))
 
 ;    ╒══════════════════════════════════════════════════════════════════════╕
 ;                                   Task Sytle
@@ -89,10 +89,10 @@
 
 (block_quote) @quote.quote
 
-((block_quote_marker) @conceal (#set! conceal "▍"))
+((block_quote_marker) @quote (#set! conceal "▍"))
 ((block_quote
   (paragraph (inline
-    (block_continuation) @conceal (#set! conceal "▍")
+    (block_continuation) @quote (#set! conceal "▍")
   ))
 ))
 
@@ -124,6 +124,7 @@
 (#set! conceal ""))
 
 (inline) @spell
+
 
 
 

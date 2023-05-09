@@ -116,12 +116,18 @@ return {
 		vim.api.nvim_set_hl(0, "@text.title.hh6", { fg = "#5c6370" })
 
 		vim.api.nvim_set_hl(0, "@code.delimiter", { fg = "#e86671" })
+		vim.api.nvim_set_hl(0, "@code.content", { fg = "#2c313c" })
 		vim.api.nvim_set_hl(0, "@list.marks", { fg = "#c678dd" })
 		vim.api.nvim_set_hl(0, "@task.checked", { fg = "#5c6370" })
+		vim.api.nvim_set_hl(0, "@quote", { fg = "#6f737b" })
 		vim.api.nvim_set_hl(0, "@quote.quote", { fg = "#6f737b" })
 		vim.api.nvim_set_hl(0, "@text.link.title", { fg = "#61afef", underline = true })
-		vim.api.nvim_set_hl(0, "@text.indented.code", { fg = "#8096BF", underline = true })
+		vim.api.nvim_set_hl(0, "@text.indented.code", { bg = "#282c34", fg = "#8096BF", underline = true })
 		vim.api.nvim_set_hl(0, "@table.text.title", { fg = "#d19a66" })
 		vim.api.nvim_set_hl(0, "@table.spe", { fg = "#5c6370" })
+		vim.api.nvim_set_hl(0, "@text.strong", { fg = "#e06c75", underline = true, bold = true })
+		vim.api.nvim_set_hl(0, "@text.emphasis", { fg = "#d19a66", italic = true })
+		vim.api.nvim_set_hl(0, "@text.literal", { fg = "#c678dd", bg = nil })
+		vim.api.nvim_set_hl(0, "@punctuation.delimiter", { fg = "#e86671", bg = nil })
 	end,
 }

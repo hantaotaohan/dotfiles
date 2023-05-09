@@ -258,12 +258,17 @@ if Has("telescope.nvim") then
 	map(
 		"i",
 		"[[",
-		"<cmd>Telescope vimwiki link<cr>",
+		"<cmd>Telescope vimwiki previewer=true initial_mode=insert link<cr>",
 		-- "[[<esc><cmd>lua require('telescope.builtin').live_grep({initial_mode = 'insert', previewer = true })<cr>",
 		{ desc = "Live grep vimwiki file" }
 	)
 
-	map("n", "((", "<cmd>Telescope vimwiki live_grep<cr>", { desc = "Live grep vimwiki file" })
+	map(
+		"n",
+		"((",
+		"<cmd>Telescope live_grep previewer=true initial_mode=insert<cr>",
+		{ desc = "Live grep vimwiki files" }
+	)
 end
 
 map("n", "qj", ":cnext<CR>", { silent = true })

@@ -362,6 +362,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	group = augroup("HideMarkdownChar"),
 	callback = function()
-		vim.cmd([[ autocmd FileType vimwiki lua require('../config/utility').hideMarkdownBrackets() ]])
+		vim.cmd([[ autocmd FileType vimwiki lua require('../config/utility').HideMarkdownBrackets()]])
 	end,
 })
