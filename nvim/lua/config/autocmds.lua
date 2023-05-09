@@ -354,3 +354,14 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
 	end,
 })
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                           HideMarkdownChar                           │
+--   ╰──────────────────────────────────────────────────────────────────────╯
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = augroup("HideMarkdownChar"),
+	callback = function()
+		vim.cmd([[ autocmd FileType vimwiki lua require('../config/utility').hideMarkdownBrackets() ]])
+	end,
+})

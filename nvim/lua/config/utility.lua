@@ -89,4 +89,8 @@ function M.on_very_lazy(fn)
 	})
 end
 
+function M.HideMarkdownBrackets()
+	vim.cmd("syntax match ConcealBrackets /\\[\\|\\]/ conceal cchar= ")
+end
+
 return M
