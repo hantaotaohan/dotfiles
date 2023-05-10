@@ -13,7 +13,8 @@ return {
 	dependencies = {
 		{ "nvim-lua/plenary.nvim", lazy = true },
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-		{ "ElPiloto/telescope-vimwiki.nvim", lazy = true },
+		-- { "ElPiloto/telescope-vimwiki.nvim", lazy = true },
+		{ "hantaotaohan/tswiki", lazy = true },
 		{ "kiyoon/telescope-insert-path.nvim", lazy = true },
 	},
 	keys = {
