@@ -7,7 +7,6 @@
 --   ╰──────────────────────────────────────────────────────────────────────╯
 
 return {
-	enabled = false,
 	"lervag/wiki.vim",
 	-- keys = {
 	-- 	{ "<leader>ww", "<plug>VimwikiIndex", desc = "Open Vimwiki" },

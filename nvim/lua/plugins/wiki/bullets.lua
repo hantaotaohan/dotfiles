@@ -8,7 +8,6 @@
 
 return {
 	"dkarter/bullets.vim",
-	enabled = false,
 	init = function() end,
 	config = function()
 		-- vim.g.bullets_renumber_on_change = 1

@@ -81,10 +81,13 @@ return {
 	--   │                                                                      │
 	--   ╰──────────────────────────────────────────────────────────────────────╯
 
-	-- { "0x00-ketsu/markdown-preview.nvim", enabled = false },
 	-- { "iamcco/markdown-preview.nvim", enabled = false },
-	-- { "michal-h21/vim-zettel", enabled = false },
+	{ "michal-h21/vim-zettel", enabled = false },
 	-- { "vimwiki/vimwiki", enabled = false },
+	{ "dkarter/bullets.vim", enabled = false },
+	{ "lukas-reineke/headlines.nvim", enabled = false },
+	-- { "atusy/tsnode-marker.nvim", enabled = false },
+	{ "lervag/wiki.vim", enabled = false },
 
 	--   ╭──────────────────────────────────────────────────────────────────────╮
 	--   │                                                                      │
