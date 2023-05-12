@@ -34,6 +34,7 @@
     quotepath = false
     autocrlf  = false
     pager     = delta --diff-so-fancy  --wrap-max-lines 1 --max-line-length=$((COLUMNS - 10))
+	quotepath = false
 
 [pull]
 
