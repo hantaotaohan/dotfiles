@@ -189,6 +189,8 @@ map("n", "<C-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase Width" }
 if Has("bufferline.nvim") then
 	map("n", "<LocalLeader><S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
 	map("n", "<LocalLeader><Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
+	map("n", "H", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev Buffer" })
+	map("n", "L", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
 	map("n", "<LocalLeader>1", "<cmd>BufferLineGoToBuffer 1<cr>", { desc = "Buffer To 1" })
 	map("n", "<LocalLeader>2", "<cmd>BufferLineGoToBuffer 2<cr>", { desc = "Buffer To 2" })
 	map("n", "<LocalLeader>3", "<cmd>BufferLineGoToBuffer 3<cr>", { desc = "Buffer To 3" })
@@ -201,6 +203,8 @@ if Has("bufferline.nvim") then
 else
 	map("n", "<LocalLeader><S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
 	map("n", "<LocalLeader><Tab>", "<cmd>bnext<cr>", { desc = "Next Buffer" })
+	map("n", "H", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })
+	map("n", "L", "<cmd>bnext<cr>", { desc = "Next Buffer" })
 end
 
 --   ╭──────────────────────────────────────────────────────────────────────╮

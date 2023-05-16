@@ -7,7 +7,7 @@ end
 local filetypes = {
 	"makrdown",
 	"gitcommit",
-	"vimwiki.markdown",
+	"vimwiki",
 }
 
 --   ╭──────────────────────────────────────────────────────────────────────╮
