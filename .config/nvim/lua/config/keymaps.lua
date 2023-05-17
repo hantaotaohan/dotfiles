@@ -259,21 +259,25 @@ if Has("telescope.nvim") then
 		{ desc = "Projects" }
 	)
 
-	map(
-		"i",
-		"[[",
-		"<cmd>Telescope vimwiki previewer=true initial_mode=insert link<cr>",
-		-- "[[<esc><cmd>lua require('telescope.builtin').live_grep({initial_mode = 'insert', previewer = true })<cr>",
-		{ desc = "Live grep vimwiki file" }
-	)
-
-	map(
-		"n",
-		"((",
-		"<cmd>Telescope live_grep previewer=true initial_mode=insert<cr>",
-		{ desc = "Live grep vimwiki files" }
-	)
+	-- map(
+	-- 	"i",
+	-- 	"[[",
+	-- 	"<cmd>Telescope vimwiki previewer=true initial_mode=insert link<cr>",
+	-- 	-- "[[<esc><cmd>lua require('telescope.builtin').live_grep({initial_mode = 'insert', previewer = true })<cr>",
+	-- 	{ desc = "Live grep vimwiki file" }
+	-- )
+	--
+	-- map(
+	-- 	"n",
+	-- 	"((",
+	-- 	"<cmd>Telescope live_grep previewer=true initial_mode=insert<cr>",
+	-- 	{ desc = "Live grep vimwiki files" }
+	-- )
 end
+
+--   ╭──────────────────────────────────────────────────────────────────────╮
+--   │                          QuickFix Settings                           │
+--   ╰──────────────────────────────────────────────────────────────────────╯
 
 map("n", "qj", ":cnext<CR>", { silent = true })
 map("n", "qk", ":cprev<CR>", { silent = true })

@@ -80,6 +80,8 @@ return {
 		                  autocmd!
 		                  let g:vimwiki_syntaxlocal_vars['markdown']['Link1'] = g:vimwiki_syntaxlocal_vars['default']['Link1']
                           autocmd FileType vimwiki inoremap <silent><buffer> <LocalLeader><CR> <Esc>:VimwikiReturn 2 2<CR>
+                          autocmd FileType vimwiki inoremap <silent><buffer> [[ <Esc>:lua require('telescope.builtin').live_grep({initial_mode = 'insert', previewer = true })<CR>
+                          autocmd FileType vimwiki nnoremap <silent><buffer> (( :Telescope live_grep previewer=true initial_mode=insert<CR>
 		                  " autocmd FileType vimwiki.markdown syntax match MarkdownTrailingSpaces "\s\{4}.*$"
 		                  " autocmd FileType vimwiki.markdown syntax region VimwikiBlockquote start=/^\s*>/ end="$"
 		                  " autocmd FileType vimwiki.markdown highlight VimwikiBlockquote guifg=#6d7179 guibg=#21252B
